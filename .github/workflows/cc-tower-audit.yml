@@ -1,0 +1,88 @@
+name: CC Tower Audit (report + snapshot)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: "0 2 * * *" # nightly @ 02:00 UTC
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p cc-tower-audit
+
+          RUN_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          REPO="${GITHUB_REPOSITORY}"
+          SHA="${GITHUB_SHA}"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          has_app="no"; [[ -d src/app || -d app ]] && has_app="yes"
+          has_pages="no"; [[ -d src/pages || -d pages ]] && has_pages="yes"
+
+          env_files="$(ls -1A . | grep -E '^\.(env|env\..+)$' || true)"
+
+          {
+            echo "# CC Tower Quick Audit"
+            echo
+            echo "**Run:** ${RUN_TS}"
+            echo
+            echo "## Repo"
+            echo "- Repository: \`${REPO}\`"
+            echo "- Commit: \`${SHA}\`"
+            echo "- Run: ${RUN_URL}"
+            echo
+            echo "## Project"
+            echo "- App Router present: **${has_app}**"
+            echo "- Pages Router present: **${has_pages}**"
+            if [[ -n "${env_files}" ]]; then
+              echo "- Env files at root:"
+              echo '```'
+              echo "${env_files}"
+              echo '```'
+            else
+              echo "- Env files at root: none found"
+            fi
+            echo
+            echo "## File tree (first 2,000 entries)"
+            echo '```'
+            # show files & folders up to depth 6 (compact but useful)
+            find -L . -path ./.git -prune -o -maxdepth 6 -print 2>/dev/null | sed 's#^\./##' | head -n 2000
+            echo '```'
+          } > cc-tower-audit/cc-report.md
+
+      - name: Create source snapshot (excludes heavy folders)
+        run: |
+          tar \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.next' \
+            --exclude='dist' \
+            --exclude='build' \
+            -czf cc-tower-audit/source-snapshot.tar.gz .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cc-tower-audit
+          path: |
+            cc-tower-audit/cc-report.md
+            cc-tower-audit/source-snapshot.tar.gz
+
+      - name: Job summary
+        run: |
+          echo "### CC Tower Audit" >> $GITHUB_STEP_SUMMARY
+          echo "- Report + snapshot uploaded as artifact **cc-tower-audit**" >> $GITHUB_STEP_SUMMARY
