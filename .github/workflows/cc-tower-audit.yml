@@ -1,78 +1,51 @@
-name: CC Tower Audit (report + snapshot)
+name: CC Tower Audit (quick)
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *" # nightly @ 02:00 UTC
+    - cron: '0 3 * * *'
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Build audit report
-        shell: bash
+      - name: Generate quick audit report
         run: |
-          set -euo pipefail
+          set -e
           mkdir -p cc-tower-audit
-
-          RUN_TS="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-          REPO="${GITHUB_REPOSITORY}"
-          SHA="${GITHUB_SHA}"
-          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-
-          has_app="no"; [[ -d src/app || -d app ]] && has_app="yes"
-          has_pages="no"; [[ -d src/pages || -d pages ]] && has_pages="yes"
-
-          env_files="$(ls -1A . | grep -E '^\.(env|env\..+)$' || true)"
-
+          FILES=$(git ls-files | wc -l | tr -d " ")
+          if [ -d app ] || [ -d src/app ]; then ROUTER=app;
+          elif [ -d pages ] || [ -d src/pages ]; then ROUTER=pages;
+          else ROUTER=unknown; fi
+          NEXT=$(node -e "try{const p=require(\"./package.json\");console.log(p.dependencies?.next||p.devDependencies?.next||\"\")}catch{}")
           {
             echo "# CC Tower Quick Audit"
             echo
-            echo "**Run:** ${RUN_TS}"
-            echo
-            echo "## Repo"
-            echo "- Repository: \`${REPO}\`"
-            echo "- Commit: \`${SHA}\`"
-            echo "- Run: ${RUN_URL}"
+            echo "**Run:** $(date -u +%FT%TZ)"
             echo
             echo "## Project"
-            echo "- App Router present: **${has_app}**"
-            echo "- Pages Router present: **${has_pages}**"
-            if [[ -n "${env_files}" ]]; then
-              echo "- Env files at root:"
-              echo '```'
-              echo "${env_files}"
-              echo '```'
-            else
-              echo "- Env files at root: none found"
-            fi
+            echo "- Files tracked: ${FILES}"
+            echo "- Router: **${ROUTER}**"
+            [ -n "$NEXT" ] && echo "- Next.js: ${NEXT}" || true
             echo
-            echo "## File tree (first 2,000 entries)"
-            echo '```'
-            # show files & folders up to depth 6 (compact but useful)
-            find -L . -path ./.git -prune -o -maxdepth 6 -print 2>/dev/null | sed 's#^\./##' | head -n 2000
-            echo '```'
+            echo "## File tree (first 2000)"
+            echo "```"
+            (find -L . -path ./.git -prune -o -maxdepth 3 -print | sed "s#^\./##" | head -n 2000)
+            echo "```"
           } > cc-tower-audit/cc-report.md
-
-      - name: Create source snapshot (excludes heavy folders)
-        run: |
-          tar \
-            --exclude='.git' \
-            --exclude='node_modules' \
-            --exclude='.next' \
-            --exclude='dist' \
-            --exclude='build' \
-            -czf cc-tower-audit/source-snapshot.tar.gz .
+          tar --exclude=.git --exclude=node_modules --exclude=.next -czf cc-tower-audit/source-snapshot.tar.gz .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -84,5 +57,5 @@ jobs:
 
       - name: Job summary
         run: |
-          echo "### CC Tower Audit" >> $GITHUB_STEP_SUMMARY
-          echo "- Report + snapshot uploaded as artifact **cc-tower-audit**" >> $GITHUB_STEP_SUMMARY
+          echo "### CC Tower Audit (quick)" >> $GITHUB_STEP_SUMMARY
+          echo "- Report and snapshot uploaded as artifact **cc-tower-audit**" >> $GITHUB_STEP_SUMMARY
