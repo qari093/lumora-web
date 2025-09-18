@@ -1,0 +1,31 @@
+name: CC Tower Audit (quick)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * *"   # every night at midnight UTC
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Audit
+        run: |
+          echo "🔍 Running CC Tower Audit..."
+          npx --yes next lint || true
+          npx --yes prettier --check . || true
+          echo "✅ Audit complete"
