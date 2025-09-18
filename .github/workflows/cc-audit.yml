@@ -2,14 +2,16 @@ name: CC Tower Audit (quick)
 
 on:
   push:
-    branches: ['main']
+    branches: [ main ]
   pull_request:
-    branches: ['main']
-  workflow_dispatch:
+    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * *"   # every night at midnight UTC
 
 jobs:
   audit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
