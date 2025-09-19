@@ -20,3 +20,8 @@ export default function HomePage() {
     </main>
   );
 }
+
+{/* Lumora Labs entrypoint */}
+<p className="mt-2 text-sm">
+  Try the AI studio: <a className="text-blue-600 underline" href="/labs">Lumora Labs</a>
+</p>
