@@ -89,7 +89,7 @@ export default function Admin(){
             ))}
           </div>
           <div>
-            <div style={{fontWeight:700}}>Shared IP (>3 devices)</div>
+            <div style={{fontWeight:700}}>Shared IP ({">"} 3 devices)</div>
             {(fraud?.sharedIp||[]).map((r:any)=>(
               <div key={r.ip} style={{display:"flex",justifyContent:"space-between",padding:"6px 0",borderTop:"1px solid #27272a"}}>
                 <div>{r.ip}</div>
