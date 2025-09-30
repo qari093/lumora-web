@@ -1,3 +1,4 @@
 {
-  "version": 2
+  "framework": "nextjs",
+  "buildCommand": "VERCEL_FORCE_NO_BUILD_CACHE=1 npm run build"
 }
