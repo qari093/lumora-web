@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
   "rewrites": [
     { "source": "/api/health", "destination": "/health.json" },
     { "source": "/videos", "destination": "/videos/index.html" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/videos", "permanent": true }
   ]
 }
