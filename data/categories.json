@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "categories": [
+    {"id":"all","name":"All"},
+    {"id":"focus","name":"Focus"},
+    {"id":"calm","name":"Calm / Ambient"},
+    {"id":"hype","name":"Hype / EDM"},
+    {"id":"lofi","name":"Lo-Fi"},
+    {"id":"classical","name":"Classical"},
+    {"id":"hiphop","name":"Hip-hop"},
+    {"id":"pop","name":"Pop"},
+    {"id":"rock","name":"Rock"},
+    {"id":"house","name":"House"},
+    {"id":"techno","name":"Techno"},
+    {"id":"jazz","name":"Jazz"},
+    {"id":"world","name":"World"},
+    {"id":"sleep","name":"Sleep"},
+    {"id":"meditation","name":"Meditation"},
+    {"id":"workout","name":"Workout"},
+    {"id":"podcast","name":"Podcasts"}
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "r_e95n7fhg",
+    "title": "Water break",
+    "whenISO": "2025-09-23T18:53:54.036Z",
+    "repeat": "NONE",
+    "createdAt": "2025-09-23T18:48:54.038Z",
+    "enabled": true
+  },
+  {
+    "id": "r_k7ew765b",
+    "title": "Walk + Stretch",
+    "whenISO": "2025-09-23T19:48:54.036Z",
+    "repeat": "DAILY",
+    "createdAt": "2025-09-23T18:48:54.038Z",
+    "enabled": true
+  }
+]

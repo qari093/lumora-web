@@ -1,0 +1,59 @@
+"use client";
+import React, { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { PHASE3_GAMES } from "../../../../src/lib/gmar/games-phase3";
+import { EngineSwitchPhase3 } from "../../../../src/components/gmar/phase3/engine-switch";
+type Settings={difficulty:"easy"|"normal"|"hard";sfx?:boolean;haptics?:boolean;leftHanded?:boolean};
+type Inventory={coins:number;items:{id:string;qty:number}[]};
+const LS_BEST=(id:string)=>`gmar.p3.best.${id}`, LS_COINS="gmar.wallet.coins";
+const lsNum=(k:string,d=0)=>{ try{const v=Number(JSON.parse(localStorage.getItem(k)||"0")); return Number.isFinite(v)?v:d;}catch{return d;} };
+const setNum=(k:string,v:number)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} };
+function Btn(p:React.ButtonHTMLAttributes<HTMLButtonElement>){ return <button {...p} style={{padding:"8px 12px",borderRadius:8,border:"1px solid #1f2937",background:"#0b1220",color:"#e5e7eb",cursor:"pointer"}}/> }
+function Card({title,children}:{title:string;children:React.ReactNode}){ return <div style={{border:"1px solid #1f2937",borderRadius:12,padding:12,background:"#0b1220"}}><div style={{fontWeight:700,marginBottom:6}}>{title}</div>{children}</div>; }
+
+export default function Phase3PlayPage(){
+  const { id } = useParams<{id:string}>();
+  const game = useMemo(()=> PHASE3_GAMES.find(g=>g.id===id) || PHASE3_GAMES[0],[id]);
+  const [score,setScore]=useState(0), [best,setBest]=useState(0), [coins,setCoins]=useState(0), [paused,setPaused]=useState(false);
+  const [settings,setSettings]=useState<Settings>({difficulty:"normal",sfx:true,haptics:true,leftHanded:false});
+  const [inv,setInv]=useState<Inventory>({coins:0,items:[]});
+  useEffect(()=>{ setBest(lsNum(LS_BEST(game.id),0)); const c=lsNum(LS_COINS,0); setCoins(c); setScore(0); setPaused(false); setInv({coins:c,items:[]}); },[game.id]);
+  const onScore=(s:number)=>{ setScore(s); if(s>best){ setBest(s); setNum(LS_BEST(game.id),s); } };
+  const onCoin=(n:number)=>{ const cur=Math.max(0,lsNum(LS_COINS,0)+n); setNum(LS_COINS,cur); setCoins(cur); setInv(v=>({...v,coins:cur})); };
+  return (<div style={{padding:16,color:"#e5e7eb",background:"#020617",minHeight:"100vh"}}>
+    <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
+      <Link href="/gmar/phase3" style={{color:"#93c5fd",textDecoration:"underline"}}>← Back</Link>
+      <div style={{opacity:.6,fontSize:12}}>Phase 3 — AA+ Engines</div>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 320px",gap:14}}>
+      <div>
+        <Card title={game.title}>
+          <EngineSwitchPhase3 kind={game.engine} paused={paused} onScore={onScore} onCoin={onCoin} settings={settings} inventory={inv}/>
+          <div style={{marginTop:10,opacity:.7,fontSize:12}}>Use HUD to pause/reset; coins accrue automatically during play.</div>
+        </Card>
+      </div>
+      <div style={{display:"grid",gap:10}}>
+        <Card title="HUD">
+          <div style={{display:"grid",gridTemplateColumns:"1fr auto auto auto auto",gap:8,alignItems:"center"}}>
+            <div>Score: <b>{score}</b></div><div>Best: <b>{best}</b></div><div>Coins: <b>{coins}</b></div>
+            <Btn onClick={()=>setPaused(p=>!p)}>{paused?"Resume":"Pause"}</Btn>
+            <Btn onClick={()=>setScore(0)}>Reset</Btn>
+          </div>
+        </Card>
+        <Card title="Settings">
+          <div style={{display:"grid",gap:8}}>
+            <label style={{display:"flex",gap:8,alignItems:"center"}}><input type="checkbox" checked={settings.leftHanded} onChange={e=>setSettings({...settings,leftHanded:e.target.checked})}/> Left-handed</label>
+            <div style={{display:"flex",gap:8,alignItems:"center"}}><span>Difficulty:</span>
+              <select value={settings.difficulty} onChange={e=>setSettings({...settings,difficulty:e.target.value as Settings["difficulty"]})}
+                style={{background:"#0b1220",color:"#e5e7eb",border:"1px solid #1f2937",borderRadius:8,padding:"6px 8px"}}>
+                <option value="easy">easy</option><option value="normal">normal</option><option value="hard">hard</option>
+              </select>
+            </div>
+          </div>
+        </Card>
+        <Card title="Inventory"><div>Coins: <b>{inv.coins}</b></div><div style={{opacity:.7,fontSize:12,marginTop:6}}>Store items will appear here when enabled.</div></Card>
+      </div>
+    </div>
+  </div>);
+}

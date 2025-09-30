@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "intervalMinutes": 10,
+  "sources": [
+    {
+      "id":"public_lofi_feed",
+      "kind":"json",
+      "url":"https://raw.githubusercontent.com/public-placeholder/audio-feeds/main/lofi.json",
+      "map": { "id":"id", "title":"title", "artist":"artist", "url":"stream", "genre":"genre", "bpm":"bpm" },
+      "defaultGenre":"lofi",
+      "sourceLabel":"lofi-feed"
+    }
+  ]
+}

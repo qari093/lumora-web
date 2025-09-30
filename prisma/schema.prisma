@@ -1,0 +1,90 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./gmar.db"
+}
+generator client {
+  provider = "prisma-client-js"
+}
+model Device {
+  id        String   @id
+  createdAt DateTime @default(now())
+  lastSeen  DateTime @default(now())
+  lang      String?
+  banned    Boolean  @default(false)
+  banReason String?
+  Events    Event[]
+  Scores    Score[]
+  Achievements Achievement[]
+  AdMetrics AdMetric[]
+  Bans      Ban[]
+}
+model Game {
+  id     String @id
+  title  String
+  Events Event[]
+  Scores Score[]
+}
+model Event {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  deviceId  String?
+  device    Device?  @relation(fields: [deviceId], references: [id])
+  gameId    String
+  game      Game     @relation(fields: [gameId], references: [id])
+  type      String
+  data      Json?
+}
+model Score {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  deviceId  String?
+  device    Device?  @relation(fields: [deviceId], references: [id])
+  gameId    String
+  game      Game     @relation(fields: [gameId], references: [id])
+  player    String
+  value     Int
+  @@index([gameId, value(sort: Desc)])
+}
+model Season {
+  id        Int      @id @default(autoincrement())
+  name      String
+  startAt   DateTime
+  endAt     DateTime
+  active    Boolean  @default(false)
+  Scores    SeasonScore[]
+}
+model SeasonScore {
+  id        String   @id @default(cuid())
+  seasonId  Int
+  season    Season   @relation(fields: [seasonId], references: [id])
+  gameId    String
+  player    String
+  value     Int
+  createdAt DateTime @default(now())
+  @@index([seasonId, gameId, value(sort: Desc)])
+}
+model Achievement {
+  id        String   @id @default(cuid())
+  deviceId  String?
+  device    Device?  @relation(fields: [deviceId], references: [id])
+  gameId    String
+  badge     String
+  createdAt DateTime @default(now())
+}
+model AdMetric {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  deviceId  String?
+  device    Device?  @relation(fields: [deviceId], references: [id])
+  gameId    String
+  variant   String
+  action    String
+}
+model Ban {
+  id        String   @id @default(cuid())
+  deviceId  String
+  device    Device   @relation(fields: [deviceId], references: [id])
+  reason    String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

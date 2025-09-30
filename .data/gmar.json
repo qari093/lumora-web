@@ -1,0 +1,104 @@
+{
+  "events": [
+    {
+      "id": "e_brcjmj1n",
+      "at": 1758745638718,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    },
+    {
+      "id": "e_k3t3rrof",
+      "at": 1758745686938,
+      "gameId": "runner_1",
+      "type": "start",
+      "device": "dev-::ffff:127.0.0.1"
+    },
+    {
+      "id": "e_r10d1icu",
+      "at": 1758745699018,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    },
+    {
+      "id": "e_c1yoo23h",
+      "at": 1758745709492,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    },
+    {
+      "id": "e_l1vjfdub",
+      "at": 1758746167477,
+      "gameId": "runner_1",
+      "type": "start",
+      "device": "dev-::ffff:127.0.0.1"
+    },
+    {
+      "id": "e_3xpdkfxw",
+      "at": 1758746174166,
+      "gameId": "runner_1",
+      "type": "start",
+      "device": "dev-::ffff:127.0.0.1"
+    },
+    {
+      "id": "e_47x8zes7",
+      "at": 1758746178251,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    },
+    {
+      "id": "e_2lpdztfs",
+      "at": 1758746217766,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    },
+    {
+      "id": "e_35prlk0k",
+      "at": 1758748154196,
+      "gameId": "runner_1",
+      "type": "start",
+      "device": "dev-::ffff:127.0.0.1"
+    },
+    {
+      "id": "e_9ydqnu8b",
+      "at": 1758748170582,
+      "gameId": "runner_1",
+      "type": "ad_buy_open",
+      "device": "dev-::ffff:127.0.0.1",
+      "meta": {
+        "variant": "holo"
+      }
+    }
+  ],
+  "scores": {},
+  "ab": {
+    "dev-dxvuc4cl": "holo"
+  },
+  "caps": {
+    "dev-dxvuc4cl": {
+      "runner_1": {
+        "count": 1,
+        "since": 1758748154
+      }
+    }
+  }
+}

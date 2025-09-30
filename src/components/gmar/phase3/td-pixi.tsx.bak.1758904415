@@ -1,0 +1,185 @@
+"use client";
+import React, { useEffect, useRef } from "react";
+function lerp(a:number,b:number,t:number){return a+(b-a)*t;}
+function dist(x1:number,y1:number,x2:number,y2:number){const dx=x2-x1,dy=y2-y1;return Math.hypot(dx,dy);}
+function angle(x1:number,y1:number,x2:number,y2:number){return Math.atan2(y2-y1,x2-x1);}
+import * as PIXI from "pixi.js";
+import "@pixi/graphics-extras";
+import "@pixi/sound";
+
+type Settings = { difficulty: "easy" | "normal" | "hard" };
+type Callbacks = { addCoins?: (n:number)=>void; onScore?: (s:number)=>void; };
+type Props = { width?: number; height?: number; paused?: boolean; settings: Settings } & Callbacks;
+
+/** Zen Fortress — Pixi.js playfield (AA+ baseline) */
+export default function TdPixiEngine({ width=960, height=540, paused=false, settings, addCoins, onScore }: Props){
+  const mountRef = useRef<HTMLDivElement|null>(null);
+
+  useEffect(()=>{
+    let destroyed = false;
+    const app = new PIXI.Application();
+    app.init({ width, height, antialias:true, background: 0x070b16, resolution: window.devicePixelRatio||1 })
+      .then(()=>{ if(!mountRef.current || destroyed) return; mountRef.current.innerHTML=""; mountRef.current.appendChild(app.canvas); });
+
+    const stage = app.stage; stage.sortableChildren = true;
+
+    // Grid
+    const grid = new PIXI.Graphics(); grid.zIndex=0;
+    for(let x=0;x<width;x+=30){ grid.moveTo(x,0).lineTo(x,height).stroke({color:0x0f172a,alpha:.6}); }
+    for(let y=0;y<height;y+=30){ grid.moveTo(0,y).lineTo(width,y).stroke({color:0x0f172a,alpha:.6}); }
+    stage.addChild(grid);
+
+    // Path
+    const pathPts = [
+      new PIXI.Point(30, height-80),
+      new PIXI.Point(width*0.25, height-120),
+      new PIXI.Point(width*0.45, height-260),
+      new PIXI.Point(width*0.65, height-160),
+      new PIXI.Point(width*0.85, height-260),
+      new PIXI.Point(width-40, 80),
+    ];
+    const pathG = new PIXI.Graphics(); pathG.zIndex=1;
+    pathG.moveTo(pathPts[0].x, pathPts[0].y);
+    for (let i=1;i<pathPts.length;i++) pathG.lineTo(pathPts[i].x, pathPts[i].y);
+    pathG.stroke({width:4,color:0x273449}); stage.addChild(pathG);
+
+    // Towers
+    const towers = [
+      {x: width*0.32, y: height-180, cd:0},
+      {x: width*0.55, y: height-220, cd:0},
+      {x: width*0.72, y: height-120, cd:0},
+    ];
+    const towerLayer = new PIXI.Container(); towerLayer.zIndex=2; stage.addChild(towerLayer);
+    towers.forEach(t=>{
+      const g=new PIXI.Graphics();
+      g.circle(t.x,t.y,12).fill(0x5eead4).stroke({width:2,color:0x083344});
+      g.moveTo(t.x,t.y).lineTo(t.x+16,t.y).stroke({width:3,color:0x0ea5e9});
+      towerLayer.addChild(g);
+    });
+
+    // Layers
+    const enemyLayer = new PIXI.Container(); enemyLayer.zIndex=3; stage.addChild(enemyLayer);
+    const bulletLayer = new PIXI.Container(); bulletLayer.zIndex=4; stage.addChild(bulletLayer);
+
+    type Enemy = { t:number; hp:number; sp:number; spr:PIXI.Graphics };
+    type Bullet = { x:number;y:number; vx:number;vy:number; dmg:number; spr:PIXI.Graphics };
+    const enemies: Enemy[] = [];
+    const bullets: Bullet[] = [];
+
+    const samplePath = (t:number)=>{
+      const seg = (pathPts.length-1)*Math.min(Math.max(t,0),1);
+      const i = Math.floor(seg), u = seg - i;
+      const p0=pathPts[Math.max(0,i-1)], p1=pathPts[i], p2=pathPts[Math.min(pathPts.length-1,i+1)], p3=pathPts[Math.min(pathPts.length-1,i+2)];
+      return new PIXI.Point(
+        PIXI.math.catmullRom(u,p0.x,p1.x,p2.x,p3.x),
+        PIXI.math.catmullRom(u,p0.y,p1.y,p2.y,p3.y)
+      );
+    };
+
+    const diff = settings?.difficulty||"normal";
+    const spd = diff==="easy"? 0.17 : diff==="normal"? 0.22 : 0.28;
+    const hpBase = diff==="easy"? 12 : diff==="normal"? 18 : 26;
+    const towerRange = 140;
+    const towerROF = diff==="hard"? 0.22 : 0.28;
+    const bulletSpeed = 520;
+
+    let wave=1, spawnTimer=0, spawnLeft=0, score=0;
+    const spawnWave=()=>{ spawnLeft = 8 + Math.floor(wave*1.5); };
+    spawnWave();
+
+    const addEnemy = ()=>{
+      const spr = new PIXI.Graphics();
+      spr.circle(0,0,10).fill(0xfb7185).stroke({width:2,color:0x7f1d1d});
+      enemyLayer.addChild(spr);
+      const e: Enemy = { t:0, hp: Math.round(hpBase+Math.random()*4+wave*1.2), sp: spd*(0.9+Math.random()*0.2), spr };
+      enemies.push(e);
+      const p=samplePath(0); spr.position.copyFrom(p);
+    };
+
+    const fire = (from:PIXI.Point, to:PIXI.Point)=>{
+      const dx=to.x-from.x, dy=to.y-from.y, len=Math.hypot(dx,dy)||1;
+      const vx=(dx/len)*bulletSpeed, vy=(dy/len)*bulletSpeed;
+      const spr=new PIXI.Graphics(); spr.circle(0,0,3).fill(0x93c5fd);
+      spr.position.set(from.x,from.y); bulletLayer.addChild(spr);
+      bullets.push({x:from.x,y:from.y, vx,vy, dmg:6, spr});
+    };
+
+    const label = new PIXI.Text({ text:"", style:{fill:0x9ca3af,fontSize:12} });
+    label.position.set(8,6); stage.addChild(label);
+
+    const dt = 1/60;
+    app.ticker.maxFPS=60;
+    app.ticker.add(()=>{
+      if (paused) return;
+
+      // spawn cadence
+      spawnTimer -= dt;
+      if (spawnLeft>0 && spawnTimer<=0){ addEnemy(); spawnLeft--; spawnTimer=0.35; }
+      if (spawnLeft===0 && enemies.length===0){ wave++; spawnWave(); addCoins?.(3 + Math.floor(wave/3)); }
+
+      // move enemies
+      for (let i=enemies.length-1;i>=0;i--){
+        const e=enemies[i];
+        e.t += e.sp*dt*0.12;
+        if (e.t>=1){ enemyLayer.removeChild(e.spr); e.spr.destroy(); enemies.splice(i,1); continue; }
+        e.spr.position.copyFrom(samplePath(e.t));
+      }
+
+      // towers fire
+      towers.forEach(t=>{
+        t.cd = Math.max(0, t.cd - dt);
+        if (t.cd>0) return;
+        let target: Enemy | null = null, bestT=-1;
+        for (const e of enemies){
+          const d = Math.hypot(e.spr.x - t.x, e.spr.y - t.y);
+          if (d<=towerRange && e.t>bestT){ bestT=e.t; target=e; }
+        }
+        if (target){
+          fire(new PIXI.Point(t.x,t.y), target.spr.position);
+          t.cd = towerROF;
+          const flash=new PIXI.Graphics().circle(t.x,t.y,8).fill(0x22d3ee); flash.alpha=.6; stage.addChild(flash);
+          setTimeout(()=>flash.destroy(),60);
+        }
+      });
+
+      // bullets
+      for (let i=bullets.length-1;i>=0;i--){
+        const b=bullets[i];
+        b.x+=b.vx*dt; b.y+=b.vy*dt; b.spr.position.set(b.x,b.y);
+        if (b.x<0||b.y<0||b.x>width||b.y>height){ b.spr.destroy(); bullets.splice(i,1); continue; }
+        let hit=-1;
+        for (let j=0;j<enemies.length;j++){
+          const e=enemies[j]; if (Math.hypot(e.spr.x-b.x, e.spr.y-b.y)<12){ hit=j; break; }
+        }
+        if (hit>=0){
+          const e=enemies[hit]; e.hp -= b.dmg;
+          const hitFx=new PIXI.Graphics().circle(b.x,b.y,10).fill(0xffffff); hitFx.alpha=.15; stage.addChild(hitFx); setTimeout(()=>hitFx.destroy(),60);
+          b.spr.destroy(); bullets.splice(i,1);
+          if (e.hp<=0){
+            const boom=new PIXI.Graphics().circle(e.spr.x,e.spr.y,14).fill(0xfca5a5); boom.alpha=.28; stage.addChild(boom); setTimeout(()=>boom.destroy(),90);
+            enemyLayer.removeChild(e.spr); e.spr.destroy(); enemies.splice(hit,1);
+            score+=3; onScore?.(score); addCoins?.(2);
+          }
+        }
+      }
+
+      label.text = `Wave ${wave} • Enemies ${enemies.length} • Score ${score}`;
+    });
+
+    return ()=>{ destroyed=true; try{ app.destroy(true,{children:true,texture:true,baseTexture:true}); }catch{} };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width,height,paused,settings?.difficulty]);
+
+  return <div ref={mountRef} style={{width:"100%",height:"100%",border:"1px solid #1f2937",borderRadius:12,overflow:"hidden"}} />;
+}
+
+// Fallback enemy path (grid coordinates -> pixels)
+const PATH = [
+  [40, 60],
+  [180, 60],
+  [180, 180],
+  [320, 180],
+  [320, 300],
+  [500, 300],
+  [500, 420]
+].map(([x, y]) => ({ x, y }));

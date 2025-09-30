@@ -1,0 +1,49 @@
+/** Zen Economy - Offline-first (Phase 3) */
+export type ReceiptItem = { id: string; title: string; qty: number; price: number };
+export type Receipt = { id: string; at: number; email?: string; items: ReceiptItem[]; total: number };
+export type InvItem = { id: string; title: string; qty: number };
+export type Inventory = { coins: number; items: InvItem[] };
+
+const K_COINS = "zeneco.coins";
+const K_INV   = "zeneco.inv";
+const K_RCPTS = "zeneco.receipts";
+
+export function loadCoins(): number {
+  try { const n = Number(JSON.parse(localStorage.getItem(K_COINS) || "0")); return Number.isFinite(n) ? n : 0; } catch { return 0; }
+}
+export function saveCoins(n: number) { try { localStorage.setItem(K_COINS, JSON.stringify(Math.max(0, n))); } catch {} }
+export function addCoins(n: number) { const cur = loadCoins() + n; saveCoins(cur); const inv = loadInv(); inv.coins = cur; saveInv(inv); return cur; }
+export function spendCoins(n: number): number | null {
+  const cur = loadCoins(); if (cur < n) return null; const next = cur - n; saveCoins(next);
+  const inv = loadInv(); inv.coins = next; saveInv(inv); return next;
+}
+
+export function loadInv(): Inventory {
+  try {
+    const raw = localStorage.getItem(K_INV);
+    if (raw) { const v = JSON.parse(raw) as Inventory; if (typeof v.coins !== "number" || !Array.isArray(v.items)) throw 0; return v; }
+  } catch {}
+  return { coins: loadCoins(), items: [] };
+}
+export function saveInv(inv: Inventory) { try { localStorage.setItem(K_INV, JSON.stringify(inv)); } catch {} }
+export function addItem(id: string, title: string, qty = 1): Inventory {
+  const inv = loadInv();
+  const f = inv.items.find(i => i.id === id);
+  if (f) f.qty += qty; else inv.items.push({ id, title, qty });
+  saveInv(inv); return inv;
+}
+
+export function loadReceipts(): Receipt[] {
+  try { const j = localStorage.getItem(K_RCPTS); return j ? (JSON.parse(j) as Receipt[]) : []; } catch { return []; }
+}
+export function saveReceipt(r: Receipt) {
+  const all = loadReceipts(); all.unshift(r); try { localStorage.setItem(K_RCPTS, JSON.stringify(all)); } catch {}
+}
+
+/** Simple catalog for demo */
+export const CATALOG = [
+  { id: "boost_xs", title: "Boost XS (+5 start)", price: 5 },
+  { id: "boost_m",  title: "Boost M (+15 start)", price: 15 },
+  { id: "revive",   title: "Revive (1 per run)",  price: 25 },
+  { id: "skin_neon",title: "Neon Skin",           price: 20 },
+] as const;

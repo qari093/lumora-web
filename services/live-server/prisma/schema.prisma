@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// LIVE
+model Room {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  gifts     Gift[]
+  nfts      Nft[]
+}
+
+model Gift {
+  id        String   @id @default(cuid())
+  roomSlug  String
+  sender    String
+  giftType  String
+  value     Int
+  createdAt DateTime @default(now())
+
+  room Room @relation(fields: [roomSlug], references: [slug], onDelete: Cascade)
+
+  @@index([roomSlug, createdAt])
+}
+
+model Nft {
+  id        String   @id @default(cuid())
+  roomSlug  String
+  rarity    String
+  meta      String // was Json, now String
+  createdAt DateTime @default(now())
+
+  room Room @relation(fields: [roomSlug], references: [slug], onDelete: Cascade)
+
+  @@index([roomSlug, createdAt])
+}
+
+// ECONOMY
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String // was enum Token
+  balance   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, token])
+}
+
+model LedgerEntry {
+  id       String   @id @default(cuid())
+  ts       DateTime @default(now())
+  userId   String
+  token    String // was enum Token
+  type     String // was enum EntryType
+  amount   Int
+  reason   String
+  meta     String? // was Json?, now String?
+  roomSlug String?
+
+  @@index([userId, token, ts])
+}

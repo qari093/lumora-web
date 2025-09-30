@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+  <rect width="100%" height="100%" rx="16" ry="16" fill="#0b0b0f" stroke="#26272b"/>
+  <circle cx="64" cy="64" r="40" fill="#7c3aed"/>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="Arial,Helvetica,Roboto" font-size="18" fill="#ffffff">Shooter</text>
+</svg>

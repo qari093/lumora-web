@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "items": [
+    { "id": "w1", "title": "Full Body Warmup", "url": "/videos/workout.mp4", "durationHintSec": 600 }
+  ]
+}
