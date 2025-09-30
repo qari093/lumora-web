@@ -59,7 +59,7 @@ export default function Admin(){
               <div>#{s.id} — <b>{s.name}</b> {s.active?"• ACTIVE":""} <span style={{opacity:.7}}>({new Date(s.startAt).toLocaleDateString()} → {new Date(s.endAt).toLocaleDateString()})</span></div>
               <div>
                 {!s.active && <button onClick={()=>activate(s.id)} style={{background:"#22c55e",color:"#000",padding:"6px 10px",borderRadius:8}}>Activate</button>}
-                <a href={} style={{marginLeft:8,color:"#a78bfa"}}>Export CSV</a>
+                <a href="#" style={{marginLeft:8,color:"#a78bfa"}}>Export CSV</a>
               </div>
             </div>
           ))}
