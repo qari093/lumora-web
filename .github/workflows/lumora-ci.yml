@@ -1,0 +1,46 @@
+name: Lumora CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: "file:./prisma/dev.db"
+
+      - name: Lint (non-blocking)
+        run: npm run lint || true
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        env:
+          NODE_ENV: production
+          DATABASE_URL: "file:./prisma/dev.db"
+          LUMORA_API_KEY: "ci-key"
+          NEXT_PUBLIC_LUMORA_API_KEY: "ci-key"
+        run: npm run build

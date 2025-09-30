@@ -1,0 +1,73 @@
+[
+  {
+    "id": "e_96j34cgl",
+    "at": 1758727005245,
+    "gameId": "runner_1",
+    "type": "click",
+    "deviceId": "dev_ra2lmsl",
+    "meta": {
+      "from": "overlay"
+    }
+  },
+  {
+    "id": "e_lmj5y6bq",
+    "at": 1758727008978,
+    "gameId": "runner_1",
+    "type": "impression",
+    "deviceId": "dev_ra2lmsl",
+    "meta": {
+      "closed": true
+    }
+  },
+  {
+    "id": "e_4sloe4rv",
+    "at": 1758729849595,
+    "gameId": "runner_1",
+    "type": "start",
+    "deviceId": "dev_ra2lmsl"
+  },
+  {
+    "id": "e_ag50encw",
+    "at": 1758729878645,
+    "gameId": "runner_1",
+    "type": "impression",
+    "deviceId": "dev_ra2lmsl",
+    "meta": {
+      "closed": true
+    }
+  },
+  {
+    "id": "e_7kkt0r37",
+    "at": 1758730028114,
+    "gameId": "runner_1",
+    "type": "start",
+    "deviceId": "dev_ra2lmsl"
+  },
+  {
+    "id": "e_1qm7btgy",
+    "at": 1758731464161,
+    "gameId": "runner_1",
+    "type": "impression",
+    "deviceId": "dev_ra2lmsl",
+    "meta": {
+      "closed": true
+    }
+  },
+  {
+    "id": "e_7r9o4p4p",
+    "at": 1758731479963,
+    "gameId": "runner_1",
+    "type": "start",
+    "deviceId": "dev_ra2lmsl"
+  },
+  {
+    "id": "e_0x6x299i",
+    "at": 1758731482792,
+    "gameId": "runner_1",
+    "type": "impression",
+    "deviceId": "dev_ra2lmsl",
+    "meta": {
+      "closed": true
+    }
+  }
+]

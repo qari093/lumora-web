@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: lumora-web
+    env: node
+    plan: free
+    branch: main
+    buildCommand: |
+      npm ci || npm i
+      npx prisma generate || true
+      npm run build
+    startCommand: |
+      npx prisma migrate deploy || true
+      npm run start
+    autoDeploy: true
+    healthCheckPath: /api/wallet/balance?user=demo
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:./prisma/dev.db
+      - key: LUMORA_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_LUMORA_API_KEY
+        sync: false

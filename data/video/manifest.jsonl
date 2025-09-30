@@ -1,0 +1,2 @@
+{"out":"outputs/video/sample-1.mp4","w":1080,"h":1920,"dur":6,"bgImage":"data/video/bg-1.jpg","text":"Welcome to Lumora","fontsize":72,"color":"white","box":true,"music":"data/video/bgm-1.mp3","volume":0.7,"fps":30}
+{"out":"outputs/video/sample-2.mp4","w":1920,"h":1080,"dur":8,"bgColor":"#0b1020","text":"Shooter Arena — Teaser","fontsize":64,"color":"#ffd700","box":true,"fps":30}

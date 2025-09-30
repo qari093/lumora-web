@@ -1,0 +1,15 @@
+"use client";
+import React from "react";
+import TdPixiEngine from "./td-pixi";
+import RogueLite from "./rogue-lite";
+import MobaLane from "./moba-lane";
+
+type EP={ paused?:boolean; settings?:{difficulty:"easy"|"normal"|"hard"}; onScore?:(n:number)=>void; addCoins?:(n:number)=>void; };
+
+export function EngineSwitchPhase3({id, paused, settings, onScore, addCoins}:{id:string}&EP){
+  if(id==="zen-fortress"){ return <TdPixiEngine paused={paused} settings={settings} onScore={onScore} addCoins={addCoins}/>; }
+  if(id==="zen-rogue"){ return <RogueLite paused={paused} settings={settings} onScore={onScore}/>; }
+  if(id==="zen-moba"){ return <MobaLane paused={paused} settings={settings} onScore={onScore}/>; }
+  return <div style={{padding:20}}>Unknown engine: {id}</div>;
+}
+export default EngineSwitchPhase3;

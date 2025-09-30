@@ -1,0 +1,101 @@
+{
+  "version": 3,
+  "catalog": [
+    {
+      "id": "seed_001",
+      "title": "Ocean Focus",
+      "artist": "NEXA",
+      "genre": "focus",
+      "energy": "focus",
+      "bpm": 92,
+      "source": "local",
+      "url": "/audio/focus1.mp3"
+    },
+    {
+      "id": "seed_002",
+      "title": "Deep Flow",
+      "artist": "NEXA",
+      "genre": "focus",
+      "energy": "focus",
+      "bpm": 88,
+      "source": "local",
+      "url": "/audio/focus2.mp3"
+    },
+    {
+      "id": "seed_003",
+      "title": "Sunrise Calm",
+      "artist": "NEXA",
+      "genre": "calm",
+      "energy": "calm",
+      "bpm": 70,
+      "source": "local",
+      "url": "/audio/calm1.mp3"
+    },
+    {
+      "id": "seed_004",
+      "title": "Harbor Sprint",
+      "artist": "NEXA",
+      "genre": "hype",
+      "energy": "hype",
+      "bpm": 140,
+      "source": "local",
+      "url": "/audio/hype1.mp3"
+    },
+    {
+      "id": "seed_005",
+      "title": "TempoZone",
+      "artist": "NEXA",
+      "genre": "hype",
+      "energy": "hype",
+      "bpm": 150,
+      "source": "local",
+      "url": "/audio/hype2.mp3"
+    },
+    {
+      "id": "local_calm1_mp3",
+      "title": "calm1",
+      "artist": "Local",
+      "url": "/audio/calm1.mp3",
+      "genre": "calm",
+      "source": "local",
+      "createdAt": 1758579384200
+    },
+    {
+      "id": "local_focus1_mp3",
+      "title": "focus1",
+      "artist": "Local",
+      "url": "/audio/focus1.mp3",
+      "genre": "focus",
+      "source": "local",
+      "createdAt": 1758579384200
+    },
+    {
+      "id": "local_focus2_mp3",
+      "title": "focus2",
+      "artist": "Local",
+      "url": "/audio/focus2.mp3",
+      "genre": "focus",
+      "source": "local",
+      "createdAt": 1758579384200
+    },
+    {
+      "id": "local_hype1_mp3",
+      "title": "hype1",
+      "artist": "Local",
+      "url": "/audio/hype1.mp3",
+      "genre": "hype",
+      "source": "local",
+      "createdAt": 1758579384200
+    },
+    {
+      "id": "local_hype2_mp3",
+      "title": "hype2",
+      "artist": "Local",
+      "url": "/audio/hype2.mp3",
+      "genre": "hype",
+      "source": "local",
+      "createdAt": 1758579384200
+    }
+  ],
+  "lastUpdated": 1758662141120
+}

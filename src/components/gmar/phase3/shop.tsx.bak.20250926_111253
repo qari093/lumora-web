@@ -1,0 +1,51 @@
+"use client";
+import React, { useState } from "react";
+import { spend, addItem, loadCoins, loadInv } from "./economy";
+
+export default function Shop({ onClose }:{ onClose:()=>void }){
+  const [coins,setCoins] = useState(loadCoins());
+  const [inv,setInv] = useState(loadInv());
+  const [email,setEmail] = useState("");
+
+  const buy=(id:string,cost:number)=>{
+    const r=spend(cost);
+    if(r===null){ alert("Not enough coins."); return; }
+    const nx=addItem(id,1);
+    setCoins(r); setInv(nx);
+    alert(`Purchased: ${id} (remaining coins: ${r})`);
+  };
+
+  const items=[
+    {id:"boost_xs",t:"Boost XS (+5 start)",c:5},
+    {id:"boost_m",t:"Boost M (+15 start)",c:15},
+    {id:"revive",t:"Revive (1 per run)",c:25},
+    {id:"skin_neon",t:"Neon Skin",c:20}
+  ];
+
+  return (
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.65)",display:"grid",placeItems:"center",zIndex:50}}>
+      <div style={{width:"min(500px,95vw)",background:"#0b1220",color:"#e5e7eb",padding:16,borderRadius:12}}>
+        <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
+          <b>Zen Shop (offline)</b>
+          <button onClick={onClose} style={{padding:"4px 10px",border:"1px solid #1f2937",borderRadius:6,background:"#1e293b"}}>Close</button>
+        </div>
+        <div>Coins: {coins}</div>
+        <div style={{display:"grid",gap:8,marginTop:10}}>
+          {items.map(it=>(
+            <div key={it.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",border:"1px solid #1f2937",padding:"8px 10px",borderRadius:8}}>
+              <div>{it.t} — <span style={{opacity:.7}}>Price: {it.c}</span></div>
+              <button disabled={coins<it.c} onClick={()=>buy(it.id,it.c)} style={{padding:"4px 10px",border:"1px solid #1f2937",borderRadius:6,background:"#1e293b",color:"#e5e7eb"}}>
+                Buy
+              </button>
+            </div>
+          ))}
+        </div>
+        <div style={{marginTop:10,opacity:.8,fontSize:12}}>
+          <div>Email (optional for receipt):</div>
+          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com"
+            style={{marginTop:6,width:"100%",border:"1px solid #1f2937",borderRadius:8,background:"#020617",color:"#e5e7eb",padding:"8px 10px"}}/>
+        </div>
+      </div>
+    </div>
+  );
+}
