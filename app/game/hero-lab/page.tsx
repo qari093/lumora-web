@@ -1,4 +1,4 @@
-"use client";
+import HeaderLogo from "./HeaderLogo";"use client";
 import React from "react";
 import GlbUpload from "@/components/rbn3d/GlbUpload";
 import SampleBar from "@/components/rbn3d/SampleBar";
