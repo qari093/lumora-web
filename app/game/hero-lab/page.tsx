@@ -30,6 +30,7 @@ export default function HeroLabPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0f0f10" }}>
+      <HeaderLogo />
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "20px 16px" }}>
         <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:8}}>
   <img
