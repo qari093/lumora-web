@@ -31,7 +31,17 @@ export default function HeroLabPage() {
   return (
     <div style={{ minHeight: "100vh", background: "#0f0f10" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "20px 16px" }}>
-        <h1 style={{ color: "white", marginBottom: 10 }}>Lumora — Hero Lab</h1>
+        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:8}}>
+  <img
+    src="/lumora-logo.png"
+    onError={(e)=>{(e.currentTarget as HTMLImageElement).src="/lumora-logo.svg";}}
+    alt="Lumora"
+    width={140}
+    height={38}
+    style={{display:"block"}}
+  />
+  <span style={{opacity:.85,fontWeight:600,fontSize:18}}>Hero Lab</span>
+</div>
         <p style={{ color: "#cfcfcf", marginBottom: 12 }}>
           یہاں سے ہیرو ماڈلز سلیکٹ کریں — GLB URL/فائل دیں یا نیچے سے Sample لوڈ کریں۔
         </p>

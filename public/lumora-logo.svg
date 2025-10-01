@@ -1,0 +1,6 @@
+<svg width="160" height="44" viewBox="0 0 160 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#00E0FF"/><stop offset="1" stop-color="#7A5CFF"/></linearGradient></defs>
+  <path d="M16 2 C7 10 7 34 16 42 C5 40 2 29 2 22 C2 15 5 4 16 2Z" fill="url(#g)"/>
+  <text x="38" y="30" font-family="Inter, system-ui, -apple-system" font-size="24" letter-spacing="2" fill="#77F0FF">LUMORA</text>
+</svg>
