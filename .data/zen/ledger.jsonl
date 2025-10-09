@@ -1,0 +1,16 @@
+{"id":"tx_xs03xlta","at":1759488098608,"device":"dev1","action":"earn","amount":5,"reason":"test","opId":"op_abc"}
+{"id":"tx_z0j6o61w","at":1759488098691,"device":"dev1","action":"spend","amount":2,"reason":"buy_skin","opId":"op_def"}
+{"id":"tx_h90rwoam","at":1759488099180,"device":"dev1","action":"earn","amount":1,"reason":"combo1","opId":"b1"}
+{"id":"tx_lo3rs0ch","at":1759488099183,"device":"dev1","action":"refund","amount":1,"reason":"undo","opId":"b2"}
+{"id":"tx_tm3ouniz","at":1759488099583,"device":"dev1","action":"earn","amount":5,"reason":"daily_bonus","opId":"bonus:2025-10-03"}
+{"id":"tx_1uplloqh","at":1759488919496,"device":"dev1","action":"earn","amount":2,"reason":"manual","opId":"dev1_test1"}
+{"id":"tx_j90api4h","at":1759488919595,"device":"dev1","action":"spend","amount":1,"reason":"buy_skin","opId":"dev1_test2"}
+{"id":"tx_8u1nzzeo","at":1759495331432,"device":"dev1","action":"earn","amount":6,"reason":"streak","opId":"streak:2025-10-03"}\n{"id":"tx_yfsuoq38","at":1759495331816,"device":"dev1","action":"earn","amount":1,"reason":"ad_view","opId":"ad:2025-10-03:ad_demo_1:view:1"}\n{"id":"tx_aqwzy1ca","at":1759506402859,"device":"dev1","action":"earn","amount":6,"reason":"streak_bonus","opId":"streak:2025-10-03"}
+{"id":"tx_236pa3if","at":1759506403323,"device":"dev1","action":"earn","amount":1,"reason":"ad_view:ad_demo_1","opId":"ad:ad_demo_1:view:2025-10-03"}
+{"id":"tx_zt0thdmj","at":1759506403479,"device":"dev1","action":"earn","amount":3,"reason":"manual","opId":"once1"}
+{"id":"tx_077qj8x2","at":1759506649926,"device":"dev1","action":"earn","amount":3,"reason":"manual","opId":"once1"}
+{"id":"tx_onvub4da","at":1759506650016,"device":"dev1","action":"earn","amount":3,"reason":"manual","opId":"once1"}
+{"id":"tx_fp6k3dzs","at":1759506650191,"device":"dev1","action":"earn","amount":1,"reason":"ad_click:ad_demo_1","opId":"ad:ad_demo_1:click:2025-10-03"}
+{"id":"tx_biwdql0k","at":1759506651145,"device":"dev1","action":"earn","amount":2,"reason":"combo_batch","opId":"b_combo_1"}\n{"id":"tx_dk2d0787","at":1759506651273,"device":"dev1","action":"refund","amount":1,"reason":"undo_batch","opId":"b_combo_2"}\n{"id":"tx_obwrmkwl","at":1759515035836,"device":"dev1","action":"earn","amount":10,"reason":"seed","opId":"seed_10"}
+{"id":"tx_vugvv4f4","at":1759516396003,"device":"dev1","action":"earn","amount":10,"reason":"seed","opId":"seed_10_again"}
+{"id":"tx_gcb5y6a5","at":1759568717019,"device":"dev1","action":"earn","amount":5,"reason":"daily_bonus","opId":"bonus:2025-10-04"}\n{"id":"tx_eef46wui","at":1759568717226,"device":"dev1","action":"earn","amount":5,"reason":"daily_bonus","opId":"bonus:2025-10-04"}\n{"id":"tx_0dh4zd1v","at":1759568972979,"device":"dev1","action":"earn","amount":5,"reason":"daily_bonus","opId":"bonus:2025-10-04"}\n{"id":"tx_t7imw76s","at":1759568973188,"device":"dev1","action":"earn","amount":5,"reason":"daily_bonus","opId":"bonus:2025-10-04"}\n

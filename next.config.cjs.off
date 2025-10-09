@@ -1,0 +1,16 @@
+/** Minimal, correct Next.js config (CJS) */
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    allowedDevOrigins: ["http://127.0.0.1:3010"],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Safe fallbacks (client only); leaving these false is OK
+      config.resolve.fallback = { ...(config.resolve.fallback || {}), crypto: false };
+      config.resolve.alias = { ...(config.resolve.alias || {}), crypto: false, "node:crypto": false };
+    }
+    return config;
+  },
+};
+module.exports = nextConfig;

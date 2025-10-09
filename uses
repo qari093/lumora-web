@@ -1,0 +1,403 @@
+// Game3DPlus.tsx
+// A dependency-free “3D-ish” canvas mini-engine that compiles anywhere (Next.js, Vite).
+// No react-three-fiber required. Safe defaults, pause/resume, resize handling, and simple controls.
+//
+// Controls:
+// • Mouse / drag: orbit
+// • Wheel / pinch: zoom
+// • Space: pause/resume
+// • R: reset camera
+// • P: toggle pixelate (retro look)
+//
+// Drop this file where your project expects "Game3DPlus.tsx" and import it normally.
+
+"use client";
+
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  CSSProperties,
+} from "react";
+
+// ---------- Types ----------
+type Vec3 = { x: number; y: number; z: number };
+
+type Props = {
+  width?: number;             // CSS pixels; canvas will scale with DPR
+  height?: number;
+  background?: string;        // CSS color
+  seed?: number;              // deterministic scene
+  pixelate?: boolean;         // start with retro pixelation
+  style?: CSSProperties;
+  className?: string;
+};
+
+// ---------- Math helpers ----------
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+const TAU = Math.PI * 2;
+
+function LCG(seed = 1) {
+  // Small, deterministic RNG
+  let s = (seed >>> 0) || 1;
+  return () => ((s = (1664525 * s + 1013904223) >>> 0) / 0xffffffff);
+}
+
+function rotateY(p: Vec3, a: number): Vec3 {
+  const s = Math.sin(a), c = Math.cos(a);
+  return { x: c * p.x + s * p.z, y: p.y, z: -s * p.x + c * p.z };
+}
+function rotateX(p: Vec3, a: number): Vec3 {
+  const s = Math.sin(a), c = Math.cos(a);
+  return { x: p.x, y: c * p.y - s * p.z, z: s * p.y + c * p.z };
+}
+
+// ---------- Scene generation ----------
+type Line = [Vec3, Vec3, number]; // from, to, brightness
+type Point = [Vec3, number];      // pos, brightness
+
+function makeScene(seed = 7) {
+  const rnd = LCG(seed);
+  const points: Point[] = [];
+  const lines: Line[] = [];
+
+  // A lo-poly “asteroid” + ring lines
+  const N = 280;
+  for (let i = 0; i < N; i++) {
+    // random point on sphere, jitter radius
+    const th = rnd() * TAU;
+    const ph = Math.acos(2 * rnd() - 1);
+    const r = 0.9 + rnd() * 0.4;
+    const x = r * Math.sin(ph) * Math.cos(th);
+    const y = r * Math.cos(ph);
+    const z = r * Math.sin(ph) * Math.sin(th);
+    points.push([{ x, y, z }, 0.7 + rnd() * 0.3]);
+  }
+
+  // Ring lines
+  const M = 64;
+  for (let i = 0; i < M; i++) {
+    const a0 = (i / M) * TAU;
+    const a1 = ((i + 1) / M) * TAU;
+    const r = 1.6;
+    const p0: Vec3 = { x: r * Math.cos(a0), y: 0.0, z: r * Math.sin(a0) };
+    const p1: Vec3 = { x: r * Math.cos(a1), y: 0.0, z: r * Math.sin(a1) };
+    lines.push([p0, p1, 0.5]);
+  }
+
+  return { points, lines };
+}
+
+// ---------- Projection ----------
+function project(
+  p: Vec3,
+  camR: number,
+  yaw: number,
+  pitch: number,
+  fov: number,
+  aspect: number
+) {
+  // camera at radius camR, orbit angles yaw/pitch around origin
+  const cam: Vec3 = {
+    x: camR * Math.cos(pitch) * Math.sin(yaw),
+    y: camR * Math.sin(pitch),
+    z: camR * Math.cos(pitch) * Math.cos(yaw),
+  };
+
+  // Transform point by inverse camera rotation/translation
+  let v: Vec3 = { x: p.x - cam.x, y: p.y - cam.y, z: p.z - cam.z };
+  // apply inverse yaw then inverse pitch
+  v = rotateY(v, -yaw);
+  v = rotateX(v, -pitch);
+
+  // Simple perspective
+  const z = v.z;
+  const near = 0.1;
+  if (z > -near) return null; // behind the camera
+  const scale = (1 / Math.tan((fov * Math.PI) / 360)) / -z;
+  const x = v.x * scale;
+  const y = v.y * scale;
+  return { x: x * aspect, y, z };
+}
+
+// ---------- Component ----------
+const Game3DPlus: React.FC<Props> = ({
+  width = 720,
+  height = 420,
+  background = "#0b0d12",
+  seed = 7,
+  pixelate: pixelateStart = false,
+  style,
+  className,
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const lowRef = useRef<HTMLCanvasElement | null>(null); // offscreen for pixelate
+  const rafRef = useRef<number | null>(null);
+  const draggingRef = useRef(false);
+  const lastRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Camera + state
+  const [yaw, setYaw] = useState(0.7);
+  const [pitch, setPitch] = useState(0.25);
+  const [radius, setRadius] = useState(4.2);
+  const [paused, setPaused] = useState(false);
+  const [pixelate, setPixelate] = useState(!!pixelateStart);
+
+  // Scene is deterministic for a seed
+  const scene = useMemo(() => makeScene(seed), [seed]);
+
+  // Resize canvas to DPR
+  const syncCanvasSize = useCallback(() => {
+    const cvs = canvasRef.current;
+    if (!cvs) return;
+    const dpr = (globalThis.devicePixelRatio || 1) | 0;
+    const w = Math.max(1, Math.floor(width));
+    const h = Math.max(1, Math.floor(height));
+    cvs.style.width = `${w}px`;
+    cvs.style.height = `${h}px`;
+    cvs.width = w * dpr;
+    cvs.height = h * dpr;
+
+    // offscreen (low-res) when pixelated
+    const low = (lowRef.current ??= document.createElement("canvas"));
+    const factor = pixelate ? 0.28 : 1;
+    low.width = Math.max(1, Math.floor(w * factor));
+    low.height = Math.max(1, Math.floor(h * factor));
+  }, [width, height, pixelate]);
+
+  // Controls
+  useEffect(() => {
+    const cvs = canvasRef.current;
+    if (!cvs) return;
+
+    const onDown = (e: MouseEvent | TouchEvent) => {
+      draggingRef.current = true;
+      const pt =
+        "touches" in e
+          ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
+          : { x: (e as MouseEvent).clientX, y: (e as MouseEvent).clientY };
+      lastRef.current = pt;
+    };
+    const onUp = () => {
+      draggingRef.current = false;
+      lastRef.current = null;
+    };
+    const onMove = (e: MouseEvent | TouchEvent) => {
+      if (!draggingRef.current) return;
+      const pt =
+        "touches" in e
+          ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
+          : { x: (e as MouseEvent).clientX, y: (e as MouseEvent).clientY };
+      const last = lastRef.current;
+      lastRef.current = pt;
+      if (!last) return;
+      const dx = pt.x - last.x;
+      const dy = pt.y - last.y;
+      setYaw((v) => v + dx * 0.005);
+      setPitch((v) => clamp(v + dy * -0.004, -1.2, 1.2));
+    };
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const k = Math.exp(-e.deltaY * 0.0016);
+      setRadius((r) => clamp(r * k, 1.6, 12));
+    };
+
+    cvs.addEventListener("mousedown", onDown);
+    cvs.addEventListener("touchstart", onDown, { passive: true });
+    globalThis.addEventListener("mousemove", onMove);
+    globalThis.addEventListener("touchmove", onMove, { passive: true });
+    globalThis.addEventListener("mouseup", onUp);
+    globalThis.addEventListener("touchend", onUp);
+    cvs.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => {
+      cvs.removeEventListener("mousedown", onDown);
+      cvs.removeEventListener("touchstart", onDown);
+      globalThis.removeEventListener("mousemove", onMove);
+      globalThis.removeEventListener("touchmove", onMove);
+      globalThis.removeEventListener("mouseup", onUp);
+      globalThis.removeEventListener("touchend", onUp);
+      cvs.removeEventListener("wheel", onWheel);
+    };
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === " " || e.code === "Space") {
+        setPaused((p) => !p);
+      } else if (e.key.toLowerCase() === "r") {
+        setYaw(0.7);
+        setPitch(0.25);
+        setRadius(4.2);
+      } else if (e.key.toLowerCase() === "p") {
+        setPixelate((v) => !v);
+      }
+    };
+    globalThis.addEventListener("keydown", onKey);
+    return () => globalThis.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Render loop
+  useEffect(() => {
+    syncCanvasSize();
+
+    const cvs = canvasRef.current;
+    if (!cvs) return;
+    const ctx = cvs.getContext("2d", { alpha: false });
+    if (!ctx) return;
+
+    const low = lowRef.current!;
+    const lctx = low.getContext("2d", { alpha: false })!;
+
+    let t0 = performance.now();
+
+    const frame = (t: number) => {
+      rafRef.current = requestAnimationFrame(frame);
+      const dt = Math.min(0.05, (t - t0) / 1000);
+      t0 = t;
+
+      // Animation (spin scene slowly when not dragging)
+      if (!paused && !draggingRef.current) {
+        setYaw((y) => y + dt * 0.25);
+      }
+
+      // Choose target ctx (low-res if pixelate)
+      const target = pixelate ? lctx : ctx;
+      const W = pixelate ? low.width : cvs.width;
+      const H = pixelate ? low.height : cvs.height;
+
+      // Clear
+      target.fillStyle = background;
+      target.fillRect(0, 0, W, H);
+
+      // Camera + projection params
+      const aspect = W / H;
+      const fov = 60;
+
+      // Subtle starfield
+      target.globalAlpha = 0.9;
+      target.fillStyle = "#0e1118";
+      for (let i = 0; i < 40; i++) {
+        const x = ((i * 73) % W) | 0;
+        const y = ((i * 149) % H) | 0;
+        target.fillRect(x, y, 1, 1);
+      }
+      target.globalAlpha = 1;
+
+      // Draw lines
+      target.strokeStyle = "#5ab0ff";
+      target.lineWidth = Math.max(1, Math.floor(W / 540));
+      target.globalAlpha = 0.7;
+      target.beginPath();
+      for (const [a, b, br] of scene.lines) {
+        const pa = project(a, radius, yaw, pitch, fov, aspect);
+        const pb = project(b, radius, yaw, pitch, fov, aspect);
+        if (!pa || !pb) continue;
+        target.globalAlpha = 0.4 + 0.6 * br;
+        const x0 = (pa.x * 0.5 + 0.5) * W;
+        const y0 = (-pa.y * 0.5 + 0.5) * H;
+        const x1 = (pb.x * 0.5 + 0.5) * W;
+        const y1 = (-pb.y * 0.5 + 0.5) * H;
+        target.moveTo(x0, y0);
+        target.lineTo(x1, y1);
+      }
+      target.stroke();
+      target.globalAlpha = 1;
+
+      // Draw points
+      for (const [p, br] of scene.points) {
+        const pr = project(p, radius, yaw, pitch, fov, aspect);
+        if (!pr) continue;
+        const x = (pr.x * 0.5 + 0.5) * W;
+        const y = (-pr.y * 0.5 + 0.5) * H;
+        const s = clamp(1.2 + (-pr.z * 0.6), 0.6, 4.2);
+        target.fillStyle = `rgba(180,220,255,${0.35 + 0.65 * br})`;
+        target.fillRect(x - s * 0.5, y - s * 0.5, s, s);
+      }
+
+      // If pixelated, scale low → main with nearest-neighbor
+      if (pixelate) {
+        // draw low-res to hi-res with “pixel” look
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(low, 0, 0, cvs.width, cvs.height);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(frame);
+    return () => {
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [background, pixelate, radius, yaw, pitch, syncCanvasSize, scene.points, scene.lines]);
+
+  // Resize on DPR / container changes
+  useEffect(() => {
+    syncCanvasSize();
+    const onDPR = () => syncCanvasSize();
+    const mq = globalThis.matchMedia
+      ? globalThis.matchMedia(`(resolution: ${globalThis.devicePixelRatio || 1}dppx)`)
+      : null;
+    mq?.addEventListener?.("change", onDPR);
+    const onResize = () => syncCanvasSize();
+    globalThis.addEventListener("resize", onResize);
+    return () => {
+      mq?.removeEventListener?.("change", onDPR);
+      globalThis.removeEventListener("resize", onResize);
+    };
+  }, [syncCanvasSize]);
+
+  return (
+    <div
+      className={className}
+      style={{
+        position: "relative",
+        width,
+        height,
+        userSelect: "none",
+        ...style,
+      }}
+      aria-label="Game3DPlus canvas"
+      role="img"
+    >
+      <canvas
+        ref={canvasRef}
+        // Let CSS handle the “retro” feel for cursor, etc.
+        style={{
+          display: "block",
+          width,
+          height,
+          imageRendering: pixelate ? ("pixelated" as any) : "auto",
+          cursor: "grab",
+          borderRadius: 8,
+          outline: "none",
+        }}
+      />
+      {/* HUD */}
+      <div
+        style={{
+          position: "absolute",
+          left: 10,
+          bottom: 10,
+          fontFamily: "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
+          fontSize: 12,
+          color: "#a9b4ca",
+          background: "rgba(0,0,0,0.35)",
+          padding: "6px 8px",
+          borderRadius: 6,
+          pointerEvents: "none",
+        }}
+      >
+        <b>Controls</b>: drag to orbit • wheel to zoom • <kbd>Space</kbd> pause •{" "}
+        <kbd>P</kbd> pixelate • <kbd>R</kbd> reset
+        <span style={{ marginLeft: 8, opacity: 0.75 }}>
+          {paused ? "⏸ paused" : "▶️ running"}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default Game3DPlus;

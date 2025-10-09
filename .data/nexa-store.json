@@ -1,0 +1,11 @@
+{
+  "users": {
+    "dev1": {
+      "device": "dev1",
+      "dayIndex": 1,
+      "streak": 1,
+      "planId": "mediterranean",
+      "lastDoneAt": 1759569582052
+    }
+  }
+}

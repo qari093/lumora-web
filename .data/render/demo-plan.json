@@ -1,0 +1,15 @@
+{
+  "outPath": "out/videos/from-api-ducked.mp4",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "color": { "saturation": 1.06 },
+  "clips": [
+    { "file": ".data/render/cache/clip1.mp4" },
+    { "file": ".data/render/cache/clip2.mp4" },
+    { "file": ".data/render/cache/clip3.mp4" }
+  ],
+  "voice": { "file": ".data/render/cache/voice.wav", "gainDb": 2 },
+  "music": { "file": ".data/render/cache/music.wav", "gainDb": -8 },
+  "subtitles": { "srtPath": ".data/render/cache/demo.srt", "outlinePx": 3, "bottomPct": 12 }
+}

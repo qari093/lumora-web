@@ -1,0 +1,80 @@
+[
+  {
+    "ts": 1759603530810,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759603529735,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759603528668,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759603526795,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759603040285,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759603032896,
+    "type": "bootstrap_room",
+    "userId": "Guest",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759602951760,
+    "type": "bootstrap_room",
+    "userId": "tester",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  },
+  {
+    "ts": 1759602847625,
+    "type": "bootstrap_room",
+    "userId": "tester",
+    "props": {}
+  },
+  {
+    "ts": 1759602603816,
+    "type": "bootstrap_room",
+    "userId": "tester",
+    "props": {
+      "room": "daily-huddle",
+      "scene": "real"
+    }
+  }
+]
