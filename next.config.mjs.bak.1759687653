@@ -1,0 +1,13 @@
+let withSentryConfig = (c)=>c, sentryOpts = {};
+try {
+  const mod = await import("@sentry/nextjs");
+  if (mod?.withSentryConfig) withSentryConfig = mod.withSentryConfig;
+  sentryOpts = { silent: true, org: process.env.SENTRY_ORG, project: process.env.SENTRY_PROJECT };
+} catch { /* Sentry optional */ }
+
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {},
+};
+
+export default withSentryConfig(nextConfig, sentryOpts);

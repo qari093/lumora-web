@@ -1,90 +1,171 @@
-datasource db {
-  provider = "sqlite"
-  url      = "file:./gmar.db"
-}
 generator client {
   provider = "prisma-client-js"
 }
-model Device {
-  id        String   @id
-  createdAt DateTime @default(now())
-  lastSeen  DateTime @default(now())
-  lang      String?
-  banned    Boolean  @default(false)
-  banReason String?
-  Events    Event[]
-  Scores    Score[]
-  Achievements Achievement[]
-  AdMetrics AdMetric[]
-  Bans      Ban[]
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-model Game {
-  id     String @id
-  title  String
-  Events Event[]
-  Scores Score[]
+
+enum RoomRole {
+  HOST
+  MODERATOR
+  PARTICIPANT
 }
+
+enum EventType {
+  JOIN
+  LEAVE
+  MUTE
+  UNMUTE
+  START_STREAM
+  STOP_STREAM
+  MESSAGE
+  SCREEN_START
+  SCREEN_STOP
+  RAISE_HAND
+  LOWER_HAND
+}
+
+enum ModerationKind {
+  TEXT
+  IMAGE
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String?
+  image     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  passwordHash String?
+
+  rooms       Room[]        @relation("HostRooms")
+  memberships RoomMember[]
+  events      Event[]       @relation("UserEvents")
+  messages    Message[]     @relation("UserMessages")
+}
+
+model Room {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  title     String
+  hostId    String
+  host      User         @relation("HostRooms", fields: [hostId], references: [id])
+  isPrivate Boolean      @default(false)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  members   RoomMember[]
+  events    Event[]
+  messages  Message[]
+}
+
+model RoomMember {
+  id       String   @id @default(cuid())
+  userId   String
+  roomId   String
+  role     RoomRole @default(PARTICIPANT)
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
+
+  @@unique([userId, roomId])
+}
+
 model Event {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  deviceId  String?
-  device    Device?  @relation(fields: [deviceId], references: [id])
-  gameId    String
-  game      Game     @relation(fields: [gameId], references: [id])
-  type      String
+  id        String     @id @default(cuid())
+  roomId    String
+  type      EventType
+  timestamp DateTime   @default(now())
   data      Json?
+  actorId   String?
+
+  room  Room @relation(fields: [roomId], references: [id])
+  actor User? @relation("UserEvents", fields: [actorId], references: [id])
+
+  @@index([roomId, timestamp])
 }
-model Score {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  deviceId  String?
-  device    Device?  @relation(fields: [deviceId], references: [id])
-  gameId    String
-  game      Game     @relation(fields: [gameId], references: [id])
-  player    String
-  value     Int
-  @@index([gameId, value(sort: Desc)])
+
+model Message {
+  id      String   @id @default(cuid())
+  roomId  String
+  userId  String
+  content String
+  sentAt  DateTime @default(now())
+
+  room   Room @relation(fields: [roomId], references: [id])
+  author User @relation("UserMessages", fields: [userId], references: [id])
+
+  @@index([roomId, sentAt])
 }
-model Season {
-  id        Int      @id @default(autoincrement())
-  name      String
-  startAt   DateTime
-  endAt     DateTime
-  active    Boolean  @default(false)
-  Scores    SeasonScore[]
+
+model ModerationItem {
+
+  id         String            @id @default(cuid())
+  kind       ModerationKind
+  text       String?
+  objectKey  String?
+  status     ModerationStatus  @default(PENDING)
+  flags      Json?
+  reason     String?
+  createdAt  DateTime          @default(now())
+  reviewedAt DateTime?
+  reviewer   String?
+
+  @@index([status, createdAt])
+  fileKey     String?
+  sha256      String?
+  scanStatus  ScanStatus?
+  scanAt      DateTime?
 }
-model SeasonScore {
-  id        String   @id @default(cuid())
-  seasonId  Int
-  season    Season   @relation(fields: [seasonId], references: [id])
-  gameId    String
-  player    String
-  value     Int
-  createdAt DateTime @default(now())
-  @@index([seasonId, gameId, value(sort: Desc)])
+
+
+model AnalyticsEvent {
+  id      String   @id @default(cuid())
+  ts      DateTime @default(now())
+  type    String
+  userId  String?
+  roomId  String?
+  path    String?
+  meta    Json?
+
+  @@index([ts, type])
 }
-model Achievement {
-  id        String   @id @default(cuid())
-  deviceId  String?
-  device    Device?  @relation(fields: [deviceId], references: [id])
-  gameId    String
-  badge     String
-  createdAt DateTime @default(now())
+
+
+enum RenderStatus {
+  QUEUED
+  RUNNING
+  DONE
+  ERROR
 }
-model AdMetric {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  deviceId  String?
-  device    Device?  @relation(fields: [deviceId], references: [id])
-  gameId    String
-  variant   String
-  action    String
+
+model RenderJob {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  status    RenderStatus  @default(QUEUED)
+  progress  Int           @default(0)
+  input     Json?
+  outputUrl String?
+  error     String?
+
+  @@index([createdAt, status])
 }
-model Ban {
-  id        String   @id @default(cuid())
-  deviceId  String
-  device    Device   @relation(fields: [deviceId], references: [id])
-  reason    String
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
+
+
+enum ScanStatus {
+  PENDING
+  CLEAN
+  INFECTED
 }

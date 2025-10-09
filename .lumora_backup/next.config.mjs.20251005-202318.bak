@@ -1,0 +1,3 @@
+/** Minimal safe Next.js config in ESM format (for "type":"module" projects) */
+const nextConfig = { reactStrictMode: true };
+export default nextConfig;

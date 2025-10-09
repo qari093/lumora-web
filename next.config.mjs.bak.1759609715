@@ -1,0 +1,15 @@
+/** Minimal, safe Next.js config (ESM) */
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    allowedDevOrigins: ["http://127.0.0.1:3010"],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = { ...(config.resolve.fallback||{}), crypto: false };
+      config.resolve.alias = { ...(config.resolve.alias||{}), crypto: false, "node:crypto": false };
+    }
+    return config;
+  },
+};
+export default nextConfig;

@@ -1,0 +1,4 @@
+[
+  {"userId":"u1","type":"view","props":{"dwell":42},"ts":17595949193N},
+  {"userId":"u2","type":"generate_plan","props":{"location":"NYC"},"ts":17595949193N}
+]

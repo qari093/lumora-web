@@ -1,7 +1,7 @@
-const nextConfig = {
+const config = {
   reactStrictMode: true,
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
   experimental: {},
+  async redirects() { return []; },
+  async rewrites() { return []; }
 };
-export default nextConfig;
+export default config;

@@ -1,0 +1,30 @@
+import { Worker } from "@bullmq/fast";
+import IORedis from "ioredis";
+import prisma from "@/src/lib/db";
+import { composeShort } from "@/src/lib/compositor";
+import fs from "fs";
+import { putObject } from "@/src/lib/s3";
+import { join } from "path";
+const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
+const CONC = Number(process.env.GEN_CONCURRENCY || "8");
+const BUCKET = process.env.S3_BUCKET || "lumora-local";
+const PREFIX = process.env.GEN_OUTPUT_PREFIX || "cdn/renders";
+const connection = new IORedis(REDIS_URL, { maxRetriesPerRequest: null, enableReadyCheck: false });
+type Scene = { text?: string; imageUrl?: string; videoUrl?: string; duration?: number };
+type Script = { scenes: Scene[]; musicUrl?: string };
+function dims(){ return { w:1080, h:1920 }; }
+new Worker("video:generate", async (job)=>{
+  const { projectId } = job.data as { projectId:string };
+  const proj = await prisma.videoProject.findUnique({ where:{ id: projectId }});
+  if(!proj) throw new Error("project not found");
+  const script = (proj.script as Script) || { scenes:[{ text: proj.topic||"Lumora", duration:3 }] };
+  const d = dims();
+  const out = await composeShort({ width:d.w, height:d.h, scenes: script.scenes, outPath: join("/tmp", `${proj.id}.mp4`) });
+  const buf = fs.readFileSync(out);
+  const key = `${PREFIX}/${proj.id}.mp4`;
+  const url = await putObject(BUCKET, key, buf, "video/mp4");
+  await prisma.videoProject.update({ where:{ id: proj.id }, data:{ outputUrl:url, status:"DONE" }});
+  await prisma.renderJob.updateMany({ where:{ projectId: proj.id }, data:{ status:"DONE", progress:100, outputUrl:url }});
+  return { url };
+},{ connection, concurrency: CONC });
+console.log("[worker] video-generator up", CONC);

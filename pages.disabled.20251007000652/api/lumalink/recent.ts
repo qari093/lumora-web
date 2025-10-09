@@ -1,0 +1,38 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import fs from "fs";
+import path from "path";
+
+type LogItem = { ts: number; type: string; userId: string; props?: Record<string, any> };
+
+function ensureDB() {
+  const dir = path.join(process.cwd(), "db");
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  const file = path.join(dir, "lumalink-log.json");
+  if (!fs.existsSync(file)) fs.writeFileSync(file, "[]");
+  return file;
+}
+function load(file: string): LogItem[] {
+  try { return JSON.parse(fs.readFileSync(file, "utf8") || "[]"); }
+  catch { return []; }
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:3010");
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method !== "GET") return res.status(405).json({ ok:false, error:"Method Not Allowed" });
+
+  try {
+    const nParam = Array.isArray(req.query.n) ? req.query.n[0] : req.query.n;
+    const n = Math.max(1, Math.min(50, parseInt(String(nParam ?? "10"), 10) || 10));
+    const file = ensureDB();
+    const items = load(file).slice(0, n);
+    return res.status(200).json({ ok:true, items });
+  } catch (e:any) {
+    return res.status(500).json({ ok:false, error: e?.message || "unknown" });
+  }
+}

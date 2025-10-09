@@ -1,0 +1,3 @@
+/** Minimal Next.js config to avoid dev bundler crashes */
+const nextConfig = {};
+export default nextConfig;

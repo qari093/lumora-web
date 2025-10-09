@@ -1,0 +1,29 @@
+{
+  "balances": {
+    "dev1": 3
+  },
+  "history": {
+    "dev1": [
+      {
+        "id": "tx_h73ryeqa",
+        "at": 1759520146972,
+        "device": "dev1",
+        "action": "spend",
+        "amount": 7,
+        "reason": "zenshop:skin_aurora"
+      },
+      {
+        "id": "tx_k6tpxfw9",
+        "at": 1759520146533,
+        "device": "dev1",
+        "action": "earn",
+        "amount": 10,
+        "reason": "seed",
+        "opId": "seed_run"
+      }
+    ]
+  },
+  "ops": {
+    "dev1:seed_run": true
+  }
+}

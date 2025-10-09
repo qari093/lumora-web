@@ -1,0 +1,59 @@
+import { NextResponse } from "next/server";
+
+export function middleware(req: Request) {
+  // Skip static assets and Next internals cheaply
+  const url = new URL(req.url);
+  const p = url.pathname;
+  if (
+    p.startsWith("/_next") ||
+    p === "/favicon.ico" ||
+    p.match(/\.[a-z0-9]+$/i) // files with extensions
+  ) {
+    return NextResponse.next();
+  }
+  // No-op pass-through (add real logic later)
+  return NextResponse.next();
+}
+"EOF"
+
+# 3) Ensure minimal ESM next config (for "type":"module")
+if [ ! -f next.config.mjs ]; then
+  cat > next.config.mjs <<EOF
+/** Minimal safe Next.js config (ESM) */
+const nextConfig = { reactStrictMode: true };
+export default nextConfig;
+"EOF"
+fi
+
+# 4) Ensure a simple health route so we can verify quickly
+mkdir -p app/api/health
+cat > app/api/health/route.ts <<EOF
+import { NextResponse } from "next/server";
+export async function GET() {
+  return NextResponse.json({ ok: true, service: "lumora-web" });
+}
+"EOF"
+
+# 5) Ensure a basic home page (only if missing)
+mkdir -p app
+[ -f app/page.tsx ] || cat > app/page.tsx <<EOF
+export default function Home() {
+  return (
+    <main style={{padding:20,fontFamily:"system-ui"}}>
+      <h1>Lumora Dev</h1>
+      <p>OK ✓ — App is running. Health at <code>/api/health</code>.</p>
+    </main>
+  );
+}
+"EOF"
+
+# 6) Start Next (worker intentionally not started)
+PORT=3000 npx next dev >/tmp/next-dev.out 2>&1 & disown
+
+# 7) Wait for /api/health and show status
+for i in {1..60}; do
+  curl -sfm 1 http://127.0.0.1:3000/api/health >/dev/null 2>&1 && break || sleep 1
+done
+
+echo "🔎 /api/health:"; (curl -sS http://127.0.0.1:3000/api/health || true); echo
+echo "—— dev (tail 80) ——"; tail -n 80 /tmp/next-dev.out || true

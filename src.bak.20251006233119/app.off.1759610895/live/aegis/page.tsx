@@ -1,0 +1,1 @@
+"use client"; export default function AegisInLive(){ return (<div style={{height:"100vh",background:"#000",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,fontWeight:800}}>Aegis - Live Group Route Active (/live/aegis)</div>); }

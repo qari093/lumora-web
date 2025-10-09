@@ -1,0 +1,87 @@
+{
+  "ads": [
+    {
+      "id": "ad_creatine_1",
+      "title": "Creatine Pro Stack",
+      "line": "Ships today • €29",
+      "image": "/ads/creatine.png",
+      "cta": "Shop",
+      "url": "https://lumora.ai/shop/creatine",
+      "budget": 1000,
+      "cap": 5,
+      "payout": 1,
+      "placement": "videos_infeed",
+      "lang": "en"
+    },
+    {
+      "id": "ad_wallet_bonus_1",
+      "title": "Watch to get +1 Zen",
+      "line": "Rewarded • Tap to watch",
+      "image": "/ads/reward.png",
+      "cta": "Watch",
+      "url": "#",
+      "budget": 1000,
+      "cap": 10,
+      "payout": 1,
+      "placement": "rewarded_wallet",
+      "lang": "en"
+    },
+    {
+      "id": "ad_game_overlay_1",
+      "title": "Tap & Hold to Claim",
+      "line": "Limited reward",
+      "image": "/ads/hold.png",
+      "cta": "Hold",
+      "url": "#",
+      "budget": 500,
+      "cap": 3,
+      "payout": 1,
+      "placement": "game_overlay",
+      "lang": "en"
+    }
+  ],
+  "impressions": [
+    {
+      "id": "imp_vxs31hwd",
+      "adId": "ad_creatine_1",
+      "placement": "videos_infeed",
+      "at": 1759524557403,
+      "device": "dev-::ffff:127.0.0.1",
+      "lang": "en",
+      "events": [
+        {
+          "at": 1759524557403,
+          "event": "view"
+        }
+      ]
+    },
+    {
+      "id": "imp_v69tvo8y",
+      "adId": "ad_creatine_1",
+      "placement": "videos_infeed",
+      "at": 1759526897039,
+      "device": "dev-::ffff:127.0.0.1",
+      "lang": "en",
+      "events": [
+        {
+          "at": 1759526897039,
+          "event": "view"
+        }
+      ]
+    },
+    {
+      "id": "imp_ipn9w1va",
+      "adId": "ad_creatine_1",
+      "placement": "videos_infeed",
+      "at": 1759568514760,
+      "device": "dev-::ffff:127.0.0.1",
+      "lang": "en",
+      "events": [
+        {
+          "at": 1759568514760,
+          "event": "view"
+        }
+      ]
+    }
+  ]
+}

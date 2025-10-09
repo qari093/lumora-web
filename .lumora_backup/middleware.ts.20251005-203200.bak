@@ -1,0 +1,105 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+/** In-memory LRU-ish bucket (dev/staging). For prod use Redis/Upstash. */
+type Bucket = { tokens:number; updated:number };
+const LIMIT = 60;           // requests
+const WINDOW_MS = 60_000;   // per 60s
+const REFILL_PER_MS = LIMIT / WINDOW_MS;
+const MAX_BUCKETS = 2000;
+const buckets = new Map<string, Bucket>();
+
+function keyFor(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+         || req.ip
+         || "127.0.0.1";
+  // path-level isolation helps noisy routes
+  const path = req.nextUrl.pathname.split("/").slice(0,3).join("/");
+  return `${ip}|${path}`;
+}
+
+function rateLimit(req: NextRequest) {
+  const k = keyFor(req);
+  let b = buckets.get(k);
+  const now = Date.now();
+  if (!b) {
+    b = { tokens: LIMIT, updated: now };
+    if (buckets.size > MAX_BUCKETS) {
+      // naive trim
+      const first = buckets.keys().next().value;
+      if (first) buckets.delete(first);
+    }
+  } else {
+    const delta = now - b.updated;
+    b.tokens = Math.min(LIMIT, b.tokens + delta * REFILL_PER_MS);
+    b.updated = now;
+  }
+  if (b.tokens < 1) {
+    buckets.set(k, b);
+    return { ok:false, retryAfter: Math.ceil((1 - b.tokens) / REFILL_PER_MS / 1000) };
+  }
+  b.tokens -= 1;
+  buckets.set(k, b);
+  return { ok:true };
+}
+
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // Exemptions
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/public") ||
+    pathname.startsWith("/api/ice") ||
+    pathname.startsWith("/api/csrf") ||
+    pathname.startsWith("/api/error-test") ||
+    pathname.startsWith("/api/stripe/webhook")
+  ) {
+    return NextResponse.next();
+  }
+
+  // Same-origin for unsafe methods
+  if (["POST","PUT","PATCH","DELETE"].includes(req.method)) {
+    const origin = req.headers.get("origin");
+    const host = req.headers.get("host");
+    if (!origin || !host || !origin.includes(host)) {
+      return new NextResponse(JSON.stringify({ error: "same_origin_required" }), {
+        status: 400,
+        headers: { "content-type":"application/json" }
+      });
+    }
+  }
+
+  // Rate limit (all routes except static exemptions)
+  const rl = rateLimit(req);
+  if (!rl.ok) {
+    return new NextResponse(JSON.stringify({ error:"rate_limited" }), {
+      status: 429,
+      headers: { "content-type":"application/json", "retry-after": String(rl.retryAfter ?? 1) }
+    });
+  }
+
+  // Uploader consent required for /upload
+  if (pathname.startsWith("/upload")) {
+    const ok = req.cookies.get("uploader_consent")?.value === "1";
+    if (!ok) return NextResponse.redirect(new URL("/consent", req.url));
+  }
+
+  // Protect /moderation (auth required) and /live/* (auth OR stripe cookie)
+  if (pathname.startsWith("/moderation")) {
+    const token = await getToken({ req, secureCookie: process.env.NODE_ENV === "production" });
+    if (!token) return NextResponse.redirect(new URL("/login", req.url));
+  }
+  if (pathname.startsWith("/live")) {
+    const token = await getToken({ req, secureCookie: process.env.NODE_ENV === "production" });
+    const hasStripe = req.cookies.get("live_paid")?.value === "1";
+    if (!token && !hasStripe) {
+      return NextResponse.redirect(new URL("/live/subscribe", req.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = { matcher: ["/:path*"] };
