@@ -1,0 +1,458 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoomRole {
+  HOST
+  MODERATOR
+  PARTICIPANT
+}
+
+enum EventType {
+  JOIN
+  LEAVE
+  MUTE
+  UNMUTE
+  START_STREAM
+  STOP_STREAM
+  MESSAGE
+  SCREEN_START
+  SCREEN_STOP
+  RAISE_HAND
+  LOWER_HAND
+}
+
+enum ModerationKind {
+  TEXT
+  IMAGE
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String?
+  image     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  passwordHash String?
+
+  rooms       Room[]        @relation("HostRooms")
+  memberships RoomMember[]
+  events      Event[]       @relation("UserEvents")
+  messages    Message[]     @relation("UserMessages")
+}
+
+model Room {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  title     String
+  hostId    String
+  host      User         @relation("HostRooms", fields: [hostId], references: [id])
+  isPrivate Boolean      @default(false)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  members   RoomMember[]
+  events    Event[]
+  messages  Message[]
+}
+
+model RoomMember {
+  id       String   @id @default(cuid())
+  userId   String
+  roomId   String
+  role     RoomRole @default(PARTICIPANT)
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
+
+  @@unique([userId, roomId])
+}
+
+model Event {
+  id        String     @id @default(cuid())
+  roomId    String
+  type      EventType
+  timestamp DateTime   @default(now())
+  data      Json?
+  actorId   String?
+
+  room  Room @relation(fields: [roomId], references: [id])
+  actor User? @relation("UserEvents", fields: [actorId], references: [id])
+
+  @@index([roomId, timestamp])
+}
+
+model Message {
+  id      String   @id @default(cuid())
+  roomId  String
+  userId  String
+  content String
+  sentAt  DateTime @default(now())
+
+  room   Room @relation(fields: [roomId], references: [id])
+  author User @relation("UserMessages", fields: [userId], references: [id])
+
+  @@index([roomId, sentAt])
+}
+
+model ModerationItem {
+
+  id         String            @id @default(cuid())
+  kind       ModerationKind
+  text       String?
+  objectKey  String?
+  status     ModerationStatus  @default(PENDING)
+  flags      Json?
+  reason     String?
+  createdAt  DateTime          @default(now())
+  reviewedAt DateTime?
+  reviewer   String?
+
+  @@index([status, createdAt])
+  fileKey     String?
+  sha256      String?
+  scanStatus  ScanStatus?
+  scanAt      DateTime?
+}
+
+
+model AnalyticsEvent {
+  id      String   @id @default(cuid())
+  ts      DateTime @default(now())
+  type    String
+  userId  String?
+  roomId  String?
+  path    String?
+  meta    Json?
+
+  @@index([ts, type])
+}
+
+
+enum RenderStatus {
+  QUEUED
+  RUNNING
+  DONE
+  ERROR
+}
+
+model RenderJob {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  status    RenderStatus  @default(QUEUED)
+  progress  Int           @default(0)
+  input     Json?
+  outputUrl String?
+  error     String?
+
+  @@index([createdAt, status])
+}
+
+
+enum ScanStatus {
+  PENDING
+  CLEAN
+  INFECTED
+}
+/// ---------- HARMONY v2.5 ECONOMY MODELS ----------
+model PulseLedger {
+  id           String   @id @default(cuid())
+  userId       String   @index
+  type         PulseTxn @default(EARN)
+  amount       Int
+  note         String?
+  meta         Json?
+  createdAt    DateTime @default(now())
+}
+enum PulseTxn { EARN SPEND BURN ADJUST GRANT }
+model PulseWallet {
+  userId       String   @id
+  balance      Int      @default(0)
+  harmonyXp    Int      @default(0)
+  lastActiveAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+model EconDaily {
+  id         String   @id @default(cuid())
+  day        Date     @unique
+  earnTotal  Int      @default(0)
+  spendTotal Int      @default(0)
+  burnTotal  Int      @default(0)
+  reserve    Int      @default(0)
+  poolNext   Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+model Treasury {
+  id        Int      @id @default(1)
+  reserve   Int      @default(0)
+  poolLive  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+"PRISMA"
+
+# 3) .env defaults
+grep -q "^HARMONY_BURN_BASE=" .env.local 2>/dev/null || cat >> .env.local <<ENVV
+HARMONY_BURN_BASE=0.05
+HARMONY_BURN_MIN=0.03
+HARMONY_BURN_MAX=0.15
+HARMONY_DAILY_CAP=100
+HARMONY_NEWUSER_BOOST_DAYS=30
+HARMONY_TREASURY_RESERVE_TARGET=0.30
+HARMONY_VELOCITY_MIN=0.80
+HARMONY_VELOCITY_MAX_METHOD=STATIC
+HARMONY_VELOCITY_MAX=1.10
+"ENVV"
+
+# 4) Core econ lib
+cat > src/lib/econ/harmony.ts <<TS
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+type EconSnapshot = { burn:number; cap:number; reserveTarget:number; velocityMin:number; velocityMax:number; };
+const clamp=(v:number,min:number,max:number)=>Math.max(min,Math.min(max,v));
+export async function getSnapshot():Promise<EconSnapshot>{
+  return {
+    burn: parseFloat(process.env.HARMONY_BURN_BASE||"0.05"),
+    cap: parseInt(process.env.HARMONY_DAILY_CAP||"100",10),
+    reserveTarget: parseFloat(process.env.HARMONY_TREASURY_RESERVE_TARGET||"0.30"),
+    velocityMin: parseFloat(process.env.HARMONY_VELOCITY_MIN||"0.80"),
+    velocityMax: parseFloat(process.env.HARMONY_VELOCITY_MAX||"1.10"),
+  };
+}
+export function dpiEarningFactor(days:number, v:number){
+  const agePenalty = clamp(days/90,0,0.5);
+  const velocityAdj = 1 - (v - 1) * 0.3;
+  return clamp((1 - agePenalty) * velocityAdj, 0.4, 1.2);
+}
+export async function getUserDailyEarned(userId:string, dayISO:string){
+  const start=new Date(dayISO+"T00:00:00.000Z"); const end=new Date(dayISO+"T23:59:59.999Z");
+  const sum = await prisma.pulseLedger.aggregate({_sum:{amount:true},where:{userId,type:"EARN",createdAt:{gte:start,lte:end}}});
+  return sum._sum.amount ?? 0;
+}
+export async function earn(userId:string, baseAmount:number, opts:{note?:string,meta?:any,daysSinceSignup?:number}){
+  const today = new Date().toISOString().slice(0,10);
+  const daily = await prisma.econDaily.findUnique({ where:{ day:new Date(today) }});
+  const earnTotal=daily?.earnTotal??0, spendTotal=daily?.spendTotal??0;
+  const velocity = spendTotal===0 ? 1 : spendTotal/Math.max(earnTotal,1);
+  const factor = dpiEarningFactor(opts.daysSinceSignup??0, velocity);
+  let grant = Math.floor(baseAmount * factor);
+  if (grant<=0) return { granted:0, capped:true };
+  const cap = parseInt(process.env.HARMONY_DAILY_CAP||"100",10);
+  const already = await getUserDailyEarned(userId, today);
+  const room = Math.max(0, cap - already);
+  grant = Math.min(grant, room);
+  if (grant<=0) return { granted:0, capped:true };
+  const tx = await prisma.(async(txp)=>{
+    const w = await txp.pulseWallet.upsert({ where:{userId}, update:{}, create:{userId} });
+    await txp.pulseWallet.update({ where:{userId}, data:{ balance:w.balance+grant, harmonyXp:w.harmonyXp+grant, lastActiveAt:new Date() }});
+    await txp.pulseLedger.create({ data:{ userId, type:"EARN", amount:grant, note:opts.note, meta:opts.meta }});
+    const day=new Date(today);
+    await txp.econDaily.upsert({ where:{day}, create:{day,earnTotal:grant}, update:{ earnTotal:{increment:grant} }});
+    return grant;
+  });
+  return { granted:tx, capped: tx===room && room===0 };
+}
+export async function spend(userId:string, spendAmount:number, opts:{note?:string,meta?:any}){
+  const minB=parseFloat(process.env.HARMONY_BURN_MIN||"0.03"), maxB=parseFloat(process.env.HARMONY_BURN_MAX||"0.15");
+  const burnBase=parseFloat(process.env.HARMONY_BURN_BASE||"0.05");
+  const burnRate=clamp(burnBase,minB,maxB);
+  const burn=Math.ceil(spendAmount*burnRate), totalDebit=spendAmount+burn;
+  const result = await prisma.(async(txp)=>{
+    const w=await txp.pulseWallet.findUnique({ where:{userId}, rejectOnNotFound:true as any });
+    if ((w?.balance??0) < totalDebit) throw new Error("INSUFFICIENT_PULSE");
+    await txp.pulseWallet.update({ where:{userId}, data:{ balance:w!.balance-totalDebit, lastActiveAt:new Date() }});
+    await txp.pulseLedger.createMany({ data:[
+      { userId, type:"SPEND", amount:spendAmount, note:opts.note, meta:opts.meta },
+      { userId, type:"BURN",  amount:burn,        note:"burn:"+opts.note, meta:{ burnRate } }
+    ]});
+    const today=new Date(new Date().toISOString().slice(0,10));
+    await txp.econDaily.upsert({ where:{day:today}, create:{day:today,spendTotal:spendAmount,burnTotal:burn},
+      update:{ spendTotal:{increment:spendAmount}, burnTotal:{increment:burn} }});
+    const t=await txp.treasury.upsert({ where:{id:1}, create:{id:1}, update:{} });
+    await txp.treasury.update({ where:{id:1}, data:{ reserve: t.reserve + burn }});
+    return { spend:spendAmount, burn };
+  });
+  return result;
+}
+export async function statsToday(){
+  const today=new Date().toISOString().slice(0,10);
+  const d=await prisma.econDaily.findUnique({ where:{ day:new Date(today) }});
+  const t=await prisma.treasury.findUnique({ where:{ id:1 }});
+  const earn=d?.earnTotal??0, spend=d?.spendTotal??0;
+  const velocity = earn===0 ? 1 : spend/Math.max(earn,1);
+  return { earn, spend, burn:d?.burnTotal??0, velocity, reserve:t?.reserve??0, poolLive:t?.poolLive??0 };
+}
+export async function closeDay({ adPulses }:{ adPulses:number }){
+  const today=new Date().toISOString().slice(0,10);
+  const d=await statsToday();
+  const reserveTarget=parseFloat(process.env.HARMONY_TREASURY_RESERVE_TARGET||"0.30");
+  const t=await prisma.treasury.upsert({ where:{id:1}, create:{id:1}, update:{} });
+  let newReserve=t.reserve + Math.max(0, adPulses);
+  const poolNext=Math.floor((1-reserveTarget)*newReserve);
+  const reserveKeep=newReserve - poolNext;
+  await prisma.(async(txp)=>{
+    await txp.treasury.update({ where:{id:1}, data:{ reserve:reserveKeep, poolLive:poolNext }});
+    await txp.econDaily.upsert({ where:{ day:new Date(today) }, create:{ day:new Date(today), reserve:reserveKeep, poolNext },
+      update:{ reserve:reserveKeep, poolNext }});
+  });
+  const minV=parseFloat(process.env.HARMONY_VELOCITY_MIN||"0.8");
+  const maxV=parseFloat(process.env.HARMONY_VELOCITY_MAX||"1.1");
+  let burn=parseFloat(process.env.HARMONY_BURN_BASE||"0.05");
+  if (d.velocity>maxV) burn=clamp(burn+0.02, parseFloat(process.env.HARMONY_BURN_MIN||"0.03"), parseFloat(process.env.HARMONY_BURN_MAX||"0.15"));
+  if (d.velocity<minV) burn=clamp(burn-0.02, parseFloat(process.env.HARMONY_BURN_MIN||"0.03"), parseFloat(process.env.HARMONY_BURN_MAX||"0.15"));
+  console.log();
+  return { ok:true, burn, poolNext, reserve:newReserve, velocity:d.velocity };
+}
+"TS"
+
+# 5) API routes
+cat > src/app/api/pulse/earn/route.ts <<TS
+import { NextRequest, NextResponse } from "next/server";
+import { earn } from "@/lib/econ/harmony";
+async function getAuth(req:NextRequest){ 
+  const userId = req.headers.get("x-user-id") || "demo-user";
+  const days = parseInt(req.headers.get("x-days-since-signup")||"0",10);
+  return { userId, days };
+}
+export async function POST(req:NextRequest){
+  const { userId, days } = await getAuth(req);
+  const body = await req.json().catch(()=>({}));
+  const base = Math.max(1, Math.min(5, body?.baseAmount ?? 1));
+  const note = body?.note || "watch_ad";
+  const r = await earn(userId, base, { note, meta: body?.meta, daysSinceSignup: days });
+  return NextResponse.json(r);
+}
+"TS"
+
+cat > src/app/api/pulse/spend/route.ts <<TS
+import { NextRequest, NextResponse } from "next/server";
+import { spend } from "@/lib/econ/harmony";
+async function getAuth(req:NextRequest){ 
+  const userId = req.headers.get("x-user-id") || "demo-user";
+  return { userId };
+}
+export async function POST(req:NextRequest){
+  const { userId } = await getAuth(req);
+  const body = await req.json().catch(()=>({}));
+  const amount = Math.max(1, body?.amount ?? 1);
+  const note = body?.note || "shop_purchase";
+  try{
+    const r = await spend(userId, amount, { note, meta: body?.meta });
+    return NextResponse.json(r);
+  }catch(e:any){
+    return NextResponse.json({ error: e.message||"ERR" }, { status: 400 });
+  }
+}
+"TS"
+
+cat > src/app/api/pulse/stats/route.ts <<TS
+import { NextResponse } from "next/server";
+import { statsToday } from "@/lib/econ/harmony";
+export async function GET(){ const s = await statsToday(); return NextResponse.json(s); }
+"TS"
+
+cat > src/app/api/treasury/close-day/route.ts <<TS
+import { NextRequest, NextResponse } from "next/server";
+import { closeDay } from "@/lib/econ/harmony";
+export async function POST(req:NextRequest){
+  const body = await req.json().catch(()=>({}));
+  const adPulses = Math.max(0, body?.adPulses ?? 0);
+  const r = await closeDay({ adPulses });
+  return NextResponse.json(r);
+}
+"TS"
+
+# 6) Minimal UI
+cat > src/components/harmony/HarmonyBar.tsx <<TSX
+"use client";
+import React from "react";
+export default function HarmonyBar({ xp }:{ xp:number }){
+  const level = Math.floor(xp/100);
+  const pct = Math.min(100, (xp % 100));
+  return (
+    <div style={{padding:8}}>
+      <div style={{fontWeight:700, marginBottom:6}}>Harmony Lv.{level}</div>
+      <div style={{height:10, background:"#111827", borderRadius:6, overflow:"hidden"}}>
+        <div style={{width:, height:"100%"}} />
+      </div>
+    </div>
+  );
+}
+"TSX"
+
+cat > src/components/harmony/PulseWallet.tsx <<TSX
+"use client";
+import React from "react";
+export default function PulseWallet({ balance }:{ balance:number }){
+  return (
+    <div style={{display:"flex", alignItems:"center", gap:8, padding:8, border:"1px solid #222", borderRadius:8}}>
+      <span style={{fontWeight:800}}>Pulse:</span>
+      <span style={{fontFeatureSettings:"tnum", fontVariantNumeric:"tabular-nums"}}>{balance}</span>
+    </div>
+  );
+}
+"TSX"
+
+cat > src/app/harmony-demo/page.tsx <<TSX
+"use client";
+import React from "react";
+export default function HarmonyDemo(){
+  const [stats, setStats] = React.useState<any>(null);
+  const [balance, setBalance] = React.useState<number>(0);
+  const [xp, setXp] = React.useState<number>(0);
+  async function refresh(){ const s = await fetch("/api/pulse/stats").then(r=>r.json()); setStats(s); }
+  async function earnOnce(){
+    await fetch("/api/pulse/earn", { method:"POST", headers:{ "content-type":"application/json", "x-user-id":"demo-user", "x-days-since-signup":"3" }, body: JSON.stringify({ baseAmount:1, note:"watch_ad" })});
+    setBalance(b=>b+1); setXp(x=>x+1); refresh();
+  }
+  async function spendTen(){
+    const r = await fetch("/api/pulse/spend", { method:"POST", headers:{ "content-type":"application/json", "x-user-id":"demo-user" }, body: JSON.stringify({ amount:10, note:"shop_item:boost" })});
+    const j = await r.json(); if(!r.ok) alert(j.error); else { setBalance(b=>b-(j.spend+j.burn)); refresh(); }
+  }
+  React.useEffect(()=>{ refresh(); },[]);
+  return (
+    <div style={{padding:20, display:"grid", gap:12}}>
+      <h1>Harmony v2.5 — Demo</h1>
+      <div style={{display:"flex", gap:12}}>
+        <button onClick={earnOnce}>Watch Ad → +Pulse</button>
+        <button onClick={spendTen}>Spend 10 Pulse</button>
+        <button onClick={refresh}>Refresh Stats</button>
+      </div>
+      <div style={{display:"grid", gap:8}}>
+        <div><b>Wallet (demo)</b>: {balance} Pulse | XP: {xp}</div>
+        <pre style={{background:"#0b0f12", color:"#d1d5db", padding:12, borderRadius:8}}>{JSON.stringify(stats,null,2)}</pre>
+      </div>
+    </div>
+  );
+}
+"TSX"
+
+# 7) Deps + migrate
+npm i @prisma/client >/dev/null
+npm i -D prisma >/dev/null
+npx prisma generate
+npx prisma migrate dev -n "harmony_v2_5_core" || true
+
+# 8) Restart Next
+pkill -f "next dev" >/dev/null 2>&1 || true
+PORT=3000 npx next dev >/tmp/next-dev.out 2>&1 & disown
+sleep 4
+tail -n 60 /tmp/next-dev.out || true
+echo
+echo "✅ Open: http://localhost:3000/harmony-demo"
