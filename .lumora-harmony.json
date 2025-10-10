@@ -1,0 +1,11 @@
+{
+  "reserve": 250,
+  "poolLive": 144,
+  "lastUpdated": 1760036415711,
+  "users": {
+    "demo-user": {
+      "balance": 44,
+      "xp": 80
+    }
+  }
+}

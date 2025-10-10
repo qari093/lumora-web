@@ -45,7 +45,7 @@
     "@livekit/components-styles": "^1.1.6",
     "@pixi/graphics-extras": "^7.4.3",
     "@pixi/sound": "^6.0.1",
-    "@prisma/client": "^6.16.3",
+    "@prisma/client": "^6.17.0",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@react-three/postprocessing": "^3.0.4",

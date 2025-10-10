@@ -39,33 +39,34 @@ enum ModerationStatus {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  name         String?
-  image        String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String?
+  image     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   passwordHash String?
 
-  rooms       Room[]       @relation("HostRooms")
+  rooms       Room[]        @relation("HostRooms")
   memberships RoomMember[]
-  events      Event[]      @relation("UserEvents")
-  messages    Message[]    @relation("UserMessages")
+  events      Event[]       @relation("UserEvents")
+  messages    Message[]     @relation("UserMessages")
 }
 
 model Room {
-  id        String   @id @default(cuid())
-  slug      String   @unique
+  id        String       @id @default(cuid())
+  slug      String       @unique
   title     String
   hostId    String
-  host      User     @relation("HostRooms", fields: [hostId], references: [id])
-  isPrivate Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  host      User         @relation("HostRooms", fields: [hostId], references: [id])
+  isPrivate Boolean      @default(false)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
-  members  RoomMember[]
-  events   Event[]
-  messages Message[]
+  members   RoomMember[]
+  events    Event[]
+  messages  Message[]
 }
 
 model RoomMember {
@@ -82,14 +83,14 @@ model RoomMember {
 }
 
 model Event {
-  id        String    @id @default(cuid())
+  id        String     @id @default(cuid())
   roomId    String
   type      EventType
-  timestamp DateTime  @default(now())
+  timestamp DateTime   @default(now())
   data      Json?
   actorId   String?
 
-  room  Room  @relation(fields: [roomId], references: [id])
+  room  Room @relation(fields: [roomId], references: [id])
   actor User? @relation("UserEvents", fields: [actorId], references: [id])
 
   @@index([roomId, timestamp])
@@ -109,35 +110,38 @@ model Message {
 }
 
 model ModerationItem {
-  id         String           @id @default(cuid())
+
+  id         String            @id @default(cuid())
   kind       ModerationKind
   text       String?
   objectKey  String?
-  status     ModerationStatus @default(PENDING)
+  status     ModerationStatus  @default(PENDING)
   flags      Json?
   reason     String?
-  createdAt  DateTime         @default(now())
+  createdAt  DateTime          @default(now())
   reviewedAt DateTime?
   reviewer   String?
-  fileKey    String?
-  sha256     String?
-  scanStatus ScanStatus?
-  scanAt     DateTime?
 
   @@index([status, createdAt])
+  fileKey     String?
+  sha256      String?
+  scanStatus  ScanStatus?
+  scanAt      DateTime?
 }
 
+
 model AnalyticsEvent {
-  id     String   @id @default(cuid())
-  ts     DateTime @default(now())
-  type   String
-  userId String?
-  roomId String?
-  path   String?
-  meta   Json?
+  id      String   @id @default(cuid())
+  ts      DateTime @default(now())
+  type    String
+  userId  String?
+  roomId  String?
+  path    String?
+  meta    Json?
 
   @@index([ts, type])
 }
+
 
 enum RenderStatus {
   QUEUED
@@ -147,11 +151,11 @@ enum RenderStatus {
 }
 
 model RenderJob {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  status    RenderStatus @default(QUEUED)
-  progress  Int          @default(0)
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  status    RenderStatus  @default(QUEUED)
+  progress  Int           @default(0)
   input     Json?
   outputUrl String?
   error     String?
@@ -159,33 +163,23 @@ model RenderJob {
   @@index([createdAt, status])
 }
 
+
 enum ScanStatus {
   PENDING
   CLEAN
   INFECTED
 }
-
 /// ---------- HARMONY v2.5 ECONOMY MODELS ----------
 model PulseLedger {
-  id        String   @id @default(cuid())
-  userId    String
-  type      PulseTxn @default(EARN)
-  amount    Int
-  note      String?
-  meta      Json?
-  createdAt DateTime @default(now())
-
-  @@index([userId])
+  id           String   @id @default(cuid())
+  userId       String   @index
+  type         PulseTxn @default(EARN)
+  amount       Int
+  note         String?
+  meta         Json?
+  createdAt    DateTime @default(now())
 }
-
-enum PulseTxn {
-  EARN
-  SPEND
-  BURN
-  ADJUST
-  GRANT
-}
-
+enum PulseTxn { EARN SPEND BURN ADJUST GRANT }
 model PulseWallet {
   userId       String   @id
   balance      Int      @default(0)
@@ -194,10 +188,9 @@ model PulseWallet {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
-
 model EconDaily {
   id         String   @id @default(cuid())
-  day        DateTime @unique
+  day        Date     @unique
   earnTotal  Int      @default(0)
   spendTotal Int      @default(0)
   burnTotal  Int      @default(0)
@@ -205,7 +198,6 @@ model EconDaily {
   poolNext   Int      @default(0)
   createdAt  DateTime @default(now())
 }
-
 model Treasury {
   id        Int      @id @default(1)
   reserve   Int      @default(0)
@@ -213,3 +205,6 @@ model Treasury {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+"PRISMA"
+
+
