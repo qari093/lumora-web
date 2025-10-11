@@ -1,7 +1,6 @@
+/** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  experimental: {},
-  async redirects() { return []; },
-  async rewrites() { return []; }
+  pageExtensions: ["tsx","ts","jsx","js"]
 };
 export default config;

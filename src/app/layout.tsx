@@ -1,9 +1,10 @@
-import "./globals.css";
-export const metadata = { title: "Lumora", description: "App Router baseline" };
+export const metadata = { title: "Lumora", description: "Lumora App" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ margin:0, fontFamily:"system-ui, -apple-system, Segoe UI, Roboto, Arial" }}>
+        {children}
+      </body>
     </html>
   );
 }

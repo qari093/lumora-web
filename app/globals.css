@@ -1,0 +1,4 @@
+:root { --fg: #111; --bg: #fff; }
+html,body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: ui-sans-serif, system-ui; }
+a { color: #4f46e5; text-decoration: underline; }
+main { max-width: 920px; margin: 40px auto; padding: 0 20px; }

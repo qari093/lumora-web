@@ -1,10 +1,12 @@
-import { getUser } from "@/lib/auth/session";
-export default async function Page(){
-  const u = await getUser();
+import { getSession } from "@/src/lib/auth";
+
+export default function AdminPage() {
+  const me = getSession();
   return (
-    <div style={{padding:24}}>
-      <h1>admin Dashboard</h1>
-      <p>Welcome, {u?.name} (role: {u?.role})</p>
-    </div>
+    <main style={{ padding: 24 }}>
+      <h1>Admin Area</h1>
+      <p>Welcome, {me.name}!</p>
+      <p>This page is restricted to the <b>admin</b> role.</p>
+    </main>
   );
 }
