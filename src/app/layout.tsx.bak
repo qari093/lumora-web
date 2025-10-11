@@ -1,0 +1,24 @@
+import "./globals.css";
+import Link from "next/link";
+import { getSession } from "@/src/lib/auth";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const me = getSession();
+  return (
+    <html lang="en">
+      <body>
+        <header style={{ padding: "10px 16px", borderBottom: "1px solid #eee", display: "flex", gap: 16, alignItems: "center" }}>
+          <Link href="/">Home</Link>
+          <Link href="/login">Login</Link>
+          <Link href="/dash">Dash</Link>
+          <Link href="/dash/mod">Mod</Link>
+          <Link href="/dash/admin">Admin</Link>
+          <div style={{ marginLeft: "auto", opacity: 0.8 }}>
+            Role: <b>{me.role}</b> &nbsp;|&nbsp; User: <b>{me.name}</b>
+          </div>
+        </header>
+        <div>{children}</div>
+      </body>
+    </html>
+  );
+}
