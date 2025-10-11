@@ -7,7 +7,7 @@ import { useActionToken } from "@/hooks/useActionToken";
 import { useEnergy } from "@/hooks/useEnergy";
 import { useTeamAura } from "@/hooks/useTeamAura";
 import { getPhaseFromHour, applyTimeOfDayTheme } from "@/lib/timeTheme";
-import MicroInsights from "@/components/dev/MicroInsights";
+import DevHUD from "@/components/dev/DevHUD";
 import EnergyStormBanner from "@/components/fyp/EnergyStormBanner";
 import { recordUnits, recordLimiter } from "@/lib/metricsBus";
 
@@ -101,7 +101,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
       `}</style>
 
       <EnergyStormBanner />
-      <MicroInsights />
+      <DevHUD />
 
       <video ref={vidRef} src={src} poster={poster} autoPlay muted={muted} playsInline loop
         style={{
