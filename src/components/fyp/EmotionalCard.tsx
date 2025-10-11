@@ -13,7 +13,13 @@ type Props = { src: string; poster?: string; title?: string; videoId?: string; }
 export default function EmotionalCard({ src, poster, title, videoId }: Props) {
   const vidRef = useRef<HTMLVideoElement>(null);
   const id = videoId || title || src;
+
+  // Local UI state
   const [muted, setMuted] = useState(true);
+  const [videoEnergy, setVideoEnergy] = useState<number>(0);
+  const [cooldown, setCooldown] = useState<string | null>(null); // shows on 429
+  const [spark, setSpark] = useState<{txt:string,ts:number}|null>(null);
+
   const { tap, success } = useHaptics();
   const level = useAudioLevel(vidRef);
   const token = useActionToken();
@@ -22,6 +28,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
 
   useEffect(()=>{ applyTimeOfDayTheme(getPhaseFromHour(new Date().getHours())); }, []);
 
+  // Watch tracker (server-side conversion + quality factor handled API-side)
   useWatchTracker({ videoRef: vidRef, videoId: id, bearer: token || undefined });
 
   // Audio-reactive ring
@@ -37,31 +44,57 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
     tap();
   };
 
-  async function sendAction(type:"LIKE"|"COMMENT"|"SHARE"){
-    if(!token) return;
-    await fetch("/api/energy/earn", {
-      method:"PATCH",
-      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
-      body: JSON.stringify({ type, videoId: id })
-    });
+  // ---- Per-video energy binding (poll every 4s + small boot refresh) ----
+  async function refreshVideoEnergy(){
+    try{
+      const r = await fetch(`/api/energy/video?id=${encodeURIComponent(id)}`, { cache:"no-store" });
+      const j = await r.json();
+      if(j?.ok) setVideoEnergy(j.stat.energy || 0);
+    }catch{}
   }
-  async function assist(){
-    if(!token) return;
-    await fetch("/api/energy/assist", {
-      method:"POST",
-      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
-      body: JSON.stringify({ videoId: id })
-    });
-  }
+  useEffect(()=>{ refreshVideoEnergy(); const t=setInterval(refreshVideoEnergy, 4000); return ()=>clearInterval(t); }, [id]);
 
-  // Breathing pill visuals: color with audio + spark on team aura ticks
-  const [spark, setSpark] = useState<{txt:string,ts:number}|null>(null);
+  // Show a tiny spark when team energy moves (visual delight)
   useEffect(()=>{
     if(!teamAura) return;
     setSpark({ txt:"+", ts: Date.now() });
     const t = setTimeout(()=>setSpark(null), 700);
     return ()=>clearTimeout(t);
   }, [teamAura?.energy]);
+
+  // Helper: handle actions; on 429 show cooldown hint
+  async function sendAction(type:"LIKE"|"COMMENT"|"SHARE"){
+    if(!token) return;
+    const r = await fetch("/api/energy/earn", {
+      method:"PATCH",
+      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
+      body: JSON.stringify({ type, videoId: id })
+    });
+    if(r.status === 429){
+      setCooldown("You’re on a short cooldown ⏳");
+      setTimeout(()=>setCooldown(null), 900);
+      return;
+    }
+    if(r.ok){
+      // server already updated counters; pull fresh per-video number once
+      refreshVideoEnergy();
+    }
+  }
+
+  async function assist(){
+    if(!token) return;
+    const r = await fetch("/api/energy/assist", {
+      method:"POST",
+      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
+      body: JSON.stringify({ videoId: id })
+    });
+    if(r.status === 429){
+      setCooldown("You’re on a short cooldown ⏳");
+      setTimeout(()=>setCooldown(null), 900);
+      return;
+    }
+    if(r.ok){ refreshVideoEnergy(); }
+  }
 
   return (
     <div style={{ position:"relative", width:"100%", height:"100dvh", overflow:"hidden",
@@ -83,7 +116,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
       {title && (<div style={{ position:"absolute", left:12, bottom:140, color:"rgba(255,255,255,0.93)",
         fontWeight:700, fontSize:18, textShadow:"0 2px 12px rgba(0,0,0,0.55)", backdropFilter:"blur(2px)" }}>{title}</div>)}
 
-      {/* Breathing Energy pill with donor spark */}
+      {/* Breathing Energy pill (now shows live number) */}
       <div style={{
         position:"absolute", left:"50%", bottom:110, transform:"translateX(-50%)",
         display:"flex", alignItems:"center", gap:10,
@@ -99,11 +132,9 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
           boxShadow:`0 0 ${8+level*10}px var(--fyp-accent)`
         }}/>
         <div style={{ fontWeight:800, color:"#fff" }}>
-          Energy <span id="video-energy-readout">↗️</span>
+          Energy {videoEnergy}
         </div>
-        {spark && <div style={{
-          marginLeft:6, color:"#fef08a", fontWeight:900, animation:"pop .7s ease forwards"
-        }}>+1</div>}
+        {spark && <div style={{ marginLeft:6, color:"#fef08a", fontWeight:900, animation:"pop .7s ease forwards" }}>+1</div>}
       </div>
 
       {/* Volume toggle */}
@@ -113,7 +144,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
         backdropFilter:"blur(6px)", color:"white", cursor:"pointer", fontSize:16
       }}>{muted ? "🔇" : "🔊"}</button>
 
-      {/* Top-left: Crew controls (as before) */}
+      {/* Top-left: Crew controls */}
       <div style={{ position:"absolute", top:14, left:12, display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
         {!crew ? (
           <button onClick={joinDemo} style={{
@@ -141,7 +172,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
         )}
       </div>
 
-      {/* Right rail (Like / Comment / Share / Assist) */}
+      {/* Right rail */}
       <div style={{ position:"absolute", right:12, bottom:100, display:"flex", flexDirection:"column", gap:14, alignItems:"center" }}>
         <Circle onClick={()=>{ success(); sendAction("LIKE"); }} shadow={`${ring.px}px ${ring.opacity}`}>❤</Circle>
         <Circle onClick={()=>{ tap(); sendAction("COMMENT"); }}>💬</Circle>
@@ -156,12 +187,16 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
         <Bar label="You"  value={Math.min(100,(me?.energy ?? 0)%100)}   total={me?.energy ?? 0}   colorVar="#f59e0b"/>
       </div>
 
-      {/* Limiter hint (very subtle) */}
-      <div style={{ position:"absolute", right:12, top:14, color:"rgba(255,255,255,0.8)", fontSize:12 }}>
-        {/* Tip: we could fetch remaining budget & show a tiny icon; keeping minimal here */}
-      </div>
+      {/* Cooldown toast (429) */}
+      {cooldown && (
+        <div style={{
+          position:"absolute", left:"50%", bottom:70, transform:"translateX(-50%)",
+          padding:"8px 12px", borderRadius:10, color:"#0b0f12",
+          background:"#fde68a", fontWeight:800, boxShadow:"0 8px 30px rgba(0,0,0,0.35)"
+        }}>{cooldown}</div>
+      )}
 
-      {/* Flash toast (reuse from useEnergy) */}
+      {/* Flash toast (from useEnergy) */}
       {flash && (
         <div style={{
           position:"absolute", left:"50%", bottom:70, transform:"translateX(-50%)",
