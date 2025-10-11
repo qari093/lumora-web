@@ -8,7 +8,7 @@ import { useEnergy } from "@/hooks/useEnergy";
 import { useTeamAura } from "@/hooks/useTeamAura";
 import { getPhaseFromHour, applyTimeOfDayTheme } from "@/lib/timeTheme";
 import DevHUD from "@/components/dev/DevHUD";
-import EnergyStormBanner from "@/components/fyp/EnergyStormBanner";
+import StormHUD from "@/components/fyp/StormHUD";
 import { recordUnits, recordLimiter } from "@/lib/metricsBus";
 
 type Props = { src: string; poster?: string; title?: string; videoId?: string; };
@@ -100,7 +100,7 @@ export default function EmotionalCard({ src, poster, title, videoId }: Props) {
         @keyframes pop { 0%{transform:translateY(0) scale(.9);opacity:1} 100%{transform:translateY(-14px) scale(1.1);opacity:0} }
       `}</style>
 
-      <EnergyStormBanner />
+      <StormHUD />
       <DevHUD />
 
       <video ref={vidRef} src={src} poster={poster} autoPlay muted={muted} playsInline loop
