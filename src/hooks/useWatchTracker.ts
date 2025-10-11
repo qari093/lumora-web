@@ -5,16 +5,16 @@ type Opt = {
   videoRef: React.RefObject<HTMLVideoElement>;
   videoId: string;
   bearer?: string | null;
+  onUnitsSent?: (units:number)=>void;
 };
 
-export function useWatchTracker({ videoRef, videoId, bearer }: Opt){
+export function useWatchTracker({ videoRef, videoId, bearer, onUnitsSent }: Opt){
   const accMs = useRef(0);
   const last = useRef<number | null>(null);
   const bucketMs = useRef(0);
   const flushing = useRef(false);
-  const visible = useRef(0);
+  const visible = useRef(1);
   const focused = useRef(true);
-  const holder = useRef<HTMLDivElement | null>(null);
 
   useEffect(()=>{
     focused.current = document.hasFocus();
@@ -27,7 +27,6 @@ export function useWatchTracker({ videoRef, videoId, bearer }: Opt){
 
   useEffect(()=>{
     const v = videoRef.current; if(!v) return;
-    // track visibility of the video element
     const io = new IntersectionObserver((ents)=>{
       for(const e of ents){ if(e.target === v){ visible.current = e.intersectionRatio; } }
     }, { threshold: [0,0.25,0.5,0.6,0.75,1] });
@@ -49,11 +48,12 @@ export function useWatchTracker({ videoRef, videoId, bearer }: Opt){
           let units = 0;
           while(bucketMs.current >= 3000){ bucketMs.current -= 3000; units++; }
           if(units>0){
-            await tryFetch("/api/energy/watch", {
+            const r = await tryFetch("/api/energy/watch", {
               method:"POST",
               headers:{ "content-type":"application/json", "authorization":`Bearer ${bearer}` },
               body: JSON.stringify({ videoId, units, visible: visible.current, focus: focused.current })
             }, 3);
+            if(r.ok){ onUnitsSent?.(units); }
           }
         }
       }finally{ flushing.current = false; }
@@ -78,5 +78,5 @@ export function useWatchTracker({ videoRef, videoId, bearer }: Opt){
       v.removeEventListener("ended", onEnded);
       if(accMs.current>0) void flush();
     };
-  }, [videoRef, videoId, bearer]);
+  }, [videoRef, videoId, bearer, onUnitsSent]);
 }
