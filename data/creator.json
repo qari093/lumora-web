@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cr_mgplss24",
+    "name": "Beta",
+    "handle": "@beta",
+    "category": "Comedy",
+    "bio": "beta seed 2025-10-13T20:46:36Z",
+    "ts": "2025-10-13T20:46:36.556Z",
+    "status": "rejected"
+  },
+  {
+    "id": "cr_mgplsryi",
+    "name": "Alpha",
+    "handle": "@alpha",
+    "category": "Music",
+    "bio": "alpha seed 2025-10-13T20:46:35Z",
+    "ts": "2025-10-13T20:46:36.426Z",
+    "status": "approved"
+  },
+  {
+    "id": "cr_mgplokik",
+    "name": "CLI Test",
+    "handle": "@cli",
+    "category": "Testing",
+    "bio": "Created 2025-10-13T20:43:19Z",
+    "ts": "2025-10-13T20:43:20.156Z",
+    "status": "new"
+  }
+]

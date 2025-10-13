@@ -1,235 +1,355 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useHaptics } from "@/hooks/useHaptics";
-import { useAudioLevel } from "@/hooks/useAudioLevel";
-import { useWatchTracker } from "@/hooks/useWatchTracker";
-import { useActionToken } from "@/hooks/useActionToken";
-import { useEnergy } from "@/hooks/useEnergy";
-import { useTeamAura } from "@/hooks/useTeamAura";
-import { getPhaseFromHour, applyTimeOfDayTheme } from "@/lib/timeTheme";
-import DevHUD from "@/components/dev/DevHUD";
-import StormHUD from "@/components/fyp/StormHUD";
-import { recordUnits, recordLimiter } from "@/lib/metricsBus";
+import React from "react";
+import { videoAction, videoImpression } from "@/lib/track";
 
-type Props = { src: string; poster?: string; title?: string; videoId?: string; };
+type Props = { src: string; title?: string; videoId?: string; poster?: string };
 
-export default function EmotionalCard({ src, poster, title, videoId }: Props) {
-  const vidRef = useRef<HTMLVideoElement>(null);
-  const id = videoId || title || src;
+export default function EmotionalCard({ src, title, videoId }: Props) {
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const sectionRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [muted, setMuted] = useState(true);
-  const [videoEnergy, setVideoEnergy] = useState<number>(0);
-  const [cooldown, setCooldown] = useState<string | null>(null);
-  const [spark, setSpark] = useState<{txt:string,ts:number}|null>(null);
+  // battery saver flag (set by the toggle button)
+  const [batterySaver, setBatterySaver] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    try {
+      setBatterySaver(localStorage.getItem("lumora:batterySaver") === "1");
+      const onStorage = (e: StorageEvent) => {
+        if (e.key === "lumora:batterySaver") {
+          setBatterySaver(e.newValue === "1");
+        }
+      };
+      window.addEventListener("storage", onStorage);
+      return () => window.removeEventListener("storage", onStorage);
+    } catch {}
+  }, []);
 
-  const { tap, success } = useHaptics();
-  const level = useAudioLevel(vidRef);
-  const token = useActionToken();
-  const { me, pool, crew, event, flash, joinDemo, leaveCrew, createInvite, joinByCode, invite } = useEnergy();
-  const teamAura = useTeamAura();
+  // energy counter (persists per video)
+  const key = React.useMemo(() => `lumora.energy.${videoId || src}`, [videoId, src]);
+  const [energy, setEnergy] = React.useState<number>(() => {
+    const v = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
+    const n = v ? parseInt(v, 10) : 0;
+    return Number.isFinite(n) ? Math.max(0, Math.min(9999, n)) : 0;
+  });
+  React.useEffect(() => {
+    try { localStorage.setItem(key, String(energy)); } catch {}
+  }, [key, energy]);
 
-  useEffect(()=>{ applyTimeOfDayTheme(getPhaseFromHour(new Date().getHours())); }, []);
+  // autoplay/pause on visibility + impression ping
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    const v = videoRef.current;
+    if (!el || !v) return;
+    const io = new IntersectionObserver(
+      (ents) => {
+        const onScreen = ents.some((e) => e.isIntersecting);
+        if (onScreen) {
+          v.play().catch(() => {});
+          videoImpression(videoId, { src });
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: 0.6 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [videoId, src]);
 
-  useWatchTracker({ videoRef: vidRef, videoId: id, bearer: token || undefined, onUnitsSent: (u)=>recordUnits(u) });
+  // energy ticking while playing
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    let t: number | null = null;
+    const tick = () => {
+      setEnergy((e) => Math.min(9999, e + Math.max(1, Math.round(1 * v.playbackRate))));
+      t = window.setTimeout(tick, 1000);
+    };
+    const onPlay = () => { if (t == null) tick(); videoAction(videoId, "play"); };
+    const onPause = () => { if (t != null) { window.clearTimeout(t); t = null; } videoAction(videoId, "pause"); };
+    const onEnded = () => { onPause(); videoAction(videoId, "ended"); };
 
-  const ring = useMemo(() => {
-    const intensity = Math.min(1, level * 3.5);
-    return { px: 8 + intensity * 22, opacity: 0.35 + intensity * 0.45 };
-  }, [level]);
+    v.addEventListener("play", onPlay);
+    v.addEventListener("pause", onPause);
+    v.addEventListener("ended", onEnded);
+    if (!v.paused) onPlay();
+    return () => {
+      v.removeEventListener("play", onPlay);
+      v.removeEventListener("pause", onPause);
+      v.removeEventListener("ended", onEnded);
+      if (t != null) window.clearTimeout(t);
+    };
+  }, [videoId]);
 
-  const toggleSound = () => {
-    const v = vidRef.current; if(!v) return;
-    const next = !muted; setMuted(next);
-    try{ v.muted = next; if(!next) void v.play(); }catch{}
-    tap();
-  };
+  // actions
+  const replay = React.useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.currentTime = 0;
+    v.play().catch(() => {});
+    videoAction(videoId, "replay");
+  }, [videoId]);
 
-  async function refreshVideoEnergy(){
-    try{
-      const r = await fetch(`/api/energy/video?id=${encodeURIComponent(id)}`, { cache:"no-store" });
-      const j = await r.json();
-      if(j?.ok) setVideoEnergy(j.stat.energy || 0);
-    }catch{}
-  }
-  useEffect(()=>{ refreshVideoEnergy(); const t=setInterval(refreshVideoEnergy, 4000); return ()=>clearInterval(t); }, [id]);
+  const skip = React.useCallback(() => {
+    // for now just pause & log; your feed pager will move to next item
+    videoRef.current?.pause();
+    videoAction(videoId, "skip");
+  }, [videoId]);
 
-  useEffect(()=>{
-    if(!teamAura) return;
-    setSpark({ txt:"+", ts: Date.now() });
-    const t = setTimeout(()=>setSpark(null), 700);
-    return ()=>clearTimeout(t);
-  }, [teamAura?.energy]);
+  // like animation
+  const [likedPulse, setLikedPulse] = React.useState(0);
+  const like = React.useCallback(() => {
+    setLikedPulse((n) => n + 1); // triggers CSS animation
+    videoAction(videoId, "like");
+  }, [videoId]);
 
-  async function sendAction(type:"LIKE"|"COMMENT"|"SHARE"){
-    if(!token) return;
-    const r = await fetch("/api/energy/earn", {
-      method:"PATCH",
-      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
-      body: JSON.stringify({ type, videoId: id })
-    });
-    if(r.status === 429){
-      setCooldown("You’re on a short cooldown ⏳");
-      recordLimiter(type);
-      setTimeout(()=>setCooldown(null), 900);
-      return;
-    }
-    if(r.ok){ refreshVideoEnergy(); }
-  }
+  // keyboard shortcuts: L=like, R=replay, S=skip, Space=play/pause, ArrowUp/Down volume
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const v = videoRef.current;
+      if (!v) return;
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || (e.target as HTMLElement)?.isContentEditable) return;
 
-  async function assist(){
-    if(!token) return;
-    const r = await fetch("/api/energy/assist", {
-      method:"POST",
-      headers:{ "content-type":"application/json", "authorization":`Bearer ${token}` },
-      body: JSON.stringify({ videoId: id })
-    });
-    if(r.status === 429){
-      setCooldown("You’re on a short cooldown ⏳");
-      recordLimiter("ASSIST");
-      setTimeout(()=>setCooldown(null), 900);
-      return;
-    }
-    if(r.ok){ refreshVideoEnergy(); }
-  }
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (v.paused) v.play().catch(() => {}); else v.pause();
+      } else if (e.key === "l" || e.key === "L") {
+        like();
+      } else if (e.key === "r" || e.key === "R") {
+        replay();
+      } else if (e.key === "s" || e.key === "S") {
+        skip();
+      } else if (e.key === "ArrowUp") {
+        v.volume = Math.min(1, v.volume + 0.1);
+      } else if (e.key === "ArrowDown") {
+        v.volume = Math.max(0, v.volume - 0.1);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [like, replay, skip]);
 
   return (
-    <div style={{ position:"relative", width:"100%", height:"100dvh", overflow:"hidden",
-      background:"linear-gradient(180deg, var(--fyp-bg-start), var(--fyp-bg-end))", touchAction:"manipulation" }}>
-      <style>{`
-        @keyframes breathe { 0%{transform:scale(1);opacity:.85}50%{transform:scale(1.05);opacity:1}100%{transform:scale(1);opacity:.85} }
-        @keyframes pop { 0%{transform:translateY(0) scale(.9);opacity:1} 100%{transform:translateY(-14px) scale(1.1);opacity:0} }
-      `}</style>
+    <div
+      ref={sectionRef}
+      style={{ position: "relative", width: "100%", height: "100dvh", overflow: "hidden", background: "#000" }}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        playsInline
+        muted
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
 
-      <StormHUD />
-      <DevHUD />
-
-      <video ref={vidRef} src={src} poster={poster} autoPlay muted={muted} playsInline loop
-        style={{
-          width:"100%", height:"100%", objectFit:"cover",
-          transition:"transform 120ms ease-out, opacity 240ms ease", willChange:"transform",
-          filter:"brightness(0.96) contrast(1.02)"
-        }}
-        onPlay={() => tap()} />
-
-      {/* Title */}
-      {title && (<div style={{ position:"absolute", left:12, bottom:140, color:"rgba(255,255,255,0.93)",
-        fontWeight:700, fontSize:18, textShadow:"0 2px 12px rgba(0,0,0,0.55)", backdropFilter:"blur(2px)" }}>{title}</div>)}
-
-      {/* Breathing Energy pill */}
-      <div style={{
-        position:"absolute", left:"50%", bottom:110, transform:"translateX(-50%)",
-        display:"flex", alignItems:"center", gap:10,
-        padding:"8px 12px", borderRadius:999, border:"1px solid rgba(255,255,255,0.2)",
-        background:`rgba(15,15,20,${0.45 + level*0.15})`,
-        boxShadow:`0 0 18px rgba(255,255,255,${0.08 + level*0.12})`,
-        backdropFilter:"blur(6px)", animation:"breathe 2.4s ease-in-out infinite",
-      }}>
-        <div style={{
-          width:16, height:16, borderRadius:"50%",
-          background:`radial-gradient(circle, var(--fyp-accent), rgba(255,255,255,0.6))`,
-          boxShadow:`0 0 ${8+level*10}px var(--fyp-accent)`
-        }}/>
-        <div style={{ fontWeight:800, color:"#fff" }}>Energy {videoEnergy}</div>
-        {spark && <div style={{ marginLeft:6, color:"#fef08a", fontWeight:900, animation:"pop .7s ease forwards" }}>+1</div>}
-      </div>
-
-      {/* Volume toggle */}
-      <button onClick={toggleSound} aria-label="Toggle sound" style={{
-        position:"absolute", top:14, right:12, width:44, height:44, borderRadius:"50%",
-        border:"1px solid rgba(255,255,255,0.2)", background:"rgba(15,15,20,0.55)",
-        backdropFilter:"blur(6px)", color:"white", cursor:"pointer", fontSize:16
-      }}>{muted ? "🔇" : "🔊"}</button>
-
-      {/* Top-left: Crew controls */}
-      <div style={{ position:"absolute", top:14, left:12, display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
-        {!crew ? (
-          <button onClick={joinDemo} style={{
-            padding:"8px 10px", borderRadius:10, border:"1px solid rgba(255,255,255,0.2)",
-            background:"rgba(15,15,20,0.55)", color:"#fff", backdropFilter:"blur(6px)", cursor:"pointer", fontWeight:700
-          }}>Join Demo Crew</button>
-        ) : (
-          <>
-            <span style={{ color:"#fff", fontWeight:700, opacity:.95 }}>👥 {crew.name} ({crew.members})</span>
-            <button onClick={leaveCrew} style={{ padding:"6px 8px", borderRadius:8, border:"1px solid rgba(255,255,255,0.2)",
-              background:"rgba(15,15,20,0.55)", color:"#fff", cursor:"pointer" }}>Leave</button>
-            {!invite ? (
-              <button onClick={createInvite} style={{ padding:"6px 8px", borderRadius:8, border:"1px solid rgba(255,255,255,0.2)",
-                background:"rgba(15,15,20,0.55)", color:"#fff", cursor:"pointer" }}>Invite Code</button>
-            ) : (
-              <span style={{ color:"#fef08a", fontWeight:800 }}>Code: {invite}</span>
-            )}
-          </>
-        )}
-        {event && (
-          <span style={{ marginLeft:6, padding:"6px 10px", borderRadius:999,
-            background:"linear-gradient(90deg,#22c55e,#84cc16)", color:"#0b0f12", fontWeight:900 }}>
-            ⚡ {event.name} ×{event.multiplier}
+      {/* top-left labels */}
+      <div style={{ position: "absolute", left: 12, top: 12, display: "flex", gap: 8, alignItems: "center" }}>
+        <span
+          style={{
+            padding: "3px 8px",
+            borderRadius: 999,
+            background: "rgba(20,200,120,0.25)",
+            border: "1px solid rgba(100,255,200,0.35)",
+            color: "#b6ffd8",
+            fontSize: 12,
+            fontWeight: 700,
+            textShadow: "0 1px 6px rgba(0,0,0,.6)",
+            userSelect: "none",
+          }}
+        >
+          Enhanced <span style={{ marginLeft: 4 }}>🟢</span>
+        </span>
+        {title && (
+          <span
+            style={{
+              color: "#fff",
+              fontWeight: 700,
+              fontSize: 18,
+              textShadow: "0 2px 8px rgba(0,0,0,.6)",
+              userSelect: "none",
+            }}
+          >
+            {title}
           </span>
         )}
       </div>
 
-      {/* Right rail */}
-      <div style={{ position:"absolute", right:12, bottom:100, display:"flex", flexDirection:"column", gap:14, alignItems:"center" }}>
-        <Circle onClick={()=>{ success(); sendAction("LIKE"); }} shadow={`${ring.px}px ${ring.opacity}`}>❤</Circle>
-        <Circle onClick={()=>{ tap(); sendAction("COMMENT"); }}>💬</Circle>
-        <Circle onClick={()=>{ tap(); sendAction("SHARE"); }}>↗️</Circle>
-        <Circle onClick={()=>{ tap(); assist(); }} title="Assist (+1 to this video)">⚡</Circle>
+      {/* action bar (right side) */}
+      <div
+        aria-label="Actions"
+        style={{
+          position: "absolute",
+          right: 12,
+          top: "50%",
+          transform: "translateY(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+          zIndex: 9999,
+        }}
+      >
+        <IconButton label="Like (L)" onClick={like} batterySaver={batterySaver} kind="like" />
+        <IconButton label="Replay (R)" onClick={replay} batterySaver={batterySaver} kind="replay" />
+        <IconButton label="Skip (S)" onClick={skip} batterySaver={batterySaver} kind="skip" />
       </div>
 
-      {/* Energy HUD */}
-      <div style={{ position:"absolute", left:12, right:12, bottom:22, display:"flex", flexDirection:"column", gap:10 }}>
-        <Bar label="Team" value={Math.min(100,(pool?.energy ?? 0)%100)} total={pool?.energy ?? 0} colorVar="var(--fyp-accent)"/>
-        <Bar label="Crew" value={Math.min(100,(crew?.energy ?? 0)%100)} total={crew?.energy ?? 0} colorVar="#60a5fa"/>
-        <Bar label="You"  value={Math.min(100,(me?.energy ?? 0)%100)}   total={me?.energy ?? 0}   colorVar="#f59e0b"/>
+      {/* energy pill */}
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          bottom: 18,
+          transform: "translateX(-50%)",
+          padding: "8px 14px",
+          borderRadius: 999,
+          background: batterySaver
+            ? "rgba(20,20,20,.75)"
+            : "radial-gradient(65% 130% at 50% 50%, rgba(60,120,255,.25) 0%, rgba(20,20,30,.75) 60%, rgba(0,0,0,.85) 100%)",
+          border: "1px solid rgba(255,255,255,.2)",
+          color: "#fff",
+          fontWeight: 600,
+          fontSize: 14,
+          letterSpacing: 0.2,
+          boxShadow: batterySaver
+            ? "none"
+            : "0 0 18px rgba(90,140,255,.25), inset 0 0 24px rgba(60,120,255,.18)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          animation: batterySaver ? "none" : "lumora-breathe 3s ease-in-out infinite",
+          userSelect: "none",
+        }}
+      >
+        <span
+          style={{
+            display: "inline-block",
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+            background: batterySaver ? "rgba(180,180,180,1)" : "rgba(120,200,255,1)",
+            boxShadow: batterySaver ? "none" : "0 0 14px rgba(120,200,255,.9)",
+            filter: batterySaver ? "none" : "saturate(130%)",
+          }}
+        />
+        Energy: {energy}
       </div>
 
-      {/* Cooldown toast */}
-      {cooldown && (
-        <div style={{
-          position:"absolute", left:"50%", bottom:70, transform:"translateX(-50%)",
-          padding:"8px 12px", borderRadius:10, color:"#0b0f12",
-          background:"#fde68a", fontWeight:800, boxShadow:"0 8px 30px rgba(0,0,0,0.35)"
-        }}>{cooldown}</div>
+      {/* floating heart on like */}
+      {!batterySaver && likedPulse > 0 && (
+        <div
+          key={likedPulse}
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%,-50%)",
+            pointerEvents: "none",
+            fontSize: 64,
+            filter: "drop-shadow(0 6px 16px rgba(0,0,0,.5))",
+            animation: "heart-pop 900ms ease-out forwards",
+          }}
+        >
+          ❤️
+        </div>
       )}
 
-      {/* Flash toast */}
-      {flash && (
-        <div style={{
-          position:"absolute", left:"50%", bottom:70, transform:"translateX(-50%)",
-          padding:"8px 12px", borderRadius:10, color:"#0b0f12",
-          background:"#fef08a", fontWeight:800, boxShadow:"0 8px 30px rgba(0,0,0,0.35)"
-        }}>{flash}</div>
-      )}
+      {/* keyframes */}
+      <style jsx>{`
+        @keyframes lumora-breathe {
+          0% {
+            transform: translateX(-50%) scale(0.98);
+            box-shadow: 0 0 16px rgba(90, 140, 255, 0.2), inset 0 0 20px rgba(60, 120, 255, 0.14);
+          }
+          50% {
+            transform: translateX(-50%) scale(1.02);
+            box-shadow: 0 0 28px rgba(90, 140, 255, 0.35), inset 0 0 26px rgba(60, 120, 255, 0.22);
+          }
+          100% {
+            transform: translateX(-50%) scale(0.98);
+            box-shadow: 0 0 16px rgba(90, 140, 255, 0.2), inset 0 0 20px rgba(60, 120, 255, 0.14);
+          }
+        }
+        @keyframes heart-pop {
+          0% {
+            transform: translate(-50%, -50%) scale(0.4);
+            opacity: 0;
+          }
+          40% {
+            transform: translate(-50%, -60%) scale(1.1);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(-50%, -80%) scale(0.9);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 }
 
-function Bar({label, value, total, colorVar}:{label:string; value:number; total:number; colorVar:string}){
-  return (
-    <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-      <div style={{ width:70, color:"#fff", fontSize:12, opacity:.85 }}>{label}</div>
-      <div style={{ flex:1, height:8, borderRadius:8, background:"rgba(255,255,255,0.08)", overflow:"hidden",
-        boxShadow:"0 0 10px rgba(255,255,255,0.08) inset" }}>
-        <div style={{
-          width: `${value}%`, height:"100%",
-          background:`linear-gradient(90deg, ${colorVar}, rgba(255,255,255,0.6))`,
-          filter:"saturate(1.2)", transition:"width 300ms ease",
-          boxShadow:`0 0 16px ${colorVar}`,
-        }} />
-      </div>
-      <div style={{ color:"#fff", fontSize:12, opacity:.9, minWidth:40, textAlign:"right" }}>{total}</div>
-    </div>
-  );
-}
+function IconButton({
+  label,
+  onClick,
+  batterySaver,
+  kind,
+}: {
+  label: string;
+  onClick: () => void;
+  batterySaver: boolean;
+  kind: "like" | "replay" | "skip";
+}) {
+  const base = {
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.2)",
+    padding: "10px 12px",
+    color: "#fff",
+    fontSize: 12,
+    fontWeight: 700,
+    cursor: "pointer",
+    userSelect: "none" as const,
+    backdropFilter: "blur(6px)",
+    WebkitBackdropFilter: "blur(6px)",
+  };
 
-function Circle({ children, onClick, title, shadow }:{ children:React.ReactNode; onClick:()=>void; title?:string; shadow?:string }){
+  const bg =
+    kind === "like"
+      ? batterySaver
+        ? "rgba(130,0,40,0.45)"
+        : "linear-gradient(180deg, rgba(255,70,120,.35), rgba(120,0,40,.35))"
+      : kind === "replay"
+      ? batterySaver
+        ? "rgba(0,60,120,0.45)"
+        : "linear-gradient(180deg, rgba(90,150,255,.35), rgba(0,40,110,.35))"
+      : // skip
+        batterySaver
+        ? "rgba(80,80,80,0.45)"
+        : "linear-gradient(180deg, rgba(180,180,180,.35), rgba(40,40,40,.35))";
+
+  const emoji = kind === "like" ? "❤️" : kind === "replay" ? "🔁" : "⏭️";
+
   return (
-    <button onClick={onClick} title={title} style={{
-      position:"relative", width:52, height:52, borderRadius:"50%",
-      border:"1px solid rgba(255,255,255,0.2)", background:"rgba(15,15,20,0.55)",
-      backdropFilter:"blur(6px)", cursor:"pointer",
-      boxShadow:`0 0 ${shadow || "10px rgba(255,255,255,.3)"}`,
-      color:"#fff", fontSize:20
-    }}>{children}</button>
+    <button
+      onClick={onClick}
+      aria-label={label}
+      title={label}
+      style={{
+        ...base,
+        background: bg,
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        minWidth: 90,
+        justifyContent: "center",
+        boxShadow: batterySaver ? "none" : "0 8px 24px rgba(0,0,0,.35)",
+      }}
+    >
+      <span style={{ fontSize: 16, lineHeight: 1 }}>{emoji}</span>
+      <span>{label}</span>
+    </button>
   );
 }
