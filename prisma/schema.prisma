@@ -1,3 +1,7 @@
+// ----------------------------
+// 🌟 LUMORA DATABASE SCHEMA
+// ----------------------------
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,6 +11,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// --- Enums (must match existing DB) ---
 enum RoomRole {
   HOST
   MODERATOR
@@ -27,203 +32,59 @@ enum EventType {
   LOWER_HAND
 }
 
-enum ModerationKind {
-  TEXT
-  IMAGE
-}
-
-enum ModerationStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
+// --- Core User model (used by classic Ledger) ---
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  name         String?
-  image        String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  passwordHash String?
-
-  rooms       Room[]       @relation("HostRooms")
-  memberships RoomMember[]
-  events      Event[]      @relation("UserEvents")
-  messages    Message[]    @relation("UserMessages")
+  id          String    @id @default(cuid())
+  username    String    @unique
+  balance     Int       @default(0)
+  ledgerTo    Ledger[]  @relation("ToUser")
+  ledgerFrom  Ledger[]  @relation("FromUser")
+  createdAt   DateTime  @default(now())
 }
 
-model Room {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  title     String
-  hostId    String
-  host      User     @relation("HostRooms", fields: [hostId], references: [id])
-  isPrivate Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  members  RoomMember[]
-  events   Event[]
-  messages Message[]
-}
-
-model RoomMember {
-  id       String   @id @default(cuid())
-  userId   String
-  roomId   String
-  role     RoomRole @default(PARTICIPANT)
-  joinedAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
-  room Room @relation(fields: [roomId], references: [id])
-
-  @@unique([userId, roomId])
-}
-
-model Event {
-  id        String    @id @default(cuid())
-  roomId    String
-  type      EventType
-  timestamp DateTime  @default(now())
-  data      Json?
-  actorId   String?
-
-  room  Room  @relation(fields: [roomId], references: [id])
-  actor User? @relation("UserEvents", fields: [actorId], references: [id])
-
-  @@index([roomId, timestamp])
-}
-
-model Message {
-  id      String   @id @default(cuid())
-  roomId  String
-  userId  String
-  content String
-  sentAt  DateTime @default(now())
-
-  room   Room @relation(fields: [roomId], references: [id])
-  author User @relation("UserMessages", fields: [userId], references: [id])
-
-  @@index([roomId, sentAt])
-}
-
-model ModerationItem {
-  id         String           @id @default(cuid())
-  kind       ModerationKind
-  text       String?
-  objectKey  String?
-  status     ModerationStatus @default(PENDING)
-  flags      Json?
-  reason     String?
-  createdAt  DateTime         @default(now())
-  reviewedAt DateTime?
-  reviewer   String?
-  fileKey    String?
-  sha256     String?
-  scanStatus ScanStatus?
-  scanAt     DateTime?
-
-  @@index([status, createdAt])
-}
-
-model AnalyticsEvent {
-  id     String   @id @default(cuid())
-  ts     DateTime @default(now())
-  type   String
-  userId String?
-  roomId String?
-  path   String?
-  meta   Json?
-
-  @@index([ts, type])
-}
-
-enum RenderStatus {
-  QUEUED
-  RUNNING
-  DONE
-  ERROR
-}
-
-model RenderJob {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  status    RenderStatus @default(QUEUED)
-  progress  Int          @default(0)
-  input     Json?
-  outputUrl String?
-  error     String?
-
-  @@index([createdAt, status])
-}
-
-enum ScanStatus {
-  PENDING
-  CLEAN
-  INFECTED
-}
-
-/// ---------- HARMONY v2.5 ECONOMY MODELS ----------
-model PulseLedger {
-  id        String   @id @default(cuid())
-  userId    String
-  type      PulseTxn @default(EARN)
-  amount    Int
-  note      String?
-  meta      Json?
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-}
-
-enum PulseTxn {
-  EARN
-  SPEND
-  BURN
-  ADJUST
-  GRANT
-}
-
-model PulseWallet {
-  userId       String   @id
-  balance      Int      @default(0)
-  harmonyXp    Int      @default(0)
-  lastActiveAt DateTime @default(now())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-model EconDaily {
+// --- ZENCOIN Ledger tied to User ---
+model Ledger {
   id         String   @id @default(cuid())
-  day        DateTime @unique
-  earnTotal  Int      @default(0)
-  spendTotal Int      @default(0)
-  burnTotal  Int      @default(0)
-  reserve    Int      @default(0)
-  poolNext   Int      @default(0)
+  fromId     String
+  toId       String
+  amount     Int
+  memo       String?
   createdAt  DateTime @default(now())
+
+  from User  @relation("FromUser", fields: [fromId], references: [id])
+  to   User  @relation("ToUser",   fields: [toId],   references: [id])
+
+  @@index([toId, createdAt])
+  @@index([fromId, createdAt])
 }
 
-model Treasury {
-  id        Int      @id @default(1)
-  reserve   Int      @default(0)
-  poolLive  Int      @default(0)
+// ======================
+// ZenCoin (separate rails)
+// ======================
+
+model CoinAccount {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  balance   Int      @default(0)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  txFrom    CoinTx[] @relation("FromAccount")
+  txTo      CoinTx[] @relation("ToAccount")
+
+  @@index([createdAt])
 }
 
-model Video {
-  id           String   @id @default(cuid())
-  cfUid        String   @unique
-  playbackId   String?  @unique
-  status       String   @default("PROCESSING")  // PROCESSING | READY | DELETED | FLAGGED
-  durationSec  Int?
-  sizeBytes    Int?
-  creatorId    String?
-  flagged      Boolean  @default(false)
-  reason       String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model CoinTx {
+  id        String       @id @default(cuid())
+  fromId    String?
+  toId      String
+  amount    Int
+  memo      String?
+  createdAt DateTime     @default(now())
+
+  from      CoinAccount? @relation("FromAccount", fields: [fromId], references: [id])
+  to        CoinAccount  @relation("ToAccount",   fields: [toId],   references: [id])
+
+  @@index([toId, createdAt])
+  @@index([fromId, createdAt])
 }
