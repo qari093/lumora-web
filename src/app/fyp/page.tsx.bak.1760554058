@@ -1,0 +1,64 @@
+"use client";
+import React from "react";
+import SearchBar from "../../components/lumasearch/SearchBar";
+import type { LumaResult } from "../../types/lumasearch";
+type Clip = { id:string; title:string; by:string };
+const BASE: Clip[] = [
+  { id:"a1", title:"Welcome to Lumora", by:"Team" },
+  { id:"a2", title:"Neon Runner — pro dodge", by:"ArcadePro" },
+  { id:"a3", title:"ASMR Focus — 20 min", by:"CalmLab" },
+];
+type Tab = "videos" | "creators" | "web";
+export default function FYPPage(){
+  const [query,setQuery]=React.useState(""); const [results,setResults]=React.useState<LumaResult[]|null>(null); const [tab,setTab]=React.useState<Tab>("videos");
+  const grouped = React.useMemo(()=>{ const g={videos:[] as any[],creators:[] as any[],web:[] as any[]}; (results||[]).forEach(r=>{ if(r.kind==="video") g.videos.push(r); else if(r.kind==="creator") g.creators.push(r); else if(r.kind==="web") g.web.push(r);}); return g;},[results]);
+  const feedList = React.useMemo(()=>{ if(!results) return BASE; const vids=grouped.videos; return vids.length?vids.map((v:any)=>({id:v.id,title:v.title,by:v.by||"Creator"})):BASE; },[results,grouped]);
+  return (<main style={{minHeight:"100vh",background:"#0a0c10",color:"#e5e7eb"}}>
+    <SearchBar onResults={(q,r)=>{setQuery(q);setResults(r as LumaResult[]);}} onCancel={()=>{setQuery("");setResults(null);}}/>
+    <div style={{padding:16,opacity:results?0.92:1,transition:"opacity .2s ease"}}>
+      {query?(<>
+        <div style={{display:"flex",gap:8,margin:"6px 0 12px"}}>
+          {(["videos","creators","web"] as Tab[]).map(t=>(
+            <button key={t} onClick={()=>setTab(t)} style={{padding:"6px 10px",borderRadius:999,border:tab===t?"1px solid #22c55e":"1px solid #333",background:tab===t?"linear-gradient(180deg,#22c55e,#16a34a)":"#0f1319",color:tab===t?"#0b0f12":"#d1d5db",fontWeight:800,cursor:"pointer"}}>{t[0].toUpperCase()+t.slice(1)}</button>
+          ))}
+          <div style={{marginLeft:"auto",color:"#9ca3af"}}>Showing results for: <b>{query}</b></div>
+        </div>
+        {tab==="videos"&&(<div style={{display:"flex",flexDirection:"column",gap:12}}>
+          {grouped.videos.length?grouped.videos.map((v:any)=>(
+            <div key={v.id} style={{border:"1px solid #222",borderRadius:12,padding:14,background:"#0f1319"}}>
+              <div style={{fontWeight:800}}>{v.title}</div>
+              <div style={{opacity:.8,fontSize:13}}>by {v.by||"Creator"} {v.t!=null&&<span>· jump {v.t}s</span>}</div>
+              <div style={{marginTop:8,height:160,borderRadius:8,background:"#05070a",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{opacity:.7}}>Video placeholder</span></div>
+            </div>
+          )):(<div style={{padding:"18px 12px",border:"1px dashed #333",borderRadius:10,color:"#9ca3af"}}>No video results — try another query.</div>)}
+        </div>)}
+        {tab==="creators"&&(<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:12}}>
+          {grouped.creators.length?grouped.creators.map((c:any)=>(
+            <div key={c.id} style={{border:"1px solid #222",borderRadius:12,padding:14,background:"#0f1319"}}>
+              <div style={{fontWeight:800}}>{c.name}</div>
+              <div style={{opacity:.8,fontSize:13}}>{(c.followers||0).toLocaleString()} followers</div>
+            </div>
+          )):(<div style={{padding:"18px 12px",border:"1px dashed #333",borderRadius:10,color:"#9ca3af"}}>No creators found.</div>)}
+        </div>)}
+        {tab==="web"&&(<div style={{display:"flex",flexDirection:"column",gap:10}}>
+          {grouped.web.length?grouped.web.map((w:any)=>(
+            <a key={w.url} href={w.url} target="_blank" rel="noreferrer" style={{border:"1px solid #222",borderRadius:12,padding:12,background:"#0f1319",textDecoration:"none",color:"#e5e7eb"}}>
+              <div style={{fontWeight:800}}>{w.title}</div>
+              <div style={{opacity:.75,fontSize:13}}>{w.site}</div>
+            </a>
+          )):(<div style={{padding:"18px 12px",border:"1px dashed #333",borderRadius:10,color:"#9ca3af"}}>No web results.</div>)}
+        </div>)}
+      </>):(
+        <div style={{display:"flex",flexDirection:"column",gap:12}}>
+          {feedList.map(c=>(
+            <div key={c.id} style={{border:"1px solid #222",borderRadius:12,padding:14,background:"#0f1319"}}>
+              <div style={{fontWeight:800}}>{c.title}</div>
+              <div style={{opacity:.8,fontSize:13}}>by {c.by}</div>
+              <div style={{marginTop:8,height:160,borderRadius:8,background:"#05070a",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{opacity:.7}}>Video placeholder</span></div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </main>);
+}

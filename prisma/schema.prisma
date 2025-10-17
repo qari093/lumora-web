@@ -1,90 +1,85 @@
-// ----------------------------
-// 🌟 LUMORA DATABASE SCHEMA
-// ----------------------------
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./lumora.db"
 }
 
-// --- Enums (must match existing DB) ---
-enum RoomRole {
-  HOST
-  MODERATOR
-  PARTICIPANT
+model Campaign {
+  id                    String       @id @default(cuid())
+  name                  String
+  dailyBudgetCents      Int
+  targetingRadiusMiles  Int
+  status                String       @default("active")
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+  ads                   AdCreative[]
 }
 
-enum EventType {
-  JOIN
-  LEAVE
-  MUTE
-  UNMUTE
-  START_STREAM
-  STOP_STREAM
-  MESSAGE
-  SCREEN_START
-  SCREEN_STOP
-  RAISE_HAND
-  LOWER_HAND
+model AdCreative {
+  id          String   @id @default(cuid())
+  campaignId  String
+  imageUrl    String?
+  headline    String
+  description String
+  ctaText     String   @default("Learn More")
+  createdAt   DateTime @default(now())
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 }
 
-// --- Core User model (used by classic Ledger) ---
-model User {
-  id          String    @id @default(cuid())
-  username    String    @unique
-  balance     Int       @default(0)
-  ledgerTo    Ledger[]  @relation("ToUser")
-  ledgerFrom  Ledger[]  @relation("FromUser")
-  createdAt   DateTime  @default(now())
+model Business {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String?
+  whatsapp    String?
+  addressText String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-// --- ZENCOIN Ledger tied to User ---
-model Ledger {
-  id         String   @id @default(cuid())
-  fromId     String
-  toId       String
-  amount     Int
-  memo       String?
-  createdAt  DateTime @default(now())
-
-  from User  @relation("FromUser", fields: [fromId], references: [id])
-  to   User  @relation("ToUser",   fields: [toId],   references: [id])
-
-  @@index([toId, createdAt])
-  @@index([fromId, createdAt])
+model Wallet {
+  id           String         @id @default(cuid())
+  balanceCents Int            @default(0)
+  currency     String         @default("EUR")
+  transactions Transaction[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }
 
-// ======================
-// ZenCoin (separate rails)
-// ======================
-
-model CoinAccount {
-  id        String   @id @default(cuid())
-  userId    String?  @unique
-  balance   Int      @default(0)
-  createdAt DateTime @default(now())
-
-  txFrom    CoinTx[] @relation("FromAccount")
-  txTo      CoinTx[] @relation("ToAccount")
-
-  @@index([createdAt])
+model Transaction {
+  id           String   @id @default(cuid())
+  walletId     String
+  wallet       Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type         String   // "topup" | "spend" | "refund"
+  amountCents  Int
+  description  String?
+  createdAt    DateTime @default(now())
 }
 
-model CoinTx {
-  id        String       @id @default(cuid())
-  fromId    String?
-  toId      String
-  amount    Int
-  memo      String?
-  createdAt DateTime     @default(now())
+/// ---------- Lumora Ads: base campaign schema ----------
+enum AdStatus { DRAFT ACTIVE PAUSED ARCHIVED }
+enum AdObjective { AWARENESS TRAFFIC CONVERSIONS VISITS }
+enum CreativeType { IMAGE VIDEO }
 
-  from      CoinAccount? @relation("FromAccount", fields: [fromId], references: [id])
-  to        CoinAccount  @relation("ToAccount",   fields: [toId],   references: [id])
-
-  @@index([toId, createdAt])
-  @@index([fromId, createdAt])
+model AdCampaign {
+  id                String        @id @default(cuid())
+  ownerId           String?
+  title             String
+  objective         AdObjective
+  status            AdStatus      @default(DRAFT)
+  creativeType      CreativeType
+  creativeUrl       String
+  landingUrl        String?
+  dailyBudgetCents  Int
+  totalBudgetCents  Int
+  radiusKm          Int           @default(50)
+  centerLat         Float?
+  centerLon         Float?
+  locationsJson     String?
+  startAt           DateTime?
+  endAt             DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
 }
