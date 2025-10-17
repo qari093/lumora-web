@@ -1,0 +1,45 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+/**
+ * Redirect unauthenticated users to /login, and users missing consent to /consent.
+ * - Always constructs URL with base (req.url) to avoid "to must be string" crashes.
+ * - Skips static assets & Next internals via matcher below.
+ * - Adjust cookie names/logic as your app needs.
+ */
+export function middleware(req: NextRequest) {
+  try {
+    const url = req.nextUrl;
+
+    // Example cookie checks (rename to your real cookies)
+    const token = req.cookies.get("lumora_token")?.value;
+    const consent = req.cookies.get("lumora_consent")?.value === "yes";
+
+    // Allow public pages without token (add more as needed)
+    const publicPaths = new Set<string>(["/login", "/consent", "/ads-test", "/l"]);
+    const isPublic = [...publicPaths].some((p) => url.pathname === p || url.pathname.startsWith(p + "/"));
+
+    if (!token && !isPublic) {
+      const login = new URL("/login", req.url);
+      return NextResponse.redirect(login);
+    }
+
+    if (token && !consent && url.pathname !== "/consent") {
+      const consentUrl = new URL("/consent", req.url);
+      return NextResponse.redirect(consentUrl);
+    }
+
+    return NextResponse.next();
+  } catch {
+    // Never crash dev server due to middleware errors
+    return NextResponse.next();
+  }
+}
+
+/**
+ * Skip static/_next/image/etc. Add API if you want to bypass API routes:
+ *   "^/api/.*" to skip APIs as well.
+ */
+export const config = {
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)"],
+};

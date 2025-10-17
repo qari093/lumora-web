@@ -1,0 +1,104 @@
+"use client";
+
+import React from "react";
+
+type Rec = { id: string; title: string; url: string; _score?: number; mood?: string };
+
+export default function FypPage() {
+  const [mood, setMood] = React.useState("joy");
+  const [limit, setLimit] = React.useState(3);
+  const [recs, setRecs] = React.useState<Rec[]>([]);
+  const [log, setLog] = React.useState<string>("");
+
+  async function fetchRecs() {
+    setLog((l) => l + `\n→ POST /api/fyp/recommend {mood:${mood}, limit:${limit}}\n`);
+    const r = await fetch("/api/fyp/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mood, limit }),
+      cache: "no-store",
+    });
+    const j = await r.json();
+    setRecs(j.rows || []);
+    setLog((l) => l + JSON.stringify(j, null, 2) + "\n");
+  }
+
+  async function interact(videoId: string, action: "view" | "like" | "skip", ms?: number) {
+    setLog((l) => l + `\n→ POST /api/fyp/interact {videoId:${videoId}, action:${action}, ms:${ms ?? 0}}\n`);
+    const r = await fetch("/api/fyp/interact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ videoId, action, ms }),
+      cache: "no-store",
+    });
+    const j = await r.json();
+    setLog((l) => l + JSON.stringify(j, null, 2) + "\n");
+  }
+
+  return (
+    <main style={{maxWidth:900, margin:"32px auto", padding:"0 16px", fontFamily:"system-ui"}}>
+      <h1>FYP — Minimal Test</h1>
+
+      <section style={{display:"flex", gap:12, alignItems:"center", flexWrap:"wrap"}}>
+        <label> Mood:
+          <select value={mood} onChange={e=>setMood(e.target.value)} style={{marginLeft:8}}>
+            <option value="joy">joy</option>
+            <option value="neutral">neutral</option>
+            <option value="calm">calm</option>
+            <option value="focus">focus</option>
+          </select>
+        </label>
+
+        <label> Limit:
+          <input type="number" min={1} max={20} value={limit}
+            onChange={e=>setLimit(Number(e.target.value))}
+            style={{width:64, marginLeft:8}} />
+        </label>
+
+        <button onClick={fetchRecs} style={{padding:"8px 12px", border:"1px solid #333", borderRadius:6}}>
+          Get Recommendations
+        </button>
+      </section>
+
+      <section style={{marginTop:20}}>
+        {recs.length === 0 ? (
+          <p style={{opacity:0.7}}>No items yet — click "Get Recommendations".</p>
+        ) : (
+          <ul style={{listStyle:"none", padding:0, display:"grid", gap:12}}>
+            {recs.map((v) => (
+              <li key={v.id} style={{border:"1px solid #222", borderRadius:8, padding:12}}>
+                <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                  <div>
+                    <div style={{fontWeight:600}}>{v.title || v.id}</div>
+                    <div style={{opacity:0.7, fontSize:13}}>
+                      id: {v.id} {typeof v._score === "number" ? `(score: ${v._score})` : ""} {v.mood ? `· mood: ${v.mood}` : ""}
+                    </div>
+                  </div>
+                  <div style={{display:"flex", gap:8}}>
+                    <button onClick={() => interact(v.id, "view", 1000)}>View 1s</button>
+                    <button onClick={() => interact(v.id, "like")}>Like</button>
+                    <button onClick={() => interact(v.id, "skip")}>Skip</button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section style={{marginTop:24}}>
+        <h3>Log</h3>
+        <pre style={{
+          whiteSpace:"pre-wrap",
+          background:"#0b0b0b",
+          color:"#0f0",
+          padding:12,
+          borderRadius:8,
+          minHeight:160,
+          overflow:"auto"
+        }}>{log || "Logs will appear here…"}</pre>
+      </section>
+    </main>
+  );
+}
+
