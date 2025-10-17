@@ -39,15 +39,6 @@ model Business {
   updatedAt   DateTime @updatedAt
 }
 
-model Wallet {
-  id           String        @id @default(cuid())
-  balanceCents Int           @default(0)
-  currency     String        @default("EUR")
-  transactions Transaction[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-}
-
 model Transaction {
   id          String   @id @default(cuid())
   walletId    String
@@ -99,4 +90,61 @@ model AdCampaign {
   endAt            DateTime?
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
+}
+
+/// ---------- Lumora Wallet (ledger-first) ----------
+enum LedgerType {
+  CREDIT // top-up, refund, promo
+  DEBIT // manual debit, fee
+  AD_SPEND // delivery spend
+  RESERVE // hold for upcoming spend
+  RELEASE // unhold back to balance
+  TRANSFER_IN // transfer from another wallet
+  TRANSFER_OUT // transfer to another wallet
+}
+
+model Wallet {
+  id           String   @id @default(cuid())
+  ownerId      String // user id/email or account id (no FK for now)
+  currency     String   @default("EUR")
+  balanceCents Int      @default(0) // mirror of ledger sum; maintained in app tx
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  ledgers     WalletLedger[]
+  outgoing    WalletTransfer[] @relation("fromWallet")
+  incoming    WalletTransfer[] @relation("toWallet")
+  Transaction Transaction[]
+
+  @@index([ownerId])
+}
+
+model WalletLedger {
+  id          String     @id @default(cuid())
+  walletId    String
+  wallet      Wallet     @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type        LedgerType
+  amountCents Int // positive numbers only; sign implied by type
+  refType     String? // e.g., "AdCampaign", "StripePI"
+  refId       String? // external/internal reference id
+  note        String?
+  createdAt   DateTime   @default(now())
+
+  @@index([walletId, createdAt])
+  @@index([refType, refId])
+}
+
+model WalletTransfer {
+  id           String   @id @default(cuid())
+  fromWalletId String
+  toWalletId   String
+  amountCents  Int
+  note         String?
+  createdAt    DateTime @default(now())
+
+  fromWallet Wallet @relation("fromWallet", fields: [fromWalletId], references: [id], onDelete: Cascade)
+  toWallet   Wallet @relation("toWallet", fields: [toWalletId], references: [id], onDelete: Cascade)
+
+  @@index([fromWalletId, createdAt])
+  @@index([toWalletId, createdAt])
 }
