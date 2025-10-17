@@ -1,30 +1,26 @@
+export const runtime = "nodejs"; // ensure Node runtime (not Edge)
+
 import { NextResponse } from "next/server";
-import { PrismaClient, AdObjective, AdStatus, CreativeType } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
-const prisma = new PrismaClient();
-
-// naive number sanitizer
 function toInt(n: any, def = 0) {
   const x = typeof n === "string" ? n.trim() : n;
   const v = Number(x);
   return Number.isFinite(v) ? Math.round(v) : def;
 }
 
+const ALLOWED_OBJECTIVES = ["AWARENESS","TRAFFIC","CONVERSIONS","VISITS"] as const;
+const ALLOWED_CREATIVE = ["IMAGE","VIDEO"] as const;
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // Basic validation
     const title = String(body?.title || "").trim();
     if (!title) return NextResponse.json({ ok: false, error: "Title is required" }, { status: 400 });
 
-    const objective = Object.values(AdObjective).includes(body?.objective)
-      ? body.objective
-      : AdObjective.AWARENESS;
-
-    const creativeType = Object.values(CreativeType).includes(body?.creativeType)
-      ? body.creativeType
-      : CreativeType.IMAGE;
+    const objective = ALLOWED_OBJECTIVES.includes(body?.objective) ? body.objective : "AWARENESS";
+    const creativeType = ALLOWED_CREATIVE.includes(body?.creativeType) ? body.creativeType : "IMAGE";
 
     const creativeUrl = String(body?.creativeUrl || "").trim();
     if (!creativeUrl) return NextResponse.json({ ok: false, error: "Creative URL is required" }, { status: 400 });
@@ -39,8 +35,7 @@ export async function POST(req: Request) {
     const dailyBudgetCents = dailyBudget * 100;
     const totalBudgetCents = totalBudget * 100;
 
-    const radiusKm = Math.max(1, toInt(body?.radiusKm || 50, 50));
-
+    const radiusKm = Math.max(1, toInt(body?.radiusKm ?? 50, 50));
     const centerLat = body?.centerLat != null ? Number(body.centerLat) : null;
     const centerLon = body?.centerLon != null ? Number(body.centerLon) : null;
 
@@ -50,9 +45,9 @@ export async function POST(req: Request) {
     const created = await prisma.adCampaign.create({
       data: {
         title,
-        objective,
-        status: AdStatus.DRAFT,
-        creativeType,
+        objective,            // enum string
+        status: "DRAFT",      // enum string
+        creativeType,         // enum string
         creativeUrl,
         landingUrl,
         dailyBudgetCents,

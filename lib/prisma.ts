@@ -1,11 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+declare global {
+  // eslint-disable-next-line no-var
+  var __PRISMA__: PrismaClient | undefined;
+}
 
+// Reuse Prisma client across HMR in dev
 export const prisma =
-  globalForPrisma.prisma ||
+  global.__PRISMA__ ??
   new PrismaClient({
-    log: ["error", "warn"],
+    log: process.env.NODE_ENV === "development" ? ["query","error","warn"] : ["error"]
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") {
+  global.__PRISMA__ = prisma;
+}
