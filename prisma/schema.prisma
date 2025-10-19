@@ -202,6 +202,7 @@ model CpvView {
 }
 
 model AdConversion {
+
   id           String   @id @default(cuid())
   campaignId   String
   creativeId   String?
@@ -209,6 +210,9 @@ model AdConversion {
   userId       String?
   eventType    String   // e.g. "CLICK", "INSTALL", "PURCHASE"
   rewardCents  Int      @default(0)
+  channel     String?
+  shortSlug   String?
+
   createdAt    DateTime @default(now())
 
   @@index([campaignId, eventType])
