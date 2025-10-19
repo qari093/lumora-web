@@ -7,6 +7,9 @@ datasource db {
   url      = "file:./lumora.db"
 }
 
+//
+// ---------- Core Ads (simple) ----------
+//
 model Campaign {
   id                   String       @id @default(cuid())
   name                 String
@@ -16,6 +19,10 @@ model Campaign {
   createdAt            DateTime     @default(now())
   updatedAt            DateTime     @updatedAt
   ads                  AdCreative[]
+  cpvViews             CpvView[] // CPV events tied to this simple campaign
+
+  @@index([status])
+  @@index([createdAt])
 }
 
 model AdCreative {
@@ -27,6 +34,8 @@ model AdCreative {
   ctaText     String   @default("Learn More")
   createdAt   DateTime @default(now())
   campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
 }
 
 model Business {
@@ -39,17 +48,27 @@ model Business {
   updatedAt   DateTime @updatedAt
 }
 
-model Transaction {
-  id          String   @id @default(cuid())
-  walletId    String
-  wallet      Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
-  type        String // "topup" | "spend" | "refund"
-  amountCents Int
-  description String?
-  createdAt   DateTime @default(now())
+//
+// ---------- Simple Transaction (kept for legacy/aux use) ----------
+//
+enum TransactionType {
+  TOPUP
+  SPEND
+  REFUND
 }
 
-/// ---------- Lumora Ads: base campaign schema ----------
+model Transaction {
+  id          String          @id @default(cuid())
+  walletId    String
+  wallet      Wallet          @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type        TransactionType
+  amountCents Int
+  description String?
+  createdAt   DateTime        @default(now())
+
+  @@index([walletId, createdAt])
+  @@index([type])
+}
 
 /// ---------- Lumora Ads: base campaign schema ----------
 enum AdStatus {
@@ -90,6 +109,11 @@ model AdCampaign {
   endAt            DateTime?
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
+
+  @@index([ownerId])
+  @@index([status])
+  @@index([objective])
+  @@index([createdAt])
 }
 
 /// ---------- Lumora Wallet (ledger-first) ----------
@@ -116,7 +140,8 @@ model Wallet {
   incoming    WalletTransfer[] @relation("toWallet")
   Transaction Transaction[]
 
-  @@index([ownerId])
+  @@unique([ownerId, currency]) // prevent dup wallets per currency
+  @@index([ownerId, currency]) // fast ensures/lookups
 }
 
 model WalletLedger {
@@ -124,14 +149,16 @@ model WalletLedger {
   walletId    String
   wallet      Wallet     @relation(fields: [walletId], references: [id], onDelete: Cascade)
   type        LedgerType
-  amountCents Int // positive numbers only; sign implied by type
-  refType     String? // e.g., "AdCampaign", "StripePI"
-  refId       String? // external/internal reference id
+  amountCents Int // positive numbers only; sign implied by type (app-enforced)
+  refType     String? // e.g., "CPV", "STRIPE"
+  refId       String? // e.g., idempotencyKey or Stripe session id
   note        String?
   createdAt   DateTime   @default(now())
 
+  // One ledger per external reference -> hard idempotency
+  @@unique([refType, refId])
   @@index([walletId, createdAt])
-  @@index([refType, refId])
+  @@index([type])
 }
 
 model WalletTransfer {
@@ -147,4 +174,92 @@ model WalletTransfer {
 
   @@index([fromWalletId, createdAt])
   @@index([toWalletId, createdAt])
+  @@index([createdAt])
+}
+
+/// ---------- Stripe webhook idempotency ----------
+model StripeEvent {
+  id        String   @id // Stripe event id (e.g. evt_..., or use the Checkout session id if you prefer)
+  type      String?
+  createdAt DateTime @default(now())
+
+  // You can expand later with account, payload hash, etc.
+  @@index([createdAt])
+}
+
+/// ---------- CPV charge tracking (idempotent per view) ----------
+model CpvView {
+  id             String   @id @default(cuid())
+  campaignId     String
+  idempotencyKey String   @unique // e.g., "demo-view-<ts>" or any unique token per view
+  costCents      Int
+  ledgerId       String? // the WalletLedger.id that captured the charge
+  createdAt      DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+}
+
+model AdConversion {
+  id           String   @id @default(cuid())
+  campaignId   String
+  creativeId   String?
+  viewKey      String   @unique
+  userId       String?
+  eventType    String   // e.g. "CLICK", "INSTALL", "PURCHASE"
+  rewardCents  Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([campaignId, eventType])
+}
+
+/// Ad/UX interaction stream (lightweight analytics)
+model AdEvent {
+  id         String   @id @default(cuid())
+  action     String   // "view" | "hover" | "click" | "complete" | etc.
+  viewKey    String?  // ties to CpvView.idempotencyKey if available
+  userId     String?
+  campaignId String?  // derived from CpvView if viewKey present
+  ms         Int?     // duration (ms) for hover/view segments
+  mood       String?
+  metaJson   String?  // stringified JSON for extra fields
+  createdAt  DateTime @default(now())
+
+  @@index([action, createdAt])
+  @@index([viewKey, createdAt])
+  @@index([campaignId, createdAt])
+}
+
+/// 🔒 Fraud signal log
+model FraudEvent {
+  id        String   @id @default(cuid())
+  kind      String   // e.g. "RATE_LIMIT", "IP_BLOCK"
+  reason    String?
+  ip        String?
+  userId    String?
+  viewKey   String?
+  score     Int      @default(1)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([ip, createdAt])
+}
+
+/// 🚫 Block a specific IP (optional expiry)
+model IpBlock {
+  ip        String   @id
+  reason    String?
+  expiresAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+/// ⏱️ Sliding-window counters (for simple rate limiting)
+model KeyCounter {
+  key         String   @id
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([updatedAt])
 }
