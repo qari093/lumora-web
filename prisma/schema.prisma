@@ -295,3 +295,44 @@ model EcoMetricDaily {
   @@index([day])
   @@index([campaignId, day])
 }
+
+enum KycStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model KycRequest {
+  id          String     @id @default(cuid())
+  ownerId     String
+  status      KycStatus  @default(PENDING)
+  fullName    String?
+  dob         String?
+  idType      String?
+  idNumber    String?
+  consent     Boolean    @default(false)
+  adminUser   String?
+  reason      String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  documents   KycDocument[]
+
+  @@index([ownerId, status])
+  @@index([createdAt])
+}
+
+model KycDocument {
+  id          String   @id @default(cuid())
+  requestId   String
+  docType     String
+  mimeType    String
+  filePath    String
+  original    String?
+  size        Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  request     KycRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@index([requestId, docType])
+}
