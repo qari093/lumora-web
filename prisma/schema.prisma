@@ -263,3 +263,21 @@ model KeyCounter {
 
   @@index([updatedAt])
 }
+
+/// Daily rollups per campaign (SQLite-friendly)
+model AdMetricDaily {
+  id            String   @id @default(cuid())
+  day           DateTime // UTC midnight
+  campaignId    String?
+  views         Int      @default(0)
+  hovers        Int      @default(0)
+  clicks        Int      @default(0)
+  conversions   Int      @default(0)
+  spendCents    Int      @default(0)  // sum(CpvView.costCents)
+  rewardsCents  Int      @default(0)  // sum(AdConversion.rewardCents)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([day])
+  @@index([campaignId, day])
+}
