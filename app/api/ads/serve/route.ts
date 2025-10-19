@@ -1,36 +1,25 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { fraudGuard } from "@/lib/fraud";
 
-/**
- * GET /api/ads/serve?ownerId=OWNER_A
- * Creates a CPV view row (requires costCents in your schema) and returns a viewKey
- * so the client can later call /api/ads/convert with that key.
- */
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const ownerId = url.searchParams.get("ownerId") || "OWNER_A";
 
-    // Choose a campaign — simplest: the test one we ensured exists
+    const fg = await fraudGuard(req, { scope: "serve", limits: { perIp: { limit: 5, windowSec: 10 } } });
+    if ((fg as any).blocked) {
+      return NextResponse.json((fg as any).body, { status: (fg as any).status });
+    }
+
     const campaignId = "TEST_CAMPAIGN_1";
+    const viewKey = "view-" + Date.now() + "-" + Math.floor(Math.random() * 100000);
 
-    // Create a view row with required costCents and unique idempotencyKey
-    const viewKey = `view-${Date.now()}-${Math.floor(Math.random()*100000)}`;
     await prisma.cpvView.create({
-      data: {
-        idempotencyKey: viewKey,
-        campaignId,
-        costCents: 5, // minimal CPV cost
-      },
+      data: { idempotencyKey: viewKey, campaignId, costCents: 5 },
     });
 
-    // Return JSON (HTTP 200) — DO NOT return 204!
-    return NextResponse.json({
-      ok: true,
-      campaignId,
-      viewKey,
-      // any extra metadata you want to show your client
-    });
+    return NextResponse.json({ ok: true, campaignId, viewKey, ownerId });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
   }
