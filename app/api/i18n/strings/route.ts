@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Minimal strings provider (server-side), reads cookie \`lang\`
+// Minimal strings provider (server-side), reads cookie `lang`
 const STRINGS: Record<string, Record<string, string>> = {
   en: {
     brand_insights: "Brand Insights",
@@ -15,10 +15,18 @@ const STRINGS: Record<string, Record<string, string>> = {
 };
 
 function getLangFromCookie(req: Request): "en" | "ur" {
-  const cookie = req.headers.get("cookie") || "";
-  const m = /(?:^|;\s*)lang=([^;]+)/.exec(cookie);
-  const v = m ? decodeURIComponent(m[1]) : "en";
-  return (v === "ur" ? "ur" : "en");
+  const header = req.headers.get("cookie") || "";
+  // prefer the LAST occurrence of `lang=...`
+  let found: string | null = null;
+  for (const part of header.split(/; */)) {
+    const eq = part.indexOf("=");
+    if (eq <= 0) continue;
+    const k = part.slice(0, eq).trim();
+    const v = part.slice(eq + 1);
+    if (k === "lang") found = decodeURIComponent(v);
+  }
+  const lang = (found === "ur" ? "ur" : "en") as "en" | "ur";
+  return lang;
 }
 
 export async function GET(req: Request) {
