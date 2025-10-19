@@ -336,3 +336,28 @@ model KycDocument {
 
   @@index([requestId, docType])
 }
+
+model ShortLink {
+  id         String      @id @default(cuid())
+  slug       String      @unique
+  targetUrl  String
+  campaignId String?
+  clicks     Int         @default(0)
+  createdAt  DateTime    @default(now())
+  hits       ChannelHit[]
+
+  @@index([campaignId, createdAt])
+}
+
+model ChannelHit {
+  id          String    @id @default(cuid())
+  shortLinkId String?
+  channel     String
+  ip          String?
+  userAgent   String?
+  createdAt   DateTime  @default(now())
+
+  shortLink   ShortLink? @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+
+  @@index([channel, createdAt])
+}
