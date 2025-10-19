@@ -281,3 +281,17 @@ model AdMetricDaily {
   @@index([day])
   @@index([campaignId, day])
 }
+
+/// Daily eco impact per campaign (computed from events/conversions/spend)
+model EcoMetricDaily {
+  id         String   @id @default(cuid())
+  day        DateTime
+  campaignId String?
+  co2g       Float    @default(0)   // grams CO2
+  energyWh   Float    @default(0)   // watt-hours
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([day])
+  @@index([campaignId, day])
+}
