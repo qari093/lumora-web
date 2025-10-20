@@ -1,6 +1,6 @@
 {
-  "functions": {
-    "app/api/**/route.js": { "runtime": "nodejs18.x" },
-    "app/api/**/route.ts": { "runtime": "nodejs18.x" }
-  }
+  "framework": "nextjs",
+  "installCommand": "npm install --no-audit --no-fund",
+  "buildCommand": "npm run build",
+  "env": { "NEXT_TELEMETRY_DISABLED": "1" }
 }
