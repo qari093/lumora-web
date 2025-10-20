@@ -5,52 +5,24 @@ on:
   pull_request:
     branches: [ main ]
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node 20 LTS
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'npm'
 
-      - name: Write CI env (.env)
-        run: |
-          cat > .env <<'ENV'
-          NODE_ENV=production
-          NEXT_TELEMETRY_DISABLED=1
-          NEXT_RUNTIME=nodejs
-          NEXT_PUBLIC_BASE_URL=http://localhost:3000
-          DATABASE_URL="file:./prisma/lumora.ci.db"
-          ADMIN_TOKEN=ci-admin-token
-          STRIPE_WEBHOOK_SECRET=dummy
-          ECO_KG_CO2_PER_CLICK=0.001
-          ECO_KWH_PER_CLICK=0.0002
-          ECO_KG_CO2_PER_VIEW=0.0002
-          ECO_KWH_PER_VIEW=0.00005
-          ENV
-
-      - name: Install
+      - name: Install deps (ci)
         run: npm ci
 
-      - name: Prisma generate
+      - name: Generate Prisma Client
         run: npx prisma generate
 
-      # If you have ESLint configured, you can add:
-      # - name: Lint
-      #   run: npm run lint
-
-      - name: Build (Next.js)
-        env:
-          NEXT_TELEMETRY_DISABLED: '1'
-          NODE_ENV: production
-        run: npx next build
+      - name: Build
+        run: npm run build
