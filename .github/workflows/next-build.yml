@@ -1,35 +1,16 @@
 name: CI - Next Build
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+  push: { branches: [ main ] }
+  pull_request: { branches: [ main ] }
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Print versions
-        run: |
-          node -v
-          npm -v
-
-      - name: Install deps (npm install)
-        run: npm install --no-audit --no-fund
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Build
-        env:
-          NEXT_TELEMETRY_DISABLED: "1"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: node -v && npm -v && pwd && ls -la
+      - run: npm install --no-audit --no-fund
+      - run: npx prisma -v && npx prisma generate
+      - env: { NEXT_TELEMETRY_DISABLED: '1' }
         run: npx next build
