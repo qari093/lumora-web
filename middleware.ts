@@ -1,14 +1,11 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { authMiddleware } from '@clerk/nextjs';
 
-const isPublicRoute = createRouteMatcher([
-  '/api/ping',
-]);
-
-export default clerkMiddleware((auth, req) => {
-  if (isPublicRoute(req)) return;
-  // All other routes remain protected
+export default authMiddleware({
+  // Public endpoints that should bypass auth entirely
+  publicRoutes: ['/api/ping'],
 });
 
+// Apply middleware to app + API routes, but skip static files and _next
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/(api|trpc)(.*)'],
 };
