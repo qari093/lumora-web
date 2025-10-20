@@ -1,5 +1,15 @@
+"use client";
+
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+/* build-safe default for channel */
+let channel = "";
+/* build-safe default for slug */
+let slug = "";
+/* build-safe default for campaignId */
+let campaignId = "";
+/* build-safe default: define targetUrl when prerendering */
+let targetUrl = "";
 
 const money = (c:number)=> "€"+(c/100).toFixed(2);
 
@@ -18,7 +28,7 @@ export default async function DistributePage() {
       <h2 style={{marginTop:16}}>API helpers</h2>
       <ul style={{color:"#666"}}>
         <li><Link href="/api/dist/stats">/api/dist/stats</Link> — by-channel counts &amp; top links</li>
-        <li>POST <code>/api/dist/shorten</code> — {{ targetUrl, campaignId?, slug? }}</li>
+        <li>POST <code>/api/dist/shorten</code> — {JSON.stringify({ targetUrl, campaignId, slug }, null, 2)}</li>
         <li>Redirector: <code>/api/r/&lt;slug&gt;?ch=social</code></li>
       </ul>
 
