@@ -1,0 +1,40 @@
+import { getLangFromRequest, SUPPORTED, money } from "@/lib/i18n/index";
+import Link from "next/link";
+
+export default async function SettingsLanguage() {
+  const lang = await getLangFromRequest();
+  return (
+    <div style={{maxWidth:700, margin:"24px auto", padding:"0 16px", fontFamily:"ui-sans-serif, system-ui"}}>
+      <h1 style={{fontSize:26, fontWeight:700}}>Localization</h1>
+      <p style={{color:"#666"}}>Current language: <b>{lang}</b></p>
+
+      <form action="/api/i18n/set" method="post" onSubmit={(e)=>{}}>
+        <ul style={{display:"flex", gap:12, padding:0, listStyle:"none"}}>
+          {SUPPORTED.map(l=>(
+            <li key={l}>
+              <button
+                formMethod="post"
+                formAction="/api/i18n/set"
+                name="lang" value={l}
+                style={{padding:"8px 12px", border:"1px solid #ddd", borderRadius:8, background:"#fff", cursor:"pointer"}}
+              >{l.toUpperCase()}</button>
+            </li>
+          ))}
+        </ul>
+      </form>
+
+      <div style={{marginTop:18, color:"#666"}}>
+        <div>Number: {new Intl.NumberFormat(lang).format(1234567.89)}</div>
+        <div>Money: {money(123456, lang, "EUR")}</div>
+        <div>Date: {new Intl.DateTimeFormat(lang, { dateStyle:"long", timeStyle:"short" }).format(new Date())}</div>
+      </div>
+
+      <p style={{marginTop:16}}>
+        <Link href="/brand/insights">Brand Insights</Link> ·{" "}
+        <Link href="/vendor">Vendor</Link> ·{" "}
+        <Link href="/admin">Admin</Link> ·{" "}
+        <Link href="/brand/eco">Eco</Link>
+      </p>
+    </div>
+  );
+}

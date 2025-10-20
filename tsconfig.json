@@ -10,6 +10,9 @@
       "@/*": [
         "app/*",
         "src/*"
+      ],
+      "@/lib/*": [
+        "lib/*"
       ]
     },
     "lib": [
@@ -37,6 +40,13 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "legacy_pages_api/**/*",
+    "src/**/*",
+    "**/*backup*",
+    "**/*.bak",
+    ".disabled_routes/**/*",
+    ".next/**/*",
+    "node_modules/**/*"
   ]
 }

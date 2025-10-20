@@ -1,0 +1,18 @@
+# node
+node_modules
+npm-debug.log
+pnpm-lock.yaml
+yarn.lock
+
+# prisma local dbs and backups
+prisma/*.db
+prisma/*.db-*
+prisma/*.db.*
+prisma/**/*.bak*
+prisma/**/*.tmp
+
+# dev logs
+*.local.log
+tmp/
+.next/cache/*
+!.next/cache/images # keep image cache if ever used

@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./lumora.db"
+}
+
+model Campaign {
+  id                   String       @id @default(cuid())
+  name                 String
+  dailyBudgetCents     Int
+  targetingRadiusMiles Int
+  status               String       @default("active")
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  ads                  AdCreative[]
+}
+
+model AdCreative {
+  id          String   @id @default(cuid())
+  campaignId  String
+  imageUrl    String?
+  headline    String
+  description String
+  ctaText     String   @default("Learn More")
+  createdAt   DateTime @default(now())
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
+model Business {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String?
+  whatsapp    String?
+  addressText String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Wallet {
+  id           String        @id @default(cuid())
+  balanceCents Int           @default(0)
+  currency     String        @default("EUR")
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  walletId    String
+  wallet      Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type        String // "topup" | "spend" | "refund"
+  amountCents Int
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+/// ---------- Lumora Ads: base campaign schema ----------
+
+/// ---------- Lumora Ads: base campaign schema ----------
+enum AdStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum AdObjective {
+  AWARENESS
+  TRAFFIC
+  CONVERSIONS
+  VISITS
+}
+
+enum CreativeType {
+  IMAGE
+  VIDEO
+}
+
+model AdCampaign {
+  id               String       @id @default(cuid())
+  ownerId          String?
+  title            String
+  objective        AdObjective
+  status           AdStatus     @default(DRAFT)
+  creativeType     CreativeType
+  creativeUrl      String
+  landingUrl       String?
+  dailyBudgetCents Int
+  totalBudgetCents Int
+  radiusKm         Int          @default(50)
+  centerLat        Float?
+  centerLon        Float?
+  locationsJson    String?
+  startAt          DateTime?
+  endAt            DateTime?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}

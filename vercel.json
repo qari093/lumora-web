@@ -1,10 +1,6 @@
 {
-  "version": 2,
-  "rewrites": [
-    { "source": "/api/health", "destination": "/health.json" },
-    { "source": "/videos", "destination": "/videos/index.html" }
-  ],
-  "redirects": [
-    { "source": "/", "destination": "/videos", "permanent": true }
-  ]
+  "functions": {
+    "app/api/**/route.js": { "runtime": "nodejs18.x" },
+    "app/api/**/route.ts": { "runtime": "nodejs18.x" }
+  }
 }

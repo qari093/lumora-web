@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ensureWallet } from "@/lib/wallet";
 import { prisma } from "@/lib/prisma";
 
 function isAdmin(req: Request) {
