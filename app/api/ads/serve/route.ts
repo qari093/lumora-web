@@ -1,31 +1,47 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
+import { pickCreative } from "@/src/lib/ads/fixtures";
+import { checkCaps } from "@/src/lib/ads/caps";
+import { reqId } from "@/src/lib/reqid";
 
-export async function GET(req: Request) {
-  try {
-    const url = new URL(req.url);
-    const campaignId = url.searchParams.get("campaignId") || "TEST_CAMPAIGN_1";
-    const costCents = Number(url.searchParams.get("cpv") || 5);
-
-    // Ensure campaign exists or create demo if missing
-    let camp = await prisma.campaign.findUnique({ where: { id: campaignId } });
-    if (!camp && campaignId === "TEST_CAMPAIGN_1") {
-      camp = await prisma.campaign.create({ data: { id: "TEST_CAMPAIGN_1", name: "Test Campaign", dailyBudgetCents: 10_000, targetingRadiusMiles: 50, status: "active" } as any });
-    } else if (!camp) {
-      return NextResponse.json({ ok:false, error:"CAMPAIGN_NOT_FOUND" }, { status:404 });
-    }
-
-    const viewKey = `view-${Date.now()}-${Math.floor(Math.random()*100000)}`;
-    await prisma.cpvView.create({
-      data: {
-        idempotencyKey: viewKey,
-        campaignId: camp.id,
-        costCents: Math.max(0, Math.floor(costCents)),
-      }
-    });
-
-    return NextResponse.json({ ok:true, campaignId: camp.id, viewKey });
-  } catch (e:any) {
-    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
-  }
+function getIp(req: NextRequest): string {
+  const xf = req.headers.get("x-forwarded-for");
+  if (xf) return xf.split(",")[0].trim();
+  const xr = req.headers.get("x-real-ip");
+  if (xr) return xr.trim();
+  return "0.0.0.0"; // dev fallback
 }
+
+export async function GET(req: NextRequest) {
+  const id = reqId();
+  const url = new URL(req.url);
+  const ownerId = url.searchParams.get("ownerId");
+  const ip = getIp(req);
+  const capKey = `${ownerId||"_"}::${ip}`;
+
+  const verdict = checkCaps(capKey);
+  if (!verdict.allowed) {
+    const body = { ok: false as const, decision: null, reason: verdict.reason, retryAfterMs: verdict.retryAfterMs ?? 0, caps: verdict.meta, requestId: id };
+    return NextResponse.json(body, { status: 200, headers: { "x-request-id": id } });
+  }
+
+  const creative = pickCreative(ownerId);
+  if (!creative) {
+    const body = { ok: true, decision: null, reason: "NO_CREATIVE" as const, caps: verdict.meta, requestId: id };
+    return NextResponse.json(body, { status: 200, headers: { "x-request-id": id } });
+  }
+
+  const decision = {
+    ttlMs: 30_000, // hint for client cache of the decision
+    creative,
+    tracking: {
+      // Placeholder tracking URLs (to be implemented in Step 3)
+      impressionUrl: `/api/ads/imp?cid=${encodeURIComponent(creative.id)}&rid=${encodeURIComponent(id)}`,
+      clickUrl: `/api/ads/click?cid=${encodeURIComponent(creative.id)}&rid=${encodeURIComponent(id)}`,
+    },
+  };
+
+  const body = { ok: true, decision, caps: verdict.meta, requestId: id };
+  return NextResponse.json(body, { status: 200, headers: { "x-request-id": id } });
+}
+
+export const dynamic = "force-dynamic"; // ensure fresh decisions in dev
