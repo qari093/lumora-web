@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import prisma from "@/src/lib/db";
-import { scanBuffer } from "@/src/lib/av-scanner";
+import prisma from "@/lib/db";
+import { scanBuffer } from "@/lib/av-scanner";
 
 const s3 = new S3Client({
   region: process.env.S3_REGION || "auto",

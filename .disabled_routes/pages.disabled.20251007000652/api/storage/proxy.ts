@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { getS3, requireBucket } from "@/src/lib/s3";
+import { getS3, requireBucket } from "@/lib/s3";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

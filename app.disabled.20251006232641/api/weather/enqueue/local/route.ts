@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { weatherQueue } from "@/src/lib/queue";
-import { getClientIP, lookupGeo, labelFromGeo } from "@/src/lib/geo/ip";
+import { weatherQueue } from "@/lib/queue";
+import { getClientIP, lookupGeo, labelFromGeo } from "@/lib/geo/ip";
 
 const Query = z.object({
   units: z.enum(["metric","imperial"]).default("metric"),

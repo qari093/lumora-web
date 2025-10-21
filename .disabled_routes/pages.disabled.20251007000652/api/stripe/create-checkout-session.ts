@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { stripe, assertStripeKeys } from "@/src/lib/stripe";
+import { stripe, assertStripeKeys } from "@/lib/stripe";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

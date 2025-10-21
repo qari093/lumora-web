@@ -97,7 +97,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "concurrently": "^9.2.1",
-    "esbuild": "0.25.9",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "prettier": "^3.6.2",
@@ -113,5 +112,11 @@
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
+  },
+  "overrides": {
+    "esbuild": "0.25.9",
+    "vite": {
+      "esbuild": "0.25.9"
+    }
   }
 }

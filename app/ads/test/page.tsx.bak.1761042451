@@ -1,0 +1,118 @@
+"use client";
+import { useEffect, useState } from "react";
+
+type Ad = {
+  id: string;
+  ownerId: string;
+  title: string;
+  mediaUrl: string;
+  clickUrl: string;
+  cta?: string;
+  budgetCents?: number;
+  radiusKm?: number;
+  geoHint?: string;
+};
+type ServeResp =
+  | { ok: true; ad: Ad; ownerId: string }
+  | { ok: true; ad: null; reason: string; ownerId: string }
+  | { ok: false; error: string };
+
+export default function AdsTest() {
+  const [state, setState] = useState<{loading:boolean; data:ServeResp|null; err?:string}>({loading:true, data:null});
+
+  // Fetch an ad (OWNER_A = forced demo hit per our API)
+  useEffect(() => {
+    let live = true;
+    (async () => {
+      try {
+        const r = await fetch(`/api/ads/serve?ownerId=OWNER_A`, { cache: "no-store" });
+        const j = (await r.json()) as ServeResp;
+        if (!live) return;
+        setState({loading:false, data:j});
+        // auto impression if we got an ad
+        if ((j as any).ad) {
+          const ad = (j as any).ad as Ad;
+          await fetch("/api/ads/track", {
+            method:"POST",
+            headers:{ "content-type":"application/json" },
+            body: JSON.stringify({ adId: ad.id, ownerId: ad.ownerId, event: "impression" })
+          }).catch(()=>{});
+        }
+      } catch (e:any) {
+        if (!live) return;
+        setState({loading:false, data:null, err:String(e?.message||e)});
+      }
+    })();
+    return ()=>{ live = false; };
+  }, []);
+
+  async function handleClick(ad: Ad) {
+    try {
+      await fetch("/api/ads/track", {
+        method:"POST",
+        headers:{ "content-type":"application/json" },
+        body: JSON.stringify({ adId: ad.id, ownerId: ad.ownerId, event: "click" })
+      });
+    } catch {}
+    // open landing in a new tab AFTER tracking
+    window.open(ad.clickUrl, "_blank", "noopener,noreferrer");
+  }
+
+  if (state.loading) {
+    return <Shell><p style={{opacity:.85}}>Loading ad…</p></Shell>;
+  }
+  if (state.err) {
+    return <Shell><p style={{color:"#f87171"}}>Error: {state.err}</p></Shell>;
+  }
+  if (!state.data) {
+    return <Shell><p style={{opacity:.85}}>No response.</p></Shell>;
+  }
+
+  // No fill UI
+  if ((state.data as any).ad === null) {
+    const d = state.data as any;
+    return (
+      <Shell>
+        <h2 style={{marginTop:0}}>No Fill</h2>
+        <p style={{opacity:.8}}>Reason: {d.reason}</p>
+        <p style={{opacity:.6,fontSize:12}}>ownerId: {d.ownerId}</p>
+      </Shell>
+    );
+  }
+
+  const d = state.data as any;
+  const ad = d.ad as Ad;
+  return (
+    <Shell>
+      <div style={{maxWidth:720, width:"100%", border:"1px solid #333", borderRadius:12, overflow:"hidden", background:"#0f172a"}}>
+        <div style={{padding:16, borderBottom:"1px solid #222"}}>
+          <h2 style={{margin:0}}>{ad.title}</h2>
+          <p style={{margin:"6px 0 0 0", opacity:.7, fontSize:12}}>
+            owner: {ad.ownerId} · geo: {ad.geoHint || "—"} · radius: {ad.radiusKm ?? "—"} km
+          </p>
+        </div>
+        <div style={{background:"#111", display:"grid", placeItems:"center"}}>
+          {/* simple image creative; could be video later */}
+          <img src={ad.mediaUrl} alt={ad.title} style={{display:"block", width:"100%", height:"auto"}} />
+        </div>
+        <div style={{padding:16, display:"flex", justifyContent:"flex-end"}}>
+          <button onClick={()=>handleClick(ad)}
+                  style={{padding:"10px 14px", borderRadius:10, border:"1px solid #333", background:"#16a34a", color:"#0b0f12", fontWeight:800, cursor:"pointer"}}>
+            {ad.cta || "Open"}
+          </button>
+        </div>
+      </div>
+    </Shell>
+  );
+}
+
+function Shell({children}:{children:React.ReactNode}){
+  return (
+    <main style={{minHeight:"100vh",display:"grid",placeItems:"center",background:"#0b0f12",color:"#e5e7eb",fontFamily:"ui-sans-serif,system-ui", padding:24}}>
+      <div style={{position:"fixed", top:16, left:16, opacity:.8, fontSize:12}}>
+        <a href="/" style={{color:"#93c5fd", textDecoration:"none"}}>← Home</a>
+      </div>
+      {children}
+    </main>
+  );
+}

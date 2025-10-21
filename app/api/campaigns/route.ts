@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 const clamp = (n:number, lo:number, hi:number)=> Math.max(lo, Math.min(hi, Math.floor(n)));
 

@@ -15,7 +15,7 @@ const globalAny = globalThis as unknown as {
   };
 };
 
-import { initBitesWorker } from "@/src/workers/bites";
+import { initBitesWorker } from "@/workers/bites";
 
 function initIO(server: WithIO) {
   if (globalAny.__lumalink) return globalAny.__lumalink;

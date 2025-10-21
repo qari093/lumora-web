@@ -1,5 +1,5 @@
 import type { Server as IOServer } from "socket.io";
-import prisma from "@/src/lib/db";
+import prisma from "@/lib/db";
 
 type State = { tick?: NodeJS.Timeout; running: boolean };
 const globalAny = globalThis as unknown as { __bites?: State };

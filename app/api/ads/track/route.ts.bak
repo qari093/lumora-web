@@ -1,0 +1,44 @@
+import { NextResponse } from "next/server";
+import { prisma } from "../../../../src/lib/prisma";
+
+type TrackEvent = "impression" | "click";
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const adId = String(body?.adId || "");
+    const ownerId = String(body?.ownerId || "");
+    const ev = String(body?.event || "") as TrackEvent;
+
+    if (!adId || !ownerId || (ev !== "impression" && ev !== "click")) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid payload", schema: { adId: "string", ownerId: "string", event: "impression|click" } },
+        { status: 400 }
+      );
+    }
+
+    // Best-effort IP/UA capture
+    const ip =
+      (req.headers as any).get?.("x-forwarded-for")?.split(",")[0]?.trim() ||
+      (req.headers as any).get?.("x-real-ip") ||
+      undefined;
+    const ua = (req.headers as any).get?.("user-agent") || undefined;
+
+    const saved = await prisma.adEvent.create({
+      data: {
+        adId,
+        ownerId,
+        event: ev as any,
+        ip,
+        ua,
+      },
+      select: { id: true, adId: true, ownerId: true, event: true, createdAt: true },
+    });
+
+    return NextResponse.json({ ok: true, saved }, { status: 200 });
+  } catch (e: any) {
+    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
+  }
+}
+
+export const runtime = "nodejs";

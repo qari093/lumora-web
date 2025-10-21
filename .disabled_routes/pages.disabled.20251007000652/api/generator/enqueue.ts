@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/src/lib/db";
-import { genQueue } from "@/src/lib/queue";
+import prisma from "@/lib/db";
+import { genQueue } from "@/lib/queue";
 import { nanoid } from "nanoid";
 export default async function handler(req:NextApiRequest,res:NextApiResponse){
   if(req.method!=="POST") return res.status(405).json({error:"method_not_allowed"});

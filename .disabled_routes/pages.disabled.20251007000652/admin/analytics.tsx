@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from "next";
-import prisma from "@/src/lib/db";
+import prisma from "@/lib/db";
 
 type Row = { day: string; type: string; count: number };
 type Props = { rows: Row[] };

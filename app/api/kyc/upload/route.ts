@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { saveBase64File } from "@/lib/upload";
 
 export async function POST(req: Request) {

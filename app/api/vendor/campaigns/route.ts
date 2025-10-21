@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCampaign, listCampaigns } from "@/src/lib/vendor/campaign";
-import { computeOwnerSpendEuros } from "@/src/lib/vendor/spend";
+import { computeOwnerSpendEuros, computeCampaignsSpendMap } from "@/src/lib/vendor/spend";
 import { reqId } from "@/src/lib/reqid";
 
-function withComputed(rows: ReturnType<typeof listCampaigns>, spent: number) {
+function withComputed(rows: ReturnType<typeof listCampaigns>, spent: number, per: Record<string,number>) {
   const budgetTotal = rows.reduce((s,c)=>s+(c.budgetEuros||0),0);
+  const campaigns = rows.map(c => ({ ...c, spentEuros: per[c.id] || 0, remainingEuros: +((c.budgetEuros||0) - (per[c.id]||0)).toFixed(2) }));
   return {
-    campaigns: rows,
+    campaigns,
     aggregates: { budgetTotal: +budgetTotal.toFixed(2), spentEuros: spent, remainingEuros: +(budgetTotal - spent).toFixed(2) }
   };
 }
@@ -19,7 +20,8 @@ export async function GET(req: NextRequest) {
 
   const rows = listCampaigns(ownerId);
   const spent = computeOwnerSpendEuros(ownerId);
-  return NextResponse.json({ ok:true, ownerId, ...withComputed(rows, spent), requestId:id }, { status:200, headers:{ "x-request-id": id } });
+  const per = computeCampaignsSpendMap(ownerId);
+  return NextResponse.json({ ok:true, ownerId, ...withComputed(rows, spent, per), requestId:id }, { status:200, headers:{ "x-request-id": id } });
 }
 
 export async function POST(req: NextRequest) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 /**
  * GET /api/ads/analytics/summary?minutes=60&campaignId=TEST_CAMPAIGN_1
