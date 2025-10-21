@@ -1,0 +1,45 @@
+import { NextResponse } from "next/server";
+import { prisma } from "../../../../src/lib/prisma";
+
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const adId = url.searchParams.get("adId") || "";
+  const ownerId = url.searchParams.get("ownerId") || undefined;
+  if (!adId) {
+    return NextResponse.json({ ok: false, error: "Missing adId" }, { status: 400 });
+  }
+
+  // Overall counts
+  const [impressions, clicks, lastEvent] = await Promise.all([
+    prisma.adEvent.count({ where: { adId, ownerId: ownerId || undefined, event: "impression" as any } }),
+    prisma.adEvent.count({ where: { adId, ownerId: ownerId || undefined, event: "click" as any } }),
+    prisma.adEvent.findFirst({
+      where: { adId, ownerId: ownerId || undefined },
+      orderBy: { createdAt: "desc" },
+      select: { createdAt: true },
+    }),
+  ]);
+
+  // Last 24h (simple slice)
+  const since = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const [imp24h, clk24h] = await Promise.all([
+    prisma.adEvent.count({
+      where: { adId, ownerId: ownerId || undefined, event: "impression" as any, createdAt: { gte: since } },
+    }),
+    prisma.adEvent.count({
+      where: { adId, ownerId: ownerId || undefined, event: "click" as any, createdAt: { gte: since } },
+    }),
+  ]);
+
+  return NextResponse.json(
+    {
+      ok: true,
+      adId,
+      ownerId: ownerId ?? null,
+      totals: { impressions, clicks },
+      last24h: { impressions: imp24h, clicks: clk24h, since: since.toISOString() },
+      lastEventAt: lastEvent?.createdAt?.toISOString() ?? null,
+    },
+    { status: 200 }
+  );
+}

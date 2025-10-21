@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 const money = (c:number)=> "€"+(c/100).toFixed(2);
 export default async function AdminCampaigns(){

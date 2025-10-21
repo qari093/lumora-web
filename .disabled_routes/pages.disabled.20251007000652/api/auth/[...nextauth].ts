@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import prisma from "@/src/lib/db";
+import prisma from "@/lib/db";
 import bcrypt from "bcrypt";
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {

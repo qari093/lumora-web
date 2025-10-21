@@ -1,9 +1,9 @@
 import { Worker } from "@bullmq/fast";
 import IORedis from "ioredis";
-import prisma from "@/src/lib/db";
-import { composeShort } from "@/src/lib/compositor";
+import prisma from "@/lib/db";
+import { composeShort } from "@/lib/compositor";
 import fs from "fs";
-import { putObject } from "@/src/lib/s3";
+import { putObject } from "@/lib/s3";
 import { join } from "path";
 const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
 const CONC = Number(process.env.GEN_CONCURRENCY || "8");

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as Sentry from "@sentry/nextjs";
-import { error, info } from "@/src/lib/log";
+import { error, info } from "@/lib/log";
 
 export default async function handler(_req:NextApiRequest, res:NextApiResponse){
   try {

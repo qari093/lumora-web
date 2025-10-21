@@ -1,6 +1,6 @@
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 const ALLOWED_OBJECTIVES = ["AWARENESS","TRAFFIC","CONVERSIONS","VISITS"] as const;
 const ALLOWED_CREATIVE = ["IMAGE","VIDEO"] as const;

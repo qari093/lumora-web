@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getClientIP, lookupGeo, labelFromGeo } from "@/src/lib/geo/ip";
+import { getClientIP, lookupGeo, labelFromGeo } from "@/lib/geo/ip";
 
 export async function GET(req: Request) {
   const ip = getClientIP(req);

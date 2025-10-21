@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { loadEcoFactors, estimateFromCounts } from "@/lib/eco";
 
 const fmt = (n:number)=> n.toLocaleString(undefined, { maximumFractionDigits: 1 });

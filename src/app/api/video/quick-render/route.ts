@@ -2,8 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { render } from "@/src/video-gen/ffmpeg-worker";
-import { writeProgress } from "@/src/video-gen/progress";
+import { render } from "@/video-gen/ffmpeg-worker";
+import { writeProgress } from "@/video-gen/progress";
 
 export async function POST(req: NextRequest) {
   try {

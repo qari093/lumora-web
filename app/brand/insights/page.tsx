@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { getLangFromRequest, t, money } from "@/lib/i18n/index";
 
 export default async function BrandInsightsPage() {

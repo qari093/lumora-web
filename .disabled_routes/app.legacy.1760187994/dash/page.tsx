@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSession } from "@/src/lib/auth";
+import { getSession } from "@/lib/auth";
 
 export default function DashHome() {
   const me = getSession();

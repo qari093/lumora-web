@@ -139,6 +139,7 @@ model Wallet {
   outgoing    WalletTransfer[] @relation("fromWallet")
   incoming    WalletTransfer[] @relation("toWallet")
   Transaction Transaction[]
+  ledger      LedgerEntry[]
 
   @@unique([ownerId, currency]) // prevent dup wallets per currency
   @@index([ownerId, currency]) // fast ensures/lookups
@@ -202,18 +203,17 @@ model CpvView {
 }
 
 model AdConversion {
-
-  id           String   @id @default(cuid())
-  campaignId   String
-  creativeId   String?
-  viewKey      String   @unique
-  userId       String?
-  eventType    String   // e.g. "CLICK", "INSTALL", "PURCHASE"
-  rewardCents  Int      @default(0)
+  id          String  @id @default(cuid())
+  campaignId  String
+  creativeId  String?
+  viewKey     String  @unique
+  userId      String?
+  eventType   String // e.g. "CLICK", "INSTALL", "PURCHASE"
+  rewardCents Int     @default(0)
   channel     String?
   shortSlug   String?
 
-  createdAt    DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@index([campaignId, eventType])
 }
@@ -221,13 +221,13 @@ model AdConversion {
 /// Ad/UX interaction stream (lightweight analytics)
 model AdEvent {
   id         String   @id @default(cuid())
-  action     String   // "view" | "hover" | "click" | "complete" | etc.
-  viewKey    String?  // ties to CpvView.idempotencyKey if available
+  action     String // "view" | "hover" | "click" | "complete" | etc.
+  viewKey    String? // ties to CpvView.idempotencyKey if available
   userId     String?
-  campaignId String?  // derived from CpvView if viewKey present
-  ms         Int?     // duration (ms) for hover/view segments
+  campaignId String? // derived from CpvView if viewKey present
+  ms         Int? // duration (ms) for hover/view segments
   mood       String?
-  metaJson   String?  // stringified JSON for extra fields
+  metaJson   String? // stringified JSON for extra fields
   createdAt  DateTime @default(now())
 
   @@index([action, createdAt])
@@ -238,7 +238,7 @@ model AdEvent {
 /// 🔒 Fraud signal log
 model FraudEvent {
   id        String   @id @default(cuid())
-  kind      String   // e.g. "RATE_LIMIT", "IP_BLOCK"
+  kind      String // e.g. "RATE_LIMIT", "IP_BLOCK"
   reason    String?
   ip        String?
   userId    String?
@@ -252,10 +252,10 @@ model FraudEvent {
 
 /// 🚫 Block a specific IP (optional expiry)
 model IpBlock {
-  ip        String   @id
+  ip        String    @id
   reason    String?
   expiresAt DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 /// ⏱️ Sliding-window counters (for simple rate limiting)
@@ -270,17 +270,17 @@ model KeyCounter {
 
 /// Daily rollups per campaign (SQLite-friendly)
 model AdMetricDaily {
-  id            String   @id @default(cuid())
-  day           DateTime // UTC midnight
-  campaignId    String?
-  views         Int      @default(0)
-  hovers        Int      @default(0)
-  clicks        Int      @default(0)
-  conversions   Int      @default(0)
-  spendCents    Int      @default(0)  // sum(CpvView.costCents)
-  rewardsCents  Int      @default(0)  // sum(AdConversion.rewardCents)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  day          DateTime // UTC midnight
+  campaignId   String?
+  views        Int      @default(0)
+  hovers       Int      @default(0)
+  clicks       Int      @default(0)
+  conversions  Int      @default(0)
+  spendCents   Int      @default(0) // sum(CpvView.costCents)
+  rewardsCents Int      @default(0) // sum(AdConversion.rewardCents)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([day])
   @@index([campaignId, day])
@@ -291,8 +291,8 @@ model EcoMetricDaily {
   id         String   @id @default(cuid())
   day        DateTime
   campaignId String?
-  co2g       Float    @default(0)   // grams CO2
-  energyWh   Float    @default(0)   // watt-hours
+  co2g       Float    @default(0) // grams CO2
+  energyWh   Float    @default(0) // watt-hours
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -307,61 +307,102 @@ enum KycStatus {
 }
 
 model KycRequest {
-  id          String     @id @default(cuid())
-  ownerId     String
-  status      KycStatus  @default(PENDING)
-  fullName    String?
-  dob         String?
-  idType      String?
-  idNumber    String?
-  consent     Boolean    @default(false)
-  adminUser   String?
-  reason      String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        String    @id @default(cuid())
+  ownerId   String
+  status    KycStatus @default(PENDING)
+  fullName  String?
+  dob       String?
+  idType    String?
+  idNumber  String?
+  consent   Boolean   @default(false)
+  adminUser String?
+  reason    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  documents   KycDocument[]
+  documents KycDocument[]
 
   @@index([ownerId, status])
   @@index([createdAt])
 }
 
 model KycDocument {
-  id          String   @id @default(cuid())
-  requestId   String
-  docType     String
-  mimeType    String
-  filePath    String
-  original    String?
-  size        Int      @default(0)
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  requestId String
+  docType   String
+  mimeType  String
+  filePath  String
+  original  String?
+  size      Int      @default(0)
+  createdAt DateTime @default(now())
 
-  request     KycRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  request KycRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
 
   @@index([requestId, docType])
 }
 
 model ShortLink {
-  id         String      @id @default(cuid())
-  slug       String      @unique
+  id         String       @id @default(cuid())
+  slug       String       @unique
   targetUrl  String
   campaignId String?
-  clicks     Int         @default(0)
-  createdAt  DateTime    @default(now())
+  clicks     Int          @default(0)
+  createdAt  DateTime     @default(now())
   hits       ChannelHit[]
 
   @@index([campaignId, createdAt])
 }
 
 model ChannelHit {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   shortLinkId String?
   channel     String
   ip          String?
   userAgent   String?
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime @default(now())
 
-  shortLink   ShortLink? @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+  shortLink ShortLink? @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
 
   @@index([channel, createdAt])
+}
+
+/// --- Ad event enum ---
+enum AdEventType {
+  impression
+  click
+}
+
+/// --- Budget & Ledger ---
+
+model LedgerEntry {
+  id         String   @id @default(cuid())
+  walletId   String
+  wallet     Wallet   @relation(fields: [walletId], references: [id])
+  deltaCents Int
+  reason     String?
+  adId       String?
+  event      String? // "impression" | "click" | "topup" | "refund"
+  createdAt  DateTime @default(now())
+
+  @@index([walletId, createdAt])
+}
+
+/// --- API request audit trail ---
+model ApiLog {
+  id         String   @id @default(cuid())
+  ts         DateTime @default(now())
+  method     String
+  path       String
+  status     Int
+  requestId  String?
+  durationMs Int
+
+  ownerId    String?
+  publisher  String?
+  ip         String?
+  ua         String?
+
+  @@index([ts])
+  @@index([requestId])
+  @@index([path, ts])
 }

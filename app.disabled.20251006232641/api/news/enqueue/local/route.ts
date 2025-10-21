@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { newsQueue } from "@/src/lib/queue";
-import { guardContent } from "@/src/lib/guardian";
-import { getClientIP, lookupGeo, labelFromGeo } from "@/src/lib/geo/ip";
+import { newsQueue } from "@/lib/queue";
+import { guardContent } from "@/lib/guardian";
+import { getClientIP, lookupGeo, labelFromGeo } from "@/lib/geo/ip";
 
 const Body = z.object({
   title: z.string().min(4),

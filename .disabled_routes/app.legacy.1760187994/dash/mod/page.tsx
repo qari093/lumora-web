@@ -1,4 +1,4 @@
-import { getSession } from "@/src/lib/auth";
+import { getSession } from "@/lib/auth";
 
 export default function ModPage() {
   const me = getSession();

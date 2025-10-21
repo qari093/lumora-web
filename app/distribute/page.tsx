@@ -1,6 +1,6 @@
 "use client";
 
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import Link from "next/link";
 /* build-safe default for channel */
 let channel = "";

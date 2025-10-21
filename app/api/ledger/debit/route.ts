@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 type DebitType = "DEBIT" | "AD_SPEND" | "RESERVE" | "TRANSFER_OUT";
 
