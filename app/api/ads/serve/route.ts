@@ -4,6 +4,7 @@ import { checkCaps } from "@/src/lib/ads/caps";
 import { parseLatLon, eligibleForRadius, getConsent } from "@/src/lib/geo/core";
 import { reqId } from "@/src/lib/reqid";
 import { ensureBudget, budgetStatus } from "@/src/lib/ads/spend";
+import { trustCheck } from "@/src/lib/trust/engine";
 
 function getIp(req: NextRequest): string {
   const xf = req.headers.get("x-forwarded-for");
@@ -17,10 +18,19 @@ export async function GET(req: NextRequest) {
   const id = reqId();
   const url = new URL(req.url);
   const ownerId = url.searchParams.get("ownerId") || "";
-
   const ip = getIp(req);
+  const ua = req.headers.get("user-agent") || "";
 
-  // Geo params (optional)
+  // Trust check: fast-fail
+  const trust = trustCheck(ip, ua);
+  if (!trust.ok) {
+    return NextResponse.json(
+      { ok:false, decision:null, reason:"FRAUD_BLOCKED", trust, requestId:id },
+      { status:200, headers:{ "x-request-id": id } }
+    );
+  }
+
+  // Geo (optional)
   const lat = url.searchParams.get("lat");
   const lon = url.searchParams.get("lon");
   const centerLat = url.searchParams.get("centerLat");
@@ -30,7 +40,6 @@ export async function GET(req: NextRequest) {
   const capKey = `${ownerId || "_"}::${ip}`;
   const verdict = checkCaps(capKey);
 
-  // Geo block
   const userPos = parseLatLon(lat, lon);
   const centerPos = parseLatLon(centerLat, centerLon);
   const radiusKm = Number.isFinite(Number(radiusStr)) ? Number(radiusStr) : 50;
@@ -48,25 +57,25 @@ export async function GET(req: NextRequest) {
     geo.eligible = r.eligible; geo.distanceKm = r.distanceKm; geo.usedCenter = centerPos;
   }
 
-  // Budget gating only when owner specified
+  // Budget gate
   let spendGate: any = null;
   if (ownerId) {
     const gate = ensureBudget(ownerId);
     if (!gate.ok) {
       const bs = budgetStatus(ownerId);
       spendGate = { reason: gate.reason, balance: gate.balance, paused: bs.paused };
-      return NextResponse.json({ ok:false, decision:null, reason: gate.reason, caps: verdict.meta, geo, spend: spendGate, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+      return NextResponse.json({ ok:false, decision:null, reason: gate.reason, caps: verdict.meta, geo, spend: spendGate, trust, requestId:id }, { status:200, headers:{ "x-request-id": id } });
     }
   }
 
   if (!verdict.allowed) {
-    const body = { ok:false as const, decision:null, reason: verdict.reason, retryAfterMs: verdict.retryAfterMs ?? 0, caps: verdict.meta, geo, spend: spendGate, requestId:id };
+    const body = { ok:false as const, decision:null, reason: verdict.reason, retryAfterMs: verdict.retryAfterMs ?? 0, caps: verdict.meta, geo, spend: spendGate, trust, requestId:id };
     return NextResponse.json(body, { status:200, headers:{ "x-request-id": id } });
   }
 
   const creative = pickCreative(ownerId || null);
   if (!creative) {
-    const body = { ok:true, decision:null, reason:"NO_CREATIVE" as const, caps: verdict.meta, geo, spend: spendGate, requestId:id };
+    const body = { ok:true, decision:null, reason:"NO_CREATIVE" as const, caps: verdict.meta, geo, spend: spendGate, trust, requestId:id };
     return NextResponse.json(body, { status:200, headers:{ "x-request-id": id } });
   }
 
@@ -79,7 +88,7 @@ export async function GET(req: NextRequest) {
     }
   };
 
-  return NextResponse.json({ ok:true, decision, caps: verdict.meta, geo, spend: spendGate, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+  return NextResponse.json({ ok:true, decision, caps: verdict.meta, geo, spend: spendGate, trust, requestId:id }, { status:200, headers:{ "x-request-id": id } });
 }
 
 export const dynamic = "force-dynamic";
