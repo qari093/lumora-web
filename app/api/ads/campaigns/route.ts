@@ -1,6 +1,6 @@
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 function toInt(n: any, def = 0) {
   const x = typeof n === "string" ? n.trim() : n;
