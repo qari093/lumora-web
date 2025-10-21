@@ -43,6 +43,12 @@ export function metricsSnapshot(now = Date.now()) {
   return { keys: store.size, imps, clicks };
 }
 
+/** NEW: dump all keys for aggregation/reporting (dev-use only). */
+export function dumpAll(now = Date.now()): Array<{ key: string; rec: HitRecord }> {
+  prune(now);
+  return Array.from(store.entries()).map(([key, rec]) => ({ key, rec }));
+}
+
 function prune(now = Date.now()) {
   for (const [k, v] of store.entries()) {
     if (v.expAt <= now) store.delete(k);
