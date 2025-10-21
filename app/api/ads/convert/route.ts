@@ -1,45 +1,88 @@
-import { NextResponse, NextRequest } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
+import { prisma } from "../../../../src/lib/prisma";
+import { isOwnerAllowed } from "../../../../src/lib/owners";
+import { takeToken, clientIp } from "../../../../src/lib/ratelimit";
+import { getPublisherHostFrom, isPublisherAllowed } from "../../../../src/lib/publishers";
 
-export async function POST(req: NextRequest) {
+type ConvertPayload = {
+  adId: string;
+  ownerId: string;
+  valueCents?: number;             // optional attributed value
+  orderId?: string;                // optional external reference
+  meta?: Record<string, any>;      // optional extra metadata
+};
+
+export async function POST(req: Request) {
+    // publisher_guard_applied
+  {
+    const pub = getPublisherHostFrom(req);
+    // Only enforce if publisher is present; local testing (no Referer/pub) continues to work.
+    if (pub && !isPublisherAllowed(pub)) {
+      return NextResponse.json({ ok:false, error:"PUBLISHER_FORBIDDEN", publisher: pub }, { status: 403 });
+    }
+  }
+// rate_limit_guard_applied
+  {
+    const ip = clientIp(req);
+    const k = "convert::" + ip;
+    const rl = takeToken(k, 15, 60000);
+    if (!rl.ok) {
+      return NextResponse.json({ ok:false, error:"RATE_LIMIT", waitSec: rl.waitSec }, { status: 429 });
+    }
+  }
   try {
-    const body = await req.json().catch(() => ({}));
-    const { viewKey, userId, eventType, rewardCents = 0 } = body || {};
-    let { channel, shortSlug } = body || {};
-    if (!viewKey || !eventType) return NextResponse.json({ ok:false, error:"INVALID_INPUT" }, { status:400 });
+    const body = (await req.json()) as Partial<ConvertPayload>;
+    const adId = String(body?.adId || "");
+    const ownerId = String(body?.ownerId || "");
+  // isOwnerAllowed_guard_applied
+  if (!isOwnerAllowed(ownerId)) {
+    return NextResponse.json({ ok: false, error: "OWNER_FORBIDDEN" }, { status: 403 });
+  }
 
-    const c = req.cookies;
-    if (!channel)   channel   = c.get("lum_ch")?.value || null;
-    if (!shortSlug) shortSlug = c.get("lum_slug")?.value || null;
+    const valueCents = body?.valueCents ?? null;
+    const orderId = body?.orderId ?? null;
+    const meta = body?.meta ?? {};
 
-    const view = await prisma.cpvView.findUnique({ where: { idempotencyKey: String(viewKey) } });
-    if (!view) return NextResponse.json({ ok:false, error:"VIEW_NOT_FOUND" }, { status:404 });
-
-    const existing = await prisma.adConversion.findUnique({ where: { viewKey: String(viewKey) } } as any);
-    if (existing) return NextResponse.json({ ok:true, idempotent:true, alreadyConverted:true });
-
-    const conv = await prisma.adConversion.create({
-      data: {
-        campaignId: view.campaignId,
-        creativeId: (view as any).creativeId ?? null,
-        viewKey: String(viewKey),
-        userId: userId ? String(userId) : null,
-        eventType: String(eventType),
-        rewardCents: Number(rewardCents) || 0,
-        channel: channel ? String(channel) : null,
-        shortSlug: shortSlug ? String(shortSlug) : null,
-      } as any,
-    });
-
-    if (userId && (Number(rewardCents) || 0) > 0) {
-      const wallet = await prisma.wallet.findFirst({ where: { ownerId: String(userId), currency: "EUR" } });
-      if (wallet) {
-        await prisma.wallet.update({ where: { id: wallet.id }, data: { balanceCents: { increment: Number(rewardCents) } } });
-      }
+    if (!adId || !ownerId) {
+      return NextResponse.json(
+        { ok: false, error: "adId and ownerId are required" },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({ ok:true, recorded:true, conversion: conv });
-  } catch (err:any) {
-    return NextResponse.json({ ok:false, error:String(err?.message || err) }, { status:500 });
+    const saved = await prisma.adEvent.create({
+      data: {
+        viewKey: adId,
+        campaignId: ownerId,
+        action: "conversion" as any,
+        metaJson: JSON.stringify({
+          ...meta,
+          valueCents,
+          orderId,
+          source: "ads.convert",
+        }),
+      },
+      select: { id: true, viewKey: true, campaignId: true, action: true, createdAt: true },
+    });
+
+    return NextResponse.json(
+      {
+        ok: true,
+        saved: {
+          id: saved.id,
+          adId: saved.viewKey,
+          ownerId: saved.campaignId,
+          event: saved.action,
+          createdAt: saved.createdAt,
+          valueCents,
+          orderId,
+        },
+      },
+      { status: 200 }
+    );
+  } catch (e: any) {
+    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
   }
 }
+
+export const runtime = "nodejs";
