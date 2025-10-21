@@ -11,6 +11,7 @@ export async function GET(req: NextRequest){
   const u = new URL(req.url);
   const cid = u.searchParams.get("cid") || "";
   const rid = u.searchParams.get("rid") || "";
+  const cmp = u.searchParams.get("cmp") || "";
   const userAgent = req.headers.get("user-agent") || "";
 
   if (!cid || !rid) {
@@ -21,11 +22,10 @@ export async function GET(req: NextRequest){
   let spend:any = null;
   const creative = getCreativeById(cid);
   if (creative && !deduped) {
-    spend = { kind:"imp", ...(charge(creative.ownerId, "imp", id)) };
+    spend = { kind:"imp", ...(charge(creative.ownerId, "imp", id, cmp || undefined, cid)) };
   }
 
   const snap = metricsSnapshot();
   return NextResponse.json({ ok:true, type:"imp", deduped, record: rec, spend, totals: snap, requestId:id }, { status:200, headers:{ "x-request-id": id } });
 }
-
 export const dynamic = "force-dynamic";
