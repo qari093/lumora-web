@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Guard: disable middleware cleanly if required envs are missing
-const REQUIRED_ENVS = ["NEXTAUTH_SECRET","JWT_SECRET","API_BASE_URL"].filter(Boolean);
+const REQUIRED_ENVS = ["NEXTAUTH_SECRET","JWT_SECRET","API_BASE_URL"];
 const missing = REQUIRED_ENVS.filter(k => !process.env[k]);
 
 export function middleware(_req: Request) {
@@ -10,7 +10,7 @@ export function middleware(_req: Request) {
       // Don’t spam in prod; show once in dev
       console.warn("[middleware] disabled — missing envs:", missing.join(", "));
     }
-    // No-op to avoid boot crashes / infinite redirects
+    // Allow pages to load in dev mode when envs are missing
     return NextResponse.next();
   }
 
