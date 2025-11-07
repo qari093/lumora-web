@@ -7,7 +7,7 @@ export default defineConfig({
     setupFiles: ["tests/setup/vitest.setup.ts"],
     coverage: {
       provider: "v8",
-      reporter: ["text", "lcov"],
+      reporter: ["text", "lcov", "html"],
       reportsDirectory: "./coverage",
       include: ["app/_state/**/*.ts"],
       exclude: [
@@ -21,7 +21,13 @@ export default defineConfig({
         "app/**/layout.tsx",
         "app/**/page.tsx",
         "app/**/*.tsx"
-      ]
+      ],
+      thresholds: {
+        statements: 80,
+        branches: 60,
+        functions: 60,
+        lines: 80
+      }
     }
   }
 });
