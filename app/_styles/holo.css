@@ -1,0 +1,341 @@
+/* --- Lumora Holo Emoji: Ultra Neon (Full Enhanced Edition) --- */
+
+/* Global tuning */
+:root{
+  --holo-bright: 1.20;   /* internal brightness boost */
+  --holo-sat: 160%;      /* global saturation */
+  --holo-aura: .95;      /* outer aura opacity */
+  --holo-speed: 1;       /* animation speed divisor */
+  --holo-depth: 1.00;    /* inner-shadow contrast */
+  --tiltX: 0deg;
+  --tiltY: 0deg;
+  --intensity: 1;        /* 0.5 – 1.5 */
+  --ico-accent: #8af;    /* per-emoji accent; can be overridden inline */
+}
+
+/* Grid layout */
+.emoji-wrap{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
+  gap:22px;
+  max-width:1100px;
+  margin:32px auto 80px;
+  padding:14px;
+}
+.emoji-grid{
+  perspective:900px;
+  transform-style:preserve-3d;
+}
+.emoji-tile{
+  position:relative;
+  display:grid;
+  gap:8px;
+  justify-items:center;
+  isolation:isolate;
+  border-radius:16px;
+}
+
+/* Core emoji surface */
+.emoji,.holo-emoji{
+  position:relative;
+  width:84px;height:84px;border-radius:22px;
+  display:grid;place-items:center;
+  background:
+    radial-gradient(120% 120% at 20% 15%, rgba(255,255,255,.95), rgba(255,255,255,.65) 28%, rgba(255,255,255,.15) 55%, rgba(255,255,255,0) 60%),
+    conic-gradient(from 0deg,#ff7adf 0deg,#7ad3ff 90deg,#7affc5 180deg,#ffd66b 270deg,#ff7adf 360deg);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.18),
+    0 2px 0 rgba(255,255,255,.35) inset,
+    0 0 0 1px rgba(255,255,255,.35) inset,
+    0 0 24px rgba(180,220,255,.25);
+  filter:saturate(calc(var(--holo-sat)*var(--intensity))) brightness(calc(var(--holo-bright)*var(--intensity)));
+  transform:rotateX(var(--tiltY)) rotateY(var(--tiltX));
+  transition:transform .25s ease,filter .25s ease,box-shadow .25s ease;
+  overflow:hidden;
+  isolation:isolate;
+  will-change:transform,filter;
+}
+
+/* Inner plate where SVG sits */
+.emoji>svg,.holo-emoji>svg{
+  width:64px;height:64px;border-radius:18px;
+  background:radial-gradient(100% 100% at 50% 40%,rgba(255,255,255,.55),rgba(255,255,255,.18));
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px rgba(0,0,0,.12) inset;
+  padding:6px;
+  display:block;
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.95))
+    drop-shadow(0 0 10px color-mix(in oklab,var(--ico-accent) 55%,transparent))
+    drop-shadow(0 0 22px color-mix(in oklab,var(--ico-accent) 35%,transparent))
+    drop-shadow(0 0 42px color-mix(in oklab,var(--ico-accent) 25%,transparent));
+  transform:translateZ(0);
+}
+
+/* Gloss sweep highlight */
+.emoji::before,.holo-emoji::before{
+  content:"";
+  position:absolute;inset:-40% -60% auto -60%;
+  height:200%;width:220%;
+  background:linear-gradient(15deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,.1) 60%,rgba(255,255,255,0) 75%);
+  transform:translateX(-60%) rotate(15deg);
+  mix-blend-mode:screen;opacity:.85;pointer-events:none;
+  animation:glossSweep calc(3.4s/var(--holo-speed)) ease-in-out infinite;
+}
+
+/* Rainbow aura glow */
+.emoji::after,.holo-emoji::after{
+  content:"";
+  position:absolute;inset:-16px;border-radius:inherit;pointer-events:none;
+  background:conic-gradient(from 0deg,
+    rgba(255,0,180,.35),rgba(0,180,255,.35),rgba(0,255,160,.35),
+    rgba(255,180,0,.32),rgba(255,0,180,.35));
+  filter:blur(18px) saturate(140%);
+  mix-blend-mode:screen;opacity:var(--holo-aura);
+  animation:auraFlow calc(7s/var(--holo-speed)) linear infinite;
+}
+
+/* Hover pop */
+.emoji:hover,.emoji:focus-visible,
+.holo-emoji:hover,.holo-emoji:focus-visible{
+  transform:translateY(-3px) scale(1.03) rotateX(var(--tiltY)) rotateY(var(--tiltX));
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.22),
+    0 0 0 1px rgba(255,255,255,.45) inset,
+    0 0 44px rgba(160,210,255,.35);
+}
+
+/* Labels */
+.emoji-label{
+  font:600 12px/1.2 ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  opacity:.72;
+  text-align:center;
+}
+
+/* Actions */
+.act-breathe .emoji,.act-breathe .holo-emoji{animation:breathe calc(3s/var(--holo-speed)) ease-in-out infinite;}
+.act-pulse   .emoji,.act-pulse   .holo-emoji{animation:pulse   calc(1.5s/var(--holo-speed)) ease-in-out infinite;}
+.act-rotate  .emoji,.act-rotate  .holo-emoji{animation:rotate  calc(7s/var(--holo-speed)) linear infinite;}
+.act-wag     .emoji svg{animation:wag calc(1.1s/var(--holo-speed)) ease-in-out infinite;transform-origin:50% 75%;}
+.act-rainbow .emoji svg{animation:hueSpin 6s linear infinite;}
+.act-flare   .emoji::after{animation:flare 2.4s ease-in-out infinite;}
+
+/* Light flash overlay */
+.light-flash{
+  position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.98),rgba(255,255,255,.85) 40%,rgba(255,255,255,0) 70%);
+  opacity:0;mix-blend-mode:screen;
+}
+.light-flash.on{animation:screenFlash 1.15s ease-out forwards;}
+
+/* HoloCompat: emoji-tile base auras */
+.emoji-tile::before{
+  content:"";
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    radial-gradient(120% 100% at 50% 20%,rgba(255,255,255,.22),transparent 60%),
+    conic-gradient(from 0deg,
+      rgba(255,0,180,.18),rgba(0,180,255,.18),rgba(0,255,160,.18),
+      rgba(255,180,0,.18),rgba(255,0,180,.18));
+  mix-blend-mode:screen;
+  filter:blur(10px) saturate(var(--holo-sat)) brightness(var(--holo-bright));
+  opacity:var(--holo-aura);
+  transform:translateZ(0);
+}
+.emoji-tile::after{
+  content:"";
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,transparent,rgba(255,255,255,.55) 50%,transparent);
+  transform:translateX(-60%) rotate(15deg);
+  animation:glossSweep 2.6s ease-in-out infinite;
+  opacity:.35;
+}
+.emoji-tile svg{
+  display:block;
+  filter:
+    drop-shadow(0 1px 1px rgba(0,0,0,.25))
+    drop-shadow(0 0 10px color-mix(in oklab,var(--ico-accent,#8af) 45%,transparent));
+  transform:translateZ(0);
+}
+.act-breathe .emoji-tile svg{animation:breathe 3s ease-in-out infinite;}
+.act-pulse   .emoji-tile::before{animation:pulseAura 2s ease-in-out infinite;}
+.act-rainbow .emoji-tile::before{animation:hue 6s linear infinite;}
+.act-wobble  .emoji-tile svg{animation:wob 2s ease-in-out infinite;}
+.act-float   .emoji-tile svg{animation:flo 3.6s ease-in-out infinite;}
+
+/* Chain-reaction pulse on click */
+.emoji-tile.chain .emoji{animation:chainPulse .55s ease-in-out;}
+@keyframes chainPulse{
+  0%,100%{transform:scale(1) rotateX(var(--tiltY)) rotateY(var(--tiltX));}
+  50%{transform:scale(1.12) rotateX(var(--tiltY)) rotateY(var(--tiltX));}
+}
+
+/* Animations */
+@keyframes glossSweep{0%,100%{transform:translateX(-60%) rotate(15deg)}50%{transform:translateX(60%) rotate(15deg)}}
+@keyframes auraFlow{to{filter:blur(18px) hue-rotate(360deg)}}
+@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.03)}}
+@keyframes pulse{0%,100%{filter:saturate(125%) brightness(1.03)}50%{filter:saturate(175%) brightness(1.22)}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes wag{0%,100%{transform:rotate(0deg)}25%{transform:rotate(6deg)}75%{transform:rotate(-6deg)}}
+@keyframes hueSpin{to{filter:hue-rotate(360deg)}}
+@keyframes flare{0%{opacity:.3;filter:blur(16px)}50%{opacity:.6;filter:blur(22px)}100%{opacity:.3;filter:blur(16px)}}
+@keyframes screenFlash{
+  0%{opacity:0;backdrop-filter:blur(0px) brightness(1.0)}
+  20%{opacity:.98;backdrop-filter:blur(3px) brightness(1.12)}
+  60%{opacity:.65;backdrop-filter:blur(2px) brightness(1.06)}
+  100%{opacity:0;backdrop-filter:blur(0px) brightness(1.0)}
+}
+@keyframes pulseAura{0%,100%{opacity:calc(var(--holo-aura,.85)*.7)}50%{opacity:var(--holo-aura,.85)}}
+@keyframes hue{to{filter:blur(10px) hue-rotate(360deg) saturate(var(--holo-sat)) brightness(var(--holo-bright))}}
+@keyframes wob{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-4deg)}}
+@keyframes flo{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* Action pill for intensity UI */
+.action-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.35rem .7rem;border-radius:999px;
+  background:linear-gradient(45deg,#00f3ff55,#ff00c855);
+  border:1px solid #ffffff22;backdrop-filter:blur(6px);
+  font:600 12px/1 ui-sans-serif,system-ui;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion:reduce){
+  .emoji,.holo-emoji,.emoji::before,.emoji::after,
+  .emoji-tile::before,.emoji-tile::after,.emoji-tile svg{
+    animation:none !important;transition:none !important;
+  }
+}
+
+/* ===== Missing anims to match emotion-model ===== */
+
+/* gentle float (used by sleep/calm) */
+[data-anim="float"] {
+  animation: em_float 2.6s ease-in-out infinite;
+  display: inline-block;
+}
+@keyframes em_float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* prism sweep (used by calm/focus) */
+[data-anim="prism"] {
+  position: relative;
+  display: inline-block;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #fff, #9ff, #f9f, #fff);
+  background-size: 300% 100%;
+  animation: em_prism 2.8s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.35));
+}
+@keyframes em_prism {
+  0%   { background-position: 0% 50%;   }
+  100% { background-position: 100% 50%; }
+}
+
+/* zap pulse (used by angry/surprise) */
+[data-anim="zap"] {
+  animation: em_zap 0.9s cubic-bezier(.3,.7,.2,1) infinite;
+  display: inline-block;
+}
+@keyframes em_zap {
+  0%   { transform: scale(1) rotate(0deg);    filter: drop-shadow(0 0 0 rgba(255,255,0,0)); }
+  20%  { transform: scale(1.15) rotate(-6deg); filter: drop-shadow(0 0 12px rgba(255,255,0,.65)); }
+  40%  { transform: scale(0.97) rotate(5deg); }
+  60%  { transform: scale(1.07) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg);    filter: drop-shadow(0 0 0 rgba(255,255,0,0)); }
+}
+
+/* ────────────────────────────────
+   HOLO ENHANCE PACK — Mood Glow v1
+   Adds dynamic halo + glow synced with data-anim (works with .glyph)
+─────────────────────────────────*/
+
+.glyph[data-anim] {
+  position: relative;
+  z-index: 1;
+}
+
+/* Shared halo layer under the glyph */
+.glyph[data-anim]::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.12) 0%, transparent 60%);
+  filter: blur(6px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  animation: haloPulse 2.4s ease-in-out infinite;
+}
+
+/* Dynamic color sync by animation type */
+.glyph[data-anim="beat"]::before  { background: radial-gradient(circle, rgba(255,0,90,.35),  transparent 60%); }
+.glyph[data-anim="bounce"]::before{ background: radial-gradient(circle, rgba(255,255,0,.35),  transparent 60%); }
+.glyph[data-anim="tears"]::before { background: radial-gradient(circle, rgba(120,180,255,.40),transparent 60%); }
+.glyph[data-anim="shake"]::before { background: radial-gradient(circle, rgba(255,120,0,.35),  transparent 60%); }
+.glyph[data-anim="shine"]::before { background: radial-gradient(circle, rgba(255,255,255,.40),transparent 60%); }
+.glyph[data-anim="float"]::before { background: radial-gradient(circle, rgba(150,255,255,.30),transparent 60%); }
+.glyph[data-anim="prism"]::before { background: radial-gradient(circle, rgba(255,150,255,.40),transparent 60%); }
+.glyph[data-anim="zap"]::before   { background: radial-gradient(circle, rgba(255,255,0,.50),  transparent 60%); }
+
+/* Subtle pulse */
+@keyframes haloPulse {
+  0%,100% { opacity: 0.5; transform: scale(1); }
+  50%     { opacity: 0.9; transform: scale(1.15); }
+}
+
+/* Extra micro-feedback on hover/focus */
+.emoji:hover .glyph[data-anim]::before,
+.holo-emoji:hover .glyph[data-anim]::before {
+  filter: blur(8px);
+  opacity: 0.9;
+}
+/* app/_styles/holo.css — append at the END (emoji font fallback) */
+.glyph {
+  font-family:
+    system-ui,
+    -apple-system,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    "EmojiOne Color",
+    "Twemoji Mozilla",
+    "Segoe UI Symbol",
+    sans-serif;
+  font-variation-settings: normal;
+  font-feature-settings: "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* End of Enhanced Holo CSS */
+/* HUD-off: hide floating debug chips and badges */
+body[data-hud="off"] [style*="position:fixed"] { display: none !important; }
+
+/* ──────────────────────────────────────────────
+   Celebration Summary Panel — Holographic Polish
+   ────────────────────────────────────────────── */
+.summary-panel {
+  backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 0 24px rgba(180,120,255,0.2);
+  transition: all 0.25s ease;
+}
+.summary-panel:hover {
+  box-shadow: 0 0 40px rgba(180,120,255,0.35);
+  transform: translateY(-2px);
+}
+.summary-panel h2 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--neon-pink, #ff7bff);
+}
+.summary-panel p {
+  margin: 4px 0;
+  font-size: 0.92rem;
+  opacity: 0.9;
+}

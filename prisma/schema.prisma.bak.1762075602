@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")  // dev: file:./prisma/dev.db
+}
+
+model Account {
+  id           String               @id              // user id (text in SQLite)
+  balance      Int                  @default(0)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  transactions CreditTransaction[]
+}
+
+model CreditTransaction {
+  id                  String   @id @default(cuid())
+  accountId           String
+  stripeSessionId     String   @unique
+  stripePaymentIntent String?
+  amount              Int
+  currency            String   // e.g. "usd"
+  credits             Int
+  createdAt           DateTime @default(now())
+  account             Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+}
+
+// --- EMML baseline weights ---
+model EmotionBaselineWeight {
+  id        String   @id
+  emotion   String   @unique
+  weight    Float    @default(1.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("EmotionBaselineWeight")
+}
+
+/// Emotion & Micro-Market ingestion log
+model EmmlEvent {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  userId     String?  
+  source     String?    // "api-key" | "user" | etc.
+  type       String   
+  emotion    String?  
+  intensity  Float?
+  meta       Json?
+  @@index([createdAt])
+  @@index([type, emotion])
+}
+
+/* EMML: Enums */
+enum EmotionKind {
+  joy
+  calm
+  focus
+  love
+  stress
+  anxious
+  bored
+  excited
+  confident
+  tired
+  neutral
+}
+
+/* EMML: Core Models */
+model EmotionEvent {
+  id        String      @id @default(cuid())
+  kind      String
+  emotion   EmotionKind?
+  intensity Float?
+  userId    String?
+  source    String?
+  meta      Json?
+  createdAt DateTime    @default(now())
+  @@index([createdAt])
+  @@index([emotion])
+}
+
+model EmotionIndexDaily {
+  id           String      @id @default(cuid())
+  day          DateTime
+  emotion      EmotionKind
+  ei           Float
+  count        Int         @default(0)
+  avgIntensity Float       @default(0)
+  @@unique([day, emotion])
+  @@index([emotion, day])
+}
+
+model EmotionMarketTick {
+  id            String      @id @default(cuid())
+  ts            DateTime    @default(now())
+  emotion       EmotionKind?
+  ei            Float
+  globalEi      Float?
+  zenMultiplier Float?
+  @@index([ts])
+}
+
+model ZenOracle {
+  id            String   @id @default(cuid())
+  ts            DateTime @default(now())
+  zenMultiplier Float
+  note          String?
+}
+
+model ZenBurn {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model ZenReissue {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model EmotionStake {
+  id          String      @id @default(cuid())
+  userId      String
+  emotion     EmotionKind
+  amount      Float       @default(0)
+  windowStart DateTime
+  windowEnd   DateTime
+  status      String      @default("open")
+  createdAt   DateTime    @default(now())
+  @@index([userId, status])
+  @@index([emotion, windowStart, windowEnd])
+}
+
+model EmotionDividend {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  userId String
+  amount Float
+  reason String?
+}
+

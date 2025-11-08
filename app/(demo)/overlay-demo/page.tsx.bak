@@ -1,0 +1,25 @@
+// app/(demo)/overlay-demo/page.tsx
+import HomeOverlay from "@/components/home-overlay";
+
+export const dynamic = "force-dynamic";
+
+export default function OverlayDemoPage() {
+  return (
+    <main style={{ padding: 20 }}>
+      <h1>Lumora Overlay Demo</h1>
+      <p>Scroll down or tap the Home orb to open the overlay.</p>
+      <div style={{height:"140vh",marginTop:32,background:"linear-gradient(180deg,#dfe7ff,#fff)"}}>
+        <p style={{padding:"2rem"}}>Background content for blur sampling…</p>
+      </div>
+      <HomeOverlay />
+    </main>
+  );
+}
+"TSX"
+echo "✓ wrote app/(demo)/overlay-demo/page.tsx"
+
+# 2) Ensure HomeOverlay is a client component
+if [ -f components/home-overlay.tsx ]; then
+  if ! head -n 1 components/home-overlay.tsx | grep -q use client; then
+    tmp="/var/folders/69/mj6scl7152jdfs03s4fvsqxc0000gn/T/tmp.4KlodRRnpB"
+    printf use client

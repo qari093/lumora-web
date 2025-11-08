@@ -1,0 +1,60 @@
+npm warn config optional Use `--omit=optional` to exclude optional dependencies, or
+npm warn config `--include=optional` to include them.
+npm warn config
+npm warn config       Default value does install optional deps unless otherwise omitted.
+
+> lumora-web@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.2.0
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.2.101:3002
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 3.3s
+ ✓ Compiled /middleware in 333ms (101 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 2.4s (667 modules)
+ HEAD / 200 in 2900ms
+ ○ Compiling /api/wallet/credit ...
+ ✓ Compiled /api/wallet/credit in 1460ms (685 modules)
+ POST /api/wallet/credit 200 in 1658ms
+ ✓ Compiled /api/wallet/debit in 263ms (689 modules)
+[wallet/debit] error: Error: Insufficient funds
+    at addLedgerEntry (lib/wallet.ts:54:42)
+    at async POST (app/api/wallet/debit/route.ts:22:18)
+  52 |       delta = -Math.abs(euros);       // subtract
+  53 |       // Optional: guard against going negative
+> 54 |       if (wallet.euros + delta < 0) throw new Error('Insufficient funds');
+     |                                          ^
+  55 |       break;
+  56 |     default:
+  57 |       throw new Error(`Unknown kind: ${kind}`);
+ POST /api/wallet/debit 500 in 469ms
+[wallet/debit] error: Error: Insufficient funds
+    at addLedgerEntry (lib/wallet.ts:54:42)
+    at async POST (app/api/wallet/debit/route.ts:22:18)
+  52 |       delta = -Math.abs(euros);       // subtract
+  53 |       // Optional: guard against going negative
+> 54 |       if (wallet.euros + delta < 0) throw new Error('Insufficient funds');
+     |                                          ^
+  55 |       break;
+  56 |     default:
+  57 |       throw new Error(`Unknown kind: ${kind}`);
+ POST /api/wallet/debit 500 in 78ms
+[wallet/debit] error: Error: Insufficient funds
+    at addLedgerEntry (lib/wallet.ts:54:42)
+    at async POST (app/api/wallet/debit/route.ts:22:18)
+  52 |       delta = -Math.abs(euros);       // subtract
+  53 |       // Optional: guard against going negative
+> 54 |       if (wallet.euros + delta < 0) throw new Error('Insufficient funds');
+     |                                          ^
+  55 |       break;
+  56 |     default:
+  57 |       throw new Error(`Unknown kind: ${kind}`);
+ POST /api/wallet/debit 500 in 77ms
+ ✓ Compiled /api/wallet/balance in 310ms (691 modules)
+ GET /api/wallet/balance?ownerId=OWNER_A 200 in 362ms
+ ✓ Compiled in 86ms
+[?25h

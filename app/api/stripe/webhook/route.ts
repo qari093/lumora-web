@@ -1,139 +1,82 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import Stripe from "stripe";
+import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-type StripeLikeEvent = { id: string; type: string; data?: { object?: any } };
-
-function parseEvent(bodyText: string): StripeLikeEvent {
-  try { return JSON.parse(bodyText); } catch { throw new Error("Invalid JSON payload"); }
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "content-type, stripe-signature",
-    },
-  });
-}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+  apiVersion: "2024-12-18.acacia",
+});
 
 export async function POST(req: Request) {
+  const whSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!whSecret) {
+    console.error("[stripe:webhook] Missing STRIPE_WEBHOOK_SECRET");
+    return NextResponse.json({ ok: false, error: "server misconfigured" }, { status: 500 });
+  }
+
+  const sig = req.headers.get("stripe-signature") || "";
+  const raw = Buffer.from(await req.arrayBuffer());
+
+  let event: Stripe.Event;
   try {
-    const raw = await req.text();
-    const evt = parseEvent(raw);
-    const eventId = evt.id;
-    const eventType = evt.type || "unknown";
-    const obj = evt.data?.object ?? {};
-    const md = obj.metadata ?? {};
-    const ownerId = md.ownerId || md.userId || md.accountId || undefined;
-    const amountCents = Number(
-      md.amountCents ?? md.amount_cents ?? obj.amount_total ?? obj.amount ?? 0
-    );
-    if (!eventId)
-      return NextResponse.json({ ok: false, error: "event id missing" }, { status: 400 });
+    event = stripe.webhooks.constructEvent(raw, sig, whSecret);
+  } catch (err: any) {
+    console.error("[stripe:webhook] signature verification failed:", err?.message || err);
+    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+  }
 
-    const already = await prisma.walletLedger.findFirst({
-      where: { refType: "STRIPE", refId: eventId },
-      select: { id: true, walletId: true },
-    });
-    if (already)
-      return NextResponse.json({
-        ok: true,
-        idempotent: true,
-        credited: false,
-        eventId,
-        eventType,
-        ledgerId: already.id,
-        walletId: already.walletId,
-      });
+  try {
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
 
-    const shouldCredit =
-      ["checkout.session.completed", "payment_intent.succeeded"].includes(eventType) &&
-      ownerId &&
-      amountCents > 0;
+      const userId  = (session.metadata?.userId ?? "demo-user-123");
+      const credits = Number(session.metadata?.credits ?? 0);
+      const amount  = Number(session.amount_total ?? 0); // in cents
+      const currency = (session.currency ?? "usd").toLowerCase();
+      const sessionId = session.id;
+      const paymentIntent = typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : session.payment_intent?.id;
 
-    try {
-      await prisma.stripeEvent.create({
-        data: { type: eventType, eventId, payloadJson: raw } as any,
-      });
-    } catch {}
+      // idempotent write: transaction sessionId is unique
+      await prisma.$transaction(async (tx) => {
+        // ensure account exists
+        await tx.account.upsert({
+          where: { id: userId },
+          update: {},
+          create: { id: userId },
+        });
 
-    if (!shouldCredit)
-      return NextResponse.json({
-        ok: true,
-        credited: false,
-        eventId,
-        eventType,
-        reason:
-          !ownerId
-            ? "ownerId missing in metadata"
-            : amountCents <= 0
-            ? "amountCents not provided/<=0"
-            : "event type not credit-eligible",
-      });
-
-    const wallet =
-      (await prisma.wallet.findFirst({ where: { ownerId, currency: "EUR" } })) ||
-      (await prisma.wallet.create({
-        data: { ownerId, currency: "EUR", balanceCents: 0 },
-      }));
-
-    try {
-      const result = await prisma.$transaction(async (tx) => {
-        const nextBalance = wallet.balanceCents + amountCents;
-        const row = await tx.walletLedger.create({
+        // create transaction (will throw if session already processed)
+        await tx.creditTransaction.create({
           data: {
-            walletId: wallet.id,
-            type: "CREDIT",
-            amountCents,
-            refType: "STRIPE",
-            refId: eventId,
-            note: "Stripe webhook",
+            accountId: userId,
+            stripeSessionId: sessionId,
+            stripePaymentIntent: paymentIntent ?? null,
+            amount,
+            currency,
+            credits,
           },
         });
-        const updated = await tx.wallet.update({
-          where: { id: wallet.id },
-          data: { balanceCents: nextBalance },
+
+        // increment balance
+        await tx.account.update({
+          where: { id: userId },
+          data: { balance: { increment: credits } },
         });
-        return { row, balanceAfter: updated.balanceCents };
       });
-      return NextResponse.json({
-        ok: true,
-        credited: true,
-        walletId: wallet.id,
-        ledgerId: result.row.id,
-        amountCents,
-        balanceAfterCents: result.balanceAfter,
-        refType: "STRIPE",
-        refId: eventId,
-        eventType,
-      });
-    } catch (e: any) {
-      const existing = await prisma.walletLedger.findFirst({
-        where: { walletId: wallet.id, refType: "STRIPE", refId: eventId },
-        select: { id: true },
-      });
-      if (existing)
-        return NextResponse.json({
-          ok: true,
-          idempotent: true,
-          credited: false,
-          walletId: wallet.id,
-          ledgerId: existing.id,
-          amountCents,
-          refType: "STRIPE",
-          refId: eventId,
-          eventType,
-        });
-      throw e;
+
+      console.log(`[stripe:webhook] credited ${credits} to ${userId} (session ${sessionId})`);
     }
+
+    return NextResponse.json({ received: true }, { status: 200 });
   } catch (err: any) {
-    return NextResponse.json(
-      { ok: false, error: String(err?.message || err) },
-      { status: 500 }
-    );
+    console.error("[stripe:webhook] handler error:", err?.message || err);
+    return NextResponse.json({ ok: false, error: String(err?.message || err) }, { status: 500 });
   }
 }
+
+// Stripe needs the raw body, so disable Nexts body parsing for this route
+export const config = { api: { bodyParser: false } } as any;

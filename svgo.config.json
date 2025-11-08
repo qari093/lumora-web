@@ -1,0 +1,53 @@
+{
+  "multipass": true,
+  "plugins": [
+    {
+      "name": "cleanupAttrs"
+    },
+    {
+      "name": "removeDoctype"
+    },
+    {
+      "name": "removeXMLProcInst"
+    },
+    {
+      "name": "removeComments"
+    },
+    {
+      "name": "removeMetadata"
+    },
+    {
+      "name": "removeEditorsNSData"
+    },
+    {
+      "name": "removeEmptyAttrs"
+    },
+    {
+      "name": "removeHiddenElems"
+    },
+    {
+      "name": "removeEmptyText"
+    },
+    {
+      "name": "removeEmptyContainers"
+    },
+    {
+      "name": "convertShapeToPath"
+    },
+    {
+      "name": "convertTransform"
+    },
+    {
+      "name": "mergePaths"
+    },
+    {
+      "name": "sortAttrs"
+    },
+    {
+      "name": "removeDimensions",
+      "params": {
+        "keepViewport": true
+      }
+    }
+  ]
+}

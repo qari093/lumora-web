@@ -1,0 +1,340 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")  // dev: file:./prisma/dev.db
+}
+
+model Account {
+  id           String               @id              // user id (text in SQLite)
+  balance      Int                  @default(0)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  transactions CreditTransaction[]
+}
+
+model CreditTransaction {
+  id                  String   @id @default(cuid())
+  accountId           String
+  stripeSessionId     String   @unique
+  stripePaymentIntent String?
+  amount              Int
+  currency            String   // e.g. "usd"
+  credits             Int
+  createdAt           DateTime @default(now())
+  account             Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+}
+
+// --- EMML baseline weights ---
+model EmotionBaselineWeight {
+  id        String   @id
+  emotion   String   @unique
+  weight    Float    @default(1.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("EmotionBaselineWeight")
+}
+
+/// Emotion & Micro-Market ingestion log
+model EmmlEvent {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  userId     String?  
+  source     String?    // "api-key" | "user" | etc.
+  type       String   
+  emotion    String?  
+  intensity  Float?
+  meta       Json?
+  @@index([createdAt])
+  @@index([type, emotion])
+}
+
+/* EMML: Enums */
+enum EmotionKind {
+  joy
+  calm
+  focus
+  love
+  stress
+  anxious
+  bored
+  excited
+  confident
+  tired
+  neutral
+}
+
+/* EMML: Core Models */
+model EmotionEvent {
+  id        String      @id @default(cuid())
+  kind      String
+  emotion   EmotionKind?
+  intensity Float?
+  userId    String?
+  source    String?
+  meta      Json?
+  createdAt DateTime    @default(now())
+  @@index([createdAt])
+  @@index([emotion])
+}
+
+model EmotionIndexDaily {
+  id           String      @id @default(cuid())
+  day          DateTime
+  emotion      EmotionKind
+  ei           Float
+  count        Int         @default(0)
+  avgIntensity Float       @default(0)
+  @@unique([day, emotion])
+  @@index([emotion, day])
+}
+
+model EmotionMarketTick {
+  id            String      @id @default(cuid())
+  ts            DateTime    @default(now())
+  emotion       EmotionKind?
+  ei            Float
+  globalEi      Float?
+  zenMultiplier Float?
+  @@index([ts])
+}
+
+model ZenOracle {
+  id            String   @id @default(cuid())
+  ts            DateTime @default(now())
+  zenMultiplier Float
+  note          String?
+}
+
+model ZenBurn {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model ZenReissue {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model EmotionStake {
+  id          String      @id @default(cuid())
+  userId      String
+  emotion     EmotionKind
+  amount      Float       @default(0)
+  windowStart DateTime
+  windowEnd   DateTime
+  status      String      @default("open")
+  createdAt   DateTime    @default(now())
+  @@index([userId, status])
+  @@index([emotion, windowStart, windowEnd])
+}
+
+model EmotionDividend {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  userId String
+  amount Float
+  reason String?
+}
+
+
+// --- Celebrations dependency: minimal User stub (safe if you don't have one) ---
+model User {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+// === Celebrations (v1) ===
+
+// Enums
+enum CelebrationStatus {
+  DRAFT
+  SCHEDULED
+  LIVE
+  ENDED
+  CANCELLED
+}
+
+enum CelebrationVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  BLOCKED
+}
+
+enum ReactionKind {
+  MOOD
+  PARTY
+  STREAM
+}
+
+enum RewardType {
+  ORGANIZER_FEE
+  ATTENDEE_PULSE
+  ATTENDEE_ZENCOIN
+  BONUS
+}
+
+enum BadgeType {
+  STARTER
+  HOST_PRO
+  CONSISTENT
+  TRENDING
+  LEGEND
+}
+
+// Models
+model Celebration {
+  id             String                 @id @default(cuid())
+  organizerId    String
+  organizer      User                   @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  title          String
+  slug           String                 @unique
+  description    String?
+  status         CelebrationStatus      @default(DRAFT)
+  visibility     CelebrationVisibility  @default(PUBLIC)
+  startAt        DateTime?
+  endAt          DateTime?
+  themeKey       String?
+  goalPulse      Int?                   @default(0)
+  budgetZencoin  Int?                   @default(0)
+  allowInvites   Boolean                @default(true)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+
+  invites        CelebrationInvite[]
+  participants   CelebrationParticipant[]
+  reactions      CelebrationReaction[]
+  rollups5m      CelebrationEIRollup5m[]
+  rewards        CelebrationReward[]
+
+  @@index([organizerId, status])
+  @@index([status, startAt])
+}
+
+model CelebrationInvite {
+  id             String            @id @default(cuid())
+  celebrationId  String
+  celebration    Celebration       @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  inviterId      String
+  inviter        User              @relation("InviteInviter", fields: [inviterId], references: [id], onDelete: Cascade)
+  inviteeId      String?
+  invitee        User?             @relation("InviteInvitee", fields: [inviteeId], references: [id])
+  inviteeEmail   String?
+  role           String?
+  status         InviteStatus      @default(PENDING)
+  createdAt      DateTime          @default(now())
+
+  @@index([celebrationId, status])
+}
+
+model CelebrationParticipant {
+  id             String        @id @default(cuid())
+  celebrationId  String
+  celebration    Celebration   @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt       DateTime      @default(now())
+
+  @@unique([celebrationId, userId])
+  @@index([userId, joinedAt])
+}
+
+model CelebrationReaction {
+  id             String         @id @default(cuid())
+  celebrationId  String
+  celebration    Celebration    @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind           ReactionKind
+  emotion        String?
+  intensity      Float?
+  meta           Json?
+  createdAt      DateTime       @default(now())
+
+  @@index([celebrationId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model CelebrationEIRollup5m {
+  id             String       @id @default(cuid())
+  celebrationId  String
+  celebration    Celebration  @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  windowStart    DateTime
+  reactions      Int          @default(0)
+  eiScore        Float        @default(0)
+  moodVec        Json?
+  spamDiscarded  Int          @default(0)
+
+  @@unique([celebrationId, windowStart])
+  @@index([windowStart])
+}
+
+model CelebrationReward {
+  id             String        @id @default(cuid())
+  celebrationId  String
+  celebration    Celebration   @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type           RewardType
+  zencoin        Int           @default(0)
+  pulse          Int           @default(0)
+  reason         String?
+  ledgerTxId     String?
+  createdAt      DateTime      @default(now())
+
+  @@index([celebrationId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model CelebrationStreak {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  days              Int       @default(0)
+  lastCelebrationAt DateTime?
+}
+
+model CelebrationBadge {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      BadgeType
+  awardedAt DateTime  @default(now())
+
+  @@unique([userId, type])
+}
+
+model AdminCelebrationControls {
+  id        Int      @id @default(1)
+  config    Json?
+  updatedAt DateTime @updatedAt
+}
+
+model GlobalNowLiveTicker {
+  id               Int      @id @default(1)
+  liveCount        Int      @default(0)
+  topCelebrationId String?
+  eiIndex          Float    @default(0)
+  updatedAt        DateTime @updatedAt
+}

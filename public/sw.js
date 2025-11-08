@@ -53,3 +53,26 @@ self.addEventListener('message',e=>{
     }).catch(()=>{});
   }
 });
+
+// adaptive prune hint
+self.addEventListener("message",(e)=>{ try{ if(e && e.data && e.data.type==="PRUNE_HINT"){ /* hook */ } }catch{} });
+
+self.addEventListener("fetch",event=>{
+  try{
+    const u=new URL(event.request.url);
+    if(event.request.method==="GET" && (u.pathname.startsWith("/api/zshop/") || u.pathname.startsWith("/images/products/"))){
+      event.respondWith((async()=>{
+        const cache=await caches.open("zshop-v1");
+        try{
+          const net=await fetch(event.request);
+          cache.put(event.request,net.clone());
+          return net;
+        }catch(e){
+          const hit=await cache.match(event.request);
+          if(hit) return hit;
+          throw e;
+        }
+      })());
+    }
+  }catch(_){}
+});
