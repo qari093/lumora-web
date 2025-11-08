@@ -118,6 +118,9 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.53.1"
+  },
   "overrides": {
     "esbuild": "0.25.9",
     "vite": {
