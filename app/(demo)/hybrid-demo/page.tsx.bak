@@ -1,0 +1,291 @@
+"use client";
+
+import React, { useEffect, useMemo, useState } from "react";
+
+type GenResp = { ok: boolean; type?: "emoji" | "avatar"; provider?: string; url?: string; error?: string };
+type ProvidersResp = {
+  ok: boolean;
+  cfg: {
+    emoji: { default: string; providers: string[] };
+    avatar: { default: string; providers: string[] };
+    flags: { freeDaily: number; rollover: boolean; mirrorAI: boolean; renderX: boolean };
+  };
+};
+
+export const dynamic = "force-dynamic";
+
+export default function Page() {
+  const [loading, setLoading] = useState(false);
+  
+  const [claiming, setClaiming] = useState(false);
+const [type, setType] = useState<"emoji" | "avatar">("emoji");
+  const [text, setText] = useState("smile");
+  const [provider, setProvider] = useState<string>("local");
+  const [img, setImg] = useState<string | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [providers, setProviders] = useState<ProvidersResp["cfg"] | null>(null);
+  const [credits, setCredits] = useState<number | null>(null);
+
+  // fetch providers + defaults + credits
+  useEffect(() => {
+    (async () => {
+      try {
+        const r = await fetch("/api/hybrid/providers", { cache: "no-store" });
+        const j: ProvidersResp = await r.json();
+        if (j?.ok) {
+          setProviders(j.cfg);
+          setProvider(j.cfg?.emoji?.default || "local");
+        }
+      } catch {}
+      try {
+        const r2 = await fetch("/api/hybrid/credits?user=demo", { cache: "no-store" });
+        const j2 = await r2.json();
+        if (j2?.ok) setCredits(typeof j2.credits === "number" ? j2.credits : j2.credits?.credits ?? null);
+      } catch {}
+    })();
+  }, []);
+
+  const providerOptions = useMemo(() => {
+    if (!providers) return ["local"];
+    const list = type === "emoji" ? providers.emoji.providers : providers.avatar.providers;
+    return list && list.length ? list : ["local"];
+  }, [providers, type]);
+
+
+  const locked = useMemo(() => ({
+    local: false,
+    mirrorai: !(providers?.flags?.mirrorAI),
+    renderx: !(providers?.flags?.renderX),
+  }), [providers]);
+  async function doGenerate() {
+    setLoading(true);
+    setErr(null);
+    setImg(null);
+    try {
+      const res = await fetch("/api/hybrid/generate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ type, text, provider, user: "demo" }),
+      });
+      const j: GenResp = await res.json();
+      if (!j.ok) throw new Error(j.error || "Generation failed");
+      setImg(j.url || null);
+
+      // re-fetch credits after spend
+      try {
+        const r2 = await fetch("/api/hybrid/credits?user=demo", { cache: "no-store" });
+        const j2 = await r2.json();
+        if (j2?.ok) setCredits(typeof j2.credits === "number" ? j2.credits : j2.credits?.credits ?? null);
+      } catch {}
+
+  async function claimDaily() {
+    setClaiming(true);
+    setErr(null);
+    try {
+      const r = await fetch("/api/hybrid/credits", {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ user: "demo", add: 5 })
+      });
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.error || "Claim failed");
+      const next = typeof j.credits === "number" ? j.credits : j.credits?.credits ?? null;
+      if (next !== null) setCredits(next);
+    } catch (e) {
+      setErr(String(e?.message || e));
+    } finally {
+      setClaiming(false);
+    }
+  }
+    } catch (e: any) {
+      setErr(String(e?.message || e));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // NEW: Claim +5 credits
+  async function claimCredits() {
+    try {
+      const r = await fetch("/api/hybrid/credits", {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ user: "demo", add: 5 }),
+      });
+      const j = await r.json();
+      if (j?.ok) {
+        setCredits(typeof j.credits === "number" ? j.credits : j.result?.credits ?? null);
+      } else {
+        setErr(j?.error || "Claim failed");
+      }
+    } catch {
+      setErr("Claim failed");
+    }
+  }
+
+  const locked = (p: string) =>
+    (p === "mirrorai" && !(providers?.flags.mirrorAI)) ||
+    (p === "renderx"  && !(providers?.flags.renderX));
+
+  return (
+    <main style={{ padding: 24, color: "#fff", fontFamily: "ui-sans-serif, system-ui" }}>
+      <h1 style={{ marginBottom: 8 }}>Hybrid Emoji + Avatar (Demo)</h1>
+      <p style={{ opacity: 0.7, marginBottom: 16 }}>
+        Route group <code>(demo)</code> is not visible in the URL. You are on <code>/hybrid</code>.
+      </p>
+
+      <section
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: 12,
+          maxWidth: 720,
+          margin: "0 auto",
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.15)",
+          borderRadius: 12,
+          padding: 16,
+        }}
+      >
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Type</span>
+            <select value={type} onChange={(e) => setType(e.target.value as any)} style={selectStyle}>
+              <option value="emoji">emoji</option>
+              <option value="avatar">avatar</option>
+            </select>
+          </label>
+
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Provider</span>
+            <select value={provider} onChange={(e) => setProvider(e.target.value)} style={selectStyle}>
+              {providerOptions.map((p) => (
+                <option key={p} value={p} disabled={locked[p]}>{p}{locked[p] ? " (locked)" : ""}</option>
+              ))}
+            </select>
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              Locked providers appear with “(locked)”. Add API keys in <code>.env.local</code> to unlock.
+            </div>
+          </label>
+
+          <label style={{ display: "grid", gap: 6, flex: 1, minWidth: 220 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Prompt</span>
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Describe the emoji/avatar…"
+              style={inputStyle}
+            />
+          </label>
+
+          <button
+            onClick={doGenerate}
+            disabled={loading || (credits ?? 0) <= 0}
+            style={btnStyle}
+            title={(credits ?? 0) <= 0 ? "Not enough credits" : "Generate"}
+          >
+            {loading ? "Generating…" : "Generate"}
+          </button>
+
+          <button
+            onClick={claimCredits}
+            style={{ ...btnStyle, background: "linear-gradient(90deg,#9f9,#6ef)" }}
+            title="Grant +5 demo credits"
+          >
+            Claim +5
+          </button>
+        </div>
+
+        <div style={{ fontSize: 13, opacity: 0.8, display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+          <span>Your credits: <strong>{providers?.flags.freeDaily ?? "—"}</strong></span>
+          {providers && (
+            <>
+              <span>Emoji default: <code>{providers.emoji.default}</code></span>
+              <span>Avatar default: <code>{providers.avatar.default}</code></span>
+              <span>
+                Flags: freeDaily=<code>{providers.flags.freeDaily}</code>, rollover=
+                <code>{String(providers.flags.rollover)}</code>, mirrorAI=
+                <code>{String(providers.flags.mirrorAI)}</code>, renderX=
+                <code>{String(providers.flags.renderX)}</code>
+              </span>
+            </>
+          )}
+          <span style={{ padding: "4px 8px", border: "1px solid rgba(255,255,255,0.25)", borderRadius: 8 }}>
+            Your credits: <strong>{credits ?? "—"}</strong>
+          </span>
+        </div>
+
+        {err && (
+          <div style={{ color: "#ff8899", fontSize: 14, marginTop: 6 }}>
+            ⚠️ {err}
+          </div>
+        )}
+
+        {img && (
+          <div
+            style={{
+              marginTop: 8,
+              display: "grid",
+              placeItems: "center",
+              padding: 16,
+              background: "rgba(255,255,255,0.04)",
+              borderRadius: 12,
+            }}
+          >
+            <img
+              src={img}
+              alt="Generated"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: 10, background: "#111" }}
+            />
+            <div style={{ fontSize: 12, opacity: 0.7, marginTop: 8 }}>
+              URL: <code style={{ wordBreak: "break-all" }}>{img}</code>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section style={{ marginTop: 18, fontSize: 13, opacity: 0.8 }}>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <a style={linkStyle} href="/api/hybrid/health" target="_blank">/api/hybrid/health</a>
+          <a style={linkStyle} href="/api/hybrid/providers" target="_blank">/api/hybrid/providers</a>
+          <a style={linkStyle} href="/api/hybrid/credits?user=demo" target="_blank">/api/hybrid/credits?user=demo</a>
+          <a style={linkStyle} href="/api/hybrid/placeholder/emoji?t=hello" target="_blank">/api/hybrid/placeholder/emoji?t=hello</a>
+          <a style={linkStyle} href="/api/hybrid/placeholder/avatar?t=you" target="_blank">/api/hybrid/placeholder/avatar?t=you</a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+const inputStyle: React.CSSProperties = {
+  background: "rgba(255,255,255,0.08)",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: 10,
+  padding: "10px 12px",
+  color: "#fff",
+  outline: "none",
+};
+
+const selectStyle: React.CSSProperties = {
+  ...inputStyle,
+  padding: "10px 10px",
+};
+
+const btnStyle: React.CSSProperties = {
+  padding: "10px 14px",
+  borderRadius: 12,
+  border: "1px solid rgba(255,255,255,0.25)",
+  background: "linear-gradient(90deg,#6ef,#f9f)",
+  color: "#111",
+  fontWeight: 800,
+  cursor: "pointer",
+};
+
+const linkStyle: React.CSSProperties = {
+  padding: "6px 10px",
+  borderRadius: 8,
+  border: "1px solid rgba(255,255,255,0.2)",
+  background: "rgba(255,255,255,0.06)",
+  color: "#fff",
+  textDecoration: "none",
+};

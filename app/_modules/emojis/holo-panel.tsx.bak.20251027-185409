@@ -1,0 +1,353 @@
+"use client";
+
+import React, { useState, useMemo, useEffect } from "react";
+import clsx from "clsx";
+
+/* ------------------------------------------------------------------
+   HOLOPANEL v4 — Next-Gen Emoji Engine (9.5+)
+   Features: Categories, Quick Reactions, Skin Tones, Keyboard Nav,
+             Lazy Render, AI prompt bridge
+-------------------------------------------------------------------*/
+
+type Emoji = {
+  emoji: string;
+  label: string;
+  keywords: string[];
+};
+
+type Category = {
+  id: string;
+  name: string;
+  color: string;
+  emojis: Emoji[];
+};
+
+// Core emoji categories (you can expand this easily)
+const EMOJI_CATEGORIES: Category[] = [
+  {
+    id: "faces",
+    name: "Faces",
+    color: "#ff6b6b",
+    emojis: [
+      { emoji: "😀", label: "grinning", keywords: ["smile", "happy", "joy"] },
+      { emoji: "😂", label: "tears", keywords: ["laugh", "funny"] },
+      { emoji: "😍", label: "love", keywords: ["heart", "adore"] },
+      { emoji: "😎", label: "cool", keywords: ["sunglasses", "confident"] },
+      { emoji: "🤔", label: "thinking", keywords: ["ponder", "question"] },
+      { emoji: "😭", label: "crying", keywords: ["sad", "tears"] },
+      { emoji: "😡", label: "angry", keywords: ["mad", "annoyed"] },
+      { emoji: "🥳", label: "party", keywords: ["celebrate", "yay"] },
+      { emoji: "😴", label: "sleep", keywords: ["tired", "zzz"] },
+    ],
+  },
+  {
+    id: "hearts",
+    name: "Hearts",
+    color: "#ff8ff3",
+    emojis: [
+      { emoji: "❤️", label: "red heart", keywords: ["love", "romance"] },
+      { emoji: "🧡", label: "orange heart", keywords: ["friendship"] },
+      { emoji: "💛", label: "yellow heart", keywords: ["happiness"] },
+      { emoji: "💚", label: "green heart", keywords: ["nature", "envy"] },
+      { emoji: "💙", label: "blue heart", keywords: ["trust", "calm"] },
+      { emoji: "💜", label: "purple heart", keywords: ["compassion"] },
+      { emoji: "🖤", label: "black heart", keywords: ["dark", "goth"] },
+      { emoji: "🤍", label: "white heart", keywords: ["pure"] },
+      { emoji: "🤎", label: "brown heart", keywords: ["earth"] },
+    ],
+  },
+  {
+    id: "hands",
+    name: "Gestures",
+    color: "#ffd36b",
+    emojis: [
+      { emoji: "👍", label: "thumbs up", keywords: ["yes", "approve"] },
+      { emoji: "👎", label: "thumbs down", keywords: ["no", "disapprove"] },
+      { emoji: "👏", label: "clapping", keywords: ["applause", "praise"] },
+      { emoji: "🙏", label: "pray", keywords: ["thanks", "hope"] },
+      { emoji: "🤝", label: "handshake", keywords: ["agreement", "deal"] },
+      { emoji: "🤌", label: "pinched", keywords: ["small", "perfect"] },
+      { emoji: "🤙", label: "call me", keywords: ["phone", "hang loose"] },
+      { emoji: "✋", label: "raised hand", keywords: ["stop", "hi"] },
+      { emoji: "👋", label: "wave", keywords: ["hello", "goodbye"] },
+    ],
+  },
+];
+
+// skin tone modifiers
+const SKIN_TONES = ["🏻", "🏼", "🏽", "🏾", "🏿"];
+
+type Props = {
+  enablePulse?: boolean;
+  externalPrompt?: string;
+};
+
+export default function HoloPanel({ enablePulse = false, externalPrompt }: Props) {
+  const [activeCategory, setActiveCategory] = useState("faces");
+  const [skinTone, setSkinTone] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+  const [filtered, setFiltered] = useState<Emoji[]>([]);
+  const [lazyLimit, setLazyLimit] = useState(54);
+
+  const allEmojis = useMemo(() => EMOJI_CATEGORIES.flatMap((c) => c.emojis), []);
+
+  // Search filter
+  useEffect(() => {
+    const list = query
+      ? allEmojis.filter((e) =>
+          (e.label + e.keywords.join(" ")).toLowerCase().includes(query.toLowerCase())
+        )
+      : EMOJI_CATEGORIES.find((c) => c.id === activeCategory)?.emojis || [];
+    setFiltered(list.slice(0, lazyLimit));
+  }, [query, activeCategory, allEmojis, lazyLimit]);
+
+  // Lazy load
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+        setLazyLimit((l) => l + 18);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleEmojiClick = (e: Emoji) => {
+    navigator.clipboard.writeText(e.emoji + (skinTone ?? "")).catch(() => {});
+    const el = document.getElementById("light-flash");
+    if (el) {
+      el.classList.add("flash");
+      setTimeout(() => el.classList.remove("flash"), 400);
+    }
+  };
+
+  return (
+    <section className="holo-panel">
+      <header className="nex-header">
+        <h3>Holographic Emojis v4</h3>
+        <p>Type a feeling and press AI</p>
+      </header>
+
+      <div className="controls">
+        <div className="search">
+          <input
+            placeholder="Search or describe emotions…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button className="ai-btn">AI</button>
+        </div>
+
+        <div className="tones">
+          {SKIN_TONES.map((t) => (
+            <button
+              key={t}
+              onClick={() => setSkinTone(skinTone === t ? null : t)}
+              className={clsx("tone", skinTone === t && "on")}
+            >
+              ✋{t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <nav className="categories">
+        {EMOJI_CATEGORIES.map((c) => (
+          <button
+            key={c.id}
+            style={{
+              background: activeCategory === c.id ? c.color : "rgba(255,255,255,0.1)",
+            }}
+            className={clsx("cat", activeCategory === c.id && "on")}
+            onClick={() => {
+              setActiveCategory(c.id);
+              setQuery("");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            {c.name}
+          </button>
+        ))}
+      </nav>
+
+      <div className="grid">
+        {filtered.map((e) => (
+          <button
+            key={e.label}
+            aria-label={e.label}
+            title={e.keywords.join(", ")}
+            className={clsx("emoji", enablePulse && "act-breathe")}
+            onClick={() => handleEmojiClick(e)}
+          >
+            <span className="halo" />
+            <span className="sheen" />
+            <span className="glyph">
+              {e.emoji}
+              {skinTone ?? ""}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <footer className="quick-reactions">
+        <h4>Quick Reactions</h4>
+        <div className="strip">
+          {["🔥", "💯", "🌈", "⭐️", "🌙", "☀️", "⚡️", "💫"].map((r) => (
+            <button key={r} onClick={() => navigator.clipboard.writeText(r)}>
+              {r}
+            </button>
+          ))}
+        </div>
+      </footer>
+
+      <style jsx>{`
+        .holo-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+          color: #fff;
+        }
+
+        .nex-header h3 {
+          font-size: 1.3rem;
+          font-weight: 700;
+          background: linear-gradient(90deg, #6ef, #f9f);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        input {
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          padding: 8px 12px;
+          color: #fff;
+          min-width: 220px;
+        }
+
+        .ai-btn {
+          background: linear-gradient(90deg, #6ef, #f9f);
+          border: none;
+          padding: 8px 14px;
+          border-radius: 10px;
+          color: #000;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .tones .tone {
+          font-size: 16px;
+          background: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        .tones .tone.on {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .categories {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 6px;
+        }
+
+        .cat {
+          border: none;
+          padding: 6px 10px;
+          border-radius: 12px;
+          cursor: pointer;
+          font-size: 13px;
+          color: #111;
+          transition: 0.2s;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+          gap: 12px;
+          justify-items: center;
+        }
+
+        .emoji {
+          position: relative;
+          width: 64px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05),
+            0 0 10px rgba(255, 255, 255, 0.1);
+          cursor: pointer;
+          transition: transform 0.15s ease;
+        }
+
+        .emoji:hover {
+          transform: scale(1.1);
+        }
+
+        .glyph {
+          font-size: 32px;
+          text-shadow: 0 0 1px rgba(0, 0, 0, 0.45), 0 0 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .quick-reactions {
+          margin-top: 20px;
+          opacity: 0.9;
+        }
+
+        .quick-reactions .strip {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+
+        .quick-reactions button {
+          background: rgba(255, 255, 255, 0.12);
+          border: none;
+          border-radius: 8px;
+          font-size: 22px;
+          cursor: pointer;
+          transition: 0.15s;
+        }
+
+        .quick-reactions button:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: scale(1.15);
+        }
+
+        .flash {
+          position: fixed;
+          inset: 0;
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+          pointer-events: none;
+          animation: flash 0.4s ease;
+        }
+
+        @keyframes flash {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}

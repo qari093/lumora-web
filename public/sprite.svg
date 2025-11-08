@@ -1,0 +1,1728 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><style>symbol .stroke{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+  <symbol id="ico-nexa" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="8" class="core-dot"/>
+    <circle cx="16" cy="16" r="4" class="satellite"/>
+    <circle cx="48" cy="16" r="4" class="satellite"/>
+    <circle cx="16" cy="48" r="4" class="satellite"/>
+    <circle cx="48" cy="48" r="4" class="satellite"/>
+    <circle cx="32" cy="16" r="4" class="satellite"/>
+    <circle cx="16" cy="32" r="4" class="satellite"/>
+    <circle cx="48" cy="32" r="4" class="satellite"/>
+    <circle cx="32" cy="48" r="4" class="satellite"/>
+  </symbol>
+  <symbol id="ico-gmar" viewBox="0 0 64 64">
+    <path d="M32 8 L56 20 L56 44 L32 56 L8 44 L8 20 Z" class="shield"/>
+    <path d="M32 28 L28 32 L32 36 L36 32 Z" class="emblem core"/>
+    <path d="M24 24 L40 24 L40 40 L24 40 Z" class="emblem detail-1"/>
+  </symbol>
+  <symbol id="ico-zenshop" viewBox="0 0 64 64">
+    <line x1="32" y1="16" x2="32" y2="40" class="scale-beam"/>
+    <path d="M20 40 L44 40 L44 52 L20 52 Z" class="scale-base"/>
+    <path d="M16 24 L24 24 L24 40 L16 40 Z" class="scale-pan left"/>
+    <path d="M40 24 L48 24 L48 40 L40 40 Z" class="scale-pan right"/>
+    <path d="M28 20 Q32 16 36 20" class="leaf"/>
+  </symbol>
+  <symbol id="ico-wallet" viewBox="0 0 64 64">
+    <path d="M24 16 L40 16 L40 48 L24 48 Z" class="hand-base"/>
+    <circle cx="32" cy="32" r="6" class="coin-slot"/>
+    <circle cx="32" cy="44" r="2" class="particle p1"/>
+    <circle cx="30" cy="40" r="2" class="particle p2"/>
+    <circle cx="34" cy="36" r="2" class="particle p3"/>
+  </symbol>
+  <symbol id="ico-lumalink" viewBox="0 0 64 64">
+    <circle cx="24" cy="24" r="12" class="ring one" fill="none"/>
+    <circle cx="40" cy="24" r="12" class="ring two" fill="none"/>
+    <circle cx="32" cy="40" r="12" class="ring three" fill="none"/>
+  </symbol>
+  <symbol id="ico-live" viewBox="0 0 64 64">
+    <polygon points="24,18 24,46 44,32" class="play-button"/>
+    <circle cx="32" cy="32" r="16" class="wave one" fill="none"/>
+    <circle cx="32" cy="32" r="24" class="wave two" fill="none"/>
+  </symbol>
+  <symbol id="ico-ads" viewBox="0 0 64 64">
+    <path d="M20 24 L44 18 L44 46 L20 40 Z" class="megaphone"/>
+    <path d="M44 22 L56 22 L56 42 L44 42" class="horn"/>
+    <path d="M24 32 L18 28 L18 36 Z" class="data-stream"/>
+  </symbol>
+  <symbol id="ico-lumen" viewBox="0 0 64 64">
+    <path d="M24 20 Q32 16 40 20 Q44 28 40 36 Q32 40 24 36 Q20 28 24 20" class="brain"/>
+    <circle cx="32" cy="28" r="4" class="spark-core"/>
+    <line x1="28" y1="24" x2="36" y2="24" class="connection"/>
+    <line x1="26" y1="30" x2="38" y2="30" class="connection"/>
+  </symbol>
+  <symbol id="ico-profile" viewBox="0 0 64 64">
+    <circle cx="32" cy="20" r="8" class="head"/>
+    <path d="M24 48 L40 48 L36 28 L28 28 Z" class="body"/>
+    <circle cx="32" cy="38" r="6" class="core-layer-1"/>
+    <circle cx="32" cy="38" r="4" class="core-layer-2"/>
+    <circle cx="32" cy="38" r="2" class="core-layer-3"/>
+  </symbol>
+  <symbol id="ico-settings" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" class="gear-base" fill="none"/>
+    <rect x="30" y="12" width="4" height="8" class="gear-tooth"/>
+    <rect x="30" y="44" width="4" height="8" class="gear-tooth"/>
+    <rect x="12" y="30" width="8" height="4" class="gear-tooth"/>
+    <rect x="44" y="30" width="8" height="4" class="gear-tooth"/>
+    <circle cx="32" cy="32" r="6" class="control-core"/>
+  </symbol>
+  <symbol id="ico-music" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" class="wave-circle" fill="none"/>
+    <path d="M24 24 L28 20 L28 44 L24 40" class="sound-wave w1"/>
+    <path d="M32 20 L36 24 L36 40 L32 44" class="sound-wave w2"/>
+    <path d="M40 24 L44 20 L44 44 L40 40" class="sound-wave w3"/>
+  </symbol>
+  <symbol id="ico-trending" viewBox="0 0 64 64">
+    <path d="M32 16 L28 24 L36 24 Z" class="rocket-body"/>
+    <path d="M28 24 L24 32 L32 32 L36 24" class="rocket-base"/>
+    <path d="M24 28 L16 32 L24 36" class="rocket-wing left"/>
+    <path d="M40 28 L48 32 L40 36" class="rocket-wing right"/>
+    <circle cx="36" cy="40" r="2" class="particle p1"/>
+    <circle cx="40" cy="44" r="2" class="particle p2"/>
+    <circle cx="44" cy="48" r="2" class="particle p3"/>
+  </symbol>
+<symbol id="glyph-approve" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14C20 10 26 10 32 16C38 10 44 10 48 14C56 22 54 38 32 56Z" fill="none" class="stroke"/><path d="M26 34 L31.5 40 L42 27" class="stroke"/></symbol>\n<symbol id="glyph-veto" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14C20 10 26 10 32 16C38 10 44 10 48 14C56 22 54 38 32 56Z" fill="none" class="stroke"/><line x1="20" y1="20" x2="44" y2="44" class="stroke"/></symbol>\n<symbol id="glyph-laugh" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" class="stroke"/><path d="M22 34 Q32 42 42 34" class="stroke"/><circle cx="26" cy="28" r="1.5" class="stroke"/><circle cx="38" cy="28" r="1.5" class="stroke"/><path d="M22 38 q-2 3 -4 4" class="stroke"/></symbol>\n<symbol id="glyph-acknowledge" viewBox="0 0 64 64"><path d="M12 32 Q24 18 32 18 Q40 18 52 32 Q40 46 32 46 Q24 46 12 32 Z" fill="none" class="stroke"/><circle cx="32" cy="32" r="3" class="stroke"/></symbol>\n<symbol id="glyph-question" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" class="stroke"/><path d="M26 26 Q32 22 38 26 Q38 30 34 32 Q31 33.5 31 36" class="stroke"/><circle cx="31" cy="42" r="1.8" class="stroke"/></symbol>\n<symbol id="glyph-alert" viewBox="0 0 64 64"><path d="M32 12 L52 48 H12 Z" fill="none" class="stroke"/><line x1="32" y1="24" x2="32" y2="36" class="stroke"/><circle cx="32" cy="44" r="2" class="stroke"/></symbol>\n<symbol id="glyph-celebrate" viewBox="0 0 64 64"><path d="M20 44 L28 24 L44 20 L40 36 Z" fill="none" class="stroke"/><path d="M18 22 L22 18 M42 46 L46 42 M28 14 L28 10 M52 30 L56 30" class="stroke"/></symbol>\n<symbol id="glyph-pause" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" class="stroke"/><line x1="28" y1="22" x2="28" y2="42" class="stroke"/><line x1="36" y1="22" x2="36" y2="42" class="stroke"/></symbol>\n<symbol id="glyph-approve" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><path d="M26 34 l5.5 6 L42 27" class="stroke"/></symbol>
+<symbol id="glyph-veto" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><line x1="20" y1="20" x2="44" y2="44" class="stroke"/></symbol>
+<symbol id="glyph-laugh" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M22 34 Q32 42 42 34" class="stroke"/><circle cx="26" cy="28" r="1.5" class="stroke"/><circle cx="38" cy="28" r="1.5" class="stroke"/><path d="M22 38 q-2 3 -4 4" class="stroke"/></symbol>
+<symbol id="glyph-acknowledge" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-question" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M26 26 Q32 22 38 26 Q38 30 34 32 Q31 33.5 31 36" class="stroke"/><circle cx="31" cy="42" r="1.8" class="stroke"/></symbol>
+<symbol id="glyph-alert" viewBox="0 0 64 64"><path d="M32 12 L52 48 H12 Z" class="stroke"/><line x1="32" y1="24" x2="32" y2="36" class="stroke"/><circle cx="32" cy="44" r="2" class="stroke"/></symbol>
+<symbol id="glyph-celebrate" viewBox="0 0 64 64"><path d="M20 44 L28 24 L44 20 L40 36 Z" class="stroke"/><path d="M18 22 L22 18 M42 46 L46 42 M28 14 L28 10 M52 30 L56 30" class="stroke"/></symbol>
+<symbol id="glyph-pause" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><line x1="28" y1="22" x2="28" y2="42" class="stroke"/><line x1="36" y1="22" x2="36" y2="42" class="stroke"/></symbol>
+<symbol id="glyph-buffering" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 A18 18 0 0 1 50 32" class="stroke"/></symbol>
+<symbol id="glyph-overwhelm" viewBox="0 0 64 64"><path d="M16 32 c6-12 26-12 32 0 c-6 12-26 12-32 0Z" class="stroke"/></symbol>
+<symbol id="glyph-echo" viewBox="0 0 64 64"><circle cx="28" cy="32" r="6" class="stroke"/><circle cx="36" cy="32" r="10" class="stroke"/></symbol>
+<symbol id="glyph-connection" viewBox="0 0 64 64"><path d="M18 36 Q32 16 46 36" class="stroke"/><circle cx="18" cy="36" r="2" class="stroke"/><circle cx="46" cy="36" r="2" class="stroke"/></symbol>
+<symbol id="glyph-shift" viewBox="0 0 64 64"><path d="M20 40 L44 24" class="stroke"/><circle cx="24" cy="28" r="4" class="stroke"/><circle cx="40" cy="36" r="4" class="stroke"/></symbol>
+<symbol id="glyph-grounded" viewBox="0 0 64 64"><path d="M22 42 h20 M32 42 V22 M26 30 h12" class="stroke"/></symbol>
+<symbol id="glyph-decompress" viewBox="0 0 64 64"><path d="M18 30 h28 M18 34 h28" class="stroke"/><path d="M24 26 q8-8 16 0" class="stroke"/></symbol>
+<symbol id="glyph-resonance" viewBox="0 0 64 64"><circle cx="26" cy="32" r="6" class="stroke"/><circle cx="38" cy="32" r="6" class="stroke"/><path d="M20 32 h24" class="stroke"/></symbol>
+<symbol id="glyph-sonder" viewBox="0 0 64 64"><path d="M16 28 a8 8 0 0 1 16 0 a8 8 0 0 1 16 0" class="stroke"/></symbol>
+<symbol id="glyph-chronosync" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 v8 l6 4" class="stroke"/><path d="M18 24 q14-8 28 0" class="stroke"/></symbol>
+<symbol id="glyph-karma-field" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-lumen" viewBox="0 0 64 64"><path d="M20 32 h24 M24 24 h16 M24 40 h16" class="stroke"/><circle cx="32" cy="32" r="2" class="stroke"/></symbol>
+<symbol id="glyph-data-phantom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-quantum-state" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-neural-bloom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-symbiotic" viewBox="0 0 64 64"><path d="M22 38 q8-12 20-12" class="stroke"/><path d="M22 26 q8 12 20 12" class="stroke"/></symbol>
+<symbol id="glyph-cheer" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-idea" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-flame" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-star" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-bolt" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cloud" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-rain" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-sun" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-moon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-target" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cross" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-plus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-minus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-play" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-stop" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-record" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-mic" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-camera" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-link" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-lock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-unlock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-search" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-home" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-user" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-settings" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-approve" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><path d="M26 34 l5.5 6 L42 27" class="stroke"/></symbol>
+<symbol id="glyph-veto" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><line x1="20" y1="20" x2="44" y2="44" class="stroke"/></symbol>
+<symbol id="glyph-laugh" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M22 34 Q32 42 42 34" class="stroke"/><circle cx="26" cy="28" r="1.5" class="stroke"/><circle cx="38" cy="28" r="1.5" class="stroke"/><path d="M22 38 q-2 3 -4 4" class="stroke"/></symbol>
+<symbol id="glyph-acknowledge" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-question" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M26 26 Q32 22 38 26 Q38 30 34 32 Q31 33.5 31 36" class="stroke"/><circle cx="31" cy="42" r="1.8" class="stroke"/></symbol>
+<symbol id="glyph-alert" viewBox="0 0 64 64"><path d="M32 12 L52 48 H12 Z" class="stroke"/><line x1="32" y1="24" x2="32" y2="36" class="stroke"/><circle cx="32" cy="44" r="2" class="stroke"/></symbol>
+<symbol id="glyph-celebrate" viewBox="0 0 64 64"><path d="M20 44 L28 24 L44 20 L40 36 Z" class="stroke"/><path d="M18 22 L22 18 M42 46 L46 42 M28 14 L28 10 M52 30 L56 30" class="stroke"/></symbol>
+<symbol id="glyph-pause" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><line x1="28" y1="22" x2="28" y2="42" class="stroke"/><line x1="36" y1="22" x2="36" y2="42" class="stroke"/></symbol>
+<symbol id="glyph-buffering" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 A18 18 0 0 1 50 32" class="stroke"/></symbol>
+<symbol id="glyph-overwhelm" viewBox="0 0 64 64"><path d="M16 32 c6-12 26-12 32 0 c-6 12-26 12-32 0Z" class="stroke"/></symbol>
+<symbol id="glyph-echo" viewBox="0 0 64 64"><circle cx="28" cy="32" r="6" class="stroke"/><circle cx="36" cy="32" r="10" class="stroke"/></symbol>
+<symbol id="glyph-connection" viewBox="0 0 64 64"><path d="M18 36 Q32 16 46 36" class="stroke"/><circle cx="18" cy="36" r="2" class="stroke"/><circle cx="46" cy="36" r="2" class="stroke"/></symbol>
+<symbol id="glyph-shift" viewBox="0 0 64 64"><path d="M20 40 L44 24" class="stroke"/><circle cx="24" cy="28" r="4" class="stroke"/><circle cx="40" cy="36" r="4" class="stroke"/></symbol>
+<symbol id="glyph-grounded" viewBox="0 0 64 64"><path d="M22 42 h20 M32 42 V22 M26 30 h12" class="stroke"/></symbol>
+<symbol id="glyph-decompress" viewBox="0 0 64 64"><path d="M18 30 h28 M18 34 h28" class="stroke"/><path d="M24 26 q8-8 16 0" class="stroke"/></symbol>
+<symbol id="glyph-resonance" viewBox="0 0 64 64"><circle cx="26" cy="32" r="6" class="stroke"/><circle cx="38" cy="32" r="6" class="stroke"/><path d="M20 32 h24" class="stroke"/></symbol>
+<symbol id="glyph-sonder" viewBox="0 0 64 64"><path d="M16 28 a8 8 0 0 1 16 0 a8 8 0 0 1 16 0" class="stroke"/></symbol>
+<symbol id="glyph-chronosync" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 v8 l6 4" class="stroke"/><path d="M18 24 q14-8 28 0" class="stroke"/></symbol>
+<symbol id="glyph-karma-field" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-lumen" viewBox="0 0 64 64"><path d="M20 32 h24 M24 24 h16 M24 40 h16" class="stroke"/><circle cx="32" cy="32" r="2" class="stroke"/></symbol>
+<symbol id="glyph-data-phantom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-quantum-state" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-neural-bloom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-symbiotic" viewBox="0 0 64 64"><path d="M22 38 q8-12 20-12" class="stroke"/><path d="M22 26 q8 12 20 12" class="stroke"/></symbol>
+<symbol id="glyph-cheer" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-idea" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-flame" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-star" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-bolt" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cloud" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-rain" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-sun" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-moon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-target" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cross" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-plus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-minus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-play" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-stop" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-record" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-mic" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-camera" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-link" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-lock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-unlock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-search" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-home" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-user" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-settings" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-approve" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><path d="M26 34 l5.5 6 L42 27" class="stroke"/></symbol>
+<symbol id="glyph-veto" viewBox="0 0 64 64"><path d="M32 56C10 38 8 22 16 14c4-4 10-4 16 2c6-6 12-6 16-2c8 8 6 24-16 42Z" class="stroke"/><line x1="20" y1="20" x2="44" y2="44" class="stroke"/></symbol>
+<symbol id="glyph-laugh" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M22 34 Q32 42 42 34" class="stroke"/><circle cx="26" cy="28" r="1.5" class="stroke"/><circle cx="38" cy="28" r="1.5" class="stroke"/><path d="M22 38 q-2 3 -4 4" class="stroke"/></symbol>
+<symbol id="glyph-acknowledge" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-question" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><path d="M26 26 Q32 22 38 26 Q38 30 34 32 Q31 33.5 31 36" class="stroke"/><circle cx="31" cy="42" r="1.8" class="stroke"/></symbol>
+<symbol id="glyph-alert" viewBox="0 0 64 64"><path d="M32 12 L52 48 H12 Z" class="stroke"/><line x1="32" y1="24" x2="32" y2="36" class="stroke"/><circle cx="32" cy="44" r="2" class="stroke"/></symbol>
+<symbol id="glyph-celebrate" viewBox="0 0 64 64"><path d="M20 44 L28 24 L44 20 L40 36 Z" class="stroke"/><path d="M18 22 L22 18 M42 46 L46 42 M28 14 L28 10 M52 30 L56 30" class="stroke"/></symbol>
+<symbol id="glyph-pause" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"/><line x1="28" y1="22" x2="28" y2="42" class="stroke"/><line x1="36" y1="22" x2="36" y2="42" class="stroke"/></symbol>
+<symbol id="glyph-buffering" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 A18 18 0 0 1 50 32" class="stroke"/></symbol>
+<symbol id="glyph-overwhelm" viewBox="0 0 64 64"><path d="M16 32 c6-12 26-12 32 0 c-6 12-26 12-32 0Z" class="stroke"/></symbol>
+<symbol id="glyph-echo" viewBox="0 0 64 64"><circle cx="28" cy="32" r="6" class="stroke"/><circle cx="36" cy="32" r="10" class="stroke"/></symbol>
+<symbol id="glyph-connection" viewBox="0 0 64 64"><path d="M18 36 Q32 16 46 36" class="stroke"/><circle cx="18" cy="36" r="2" class="stroke"/><circle cx="46" cy="36" r="2" class="stroke"/></symbol>
+<symbol id="glyph-shift" viewBox="0 0 64 64"><path d="M20 40 L44 24" class="stroke"/><circle cx="24" cy="28" r="4" class="stroke"/><circle cx="40" cy="36" r="4" class="stroke"/></symbol>
+<symbol id="glyph-grounded" viewBox="0 0 64 64"><path d="M22 42 h20 M32 42 V22 M26 30 h12" class="stroke"/></symbol>
+<symbol id="glyph-decompress" viewBox="0 0 64 64"><path d="M18 30 h28 M18 34 h28" class="stroke"/><path d="M24 26 q8-8 16 0" class="stroke"/></symbol>
+<symbol id="glyph-resonance" viewBox="0 0 64 64"><circle cx="26" cy="32" r="6" class="stroke"/><circle cx="38" cy="32" r="6" class="stroke"/><path d="M20 32 h24" class="stroke"/></symbol>
+<symbol id="glyph-sonder" viewBox="0 0 64 64"><path d="M16 28 a8 8 0 0 1 16 0 a8 8 0 0 1 16 0" class="stroke"/></symbol>
+<symbol id="glyph-chronosync" viewBox="0 0 64 64"><circle cx="32" cy="32" r="18" class="stroke"/><path d="M32 14 v8 l6 4" class="stroke"/><path d="M18 24 q14-8 28 0" class="stroke"/></symbol>
+<symbol id="glyph-karma-field" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-lumen" viewBox="0 0 64 64"><path d="M20 32 h24 M24 24 h16 M24 40 h16" class="stroke"/><circle cx="32" cy="32" r="2" class="stroke"/></symbol>
+<symbol id="glyph-data-phantom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-quantum-state" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-neural-bloom" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-symbiotic" viewBox="0 0 64 64"><path d="M22 38 q8-12 20-12" class="stroke"/><path d="M22 26 q8 12 20 12" class="stroke"/></symbol>
+<symbol id="glyph-cheer" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-idea" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-flame" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-star" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-bolt" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cloud" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-rain" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-sun" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-moon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-target" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-cross" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-plus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-minus" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-play" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M22 22 L 42 42" class="stroke"/></symbol>
+<symbol id="glyph-stop" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-record" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-mic" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-camera" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-link" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M21 21 L 43 43" class="stroke"/></symbol>
+<symbol id="glyph-lock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-unlock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M20 20 L 44 44" class="stroke"/></symbol>
+<symbol id="glyph-search" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" class="stroke"/><path d="M25 25 L 39 39" class="stroke"/></symbol>
+<symbol id="glyph-home" viewBox="0 0 64 64"><circle cx="32" cy="32" r="14" class="stroke"/><path d="M23 23 L 41 41" class="stroke"/></symbol>
+<symbol id="glyph-user" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="glyph-settings" viewBox="0 0 64 64"><circle cx="32" cy="32" r="15" class="stroke"/><path d="M24 24 L 40 40" class="stroke"/></symbol>
+<symbol id="emo-smile" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-smile-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-smile-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-smile-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-smile-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-smile-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-smile-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-grin" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-grin-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-grin-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-grin-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-grin-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-grin-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-grin-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-lol" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-lol-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-lol-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-lol-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-lol-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-lol-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-lol-s)"/>
+  <circle cx="24" cy="27.5" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="27.5" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M23 34 q-3 4 0 7 q4 2 6 -1 q1 -3 -2 -7 Z" fill="#8ad8ff" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+  <path d="M22 38 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-hearts" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-hearts-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-hearts-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-hearts-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-hearts-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-hearts-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-hearts-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M22 23 q0 -3 3 -3 q2 0 3 2 q1 -2 3 -2 q3 0 3 3 q0 3 -6 7 q-6 -4 -6 -7 Z" fill="#ff6aa0"/><path d="M42 23 q0 -3 3 -3 q2 0 3 2 q1 -2 3 -2 q3 0 3 3 q0 3 -6 7 q-6 -4 -6 -7 Z" fill="#ff6aa0"/>
+  <path d="M24 40 q8 6 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-wink" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-wink-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-wink-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-wink-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-wink-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-wink-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-wink-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="transparent"/><circle cx="0" cy="0" r="2.6" fill="transparent"/><path d="M40 30 q-3 0 -6 -2" stroke="rgba(0,0,0,.92)" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="24" cy="28" r="2.8" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-sweat" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-sweat-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-sweat-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-sweat-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-sweat-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-sweat-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-sweat-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M47 22 q3 3 0 6 q-3 3 -6 0 q-2 -2 0 -6 q2 -3 6 0" fill="#8ad8ff" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+  <path d="M24 39 q8 6 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-smirk" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-smirk-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-smirk-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-smirk-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-smirk-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-smirk-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-smirk-s)"/>
+  <circle cx="26" cy="29" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="38" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 40 q8 -3 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-yawn" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-yawn-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-yawn-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-yawn-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-yawn-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-yawn-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-yawn-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 42 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-cry" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-cry-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-cry-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-cry-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-cry-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-cry-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-cry-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M41 34 q3 4 0 7 q-4 2 -6 -1 q-1 -3 2 -7 Z" fill="#8ad8ff" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+  <path d="M24 40 q8 -4 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-gasp" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-gasp-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-gasp-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-gasp-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-gasp-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-gasp-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-gasp-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="32" cy="38" r="4" fill="#111"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-laugh-sweat" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-laugh-sweat-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-laugh-sweat-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-laugh-sweat-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-laugh-sweat-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-laugh-sweat-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-laugh-sweat-s)"/>
+  <circle cx="24" cy="27" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="27" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M47 22 q3 3 0 6 q-3 3 -6 0 q-2 -2 0 -6 q2 -3 6 0" fill="#8ad8ff" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+  <path d="M22 37 q10 8 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-cool" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-cool-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-cool-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-cool-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-cool-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-cool-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-cool-s)"/>
+  <rect x="20" y="26" rx="3" ry="3" width="24" height="6" fill="rgba(0,0,0,.92)"/><circle cx="26" cy="29" r="2" fill="#111"/><circle cx="38" cy="29" r="2" fill="#111"/>
+  <path d="M24 38 q8 4 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-starstruck" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-starstruck-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-starstruck-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-starstruck-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-starstruck-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-starstruck-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-starstruck-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 6 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 18 l2.5 5 5.5.5 -4 3.6 1.2 5.6 -5-2.8 -5 2.8 1.2-5.6 -4-3.6 5.5-.5z" fill="#fff6" stroke="#0002" stroke-width="0.6"/>
+</symbol>
+<symbol id="emo-sleep" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-sleep-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-sleep-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-sleep-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-sleep-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-sleep-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-sleep-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="#111"/><path d="M38 27 q3 1 4 3" stroke="#111" stroke-width="2.2" fill="none"/><text x="40" y="22" font-size="8" fill="#77a">Z</text>
+  <path d="M26 42 a6 6 0 1 0 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-nerd" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-nerd-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-nerd-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-nerd-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-nerd-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-nerd-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-nerd-s)"/>
+  <rect x="20" y="26" width="24" height="6" rx="2" fill="#111"/><circle cx="26" cy="32" r="5" fill="#fff"/><circle cx="38" cy="32" r="5" fill="#fff"/><circle cx="26" cy="32" r="2.6" fill="#111"/><circle cx="38" cy="32" r="2.6" fill="#111"/>
+  <path d="M24 37 q8 6 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-mono" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-mono-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-mono-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-mono-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-mono-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-mono-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-mono-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="6" fill="none" stroke="#111" stroke-width="2"/>
+  <path d="M24 39 q8 6 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-tongue" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-tongue-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-tongue-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-tongue-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-tongue-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-tongue-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-tongue-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><path d="M30 38 q2 6 8 6" stroke="#ff6aa0" stroke-width="5"/>
+  <path d="M22 36 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-sus" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-sus-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-sus-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-sus-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-sus-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-sus-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-sus-s)"/>
+  <circle cx="26" cy="28" r="2.6" fill="#111"/><circle cx="38" cy="28" r="2.6" fill="#111"/><path d="M20 28 q8 -6 24 0" stroke="#111" stroke-width="2.4" fill="none"/>
+  <path d="M28 40 q4 -2 8 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-angry" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-angry-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-angry-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-angry-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-angry-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-angry-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-angry-s)"/>
+  <path d="M22 26 q4 -4 8 0" stroke="#111" stroke-width="2.6" fill="none"/><path d="M42 26 q-4 -4 -8 0" stroke="#111" stroke-width="2.6" fill="none"/><circle cx="26" cy="30" r="2.6" fill="#111"/><circle cx="38" cy="30" r="2.6" fill="#111"/>
+  <path d="M24 40 q8 -2 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v1" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v1-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-v1-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v1-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v1-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v1-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v1-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v2" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v2-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-v2-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v2-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v2-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v2-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v2-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v3" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v3-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-v3-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v3-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v3-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v3-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v3-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v4" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v4-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-v4-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v4-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v4-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v4-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v4-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v5" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v5-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient>
+    <radialGradient id="emo-v5-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v5-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v5-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v5-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v5-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v6" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v6-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-v6-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v6-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v6-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v6-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v6-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v7" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v7-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-v7-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v7-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v7-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v7-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v7-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v8" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v8-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-v8-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v8-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v8-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v8-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v8-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v9" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v9-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-v9-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v9-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v9-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v9-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v9-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v10" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v10-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d9ffcc"/><stop offset="60%" stop-color="#8cff7a"/><stop offset="100%" stop-color="#36d25b"/></radialGradient>
+    <radialGradient id="emo-v10-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v10-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v10-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v10-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v10-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v11" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v11-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-v11-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v11-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v11-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v11-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v11-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v12" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v12-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-v12-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v12-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v12-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v12-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v12-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v13" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v13-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-v13-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v13-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v13-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v13-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v13-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v14" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v14-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-v14-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v14-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v14-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v14-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v14-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v15" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v15-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient>
+    <radialGradient id="emo-v15-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v15-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v15-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v15-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v15-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v16" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v16-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-v16-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v16-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v16-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v16-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v16-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v17" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v17-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-v17-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v17-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v17-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v17-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v17-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v18" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v18-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-v18-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v18-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v18-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v18-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v18-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v19" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v19-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-v19-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v19-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v19-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v19-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v19-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v20" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v20-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient>
+    <radialGradient id="emo-v20-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v20-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v20-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v20-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v20-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v21" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v21-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient>
+    <radialGradient id="emo-v21-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v21-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v21-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v21-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v21-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v22" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v22-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient>
+    <radialGradient id="emo-v22-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v22-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v22-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v22-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v22-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v23" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v23-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient>
+    <radialGradient id="emo-v23-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v23-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v23-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v23-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v23-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v24" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v24-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient>
+    <radialGradient id="emo-v24-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v24-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v24-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v24-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v24-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v25" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v25-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient>
+    <radialGradient id="emo-v25-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v25-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v25-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v25-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v25-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v26" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v26-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-v26-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v26-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v26-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v26-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v26-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v27" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v27-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-v27-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v27-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v27-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v27-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v27-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v28" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v28-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-v28-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v28-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v28-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v28-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v28-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v29" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v29-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-v29-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v29-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v29-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v29-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v29-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v30" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v30-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe6c2"/><stop offset="60%" stop-color="#ffb265"/><stop offset="100%" stop-color="#ff8b2a"/></radialGradient>
+    <radialGradient id="emo-v30-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v30-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v30-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v30-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v30-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v31" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v31-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-v31-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v31-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v31-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v31-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v31-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 39 q8 8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v32" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v32-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-v32-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v32-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v32-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v32-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v32-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M22 37 q10 10 20 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v33" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v33-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-v33-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v33-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v33-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v33-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v33-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M26 38 q6 6 12 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v34" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v34-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-v34-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v34-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v34-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v34-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v34-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 40 q8 -3 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-v35" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-v35-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient>
+    <radialGradient id="emo-v35-l" cx="28%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="emo-v35-s" cx="65%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-v35-g)"/>
+  <ellipse cx="26" cy="23" rx="10" ry="6" fill="url(#emo-v35-l)"/>
+  <ellipse cx="38" cy="44" rx="14" ry="8" fill="url(#emo-v35-s)"/>
+  <circle cx="24" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/><circle cx="40" cy="28" r="2.6" fill="rgba(0,0,0,.92)"/>
+  <path d="M24 38 q8 -8 16 0" fill="none" stroke="rgba(0,0,0,.92)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</symbol>
+<symbol id="emo-lumalink" viewBox="0 0 64 64">
+  <defs><radialGradient id="emo-lumalink-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient></defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-lumalink-g)"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><circle cx="28" cy="30" r="6"/><circle cx="36" cy="30" r="6"/><circle cx="32" cy="38" r="6"/></g>
+</symbol>
+<symbol id="emo-live" viewBox="0 0 64 64">
+  <defs><radialGradient id="emo-live-g" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ccf3ff"/><stop offset="60%" stop-color="#88d9ff"/><stop offset="100%" stop-color="#44b6ff"/></radialGradient></defs>
+  <circle cx="32" cy="32" r="22" fill="url(#emo-live-g)"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+    <circle cx="32" cy="32" r="14" opacity=".85"/>
+    <path d="M28 24 L28 40 L42 32 Z" fill="#fff" stroke="none"/>
+    <circle cx="32" cy="32" r="20" opacity=".45"/>
+  </g>
+</symbol>
+<symbol id="emo-joy" viewBox="0 0 64 64"><defs><radialGradient id="g-joy" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffe0f6"/><stop offset="60%" stop-color="#ffb6a8"/><stop offset="100%" stop-color="#ff8b6a"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-joy)"/><path d="M24 38 q8 8 16 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="26" cy="28" r="2.6" fill="#fff"/><circle cx="38" cy="28" r="2.6" fill="#fff"/></symbol>
+<symbol id="emo-calm" viewBox="0 0 64 64"><defs><radialGradient id="g-calm" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#e0f9ff"/><stop offset="60%" stop-color="#9be4ff"/><stop offset="100%" stop-color="#52c8ff"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-calm)"/><path d="M24 40 q8 -4 16 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="26" cy="28" r="2.6" fill="#fff"/><circle cx="38" cy="28" r="2.6" fill="#fff"/></symbol>
+<symbol id="emo-lumen" viewBox="0 0 64 64"><defs><radialGradient id="g-lumen" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#efe1ff"/><stop offset="60%" stop-color="#c6a9ff"/><stop offset="100%" stop-color="#a37bff"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-lumen)"/><g fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M20 36 q12 -16 24 0"/><path d="M24 28 q8 -6 16 0"/></g></symbol>
+<symbol id="emo-live" viewBox="0 0 64 64"><defs><radialGradient id="g-live" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#def6ff"/><stop offset="60%" stop-color="#9be0ff"/><stop offset="100%" stop-color="#46b8ff"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-live)"/><circle cx="32" cy="32" r="14" fill="none" stroke="#fff" stroke-width="3"/><path d="M28 24 L28 40 L42 32 Z" fill="#fff"/></symbol>
+<symbol id="emo-link" viewBox="0 0 64 64"><defs><radialGradient id="g-link" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#eaf5ff"/><stop offset="60%" stop-color="#b7dbff"/><stop offset="100%" stop-color="#7bbaff"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-link)"/><g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><circle cx="28" cy="30" r="6"/><circle cx="36" cy="30" r="6"/><circle cx="32" cy="38" r="6"/></g></symbol>
+<symbol id="emo-coin" viewBox="0 0 64 64"><defs><radialGradient id="g-coin" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#fff7b3"/><stop offset="60%" stop-color="#ffd54a"/><stop offset="100%" stop-color="#ffb300"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-coin)"/><circle cx="32" cy="32" r="12" fill="none" stroke="#fff" stroke-width="3"/><path d="M28 36 l8 -8" stroke="#fff" stroke-width="3"/></symbol>
+<symbol id="emo-quantum" viewBox="0 0 64 64"><defs><radialGradient id="g-quant" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#d7fff7"/><stop offset="60%" stop-color="#8df0de"/><stop offset="100%" stop-color="#42d1c1"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-quant)"/><rect x="24" y="24" width="16" height="16" rx="2" fill="none" stroke="#fff" stroke-width="3"/></symbol>
+<symbol id="emo-echo" viewBox="0 0 64 64"><defs><radialGradient id="g-echo" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#ffd7ef"/><stop offset="60%" stop-color="#ff9ad2"/><stop offset="100%" stop-color="#ff6ab1"/></radialGradient></defs><circle cx="32" cy="32" r="22" fill="url(#g-echo)"/><g fill="none" stroke="#fff" stroke-width="3"><circle cx="32" cy="32" r="6"/><circle cx="32" cy="32" r="10" opacity=".7"/><circle cx="32" cy="32" r="14" opacity=".4"/></g></symbol>
+
+<symbol id="emo-light" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-light-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-light-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-love" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-love-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-love-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-laugh" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-laugh-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-laugh-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-star" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-star-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-star-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-blush" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-blush-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-blush-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-fear" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-fear-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-fear-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-shock" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-shock-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-shock-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-proud" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-proud-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-proud-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-happy" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-happy-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-happy-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-meh" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-meh-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-meh-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-shy" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-shy-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-shy-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-wow" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-wow-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-wow-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-up" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-up-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-up-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-down" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-down-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-down-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-think" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-think-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-think-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-kiss" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-kiss-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-kiss-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-bow" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-bow-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-bow-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-heart" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-heart-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-heart-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-light2" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-light2-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-light2-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-wave" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-wave-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-wave-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-fire" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-fire-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-fire-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-spark" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-spark-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-spark-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-sun" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-sun-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-sun-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-moon" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-moon-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-moon-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-camera" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-camera-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-camera-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-video" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-video-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-video-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-mic" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-mic-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-mic-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-star2" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-star2-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-star2-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-trophy" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-trophy-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-trophy-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-luck" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-luck-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-luck-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-magic" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-magic-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-magic-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-dream" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-dream-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-dream-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-sky" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-sky-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-sky-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-cloud" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-cloud-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-cloud-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-earth" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-earth-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-earth-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-portal" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-portal-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-portal-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="emo-holo" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="emo-holo-g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#aee7ff"/>
+      <stop offset="75%" stop-color="#65ffd1"/>
+      <stop offset="100%" stop-color="#8ab6ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="20" fill="url(#emo-holo-g)"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="26" cy="28" r="2.8" fill="#fff"/><circle cx="38" cy="28" r="2.8" fill="#fff"/>
+  <path d="M24 38 Q32 44 40 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+</svg>

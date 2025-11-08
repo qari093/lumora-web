@@ -1,0 +1,118 @@
+
+:root{ --holo-intensity:1; --holo-hue:0deg; }
+
+/* Tile + label */
+.emoji-tile{display:grid;place-items:center;gap:8px;width:92px;height:110px;border-radius:18px;background:rgba(255,255,255,.75);box-shadow:0 8px 26px rgba(0,0,0,.12);backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%);border:1px solid rgba(0,0,0,.06)}
+.emoji-label{font-size:12px;opacity:.75;font-weight:600;user-select:none}
+
+/* Emoji base */
+.emoji,.holo-emoji{width:64px;height:64px;border-radius:14px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 120% at 25% 20%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 35%, rgba(255,255,255,0) 60%),
+    radial-gradient(120% 120% at 70% 80%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%),
+    conic-gradient(from 210deg, #ffd3e6, #d2e7ff, #d4ffe7, #fff2c4, #ffd3e6);
+  filter:hue-rotate(var(--holo-hue));
+  box-shadow:0 0 0 1px rgba(0,0,0,.06) inset,0 6px 14px rgba(0,0,0,.12);
+  transition:transform .25s ease,filter .25s ease,box-shadow .25s ease;
+}
+.emoji:hover,.holo-emoji:hover{ transform:translateY(-3px) scale(1.03) }
+
+/* Gloss sweep */
+.emoji::before,.holo-emoji::before{content:"";position:absolute;inset:-30% -30%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.65) 50%, rgba(255,255,255,0) 70%);
+  transform:translateX(-60%) rotate(15deg);mix-blend-mode:screen;
+  animation:glossSweep calc(2.8s/var(--holo-intensity)) ease-in-out infinite;
+}
+
+/* Aura */
+.emoji::after,.holo-emoji::after{content:"";position:absolute;inset:-10%;
+  background:radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.8), rgba(255,255,255,0) 60%),
+             conic-gradient(from 0deg, rgba(255,0,160,.15), rgba(0,160,255,.15), rgba(0,255,160,.15), rgba(255,200,0,.15), rgba(255,0,160,.15));
+  mix-blend-mode:screen;opacity:.35;pointer-events:none;filter:blur(10px);
+  animation:auraFlow calc(6s/var(--holo-intensity)) linear infinite;
+}
+
+/* Sprite strokes glow */
+.emoji use,.emoji *,.holo-emoji use,.holo-emoji *{
+  stroke:#fff;stroke-width:2.6;paint-order:stroke fill;
+  filter:drop-shadow(0 0 calc(2px*var(--holo-intensity)) rgba(255,255,255,.9))
+         drop-shadow(0 0 calc(10px*var(--holo-intensity)) rgba(255,255,255,.45));
+  transition:filter .25s ease,stroke-width .25s ease;
+}
+
+/* Actions */
+@keyframes rotate360{to{transform:rotate(360deg)}}
+@keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes bloom{0%{filter:brightness(1)saturate(1)}50%{filter:brightness(1.25)saturate(1.25)}100%{filter:brightness(1)saturate(1)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(2deg)}75%{transform:rotate(-2deg)}}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+.act-rotate .emoji,.act-rotate .holo-emoji{animation:rotate360 calc(6s/var(--holo-intensity)) linear infinite;transform-origin:50% 50%}
+.act-bounce .emoji,.act-bounce .holo-emoji{animation:bounceY calc(1.5s/var(--holo-intensity)) ease-in-out infinite}
+.act-breathe .emoji,.act-breathe .holo-emoji{animation:breathe calc(2.2s/var(--holo-intensity)) ease-in-out infinite}
+.act-bloom .emoji,.act-bloom .holo-emoji{animation:bloom calc(1.8s/var(--holo-intensity)) ease-in-out infinite}
+.act-wiggle .emoji,.act-wiggle .holo-emoji{animation:wiggle calc(1.6s/var(--holo-intensity)) ease-in-out infinite}
+.act-float  .emoji,.act-float  .holo-emoji{animation:floatSlow calc(3.6s/var(--holo-intensity)) ease-in-out infinite}
+
+/* LIGHT emoji – screen-wide flash */
+.light-flash{position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.95), rgba(255,255,255,.75) 40%, rgba(255,255,255,0) 70%);
+  opacity:0;transition:opacity .25s ease;mix-blend-mode:screen}
+.light-flash.on{animation:screenLight 1.2s ease-out forwards}
+@keyframes screenLight{0%{opacity:0;backdrop-filter:none}20%{opacity:.95;backdrop-filter:blur(2px) brightness(1.08)}60%{opacity:.75;backdrop-filter:blur(3px) brightness(1.04)}100%{opacity:0;backdrop-filter:none}}
+
+/* Gloss & aura motion */
+@keyframes glossSweep{0%,100%{transform:translateX(-60%) rotate(15deg)}50%{transform:translateX(60%) rotate(15deg)}}
+@keyframes auraFlow{0%{filter:blur(10px) hue-rotate(0)}100%{filter:blur(10px) hue-rotate(360deg)}}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion:reduce){
+  .emoji,.holo-emoji,.emoji::before,.emoji::after,.holo-emoji::before,.holo-emoji::after{
+    animation:none!important;transition:none!important;
+  }
+}
+
+/* === Lumora Emoji Grid (added) ========================================== */
+.emoji-page{ display:grid; place-items:center; padding:24px; }
+.emoji-page h1{ margin:0 0 6px; }
+.emoji-page .sub{ opacity:.65; margin:0 0 16px; font-size:13px; }
+
+/* Treat either .emoji-grid or .emoji-wrap as the grid container */
+.emoji-grid, .emoji-wrap{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  width: min(1080px, 96vw);
+}
+
+/* Tiles */
+.emoji-tile{
+  display:grid; place-items:center; gap:8px;
+  padding:12px; background:rgba(255,255,255,.85);
+  border-radius:18px; border:1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.emoji-tile:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,.18); }
+.emoji-label{ font-size:12px; opacity:.7; }
+.emoji{ width:64px; height:64px; }
+
+/* Small screens */
+@media (max-width: 720px){
+  .emoji-grid, .emoji-wrap{ grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
+  .emoji{ width:54px; height:54px; }
+}
+
+/* Actions on the current wrapper (breath/rotate/bloom) */
+.act-breathe .emoji{ animation: breathe 2.8s ease-in-out infinite; }
+@keyframes breathe{ 0%,100%{ transform:scale(1); filter:saturate(100%);} 50%{ transform:scale(1.04); filter:saturate(115%);} }
+.act-rotate .emoji{ animation: spin 6s linear infinite; transform-origin:50% 50%; }
+@keyframes spin{ to{ transform: rotate(360deg) } }
+.act-bloom  .emoji{ animation: bloom 1.8s ease-in-out infinite; }
+@keyframes bloom{ 0%,100%{ filter: drop-shadow(0 0 4px rgba(255,255,255,.65)) } 50%{ filter: drop-shadow(0 0 12px rgba(255,255,255,.95)) } }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .emoji,.emoji-tile{ animation:none !important; transition:none !important; }
+}

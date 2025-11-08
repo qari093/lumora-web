@@ -1,0 +1,62 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+type EMML = {
+  type: string;
+  emotion?: string | null;
+  intensity?: number | null;
+  meta?: Record<string, any> | null;
+  userId?: string | null;
+  source?: string | null;
+};
+
+const API_KEY = process.env.EMML_API_KEY || "DEMO_KEY";
+
+export async function GET() {
+  return NextResponse.json({
+    ok: true,
+    route: "/api/emotion/ingest",
+    method: "GET",
+    hint: "Use POST with JSON body",
+    shape: { events: [{ type: "mood", emotion: "calm", intensity: 0.7, meta: {} }] },
+  });
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const key = req.headers.get("x-api-key") || "";
+    if (API_KEY && key !== API_KEY) {
+      return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
+    }
+
+    const json = (await req.json().catch(() => null)) as { events?: EMML[] } | null;
+    if (!json || !Array.isArray(json.events) || json.events.length === 0) {
+      return NextResponse.json({ ok: false, error: "invalid-payload" }, { status: 400 });
+    }
+
+    const records = json.events
+      .map((e) => ({
+        type: String(e.type || "").slice(0, 120),
+        emotion: e.emotion ? String(e.emotion).slice(0, 80) : null,
+        intensity: typeof e.intensity === "number" ? Math.max(0, Math.min(1, e.intensity)) : null,
+        meta: e.meta ?? null,
+        userId: e.userId ? String(e.userId).slice(0, 120) : null,
+        source: e.source ? String(e.source).slice(0, 80) : "api-key",
+      }))
+      .filter((r) => r.type);
+
+    if (records.length === 0) {
+      return NextResponse.json({ ok: false, error: "no-valid-events" }, { status: 400 });
+    }
+
+    const result = await prisma.emmlEvent.createMany({ data: records }); // no skipDuplicates
+
+    return NextResponse.json({
+      ok: true,
+      accepted: result.count ?? records.length,
+      rejected: Math.max(0, records.length - (result.count ?? records.length)),
+    });
+  } catch (e: any) {
+    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
+  }
+}

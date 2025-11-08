@@ -1,0 +1,4 @@
+:root{--ico-stroke:#0b0b0f;--ico-accent:#6dd3ff;--sw:2;--sw-bold:3;}
+.icon,.icon svg{width:64px;height:64px;display:inline-block}
+.icon use,.icon *{fill:none;stroke:var(--ico-stroke);stroke-width:var(--sw);stroke-linecap:round;stroke-linejoin:round}
+.icon-btn{background:transparent;border:0;padding:12px;border-radius:16px;cursor:pointer;}

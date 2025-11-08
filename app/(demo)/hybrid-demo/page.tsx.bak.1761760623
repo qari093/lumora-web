@@ -1,0 +1,228 @@
+"use client";
+
+import React, { useEffect, useMemo, useState } from "react";
+import StatusBadge from "@/app/_modules/hybrid/StatusBadge";
+import {
+  getProviders,
+  getCredits,
+  generate as sdkGenerate,
+  type HybridType,
+} from "@/app/_modules/hybrid/sdk";
+
+type GenResp = { ok: boolean; type?: "emoji" | "avatar"; provider?: string; url?: string; error?: string };
+type ProvidersCfg = {
+  emoji: { default: string; providers: string[] };
+  avatar: { default: string; providers: string[] };
+  flags: { freeDaily: number; rollover: boolean; mirrorAI: boolean; renderX: boolean };
+};
+
+export const dynamic = "force-dynamic";
+
+export default function Page() {
+  const [loading, setLoading] = useState(false);
+  const [type, setType] = useState<HybridType>("emoji");
+  const [text, setText] = useState("smile");
+  const [provider, setProvider] = useState<string>("local");
+  const [img, setImg] = useState<string | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [providers, setProviders] = useState<ProvidersCfg | null>(null);
+  const [credits, setCredits] = useState<number | null>(null);
+
+  // Initial load: providers + credits
+  useEffect(() => {
+    (async () => {
+      try {
+        const cfg = await getProviders();
+        if (cfg) {
+          setProviders(cfg);
+          setProvider(cfg.emoji?.default || "local");
+        }
+      } catch {}
+      try {
+        const c = await getCredits("demo");
+        if (typeof c === "number") setCredits(c);
+      } catch {}
+    })();
+  }, []);
+
+  // Provider list by type
+  const providerOptions = useMemo(() => {
+    if (!providers) return ["local"];
+    const list = type === "emoji" ? providers.emoji.providers : providers.avatar.providers;
+    return list && list.length ? list : ["local"];
+  }, [providers, type]);
+
+  async function doGenerate() {
+    setLoading(true);
+    setErr(null);
+    setImg(null);
+    try {
+      // Server already spends 1 credit atomically in /api/hybrid/generate.
+      const j: GenResp = await sdkGenerate(type, text, provider);
+      if (!j.ok) throw new Error(j.error || "Generation failed");
+      setImg(j.url || null);
+
+      // Refresh credits after successful generation
+      const c = await getCredits("demo");
+      if (typeof c === "number") setCredits(c);
+    } catch (e: any) {
+      setErr(String(e?.message || e));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const disableGenerate =
+    loading || credits === null || (typeof credits === "number" && credits <= 0) || text.trim().length === 0;
+
+  return (
+    <main style={{ padding: 24, color: "#fff", fontFamily: "ui-sans-serif, system-ui", minHeight:"100vh", background:"#0b0d10", color:"#e6f0ff", fontFamily:"ui-sans-serif, system-ui" }}>
+      <h1 style={{ marginBottom: 8 }}>Hybrid Emoji + Avatar (Demo)</h1>
+      <p style={{ opacity: 0.7, marginBottom: 16 }}>
+        Route group <code>(demo)</code> is not visible in the URL. You are on <code>/hybrid</code>.
+      </p>
+
+      <StatusBadge />
+
+      <section style={{ display:"grid", gridTemplateColumns:"1fr", gap:12, maxWidth:720, margin:"0 auto", background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:12, padding:16 }}>
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Type</span>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value as HybridType)}
+              style={selectStyle}
+              disabled={loading}
+            >
+              <option value="emoji">emoji</option>
+              <option value="avatar">avatar</option>
+            </select>
+          </label>
+
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Provider</span>
+            <select
+              value={provider}
+              onChange={(e) => setProvider(e.target.value)}
+              style={selectStyle}
+              disabled={loading || !providers}
+            >
+              {providerOptions.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label style={{ display: "grid", gap: 6, flex: 1, minWidth: 220 }}>
+            <span style={{ fontSize: 12, opacity: 0.8 }}>Prompt</span>
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Describe the emoji/avatar…"
+              style={inputStyle}
+              disabled={loading}
+            />
+          </label>
+
+          <button onClick={doGenerate} disabled={disableGenerate} style={btnStyle}>
+            {loading ? "Generating…" : credits !== null ? `Generate (−1 • ${credits} left)` : "Generate"}
+          </button>
+        </div>
+
+        <div style={{ fontSize: 13, opacity: 0.85, display: "flex", gap: 14, flexWrap: "wrap" }}>
+          <span>
+            Credits: <strong>{credits ?? "—"}</strong>
+          </span>
+          {providers && (
+            <>
+              <span>
+                Emoji default: <code>{providers.emoji.default}</code>
+              </span>
+              <span>
+                Avatar default: <code>{providers.avatar.default}</code>
+              </span>
+              <span>
+                Flags: freeDaily=<code>{providers.flags.freeDaily}</code>, rollover=
+                <code>{String(providers.flags.rollover)}</code>, mirrorAI=
+                <code>{String(providers.flags.mirrorAI)}</code>, renderX=
+                <code>{String(providers.flags.renderX)}</code>
+              </span>
+            </>
+          )}
+        </div>
+
+        {err && (
+          <div style={{ color: "#ff8899", fontSize: 14, marginTop: 6 }}>
+            ⚠️ {err}
+          </div>
+        )}
+
+        {img && (
+          <div
+            style={{
+              marginTop: 8,
+              display: "grid",
+              placeItems: "center",
+              padding: 16,
+              background: "rgba(255,255,255,0.04)",
+              borderRadius: 12,
+            }}
+          >
+            <img
+              src={img}
+              alt="Generated"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: 10, background: "#111" }}
+            />
+            <div style={{ fontSize: 12, opacity: 0.7, marginTop: 8 }}>
+              URL: <code style={{ wordBreak: "break-all" }}>{img}</code>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section style={{ marginTop: 18, fontSize: 13, opacity: 0.85 }}>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <a style={linkStyle} href="/api/hybrid/status" target="_blank">/api/hybrid/status</a>
+          <a style={linkStyle} href="/api/hybrid/providers" target="_blank">/api/hybrid/providers</a>
+          <a style={linkStyle} href="/api/hybrid/credits?user=demo" target="_blank">/api/hybrid/credits?user=demo</a>
+          <a style={linkStyle} href="/api/hybrid/placeholder/emoji?t=hello" target="_blank">/api/hybrid/placeholder/emoji?t=hello</a>
+          <a style={linkStyle} href="/api/hybrid/placeholder/avatar?t=you" target="_blank">/api/hybrid/placeholder/avatar?t=you</a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+const inputStyle: React.CSSProperties = {
+  background: "rgba(255,255,255,0.08)",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: 10,
+  padding: "10px 12px",
+  color: "#fff",
+  outline: "none",
+};
+
+const selectStyle: React.CSSProperties = {
+  ...inputStyle,
+  padding: "10px 10px",
+};
+
+const btnStyle: React.CSSProperties = {
+  padding: "10px 14px",
+  borderRadius: 12,
+  border: "1px solid rgba(255,255,255,0.25)",
+  background: "linear-gradient(90deg,#6ef,#f9f)",
+  color: "#111",
+  fontWeight: 800,
+  cursor: "pointer",
+};
+
+const linkStyle: React.CSSProperties = {
+  padding: "6px 10px",
+  borderRadius: 8,
+  border: "1px solid rgba(255,255,255,0.2)",
+  background: "rgba(255,255,255,0.06)",
+  color: "#fff",
+  textDecoration: "none",
+};

@@ -1,48 +1,28 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../src/lib/prisma";
-import { CURRENCY } from "../../../../src/lib/billing";
+import fs from "fs/promises";
+import path from "path";
 
-export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const ownerId = url.searchParams.get("ownerId") || "";
-  const currency = url.searchParams.get("currency") || CURRENCY;
-  const limit = Math.min(100, Math.max(1, Number(url.searchParams.get("limit") || 20)));
+type Entry = { id: string; ownerId: string; delta: number; reason?: string; meta?: any; ts: number; };
+const DATA_FILE = path.join(process.cwd(), ".data", "ledger.json");
 
-  if (!ownerId) {
-    return NextResponse.json({ ok: false, error: "Missing ownerId" }, { status: 400 });
-  }
-
-  const wallet = await prisma.wallet.findUnique({
-    where: { ownerId_currency: { ownerId, currency } },
-    select: { id: true, ownerId: true, currency: true, balanceCents: true },
-  });
-
-  if (!wallet) {
-    return NextResponse.json({ ok: true, ownerId, currency, entries: [], balanceCents: 0 }, { status: 200 });
-  }
-
-  const entries = await prisma.ledgerEntry.findMany({
-    where: { walletId: wallet.id },
-    orderBy: { createdAt: "desc" },
-    take: limit,
-    select: {
-      id: true,
-      deltaCents: true,
-      reason: true,
-      adId: true,
-      event: true,
-      createdAt: true,
-    },
-  });
-
-  return NextResponse.json({
-    ok: true,
-    ownerId,
-    currency,
-    balanceCents: wallet.balanceCents,
-    count: entries.length,
-    entries,
-  });
+async function readAll(): Promise<Entry[]> {
+  try {
+    const buf = await fs.readFile(DATA_FILE, "utf8");
+    const parsed = JSON.parse(buf);
+    return Array.isArray(parsed?.entries) ? parsed.entries as Entry[] : [];
+  } catch { return []; }
 }
 
-export const runtime = "nodejs";
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const ownerId = searchParams.get("ownerId") || "";
+    const limit = Math.max(1, Math.min(100, parseInt(searchParams.get("limit") || "20", 10) || 20));
+    const after = parseInt(searchParams.get("after") || "0", 10) || 0;
+    if (!ownerId) return NextResponse.json({ ok: false, error: "ownerId is required" }, { status: 400 });
+    const items = (await readAll()).filter(e => e.ownerId === ownerId && e.ts > after).sort((a,b)=>b.ts-a.ts).slice(0, limit);
+    return NextResponse.json({ ok: true, ownerId, items });
+  } catch (e:any) {
+    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
+  }
+}

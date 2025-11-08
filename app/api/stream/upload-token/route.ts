@@ -1,65 +1,48 @@
-import { NextRequest, NextResponse } from "next/server";
-import { upsertVideo } from "@/src/lib/stream/store";
-import { reqId } from "@/src/lib/reqid";
+// app/api/stream/upload-token/route.ts
+import { NextResponse } from 'next/server';
 
-type CFDirectUploadResp = { result?: { uploadURL: string; uid: string }; success: boolean; errors?: any[] };
+export const runtime = 'nodejs';
 
-export async function POST(req: NextRequest) {
-  const id = reqId();
-  const ACC = process.env.CF_STREAM_ACCOUNT_ID || process.env.CLOUDFLARE_ACCOUNT_ID;
-  const TOK = process.env.CF_STREAM_TOKEN || process.env.CLOUDFLARE_STREAM_TOKEN; // API Token with Stream:Edit
-  const MAX_S = Number(process.env.STREAM_MAX_SECONDS || "180"); // default 3 minutes
-
-  if (!ACC || !TOK) {
-    return NextResponse.json({
-      ok: false,
-      disabled: true,
-      error: "STREAM_NOT_CONFIGURED",
-      need: ["CF_STREAM_ACCOUNT_ID", "CF_STREAM_TOKEN"],
-      requestId: id
-    }, { status: 200, headers: { "x-request-id": id } });
-  }
-
-  let payload: any = {};
-  try { payload = await req.json(); } catch {}
-  const requireSignedURLs = !!payload?.requireSigned || false;
-
+// POST { ownerId: string }
+export async function POST(req: Request) {
   try {
-    const resp = await fetch(`https://api.cloudflare.com/client/v4/accounts/${ACC}/stream/direct_upload`, {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${TOK}`, "Content-Type": "application/json" },
+    const { ownerId } = await req.json().catch(() => ({}));
+    if (!ownerId) {
+      return NextResponse.json({ ok: false, error: 'ownerId is required' }, { status: 400 });
+    }
+
+    const accountId = process.env.CF_ACCOUNT_ID;
+    const token = process.env.CF_API_TOKEN;
+    if (!accountId || !token) {
+      return NextResponse.json({ ok: false, error: 'Missing CF_ACCOUNT_ID/CF_API_TOKEN' }, { status: 500 });
+    }
+
+    const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/direct_upload`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        // These fields are supported by Cloudflare Stream direct uploads
-        maxDurationSeconds: MAX_S,
-        requireSignedURLs
-      })
+        maxDurationSeconds: 600,
+        creator: ownerId,
+      }),
     });
-    const data = await resp.json() as CFDirectUploadResp;
 
-    if (!resp.ok || !data?.success || !data?.result?.uploadURL) {
-      return NextResponse.json({
-        ok: false,
-        error: "CF_API_ERROR",
-        status: resp.status,
-        data,
-        requestId: id
-      }, { status: 200, headers: { "x-request-id": id } });
+    const cf = await res.json();
+    if (!cf?.success) {
+      return NextResponse.json({ ok: false, error: 'Cloudflare API failed', cf }, { status: 502 });
     }
 
-    // seed store
-    if (data.result?.uid) {
-      upsertVideo(data.result.uid, { status: "created" });
-    }
-
+    // cf.result.uploadURL is the one-time direct upload URL
     return NextResponse.json({
       ok: true,
-      uploadURL: data.result.uploadURL,
-      uid: data.result.uid,
-      maxSeconds: MAX_S,
-      requestId: id
-    }, { status: 200, headers: { "x-request-id": id } });
-  } catch (e:any) {
-    return NextResponse.json({ ok:false, error:"NETWORK_OR_FETCH_ERROR", message:String(e?.message||e), requestId:id }, { status:200, headers:{ "x-request-id": id } });
+      ownerId,
+      uploadURL: cf.result?.uploadURL,
+      cfResult: cf.result,
+      requestId: Math.random().toString(36).slice(2),
+    });
+  } catch (err: any) {
+    return NextResponse.json({ ok: false, error: String(err?.message || err) }, { status: 500 });
   }
 }
-export const dynamic = "force-dynamic";
