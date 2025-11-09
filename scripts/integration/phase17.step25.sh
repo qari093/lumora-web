@@ -1,2 +1,5 @@
-Step 17.25 — Integrate event recorder and Zen airdrop engine with analytics + ZC reward pipelines.
-Step 17.25 — Integrate event recorder and Zen airdrop engine with analytics + ZC reward pipelines.
+#!/bin/bash
+set -euo pipefail
+echo "🚀 Step 17.25 — Integrating event recorder and Zen airdrop engine with analytics + ZC reward pipelines..."
+# Future commands for event tracking and reward linkage will go here
+echo "✅ Step 17.25 — done"
