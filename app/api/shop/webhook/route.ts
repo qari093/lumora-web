@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const prisma: any = new PrismaClient();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: "2023-10-16" });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: "2024-06-20" });
 
 async function creditFromCheckout(eventId: string, session: Stripe.Checkout.Session) {
   // Idempotency (safe even if StripeEvent table doesn’t exist)

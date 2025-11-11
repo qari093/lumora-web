@@ -1,0 +1,12 @@
+Step 25.8 — LumaSpace debug page (server component) smoke test (PORT=3000)
+Checking http://127.0.0.1:3000/lumaspace/debug
+HTTP/1.1 200 OK
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Accept-Encoding
+link: </_next/static/css/app/layout.css?v=1762787479140>; rel=preload; as="style"
+Cache-Control: no-store, must-revalidate
+X-Powered-By: Next.js
+Content-Type: text/html; charset=utf-8
+Date: Mon, 10 Nov 2025 15:11:19 GMT
+Connection: keep-alive
+--- body preview ---
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/app/layout.css?v=1762787479140" data-precedence="next_static/css/app/layout.css"/><l

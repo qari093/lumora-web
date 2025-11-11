@@ -1,0 +1,21 @@
+Step 25.11 — LumaSpace state contract verifier (PORT=3000)
+Checking http://127.0.0.1:3000/api/lumaspace/state
+Response headers:
+HTTP/1.1 200 OK
+vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch
+content-type: application/json
+Date: Mon, 10 Nov 2025 15:25:13 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+--- raw body (first 260 bytes) ---
+{"ok":true,"schemaVersion":1,"mode":"demo","version":"1.0.0","updatedAt":"2025-11-10T15:25:13.310Z","sections":[{"id":"reflection-journal","label":"Reflection Journal","enabled":true,"weight":1},{"id":"shadow-journal","label":"Shadow Journal","enabled":true,"w
+Running jq-based shape checks...
+✅ LumaSpace state contract OK (schemaVersion 1)
+Integration notes:
+- This script now locks schemaVersion=1 for /api/lumaspace/state.
+- Bump schemaVersion and adjust checks when evolving the payload format.
+Optimization notes:
+- When introducing v2+, keep this endpoint backward compatible or expose /state/v2.
+Step 25.11 — done

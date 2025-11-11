@@ -1,4 +1,4 @@
-
+"use client";
 function openShowsCsv(slug: string){
   try{
     const u = `/api/celebrations/${slug}/shows/csv`;
@@ -6,7 +6,6 @@ function openShowsCsv(slug: string){
   }catch{}
 }
 
-"use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 

@@ -1,3 +1,5 @@
+export const config = { api: { bodyParser: false } };
+
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
@@ -6,7 +8,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-12-18.acacia",
+  apiVersion: "2024-06-20",
 });
 
 export async function POST(req: Request) {
@@ -79,4 +81,4 @@ export async function POST(req: Request) {
 }
 
 // Stripe needs the raw body, so disable Nexts body parsing for this route
-export const config = { api: { bodyParser: false } } as any;
+

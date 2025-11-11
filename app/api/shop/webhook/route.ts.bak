@@ -1,83 +1,107 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { PrismaClient } from "@prisma/client";
 
-// Ensure Node runtime + dynamic to avoid edge body transforms
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2023-10-16",
-});
+const prisma: any = new PrismaClient();
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: "2023-10-16" });
 
-/**
- * Stripe requires the EXACT raw request body for signature verification.
- * With App Router, use req.text() and DO NOT parse JSON before constructEvent.
- */
+async function creditFromCheckout(eventId: string, session: Stripe.Checkout.Session) {
+  // Idempotency (safe even if StripeEvent table doesn’t exist)
+  try {
+    const existing = await prisma.stripeEvent?.findUnique?.({ where: { id: eventId } });
+    if (existing) return { skipped: true, reason: "already-processed" };
+  } catch {}
+
+  const ownerId =
+    (session.metadata && (session.metadata as any).ownerId) ||
+    session.client_reference_id ||
+    null;
+
+  const amountCents = typeof session.amount_total === "number" ? session.amount_total : 0;
+
+  if (!ownerId || !amountCents) {
+    try {
+      await prisma.stripeEvent?.create?.({
+        data: { id: eventId, type: "checkout.session.completed", note: "missing ownerId/amount_total" },
+      });
+    } catch {}
+    return { skipped: true, reason: "missing-owner-or-amount", ownerId, amountCents };
+  }
+
+  const result = await prisma.$transaction(async (tx: any) => {
+    // Ensure wallet exists (EUR)
+    let wallet = await tx.wallet.findFirst({ where: { ownerId: String(ownerId), currency: "EUR" } });
+    if (!wallet) {
+      wallet = await tx.wallet.create({
+        data: { ownerId: String(ownerId), currency: "EUR", balanceCents: 0 },
+      });
+    }
+
+    // Record event if table exists
+    try { await tx.stripeEvent?.create?.({ data: { id: eventId, type: "checkout.session.completed" } }); } catch {}
+
+    // Create ledger entry (connect via wallet.id)
+    const ledger = await tx.walletLedger.create({
+      data: {
+        wallet: { connect: { id: wallet.id } },
+        type: "CREDIT",
+        amountCents,
+        refType: "STRIPE",
+        refId: session.id,
+        note: "Stripe checkout",
+      },
+    });
+
+    // Increment wallet balance
+    await tx.wallet.update({
+      where: { id: wallet.id },
+      data: { balanceCents: { increment: amountCents } },
+    });
+
+    return { credited: true, ownerId, walletId: wallet.id, amountCents, ledgerId: ledger.id };
+  });
+
+  return result;
+}
+
 export async function POST(req: NextRequest) {
   const whsec = process.env.STRIPE_WEBHOOK_SECRET || "";
-  const sig = req.headers.get("stripe-signature");
-  const rawBody = await req.text();
+  const sig = req.headers.get("stripe-signature") || "";
+  const raw = await req.text();
 
-  if (!whsec) {
-    console.error("Missing STRIPE_WEBHOOK_SECRET in env");
-    return new NextResponse("Server misconfigured", { status: 500 });
-  }
-  if (!sig) {
-    return new NextResponse("Missing signature", { status: 400 });
-  }
+  if (!whsec) return new NextResponse("Server misconfigured (no STRIPE_WEBHOOK_SECRET)", { status: 500 });
+  if (!sig)   return new NextResponse("Missing signature", { status: 400 });
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(rawBody, sig, whsec);
+    event = stripe.webhooks.constructEvent(raw, sig, whsec);
   } catch (err: any) {
-    console.error("Webhook signature verification failed:", err?.message || err);
-    return new NextResponse(
-      "Webhook Error: " + (err?.message || "sig verify failed"),
-      { status: 400 }
-    );
+    console.error("WEBHOOK_SIG_VERIFY_FAILED", err?.message || err);
+    return new NextResponse("Signature verify failed", { status: 400 });
   }
 
   try {
     switch (event.type) {
       case "checkout.session.completed": {
         const s = event.data.object as Stripe.Checkout.Session;
-        // Example: map to your ledger/wallet system using metadata/client_reference_id
-        const ownerId =
-          (s.metadata && s.metadata.ownerId) ||
-          s.client_reference_id ||
-          "UNKNOWN";
-        const amountCents =
-          typeof s.amount_total === "number" ? s.amount_total : 0;
-
-        console.log(
-          "✅ checkout.session.completed",
-          { ownerId, amountCents, session: s.id }
-        );
-
-        // TODO: Replace this with your actual credit function or internal API call.
-        // await creditWallet(ownerId, amountCents, "Stripe checkout");
+        const res = await creditFromCheckout(event.id, s);
+        console.log("CREDIT_RESULT", res);
         break;
       }
-
       case "payment_intent.succeeded": {
         const pi = event.data.object as Stripe.PaymentIntent;
-        console.log("✅ payment_intent.succeeded", { id: pi.id, amount: pi.amount });
+        console.log("PI_OK", { id: pi.id, amount: pi.amount });
         break;
       }
-
-      case "payment_intent.payment_failed": {
-        const pi = event.data.object as Stripe.PaymentIntent;
-        console.warn("⚠️ payment_intent.payment_failed", pi.last_payment_error?.message);
-        break;
-      }
-
       default:
-        console.log("ℹ️ Unhandled event type:", event.type);
+        console.log("UNHANDLED_EVENT", event.type);
     }
-
     return NextResponse.json({ received: true });
   } catch (err: any) {
-    console.error("❌ Webhook handler error:", err?.message || err);
+    console.error("WEBHOOK_HANDLER_ERROR", err?.message || err);
     return new NextResponse("Webhook handler error", { status: 500 });
   }
 }

@@ -1,0 +1,8 @@
+Step 25.7 — LumaSpace debug page integration (PORT=3000)
+Checking http://127.0.0.1:3000/lumaspace/debug
+curl: (22) The requested URL returned error: 404
+Request failed for http://127.0.0.1:3000/lumaspace/debug (see log)
+
+Optimization notes:
+- Later: gate /lumaspace/debug behind admin/dev guard or feature flag.
+- Optionally read state via server component + RSC for lower client work.
