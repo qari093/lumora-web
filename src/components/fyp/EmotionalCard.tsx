@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { videoAction, videoImpression } from "@/lib/track";
+import { videoAction, videoImpression } from "../../lib/track.js";
 
 type Props = { src: string; title?: string; videoId?: string; poster?: string };
 
@@ -44,7 +44,7 @@ export default function EmotionalCard({ src, title, videoId }: Props) {
         const onScreen = ents.some((e) => e.isIntersecting);
         if (onScreen) {
           v.play().catch(() => {});
-          videoImpression(videoId, { src });
+          if (videoId) videoImpression(videoId, { src });
         } else {
           v.pause();
         }
@@ -64,9 +64,9 @@ export default function EmotionalCard({ src, title, videoId }: Props) {
       setEnergy((e) => Math.min(9999, e + Math.max(1, Math.round(1 * v.playbackRate))));
       t = window.setTimeout(tick, 1000);
     };
-    const onPlay = () => { if (t == null) tick(); videoAction(videoId, "play"); };
-    const onPause = () => { if (t != null) { window.clearTimeout(t); t = null; } videoAction(videoId, "pause"); };
-    const onEnded = () => { onPause(); videoAction(videoId, "ended"); };
+    const onPlay = () => { if (t == null) tick(); if (videoId) if (videoId) videoAction(videoId, "play"); };
+    const onPause = () => { if (t != null) { window.clearTimeout(t); t = null; } if (videoId) if (videoId) videoAction(videoId, "pause"); };
+    const onEnded = () => { onPause(); if (videoId) if (videoId) videoAction(videoId, "ended"); };
 
     v.addEventListener("play", onPlay);
     v.addEventListener("pause", onPause);
@@ -86,20 +86,20 @@ export default function EmotionalCard({ src, title, videoId }: Props) {
     if (!v) return;
     v.currentTime = 0;
     v.play().catch(() => {});
-    videoAction(videoId, "replay");
+    if (videoId) if (videoId) videoAction(videoId, "replay");
   }, [videoId]);
 
   const skip = React.useCallback(() => {
     // for now just pause & log; your feed pager will move to next item
     videoRef.current?.pause();
-    videoAction(videoId, "skip");
+    if (videoId) if (videoId) videoAction(videoId, "skip");
   }, [videoId]);
 
   // like animation
   const [likedPulse, setLikedPulse] = React.useState(0);
   const like = React.useCallback(() => {
     setLikedPulse((n) => n + 1); // triggers CSS animation
-    videoAction(videoId, "like");
+    if (videoId) if (videoId) videoAction(videoId, "like");
   }, [videoId]);
 
   // keyboard shortcuts: L=like, R=replay, S=skip, Space=play/pause, ArrowUp/Down volume

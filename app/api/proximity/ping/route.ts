@@ -28,8 +28,8 @@ export async function POST(req: Request) {
 
     const res = NextResponse.json(payload, { status: 200 });
     res.headers.set("Cache-Control", "no-store");
-    res.cookies.set("geo_cell", cell.id, { path: "/", maxAge: 3600, sameSite: "Lax" });
-    res.cookies.set("geo_radius_km", String(radiusKm), { path: "/", maxAge: 3600, sameSite: "Lax" });
+    res.cookies.set("geo_cell", cell.id, { path: "/", maxAge: 3600, sameSite: "lax" });
+    res.cookies.set("geo_radius_km", String(radiusKm), { path: "/", maxAge: 3600, sameSite: "lax" });
     return res;
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });

@@ -1,0 +1,28 @@
+Step 2 — Lint + Typecheck start
+Running: npm run lint
+
+> lumora-web@0.1.0 lint
+> eslint
+
+(node:11515) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignoring-files
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.1
+
+ESLint couldn't find an eslint.config.(js|mjs|cjs) file.
+
+From ESLint v9.0.0, the default configuration file is now eslint.config.js.
+If you are using a .eslintrc.* file, please follow the migration guide
+to update your configuration file to the new format:
+
+https://eslint.org/docs/latest/use/configure/migration-guide
+
+If you still have problems after following the migration guide, please stop by
+https://eslint.org/chat/help to chat with the team.
+
+Lint: FAILED (exit 2) – see logs/phase25.step20.lint-typecheck.log
+type-check script not found in package.json (skipped)
+
+Step 2 — Lint + Typecheck done (see logs/phase25.step20.lint-typecheck.log)

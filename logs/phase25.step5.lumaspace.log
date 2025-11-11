@@ -1,0 +1,33 @@
+▶️ Step 25.5 — LumaSpace route smoke tests (PORT=3000)
+
+── LumaSpace index  (http://127.0.0.1:3000/lumaspace)
+HTTP/1.1 200 OK
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Accept-Encoding
+Cache-Control: no-store, must-revalidate
+X-Powered-By: Next.js
+Content-Type: text/html; charset=utf-8
+Date: Mon, 10 Nov 2025 15:01:24 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+--- body preview ---
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/app/layout.css?v=1762786884585" data-precedence="next_static/css/app/layout.css"/><l
+
+── My Space page  (http://127.0.0.1:3000/me/space)
+HTTP/1.1 200 OK
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Accept-Encoding
+Cache-Control: no-store, must-revalidate
+X-Powered-By: Next.js
+Content-Type: text/html; charset=utf-8
+Date: Mon, 10 Nov 2025 15:01:25 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+--- body preview ---
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/app/layout.css?v=1762786885701" data-precedence="next_static/css/app/layout.css"/><l
+
+── LumaSpace API ping  (http://127.0.0.1:3000/api/lumaspace/ping)
+curl: (22) The requested URL returned error: 404
+⚠️ Request failed for http://127.0.0.1:3000/api/lumaspace/ping (see log)
+
+── LumaSpace state API  (http://127.0.0.1:3000/api/lumaspace/state)
+curl: (22) The requested URL returned error: 404
+⚠️ Request failed for http://127.0.0.1:3000/api/lumaspace/state (see log)

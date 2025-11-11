@@ -27,7 +27,7 @@ export async function getBalance(ownerId: string, currency = CURRENCY) {
 
 export async function topup(ownerId: string, cents: number, reason = "topup", currency = CURRENCY) {
   const w = await ensureWallet(ownerId, currency);
-  const updated = await prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx: any) => {
     const nw = await tx.wallet.update({
       where: { id: w.id },
       data: { balanceCents: { increment: cents } },
@@ -49,7 +49,7 @@ export async function charge(
   if (cents <= 0) return getBalance(ownerId, currency);
   const w = await ensureWallet(ownerId, currency);
   if (w.balanceCents < cents) throw new Error("INSUFFICIENT_FUNDS");
-  const updated = await prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx: any) => {
     const nw = await tx.wallet.update({
       where: { id: w.id },
       data: { balanceCents: { decrement: cents } },

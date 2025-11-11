@@ -1,0 +1,29 @@
+Step 25.6 — LumaSpace API integration (PORT=3000)
+
+LumaSpace API ping  (http://127.0.0.1:3000/api/lumaspace/ping)
+HTTP/1.1 200 OK
+vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch
+content-type: application/json
+Date: Mon, 10 Nov 2025 15:07:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+--- body preview ---
+{"ok":true,"service":"LumaSpace","role":"health-ping","ts":"2025-11-10T15:07:21.920Z","unix":1762787241,"env":"development"}
+
+LumaSpace state API  (http://127.0.0.1:3000/api/lumaspace/state)
+HTTP/1.1 200 OK
+vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch
+content-type: application/json
+Date: Mon, 10 Nov 2025 15:07:22 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+--- body preview ---
+{"ok":true,"mode":"demo","version":"1.0.0","updatedAt":"2025-11-10T15:07:22.692Z","sections":[{"id":"reflection-journal","label":"Reflection Journal","enabled":true,"weight":1},{"id":"shadow-journal","label":"Shadow Journal","enabled":true,"weight":0.95},{"id"
+
+Optimization notes:
+- Cache /api/lumaspace/state for a few seconds if traffic grows.
+- Move mode/sections to DB or feature flags when wiring admin UI.

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import EnergyStormBanner from "./EnergyStormBanner";
+import EnergyStormBanner from "./EnergyStormBanner.js";
 
 const KEY = "lumora_storm_visible";
 

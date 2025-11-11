@@ -1,8 +1,0 @@
-legacy_pages_api/**
-src/**/*
-**/*backup*
-**/*.bak
-.disabled_routes/**
-prisma/**
-node_modules/**
-.next/**

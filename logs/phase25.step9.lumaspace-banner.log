@@ -1,0 +1,7 @@
+Step 25.9 — LumaSpace state banner component created
+Usage: import { LumaSpaceStateBanner } from "@/app/_components/lumaspace/state-banner";
+Then mount <LumaSpaceStateBanner compact /> or <LumaSpaceStateBanner /> in /lumaspace or /me/space layouts.
+No type-check script found, skipping TS validation.
+Optimization notes:
+- Later: lift LumaSpace state into a shared store or RSC to avoid repeated fetches.
+- Consider SWR/React Query if banner is widely reused.

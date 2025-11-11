@@ -41,3 +41,33 @@ export function reset(): boolean {
   STORE.clear();
   return true;
 }
+
+// HYBRID_STATE_STUB — fallback in-memory implementation
+type UserKey = string;
+
+const __hybridCredits = new Map<UserKey, number>();
+
+export function ensure(userId: UserKey): void {
+  if (!__hybridCredits.has(userId)) __hybridCredits.set(userId, 0);
+}
+
+export function addCredits(userId: UserKey, amount: number): number {
+  if (!Number.isFinite(amount) || amount <= 0) return getCredits(userId);
+  ensure(userId);
+  const next = getCredits(userId) + amount;
+  __hybridCredits.set(userId, next);
+  return next;
+}
+
+export function spendCredit(userId: UserKey, amount: number = 1): boolean {
+  ensure(userId);
+  const current = getCredits(userId);
+  if (current < amount || amount <= 0) return false;
+  __hybridCredits.set(userId, current - amount);
+  return true;
+}
+
+export function getCredits(userId: UserKey): number {
+  return __hybridCredits.get(userId) ?? 0;
+}
+

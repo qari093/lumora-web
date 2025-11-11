@@ -1,0 +1,33 @@
+Step 25.13 — running LumaSpace-focused tests
+Detected npm test script — running scoped LumaSpace tests…
+npx jest not available; falling back to npm test (all suites)
+
+> lumora-web@0.1.0 test
+> vitest run --reporter=basic
+
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.migration.test.ts:120:9
+Step 15.97 — migration spec loaded
+
+stdout | tests/state.store.persist.test.ts:129:9
+Step 15.105 — persist spec loaded
+
+ ✓ tests/state.store.persist.test.ts  (3 tests) 87ms
+ ✓ tests/state.store.edges.test.ts  (4 tests) 7ms
+ ✓ tests/state.store.migration.test.ts  (4 tests) 203ms
+ ✓ tests/state.store.test.ts  (3 tests) 36ms
+
+ Test Files  4 passed (4)
+      Tests  14 passed (14)
+   Start at  16:31:58
+   Duration  1.88s (transform 126ms, setup 42ms, collect 268ms, tests 333ms, environment 1ms, prepare 1.67s)
+
+Integration notes:
+- You can call scripts/integration/phase25.step13.sh in CI to run only LumaSpace tests.
+- If Jest is present, it uses --testPathPattern=lumaspace to scope runs.
+Optimization notes:
+- Later: split LumaSpace tests into fast/slow groups and tag them via Jest projects.
+- Consider adding snapshot tests for LumaSpaceStateBanner once UI stabilizes.
+Step 25.13 — done
