@@ -1,88 +1,72 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 
-/**
- * GET /api/ads/analytics/timeseries?bucket=minute&points=30&campaignId=...
- * Returns an array of { t, views, hovers, clicks, conversions, spendCents, rewardsCents }
- */
-export async function GET(req: Request) {
+export const dynamic = "force-dynamic";
+
+type AdsTimeseriesPoint = {
+  date: string;
+  impressions: number;
+  clicks: number;
+  conversions: number;
+  spend: number;
+};
+
+type AdsAnalyticsTimeseriesResponse = {
+  ok: true;
+  placeholder: boolean;
+  granularity: "day";
+  points: AdsTimeseriesPoint[];
+};
+
+function buildEmptyWindow(days: number): AdsTimeseriesPoint[] {
+  const out: AdsTimeseriesPoint[] = [];
+  const now = new Date();
+
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    out.push({
+      date: d.toISOString().slice(0, 10),
+      impressions: 0,
+      clicks: 0,
+      conversions: 0,
+      spend: 0,
+    });
+  }
+
+  return out;
+}
+
+export async function GET() {
   try {
-    const url = new URL(req.url);
-    const bucket = (url.searchParams.get("bucket") || "minute").toLowerCase(); // "minute" | "hour"
-    const points = Math.max(1, Math.min(500, Number(url.searchParams.get("points") || 30)));
-    const campaignId = url.searchParams.get("campaignId") || undefined;
-
-    const now = new Date();
-    const stepMs = bucket === "hour" ? 60 * 60 * 1000 : 60 * 1000;
-    const start = new Date(now.getTime() - points * stepMs);
-
-    // Fetch once per collection within overall window
-    const [evs, convs, vws] = await Promise.all([
-      prisma.adEvent.findMany({
-        where: { createdAt: { gte: start }, ...(campaignId ? { campaignId } : {}) },
-        select: { action: true, createdAt: true },
-      }),
-      prisma.adConversion.findMany({
-        where: { createdAt: { gte: start }, ...(campaignId ? { campaignId } : {}) },
-        select: { rewardCents: true, createdAt: true },
-      }),
-      prisma.cpvView.findMany({
-        where: { createdAt: { gte: start }, ...(campaignId ? { campaignId } : {}) },
-        select: { costCents: true, createdAt: true },
-      }),
-    ]);
-
-    // Initialize buckets
-    const series: { t: string; views: number; hovers: number; clicks: number; conversions: number; spendCents: number; rewardsCents: number }[] = [];
-    for (let i = 0; i < points; i++) {
-      const t = new Date(start.getTime() + i * stepMs);
-      series.push({
-        t: t.toISOString(),
-        views: 0,
-        hovers: 0,
-        clicks: 0,
-        conversions: 0,
-        spendCents: 0,
-        rewardsCents: 0,
-      });
-    }
-    const idx = (d: Date) => {
-      const i = Math.floor((d.getTime() - start.getTime()) / stepMs);
-      return i < 0 || i >= points ? -1 : i;
+    const days = 14;
+    const response: AdsAnalyticsTimeseriesResponse = {
+      ok: true,
+      placeholder: true,
+      granularity: "day",
+      points: buildEmptyWindow(days),
     };
 
-    // Fill event buckets
-    for (const e of evs) {
-      const i = idx(new Date(e.createdAt));
-      if (i < 0) continue;
-      if (e.action === "view") series[i].views++;
-      else if (e.action === "hover") series[i].hovers++;
-      else if (e.action === "click") series[i].clicks++;
-    }
-
-    // Fill conversion buckets
-    for (const c of convs) {
-      const i = idx(new Date(c.createdAt as any));
-      if (i < 0) continue;
-      series[i].conversions++;
-      series[i].rewardsCents += Number(c.rewardCents || 0);
-    }
-
-    // Fill spend buckets (CpvView.costCents)
-    for (const v of vws) {
-      const i = idx(new Date(v.createdAt as any));
-      if (i < 0) continue;
-      series[i].spendCents += Number(v.costCents || 0);
-    }
-
-    return NextResponse.json({
-      ok: true,
-      bucket,
-      points,
-      campaignId: campaignId || null,
-      series,
+    return NextResponse.json(response, {
+      status: 200,
+      headers: {
+        "x-lumora-analytics-source": "placeholder",
+        "cache-control": "no-store",
+      },
     });
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
+  } catch (err) {
+    console.error("ads/analytics/timeseries error", err);
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "ads_analytics_timeseries_failed",
+      },
+      {
+        status: 200,
+        headers: {
+          "x-lumora-analytics-source": "placeholder-error",
+          "cache-control": "no-store",
+        },
+      },
+    );
   }
 }
