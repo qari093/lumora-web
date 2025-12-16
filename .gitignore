@@ -44,3 +44,18 @@ prisma/dev.db*
 tests/*_report.json
 tests/perf.baseline.json
 app/layout.tsx.bak_*
+
+# Lumora security: env backups
+.env.backup_*
+
+# Lumora security: env files
+.env
+.env.*
+!.env.example
+!.env.*.example
+docs/mega/
+.lumora_mega_run
+docs/mega/mega_run_*.log
+
+# quarantine (generated)
+.quarantine/
