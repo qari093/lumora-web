@@ -59,3 +59,38 @@ docs/mega/mega_run_*.log
 
 # quarantine (generated)
 .quarantine/
+# Local SQLite (dev only)
+prisma/dev.db
+prisma/prisma/dev.db
+prisma/*.db
+prisma/*.db-journal
+prisma/*.db-wal
+prisma/*.db-shm
+prisma/prisma/*.db
+prisma/prisma/*.db-journal
+prisma/prisma/*.db-wal
+prisma/prisma/*.db-shm
+# SQLite artifacts (dev/ci only) — never commit
+prisma/**/*.db
+prisma/**/*.db-journal
+prisma/**/*.db-wal
+prisma/**/*.db-shm
+prisma/*.sqlite
+prisma/**/*.sqlite
+prisma/*.sqlite3
+prisma/**/*.sqlite3
+prisma/*.db*
+prisma/**/*.db*
+prisma/*.ci.db
+prisma/**/*.ci.db
+prisma/lumora.db
+prisma/prisma/lumora.ci.db
+# SQLite backup/temporary artifacts — never commit
+prisma/**/*.db.bak*
+prisma/**/*.sqlite.bak*
+prisma/**/*.sqlite3.bak*
+prisma/**/*.db.*
+prisma/**/*.sqlite.*
+prisma/**/*.sqlite3.*
+prisma/**/*lumora.db.bak*
+prisma/**/*dev.db.bak*
