@@ -564,19 +564,3 @@ model ReflectionJournal {
 
   @@index([worldId, createdAt])
 }
-
-model EmmlSnapshot {
-  health String
-  heatSampleSize Int
-  indicesTracked Int
-  marketsOnline Int
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
-  composite Json? @default("{}")
-  indicesJson Json @default("{}")
-  marketsJson Json @default("{}")
-  metaJson  Json @default("{}")
-
-  @@map("emml_snapshot")
-}

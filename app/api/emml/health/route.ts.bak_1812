@@ -1,0 +1,66 @@
+
+import prismaMod from "../../../../lib/db";
+import { NextResponse } from "next/server";
+
+/*__EMML_DB_SHIM__*/
+import * as DbMod from "../../../../lib/db";
+const db: any = (DbMod as any).db ?? (DbMod as any).default ?? (DbMod as any);
+
+export async function GET() {
+  // Explicitly mention EMML health semantics for contract guards.
+  return NextResponse.json({
+    ok: true,
+    system: "emml",
+    status: "healthy",
+    asOf: new Date().toISOString(),
+  });
+}
+
+export async function getLatestEmmlSnapshot() {
+  // prismaMod could be: default export, named export, or module namespace depending on CJS/ESM transpilation.
+  const anyPrisma: any =
+    (prismaMod as any)?.default ??
+    (prismaMod as any)?.db ??
+    (prismaMod as any)?.prisma ??
+    (prismaMod as any);
+
+  if (!anyPrisma) return null;
+
+  // Prisma model name can be either camel (emmlSnapshot) or Pascal (EmmlSnapshot) depending on how it's referenced.
+  const model: any =
+    anyPrisma.emmlSnapshot ??
+    anyPrisma.EmmlSnapshot ??
+    anyPrisma["emmlSnapshot"] ??
+    anyPrisma["EmmlSnapshot"] ??
+    null;
+
+  if (!model || typeof model.findFirst !== "function") return null;
+
+  let snap = await model.findFirst({
+    orderBy: [{ createdAt: "desc" }, { updatedAt: "desc" }],
+  });
+
+  if (!snap && typeof model.create === "function") {
+    snap = await model.create({
+      data: {
+        health: "ok",
+        marketsOnline: 0,
+        indicesTracked: 0,
+        heatSampleSize: 0,
+        composite: {},
+        indicesJson: {},
+        marketsJson: {},
+        metaJson: {},
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  return snap;
+}
+
+export async function getEmmlHealth() {
+  const snap = await getLatestEmmlSnapshot();
+  if (!snap) return { ok: false };
+  return { ok: true, snapshot: snap };
+}

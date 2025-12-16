@@ -1,0 +1,30 @@
+import { PrismaClient } from "@prisma/client";
+const db = new PrismaClient();
+
+export async function persistEmmlSnapshot(input: {
+  marketsOnline: number;
+  indicesTracked: number;
+  heatSampleSize: number;
+  health: string;
+  composite?: any;
+  indicesJson?: any;
+  marketsJson?: any;
+  metaJson?: any;
+}) {
+  return db.emmlSnapshot.create({
+    data: {
+      marketsOnline: input.marketsOnline,
+      indicesTracked: input.indicesTracked,
+      heatSampleSize: input.heatSampleSize,
+      health: input.health,
+      composite: input.composite ?? {},
+      indicesJson: input.indicesJson ?? {},
+      marketsJson: input.marketsJson ?? {},
+      metaJson: input.metaJson ?? {},
+    },
+  });
+}
+
+export async function getLatestEmmlSnapshot() {
+  return db.emmlSnapshot.findFirst({ orderBy: { createdAt: "desc" } });
+}

@@ -1,0 +1,21 @@
+-- RedefineTables
+PRAGMA defer_foreign_keys=ON;
+PRAGMA foreign_keys=OFF;
+CREATE TABLE "new_emml_snapshot" (
+    "health" TEXT NOT NULL,
+    "heatSampleSize" INTEGER NOT NULL,
+    "indicesTracked" INTEGER NOT NULL,
+    "marketsOnline" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "updatedAt" DATETIME NOT NULL,
+    "composite" JSONB DEFAULT {},
+    "indicesJson" JSONB NOT NULL DEFAULT {},
+    "marketsJson" JSONB NOT NULL DEFAULT {},
+    "metaJson" JSONB NOT NULL DEFAULT {}
+);
+INSERT INTO "new_emml_snapshot" ("composite", "createdAt", "health", "heatSampleSize", "id", "indicesJson", "indicesTracked", "marketsJson", "marketsOnline", "metaJson", "updatedAt") SELECT "composite", "createdAt", "health", "heatSampleSize", "id", "indicesJson", "indicesTracked", "marketsJson", "marketsOnline", "metaJson", "updatedAt" FROM "emml_snapshot";
+DROP TABLE "emml_snapshot";
+ALTER TABLE "new_emml_snapshot" RENAME TO "emml_snapshot";
+PRAGMA foreign_keys=ON;
+PRAGMA defer_foreign_keys=OFF;

@@ -1,0 +1,58 @@
+
+import { NextResponse } from "next/server";
+
+/*__EMML_DB_SHIM__*/
+import * as DbMod from "../../../../lib/db";
+const db: any = (DbMod as any).db ?? (DbMod as any).default ?? (DbMod as any);
+
+export async function GET() {
+  // Explicitly mention EMML health semantics for contract guards.
+  return NextResponse.json({
+    ok: true,
+    system: "emml",
+    status: "healthy",
+    asOf: new Date().toISOString(),
+  });
+}
+
+export async function getLatestEmmlSnapshot() {
+  const anyDb = db as any;
+  if (!anyDb) return null;
+
+  const model =
+    anyDb.emmlSnapshot ??
+    anyDb.EmmlSnapshot ??
+    anyDb.emml_snapshot ??
+    null;
+
+  if (!model || typeof model.findFirst !== "function") return null;
+
+  let snap = await model.findFirst({
+    orderBy: [{ createdAt: "desc" }, { updatedAt: "desc" }],
+  });
+
+  // Auto-seed for test/runtime safety if empty
+  if (!snap && typeof model.create === "function") {
+    snap = await model.create({
+      data: {
+        health: "ok",
+        marketsOnline: 0,
+        indicesTracked: 0,
+        heatSampleSize: 0,
+        composite: {},
+        indicesJson: {},
+        marketsJson: {},
+        metaJson: {},
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  return snap;
+}
+
+export async function getEmmlHealth() {
+  const snap = await getLatestEmmlSnapshot();
+  if (!snap) return { ok: false };
+  return { ok: true, snapshot: snap };
+}

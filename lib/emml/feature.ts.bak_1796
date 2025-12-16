@@ -1,0 +1,13 @@
+export function isEmmlEnabled(): boolean {
+  const v = process.env.EMML_ENABLED;
+  if (v === undefined) return true;
+  const s = String(v).trim().toLowerCase();
+  if (s === "" || ["0","false","no","off","disabled","null","undefined"].includes(s)) {
+    return false;
+  }
+  return true;
+}
+
+export function getEmmlDisabledReason(): string | null {
+  return isEmmlEnabled() ? null : "EMML_DISABLED";
+}

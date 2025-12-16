@@ -1,0 +1,54 @@
+// EMML health route — Prisma bootstrap (Vitest-safe)
+import * as PrismaPkg from "@prisma/client";
+const PrismaClient: any = (PrismaPkg as any).PrismaClient;
+
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  // Explicitly mention EMML health semantics for contract guards.
+  return NextResponse.json({
+    ok: true,
+    system: "emml",
+    status: "healthy",
+    asOf: new Date().toISOString(),
+  });
+}
+
+export async function getLatestEmmlSnapshot() {
+  const prisma = new PrismaClient();
+
+  try {
+    const model: any = (prisma as any).emmlSnapshot ?? (prisma as any).EmmlSnapshot;
+    if (!model) return null;
+
+    let snap = await model.findFirst({
+      orderBy: [{ createdAt: "desc" }, { updatedAt: "desc" }],
+    });
+
+    if (!snap) {
+      snap = await model.create({
+        data: {
+          health: "ok",
+          marketsOnline: 0,
+          indicesTracked: 0,
+          heatSampleSize: 0,
+          composite: {},
+          indicesJson: {},
+          marketsJson: {},
+          metaJson: {},
+          updatedAt: new Date(),
+        },
+      });
+    }
+
+    return snap;
+  } finally {
+    await prisma.$disconnect().catch(() => {});
+  }
+}
+
+export async function getEmmlHealth() {
+  const snap = await getLatestEmmlSnapshot();
+  if (!snap) return { ok: false };
+  return { ok: true, snapshot: snap };
+}

@@ -1,0 +1,34 @@
+import { db } from "@/lib/db";
+
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  // Explicitly mention EMML health semantics for contract guards.
+  return NextResponse.json({
+    ok: true,
+    system: "emml",
+    status: "healthy",
+    asOf: new Date().toISOString(),
+  });
+}
+
+export { getLatestEmmlSnapshot };
+
+
+export async function getLatestEmmlSnapshot() {
+  const anyDb = db as any;
+  const model = anyDb.emmlSnapshot;
+  if (!model || typeof model.findFirst !== "function") return null;
+
+  const snap = await model.findFirst({
+    orderBy: { updatedAt: "desc" },
+  });
+
+  return snap ?? null;
+}
+
+export async function getEmmlHealth() {
+  const snap = await getLatestEmmlSnapshot();
+  if (!snap) return { ok: false };
+  return { ok: true, snapshot: snap };
+}

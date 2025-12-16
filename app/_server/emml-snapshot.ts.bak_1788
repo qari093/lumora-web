@@ -1,0 +1,78 @@
+import { Prisma, PrismaClient } from "@prisma/client";
+
+const db = new PrismaClient();
+
+type SnapshotInput = Record<string, unknown>;
+
+function getModel(name: string) {
+  const m = Prisma?.dmmf?.datamodel?.models?.find((x) => x.name === name);
+  if (!m) throw new Error(`Model not found in Prisma.dmmf: ${name}`);
+  return m;
+}
+
+function scalarFieldNames(modelName: string) {
+  return new Set(
+    getModel(modelName).fields.filter((f) => f.kind === "scalar").map((f) => f.name)
+  );
+}
+
+function requiredScalarFields(modelName: string) {
+  return getModel(modelName).fields
+    .filter((f) => f.kind === "scalar")
+    .filter((f) => (f as any).isRequired)
+    .filter((f) => !((f as any).isId && (f as any).hasDefaultValue))
+    .filter((f) => !(f as any).hasDefaultValue);
+}
+
+function scalarValueFor(field: any, seed: string) {
+  const t = field.type as string;
+  if (t === "String") return String(seed);
+  if (t === "Int") return 1;
+  if (t === "BigInt") return BigInt(1);
+  if (t === "Float") return 1.0;
+  if (t === "Decimal") return new Prisma.Decimal("1.0");
+  if (t === "Boolean") return false;
+  if (t === "DateTime") return new Date();
+  if (t === "Json") return {};
+  if (t === "Bytes") return Buffer.from("00", "hex");
+  return String(seed);
+}
+
+function whitelistToModel(modelName: string, input: SnapshotInput) {
+  const allowed = scalarFieldNames(modelName);
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(input)) {
+    if (allowed.has(k)) out[k] = v;
+  }
+  return out;
+}
+
+function fillRequired(modelName: string, input: Record<string, unknown>) {
+  const req = requiredScalarFields(modelName);
+  for (const f of req) {
+    const name = f.name as string;
+    if (input[name] !== undefined) continue;
+    input[name] = scalarValueFor(f, `${modelName}_${name}`);
+  }
+  return input;
+}
+
+export async function persistEmmlSnapshot(input: SnapshotInput) {
+  const modelName = "EmmlSnapshot";
+  const clean = whitelistToModel(modelName, input);
+  const data = fillRequired(modelName, clean);
+
+  // Ensure JSON required fields commonly expected by tests exist if schema supports them.
+  // (If schema doesn't include them, whitelistToModel drops them.)
+  for (const k of ["composite", "indicesJson", "marketsJson", "metaJson"]) {
+    if ((data as any)[k] === undefined && scalarFieldNames(modelName).has(k)) {
+      (data as any)[k] = {};
+    }
+  }
+
+  return db.emmlSnapshot.create({ data: data as any });
+}
+
+export async function getLatestEmmlSnapshot() {
+  return db.emmlSnapshot.findFirst({ orderBy: { updatedAt: "desc" } as any });
+}

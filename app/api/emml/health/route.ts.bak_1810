@@ -1,0 +1,49 @@
+
+import { NextResponse } from "next/server";
+
+/*__EMML_DB_SHIM__*/
+import * as DbMod from "../../../../lib/db";
+const db: any = (DbMod as any).db ?? (DbMod as any).default ?? (DbMod as any);
+
+export async function GET() {
+  // Explicitly mention EMML health semantics for contract guards.
+  return NextResponse.json({
+    ok: true,
+    system: "emml",
+    status: "healthy",
+    asOf: new Date().toISOString(),
+  });
+}
+
+export async function getLatestEmmlSnapshot() {
+  const anyDb = db as any;
+  if (!anyDb) return null;
+
+  // Prisma client may expose model as emmlSnapshot or EmmlSnapshot depending on generation.
+  const model =
+    anyDb.emmlSnapshot ??
+    anyDb.EmmlSnapshot ??
+    anyDb.emml_snapshot ??
+    null;
+
+  if (!model || typeof model.findFirst !== "function") return null;
+
+  // Prefer latest by createdAt then updatedAt as fallback.
+  try {
+    return await model.findFirst({
+      orderBy: [{ createdAt: "desc" }, { updatedAt: "desc" }],
+    });
+  } catch {
+    try {
+      return await model.findFirst({ orderBy: { updatedAt: "desc" } });
+    } catch {
+      return null;
+    }
+  }
+}
+
+export async function getEmmlHealth() {
+  const snap = await getLatestEmmlSnapshot();
+  if (!snap) return { ok: false };
+  return { ok: true, snapshot: snap };
+}

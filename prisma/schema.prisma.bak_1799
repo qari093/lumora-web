@@ -573,10 +573,10 @@ model EmmlSnapshot {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt
-  composite Json? @default("{}")
-  indicesJson Json @default("{}")
-  marketsJson Json @default("{}")
-  metaJson  Json @default("{}")
+  composite Json? @default(dbgenerated("json('{}')"))
+  indicesJson Json @default(dbgenerated("json('{}')"))
+  marketsJson Json @default(dbgenerated("json('{}')"))
+  metaJson  Json @default(dbgenerated("json('{}')"))
 
   @@map("emml_snapshot")
 }
