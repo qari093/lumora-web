@@ -357,3 +357,9 @@ POST_MEGA_PHASE1_STEP99
 POST_MEGA_PHASE1_STEP99_UTC=2025-12-20T20:31:03Z
 POST_MEGA_PHASE1_STEP99_NOTE=ignored/untracked LIVE_URL.txt for clean-tree stability
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP100
+POST_MEGA_PHASE1_STEP100
+POST_MEGA_PHASE1_STEP100_UTC=2025-12-20T20:32:57Z
+POST_MEGA_PHASE1_STEP100_TOOL=polaroid-mvp/tools/polaroid-mobile-smoke.sh
+POST_MEGA_PHASE1_STEP100_LIVE_URL=https://objects-bosnia-reynolds-surgery.trycloudflare.com/polaroid-mvp/index.html
+POST_MEGA_PHASE1_STEP100_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-smoke-tool-selftest-step100.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP101
