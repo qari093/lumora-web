@@ -184,3 +184,7 @@ POST_MEGA_PHASE1_STEP78_DOC=docs/polaroid/phase1/polaroid-phase1-tunnel-smoke-st
 POST_MEGA_PHASE1_STEP78_LIVE_URL=https://erp-been-photographs-machinery.trycloudflare.com/polaroid-mvp/index.html
 POST_MEGA_PHASE1_STEP78_HTTP_CODE=530
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP79
+POST_MEGA_PHASE1_STEP79
+POST_MEGA_PHASE1_STEP79_UTC=2025-12-20T13:57:36Z
+POST_MEGA_PHASE1_STEP79_NOTE=events.ndjson ignored + untracked to keep working tree clean
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP80

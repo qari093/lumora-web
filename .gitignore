@@ -94,3 +94,4 @@ prisma/**/*.sqlite.*
 prisma/**/*.sqlite3.*
 prisma/**/*lumora.db.bak*
 prisma/**/*dev.db.bak*
+polaroid-mvp/events.ndjson
