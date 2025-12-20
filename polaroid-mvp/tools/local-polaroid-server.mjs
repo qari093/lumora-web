@@ -1,33 +1,37 @@
+#!/usr/bin/env node
+/**
+ * Polaroid MVP local server:
+ * - Serves repo-root static content (focus: /polaroid-mvp/*)
+ * - Health endpoints: /health and /polaroid-mvp/health
+ * - Events endpoint: POST /polaroid-mvp/events (ndjson append)
+ */
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { URL } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Repo root is two levels up: polaroid-mvp/tools/...
-const repoRoot = path.resolve(__dirname, "..", "..");
-const polaroidRoot = path.join(repoRoot, "polaroid-mvp");
-const outNdjson = path.join(polaroidRoot, "events.ndjson");
-
-const host = process.env.HOST || "127.0.0.1";
-const port = Number(process.env.PORT || "8088");
+const HOST = process.env.HOST || "127.0.0.1";
+const PORT = Number(process.env.PORT || "8088");
+const ROOT = process.cwd();
+const POLAROID_DIR = path.join(ROOT, "polaroid-mvp");
+const EVENTS_FILE = path.join(POLAROID_DIR, "events.ndjson");
 
 function send(res, code, headers, body) {
   res.writeHead(code, headers);
-  if (body) res.end(body);
-  else res.end();
+  res.end(body);
 }
 
-function safeJoin(base, unsafeRel) {
-  const rel = unsafeRel.replace(/^\/+/, "");
-  const target = path.resolve(base, rel);
-  if (!target.startsWith(base + path.sep) && target !== base) return null;
-  return target;
+function sendJson(res, code, obj) {
+  send(res, code, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" }, JSON.stringify(obj));
 }
 
-function contentType(p) {
+function safeJoin(base, rel) {
+  const p = path.normalize(path.join(base, rel));
+  if (!p.startsWith(base)) return null;
+  return p;
+}
+
+function mime(p) {
   const ext = path.extname(p).toLowerCase();
   if (ext === ".html") return "text/html; charset=utf-8";
   if (ext === ".js") return "application/javascript; charset=utf-8";
@@ -36,71 +40,93 @@ function contentType(p) {
   if (ext === ".png") return "image/png";
   if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
   if (ext === ".svg") return "image/svg+xml; charset=utf-8";
-  if (ext === ".txt" || ext === ".md") return "text/plain; charset=utf-8";
+  if (ext === ".txt") return "text/plain; charset=utf-8";
   return "application/octet-stream";
 }
 
-function readBody(req, limitBytes = 512 * 1024) {
+function readBody(req) {
   return new Promise((resolve, reject) => {
-    let size = 0;
     const chunks = [];
-    req.on("data", (c) => {
-      size += c.length;
-      if (size > limitBytes) {
-        reject(new Error("payload too large"));
-        req.destroy();
-        return;
-      }
-      chunks.push(c);
-    });
+    req.on("data", (c) => chunks.push(c));
     req.on("end", () => resolve(Buffer.concat(chunks)));
     req.on("error", reject);
   });
 }
 
 const server = http.createServer(async (req, res) => {
-  try {
-    const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
-    const pathname = url.pathname;
+  const u = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+  const pathname = u.pathname;
 
-    // Health
-    if (req.method === "GET" && pathname === "/polaroid-mvp/health") {
-      return send(res, 200, { "content-type": "application/json; charset=utf-8" }, JSON.stringify({ ok: true }));
-    }
-
-    // NDJSON receiver
-    if (req.method === "POST" && pathname === "/polaroid-mvp/events.ndjson") {
-      const body = await readBody(req);
-      // Normalize to LF + ensure trailing newline
-      const text = body.toString("utf8").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-      // Basic sanity: allow empty but still 204
-      fs.mkdirSync(path.dirname(outNdjson), { recursive: true });
-      fs.appendFileSync(outNdjson, text.endsWith("\n") ? text : text + "\n", "utf8");
-      return send(res, 204, { "cache-control": "no-store" });
-    }
-
-    // Static serving for /polaroid-mvp/*
-    if (req.method === "GET" && (pathname === "/polaroid-mvp" || pathname.startsWith("/polaroid-mvp/"))) {
-      const rel = pathname === "/polaroid-mvp" ? "/polaroid-mvp/index.html" : pathname;
-      const relFromPolaroid = rel.replace(/^\/polaroid-mvp\/?/, "");
-      const filePath = safeJoin(polaroidRoot, relFromPolaroid || "index.html");
-      if (!filePath) return send(res, 400, { "content-type": "text/plain; charset=utf-8" }, "bad path");
-
-      if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
-        return send(res, 404, { "content-type": "text/plain; charset=utf-8" }, "not found");
-      }
-      const buf = fs.readFileSync(filePath);
-      return send(res, 200, { "content-type": contentType(filePath), "cache-control": "no-store" }, buf);
-    }
-
-    // Default
-    return send(res, 404, { "content-type": "text/plain; charset=utf-8" }, "not found");
-  } catch (e) {
-    return send(res, 500, { "content-type": "text/plain; charset=utf-8" }, "server error");
+  // Health endpoints
+  if (req.method === "GET" && (pathname === "/health" || pathname === "/polaroid-mvp/health")) {
+    return sendJson(res, 200, {
+      ok: true,
+      service: "polaroid-local",
+      host: HOST,
+      port: PORT,
+      ts: new Date().toISOString(),
+    });
   }
+
+  // Events endpoint: POST /polaroid-mvp/events (ndjson)
+  if (pathname === "/polaroid-mvp/events" && req.method === "POST") {
+    try {
+      const body = await readBody(req);
+      const line = body.toString("utf8").trim();
+      if (!line) return sendJson(res, 400, { ok: false, error: "empty body" });
+      // minimal validation: must be JSON object
+      let obj;
+      try { obj = JSON.parse(line); } catch { return sendJson(res, 400, { ok: false, error: "invalid json" }); }
+      if (typeof obj !== "object" || obj === null) return sendJson(res, 400, { ok: false, error: "json must be object" });
+
+      fs.mkdirSync(POLAROID_DIR, { recursive: true });
+      fs.appendFileSync(EVENTS_FILE, `${JSON.stringify(obj)}\n`, "utf8");
+      return sendJson(res, 200, { ok: true });
+    } catch (e) {
+      return sendJson(res, 500, { ok: false, error: String(e?.message || e) });
+    }
+  }
+
+  // Redirect convenience: / -> /polaroid-mvp/index.html
+  if (req.method === "GET" && pathname === "/") {
+    res.writeHead(302, { location: "/polaroid-mvp/index.html" });
+    return res.end();
+  }
+
+  // Static serving (repo root, but path traversal protected)
+  if (req.method === "GET" || req.method === "HEAD") {
+    const target = pathname.replace(/^\/+/, "");
+    const abs = safeJoin(ROOT, target);
+    if (!abs) return sendJson(res, 400, { ok: false, error: "bad path" });
+
+    let stat;
+    try { stat = fs.statSync(abs); } catch { stat = null; }
+    if (stat && stat.isDirectory()) {
+      const idx = path.join(abs, "index.html");
+      try { fs.statSync(idx); } catch { return sendJson(res, 404, { ok: false, error: "not found" }); }
+      const data = fs.readFileSync(idx);
+      res.writeHead(200, { "content-type": mime(idx), "cache-control": "no-store" });
+      if (req.method === "HEAD") return res.end();
+      return res.end(data);
+    }
+    if (stat && stat.isFile()) {
+      const data = fs.readFileSync(abs);
+      res.writeHead(200, { "content-type": mime(abs), "cache-control": "no-store" });
+      if (req.method === "HEAD") return res.end();
+      return res.end(data);
+    }
+    return sendJson(res, 404, { ok: false, error: "not found" });
+  }
+
+  return sendJson(res, 405, { ok: false, error: "method not allowed" });
 });
 
-server.listen(port, host, () => {
-  // eslint-disable-next-line no-console
-  console.log(`POLAROID_LOCAL_SERVER_OK http://${host}:${port}/polaroid-mvp/index.html`);
+server.on("error", (e) => {
+  // Keep output readable for shell smoke scripts
+  console.error("SERVER_ERROR", e?.code || "", String(e?.message || e));
+  process.exit(2);
+});
+
+server.listen(PORT, HOST, () => {
+  console.log(`POLAROID_LOCAL_SERVER_LISTENING http://${HOST}:${PORT}/polaroid-mvp/index.html`);
 });
