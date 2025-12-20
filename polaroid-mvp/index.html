@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lumora — Emotional Polaroid (Prototype)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f0f14" />
+  <style>
+    :root { color-scheme: dark; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f0f14;
+      color: #fff;
+    }
+    .wrap {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .panel {
+      width: min(520px, 100%);
+    }
+    .title {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      opacity: 0.92;
+    }
+    .subtitle {
+      margin: 0 0 18px 0;
+      font-size: 13px;
+      opacity: 0.7;
+      line-height: 1.35;
+    }
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(4, 64px);
+      gap: 16px;
+      justify-content: center;
+    }
+    .swatch {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      touch-action: manipulation;
+    }
+    .swatch:active {
+      transform: scale(0.92);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.30);
+    }
+
+    /* Polaroid overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+    }
+    .overlay.show { display: flex; }
+
+    .card {
+      width: min(420px, 100%);
+      border-radius: 22px;
+      background: rgba(18,18,24,0.9);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .art {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: #111;
+      display: block;
+    }
+    .footer {
+      padding: 14px 14px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .chip {
+      font-size: 12px;
+      opacity: 0.8;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      white-space: nowrap;
+      user-select: none;
+    }
+    input.word {
+      flex: 1;
+      height: 40px;
+      padding: 0 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      outline: none;
+      font-size: 14px;
+    }
+    input.word::placeholder { color: rgba(255,255,255,0.55); }
+    .btns {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      touch-action: manipulation;
+    }
+    button:active { transform: scale(0.99); }
+    .hint {
+      font-size: 12px;
+      opacity: 0.65;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <h1 class="title">Tap a color.</h1>
+      <p class="subtitle">Instant “Emotional Polaroid” appears. Optional one word after.</p>
+
+      <div class="palette" id="palette" aria-label="Color palette">
+        <div class="swatch" data-hex="#ff6b6b" style="background:#ff6b6b"></div>
+        <div class="swatch" data-hex="#feca57" style="background:#feca57"></div>
+        <div class="swatch" data-hex="#48dbfb" style="background:#48dbfb"></div>
+        <div class="swatch" data-hex="#1dd1a1" style="background:#1dd1a1"></div>
+        <div class="swatch" data-hex="#5f27cd" style="background:#5f27cd"></div>
+        <div class="swatch" data-hex="#c8d6e5" style="background:#c8d6e5"></div>
+        <div class="swatch" data-hex="#576574" style="background:#576574"></div>
+        <div class="swatch" data-hex="#222f3e" style="background:#222f3e"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Emotional Polaroid">
+    <div class="card">
+      <canvas class="art" id="art" width="800" height="1000"></canvas>
+      <div class="footer">
+        <div class="row">
+          <span class="chip" id="chip">#000000</span>
+          <input class="word" id="word" maxlength="24" placeholder="Optional: one word…" autocomplete="off" />
+        </div>
+        <div class="btns">
+          <button id="saveBtn" type="button">Save PNG</button>
+          <button id="closeBtn" type="button">Close</button>
+        </div>
+        <div class="hint">Local-only prototype. No accounts. No cloud. No sharing prompts.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const palette = document.getElementById('palette');
+    const overlay = document.getElementById('overlay');
+    const art = document.getElementById('art');
+    const chip = document.getElementById('chip');
+    const word = document.getElementById('word');
+    const saveBtn = document.getElementById('saveBtn');
+    const closeBtn = document.getElementById('closeBtn');
+
+    function hexToRgb(hex) {
+      const h = hex.replace('#','').trim();
+      const n = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+      return { r: (n>>16)&255, g: (n>>8)&255, b: n&255 };
+    }
+
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    function mulberry32(a){
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      }
+    }
+
+    function seedFrom(hex, txt){
+      let s = 0;
+      const str = (hex + '|' + (txt||'')).toLowerCase();
+      for (let i=0;i<str.length;i++) s = (s*31 + str.charCodeAt(i)) >>> 0;
+      return s >>> 0;
+    }
+
+    function drawPolaroid(hex, txt){
+      const ctx = art.getContext('2d', { alpha: false });
+      const W = art.width, H = art.height;
+
+      const {r,g,b} = hexToRgb(hex);
+      const s = seedFrom(hex, txt);
+      const rand = mulberry32(s);
+
+      // Background gradient
+      const bg = ctx.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, `rgb(${clamp(r+40,0,255)},${clamp(g+20,0,255)},${clamp(b+40,0,255)})`);
+      bg.addColorStop(1, `rgb(${clamp(r-40,0,255)},${clamp(g-20,0,255)},${clamp(b-40,0,255)})`);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      // Soft "aura" blobs
+      for (let i=0;i<18;i++){
+        const x = rand()*W;
+        const y = rand()*H;
+        const rad = 120 + rand()*320;
+        const a = 0.05 + rand()*0.10;
+        const grad = ctx.createRadialGradient(x,y,0,x,y,rad);
+        grad.addColorStop(0, `rgba(${r},${g},${b},${a})`);
+        grad.addColorStop(1, `rgba(0,0,0,0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x,y,rad,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      // Grain
+      const img = ctx.getImageData(0,0,W,H);
+      const d = img.data;
+      for (let i=0;i<d.length;i+=4){
+        const n = (rand()-0.5) * 18; // subtle grain
+        d[i]   = clamp(d[i] + n, 0, 255);
+        d[i+1] = clamp(d[i+1] + n, 0, 255);
+        d[i+2] = clamp(d[i+2] + n, 0, 255);
+      }
+      ctx.putImageData(img,0,0);
+
+      // Minimal text imprint (optional word)
+      const t = (txt||'').trim();
+      if (t){
+        ctx.fillStyle = "rgba(255,255,255,0.82)";
+        ctx.font = "700 44px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.shadowColor = "rgba(0,0,0,0.35)";
+        ctx.shadowBlur = 18;
+        ctx.fillText(t.slice(0,24), W/2, H*0.82);
+        ctx.shadowBlur = 0;
+      }
+
+      // Border vignette
+      ctx.strokeStyle = "rgba(255,255,255,0.18)";
+      ctx.lineWidth = 10;
+      ctx.strokeRect(16,16,W-32,H-32);
+    }
+
+    function openOverlay(hex){
+      chip.textContent = hex;
+      chip.style.borderColor = "rgba(255,255,255,0.16)";
+      overlay.classList.add('show');
+      // generate instantly (<1s)
+      drawPolaroid(hex, "");
+      word.value = "";
+      setTimeout(()=>word.focus(), 150);
+    }
+
+    function closeOverlay(){
+      overlay.classList.remove('show');
+    }
+
+    palette.addEventListener('click', (e)=>{
+      const sw = e.target.closest('.swatch');
+      if (!sw) return;
+      const hex = sw.getAttribute('data-hex') || '#ffffff';
+      openOverlay(hex);
+    });
+
+    word.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter'){
+        const hex = chip.textContent || '#ffffff';
+        drawPolaroid(hex, word.value || "");
+      }
+    });
+
+    saveBtn.addEventListener('click', ()=>{
+      const a = document.createElement('a');
+      const ts = new Date().toISOString().replace(/[:.]/g,'-');
+      a.download = `lumora_polaroid_${ts}.png`;
+      a.href = art.toDataURL('image/png');
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    closeBtn.addEventListener('click', closeOverlay);
+    overlay.addEventListener('click', (e)=>{
+      if (e.target === overlay) closeOverlay();
+    });
+    window.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape') closeOverlay();
+    });
+  </script>
+</body>
+</html>
