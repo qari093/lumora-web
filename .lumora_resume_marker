@@ -310,3 +310,8 @@ POST_MEGA_PHASE1_STEP91_UTC=2025-12-20T20:09:08Z
 POST_MEGA_PHASE1_STEP91_RUNBOOK=polaroid-mvp/tools/run-polaroid-tunnel.sh
 POST_MEGA_PHASE1_STEP91_DOC=docs/polaroid/phase1/polaroid-phase1-tunnel-runbook-standard-step91.md
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP92
+POST_MEGA_PHASE1_STEP92
+POST_MEGA_PHASE1_STEP92_UTC=2025-12-20T20:11:26Z
+POST_MEGA_PHASE1_STEP92_LIVE_URL=https://treated-ceo-closer-airport.trycloudflare.com/polaroid-mvp/index.html
+POST_MEGA_PHASE1_STEP92_DOC=docs/polaroid/phase1/polaroid-phase1-live-url-step92.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP93
