@@ -320,3 +320,78 @@
   </script>
 </body>
 </html>
+
+<!-- LUMORA_POLAROID_EVT_V1: minimal local instrumentation (tap/render/save) -->
+<script>
+(function () {
+  'use strict';
+  const EVT_VERSION = 'v1';
+  const ENDPOINT = (function(){
+    try { return new URL('./events.ndjson', window.location.href).toString(); } catch(e){ return null; }
+  })();
+
+  function nowIso(){ try { return new Date().toISOString(); } catch(e){ return ''; } }
+
+  function writeLocal(evt){
+    try {
+      const k = 'polaroid_events_v1';
+      const arr = JSON.parse(localStorage.getItem(k) || '[]');
+      arr.push(evt);
+      // cap to last 200 to avoid bloat
+      if (arr.length > 200) arr.splice(0, arr.length - 200);
+      localStorage.setItem(k, JSON.stringify(arr));
+    } catch (e) {}
+  }
+
+  async function bestEffortBeacon(evt){
+    // Local-only: try sendBeacon to relative NDJSON (works only when served with write handler; otherwise no-op).
+    // Always store locally as fallback.
+    writeLocal(evt);
+    try {
+      if (!ENDPOINT) return;
+      const body = JSON.stringify(evt) + "\n";
+      if (navigator.sendBeacon) {
+        const ok = navigator.sendBeacon(ENDPOINT, body);
+        if (ok) return;
+      }
+      // fallback fetch; ignore errors
+      await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, body });
+    } catch (e) {}
+  }
+
+  function track(type, extra){
+    const evt = Object.assign({
+      v: EVT_VERSION,
+      t: type,
+      ts: nowIso(),
+      ua: (navigator && navigator.userAgent) ? navigator.userAgent : 'unknown'
+    }, extra || {});
+    bestEffortBeacon(evt);
+  }
+
+  // Hook points: safe, non-invasive
+  document.addEventListener('click', function(e){
+    // Heuristic: treat any click on a color swatch as "tap"
+    const el = e.target;
+    if (!el) return;
+    const cls = (el.className || '').toString();
+    if (cls.includes('color') || cls.includes('swatch') || cls.includes('palette')) {
+      track('tap_color', { id: el.id || null, cls });
+    }
+  }, true);
+
+  window.addEventListener('polaroid:rendered', function(){
+    track('render_done', {});
+  });
+
+  window.addEventListener('polaroid:saved', function(){
+    track('save_png', {});
+  });
+
+  // Expose minimal helper for existing code to call if desired
+  window.__lumoraPolaroidTrack = track;
+
+  track('page_open', { path: location.pathname });
+})();
+</script>
+<!-- /LUMORA_POLAROID_EVT_V1 -->
