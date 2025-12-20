@@ -1,72 +1,70 @@
 #!/bin/sh
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-cd "$ROOT"
+CLOUDFLARED="/usr/local/bin/cloudflared"
+CURL="/usr/bin/curl"
+GREP="/usr/bin/grep"
+SED="/usr/bin/sed"
+HEAD="/usr/bin/head"
+CAT="/bin/cat"
+PS="/bin/ps"
+KILL="/bin/kill"
 
-PORT="${POLAROID_PORT:-8088}"
-LOCAL_HEALTH="http://127.0.0.1:${PORT}/polaroid-mvp/health"
-LOCAL_URL="http://127.0.0.1:${PORT}/polaroid-mvp/index.html"
-URL_FILE="${POLAROID_URL_FILE:-polaroid-mvp/LIVE_URL.txt}"
+URL_FILE="polaroid-mvp/LIVE_URL.txt"
+PID_FILE="polaroid-mvp/tunnel.pid"
+LOG_FILE="polaroid-mvp/tunnel.log"
 
-CFBIN="$(/usr/bin/command -v cloudflared || true)"
-[ -n "${CFBIN:-}" ] || { echo "❌ cloudflared not found"; exit 2; }
+ORIGIN="http://127.0.0.1:8088"
 
-echo "========== ▶️ POLAROID TUNNEL RUNBOOK ◀️ =========="
-echo "ROOT=$ROOT"
-echo "PORT=$PORT"
-echo "LOCAL_URL=$LOCAL_URL"
-echo "LOCAL_HEALTH=$LOCAL_HEALTH"
-echo "URL_FILE=$URL_FILE"
-echo
+[ -x "$CLOUDFLARED" ] || { echo "❌ cloudflared missing: $CLOUDFLARED"; exit 2; }
 
-echo "• Ensure local server is healthy (start if needed)"
-CODE="$(/usr/bin/curl -sS -o /dev/null -w '%{http_code}' "$LOCAL_HEALTH" || true)"
-if [ "$CODE" != "200" ]; then
-  echo "  - local health not ready (code=$CODE); starting local server via run-local-polaroid.sh"
-  ./tools/run-local-polaroid.sh >/dev/null 2>&1 || true
-  i=0
-  while [ $i -lt 12 ]; do
-    CODE="$(/usr/bin/curl -sS -o /dev/null -w '%{http_code}' "$LOCAL_HEALTH" || true)"
-    [ "$CODE" = "200" ] && break
-    i=$((i+1))
-    /bin/sleep 1
-  done
+# Ensure origin is up
+code="$("$CURL" -sS -o /dev/null -w '%{http_code}' "$ORIGIN/polaroid-mvp/health" || true)"
+[ "$code" = "200" ] || { echo "❌ origin not healthy (code=$code)"; exit 3; }
+
+# Kill previous tunnel (pid file) if alive
+if [ -f "$PID_FILE" ]; then
+  oldpid="$("$CAT" "$PID_FILE" 2>/dev/null || true)"
+  if [ -n "${oldpid:-}" ] && "$PS" -p "$oldpid" >/dev/null 2>&1; then
+    echo "• Stopping prior tunnel pid=$oldpid"
+    "$KILL" -TERM "$oldpid" >/dev/null 2>&1 || true
+    sleep 1
+    "$KILL" -KILL "$oldpid" >/dev/null 2>&1 || true
+  fi
 fi
-[ "$CODE" = "200" ] || { echo "❌ local server not healthy (code=$CODE)"; exit 2; }
-echo "✓ Local server healthy"
-echo
 
-echo "• Kill any old cloudflared (best-effort)"
-/usr/bin/pkill -f cloudflared >/dev/null 2>&1 || true
-/bin/sleep 1
+# Kill any stray quick tunnels (best-effort) – keep this minimal to avoid killing unrelated instances
+/usr/bin/pkill -f "cloudflared tunnel --url $ORIGIN" >/dev/null 2>&1 || true
 
-LOG="/tmp/polaroid_cf_tunnel.log"
-rm -f "$LOG" >/dev/null 2>&1 || true
+# Start a fresh quick tunnel and keep it alive
+: > "$LOG_FILE"
+echo "• Starting quick tunnel to $ORIGIN (background, log=$LOG_FILE)"
+nohup "$CLOUDFLARED" tunnel --url "$ORIGIN" --no-autoupdate --protocol quic >"$LOG_FILE" 2>&1 &
+pid="$!"
+echo "$pid" > "$PID_FILE"
 
-echo "• Start quick tunnel (detached) to http://127.0.0.1:${PORT}"
-nohup "$CFBIN" tunnel --url "http://127.0.0.1:${PORT}" >"$LOG" 2>&1 &
-/bin/sleep 2
+# Wait up to 20s for URL to appear in log
+i=0
+URL=""
+while [ "$i" -lt 40 ]; do
+  # Extract the first trycloudflare URL from logs
+  URL="$("$GREP" -Eo 'https://[a-z0-9-]+\.trycloudflare\.com' "$LOG_FILE" 2>/dev/null | "$HEAD" -n1 || true)"
+  if [ -n "${URL:-}" ]; then
+    break
+  fi
+  # Ensure process still alive
+  if ! "$PS" -p "$pid" >/dev/null 2>&1; then
+    echo "❌ cloudflared exited early (pid=$pid). Tail log:"
+    tail -n 80 "$LOG_FILE" || true
+    exit 4
+  fi
+  i=$((i+1))
+  sleep 0.5
+done
 
-BASE_URL="$(/usr/bin/awk '/https:\/\/[a-z0-9-]+\.trycloudflare\.com/ {print $NF}' "$LOG" | /usr/bin/head -n1 | /usr/bin/tr -d '\r' || true)"
-[ -n "${BASE_URL:-}" ] || {
-  echo "❌ Could not capture tunnel base URL yet."
-  echo "• log tail:"
-  /usr/bin/tail -n 60 "$LOG" || true
-  exit 2
-}
+[ -n "${URL:-}" ] || { echo "❌ Could not extract tunnel URL from log. Tail:"; tail -n 120 "$LOG_FILE" || true; exit 5; }
 
-FULL_URL="${BASE_URL%/}/polaroid-mvp/index.html"
-echo "✓ Tunnel URL:"
-echo "$FULL_URL"
-echo
-
-echo "• Persisting $URL_FILE"
-echo "$FULL_URL" > "$URL_FILE"
-
-echo "OPEN ON IPHONE:"
-echo "  $FULL_URL"
-echo
-echo "TAIL TUNNEL LOG:"
-echo "  tail -n 60 $LOG"
-echo
+# Persist full app URL
+FULL="$URL/polaroid-mvp/index.html"
+printf "%s\n" "$FULL" > "$URL_FILE"
+echo "✓ LIVE URL: $FULL"
