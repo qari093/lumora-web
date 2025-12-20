@@ -330,3 +330,8 @@ POST_MEGA_PHASE1_STEP94_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-proof-st
 POST_MEGA_PHASE1_STEP94_STEP92_FINAL=PASS
 POST_MEGA_PHASE1_STEP94_STEP92_LIVE_URL=https://treated-ceo-closer-airport.trycloudflare.com/polaroid-mvp/index.html
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP95
+POST_MEGA_PHASE1_STEP95
+POST_MEGA_PHASE1_STEP95_UTC=2025-12-20T20:22:33Z
+POST_MEGA_PHASE1_STEP95_TOOL=polaroid-mvp/tools/polaroid-mobile-smoke.sh
+POST_MEGA_PHASE1_STEP95_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-smoke-workflow-step95.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP96
