@@ -1,70 +1,42 @@
 #!/bin/sh
 set -euo pipefail
 
-CLOUDFLARED="/usr/local/bin/cloudflared"
-CURL="/usr/bin/curl"
-GREP="/usr/bin/grep"
-SED="/usr/bin/sed"
-HEAD="/usr/bin/head"
-CAT="/bin/cat"
-PS="/bin/ps"
-KILL="/bin/kill"
+CLOUDFLARED="${CLOUDFLARED_BIN:-/usr/local/bin/cloudflared}"
+[ -x "$CLOUDFLARED" ] || { echo "❌ cloudflared not found/executable at: $CLOUDFLARED"; exit 1; }
 
-URL_FILE="polaroid-mvp/LIVE_URL.txt"
-PID_FILE="polaroid-mvp/tunnel.pid"
-LOG_FILE="polaroid-mvp/tunnel.log"
+BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+URL_FILE="$BASE_DIR/LIVE_URL.txt"
+LOG="$BASE_DIR/tunnel.log"
+PID="$BASE_DIR/tunnel.pid"
 
-ORIGIN="http://127.0.0.1:8088"
+# Prefer HTTP2 when QUIC paths are flaky/blocked. Force IPv4 edge to avoid v6/DNS weirdness.
+PROTOCOL="${CLOUDFLARED_PROTOCOL:-http2}"
+EDGE_IP_VERSION="${CLOUDFLARED_EDGE_IP_VERSION:-4}"
 
-[ -x "$CLOUDFLARED" ] || { echo "❌ cloudflared missing: $CLOUDFLARED"; exit 2; }
+# best-effort cleanup
+pkill -f cloudflared >/dev/null 2>&1 || true
+rm -f "$URL_FILE" "$PID" 2>/dev/null || true
 
-# Ensure origin is up
-code="$("$CURL" -sS -o /dev/null -w '%{http_code}' "$ORIGIN/polaroid-mvp/health" || true)"
-[ "$code" = "200" ] || { echo "❌ origin not healthy (code=$code)"; exit 3; }
+echo "• Starting quick tunnel to http://127.0.0.1:8088 (background, log=$LOG)"
+# Note: no named tunnel; quick tunnel only.
+# --protocol http2 reduces QUIC-related 530s in some networks.
+# --edge-ip-version 4 avoids v6-only resolution edge cases.
+( "$CLOUDFLARED" tunnel --no-autoupdate --protocol "$PROTOCOL" --edge-ip-version "$EDGE_IP_VERSION" --url http://127.0.0.1:8088 >"$LOG" 2>&1 ) &
+echo $! >"$PID"
 
-# Kill previous tunnel (pid file) if alive
-if [ -f "$PID_FILE" ]; then
-  oldpid="$("$CAT" "$PID_FILE" 2>/dev/null || true)"
-  if [ -n "${oldpid:-}" ] && "$PS" -p "$oldpid" >/dev/null 2>&1; then
-    echo "• Stopping prior tunnel pid=$oldpid"
-    "$KILL" -TERM "$oldpid" >/dev/null 2>&1 || true
-    sleep 1
-    "$KILL" -KILL "$oldpid" >/dev/null 2>&1 || true
-  fi
-fi
-
-# Kill any stray quick tunnels (best-effort) – keep this minimal to avoid killing unrelated instances
-/usr/bin/pkill -f "cloudflared tunnel --url $ORIGIN" >/dev/null 2>&1 || true
-
-# Start a fresh quick tunnel and keep it alive
-: > "$LOG_FILE"
-echo "• Starting quick tunnel to $ORIGIN (background, log=$LOG_FILE)"
-nohup "$CLOUDFLARED" tunnel --url "$ORIGIN" --no-autoupdate --protocol quic >"$LOG_FILE" 2>&1 &
-pid="$!"
-echo "$pid" > "$PID_FILE"
-
-# Wait up to 20s for URL to appear in log
+# Extract base URL (trycloudflare) and write LIVE_URL.txt
+# Wait up to 12s for the URL to appear.
 i=0
-URL=""
-while [ "$i" -lt 40 ]; do
-  # Extract the first trycloudflare URL from logs
-  URL="$("$GREP" -Eo 'https://[a-z0-9-]+\.trycloudflare\.com' "$LOG_FILE" 2>/dev/null | "$HEAD" -n1 || true)"
-  if [ -n "${URL:-}" ]; then
-    break
-  fi
-  # Ensure process still alive
-  if ! "$PS" -p "$pid" >/dev/null 2>&1; then
-    echo "❌ cloudflared exited early (pid=$pid). Tail log:"
-    tail -n 80 "$LOG_FILE" || true
-    exit 4
-  fi
+BASE=""
+while [ $i -lt 24 ]; do
+  BASE="$(/usr/bin/grep -Eo 'https://[a-z0-9-]+\.trycloudflare\.com' "$LOG" | /usr/bin/head -n1 || true)"
+  [ -n "${BASE:-}" ] && break
+  /bin/sleep 0.5
   i=$((i+1))
-  sleep 0.5
 done
 
-[ -n "${URL:-}" ] || { echo "❌ Could not extract tunnel URL from log. Tail:"; tail -n 120 "$LOG_FILE" || true; exit 5; }
+[ -n "${BASE:-}" ] || { echo "❌ Could not extract trycloudflare URL from log"; /usr/bin/tail -n 80 "$LOG" || true; exit 2; }
 
-# Persist full app URL
-FULL="$URL/polaroid-mvp/index.html"
-printf "%s\n" "$FULL" > "$URL_FILE"
-echo "✓ LIVE URL: $FULL"
+echo "${BASE}/polaroid-mvp/index.html" >"$URL_FILE"
+echo "✓ LIVE URL: $(/bin/cat "$URL_FILE")"
+echo "✓ Tunnel PID running: $(/bin/cat "$PID")"
