@@ -178,3 +178,9 @@ POST_MEGA_PHASE1_STEP77_DOC=docs/polaroid/phase1/polaroid-phase1-tunnel-runbook-
 POST_MEGA_PHASE1_STEP77_TUNNEL_RUNBOOK=polaroid-mvp/tools/run-polaroid-tunnel.sh
 POST_MEGA_PHASE1_STEP77_URL_FILE=polaroid-mvp/LIVE_URL.txt
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP78
+POST_MEGA_PHASE1_STEP78
+POST_MEGA_PHASE1_STEP78_UTC=2025-12-20T13:55:41Z
+POST_MEGA_PHASE1_STEP78_DOC=docs/polaroid/phase1/polaroid-phase1-tunnel-smoke-step78.md
+POST_MEGA_PHASE1_STEP78_LIVE_URL=https://erp-been-photographs-machinery.trycloudflare.com/polaroid-mvp/index.html
+POST_MEGA_PHASE1_STEP78_HTTP_CODE=530
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP79
