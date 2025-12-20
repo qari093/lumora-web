@@ -295,3 +295,8 @@ POST_MEGA_PHASE1_STEP88_FINAL_MOBILE_RESULT=PASS
 POST_MEGA_PHASE1_STEP88_LIVE_URL=https://treated-ceo-closer-airport.trycloudflare.com/polaroid-mvp/index.html
 POST_MEGA_PHASE1_STEP88_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-proof-step88.md
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP89
+POST_MEGA_PHASE1_STEP89
+POST_MEGA_PHASE1_STEP89_UTC=2025-12-20T20:04:56Z
+POST_MEGA_PHASE1_STEP89_TOOL=polaroid-mvp/tools/record-mobile-result.sh
+POST_MEGA_PHASE1_STEP89_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-result-hardening-step89.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP90
