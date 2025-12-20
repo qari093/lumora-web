@@ -395,3 +395,124 @@
 })();
 </script>
 <!-- /LUMORA_POLAROID_EVT_V1 -->
+
+<!-- /* LUMORA_POLAROID_EVENTS_START */ -->
+<script>
+/**
+ * Lumora Polaroid — client events
+ * - Sends NDJSON beacons to /polaroid-mvp/events.ndjson
+ * - Offline queue in localStorage, flush on load + online
+ * - Very small surface area; no PII
+ */
+(function () {
+  try {
+    var ENDPOINT = "/polaroid-mvp/events.ndjson";
+    var KEY = "lumora_polaroid_events_q_v1";
+    var MAXQ = 200; // cap queue length
+
+    function nowIso() { return new Date().toISOString(); }
+
+    function safeJson(obj) {
+      try { return JSON.stringify(obj); } catch (_) { return "{}"; }
+    }
+
+    function loadQ() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr.slice(0, MAXQ) : [];
+      } catch (_) { return []; }
+    }
+
+    function saveQ(q) {
+      try { localStorage.setItem(KEY, JSON.stringify(q.slice(0, MAXQ))); } catch (_) {}
+    }
+
+    function enqueue(line) {
+      var q = loadQ();
+      q.unshift(line);
+      if (q.length > MAXQ) q = q.slice(0, MAXQ);
+      saveQ(q);
+    }
+
+    function postLines(lines) {
+      var body = lines.join("\n") + "\n";
+      return fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/x-ndjson" },
+        body: body,
+        keepalive: true,
+        credentials: "omit"
+      }).then(function () { return true; }).catch(function () { return false; });
+    }
+
+    var flushing = false;
+    function flushQ(reason) {
+      if (flushing) return;
+      flushing = true;
+      var q = loadQ();
+      if (!q.length) { flushing = false; return; }
+
+      // Send oldest-first so session ordering is more natural
+      var batch = q.slice().reverse().slice(0, 50);
+      postLines(batch).then(function (ok) {
+        if (ok) {
+          var remaining = loadQ();
+          // remove exactly the sent batch (by count, oldest-first)
+          // easiest: drop from the end (oldest)
+          remaining = remaining.slice(0, Math.max(0, remaining.length - batch.length));
+          saveQ(remaining);
+          // if still more, schedule another flush
+          if (remaining.length) setTimeout(function () { flushing = false; flushQ("drain"); }, 250);
+          else flushing = false;
+        } else {
+          // keep queue
+          flushing = false;
+        }
+      });
+    }
+
+    function emit(type, data) {
+      var evt = {
+        v: 1,
+        t: nowIso(),
+        type: String(type || "event"),
+        data: data || {}
+      };
+      var line = safeJson(evt);
+      // best effort immediate send; if fails, queue it
+      postLines([line]).then(function (ok) {
+        if (!ok) enqueue(line);
+      });
+    }
+
+    // Hook into existing UI events by best-effort listeners
+    document.addEventListener("click", function (e) {
+      var target = e.target;
+      var tag = target && target.tagName ? String(target.tagName) : "";
+      // Only log minimal metadata (no text)
+      emit("click", { tag: tag, id: target && target.id ? String(target.id) : "", cls: target && target.className ? String(target.className).slice(0, 80) : "" });
+    }, { passive: true });
+
+    window.addEventListener("error", function (e) {
+      emit("error", { msg: String((e && e.message) || "unknown").slice(0, 180) });
+    });
+
+    window.addEventListener("unhandledrejection", function (e) {
+      emit("promise_rejection", { msg: String((e && e.reason) || "unknown").slice(0, 180) });
+    });
+
+    window.addEventListener("online", function () { flushQ("online"); });
+    // Flush shortly after load
+    setTimeout(function () { flushQ("load"); }, 600);
+
+    // Expose tiny debug hook
+    window.__lumoraPolaroidEmit = emit;
+    window.__lumoraPolaroidFlush = flushQ;
+
+    emit("boot", { ua: navigator.userAgent ? String(navigator.userAgent).slice(0, 120) : "" });
+  } catch (_) {}
+})();
+</script>
+<!-- /* LUMORA_POLAROID_EVENTS_END */ -->
