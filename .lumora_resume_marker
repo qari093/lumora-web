@@ -346,3 +346,10 @@ POST_MEGA_PHASE1_STEP97_UTC=2025-12-20T20:26:20Z
 POST_MEGA_PHASE1_STEP97_TOOL=polaroid-mvp/tools/polaroid-mobile-smoke.sh
 POST_MEGA_PHASE1_STEP97_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-smoke-tool-fix-step97.md
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP98
+POST_MEGA_PHASE1_STEP98
+POST_MEGA_PHASE1_STEP98_UTC=2025-12-20T20:28:33Z
+POST_MEGA_PHASE1_STEP98_TOOL=polaroid-mvp/tools/polaroid-mobile-smoke.sh
+POST_MEGA_PHASE1_STEP98_TEST_STEP=96
+POST_MEGA_PHASE1_STEP98_OUT=/tmp/polaroid_mobile_smoke_tool_out_step98.txt
+POST_MEGA_PHASE1_STEP98_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-smoke-tool-selftest-step98.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP99
