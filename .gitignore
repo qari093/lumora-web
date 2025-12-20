@@ -97,3 +97,5 @@ prisma/**/*dev.db.bak*
 polaroid-mvp/events.ndjson
 polaroid-mvp/tunnel.log
 polaroid-mvp/tunnel.pid
+
+polaroid-mvp/LIVE_URL.txt
