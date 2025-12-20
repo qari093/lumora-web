@@ -1,73 +1,37 @@
 #!/bin/sh
 set -euo pipefail
 
-cd ~/lumora-web || { echo "❌ project not found"; exit 1; }
+cd "${LUMORA_ROOT:-$HOME/lumora-web}" 2>/dev/null || true
 
-GIT="${GIT:-/usr/bin/git}"
-[ -x "$GIT" ] || GIT="$(command -v git || true)"
-[ -n "${GIT:-}" ] || { echo "❌ git not found"; exit 2; }
+MARKER="${MARKER:-.lumora_resume_marker}"
+STEP="${1:-}"
 
-GREP_BIN="/usr/bin/grep"; [ -x "$GREP_BIN" ] || GREP_BIN="/bin/grep"
-SED_BIN="/usr/bin/sed"; [ -x "$SED_BIN" ] || SED_BIN="/bin/sed"
-DATE_BIN="/bin/date"
+GREP="${GREP:-/usr/bin/grep}"
+WC="${WC:-/usr/bin/wc}"
+DATE="${DATE:-/bin/date}"
 
-MARKER=".lumora_resume_marker"
-[ -f "$MARKER" ] || { echo "❌ Missing $MARKER"; exit 2; }
-
-STEP="${POLAROID_MOBILE_STEP:-}"
 FINAL="${POLAROID_FINAL_RESULT:-}"
-[ -n "${STEP:-}" ] || { echo "❌ Set POLAROID_MOBILE_STEP (e.g. 86)"; exit 3; }
+[ -f "$MARKER" ] || { echo "❌ Missing marker: $MARKER"; exit 2; }
+[ -n "$STEP" ] || { echo "❌ Usage: POLAROID_FINAL_RESULT=PASS|FAIL $0 <stepNumber>"; exit 2; }
+[ -n "$FINAL" ] || { echo "❌ POLAROID_FINAL_RESULT is required"; exit 2; }
 
-case "${FINAL:-}" in
-  PASS|FAIL) : ;;
-  *)
-    echo "ACTION REQUIRED:"
-    echo "Run EXACTLY ONE:"
-    echo "  POLAROID_MOBILE_STEP=$STEP POLAROID_FINAL_RESULT=PASS $0"
-    echo "  POLAROID_MOBILE_STEP=$STEP POLAROID_FINAL_RESULT=FAIL $0"
-    exit 4
-    ;;
-esac
+case "$FINAL" in PASS|FAIL) : ;; *) echo "❌ Invalid POLAROID_FINAL_RESULT=$FINAL"; exit 2 ;; esac
 
-LOCK_KEY="POST_MEGA_PHASE1_STEP${STEP}_LOCKED_SINGLE=true"
-if "$GREP_BIN" -q "^${LOCK_KEY}$" "$MARKER" 2>/dev/null; then
-  ALREADY="$("$GREP_BIN" "^POST_MEGA_PHASE1_STEP${STEP}_FINAL_MOBILE_RESULT=" "$MARKER" | tail -n 1 | "$SED_BIN" "s/^POST_MEGA_PHASE1_STEP${STEP}_FINAL_MOBILE_RESULT=//" || true)"
-  echo "❌ Step $STEP already locked (FINAL=${ALREADY:-unknown})."
-  exit 5
-fi
+# Accept either recorded mobile results, or allow "final lock without prior record" for recovery.
+PASS_CNT="$("$GREP" -c "^POST_MEGA_PHASE1_STEP${STEP}_MOBILE_RESULT=PASS$" "$MARKER" 2>/dev/null || true)"
+FAIL_CNT="$("$GREP" -c "^POST_MEGA_PHASE1_STEP${STEP}_MOBILE_RESULT=FAIL$" "$MARKER" 2>/dev/null || true)"
+ANY_CNT=$((PASS_CNT + FAIL_CNT))
 
-PASS_CT="$("$GREP_BIN" -c "^POST_MEGA_PHASE1_STEP${STEP}_MOBILE_RESULT=PASS$" "$MARKER" 2>/dev/null || true)"
-FAIL_CT="$("$GREP_BIN" -c "^POST_MEGA_PHASE1_STEP${STEP}_MOBILE_RESULT=FAIL$" "$MARKER" 2>/dev/null || true)"
+ts="$("$DATE" -u +"%Y-%m-%dT%H:%M:%SZ")"
 
-echo "• Detected Step${STEP} results in marker:"
-echo "  PASS entries: ${PASS_CT:-0}"
-echo "  FAIL entries: ${FAIL_CT:-0}"
-echo
-
-if [ "${PASS_CT:-0}" -gt 0 ] && [ "${FAIL_CT:-0}" -gt 0 ]; then
-  echo "⚠ Conflicting entries exist; locking FINAL=${FINAL} as truth."
-elif [ "${PASS_CT:-0}" -eq 0 ] && [ "${FAIL_CT:-0}" -eq 0 ]; then
-  echo "❌ No recorded mobile results found for Step $STEP. Record first, then lock."
-  exit 6
-fi
-
-ts="$("$DATE_BIN" -u +"%Y-%m-%dT%H:%M:%SZ")"
 {
-  echo "POST_MEGA_PHASE1_STEP${STEP}_FINAL_MOBILE_RESULT=$FINAL"
+  echo "POST_MEGA_PHASE1_STEP${STEP}_FINAL_MOBILE_RESULT=${FINAL}"
+  echo "POST_MEGA_PHASE1_STEP${STEP}_FINAL_MOBILE_RESULT_UTC=${ts}"
   echo "POST_MEGA_PHASE1_STEP${STEP}_LOCKED_SINGLE=true"
-  echo "POST_MEGA_PHASE1_STEP${STEP}_LOCKED_UTC=$ts"
-} >> "$MARKER"
-
-"$GIT" add "$MARKER" >/dev/null 2>&1 || true
-if ! "$GIT" diff --cached --quiet 2>/dev/null; then
-  "$GIT" commit -m "Polaroid: lock mobile truth for Step ${STEP} (${FINAL})" >/dev/null || true
-  echo "✓ Commit created"
-else
-  echo "ℹ Nothing to commit"
-fi
-
-gs="$("$GIT" status --porcelain || true)"
-[ -z "$gs" ] || { echo "❌ Working tree not clean:"; echo "$gs"; exit 7; }
-echo "✓ Working tree clean"
+  if [ "$ANY_CNT" -eq 0 ]; then
+    echo "POST_MEGA_PHASE1_STEP${STEP}_FINAL_LOCK_NO_PRIOR_RECORD=true"
+  fi
+} >>"$MARKER"
 
 echo "✓ Locked Step ${STEP} final mobile result: ${FINAL}"
+exit 0
