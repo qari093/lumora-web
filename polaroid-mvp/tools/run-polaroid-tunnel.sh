@@ -1,42 +1,63 @@
 #!/bin/sh
 set -euo pipefail
 
-CLOUDFLARED="${CLOUDFLARED_BIN:-/usr/local/bin/cloudflared}"
-[ -x "$CLOUDFLARED" ] || { echo "❌ cloudflared not found/executable at: $CLOUDFLARED"; exit 1; }
+cd ~/lumora-web || { echo "❌ project not found"; exit 1; }
 
-BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-URL_FILE="$BASE_DIR/LIVE_URL.txt"
-LOG="$BASE_DIR/tunnel.log"
-PID="$BASE_DIR/tunnel.pid"
+CF_BIN="/usr/local/bin/cloudflared"
+[ -x "$CF_BIN" ] || CF_BIN="$(command -v cloudflared || true)"
+[ -n "${CF_BIN:-}" ] || { echo "❌ cloudflared not found"; exit 2; }
 
-# Prefer HTTP2 when QUIC paths are flaky/blocked. Force IPv4 edge to avoid v6/DNS weirdness.
-PROTOCOL="${CLOUDFLARED_PROTOCOL:-http2}"
-EDGE_IP_VERSION="${CLOUDFLARED_EDGE_IP_VERSION:-4}"
+DATE_BIN="/bin/date"
+SLEEP_BIN="/bin/sleep"
+KILL_BIN="/bin/kill"
+PS_BIN="/bin/ps"
+GREP_BIN="/usr/bin/grep"; [ -x "$GREP_BIN" ] || GREP_BIN="/bin/grep"
+TAIL_BIN="/usr/bin/tail"; [ -x "$TAIL_BIN" ] || TAIL_BIN="/bin/tail"
+AWK_BIN="/usr/bin/awk"; [ -x "$AWK_BIN" ] || AWK_BIN="/usr/bin/awk"
 
-# best-effort cleanup
-pkill -f cloudflared >/dev/null 2>&1 || true
-rm -f "$URL_FILE" "$PID" 2>/dev/null || true
+RUNBOOK_DIR="polaroid-mvp/tools"
+LOG="polaroid-mvp/tunnel.log"
+PIDF="polaroid-mvp/tunnel.pid"
+URLF="polaroid-mvp/LIVE_URL.txt"
 
-echo "• Starting quick tunnel to http://127.0.0.1:8088 (background, log=$LOG)"
-# Note: no named tunnel; quick tunnel only.
-# --protocol http2 reduces QUIC-related 530s in some networks.
-# --edge-ip-version 4 avoids v6-only resolution edge cases.
-( "$CLOUDFLARED" tunnel --no-autoupdate --protocol "$PROTOCOL" --edge-ip-version "$EDGE_IP_VERSION" --url http://127.0.0.1:8088 >"$LOG" 2>&1 ) &
-echo $! >"$PID"
+mkdir -p "$RUNBOOK_DIR"
 
-# Extract base URL (trycloudflare) and write LIVE_URL.txt
-# Wait up to 12s for the URL to appear.
+# Best-effort stop old tunnel (only if it was our last PID)
+if [ -f "$PIDF" ]; then
+  oldpid="$(cat "$PIDF" 2>/dev/null || true)"
+  if [ -n "${oldpid:-}" ] && "$PS_BIN" -p "$oldpid" >/dev/null 2>&1; then
+    "$KILL_BIN" -TERM "$oldpid" >/dev/null 2>&1 || true
+    "$SLEEP_BIN" 0.5 || true
+  fi
+fi
+
+# Clear previous URL (avoid stale reads)
+: > "$URLF"
+
+# Start new quick tunnel (account-less), force edge IPv4 and http2 to reduce QUIC/DNS weirdness
+ts="$("$DATE_BIN" -u +"%Y-%m-%dT%H:%M:%SZ")"
+{
+  echo "[$ts] starting quick tunnel → http://127.0.0.1:8088"
+} >> "$LOG"
+
+"$CF_BIN" tunnel --edge-ip-version 4 --protocol http2 --no-autoupdate --url http://127.0.0.1:8088 >>"$LOG" 2>&1 &
+pid="$!"
+echo "$pid" > "$PIDF"
+
+# Extract URL from log (retry up to ~12s)
 i=0
-BASE=""
-while [ $i -lt 24 ]; do
-  BASE="$(/usr/bin/grep -Eo 'https://[a-z0-9-]+\.trycloudflare\.com' "$LOG" | /usr/bin/head -n1 || true)"
-  [ -n "${BASE:-}" ] && break
-  /bin/sleep 0.5
+url=""
+while [ "$i" -lt 24 ]; do
+  url="$("$GREP_BIN" -Eo 'https://[a-z0-9-]+\.trycloudflare\.com' "$LOG" 2>/dev/null | "$TAIL_BIN" -n 1 || true)"
+  if [ -n "${url:-}" ]; then break; fi
+  "$SLEEP_BIN" 0.5
   i=$((i+1))
 done
 
-[ -n "${BASE:-}" ] || { echo "❌ Could not extract trycloudflare URL from log"; /usr/bin/tail -n 80 "$LOG" || true; exit 2; }
+[ -n "${url:-}" ] || { echo "❌ Could not extract trycloudflare URL from log: $LOG"; exit 3; }
 
-echo "${BASE}/polaroid-mvp/index.html" >"$URL_FILE"
-echo "✓ LIVE URL: $(/bin/cat "$URL_FILE")"
-echo "✓ Tunnel PID running: $(/bin/cat "$PID")"
+# Persist full URL including path
+echo "${url}/polaroid-mvp/index.html" > "$URLF"
+
+echo "LIVE_URL=$(cat "$URLF")"
+echo "TUNNEL_PID=$pid"
