@@ -272,3 +272,9 @@ POST_MEGA_PHASE1_STEP85_UTC=2025-12-20T19:53:55Z
 POST_MEGA_PHASE1_STEP85_LIVE_URL=https://treated-ceo-closer-airport.trycloudflare.com/polaroid-mvp/index.html
 POST_MEGA_PHASE1_STEP85_DOC=docs/polaroid/phase1/polaroid-phase1-tunnel-url-recovery-step85.md
 POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP86
+POST_MEGA_PHASE1_STEP86
+POST_MEGA_PHASE1_STEP86_UTC=2025-12-20T19:56:46Z
+POST_MEGA_PHASE1_STEP86_LIVE_URL=https://treated-ceo-closer-airport.trycloudflare.com/polaroid-mvp/index.html
+POST_MEGA_PHASE1_STEP86_MOBILE_RESULT=PASS
+POST_MEGA_PHASE1_STEP86_DOC=docs/polaroid/phase1/polaroid-phase1-mobile-result-step86.md
+POST_MEGA_PHASE1_NEXT_STEP=POST_MEGA_PHASE1_STEP87
