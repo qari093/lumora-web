@@ -120,7 +120,13 @@
     "guard:safetynet:health": "sh scripts/guardrail-safetynet-health.sh",
     "guard:safetynet:autofix": "sh scripts/guardrail-safetynet-autofix.sh",
     "guard:safetynet:all": "sh scripts/guardrail-safetynet-all.sh",
-    "test:emml-ci": "node scripts/emml.seed.cjs && vitest run tests/emml --passWithNoTests"
+    "test:emml-ci": "node scripts/emml.seed.cjs && vitest run tests/emml --passWithNoTests",
+    "test:health": "vitest run --dir tests/health",
+    "test:health:file": "vitest run tests/health/middleware_health.test.ts",
+    "test:health:dir": "vitest run --dir tests/health",
+    "test:health:smoke": "vitest run tests/health/health_smoke.test.ts",
+    "health:probe": "sh scripts/health/probe_health_endpoints.sh",
+    "ci:health": "sh scripts/health/ci_gate.sh"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
