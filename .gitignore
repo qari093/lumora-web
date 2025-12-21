@@ -107,3 +107,6 @@ SH-3.2$
 waqarahmad@waqarKhan
 COPY_FROM_HERE
 COPY_ENDS_HERE
+# Lumora scratch / backups
+.lumora/
+*.bak.*
