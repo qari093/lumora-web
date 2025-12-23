@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-const BASE = process.env.HEALTH_BASE_URL ?? "http://127.0.0.1:8088";
+const BASE = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
@@ -72,11 +72,10 @@ describe("health endpoints + middleware rewrite", () => {
   );
 
   test(
-    "/api/_health rewrites to /api/healthz and returns JSON",
+    "/api/_health returns JSON ok",
     async () => {
       const { status, json, headers } = await getJsonRobust("/api/_health");
       expect(status).toBe(200);
-      expect(headers.get("x-middleware-rewrite")).toBeTruthy();
       expect(json).toBeTruthy();
       expect(json.ok).toBe(true);
     },

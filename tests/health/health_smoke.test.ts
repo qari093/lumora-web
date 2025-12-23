@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 const PORT = Number(process.env.PORT ?? 8088);
-const BASE = `http://127.0.0.1:${PORT}`;
+const BASE = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
 
 async function sleep(ms: number) {
   await new Promise((r) => setTimeout(r, ms));

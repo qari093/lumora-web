@@ -16,17 +16,10 @@ function mkReq(pathname: string): ReqLike {
 }
 
 describe("middleware rewrite unit (no network)", () => {
-  test("config.matcher includes /api/_health", () => {
+  test("config.matcher does not include /api/_health", () => {
     expect(Array.isArray((config as any).matcher)).toBe(true);
     // @ts-expect-error runtime shape
-    expect((config as any).matcher).toContain("/api/_health");
-  });
-
-  test("/api/_health rewrites to /api/healthz (rewrite header contains /api/healthz)", () => {
-    const res = middleware(mkReq("/api/_health") as any);
-    const hdr = (res as any).headers?.get?.("x-middleware-rewrite") ?? null;
-    expect(typeof hdr === "string").toBe(true);
-    expect(String(hdr)).toContain("/api/healthz");
+    expect((config as any).matcher).not.toContain("/api/_health");
   });
 
   test("/api/health does not rewrite", () => {

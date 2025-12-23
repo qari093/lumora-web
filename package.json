@@ -126,7 +126,10 @@
     "test:health:dir": "vitest run --dir tests/health",
     "test:health:smoke": "vitest run tests/health/health_smoke.test.ts",
     "health:probe": "sh scripts/health/probe_health_endpoints.sh",
-    "ci:health": "sh scripts/health/ci_gate.sh"
+    "ci:health": "sh scripts/health/ci_gate.sh",
+    "brand:guard": "sh scripts/brand/no_touch_blade_guard.step13.sh",
+    "ops:private-smoke": "sh ops/_runbooks/private_mode_smoke.sh",
+    "ops:private-smoke:out": "sh ops/_runbooks/private_mode_smoke.sh > ops/_analysis/private_mode_smoke.latest.out 2>&1"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -183,6 +186,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@prisma/client": "^6.18.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/bcrypt": "^6.0.0",
     "@types/lru-cache": "^7.10.9",
     "@types/node": "^20.19.25",
@@ -192,6 +196,7 @@
     "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
+    "pngjs": "^7.0.0",
     "prettier": "^3.6.2",
     "prisma": "^6.18.0",
     "stripe": "^16.12.0",
