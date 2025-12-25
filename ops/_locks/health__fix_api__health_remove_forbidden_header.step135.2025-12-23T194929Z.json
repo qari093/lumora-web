@@ -1,0 +1,11 @@
+{
+  "step": 135,
+  "kind": "health__fix_api__health_remove_forbidden_header",
+  "createdAt": "2025-12-23T194929Z",
+  "files": ["app/api/_health/route.ts", "src/app/api/_health/route.ts"],
+  "notes": [
+    "Removed forbidden x-middleware-rewrite header from /api/_health App Route handler",
+    "Ensured /api/_health returns 200 JSON + cache-control:no-store",
+    "Re-ran vitest health suite (tests/health) and committed only /api/_health changes"
+  ]
+}

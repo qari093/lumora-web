@@ -1,0 +1,113 @@
+{
+  "step": 14,
+  "kind": "frame_integrity_verification",
+  "createdAt": "2025-12-22T10:20:28.757Z",
+  "inputs": {
+    "pixelBaselineDir": "branding/_pixel_baseline/images",
+    "masterExportDir": "branding/_exports/png"
+  },
+  "summary": {
+    "baselineCount": 7,
+    "exportCount": 6,
+    "issueCount": 1
+  },
+  "baseline": [
+    {
+      "path": "branding/_pixel_baseline/images/blade_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "rgba": true
+    },
+    {
+      "path": "branding/_pixel_baseline/images/blade_256.png",
+      "ok": true,
+      "width": 256,
+      "height": 70,
+      "rgba": true
+    },
+    {
+      "path": "branding/_pixel_baseline/images/blade_512.png",
+      "ok": true,
+      "width": 512,
+      "height": 140,
+      "rgba": true
+    },
+    {
+      "path": "branding/_pixel_baseline/images/og-fallback.png",
+      "ok": false,
+      "problem": "invalid_png_header"
+    },
+    {
+      "path": "branding/_pixel_baseline/images/wordmark_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 256,
+      "rgba": true
+    },
+    {
+      "path": "branding/_pixel_baseline/images/wordmark_256.png",
+      "ok": true,
+      "width": 256,
+      "height": 64,
+      "rgba": true
+    },
+    {
+      "path": "branding/_pixel_baseline/images/wordmark_512.png",
+      "ok": true,
+      "width": 512,
+      "height": 128,
+      "rgba": true
+    }
+  ],
+  "exports": [
+    {
+      "path": "branding/_exports/png/blade_master_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "rgba": true
+    },
+    {
+      "path": "branding/_exports/png/blade_master_2048.png",
+      "ok": true,
+      "width": 2048,
+      "height": 559,
+      "rgba": true
+    },
+    {
+      "path": "branding/_exports/png/blade_master_4096.png",
+      "ok": true,
+      "width": 4096,
+      "height": 1117,
+      "rgba": true
+    },
+    {
+      "path": "branding/_exports/png/wordmark_master_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 256,
+      "rgba": true
+    },
+    {
+      "path": "branding/_exports/png/wordmark_master_2048.png",
+      "ok": true,
+      "width": 2048,
+      "height": 512,
+      "rgba": true
+    },
+    {
+      "path": "branding/_exports/png/wordmark_master_4096.png",
+      "ok": true,
+      "width": 4096,
+      "height": 1024,
+      "rgba": true
+    }
+  ],
+  "issues": [
+    {
+      "path": "branding/_pixel_baseline/images/og-fallback.png",
+      "problem": "invalid_png_header"
+    }
+  ]
+}

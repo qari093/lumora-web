@@ -1,0 +1,10 @@
+{
+  "step": 122,
+  "kind": "health__commit_health_only",
+  "createdAt": "2025-12-23T19:18:57Z",
+  "notes": [
+    "Staged and committed ONLY health-related changes (no package-lock.json, no unrelated app dirs)",
+    "Includes: /api/_health legacy rewrite, health-alias header fix, /api/healthz ts:number, tests, ci_gate.sh, package.json scripts",
+    "Left remaining modified/untracked files untouched for later dedicated steps"
+  ]
+}

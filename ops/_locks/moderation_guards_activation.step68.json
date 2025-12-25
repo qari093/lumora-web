@@ -1,0 +1,11 @@
+{
+  "step": 68,
+  "kind": "moderation_safety_guards_activation",
+  "createdAt": "2025-12-22T12:11:35Z",
+  "env": { "LUMORA_MODERATION_ENABLED": "1" },
+  "endpoints": ["/api/moderation/policy"],
+  "notes": [
+    "Moderation & safety guards flagged ON for Private Live.",
+    "Wire enforcement into publish/comment/message flows as those systems are activated."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "step": 52,
+  "kind": "os_version_coverage_policy",
+  "createdAt": "2025-12-22T11:45:30Z",
+  "coverage": {
+    "ios": {
+      "minSupported": "iOS 17",
+      "recommended": ["iOS 17", "iOS 18", "latest"],
+      "notes": [
+        "Safari WebKit behavior differs across iOS minors; test at least one 17.x and latest.",
+        "Reduced-motion and memory behavior must be verified on iOS Safari."
+      ]
+    },
+    "android": {
+      "minSupported": "Android 13",
+      "recommended": ["Android 13", "Android 14", "Android 15 (if available)"],
+      "notes": [
+        "Test at least one mid-tier and one low-end device for cold-start performance.",
+        "Chrome stable only; avoid beta channels for coverage sign-off."
+      ]
+    },
+    "desktop": {
+      "browsers": {
+        "chrome": "latest-1 and latest",
+        "safari": "latest",
+        "edge": "latest",
+        "firefox": "latest (optional)"
+      },
+      "notes": [
+        "Desktop is not the primary launch target for splash, but must not regress."
+      ]
+    }
+  },
+  "acceptanceGates": [
+    "No blank screen on cold start across all minSupported OS versions.",
+    "SplashGate always fails open (app is usable) even under offline conditions.",
+    "Reduced-motion behavior verified on iOS + Android.",
+    "No crash loops observed after 10 consecutive cold starts on iOS Safari."
+  ],
+  "signOff": {
+    "required": true,
+    "roles": ["Brand", "Frontend", "QA/Operator"],
+    "artifact": "branding/_validation/device_matrix_testing.step51.md"
+  }
+}

@@ -1,0 +1,15 @@
+
+  }
+
+  // 2) Health bypass: NEVER run private gating on health endpoints
+  if (HEALTH_PATHS.has(p)) {
+    return NextResponse.next();
+  }
+
+  // 3) Default: do nothing (private gating is handled elsewhere, or by route middleware)
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/api/_health", "/api/:path*"],
+};

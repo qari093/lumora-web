@@ -1,0 +1,10 @@
+{
+  "step": 109,
+  "kind": "splashgate_cleanup_dedupe_fix_applied",
+  "createdAt": "2025-12-22T15:10:10Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step109.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step109.20251222T151010Z.bak"
+  }
+}

@@ -1,0 +1,98 @@
+import { describe, expect, test } from "vitest";
+
+const BASE = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
+
+function sleep(ms: number) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function fetchText(path: string, timeoutMs: number): Promise<{ status: number; ct: string; text: string; headers: Headers }> {
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
+  try {
+    const res = await fetch(new URL(path, BASE), { cache: "no-store", signal: ac.signal });
+    const text = await res.text();
+    const ct = res.headers.get("content-type") ?? "";
+    return { status: res.status, ct, text, headers: res.headers };
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+async function getJsonRobust(path: string): Promise<{ status: number; json: any; headers: Headers }> {
+  // Robust: total budget ~20s with backoff; each attempt has its own abort.
+  const attempts: Array<{ timeout: number; wait: number }> = [
+    { timeout: 2500, wait: 150 },
+    { timeout: 3500, wait: 250 },
+    { timeout: 5000, wait: 400 },
+    { timeout: 6500, wait: 650 },
+    { timeout: 8000, wait: 900 },
+  ];
+
+  let lastErr: unknown = null;
+
+  for (let i = 0; i < attempts.length; i++) {
+    const { timeout, wait } = attempts[i]!;
+    try {
+      const { status, ct, text, headers } = await fetchText(path, timeout);
+      if (status !== 200) throw new Error(`status:${status}`);
+      if (!ct.includes("application/json")) throw new Error(`ct:${ct}`);
+      return { status, json: JSON.parse(text), headers };
+    } catch (e) {
+      lastErr = e;
+      await sleep(wait);
+    }
+  }
+
+  throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+}
+
+describe("health endpoints + middleware rewrite", () => {
+  test(
+    "/api/health returns JSON ok",
+    async () => {
+      const { status, json } = await getJsonRobust("/api/health");
+      expect(status).toBe(200);
+      expect(json).toBeTruthy();
+      expect(json.ok).toBe(true);
+      expect(json.route).toBe("/api/health");
+    },
+    25000
+  );
+
+  test(
+    "/api/healthz returns JSON ok",
+    async () => {
+      const { status, json } = await getJsonRobust("/api/healthz");
+      expect(status).toBe(200);
+      expect(json).toBeTruthy();
+      expect(json.ok).toBe(true);
+    },
+    20000
+  );
+
+  test(
+    "/api/_health rewrites to /api/healthz and returns JSON",
+    async () => {
+      const { status, json, headers } = await getJsonRobust("/api/_health");
+      expect(status).toBe(200);
+      expect(json).toBeTruthy();
+      expect(json.ok).toBe(true);
+    },
+    20000
+  );
+
+  test(
+    "other health routes remain accessible",
+    async () => {
+      const paths = ["/api/emml/health", "/api/hybrid/health", "/api/ads/health"];
+      for (const p of paths) {
+        const { status, json } = await getJsonRobust(p);
+        expect(status).toBe(200);
+        expect(json).toBeTruthy();
+        expect(json.ok).toBe(true);
+      }
+    },
+    30000
+  );
+});

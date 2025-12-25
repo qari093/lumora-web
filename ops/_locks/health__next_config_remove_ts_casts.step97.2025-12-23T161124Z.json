@@ -1,0 +1,9 @@
+{
+  "step": 97,
+  "kind": "health__next_config_remove_ts_casts",
+  "createdAt": "2025-12-23T161124Z",
+  "files": ["next.config.mjs", "ops/_patches/next.config.mjs.before_step97.2025-12-23T161124Z.bak"],
+  "notes": [
+    "Removed TypeScript-only 'as any' casts from next.config.mjs so Node can parse ESM config"
+  ]
+}

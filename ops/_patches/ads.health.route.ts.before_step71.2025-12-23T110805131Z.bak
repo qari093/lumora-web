@@ -1,0 +1,46 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function bool(v: string | undefined) {
+  return v === "1" || v === "true" || v === "yes";
+}
+
+export async function GET() {
+  try {
+    // Keep this endpoint safe for prod builds: no dynamic require/import.
+    // Only validate presence of key envs (do not leak values).
+    const env = process.env;
+
+    const ok =
+      typeof env.NODE_ENV === "string" &&
+      typeof env.LAUNCH_MODE === "string";
+
+    const privateMode = (env.LAUNCH_MODE || "").toLowerCase() === "private";
+    const hasAllowlist = !!(env.LUMORA_PRIVATE_ALLOWLIST || env.LUMORA_ALLOWLIST);
+    const hasToken = !!(env.LUMORA_PRIVATE_TOKEN || env.LUMORA_PRIVATE_ACCESS_TOKEN || env.LUMORA_TOKEN);
+
+    const warnings: string[] = [];
+    if (privateMode && !hasAllowlist) warnings.push("missing_allowlist_env");
+    if (privateMode && !hasToken) warnings.push("missing_private_token_env");
+
+    return NextResponse.json(
+      {
+        ok: ok && warnings.length === 0,
+        service: "ads-health",
+        nodeEnv: env.NODE_ENV || null,
+        launchMode: env.LAUNCH_MODE || null,
+        privateMode,
+        warnings,
+        ts: new Date().toISOString(),
+      },
+      { status: ok ? 200 : 500 }
+    );
+  } catch (e: any) {
+    return NextResponse.json(
+      { ok: false, service: "ads-health", error: "exception", message: String(e?.message || e), ts: new Date().toISOString() },
+      { status: 500 }
+    );
+  }
+}

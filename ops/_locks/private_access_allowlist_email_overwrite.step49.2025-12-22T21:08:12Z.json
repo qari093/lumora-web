@@ -1,0 +1,16 @@
+{
+  "step": 49,
+  "kind": "private_access_allowlist_email_overwrite",
+  "createdAt": "2025-12-22T21:08:12Z",
+  "port": 3004,
+  "healthEndpoint": "/api/healthz",
+  "envFile": ".env.production.local",
+  "log": "ops/_analysis/next_start.step49.log",
+  "buildLog": "ops/_analysis/next_build.step49.log",
+  "email": "rana.waqar78@gmail.com",
+  "notes": [
+    "Extracted first valid email via regex (fixes broken allowlist values like \\"'\\"\\"''\\"')",
+    "Overwrote allowlist+token into .env.production.local to remove dotenv ambiguity",
+    "Verified private-access cookie mint + / gated without cookie and 200 with cookie"
+  ]
+}

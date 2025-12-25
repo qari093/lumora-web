@@ -1,0 +1,88 @@
+import { NextRequest, NextResponse } from "next/server";
+
+const ALWAYS_ALLOW_PREFIXES = [
+  "/api",
+  "/_next",
+  "/favicon.ico",
+  "/favicon.png",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/assets",
+  "/public",
+  "/p.gif",
+];
+
+function isAlwaysAllowed(pathname: string): boolean {
+  return ALWAYS_ALLOW_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/") || pathname.startsWith(p));
+}
+
+function parseAllowlist(envVal: string | undefined): Set<string> {
+  const s = (envVal ?? "").trim();
+  if (!s) return new Set();
+  return new Set(
+    s
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
+
+export function middleware(req: NextRequest) {
+  const url = req.nextUrl;
+  const pathname = url.pathname;
+
+  if (isAlwaysAllowed(pathname)) return NextResponse.next();
+
+  // Private launch mode guard (file-based state written in Step 2)
+  const launchMode = process.env.LAUNCH_MODE || process.env.LUMORA_LAUNCH_MODE || "";
+  const publicAccess = process.env.PUBLIC_ACCESS || process.env.LUMORA_PUBLIC_ACCESS || "";
+
+  const isPrivate = launchMode.toLowerCase() === "private" || publicAccess === "0";
+  if (!isPrivate) return NextResponse.next();
+
+  // Allow access to the explicit onboarding page
+  if (pathname === "/private-access") return NextResponse.next();
+
+  const allowlist = parseAllowlist(process.env.LUMORA_PRIVATE_ALLOWLIST);
+  if (allowlist.size === 0) {
+    // Fail-closed by default for safety
+    const r = NextResponse.redirect(new URL("/private-access", req.url));
+    r.headers.set("x-lumora-private", "1");
+    r.headers.set("x-lumora-private-reason", "allowlist_empty");
+    return r;
+  }
+
+  // One-time onboarding: /private-access?email=user@x.com will set cookie
+  const emailParam = url.searchParams.get("email")?.trim().toLowerCase() ?? "";
+  if (emailParam) {
+    const r = NextResponse.redirect(new URL(url.pathname, req.url));
+    r.cookies.set("lumora_email", emailParam, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: true,
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+    r.headers.set("x-lumora-private", "1");
+    r.headers.set("x-lumora-private-onboard", "1");
+    return r;
+  }
+
+  const cookieEmail = (req.cookies.get("lumora_email")?.value ?? "").trim().toLowerCase();
+
+  if (!cookieEmail || !allowlist.has(cookieEmail)) {
+    const r = NextResponse.redirect(new URL("/private-access", req.url));
+    r.headers.set("x-lumora-private", "1");
+    r.headers.set("x-lumora-private-reason", cookieEmail ? "not_allowed" : "missing_cookie");
+    return r;
+  }
+
+  const res = NextResponse.next();
+  res.headers.set("x-lumora-private", "1");
+  res.headers.set("x-lumora-private-email", cookieEmail);
+  return res;
+}
+
+export const config = {
+  matcher: ["/((?!_next/static|_next/image).*)"],
+};

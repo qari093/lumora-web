@@ -1,0 +1,14 @@
+{
+  "step": 46,
+  "kind": "private_access_runtime_env_injected",
+  "createdAt": "2025-12-22T20:52:21Z",
+  "port": "3002",
+  "email": "rana.waqar78@gmail.com",
+  "log": "ops/_analysis/next_start.step46.log",
+  "buildLog": "ops/_analysis/next_build.step46.log",
+  "notes": [
+    "Injected allowlist+token directly into next start process env (bypasses dotenv ambiguity)",
+    "Verified /api/private-access returns Set-Cookie lumora_email",
+    "Verified / is gated without cookie and 200 with cookie"
+  ]
+}

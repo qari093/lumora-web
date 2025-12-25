@@ -1,0 +1,14 @@
+{
+  "step": 74,
+  "kind": "private_tester_onboarding_prepared",
+  "createdAt": "2025-12-22T12:22:09Z",
+  "privateAccess": {
+    "cookie": "lumora_private_access",
+    "tokenPresentInEnvLocal": true,
+    "helperEndpoint": "/api/private/access?token=***"
+  },
+  "docs": {
+    "onboarding": "ops/private_testers/onboarding.step74.md",
+    "checklist": "ops/private_testers/checklist.step74.md"
+  }
+}

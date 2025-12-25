@@ -1,0 +1,55 @@
+{
+  "step": 49,
+  "kind": "dark_mode_appearance_check",
+  "createdAt": "2025-12-22T11:40:56.164Z",
+  "assets": [
+    {
+      "name": "blade",
+      "path": "branding/_exports/png/blade_master_2048.png",
+      "sha256": "3a2fe6c3b3a44cf0219ed95176c54b4e1baa874fe6083424289857d16a42b34e",
+      "previews": [
+        {
+          "background": "black",
+          "path": "branding/_validation/dark_mode/dark_blade_black.png",
+          "avgLuma": 23.374
+        },
+        {
+          "background": "near_black",
+          "path": "branding/_validation/dark_mode/dark_blade_near_black.png",
+          "avgLuma": 23.508
+        },
+        {
+          "background": "slate",
+          "path": "branding/_validation/dark_mode/dark_blade_slate.png",
+          "avgLuma": 23.596
+        }
+      ]
+    },
+    {
+      "name": "wordmark",
+      "path": "branding/_exports/png/wordmark_master_2048.png",
+      "sha256": "8dd251d0fea9c230a2719142f568cef99da895086cb8f099a67c5e3b3736beaa",
+      "previews": [
+        {
+          "background": "black",
+          "path": "branding/_validation/dark_mode/dark_wordmark_black.png",
+          "avgLuma": 8.075
+        },
+        {
+          "background": "near_black",
+          "path": "branding/_validation/dark_mode/dark_wordmark_near_black.png",
+          "avgLuma": 12.235
+        },
+        {
+          "background": "slate",
+          "path": "branding/_validation/dark_mode/dark_wordmark_slate.png",
+          "avgLuma": 15.151
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Outputs are composites for human inspection under dark backgrounds.",
+    "No asset pixels are modified; only composited previews are generated."
+  ]
+}

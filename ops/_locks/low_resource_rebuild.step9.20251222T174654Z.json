@@ -1,0 +1,9 @@
+{
+  "step": 9,
+  "kind": "low_resource_rebuild",
+  "createdAt": "2025-12-22T17:48:17Z",
+  "log": "ops/_analysis/next_build_low_resource.step9.20251222T174654Z.log",
+  "exitCode": 1,
+  "buildId": "",
+  "nodeOptions": " --max-old-space-size=3072"
+}

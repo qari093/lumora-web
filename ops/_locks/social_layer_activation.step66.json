@@ -1,0 +1,11 @@
+{
+  "step": 66,
+  "kind": "social_layer_activation",
+  "createdAt": "2025-12-22T12:08:35Z",
+  "env": { "LUMORA_SOCIAL_ENABLED": "1" },
+  "route": "/social",
+  "notes": [
+    "Social layer enabled for Private Live.",
+    "Bind LUMORA_SOCIAL_ENABLED to your feature flag system if applicable."
+  ]
+}

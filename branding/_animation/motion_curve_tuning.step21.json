@@ -1,0 +1,113 @@
+{
+  "step": 21,
+  "kind": "motion_curve_tuning",
+  "createdAt": "2025-12-22T10:31:15.591Z",
+  "derivedFrom": {
+    "typographyReveal": "branding/_animation/typography_reveal_animation.step20.json",
+    "choreography": "branding/_animation/reveal_choreography.step9.json"
+  },
+  "selection": {
+    "easingKey": "cubic_out",
+    "css": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "points": {
+      "p1": {
+        "x": 0.22,
+        "y": 1
+      },
+      "p2": {
+        "x": 0.36,
+        "y": 1
+      }
+    }
+  },
+  "sampleCurve": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 0.05,
+      "y": 0.215033
+    },
+    {
+      "x": 0.1,
+      "y": 0.401097
+    },
+    {
+      "x": 0.15,
+      "y": 0.554011
+    },
+    {
+      "x": 0.2,
+      "y": 0.673978
+    },
+    {
+      "x": 0.25,
+      "y": 0.764865
+    },
+    {
+      "x": 0.3,
+      "y": 0.832192
+    },
+    {
+      "x": 0.35,
+      "y": 0.881423
+    },
+    {
+      "x": 0.4,
+      "y": 0.917147
+    },
+    {
+      "x": 0.45,
+      "y": 0.942916
+    },
+    {
+      "x": 0.5,
+      "y": 0.961383
+    },
+    {
+      "x": 0.55,
+      "y": 0.974493
+    },
+    {
+      "x": 0.6,
+      "y": 0.983675
+    },
+    {
+      "x": 0.65,
+      "y": 0.989982
+    },
+    {
+      "x": 0.7,
+      "y": 0.994194
+    },
+    {
+      "x": 0.75,
+      "y": 0.996894
+    },
+    {
+      "x": 0.8,
+      "y": 0.998524
+    },
+    {
+      "x": 0.85,
+      "y": 0.99942
+    },
+    {
+      "x": 0.9,
+      "y": 0.99984
+    },
+    {
+      "x": 0.95,
+      "y": 0.999981
+    },
+    {
+      "x": 1,
+      "y": 1
+    }
+  ],
+  "notes": [
+    "Curve is monotonic (no overshoot) for stability and brand safety.",
+    "Use the same curve for text reveal + light sweep position interpolation."
+  ]
+}

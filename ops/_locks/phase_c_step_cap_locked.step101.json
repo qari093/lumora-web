@@ -1,0 +1,18 @@
+{
+  "step": 101,
+  "kind": "phase_c_step_cap_locked",
+  "createdAt": "2025-12-22T14:48:17Z",
+  "cap": {
+    "phase": "C",
+    "startStep": 100,
+    "maxStep": 110
+  },
+  "artifacts": {
+    "capFile": ".lumora_phase_c_cap.step101",
+    "guardScript": "scripts/ops/phase_c_step_guard.step101.sh"
+  },
+  "notes": [
+    "Any step numbered >110 is forbidden for Phase C.",
+    "Run guard any time before executing a new /tmp/phase_step.sh: sh scripts/ops/phase_c_step_guard.step101.sh"
+  ]
+}

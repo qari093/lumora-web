@@ -1,0 +1,108 @@
+{
+  "step": 24,
+  "kind": "app_launch_animation_export",
+  "createdAt": "2025-12-22T10:36:04.470Z",
+  "export": {
+    "type": "png_frame_sequence_preview",
+    "width": 1080,
+    "height": 1920,
+    "frameCount": 16,
+    "durationMs": 1600,
+    "framesDir": "branding/_launch/frames_png"
+  },
+  "frames": [
+    {
+      "idx": 0,
+      "tMs": 0,
+      "path": "branding/_launch/frames_png/launch_00_t0000.png"
+    },
+    {
+      "idx": 1,
+      "tMs": 107,
+      "path": "branding/_launch/frames_png/launch_01_t0107.png"
+    },
+    {
+      "idx": 2,
+      "tMs": 213,
+      "path": "branding/_launch/frames_png/launch_02_t0213.png"
+    },
+    {
+      "idx": 3,
+      "tMs": 320,
+      "path": "branding/_launch/frames_png/launch_03_t0320.png"
+    },
+    {
+      "idx": 4,
+      "tMs": 427,
+      "path": "branding/_launch/frames_png/launch_04_t0427.png"
+    },
+    {
+      "idx": 5,
+      "tMs": 533,
+      "path": "branding/_launch/frames_png/launch_05_t0533.png"
+    },
+    {
+      "idx": 6,
+      "tMs": 640,
+      "path": "branding/_launch/frames_png/launch_06_t0640.png"
+    },
+    {
+      "idx": 7,
+      "tMs": 747,
+      "path": "branding/_launch/frames_png/launch_07_t0747.png"
+    },
+    {
+      "idx": 8,
+      "tMs": 853,
+      "path": "branding/_launch/frames_png/launch_08_t0853.png"
+    },
+    {
+      "idx": 9,
+      "tMs": 960,
+      "path": "branding/_launch/frames_png/launch_09_t0960.png"
+    },
+    {
+      "idx": 10,
+      "tMs": 1067,
+      "path": "branding/_launch/frames_png/launch_10_t1067.png"
+    },
+    {
+      "idx": 11,
+      "tMs": 1173,
+      "path": "branding/_launch/frames_png/launch_11_t1173.png"
+    },
+    {
+      "idx": 12,
+      "tMs": 1280,
+      "path": "branding/_launch/frames_png/launch_12_t1280.png"
+    },
+    {
+      "idx": 13,
+      "tMs": 1387,
+      "path": "branding/_launch/frames_png/launch_13_t1387.png"
+    },
+    {
+      "idx": 14,
+      "tMs": 1493,
+      "path": "branding/_launch/frames_png/launch_14_t1493.png"
+    },
+    {
+      "idx": 15,
+      "tMs": 1600,
+      "path": "branding/_launch/frames_png/launch_15_t1600.png"
+    }
+  ],
+  "notes": [
+    "This is a preview frame export for review; final runtime will use the selected motion engine (Step 15).",
+    "Blade layer is embedded from locked SVG; sweep and text are mask/clip-based overlays.",
+    "Particles are illustrative and must be bounded outside blade in runtime."
+  ],
+  "derivedFrom": {
+    "bladeLocked": "branding/_layers/blade.locked.svg",
+    "bladeMask": "branding/_layers/blade.mask.svg",
+    "choreography": "branding/_animation/reveal_choreography.step9.json",
+    "sweep": "branding/_animation/light_sweep_integration.step18.json",
+    "typography": "branding/_animation/typography_reveal_animation.step20.json",
+    "particles": "branding/_animation/external_particle_system.step19.json"
+  }
+}

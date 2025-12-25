@@ -1,0 +1,10 @@
+{
+  "step": 110,
+  "kind": "splashgate_fallback_style_braces_fix_applied",
+  "createdAt": "2025-12-22T15:25:33Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step110_style_braces_fix.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step110_style_braces_fix.20251222T152533Z.bak"
+  }
+}

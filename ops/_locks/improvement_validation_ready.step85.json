@@ -1,0 +1,10 @@
+{
+  "step": 85,
+  "kind": "improvement_validation_ready",
+  "createdAt": "2025-12-22T12:45:01Z",
+  "artifacts": {
+    "doc": "ops/private_testers/improvement_validation.step85.md",
+    "script": "scripts/ops/aggregate_improvement_validation.step85.sh",
+    "summary": "ops/_analysis/improvement_validation_summary.step85.json"
+  }
+}

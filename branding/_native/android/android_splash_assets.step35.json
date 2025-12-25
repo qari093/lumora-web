@@ -1,0 +1,56 @@
+{
+  "step": 35,
+  "kind": "android_splash_integration_scaffold",
+  "createdAt": "2025-12-22T11:01:30.916Z",
+  "splashAssets": [
+    {
+      "path": "branding/_launch/fallback_png/fallback_1080x1920.png",
+      "sha256": "5be6edf0cfd3c2f3fc29b7d0d6f0c2a385e8197e2c019005171fe548fdb20b01"
+    },
+    {
+      "path": "branding/_launch/fallback_png/fallback_1242x2688.png",
+      "sha256": "449bd8ac51ec3029b023d06892b95022d83dca71981832434517c5e54af86b7c"
+    },
+    {
+      "path": "branding/_launch/fallback_png/fallback_750x1334.png",
+      "sha256": "f26de2de19347eb559e691a8f7691b935ee03e655b3634d0b76013ae24b5d799"
+    }
+  ],
+  "androidIconAssets": [
+    {
+      "path": "branding/_icons/png/icon_android_512.png",
+      "sha256": "8f041e0585c8bf5bc6e33545b57a300e58de4af143d9b50ddb1e657bd1357ce2",
+      "size": 512
+    },
+    {
+      "path": "branding/_icons/png/icon_android_192.png",
+      "sha256": "c77b3febc38cc50e6c28371255d4724810f53790d778c8ea4e03b6d685c67f43",
+      "size": 192
+    },
+    {
+      "path": "branding/_icons/png/icon_android_144.png",
+      "sha256": "3363742333f8e8920e41221b5bf2199ad6e0249dcf60ca0f853fe29c90582323",
+      "size": 144
+    },
+    {
+      "path": "branding/_icons/png/icon_android_96.png",
+      "sha256": "c8cd7e5e1b7ba82f0b4be3cb5c743467efb68769a8a11ebd6721f529aedc67a7",
+      "size": 96
+    },
+    {
+      "path": "branding/_icons/png/icon_android_72.png",
+      "sha256": "63c78b366ee2fc4641c76c4e7d2f5e4f84bbf6ad09dc7c9debc693bbfa23a2ee",
+      "size": 72
+    },
+    {
+      "path": "branding/_icons/png/icon_android_48.png",
+      "sha256": "8ab4bfa86226f104169c17cf5c74b983a69d5b5e13f7795fe9fe2440d021d2a3",
+      "size": 48
+    }
+  ],
+  "recommendedSplash": "branding/_launch/fallback_png/fallback_1080x1920.png",
+  "notes": [
+    "Static splash assets only; OS controls splash animation.",
+    "Use Android 12 SplashScreen API and start the Lumora animation after content is ready."
+  ]
+}

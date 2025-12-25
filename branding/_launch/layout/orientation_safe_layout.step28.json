@@ -1,0 +1,76 @@
+{
+  "step": 28,
+  "kind": "orientation_safe_layout",
+  "createdAt": "2025-12-22T10:42:22.407Z",
+  "strategy": {
+    "rule": "center_logo_in_safe_area",
+    "safeInsets": "device_dependent (use CSS env(safe-area-inset-*))",
+    "fallbackInsets": "use conservative defaults from this spec"
+  },
+  "layouts": [
+    {
+      "name": "portrait_1080x1920",
+      "size": {
+        "w": 1080,
+        "h": 1920
+      },
+      "safeArea": {
+        "x": 60,
+        "y": 120,
+        "w": 960,
+        "h": 1660
+      },
+      "logoBox": {
+        "x": 195,
+        "y": 605,
+        "w": 691,
+        "h": 691
+      },
+      "previewSvg": "branding/_launch/layout/previews/portrait_1080x1920.svg"
+    },
+    {
+      "name": "landscape_1920x1080",
+      "size": {
+        "w": 1920,
+        "h": 1080
+      },
+      "safeArea": {
+        "x": 120,
+        "y": 60,
+        "w": 1680,
+        "h": 960
+      },
+      "logoBox": {
+        "x": 615,
+        "y": 195,
+        "w": 691,
+        "h": 691
+      },
+      "previewSvg": "branding/_launch/layout/previews/landscape_1920x1080.svg"
+    },
+    {
+      "name": "square_1024",
+      "size": {
+        "w": 1024,
+        "h": 1024
+      },
+      "safeArea": {
+        "x": 64,
+        "y": 64,
+        "w": 896,
+        "h": 896
+      },
+      "logoBox": {
+        "x": 190,
+        "y": 190,
+        "w": 645,
+        "h": 645
+      },
+      "previewSvg": "branding/_launch/layout/previews/square_1024.svg"
+    }
+  ],
+  "notes": [
+    "Previews are geometry guides only (no actual assets embedded).",
+    "Runtime will position the animation container using these rules."
+  ]
+}

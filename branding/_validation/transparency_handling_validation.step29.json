@@ -1,0 +1,545 @@
+{
+  "step": 29,
+  "kind": "transparency_handling_validation",
+  "createdAt": "2025-12-22T10:45:50.464Z",
+  "scannedGroups": [
+    "pixel_baseline",
+    "master_exports",
+    "icons",
+    "fallback_splash",
+    "launch_frames"
+  ],
+  "summary": {
+    "fileCount": 52,
+    "issueCount": 1
+  },
+  "results": [
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/blade_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/blade_256.png",
+      "ok": true,
+      "width": 256,
+      "height": 70,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/blade_512.png",
+      "ok": true,
+      "width": 512,
+      "height": 140,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/og-fallback.png",
+      "ok": false,
+      "problem": "invalid_png_header"
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/wordmark_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 256,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/wordmark_256.png",
+      "ok": true,
+      "width": 256,
+      "height": 64,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "pixel_baseline",
+      "path": "branding/_pixel_baseline/images/wordmark_512.png",
+      "ok": true,
+      "width": 512,
+      "height": 128,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/blade_master_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/blade_master_2048.png",
+      "ok": true,
+      "width": 2048,
+      "height": 559,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/blade_master_4096.png",
+      "ok": true,
+      "width": 4096,
+      "height": 1117,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/wordmark_master_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 256,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/wordmark_master_2048.png",
+      "ok": true,
+      "width": 2048,
+      "height": 512,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "master_exports",
+      "path": "branding/_exports/png/wordmark_master_4096.png",
+      "ok": true,
+      "width": 4096,
+      "height": 1024,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_144.png",
+      "ok": true,
+      "width": 144,
+      "height": 39,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_192.png",
+      "ok": true,
+      "width": 192,
+      "height": 52,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_48.png",
+      "ok": true,
+      "width": 48,
+      "height": 13,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_512.png",
+      "ok": true,
+      "width": 512,
+      "height": 140,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_72.png",
+      "ok": true,
+      "width": 72,
+      "height": 20,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_android_96.png",
+      "ok": true,
+      "width": 96,
+      "height": 26,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_120.png",
+      "ok": true,
+      "width": 120,
+      "height": 33,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_152.png",
+      "ok": true,
+      "width": 152,
+      "height": 41,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_167.png",
+      "ok": true,
+      "width": 167,
+      "height": 46,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_180.png",
+      "ok": true,
+      "width": 180,
+      "height": 49,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_20.png",
+      "ok": true,
+      "width": 20,
+      "height": 5,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_29.png",
+      "ok": true,
+      "width": 29,
+      "height": 8,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_40.png",
+      "ok": true,
+      "width": 40,
+      "height": 11,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_58.png",
+      "ok": true,
+      "width": 58,
+      "height": 16,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_60.png",
+      "ok": true,
+      "width": 60,
+      "height": 16,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_76.png",
+      "ok": true,
+      "width": 76,
+      "height": 21,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_80.png",
+      "ok": true,
+      "width": 80,
+      "height": 22,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_ios_87.png",
+      "ok": true,
+      "width": 87,
+      "height": 24,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "icons",
+      "path": "branding/_icons/png/icon_master_1024.png",
+      "ok": true,
+      "width": 1024,
+      "height": 279,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "fallback_splash",
+      "path": "branding/_launch/fallback_png/fallback_1080x1920.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "fallback_splash",
+      "path": "branding/_launch/fallback_png/fallback_1242x2688.png",
+      "ok": true,
+      "width": 1242,
+      "height": 2688,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "fallback_splash",
+      "path": "branding/_launch/fallback_png/fallback_750x1334.png",
+      "ok": true,
+      "width": 750,
+      "height": 1334,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_00_t0000.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_01_t0107.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_02_t0213.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_03_t0320.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_04_t0427.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_05_t0533.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_06_t0640.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_07_t0747.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_08_t0853.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_09_t0960.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_10_t1067.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_11_t1173.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_12_t1280.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_13_t1387.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_14_t1493.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    },
+    {
+      "group": "launch_frames",
+      "path": "branding/_launch/frames_png/launch_15_t1600.png",
+      "ok": true,
+      "width": 1080,
+      "height": 1920,
+      "bitDepth": 8,
+      "colorType": 6,
+      "alphaChannel": true
+    }
+  ],
+  "issues": [
+    {
+      "path": "branding/_pixel_baseline/images/og-fallback.png",
+      "group": "pixel_baseline",
+      "problem": "invalid_png_header"
+    }
+  ],
+  "notes": [
+    "Header-based validation only (alpha-channel capability).",
+    "If issues occur, re-export assets with RGBA/GA color type."
+  ]
+}

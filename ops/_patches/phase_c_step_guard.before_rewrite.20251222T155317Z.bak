@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+
+MAX=110
+
+extract_start_step() {
+  f="$1"
+  [ -f "$f" ] || return 0
+  # Match: "START STEP 101" or "START STEP 101 (....)"
+  # Only take the first occurrence (real step header)
+  n="$(LC_ALL=C grep -Eom1 'START[[:space:]]+STEP[[:space:]]+[0-9]+' "$f" 2>/dev/null | awk '{print $3}' || true)"
+  [ -n "${n:-}" ] || return 0
+  echo "$n"
+}
+
+check_file() {
+  f="$1"
+  n="$(extract_start_step "$f")"
+  [ -n "${n:-}" ] || { echo "ℹ Phase C guard: no START STEP header found in $f (skipping)"; return 0; }
+  if [ "$n" -gt "$MAX" ]; then
+    echo "❌ Phase C guard: START STEP $n in $f (max allowed: $MAX)"
+    exit 9
+  fi
+  echo "✓ Phase C guard ok for $f (START STEP: $n, max: $MAX)"
+}
+
+check_file "/tmp/phase_step.sh"
+check_file "/tmp/phase_step_target.sh"
+
+exit 0

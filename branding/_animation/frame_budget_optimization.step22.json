@@ -1,0 +1,51 @@
+{
+  "step": 22,
+  "kind": "frame_budget_optimization",
+  "createdAt": "2025-12-22T10:32:34.100Z",
+  "budgets": {
+    "targetFps": 60,
+    "frameMs": 16.67,
+    "cpuMsBudget": {
+      "mobileMid": 6,
+      "desktop": 4
+    },
+    "gpuMsBudget": {
+      "mobileMid": 6,
+      "desktop": 4
+    },
+    "totalDurationMs": 1600
+  },
+  "caps": {
+    "particles": {
+      "maxCountMobile": 120,
+      "maxCountDesktop": 220,
+      "disableUnderReducedMotion": true,
+      "disableIfFrameDropsOver": {
+        "percent": 8,
+        "windowMs": 800
+      }
+    },
+    "sweep": {
+      "singleGradientRect": true,
+      "noFilters": true,
+      "maskedOnly": true
+    },
+    "typography": {
+      "clipPathOnly": true,
+      "noBlurUnderReducedMotion": true
+    }
+  },
+  "enforcement": {
+    "runtimePolicy": [
+      "If average frame time > 22ms for 800ms window → disable particles.",
+      "If still > 22ms → switch to static PNG fallback.",
+      "Always respect prefers-reduced-motion."
+    ],
+    "integrationNote": "Runtime enforcement will be wired when splash component is implemented (Step 31+)."
+  },
+  "derivedFrom": {
+    "particles": "branding/_animation/external_particle_system.step19.json",
+    "sweep": "branding/_animation/light_sweep_integration.step18.json",
+    "typography": "branding/_animation/typography_reveal_animation.step20.json"
+  }
+}

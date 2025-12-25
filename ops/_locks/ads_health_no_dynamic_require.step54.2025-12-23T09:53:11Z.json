@@ -1,0 +1,12 @@
+{
+  "step": 54,
+  "kind": "ads_health_no_dynamic_require",
+  "createdAt": "2025-12-23T09:53:11Z",
+  "file": "app/api/ads/health/route.ts",
+  "backup": "ops/_patches/ads.health.route.ts.before_step54.20251223T095142Z.bak",
+  "buildLog": "ops/_analysis/next_build.step54.log",
+  "notes": [
+    "Rewrote /api/ads/health to be static (no dynamic require/import) to eliminate critical dependency warning",
+    "Kept endpoint defensive and non-leaky"
+  ]
+}

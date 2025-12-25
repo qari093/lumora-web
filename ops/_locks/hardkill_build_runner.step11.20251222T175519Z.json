@@ -1,0 +1,11 @@
+{
+  "step": 11,
+  "kind": "hardkill_build_runner",
+  "createdAt": "2025-12-22T17:56:24Z",
+  "target": "/tmp/phase_step_target_build.step11.sh",
+  "helper": "scripts/ops/run_target_once.step100.sh",
+  "wrapper": "scripts/ops/run_and_capture_hardkill.sh",
+  "exitCode": 0,
+  "latestHardkillLog": "ops/_analysis/hardkill_capture_20251222T175520Z.log",
+  "buildId": ""
+}

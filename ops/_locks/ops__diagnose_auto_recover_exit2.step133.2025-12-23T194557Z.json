@@ -1,0 +1,10 @@
+{
+  "step": 133,
+  "kind": "ops__diagnose_auto_recover_exit2_clean_runner",
+  "createdAt": "2025-12-23T194557Z",
+  "artifacts": ["/tmp/step133_tmp_inventory.2025-12-23T194557Z.txt"],
+  "notes": [
+    "Ran diagnostics via generated /bin/sh script to avoid zsh parse errors from prompt-garbage",
+    "Inventory /tmp, list START STEP candidates, and grep for corruption markers"
+  ]
+}

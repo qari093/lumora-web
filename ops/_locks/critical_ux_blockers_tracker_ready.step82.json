@@ -1,0 +1,9 @@
+{
+  "step": 82,
+  "kind": "critical_ux_blockers_tracker_ready",
+  "createdAt": "2025-12-22T12:38:57Z",
+  "artifacts": {
+    "markdown": "ops/private_testers/critical_ux_blockers.step82.md",
+    "json": "ops/_analysis/critical_ux_blockers.step82.json"
+  }
+}

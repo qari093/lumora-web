@@ -1,0 +1,12 @@
+{
+  "step": 144,
+  "kind": "health__ads_health_ts_string",
+  "createdAt": "2025-12-23T200837Z",
+  "files": ["app/api/ads/health/route.ts"],
+  "artifacts": ["/tmp/step144_ads_health.headers", "/tmp/step144_ads_health.body"],
+  "notes": [
+    "Patched /api/ads/health to satisfy unit contract: ts is string (ISO) and service is string",
+    "Added cache-control:no-store; kept runtime/dynamic/revalidate stable",
+    "Re-ran vitest health suite"
+  ]
+}

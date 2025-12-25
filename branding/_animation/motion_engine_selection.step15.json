@@ -1,0 +1,31 @@
+{
+  "step": 15,
+  "kind": "motion_engine_selection",
+  "createdAt": "2025-12-22T10:21:40.396Z",
+  "selection": {
+    "primary": "lottie-web",
+    "rationale": [
+      "Deterministic playback and easy embedding in Next.js web app splash.",
+      "Portable JSON-based animation export path (later: iOS/Android can use Lottie runtimes).",
+      "Good performance for short logo reveals when kept minimal (no heavy filters).",
+      "Supports reduced-motion fallbacks cleanly."
+    ],
+    "constraints": [
+      "No blade geometry edits; use mask/clipPath with locked SVG geometry.",
+      "No color edits; overlays must not modify underlying blade spectrum.",
+      "Keep particle layer external and density-capped; disable under prefers-reduced-motion."
+    ]
+  },
+  "fallback": {
+    "reducedMotion": "static_png_swap",
+    "lowEndDevices": "static_png_swap",
+    "timeoutGuardMs": 2000
+  },
+  "integrationTargets": {
+    "web": "Next.js App Router splash component",
+    "nativeLater": [
+      "iOS Lottie",
+      "Android Lottie"
+    ]
+  }
+}

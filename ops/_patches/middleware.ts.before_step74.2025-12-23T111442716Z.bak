@@ -1,0 +1,41 @@
+import { NextRequest, NextResponse } from "next/server";
+
+/**
+ * Canonical middleware (Step 72)
+ * - Health endpoints MUST stay accessible and JSON-returning under private mode.
+ * - /api/_health MUST rewrite to /api/healthz (tests assert x-middleware-rewrite).
+ *
+ * NOTE: If you had custom middleware logic, it was backed up:
+ *   ops/_patches/middleware.ts.before_step72.2025-12-23T111023466Z.bak
+ */
+
+const HEALTH_PATHS = new Set([
+  "/api/health",
+  "/api/healthz",
+  "/api/ads/health",
+  "/api/emml/health",
+  "/api/hybrid/health",
+]);
+
+export function middleware(request: NextRequest) {
+  const p = request.nextUrl.pathname;
+
+  // 1) Health rewrite: /api/_health -> /api/healthz
+  if (p === "/api/_health") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/api/healthz";
+    return NextResponse.rewrite(url);
+  }
+
+  // 2) Health bypass: NEVER run private gating on health endpoints
+  if (HEALTH_PATHS.has(p)) {
+    return NextResponse.next();
+  }
+
+  // 3) Default: do nothing (private gating is handled elsewhere, or by route middleware)
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/api/_health", "/api/:path*"],
+};

@@ -1,0 +1,45 @@
+import { describe, expect, test } from "vitest";
+
+const PORT = process.env.PORT ?? "8088";
+const BASE = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
+
+async function get(path: string, timeoutMs = 8000) {
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
+  try {
+    const res = await fetch(new URL(path, BASE), { cache: "no-store", signal: ac.signal });
+    const text = await res.text();
+    return { res, text };
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+describe("middleware header contract (integration)", () => {
+  test(
+    "/api/_health returns JSON and includes x-middleware-rewrite to /api/healthz",
+    async () => {
+      const { res, text } = await get("/api/_health", 12000);
+      expect(res.status).toBe(200);
+      expect(res.headers.get("content-type") ?? "").toContain("application/json");
+      const hdr = res.headers.get("x-middleware-rewrite") ?? "";
+      expect(hdr).toContain("/api/healthz");
+      const j = JSON.parse(text) as Record<string, unknown>;
+      expect(typeof j.ok).toBe("boolean");
+    },
+    20000
+  );
+
+  test(
+    "/api/health does not include x-middleware-rewrite header",
+    async () => {
+      const { res, text } = await get("/api/health", 12000);
+      expect(res.status).toBe(200);
+      expect(res.headers.get("content-type") ?? "").toContain("application/json");
+      expect(res.headers.get("x-middleware-rewrite")).toBeNull();
+      const j = JSON.parse(text) as Record<string, unknown>;
+      expect(typeof j.ok).toBe("boolean");
+    },
+    20000
+  );
+});

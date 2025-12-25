@@ -1,0 +1,162 @@
+{
+  "step": 30,
+  "kind": "size_budget_enforcement",
+  "createdAt": "2025-12-22T10:47:47.684Z",
+  "budgetsBytes": {
+    "icons": 1572864,
+    "fallback_splash": 2621440,
+    "launch_frames_1080": 12582912,
+    "launch_frames_variants": 18874368
+  },
+  "summary": {
+    "groupCount": 4,
+    "issueCount": 0
+  },
+  "groups": [
+    {
+      "name": "icons",
+      "dir": "branding/_icons/png",
+      "fileCount": 20,
+      "totalBytes": 14356,
+      "topFiles": [
+        {
+          "path": "branding/_icons/png/icon_ios_1024.png",
+          "bytes": 3799
+        },
+        {
+          "path": "branding/_icons/png/icon_master_1024.png",
+          "bytes": 3799
+        },
+        {
+          "path": "branding/_icons/png/icon_android_512.png",
+          "bytes": 1650
+        },
+        {
+          "path": "branding/_icons/png/icon_android_192.png",
+          "bytes": 589
+        },
+        {
+          "path": "branding/_icons/png/icon_ios_180.png",
+          "bytes": 558
+        },
+        {
+          "path": "branding/_icons/png/icon_ios_167.png",
+          "bytes": 514
+        },
+        {
+          "path": "branding/_icons/png/icon_ios_152.png",
+          "bytes": 456
+        },
+        {
+          "path": "branding/_icons/png/icon_android_144.png",
+          "bytes": 430
+        }
+      ]
+    },
+    {
+      "name": "fallback_splash",
+      "dir": "branding/_launch/fallback_png",
+      "fileCount": 3,
+      "totalBytes": 48664,
+      "topFiles": [
+        {
+          "path": "branding/_launch/fallback_png/fallback_1242x2688.png",
+          "bytes": 23480
+        },
+        {
+          "path": "branding/_launch/fallback_png/fallback_1080x1920.png",
+          "bytes": 16153
+        },
+        {
+          "path": "branding/_launch/fallback_png/fallback_750x1334.png",
+          "bytes": 9031
+        }
+      ]
+    },
+    {
+      "name": "launch_frames_1080",
+      "dir": "branding/_launch/frames_png",
+      "fileCount": 16,
+      "totalBytes": 347799,
+      "topFiles": [
+        {
+          "path": "branding/_launch/frames_png/launch_12_t1280.png",
+          "bytes": 25307
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_13_t1387.png",
+          "bytes": 25307
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_14_t1493.png",
+          "bytes": 25307
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_15_t1600.png",
+          "bytes": 25307
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_11_t1173.png",
+          "bytes": 24965
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_10_t1067.png",
+          "bytes": 24330
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_08_t0853.png",
+          "bytes": 24303
+        },
+        {
+          "path": "branding/_launch/frames_png/launch_07_t0747.png",
+          "bytes": 24217
+        }
+      ]
+    },
+    {
+      "name": "launch_frames_variants",
+      "dir": "branding/_launch/frames_variants",
+      "fileCount": 49,
+      "totalBytes": 506381,
+      "topFiles": [
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_12_t1280.png",
+          "bytes": 16700
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_13_t1387.png",
+          "bytes": 16700
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_14_t1493.png",
+          "bytes": 16700
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_15_t1600.png",
+          "bytes": 16700
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_11_t1173.png",
+          "bytes": 16459
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_10_t1067.png",
+          "bytes": 15981
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_09_t0960.png",
+          "bytes": 15872
+        },
+        {
+          "path": "branding/_launch/frames_variants/1080w/launch_08_t0853.png",
+          "bytes": 15720
+        }
+      ]
+    }
+  ],
+  "issues": [],
+  "notes": [
+    "This step reports and flags size budgets; it does not delete or recompress.",
+    "If over budget, tighten PNG compression or reduce frame count/variant count."
+  ]
+}

@@ -1,0 +1,199 @@
+"use client";
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+type Phase = "boot" | "done";
+
+export type SplashGateProps = {
+  /** Wrap your app so the splash can show before children mount. */
+  children: React.ReactNode;
+  /** Minimum splash duration (ms). Keep tiny to avoid dev annoyance. */
+  minMs?: number;
+  /** Optional: render nothing (no overlay) if you want to disable quickly. */
+  disabled?: boolean;
+};
+
+const KEY_INFLIGHT = "lumora:splash:inflight";
+const KEY_FAILURES = "lumora:splash:failures";
+
+function safeGetStorage(kind: "local" | "session"): Storage | null {
+  try {
+    return kind === "local" ? window.localStorage : window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+function safeGetNumber(s: Storage | null, k: string): number {
+  if (!s) return 0;
+  try {
+    const v = s.getItem(k);
+    const n = v == null ? 0 : Number(v);
+    return Number.isFinite(n) ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function safeSet(s: Storage | null, k: string, v: string): void {
+  if (!s) return;
+  try {
+    s.setItem(k, v);
+  } catch {
+    // ignore
+  }
+}
+
+function safeRemove(s: Storage | null, k: string): void {
+  if (!s) return;
+  try {
+    s.removeItem(k);
+  } catch {
+    // ignore
+  }
+}
+
+/**
+ * SplashGate (client)
+ * - NO conditional hooks (fixes "change in order of Hooks" error)
+ * - Best-effort crash tracking using session/local storage
+ */
+export function SplashGate(props: SplashGateProps) {
+  const { children, minMs = 180, disabled = false } = props;
+
+  // Hooks MUST be called unconditionally and in same order every render.
+  const [phase, setPhase] = useState<Phase>("boot");
+  const [mounted, setMounted] = useState(false);
+  const [now, setNow] = useState<number>(() => Date.now());
+
+  const timers = useRef<number[]>([]);
+  const local = useMemo(() => (typeof window === "undefined" ? null : safeGetStorage("local")), []);
+  const session = useMemo(() => (typeof window === "undefined" ? null : safeGetStorage("session")), []);
+
+  // Mount marker
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Crash accounting (best-effort)
+  useEffect(() => {
+    if (!mounted) return;
+
+    // If a previous navigation crashed while splash was inflight, count it.
+    const inflight = (() => {
+      try {
+        return session?.getItem(KEY_INFLIGHT) === "1";
+      } catch {
+        return false;
+      }
+    })();
+
+    if (inflight) {
+      const prev = safeGetNumber(local, KEY_FAILURES);
+      safeSet(local, KEY_FAILURES, String(prev + 1));
+    }
+
+    // Mark this run as inflight until we finish.
+    safeSet(session, KEY_INFLIGHT, "1");
+
+    return () => {
+      // Cleanup timers
+      for (const id of timers.current) clearTimeout(id);
+      timers.current = [];
+    };
+  }, [mounted, local, session]);
+
+  // Drive the splash lifecycle
+  useEffect(() => {
+    if (!mounted) return;
+    if (disabled) {
+      setPhase("done");
+      safeRemove(session, KEY_INFLIGHT);
+      safeSet(local, KEY_FAILURES, "0");
+      return;
+    }
+
+    // Keep splash for a minimum duration (ms), then finish.
+    const t = window.setTimeout(() => {
+      setNow(Date.now());
+      setPhase("done");
+
+      // Success: clear inflight and reset failures
+      safeRemove(session, KEY_INFLIGHT);
+      safeSet(local, KEY_FAILURES, "0");
+    }, Math.max(0, Math.floor(minMs)));
+
+    timers.current.push(t);
+
+    // Also update "now" once shortly after mount (helps some animations)
+    const t2 = window.setTimeout(() => setNow(Date.now()), 32);
+    timers.current.push(t2);
+  }, [mounted, disabled, minMs, local, session]);
+
+  // Render
+  if (!mounted) return null;
+
+  if (phase !== "done") {
+    const failures = safeGetNumber(local, KEY_FAILURES);
+    return (
+      <div
+        aria-label="Lumora Splash"
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 9999,
+          display: "grid",
+          placeItems: "center",
+          background: "radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,0.07), rgba(0,0,0,0.92))",
+          color: "white",
+          fontFamily:
+            'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"',
+        }}
+      >
+        <div
+          style={{
+            width: "min(720px, 92vw)",
+            borderRadius: 18,
+            padding: "28px 22px",
+            background: "rgba(10,10,10,0.55)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.55)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: 0.3 }}>Lumora</div>
+            <div style={{ fontSize: 12, opacity: 0.75 }}>booting…</div>
+          </div>
+
+          <div style={{ marginTop: 14, height: 8, borderRadius: 999, background: "rgba(255,255,255,0.12)" }}>
+            <div
+              style={{
+                height: "100%",
+                width: "68%",
+                borderRadius: 999,
+                background: "linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.25))",
+              }}
+            />
+          </div>
+
+          <div style={{ marginTop: 12, fontSize: 12, opacity: 0.75 }}>
+            <span>ts:</span> <span style={{ opacity: 0.95 }}>{String(now)}</span>
+            {failures > 0 ? (
+              <>
+                {" "}
+                <span style={{ marginLeft: 10, opacity: 0.85 }}>recovering…</span>{" "}
+                <span style={{ opacity: 0.95 }}>failures={failures}</span>
+              </>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+}
+
+
+export default SplashGate;

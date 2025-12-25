@@ -1,0 +1,46 @@
+{
+  "step": 9,
+  "kind": "reveal_choreography",
+  "createdAt": "2025-12-22T09:42:23Z",
+  "timing": {
+    "totalMs": 1600,
+    "bladeInMs": 0,
+    "lightSweepStartMs": 120,
+    "lightSweepEndMs": 820,
+    "textRevealStartMs": 520,
+    "textRevealEndMs": 1180,
+    "particleBurstStartMs": 160,
+    "particleBurstEndMs": 900,
+    "settleEndMs": 1600
+  },
+  "layers": {
+    "blade": {
+      "mode": "static_locked_geometry",
+      "transform": "none",
+      "notes": "Blade appears immediately; no deformation or recolor."
+    },
+    "lightSweep": {
+      "mode": "additive_overlay",
+      "path": "edge_follow",
+      "intensity": "subtle",
+      "notes": "Must not alter base blade colors; acts as trigger for mask reveal."
+    },
+    "text": {
+      "mode": "mask_reveal",
+      "direction": "left_to_right",
+      "ease": "cubic_out",
+      "notes": "Text is revealed by mask; no geometry edits."
+    },
+    "particles": {
+      "mode": "bounded_external",
+      "bounds": "outside_blade_only",
+      "densityCap": "mobile_safe",
+      "notes": "Never occlude blade fill; bounded around edge."
+    }
+  },
+  "guards": {
+    "skipEnabled": true,
+    "timeoutMs": 2000,
+    "reducedMotion": "auto_disable_particles_and_shorten"
+  }
+}

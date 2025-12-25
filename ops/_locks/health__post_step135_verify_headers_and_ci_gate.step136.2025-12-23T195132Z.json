@@ -1,0 +1,11 @@
+{
+  "step": 136,
+  "kind": "health__post_step135_verify_headers_and_ci_gate",
+  "createdAt": "2025-12-23T195132Z",
+  "artifacts": ["/tmp/step136_post_step135_verify.2025-12-23T195132Z.txt", "/tmp/step136._health.headers", "/tmp/step136._health.body", "/tmp/next-dev.out"],
+  "notes": [
+    "Restarted next dev and probed /api/_health",
+    "Asserted forbidden x-middleware-rewrite header is absent",
+    "Ran ci:health to confirm health suite passes post-commit"
+  ]
+}

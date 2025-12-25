@@ -1,0 +1,37 @@
+import { NextResponse, type NextRequest, NextRequest } from "next/server";
+
+const HEALTH_PATHS = new Set([
+  "/api/health",
+  "/api/healthz",
+  "/api/_health",
+  "/api/emml/health",
+  "/api/hybrid/health",
+  "/api/ads/health",
+]);
+
+export function middleware(request: NextRequest) {    
+  
+  
+  // Health bypass: never gated by private middleware.
+  // Covers: /api/_health, /api/health, /api/healthz, and any /api/*/health endpoints.
+  const __p = request.nextUrl?.pathname ?? new URL(request.url).pathname;
+  if (__p === "/api/_health" || __p === "/api/health" || __p === "/api/healthz" || (__p.startsWith("/api/") && __p.endsWith("/health"))) {
+    return NextResponse.next();
+  }
+
+const { pathname } = request.nextUrl;
+
+  // Always allow health endpoints (CI + probes) through all gates.
+  if (HEALTH_PATHS.has(pathname)) return NextResponse.next();
+
+  // Keep private-mode gating (existing behavior) by deferring to the legacy logic,
+  // but only if a legacy function exists. Otherwise, no-op.
+  const anyGlobal = globalThis as any;
+  if (typeof anyGlobal.__lumora_legacy_middleware === "function") {
+    return anyGlobal.__lumora_legacy_middleware(request);
+  }
+
+  return NextResponse.next();
+}
+
+// Match all API routes plus explicit /api/_health.

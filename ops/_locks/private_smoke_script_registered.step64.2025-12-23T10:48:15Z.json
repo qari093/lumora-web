@@ -1,0 +1,14 @@
+{
+  "step": 64,
+  "kind": "private_smoke_script_registered",
+  "createdAt": "2025-12-23T10:48:15Z",
+  "scripts": {
+    "ops:private-smoke": "sh ops/_runbooks/private_mode_smoke.sh",
+    "ops:private-smoke:out": "sh ops/_runbooks/private_mode_smoke.sh > ops/_analysis/private_mode_smoke.latest.out 2>&1",
+    "healthGate": "scripts/health/private_smoke_gate.sh"
+  },
+  "notes": [
+    "Registered canonical private smoke in package.json",
+    "Added CI-friendly wrapper and optionally chained into scripts/health/ci_gate.sh"
+  ]
+}

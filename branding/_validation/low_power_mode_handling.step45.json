@@ -1,0 +1,20 @@
+{
+  "step": 45,
+  "kind": "low_power_mode_handling",
+  "createdAt": "2025-12-22T11:17:48.634Z",
+  "heuristics": {
+    "reducedMotion": "prefers-reduced-motion",
+    "lowPowerLike": [
+      "navigator.connection.saveData",
+      "effectiveType in {slow-2g,2g}"
+    ]
+  },
+  "behavior": {
+    "shorterHoldWhenLowPower": true,
+    "disableSamplingWhenLowPower": true
+  },
+  "notes": [
+    "This is heuristic-based (web cannot reliably read OS low-power mode).",
+    "Low-power-like devices get shorter splash and no sampling overhead."
+  ]
+}

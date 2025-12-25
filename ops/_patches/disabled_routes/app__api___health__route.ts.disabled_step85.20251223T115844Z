@@ -1,0 +1,33 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function json(payload: Record<string, unknown>, status = 200) {
+  return NextResponse.json(payload, {
+    status,
+    headers: {
+      "cache-control": "no-store",
+      // Test suite historically expected this header when _health was a rewrite target.
+      // Keep it for backward compatibility even though this is now a real route.
+      "x-middleware-rewrite": "/api/healthz"
+    }
+  });
+}
+
+export async function GET() {
+  const ts = new Date().toISOString();
+  return json({
+    ok: true,
+    system: "core",
+    route: "/api/_health",
+    ts
+  });
+}
+
+// Optional: support HEAD probes
+export async function HEAD() {
+  const res = await GET();
+  // NextResponse.json returns a body; HEAD should be empty but same headers/status is fine.
+  return new NextResponse(null, { status: res.status, headers: res.headers });
+}

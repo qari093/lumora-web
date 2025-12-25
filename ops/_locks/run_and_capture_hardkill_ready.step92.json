@@ -1,0 +1,14 @@
+{
+  "step": 92,
+  "kind": "run_and_capture_hardkill_ready",
+  "createdAt": "2025-12-22T13:50:41Z",
+  "wrapper": "scripts/ops/run_and_capture_hardkill.sh",
+  "use": [
+    "sh scripts/ops/run_and_capture_hardkill.sh /tmp/phase_step.sh 45 260",
+    "sh scripts/ops/run_and_capture_hardkill.sh /tmp/phase_step.sh 90 400"
+  ],
+  "notes": [
+    "This guarantees the run ends and prints the last traced lines even if the underlying step hangs.",
+    "After you run it, paste ONLY the tail shown (already short) — no full script repaste."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "step": 100,
+  "kind": "hardkill_wrapper_fixed_no_recursion",
+  "createdAt": "2025-12-22T14:43:52Z",
+  "wrapper": "scripts/ops/run_and_capture_hardkill.sh",
+  "helper": "scripts/ops/run_target_once.step100.sh",
+  "notes": [
+    "Wrapper now refuses targets that reference itself (prevents fork explosion).",
+    "Use: sh scripts/ops/run_target_once.step100.sh /tmp/phase_step_target.sh 90 260"
+  ]
+}

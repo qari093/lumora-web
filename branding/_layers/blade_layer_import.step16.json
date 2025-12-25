@@ -1,0 +1,17 @@
+{
+  "step": 16,
+  "kind": "blade_layer_import_read_only",
+  "createdAt": "2025-12-22T10:22:49.056Z",
+  "source": {
+    "path": "public/brand/holo-badge.svg",
+    "sha256": "bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5"
+  },
+  "imported": {
+    "path": "branding/_layers/blade.locked.svg",
+    "mode": "0444_read_only"
+  },
+  "notes": [
+    "Imported blade layer is read-only and must not be edited.",
+    "Animation must reference this locked layer for mask construction."
+  ]
+}

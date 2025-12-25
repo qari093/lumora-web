@@ -1,0 +1,7 @@
+{
+  "step": 79,
+  "kind": "portal_usage_analysis_ready",
+  "createdAt": "2025-12-22T12:33:55Z",
+  "script": "scripts/ops/identify_portal_usage.step79.js",
+  "output": "ops/_analysis/portal_usage.step79.json"
+}

@@ -1,0 +1,15 @@
+{
+  "step": 102,
+  "kind": "health__remove_nextresponse_rewrite_from_routes",
+  "createdAt": "2025-12-23T162223Z",
+  "files": [
+    "app/api/health-alias/route.ts",
+    "src/app/api/health-alias/route.ts",
+    "app/api/healthz/route.ts",
+    "src/app/api/healthz/route.ts"
+  ],
+  "notes": [
+    "Removed NextResponse.rewrite() usage from App Router route handlers (unsupported)",
+    "Restarted dev server and verified /api/healthz, /api/health-alias, and /api/_health"
+  ]
+}

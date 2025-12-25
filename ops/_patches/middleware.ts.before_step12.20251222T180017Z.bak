@@ -1,0 +1,30 @@
+import { NextRequest, NextResponse } from "next/server";
+
+const ALWAYS_ALLOW_PREFIXES = [
+  "/api",
+  "/_next",
+  "/favicon.ico",
+  "/favicon.png",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/assets",
+  "/public",
+  "/p.gif",
+];
+
+function isAlwaysAllowed(pathname: string): boolean {
+  return ALWAYS_ALLOW_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/") || pathname.startsWith(p));
+}
+
+function parseAllowlist(envVal: string | undefined): Set<string> {
+  const s = (envVal ?? "").trim();
+  if (!s) return new Set();
+  return new Set(
+    s
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
+
+export async function middleware(req: NextRequ

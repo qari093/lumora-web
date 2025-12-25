@@ -1,0 +1,10 @@
+{
+  "step": 102,
+  "kind": "phase_c_step_guard_patched_strict_header_only",
+  "createdAt": "2025-12-22T14:50:42Z",
+  "guard": "scripts/ops/phase_c_step_guard.step101.sh",
+  "maxStep": 110,
+  "notes": [
+    "Guard now checks only the first START STEP N banner, ignoring incidental 'Step N' strings in JSON/docs."
+  ]
+}

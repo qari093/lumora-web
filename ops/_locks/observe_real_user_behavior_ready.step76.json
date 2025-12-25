@@ -1,0 +1,14 @@
+{
+  "step": 76,
+  "kind": "observe_real_user_behavior_prepared",
+  "createdAt": "2025-12-22T12:25:10Z",
+  "artifacts": {
+    "template": "ops/private_testers/observation_log_template.step76.md",
+    "captureScript": "scripts/ops/capture_observation.step76.sh",
+    "outputDir": "ops/_observations"
+  },
+  "notes": [
+    "Run capture script once per tester session to create a timestamped log.",
+    "Keep logs private (may contain personal device info)."
+  ]
+}

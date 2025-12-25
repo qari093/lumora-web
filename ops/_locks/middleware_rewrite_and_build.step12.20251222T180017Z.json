@@ -1,0 +1,11 @@
+{
+  "step": 12,
+  "kind": "middleware_rewrite_and_build",
+  "createdAt": "2025-12-22T18:02:22Z",
+  "exitCode": 0,
+  "buildId": "hC2LHlsm_tblBpYDRchZ7",
+  "notes": [
+    "middleware.ts was truncated previously; rewritten fully with private allowlist + video-gen cap callout.",
+    "Build executed via non-recursive hardkill helper."
+  ]
+}

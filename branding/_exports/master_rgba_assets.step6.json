@@ -1,0 +1,17 @@
+{
+  "step": 6,
+  "kind": "master_rgba_export",
+  "createdAt": "2025-12-22T09:37:28Z",
+  "source": {
+    "bladeSvg": "public/brand/holo-badge.svg",
+    "wordmarkSvg": "public/brand/nexa-tv.svg"
+  },
+  "exports": [
+    {"path":"branding/_exports/png/blade_master_1024.png","sha256":"95c71814ade8c77b44f4ad476d1516e82062a29be849806adc44afd5d7939198"}
+    ,{"path":"branding/_exports/png/blade_master_2048.png","sha256":"3a2fe6c3b3a44cf0219ed95176c54b4e1baa874fe6083424289857d16a42b34e"}
+    ,{"path":"branding/_exports/png/blade_master_4096.png","sha256":"b3d29d3e1c9c6aa590473e11097d38dc1825e55e6cd74e37f5cd299bdfa0fea2"}
+    ,{"path":"branding/_exports/png/wordmark_master_1024.png","sha256":"912264ee4719e75f25874d2dda7d2538ecc652a596b150f431c50db8eee1f410"}
+    ,{"path":"branding/_exports/png/wordmark_master_2048.png","sha256":"8dd251d0fea9c230a2719142f568cef99da895086cb8f099a67c5e3b3736beaa"}
+    ,{"path":"branding/_exports/png/wordmark_master_4096.png","sha256":"a6860a1a96c58b7cf7b64b0f8b7b0f11e95857ef15a175590aa5338e1d0a65b0"}
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "step": 12,
+  "kind": "energy_particle_boundary_definition",
+  "createdAt": "2025-12-22T10:12:47.255Z",
+  "derivedFrom": {
+    "bladeMaskConfirmation": "branding/_animation/blade_as_mask_confirmation.step10.json",
+    "choreography": "branding/_animation/reveal_choreography.step9.json"
+  },
+  "boundary": {
+    "coordinateSpace": "blade_viewBox",
+    "viewBox": {
+      "minX": 0,
+      "minY": 0,
+      "width": 110,
+      "height": 30
+    },
+    "energyField": {
+      "outerBounds": {
+        "x": -2,
+        "y": -2,
+        "width": 114,
+        "height": 34
+      },
+      "notes": "Particles may exist in this outer field only."
+    },
+    "exclusionRules": {
+      "noOccludeBladeFill": true,
+      "noParticlesInsideBladeMask": true,
+      "edgeBufferPx": 1,
+      "notes": [
+        "Particles must never render inside the blade mask region.",
+        "Particles must never cover blade fill; treat blade as topmost locked layer.",
+        "Maintain an edge buffer to avoid visual touching/merging with blade."
+      ]
+    },
+    "particleCaps": {
+      "maxCountMobile": 120,
+      "maxCountDesktop": 220,
+      "maxRadiusPx": 0,
+      "maxVelocityPxPerFrame": 2,
+      "lifetimeMs": {
+        "min": 250,
+        "max": 900
+      },
+      "spawnRatePerSecond": {
+        "min": 40,
+        "max": 120
+      }
+    },
+    "timing": {
+      "startMs": 160,
+      "endMs": 900
+    }
+  }
+}

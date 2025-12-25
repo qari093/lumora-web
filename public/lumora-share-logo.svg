@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="g" cx="30%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#77f" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#0ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#30f" stop-opacity="1"/>
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="220" fill="#050514"/>
+  <circle cx="512" cy="512" r="360" fill="url(#g)" opacity="0.95"/>
+  <circle cx="512" cy="512" r="370" fill="none" stroke="#7ff" stroke-width="10" opacity="0.65" filter="url(#glow)"/>
+  <path d="M 340 690 L 340 320 L 470 320 L 470 580 Q 470 620 500 620 L 684 620 L 684 690 Z"
+        fill="#e8fbff" opacity="0.92" filter="url(#glow)"/>
+  <path d="M 554 340 L 684 340 L 684 560 Q 684 590 656 590 L 554 590 Z"
+        fill="#ffffff" opacity="0.88"/>
+  <text x="512" y="820" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial"
+        font-size="64" fill="#dff" opacity="0.9">LUMORA</text>
+</svg>

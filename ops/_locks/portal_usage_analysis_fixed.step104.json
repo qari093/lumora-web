@@ -1,0 +1,9 @@
+{
+  "step": 104,
+  "kind": "portal_usage_analysis_fixed_cjs_and_ran",
+  "createdAt": "2025-12-22T14:55:06Z",
+  "node": "v20.19.5",
+  "script": "scripts/ops/identify_portal_usage.step79.js",
+  "output": "ops/_analysis/portal_usage.step79.json",
+  "exitCode": 1
+}

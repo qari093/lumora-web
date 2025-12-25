@@ -1,0 +1,17 @@
+{
+  "step": 44,
+  "kind": "offline_behavior_validation",
+  "createdAt": "2025-12-22T11:16:21.626Z",
+  "behavior": {
+    "bypassWhenOfflineAtStart": true,
+    "bypassOnOfflineEventDuringSplash": true,
+    "reasonTokens": [
+      "offline_bypass",
+      "offline_event_bypass"
+    ]
+  },
+  "notes": [
+    "Offline start must not block app; SplashGate fails open.",
+    "When offline is detected, splash is bypassed and next app render proceeds."
+  ]
+}

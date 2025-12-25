@@ -1,0 +1,107 @@
+import { NextRequest, NextResponse } from "next/server";
+
+function json(status: number, payload: any, headers?: Record<string, string>) {
+  return new NextResponse(JSON.stringify(payload), {
+    status,
+    headers: { "content-type": "application/json; charset=utf-8", ...(headers || {}) },
+  });
+}
+
+function getEnvToken(): string {
+  return (
+    process.env.LUMORA_PRIVATE_TOKEN ||
+    process.env.LUMORA_PRIVATE_ACCESS_TOKEN ||
+    process.env.LUMORA_TOKEN ||
+    ""
+  ).toString();
+}
+
+function getAllowlist(): string[] {
+  const raw =
+    (process.env.LUMORA_PRIVATE_ALLOWLIST ||
+      process.env.LUMORA_ALLOWLIST ||
+      "").toString();
+  return raw
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function parseEmail(raw: unknown): string {
+  const email = (raw || "").toString().trim().toLowerCase();
+  return email;
+}
+
+function safeEqual(a: string, b: string) {
+  // constant-time-ish compare for same-length strings
+  if (a.length !== b.length) return false;
+  let out = 0;
+  for (let i = 0; i < a.length; i++) out |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return out === 0;
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const contentType = req.headers.get("content-type") || "";
+    const envToken = getEnvToken();
+    const allowlist = getAllowlist();
+
+    if (!envToken) {
+      return json(500, { ok: false, error: "server misconfigured: missing token env" });
+    }
+    if (allowlist.length === 0) {
+      return json(500, { ok: false, error: "server misconfigured: missing allowlist env" });
+    }
+
+    let email = "";
+    let token = "";
+
+    if (contentType.includes("application/json")) {
+      const body = (await req.json().catch(() => ({}))) as any;
+      email = parseEmail(body?.email);
+      token = (body?.token || body?.tok || "").toString();
+    } else {
+      const form = await req.formData().catch(() => null);
+      email = parseEmail(form?.get("email"));
+      token = (form?.get("token") || form?.get("tok") || "").toString();
+    }
+
+    if (!email) return json(400, { ok: false, error: "missing email" });
+    if (!token) return json(400, { ok: false, error: "missing token" });
+
+    if (!safeEqual(token, envToken)) {
+      return json(401, { ok: false, error: "invalid token" });
+    }
+
+    if (!allowlist.includes(email)) {
+      return json(403, { ok: false, error: "email not allowlisted" });
+    }
+
+    const res = json(200, { ok: true, email });
+
+    // Cookie must work for middleware + root page:
+    // - Path=/ so it applies site-wide
+    // - SameSite=Lax ok for top-level navigation
+    // - HttpOnly to avoid JS access
+    // - Secure only in production over https; for local http keep false
+    const secure = (process.env.NODE_ENV || "").toLowerCase() === "production" && (process.env.LUMORA_COOKIE_SECURE || "") === "1";
+    res.cookies.set({
+      name: "lumora_email",
+      value: email,
+      httpOnly: true,
+      sameSite: "lax",
+      secure,
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+
+    return res;
+  } catch (e: any) {
+    return json(500, { ok: false, error: "private-access internal error", detail: String(e?.message || e) });
+  }
+}
+
+// GET is intentionally not supported for minting to avoid link leaks.
+export async function GET() {
+  return json(405, { ok: false, error: "method not allowed" }, { allow: "POST" });
+}

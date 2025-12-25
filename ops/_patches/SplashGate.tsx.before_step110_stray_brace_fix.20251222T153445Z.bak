@@ -1,0 +1,238 @@
+"use client";
+
+import Image from "next/image";
+import { loadSplashGuard, saveSplashGuard } from "./splashGuard";
+import { sampleFrames } from "./perfSampler";
+import { sampleMemory } from "./memSampler";
+import { isSplashDisabled, noteCrashFailure, clearCrashFailures } from "./crashGuard";
+import React from "react";
+
+type SplashPhase = "init" | "showing" | "skipped" | "timed_out" | "done";
+
+type SplashConfig = {
+  ok: boolean;
+  splash?: {
+    timeoutMs: number;
+    reducedMotion: string;
+    motion?: any;
+    budgets?: any;
+    caps?: any;
+    timing?: any;
+  };
+};
+
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function isLowPowerLike(): boolean {
+  try {
+    const nav: any = typeof navigator !== "undefined" ? navigator : null;
+    const conn: any = nav && (nav.connection || nav.mozConnection || nav.webkitConnection);
+    const saveData = !!(conn && conn.saveData);
+    const type = conn && typeof conn.effectiveType === "string" ? conn.effectiveType : "";
+    // Treat 2g/slow-2g and saveData as low-power-like.
+    return saveData || type === "2g" || type === "slow-2g";
+  } catch {
+    return false;
+  }
+}
+
+
+function nowMs(){ return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
+
+
+const SPLASH_FALLBACK_SRC = "/branding/_launch/fallback_png/fallback_1080x1920.png";
+
+export function SplashGate(props: { children: React.ReactNode }) {
+  function skipSplash(r: string) {
+    saveSplashGuard({ phase: "skipped", reason: r });
+    setReason(r);
+    setPhase("skipped");
+    setReady(true);
+  }
+
+  const [ready, setReady] = React.useState(false);
+  const [phase, setPhase] = React.useState<SplashPhase>("init");
+  const [reason, setReason] = React.useState<string | null>(null);
+  const startAtRef = React.useRef<number>(0);
+  const t0Ref = React.useRef<number>(0);
+  const reportedRef = React.useRef<boolean>(false);
+
+
+  React.useEffect(() => {
+    let mounted = true;
+    const prior = typeof window !== "undefined" ? loadSplashGuard() : null;
+    const disabled = typeof window !== "undefined" ? isSplashDisabled() : false;
+    const offline = typeof navigator !== "undefined" ? (navigator.onLine === false) : false;
+    if (offline) {
+      setReason("offline_bypass");
+      setPhase("timed_out");
+      setReady(true);
+      return () => { mounted = false; };
+    }
+    if (disabled) {
+      setReason("crash_guard_disabled");
+      setPhase("timed_out");
+      setReady(true);
+      return () => { mounted = false; };
+    }
+    if (prior && (prior.phase === "skipped" || prior.phase === "timed_out")) {
+      setReason(prior.reason);
+      setPhase(prior.phase);
+      setReady(true);
+      return () => { mounted = false; };
+    }
+
+    let timeout: any = null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        skipSplash("user_skip_key");
+      }
+    };
+
+    const onClick = () => {
+      // tap/click to skip (brand-safe)
+      skipSplash("user_skip_click");
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("keydown", onKey);
+      window.addEventListener("pointerdown", onClick, { passive: true });
+    }
+
+    let mounted = true;
+    let timeout: any = null;
+
+    (async () => {
+      try {
+        const res = await fetch("/api/brand/splash", { cache: "no-store" });
+        const json = (await res.json()) as SplashConfig;
+
+        const timeoutMs = json?.splash?.timeoutMs ?? 2000;
+        const reduce = prefersReducedMotion();
+
+        // For now: no animation runtime; we just hold a short splash window.
+        // Step 32/37 will bind actual animation lifecycle + skip/timeout guards.
+        timeout = setTimeout(() => {
+          if (mounted) setReady(true);
+        }, reduce ? Math.min(450, timeoutMs) : Math.min(750, timeoutMs));
+      } catch {
+        // Fail-open: never block app
+        if (mounted) setReady(true);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+      if (timeout) clearTimeout(timeout);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("keydown", onKey);
+        window.removeEventListener("pointerdown", onClick);
+      }
+    };
+  }, []);
+
+  if (!ready) {
+    return (
+      <div
+        aria-label="Lumora Splash"
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "black",
+          display: "grid",
+          placeItems: "center",
+          zIndex: 9999,
+        }}
+      >
+        <div style={{ opacity: 0.9, fontFamily: "system-ui", color: "white" }}>
+          Loading…
+        </div>
+      </div>
+    );
+  }
+
+  React.useEffect(() => {
+    if (!ready) return;
+    setPhase("done");
+    try { clearCrashFailures(); } catch {}
+    if (reportedRef.current) return;
+    reportedRef.current = true;
+
+    const tReady = nowMs();
+    const elapsed = t0Ref.current ? (tReady - t0Ref.current) : null;
+
+    // Fire-and-forget; never block UI
+    try {
+      fetch("/api/brand/splash/metrics", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+      phase,
+      reason,
+      t0: t0Ref.current || null,
+      tReady,
+      elapsedMs: typeof elapsed === "number" ? Math.round(elapsed) : null,
+      ua: typeof navigator !== "undefined" ? navigator.userAgent : null,
+      }),
+      keepalive: true,
+      }).catch(() => {});
+    } catch {}
+  }, [ready]);
+
+  React.useEffect(() => {
+    if (!ready) return;
+    try {
+      sampleFrames(800).then((r) => {
+        // Frame-drop guard: if too many long frames, persist guard and end splash early
+          try {
+            const longFrames = typeof r.longFrames === "number" ? r.longFrames : 0;
+            // Threshold: > 18 long frames in ~800ms (~22ms+) implies struggling device
+            if (longFrames > 18) {
+              try { saveSplashGuard({ phase: "timed_out", reason: "frame_drop_guard_tripped" }); } catch {}
+              setReason("frame_drop_guard_tripped");
+              setPhase("timed_out");
+              setReady(true);
+            }
+          } catch {}
+
+          try {
+            fetch("/api/brand/splash/profile", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              mode: "post",
+              // marker only
+              frameDropNote: "frame_drop_post_observed",
+              ...r,
+              ua: typeof navigator !== "undefined" ? navigator.userAgent : null,
+            }),
+            keepalive: true,
+          }).catch(() => {});
+        } catch {}
+      });
+      }
+    } catch {}
+  }, [ready]);
+
+  React.useEffect(() => {
+    if (!ready) return;
+    try {
+      const mm = sampleMemory();
+      fetch("/api/brand/splash/memory", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ phase: "post", ...mm, ua: typeof navigator !== "undefined" ? navigator.userAgent : null }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {}
+  }, [ready]);
+
+
+
+  return <>{props.children}</>;
+}

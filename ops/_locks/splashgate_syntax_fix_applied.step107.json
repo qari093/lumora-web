@@ -1,0 +1,10 @@
+{
+  "step": 107,
+  "kind": "splashgate_fix_applied",
+  "createdAt": "2025-12-22T15:04:52Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step107.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step107.20251222T150452Z.bak"
+  }
+}

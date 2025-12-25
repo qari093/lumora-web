@@ -1,0 +1,11 @@
+{
+  "step": 73,
+  "kind": "backup_routines_activation",
+  "createdAt": "2025-12-22T12:20:39Z",
+  "env": { "LUMORA_BACKUP_ROUTINES_ENABLED": "1" },
+  "script": "scripts/ops/backup_snapshot.step73.sh",
+  "notes": [
+    "Snapshot excludes .env* by design (secrets).",
+    "Run on-demand before risky changes and before expanding tester cohort."
+  ]
+}

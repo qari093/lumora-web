@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect x="0" y="0" width="1080" height="1920" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="rgba(0,0,0,0)"/>
+  <rect x="60" y="120" width="960" height="1660" stroke="rgba(255,255,255,0.55)" stroke-width="2" fill="rgba(0,0,0,0)"/>
+  <rect x="195" y="605" width="691" height="691" stroke="rgba(255,255,255,0.9)" stroke-width="3" fill="rgba(255,255,255,0.04)"/>
+  <text x="60" y="110" font-size="18" fill="rgba(255,255,255,0.75)">SAFE AREA</text>
+  <text x="195" y="595" font-size="18" fill="rgba(255,255,255,0.75)">LOGO BOX</text>
+</svg>

@@ -1,0 +1,29 @@
+import { NextRequest, NextResponse } from "next/server";
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  const launchMode = (process.env.LAUNCH_MODE || process.env.LUMORA_LAUNCH_MODE || "").toLowerCase();
+  const publicAccess = (process.env.PUBLIC_ACCESS || process.env.LUMORA_PUBLIC_ACCESS || "").trim();
+  const isPrivate = launchMode === "private" || publicAccess === "0";
+
+  // HARD RUNTIME OVERRIDE — robots.txt
+  if (pathname === "/robots.txt" && isPrivate) {
+    return new NextResponse(
+      "User-agent: *\nDisallow: /\n",
+      {
+        status: 200,
+        headers: {
+          "content-type": "text/plain; charset=utf-8",
+          "cache-control": "no-store",
+        },
+      }
+    );
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/robots.txt"],
+};

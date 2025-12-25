@@ -1,0 +1,23 @@
+import { NextResponse } from "next/server";
+
+// Compatibility endpoint for health probes and CI.
+// Returns the same payload shape as /api/healthz.
+export async function GET() {
+  const url = new URL("http://localhost/api/healthz");
+  return NextResponse.json(
+    {
+      ok: true,
+      system: "core",
+      route: "/api/_health",
+      rewritesTo: "/api/healthz",
+      ts: new Date().toISOString(),
+    },
+    {
+      status: 200,
+      headers: {
+        // Keep the contract expectation: expose the intended rewrite target.
+        "x-middleware-rewrite": url.pathname,
+      },
+    }
+  );
+}

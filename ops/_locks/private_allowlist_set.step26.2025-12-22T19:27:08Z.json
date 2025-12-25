@@ -1,0 +1,14 @@
+{
+  "step": 26,
+  "kind": "private_allowlist_set",
+  "createdAt": "2025-12-22T19:27:08Z",
+  "port": "3000",
+  "pid": 89772,
+  "log": "ops/_analysis/next_start.step26.log",
+  "allowlist": "rana.waqar78@gmail.com",
+  "notes": [
+    "Ensured LUMORA_PRIVATE_ALLOWLIST exists in .env.local",
+    "Forced private mode keys present (LAUNCH_MODE=private, PUBLIC_ACCESS=0)",
+    "Rebuilt + restarted prod server using nohup (detached) to prevent terminal job termination"
+  ]
+}

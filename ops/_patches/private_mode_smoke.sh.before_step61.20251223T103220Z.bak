@@ -1,0 +1,130 @@
+#!/bin/sh
+set -euo pipefail
+
+cd ~/lumora-web || { echo "❌ project not found"; exit 1; }
+
+# --- helpers ---
+trim() { sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//'; }
+
+read_key() {
+  key="$1"; shift
+  for f in "$@"; do
+    [ -f "$f" ] || continue
+    line="$(grep -E "^[[:space:]]*(export[[:space:]]+)?${key}[[:space:]]*=" "$f" 2>/dev/null | tail -n 1 || true)"
+    [ -n "${line:-}" ] || continue
+    val="$(printf "%s" "$line" | sed -E "s/^[[:space:]]*(export[[:space:]]+)?${key}[[:space:]]*=[[:space:]]*//" | tr -d '\r' | trim)"
+    # strip surrounding single/double quotes (one pair)
+    val="$(printf "%s" "$val" | sed -E "s/^[\"'](.*)[\"']$/\1/" | trim)"
+    if [ -n "${val:-}" ]; then printf "%s" "$val"; return 0; fi
+  done
+  return 1
+}
+
+first_email() {
+  # extract first plausible email from a messy allowlist string
+  printf "%s" "$1" | tr ',;\n\t' '    ' | tr -s ' ' '\n' | \
+    grep -E '^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$' | head -n 1 || true
+}
+
+detect_port() {
+  # prefer ACTIVE_PROD_PORT.txt if valid; else probe 3000..3010
+  hint="ops/_runbooks/ACTIVE_PROD_PORT.txt"
+  if [ -f "$hint" ]; then
+    p="$(cat "$hint" 2>/dev/null | tr -d '\r' | trim || true)"
+    if printf "%s" "$p" | grep -Eq '^[0-9]+$'; then
+      if curl -fsS "http://127.0.0.1:${p}/api/healthz" >/dev/null 2>&1; then
+        printf "%s" "$p"; return 0
+      fi
+      if curl -fsS "http://127.0.0.1:${p}/api/health" >/dev/null 2>&1; then
+        printf "%s" "$p"; return 0
+      fi
+    fi
+  fi
+
+  for p in 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009 3010; do
+    if curl -fsS "http://127.0.0.1:${p}/api/healthz" >/dev/null 2>&1; then printf "%s" "$p"; return 0; fi
+    if curl -fsS "http://127.0.0.1:${p}/api/health"  >/dev/null 2>&1; then printf "%s" "$p"; return 0; fi
+  done
+  return 1
+}
+
+json_escape() {
+  # minimal JSON string escaper (\, ", and newlines)
+  printf "%s" "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e ':a;N;$!ba;s/\n/\\n/g'
+}
+
+# --- determine active port ---
+PORT="$(detect_port || true)"
+[ -n "${PORT:-}" ] || { echo "❌ Could not detect prod port via /api/healthz or /api/health"; exit 2; }
+
+# persist hint
+mkdir -p ops/_runbooks
+printf "%s\n" "$PORT" > ops/_runbooks/ACTIVE_PROD_PORT.txt 2>/dev/null || true
+
+# --- robots lock check ---
+ROBOTS="$(curl -fsS "http://127.0.0.1:${PORT}/robots.txt" 2>/dev/null || true)"
+printf "%s" "$ROBOTS" | grep -q "Disallow: /" || { echo "❌ robots not locked on port=$PORT"; exit 2; }
+echo "✓ robots locked (port=$PORT)"
+
+# --- load allowlist + token (prefer runtime env, fallback files) ---
+ENV_CAND=".env.production.local .env.local .env"
+
+ALLOW_RAW="${LUMORA_PRIVATE_ALLOWLIST:-}"
+[ -n "${ALLOW_RAW:-}" ] || ALLOW_RAW="$(read_key LUMORA_PRIVATE_ALLOWLIST $ENV_CAND 2>/dev/null || true)"
+[ -n "${ALLOW_RAW:-}" ] || ALLOW_RAW="${LUMORA_ALLOWLIST:-}"
+[ -n "${ALLOW_RAW:-}" ] || ALLOW_RAW="$(read_key LUMORA_ALLOWLIST $ENV_CAND 2>/dev/null || true)"
+[ -n "${ALLOW_RAW:-}" ] || ALLOW_RAW="${LUMORA_PRIVATE_ACCESS_ALLOWLIST:-}"
+[ -n "${ALLOW_RAW:-}" ] || ALLOW_RAW="$(read_key LUMORA_PRIVATE_ACCESS_ALLOWLIST $ENV_CAND 2>/dev/null || true)"
+
+TOK="${LUMORA_PRIVATE_TOKEN:-}"
+[ -n "${TOK:-}" ] || TOK="$(read_key LUMORA_PRIVATE_TOKEN $ENV_CAND 2>/dev/null || true)"
+[ -n "${TOK:-}" ] || TOK="${LUMORA_PRIVATE_ACCESS_TOKEN:-}"
+[ -n "${TOK:-}" ] || TOK="$(read_key LUMORA_PRIVATE_ACCESS_TOKEN $ENV_CAND 2>/dev/null || true)"
+[ -n "${TOK:-}" ] || TOK="${LUMORA_TOKEN:-}"
+[ -n "${TOK:-}" ] || TOK="$(read_key LUMORA_TOKEN $ENV_CAND 2>/dev/null || true)"
+
+EMAIL="$(first_email "${ALLOW_RAW:-}")"
+
+[ -n "${EMAIL:-}" ] || { echo "❌ Missing/invalid allowlist email (ALLOW_RAW='${ALLOW_RAW:-}')"; exit 2; }
+[ -n "${TOK:-}" ] || { echo "❌ Missing private token"; exit 2; }
+
+# --- mint cookie via POST /api/private-access ---
+EMAIL_ESC="$(json_escape "$EMAIL")"
+TOK_ESC="$(json_escape "$TOK")"
+PAYLOAD="{\"email\":\"${EMAIL_ESC}\",\"token\":\"${TOK_ESC}\"}"
+
+H="$(mktemp)"
+B="$(mktemp)"
+code="$(curl -sS -D "$H" -o "$B" -w "%{http_code}" \
+  -H "content-type: application/json" \
+  -X POST "http://127.0.0.1:${PORT}/api/private-access" \
+  --data "$PAYLOAD" || true)"
+
+if [ "$code" != "200" ] && [ "$code" != "204" ]; then
+  echo "❌ private-access mint failed (http=$code)"
+  echo "• payload: $PAYLOAD"
+  echo "• body:"
+  head -c 500 "$B" || true
+  rm -f "$H" "$B"
+  exit 2
+fi
+
+COOKIE="$(grep -i '^set-cookie:' "$H" | grep -i 'lumora_email=' | head -n 1 | sed -E 's/^set-cookie:[[:space:]]*//I' | tr -d '\r' || true)"
+[ -n "${COOKIE:-}" ] || { echo "❌ Missing Set-Cookie lumora_email"; rm -f "$H" "$B"; exit 2; }
+echo "✓ Cookie minted: lumora_email=***"
+
+# --- verify gate ---
+root_no_cookie="$(curl -sS -o /dev/null -w "%{http_code}" "http://127.0.0.1:${PORT}/" || true)"
+[ "$root_no_cookie" != "200" ] || { echo "❌ Gate not enforced: / returned 200 without cookie"; rm -f "$H" "$B"; exit 2; }
+
+root_with_cookie="$(curl -sS -o /dev/null -w "%{http_code}" -H "cookie: $COOKIE" "http://127.0.0.1:${PORT}/" || true)"
+[ "$root_with_cookie" = "200" ] || {
+  echo "❌ / not 200 with cookie (got $root_with_cookie)"
+  echo "• cookie header used: lumora_email=***"
+  rm -f "$H" "$B"
+  exit 2
+}
+
+echo "✓ private gate OK (cookie grants access; no-cookie blocked)"
+
+rm -f "$H" "$B"

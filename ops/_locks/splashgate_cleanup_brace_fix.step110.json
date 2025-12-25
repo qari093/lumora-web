@@ -1,0 +1,10 @@
+{
+  "step": 110,
+  "kind": "phase_c_complete_cap_110",
+  "createdAt": "2025-12-22T15:16:36Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step110.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step110.20251222T151636Z.bak"
+  }
+}

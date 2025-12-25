@@ -1,0 +1,10 @@
+{
+  "step": 108,
+  "kind": "splashgate_targeted_cleanup_fix_applied",
+  "createdAt": "2025-12-22T15:07:21Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step108.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step108.20251222T150721Z.bak"
+  }
+}

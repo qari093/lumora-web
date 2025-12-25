@@ -1,0 +1,11 @@
+{
+  "step": 88,
+  "kind": "controlled_expansion_ready",
+  "createdAt": "2025-12-22T12:54:14Z",
+  "artifacts": {
+    "policy": "ops/private_testers/controlled_expansion_policy.step88.md",
+    "checklist": "ops/private_testers/controlled_expansion_checklist.step88.md",
+    "rolloutPlan": "ops/private_testers/cohort_rollout_plan.step88.md",
+    "readinessJson": "ops/_analysis/controlled_expansion_readiness.step88.json"
+  }
+}

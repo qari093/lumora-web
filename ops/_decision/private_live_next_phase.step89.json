@@ -1,0 +1,23 @@
+{
+  "step": 89,
+  "kind": "private_live_next_phase_decision",
+  "createdAt": "2025-12-22T12:56:05Z",
+  "signals": {
+    "buildStep60": "false",
+    "buildStep87": "unknown",
+    "stabilityReportStep86Present": true,
+    "securityReportStep87Present": true,
+    "expansionReadinessStep88Present": true
+  },
+  "defaultDecision": "iterate",
+  "rationale": "Build appears failing or unknown; prioritize fixing stability issues before expanding cohort.",
+  "operatorOverride": {
+    "decision": null,
+    "approvedBy": null,
+    "notes": null
+  },
+  "artifacts": {
+    "decisionMd": "ops/_decision/private_live_next_phase.step89.md",
+    "decisionJson": "ops/_decision/private_live_next_phase.step89.json"
+  }
+}

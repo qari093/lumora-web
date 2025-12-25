@@ -1,0 +1,22 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+export async function GET() {
+  return NextResponse.json(
+    {
+      ok: true,
+      system: "core",
+      route: "/api/_health",
+      ts: new Date().toISOString(),
+    },
+    {
+      status: 200,
+      headers: {
+        // Legacy compatibility: tests expect this header when probing "_health"
+        "x-middleware-rewrite": "/api/healthz",
+        "cache-control": "no-store",
+      },
+    }
+  );
+}

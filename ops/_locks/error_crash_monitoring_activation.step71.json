@@ -1,0 +1,14 @@
+{
+  "step": 71,
+  "kind": "error_crash_monitoring_activation",
+  "createdAt": "2025-12-22T12:17:35Z",
+  "env": {
+    "LUMORA_ERROR_MONITORING_ENABLED": "1",
+    "LUMORA_ERROR_MONITORING_MODE": "silent"
+  },
+  "endpoints": ["/api/errors/report"],
+  "notes": [
+    "Silent mode acknowledges error reports without logging/persisting.",
+    "Wire to Sentry/OTel/DB later after stability is verified."
+  ]
+}

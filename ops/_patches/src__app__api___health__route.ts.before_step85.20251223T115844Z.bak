@@ -1,0 +1,24 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  const ts = new Date().toISOString();
+  return NextResponse.json(
+    { ok: true, system: "core", route: "/api/_health", ts },
+    {
+      status: 200,
+      headers: {
+        "cache-control": "no-store",
+        // Backward-compat header some suites previously asserted when this endpoint was a rewrite target.
+        "x-middleware-rewrite": "/api/healthz"
+      }
+    }
+  );
+}
+
+export async function HEAD() {
+  const res = await GET();
+  return new NextResponse(null, { status: res.status, headers: res.headers });
+}

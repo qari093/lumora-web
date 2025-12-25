@@ -1,0 +1,11 @@
+{
+  "step": 110,
+  "kind": "phase_c_step_guard_rewrite_clean",
+  "createdAt": "2025-12-22T15:53:17Z",
+  "guard": "scripts/ops/phase_c_step_guard.step101.sh",
+  "maxStep": 110,
+  "accepts": [
+    "START STEP N banner",
+    "PHASE C COMPLETE (CAP=110) banner"
+  ]
+}

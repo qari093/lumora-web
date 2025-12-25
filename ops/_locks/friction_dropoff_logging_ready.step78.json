@@ -1,0 +1,14 @@
+{
+  "step": 78,
+  "kind": "friction_dropoff_logging_prepared",
+  "createdAt": "2025-12-22T12:30:07Z",
+  "artifacts": {
+    "template": "ops/private_testers/friction_dropoff_log_template.step78.md",
+    "captureScript": "scripts/ops/capture_friction_log.step78.sh",
+    "outputDir": "ops/_friction"
+  },
+  "notes": [
+    "Run capture script per tester session if you want a dedicated friction log.",
+    "Keep logs private; may include device identifiers and screenshots."
+  ]
+}

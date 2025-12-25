@@ -1,0 +1,11 @@
+{
+  "step": 64,
+  "kind": "video_generation_engine_activation",
+  "createdAt": "2025-12-22T12:02:54Z",
+  "env": { "LUMORA_VIDEO_GEN_ENABLED": "1" },
+  "route": "/video-gen",
+  "notes": [
+    "Video Generation Engine is enabled for Private Live.",
+    "Bind LUMORA_VIDEO_GEN_ENABLED to your feature flag system if applicable."
+  ]
+}

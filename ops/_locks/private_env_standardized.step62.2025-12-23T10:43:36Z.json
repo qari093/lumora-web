@@ -1,0 +1,16 @@
+{
+  "step": 62,
+  "kind": "private_env_standardized",
+  "createdAt": "2025-12-23T10:43:36Z",
+  "port": 3000,
+  "healthEndpoint": "/api/healthz",
+  "envFile": ".env.production.local",
+  "backup": "ops/_patches/env.production.local.before_step62.20251223T104327Z.bak",
+  "log": "ops/_analysis/next_start.step62.20251223T104327Z.log",
+  "allowlistEmail": "rana.waqar78@gmail.com",
+  "notes": [
+    "Canonicalized private-mode env keys in .env.production.local",
+    "Restarted on port 3000 with forced env to remove dotenv ambiguity",
+    "Verified robots lock + cookie mint + root gating"
+  ]
+}

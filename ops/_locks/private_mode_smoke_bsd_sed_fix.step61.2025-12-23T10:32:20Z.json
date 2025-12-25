@@ -1,0 +1,13 @@
+{
+  "step": 61,
+  "kind": "private_mode_smoke_bsd_sed_fix",
+  "createdAt": "2025-12-23T10:32:20Z",
+  "script": "ops/_runbooks/private_mode_smoke.sh",
+  "backup": "ops/_patches/private_mode_smoke.sh.before_step61.20251223T103220Z.bak",
+  "output": "ops/_analysis/private_mode_smoke.step61.out",
+  "notes": [
+    "BSD awk-safe patch (no reserved var names) replaced json_escape()",
+    "Eliminated BSD sed unused label warnings",
+    "Smoke re-run succeeded with clean output"
+  ]
+}

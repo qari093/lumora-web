@@ -1,0 +1,49 @@
+{
+  "step": 20,
+  "kind": "typography_reveal_animation",
+  "createdAt": "2025-12-22T10:29:56.667Z",
+  "derivedFrom": {
+    "textTimingMap": "branding/_animation/text_emergence_timing_map.step11.json",
+    "choreography": "branding/_animation/reveal_choreography.step9.json",
+    "wordmarkMasterPng": "branding/_exports/png/wordmark_master_2048.png"
+  },
+  "reveal": {
+    "startMs": 520,
+    "endMs": 1180,
+    "durationMs": 660,
+    "direction": "left_to_right",
+    "easing": "cubic_out",
+    "implementation": "clipPath_reveal_over_wordmark_png",
+    "constraints": [
+      "No edits to wordmark geometry (locked in Step 3).",
+      "Reveal is masking-only; no color modification.",
+      "Disable blur/transitions under prefers-reduced-motion."
+    ]
+  },
+  "previews": [
+    {
+      "progress": 0,
+      "path": "branding/_animation/typography_previews/type_000.png"
+    },
+    {
+      "progress": 0.25,
+      "path": "branding/_animation/typography_previews/type_025.png"
+    },
+    {
+      "progress": 0.5,
+      "path": "branding/_animation/typography_previews/type_050.png"
+    },
+    {
+      "progress": 0.75,
+      "path": "branding/_animation/typography_previews/type_075.png"
+    },
+    {
+      "progress": 1,
+      "path": "branding/_animation/typography_previews/type_100.png"
+    }
+  ],
+  "notes": [
+    "Previews are masked wordmark PNGs only (transparent background).",
+    "Runtime will composite with blade + sweep + particles according to choreography."
+  ]
+}

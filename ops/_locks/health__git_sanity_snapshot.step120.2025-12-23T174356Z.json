@@ -1,0 +1,11 @@
+{
+  "step": 120,
+  "kind": "health__git_sanity_snapshot_clean",
+  "createdAt": "2025-12-23T17:43:56Z",
+  "artifacts": ["/tmp/step120_git_snapshot.clean.txt"],
+  "notes": [
+    "Removed accidental literal file named '$OUT' that appeared as untracked",
+    "Re-captured git status + focused diffs excluding package-lock.json",
+    "Snapshot-only; no code changes applied"
+  ]
+}

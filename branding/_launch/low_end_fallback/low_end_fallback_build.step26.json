@@ -1,0 +1,37 @@
+{
+  "step": 26,
+  "kind": "low_end_fallback_build",
+  "createdAt": "2025-12-22T10:39:26.644Z",
+  "package": {
+    "dir": "branding/_launch/low_end_fallback",
+    "mode": "static_only",
+    "triggers": [
+      "prefers-reduced-motion",
+      "low_power_mode",
+      "frame_drop_guard_tripped",
+      "timeout_guard_tripped"
+    ]
+  },
+  "assets": [
+    {
+      "path": "branding/_launch/low_end_fallback/fallback_1080x1920.png",
+      "sha256": "5be6edf0cfd3c2f3fc29b7d0d6f0c2a385e8197e2c019005171fe548fdb20b01"
+    },
+    {
+      "path": "branding/_launch/low_end_fallback/fallback_1242x2688.png",
+      "sha256": "449bd8ac51ec3029b023d06892b95022d83dca71981832434517c5e54af86b7c"
+    },
+    {
+      "path": "branding/_launch/low_end_fallback/fallback_750x1334.png",
+      "sha256": "f26de2de19347eb559e691a8f7691b935ee03e655b3634d0b76013ae24b5d799"
+    }
+  ],
+  "derivedFrom": {
+    "fallbackExport": "branding/_launch/fallback_splash_export.step25.json",
+    "frameBudget": "branding/_animation/frame_budget_optimization.step22.json"
+  },
+  "notes": [
+    "This package is safe for low-end devices: static PNG only.",
+    "Runtime will select one matching screen size and skip all animations."
+  ]
+}

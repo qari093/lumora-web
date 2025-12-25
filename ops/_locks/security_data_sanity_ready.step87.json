@@ -1,0 +1,10 @@
+{
+  "step": 87,
+  "kind": "security_data_sanity_ready_safe",
+  "createdAt": "2025-12-22T12:52:06Z",
+  "artifacts": {
+    "reportMd": "ops/_analysis/security_data_sanity.step87.md",
+    "reportJson": "ops/_analysis/security_data_sanity.step87.json",
+    "buildLog": "ops/_analysis/build_capture.step87.log"
+  }
+}

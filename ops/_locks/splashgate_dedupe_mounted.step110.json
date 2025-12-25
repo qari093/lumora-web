@@ -1,0 +1,10 @@
+{
+  "step": 110,
+  "kind": "splashgate_dedupe_mounted_timeout_applied",
+  "createdAt": "2025-12-22T15:37:29Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step110_dedupe_mounted.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step110_dedupe_mounted.20251222T153729Z.bak"
+  }
+}

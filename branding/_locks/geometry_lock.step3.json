@@ -1,0 +1,22 @@
+{
+  "step": 3,
+  "kind": "geometry_lock",
+  "createdAt": "2025-12-22T09:29:17Z",
+  "assets": {
+    "blade": {
+      "path": "public/brand/holo-badge.svg",
+      "sha256": "bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5",
+      "fingerprint": "0 0 110 30 | 110 | 30 | 0 | 0 | 1 | 0 | 0 | 0 | 0"
+    },
+    "text": {
+      "path": "public/brand/nexa-tv.svg",
+      "sha256": "7edf792dfbfb0ff8099a9032433f5f7f667886dd8b32b83c11a66b0e4a722748",
+      "fingerprint": "0 0 160 40 | 160 | 40 | 0 | 0 | 1 | 0 | 0 | 0 | 0"
+    }
+  },
+  "rules": [
+    "No blade geometry edits after lock (paths/shapes/viewBox).",
+    "No text geometry edits after lock (wordmark paths/shapes/viewBox).",
+    "Any change requires new brand version and explicit sign-off."
+  ]
+}

@@ -10,6 +10,11 @@ import { NextResponse } from "next/server";
  * We also EXCLUDE /api/* from middleware execution to keep APIs stable + fast.
  */
 export function middleware(_req: NextRequest) {
+
+  // Fast-path: never rewrite dedicated internal health endpoint
+  if (_req.nextUrl.pathname === "/api/_health") {
+    return NextResponse.next();
+  }
   return NextResponse.next();
 }
 

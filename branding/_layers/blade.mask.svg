@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 30">
+  <defs>
+    <mask id="bladeMask" maskUnits="userSpaceOnUse">
+      <rect x="-99999" y="-99999" width="199999" height="199999" fill="black"/>
+<rect rx="6" width="110" height="30" fill="white" />
+    </mask>
+  </defs>
+
+  <!-- Reference rect to show mask region when needed (kept transparent) -->
+  <rect x="0" y="0" width="110" height="30" fill="black" mask="url(#bladeMask)" opacity="0"/>
+</svg>

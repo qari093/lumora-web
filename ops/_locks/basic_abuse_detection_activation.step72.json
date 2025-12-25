@@ -1,0 +1,14 @@
+{
+  "step": 72,
+  "kind": "basic_abuse_detection_activation",
+  "createdAt": "2025-12-22T12:18:55Z",
+  "env": {
+    "LUMORA_ABUSE_DETECTION_ENABLED": "1",
+    "LUMORA_ABUSE_DETECTION_MODE": "silent"
+  },
+  "endpoints": ["/api/abuse/signal"],
+  "notes": [
+    "Silent mode acknowledges abuse signals without logging/persisting.",
+    "Scoring, rate limits, and enforcement are wired later."
+  ]
+}

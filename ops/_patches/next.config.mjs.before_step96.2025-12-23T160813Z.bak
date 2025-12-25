@@ -1,0 +1,42 @@
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+};
+export default nextConfig;
+
+/** Step 95: legacy /api/_health compatibility via rewrites (SAFE, non-recursive) */
+const __step95_original_rewrites__ = nextConfig?.rewrites;
+
+/**
+ * Merge legacy rewrite with any existing rewrites output.
+ * Supports array form OR { beforeFiles, afterFiles, fallback } form.
+ */
+async function __step95_merge_rewrites__() {
+  const legacy = [{ source: "/api/_health", destination: "/api/health-alias" }];
+
+  let out;
+  try {
+    out = typeof __step95_original_rewrites__ === "function"
+      ? await __step95_original_rewrites__()
+      : __step95_original_rewrites__;
+  } catch {
+    out = undefined;
+  }
+
+  if (!out) return legacy;
+  if (Array.isArray(out)) return [...legacy, ...out];
+
+  if (out && typeof out === "object") {
+    const merged = { ...out };
+    const bf = Array.isArray(out.beforeFiles) ? out.beforeFiles : [];
+    merged.beforeFiles = [...legacy, ...bf];
+    return merged;
+  }
+
+  return legacy;
+}
+
+nextConfig.rewrites = __step95_merge_rewrites__;
+
+export default nextConfig;

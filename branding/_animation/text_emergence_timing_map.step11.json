@@ -1,0 +1,86 @@
+{
+  "step": 11,
+  "kind": "text_emergence_timing_map",
+  "createdAt": "2025-12-22T10:11:07.338Z",
+  "derivedFrom": {
+    "choreography": "branding/_animation/reveal_choreography.step9.json",
+    "bladeMaskConfirmation": "branding/_animation/blade_as_mask_confirmation.step10.json"
+  },
+  "textReveal": {
+    "startMs": 520,
+    "endMs": 1180,
+    "direction": "left_to_right",
+    "easing": "cubic_out",
+    "keyframes": [
+      {
+        "ms": 440,
+        "progress": 0,
+        "mask": 0,
+        "opacity": 0,
+        "blurPx": 6,
+        "note": "pre-roll (hidden)"
+      },
+      {
+        "ms": 520,
+        "progress": 0,
+        "mask": 0,
+        "opacity": 0,
+        "blurPx": 5,
+        "note": "reveal start"
+      },
+      {
+        "ms": 640,
+        "progress": 0.2,
+        "mask": 0.2,
+        "opacity": 0.35,
+        "blurPx": 4,
+        "note": "first glyph hints"
+      },
+      {
+        "ms": 760,
+        "progress": 0.4,
+        "mask": 0.4,
+        "opacity": 0.6,
+        "blurPx": 3,
+        "note": "half emergence"
+      },
+      {
+        "ms": 880,
+        "progress": 0.6,
+        "mask": 0.6,
+        "opacity": 0.78,
+        "blurPx": 2,
+        "note": "readable"
+      },
+      {
+        "ms": 1000,
+        "progress": 0.8,
+        "mask": 0.8,
+        "opacity": 0.9,
+        "blurPx": 1,
+        "note": "nearly complete"
+      },
+      {
+        "ms": 1180,
+        "progress": 1,
+        "mask": 1,
+        "opacity": 1,
+        "blurPx": 0,
+        "note": "fully revealed"
+      },
+      {
+        "ms": 1400,
+        "progress": 1,
+        "mask": 1,
+        "opacity": 1,
+        "blurPx": 0,
+        "note": "settled"
+      }
+    ]
+  },
+  "notes": [
+    "This map defines timing only; it does not alter wordmark geometry.",
+    "Mask progression should be implemented as a clipPath/mask sweep tied to these keyframes.",
+    "If reduced-motion, shorten total duration and disable blur transitions."
+  ]
+}

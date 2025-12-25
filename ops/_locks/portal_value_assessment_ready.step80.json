@@ -1,0 +1,9 @@
+{
+  "step": 80,
+  "kind": "portal_value_assessment_ready",
+  "createdAt": "2025-12-22T12:35:38Z",
+  "artifacts": {
+    "form": "ops/private_testers/portal_value_assessment_form.step80.md",
+    "scaffold": "ops/_analysis/portal_value_assessment.step80.json"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "step": 19,
+  "kind": "external_particle_system_integration",
+  "createdAt": "2025-12-22T10:28:18.769Z",
+  "derivedFrom": {
+    "boundary": "branding/_animation/energy_particle_boundary.step12.json",
+    "choreography": "branding/_animation/reveal_choreography.step9.json"
+  },
+  "config": {
+    "engine": "canvas2d_particles_v1",
+    "bounds": {
+      "coordinateSpace": "blade_viewBox",
+      "viewBox": {
+        "minX": 0,
+        "minY": 0,
+        "width": 110,
+        "height": 30
+      },
+      "energyField": {
+        "outerBounds": {
+          "x": -2,
+          "y": -2,
+          "width": 114,
+          "height": 34
+        },
+        "notes": "Particles may exist in this outer field only."
+      },
+      "exclusionRules": {
+        "noOccludeBladeFill": true,
+        "noParticlesInsideBladeMask": true,
+        "edgeBufferPx": 1,
+        "notes": [
+          "Particles must never render inside the blade mask region.",
+          "Particles must never cover blade fill; treat blade as topmost locked layer.",
+          "Maintain an edge buffer to avoid visual touching/merging with blade."
+        ]
+      },
+      "particleCaps": {
+        "maxCountMobile": 120,
+        "maxCountDesktop": 220,
+        "maxRadiusPx": 0,
+        "maxVelocityPxPerFrame": 2,
+        "lifetimeMs": {
+          "min": 250,
+          "max": 900
+        },
+        "spawnRatePerSecond": {
+          "min": 40,
+          "max": 120
+        }
+      },
+      "timing": {
+        "startMs": 160,
+        "endMs": 900
+      }
+    },
+    "timing": {
+      "startMs": 160,
+      "endMs": 900
+    },
+    "rendering": {
+      "composite": "lighter",
+      "alpha": 0.85,
+      "blurPx": 0,
+      "note": "Keep cheap: no heavy filters; minimal blending."
+    },
+    "caps": {
+      "maxCountMobile": 120,
+      "maxCountDesktop": 220,
+      "maxRadiusPx": 0,
+      "maxVelocityPxPerFrame": 2,
+      "lifetimeMs": {
+        "min": 250,
+        "max": 900
+      },
+      "spawnRatePerSecond": {
+        "min": 40,
+        "max": 120
+      }
+    },
+    "rules": [
+      "Particles outside blade only; never render inside blade mask.",
+      "Never occlude blade fill; blade layer stays on top.",
+      "Disable particles entirely under prefers-reduced-motion."
+    ]
+  },
+  "previews": [
+    {
+      "progress": 0,
+      "path": "branding/_animation/particle_previews/particles_000.png"
+    },
+    {
+      "progress": 0.33,
+      "path": "branding/_animation/particle_previews/particles_033.png"
+    },
+    {
+      "progress": 0.66,
+      "path": "branding/_animation/particle_previews/particles_066.png"
+    },
+    {
+      "progress": 1,
+      "path": "branding/_animation/particle_previews/particles_100.png"
+    }
+  ],
+  "notes": [
+    "Previews are illustrative: particles only, transparent background.",
+    "Final implementation must enforce 'noParticlesInsideBladeMask' at runtime."
+  ]
+}

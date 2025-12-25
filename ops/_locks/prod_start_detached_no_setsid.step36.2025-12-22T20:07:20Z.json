@@ -1,0 +1,14 @@
+{
+  "step": 36,
+  "kind": "prod_start_detached_no_setsid",
+  "createdAt": "2025-12-22T20:07:20Z",
+  "port": "3001",
+  "pid": 50717,
+  "healthEndpoint": "/api/healthz",
+  "log": "ops/_analysis/next_start.step36.log",
+  "notes": [
+    "Detached start uses nohup only (setsid not available on this system)",
+    "Port auto-bumped if 3000 busy",
+    "Health endpoint verified"
+  ]
+}

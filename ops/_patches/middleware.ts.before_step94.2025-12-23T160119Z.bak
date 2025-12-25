@@ -1,0 +1,16 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+/**
+ * Kept only so unit tests can import `../../middleware`.
+ * No rewrites here: this repo's Next dev edge adapter has crashed on middleware URL parsing paths.
+ * /api/_health and /api/healthz are served by route handlers and satisfy header contracts directly.
+ */
+export function middleware(_req: NextRequest) {
+  return NextResponse.next();
+}
+
+// Avoid running middleware on /api entirely.
+export const config = {
+  matcher: ["/((?!api/).*)"]
+};

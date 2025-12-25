@@ -1,0 +1,111 @@
+#!/bin/sh
+set -euo pipefail
+
+cd ~/lumora-web || { echo "❌ project not found"; exit 1; }
+
+# ---------- helpers ----------
+trim() { echo "$1" | awk '{gsub(/^[ \t\r\n]+|[ \t\r\n]+$/,""); print}'; }
+
+# Read KEY from env files (supports export, quotes, spaces). Last one wins.
+read_env_key() {
+  key="$1"
+  shift || true
+  for f in "$@"; do
+    [ -f "$f" ] || continue
+    # grep all matches, take last, strip "export", strip key=, strip quotes.
+    line="$(grep -E "^[[:space:]]*(export[[:space:]]+)?${key}[[:space:]]*=" "$f" 2>/dev/null | tail -n 1 || true)"
+    [ -n "${line:-}" ] || continue
+    val="$(echo "$line" | sed -E "s/^[[:space:]]*(export[[:space:]]+)?${key}[[:space:]]*=[[:space:]]*//")"
+    val="$(echo "$val" | sed -E 's/^[\"\x27]//; s/[\"\x27][[:space:]]*$//')"
+    val="$(trim "$val")"
+    if [ -n "${val:-}" ]; then
+      echo "$val"
+      return 0
+    fi
+  done
+  return 1
+}
+
+detect_port() {
+  # prefer pinned hint if present
+  if [ -f "ops/_runbooks/ACTIVE_PROD_PORT.txt" ]; then
+    p="$(cat ops/_runbooks/ACTIVE_PROD_PORT.txt 2>/dev/null | tr -d '\r\n' || true)"
+    if [ -n "${p:-}" ] && curl -fsS "http://127.0.0.1:${p}/api/healthz" >/dev/null 2>&1; then
+      echo "$p"
+      return 0
+    fi
+  fi
+
+  # probe common ports
+  for p in 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009; do
+    if curl -fsS "http://127.0.0.1:${p}/api/healthz" >/dev/null 2>&1; then
+      echo "$p"
+      return 0
+    fi
+  done
+  return 1
+}
+
+# ---------- main ----------
+PORT="$(detect_port || true)"
+[ -n "${PORT:-}" ] || { echo "❌ Could not detect running prod server port via /api/healthz"; exit 2; }
+
+# Persist hint for humans/tools
+printf "%s\n" "$PORT" > ops/_runbooks/ACTIVE_PROD_PORT.txt
+
+# Verify robots
+ROB="$(curl -fsS "http://127.0.0.1:${PORT}/robots.txt" || true)"
+echo "$ROB" | grep -q "Disallow: /" || { echo "❌ robots.txt not locked (expected Disallow: /)"; echo "$ROB"; exit 2; }
+echo "✓ robots locked (port=$PORT)"
+
+# Pull allowlist + token from env files (prod-first)
+ENV_A=".env.production.local"
+ENV_B=".env.local"
+ENV_C=".env"
+ALLOW="$(read_env_key LUMORA_PRIVATE_ALLOWLIST "$ENV_A" "$ENV_B" "$ENV_C" 2>/dev/null || true)"
+[ -n "${ALLOW:-}" ] || ALLOW="$(read_env_key LUMORA_ALLOWLIST "$ENV_A" "$ENV_B" "$ENV_C" 2>/dev/null || true)"
+TOK="$(read_env_key LUMORA_PRIVATE_TOKEN "$ENV_A" "$ENV_B" "$ENV_C" 2>/dev/null || true)"
+[ -n "${TOK:-}" ] || TOK="$(read_env_key LUMORA_PRIVATE_ACCESS_TOKEN "$ENV_A" "$ENV_B" "$ENV_C" 2>/dev/null || true)"
+[ -n "${TOK:-}" ] || TOK="$(read_env_key LUMORA_TOKEN "$ENV_A" "$ENV_B" "$ENV_C" 2>/dev/null || true)"
+
+# Extract first valid email from allowlist value (robust against commas/spaces/newlines)
+EMAIL="$(printf "%s" "${ALLOW:-}" | tr ',;\n' '   ' | grep -Eio '[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}' | head -n1 || true)"
+[ -n "${EMAIL:-}" ] || { echo "❌ Could not extract an email from allowlist"; echo "• allowlist raw: ${ALLOW:-<empty>}"; exit 2; }
+[ -n "${TOK:-}" ] || { echo "❌ Private token missing in env files"; exit 2; }
+
+# Mint cookie via POST
+PAYLOAD="20 20 12 61 79 80 81 98 701 333 703 33 100 204 250 395 398 399 400 702env EMAIL="" TOK="" node -e 'const email=process.env.EMAIL; const token=process.env.TOK; console.log(JSON.stringify({email, token}));' )"
+HDR="/tmp/private_access_headers.$$"
+BODY="/tmp/private_access_body.$$"
+code="$(curl -sS -o "$BODY" -D "$HDR" -w "%{http_code}" \
+  -H "content-type: application/json" \
+  -X POST "http://127.0.0.1:${PORT}/api/private-access" \
+  --data-binary "$PAYLOAD" || true)"
+
+if [ "$code" != "200" ]; then
+  echo "❌ private-access mint failed (http=$code)"
+  echo "• payload: $PAYLOAD"
+  echo "• body:"
+  head -n 40 "$BODY" || true
+  exit 2
+fi
+
+COOKIE="$(grep -i '^set-cookie:' "$HDR" | head -n1 | sed -E 's/^set-cookie:[[:space:]]*//I' | cut -d';' -f1 | tr -d '\r' || true)"
+echo "$COOKIE" | grep -q "^lumora_email=" || { echo "❌ Missing lumora_email Set-Cookie"; cat "$HDR"; exit 2; }
+echo "✓ cookie minted"
+
+# Root should redirect/gate without cookie
+noc="$(curl -sS -o /dev/null -w "%{http_code}" "http://127.0.0.1:${PORT}/" || true)"
+if [ "$noc" = "200" ]; then
+  echo "❌ gate failure: / returned 200 without cookie"
+  exit 2
+fi
+echo "✓ / gated without cookie (http=$noc)"
+
+# Root should be 200 with cookie
+ok="$(curl -sS -o /dev/null -w "%{http_code}" -H "cookie: $COOKIE" "http://127.0.0.1:${PORT}/" || true)"
+[ "$ok" = "200" ] || { echo "❌ / not 200 with cookie (http=$ok)"; exit 2; }
+echo "✓ / 200 with cookie"
+
+rm -f "$HDR" "$BODY" 2>/dev/null || true
+echo "SMOKE_OK port=$PORT email=$EMAIL"

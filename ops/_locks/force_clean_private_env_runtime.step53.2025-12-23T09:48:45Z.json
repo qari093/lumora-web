@@ -1,0 +1,16 @@
+{
+  "step": 53,
+  "kind": "force_clean_private_env_runtime",
+  "createdAt": "2025-12-23T09:48:45Z",
+  "port": 3000,
+  "envFile": ".env.production.local",
+  "email": "rana.waqar78@gmail.com",
+  "log": "ops/_analysis/next_start.step53.port3000.log",
+  "buildLog": "ops/_analysis/next_build.step53.log",
+  "notes": [
+    "Exported EMAIL/TOK so node upsert succeeds",
+    "Overwrote .env.production.local keys to clean values (no ambiguous quotes)",
+    "Restarted next start with forced env vars (allowlist+token) to bypass dotenv ambiguity",
+    "Verified robots lock + private-access cookie mint + root gated"
+  ]
+}

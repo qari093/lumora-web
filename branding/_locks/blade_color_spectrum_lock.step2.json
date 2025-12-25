@@ -1,0 +1,16 @@
+{
+  "step": 2,
+  "createdAt": "2025-12-22T09:27:44Z",
+  "assetPath": "public/brand/holo-badge.svg",
+  "assetSha256": "bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5",
+  "colorTokenCount": 2,
+  "colorTokens": [
+    "#111827",
+    "#a78bfa"
+  ],
+  "rules": [
+    "Blade colors are immutable after this lock.",
+    "Any spectrum change invalidates the brand.",
+    "Used for pixel-diff and histogram verification."
+  ]
+}

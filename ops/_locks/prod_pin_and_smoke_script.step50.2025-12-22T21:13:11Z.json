@@ -1,0 +1,15 @@
+{
+  "step": 50,
+  "kind": "prod_pin_and_smoke_script",
+  "createdAt": "2025-12-22T21:13:11Z",
+  "port": 3005,
+  "healthEndpoint": "/api/healthz",
+  "envFile": ".env.production.local",
+  "log": "ops/_analysis/next_start.step50.port3005.log",
+  "smokeScript": "ops/_runbooks/private_smoke.sh",
+  "notes": [
+    "Restarted prod server (prefers 3000, bumps if busy)",
+    "Wrote reusable private-mode smoke script",
+    "Verified robots lock + cookie mint + root gating"
+  ]
+}

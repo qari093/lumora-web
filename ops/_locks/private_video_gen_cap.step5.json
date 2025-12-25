@@ -1,0 +1,15 @@
+{
+  "step": 5,
+  "kind": "private_video_gen_daily_cap",
+  "createdAt": "2025-12-22T17:34:29Z",
+  "files": [
+    "app/_server/videoGenCap.ts",
+    ".env.local (LUMORA_VIDEO_GEN_DAILY_CAP)",
+    "auto-patched api routes (if detected)"
+  ],
+  "notes": [
+    "Daily cap enforced only in private launch (LAUNCH_MODE=private or PUBLIC_ACCESS=0).",
+    "429 with Retry-After when cap reached.",
+    "Counter stored at ops/_limits/video_gen_cap_state.json (file-lock)."
+  ]
+}

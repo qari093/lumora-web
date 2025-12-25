@@ -1,0 +1,14 @@
+{
+  "step": 61,
+  "kind": "private_access_mode_enabled",
+  "createdAt": "2025-12-22T11:58:56Z",
+  "env": {
+    "LUMORA_PRIVATE_ACCESS_ENABLED": "1",
+    "LUMORA_PRIVATE_ACCESS_COOKIE": "lumora_private_access",
+    "tokenStoredIn": ".env.local (LUMORA_PRIVATE_ACCESS_TOKEN)"
+  },
+  "notes": [
+    "Invite URL format: https://<host>/?access=<TOKEN>",
+    "Token is persisted in httpOnly cookie after first successful visit."
+  ]
+}

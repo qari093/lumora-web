@@ -1,0 +1,28 @@
+{
+  "step": 54,
+  "kind": "animation_freeze",
+  "createdAt": "2025-12-22T11:48:10Z",
+  "frozen": [
+    {"path":"branding/_animation/reveal_choreography.step9.json","sha256":"dd605b306d272eea0bc86840d85a2013743bd9d957cfd9f2f21d5fb9e128b8c9"}
+    ,{"path":"branding/_animation/blade_as_mask_confirmation.step10.json","sha256":"9bc9b185cfd0b0659c71135d7262b8d06e1d0dd6875dcb3bff03237f55070a0f"}
+    ,{"path":"branding/_animation/text_emergence_timing_map.step11.json","sha256":"d806baaeefb035647cec27c4b19c997e7e00441ebd9a03f4517c4a6d59fef646"}
+    ,{"path":"branding/_animation/energy_particle_boundary.step12.json","sha256":"5bd3562887825a7a30be23a2c8f9a346a60d002051a3f6b6765c28b9d81bb74c"}
+    ,{"path":"branding/_animation/motion_engine_selection.step15.json","sha256":"a162e3783cd6c6c27ff0a3494a9b39483a1174b1584b40b2e2c8b382a3d2fc1b"}
+    ,{"path":"branding/_layers/blade.locked.svg","sha256":"bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5"}
+    ,{"path":"branding/_layers/blade.mask.svg","sha256":"10746e74dbbde8618f8d80c97a7a4a38fdf004770235e7712a1f69a077d998da"}
+    ,{"path":"branding/_animation/light_sweep_integration.step18.json","sha256":"bfc53ff8b38408bef0126a1d3fbe50372d1d1660931440e94ee14eb58949b92f"}
+    ,{"path":"branding/_animation/external_particle_system.step19.json","sha256":"f827596cb1a2969d03ea53725f1bf0ad5400cb106e7361ad711efed9c0e37159"}
+    ,{"path":"branding/_animation/typography_reveal_animation.step20.json","sha256":"76e175b82c8cd847c28ade5c69ed68069ed40dbeaaf76fe8215cfd610aa478fa"}
+    ,{"path":"branding/_animation/motion_curve_tuning.step21.json","sha256":"8737598619451a3457414b6c55032de27de0619f3253244a8f28c095ffadcea1"}
+    ,{"path":"branding/_animation/frame_budget_optimization.step22.json","sha256":"93916ec1f9760f7e5388ca7f119c3620bf5a0198937737296a1f620a0c6496d7"}
+    ,{"path":"branding/_launch/app_launch_animation_export.step24.json","sha256":"0ea0282fe418f88348eb3d1136f894fe3d8b89b9d00730c9bb1b50036ff18fbb"}
+    ,{"path":"branding/_launch/fallback_splash_export.step25.json","sha256":"6a3c3056487b3d027341ca881f20b37473591514037adc10572f7c6836277c66"}
+    ,{"path":"branding/_launch/low_end_fallback/low_end_fallback_build.step26.json","sha256":"c5037988c8f660af0a55d98ae89b8ea50f5bf2d238d959c3722c2a4bdd92dba9"}
+    ,{"path":"branding/_launch/frames_variants/resolution_variants.step27.json","sha256":"d4aa970dfc2017ddc8cf027fbd880ccdf4f0197942f7e239e7a55341d81e73dd"}
+    ,{"path":"branding/_launch/layout/orientation_safe_layout.step28.json","sha256":"8af0b5b5f25bb36d41611c3d7f7d6496b473d3ea46e34874df9d4f28333f1e14"}
+  ],
+  "notes": [
+    "Animation configuration and layers are frozen read-only.",
+    "Any change requires new brand version + sign-off."
+  ]
+}

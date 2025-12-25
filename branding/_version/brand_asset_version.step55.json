@@ -1,0 +1,16 @@
+{
+  "step": 55,
+  "kind": "asset_version_tagging",
+  "createdAt": "2025-12-22T11:49:21Z",
+  "tag": "lumora-brand-v1-24ae4458da22",
+  "inputs": [
+    {"path":"branding/_checksums/logo_checksum_freeze.step1.txt","sha256":"103f7376fd663c0e0cbff22debc4bc9935e539c459e369f6c8d8cbb03356fafd"},
+    {"path":"branding/_locks/blade_color_spectrum_lock.step2.json","sha256":"c68c54157dfdd139145900fd1affbb85dcaeb3b4e64f820fccbaba7ae2f9609a"},
+    {"path":"branding/_locks/geometry_lock.step3.json","sha256":"65500303c075af0fc86e29f0e8c274c7a330db821bebecf540d01cf75cd1e5bc"},
+    {"path":"branding/_validation/animation_freeze.step54.json","sha256":"ac603639efb6eb7b5d57210c67580fa32606fd5507822e8f250dba6498ad4a2e"}
+  ],
+  "notes": [
+    "Tag is derived from immutable brand locks + animation freeze manifest.",
+    "Any change to locks requires a new tag and brand sign-off."
+  ]
+}

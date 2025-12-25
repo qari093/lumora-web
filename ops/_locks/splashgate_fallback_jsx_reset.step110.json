@@ -1,0 +1,10 @@
+{
+  "step": 110,
+  "kind": "splashgate_fallback_jsx_reset_applied",
+  "createdAt": "2025-12-22T15:22:35Z",
+  "buildExit": 1,
+  "artifacts": {
+    "report": "ops/_analysis/splashgate_fix.step110_fallback_reset.json",
+    "backup": "ops/_patches/SplashGate.tsx.before_step110_fallback_reset.20251222T152235Z.bak"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "step": 17,
+  "kind": "robots_private_lock_final",
+  "createdAt": "2025-12-22T19:02:53Z",
+  "port": "3000",
+  "notes": [
+    "Removed public/robots.txt which was overriding runtime logic",
+    "robots.txt now enforced exclusively via middleware in private mode"
+  ]
+}

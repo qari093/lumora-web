@@ -1,0 +1,13 @@
+{
+  "step": 63,
+  "kind": "private_mode_smoke_clean",
+  "createdAt": "2025-12-23T10:46:25Z",
+  "script": "ops/_runbooks/private_mode_smoke.sh",
+  "backup": "ops/_patches/private_mode_smoke.sh.before_step63.20251223T104624Z.bak",
+  "output": "ops/_analysis/private_mode_smoke.step63.out",
+  "notes": [
+    "Rewrote smoke script to avoid json_escape/perl/sed/awk quoting hazards",
+    "Auto-detects port + health endpoint",
+    "Mints cookie via POST /api/private-access and verifies gating + robots lock"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "step": 65,
+  "kind": "video_feed_discovery_activation",
+  "createdAt": "2025-12-22T12:07:10Z",
+  "env": { "LUMORA_VIDEO_FEED_ENABLED": "1" },
+  "route": "/feed",
+  "notes": [
+    "Feed/Discovery enabled for Private Live.",
+    "Bind LUMORA_VIDEO_FEED_ENABLED to your feature flag system if applicable."
+  ]
+}

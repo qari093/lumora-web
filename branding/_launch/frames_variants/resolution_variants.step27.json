@@ -1,0 +1,72 @@
+{
+  "step": 27,
+  "kind": "resolution_variants_generation",
+  "createdAt": "2025-12-22T10:40:54.210Z",
+  "source": {
+    "framesDir": "branding/_launch/frames_png",
+    "frameCount": 16
+  },
+  "variants": [
+    {
+      "key": "1080w",
+      "width": 1080,
+      "dir": "branding/_launch/frames_variants/1080w"
+    },
+    {
+      "key": "720w",
+      "width": 720,
+      "dir": "branding/_launch/frames_variants/720w"
+    },
+    {
+      "key": "540w",
+      "width": 540,
+      "dir": "branding/_launch/frames_variants/540w"
+    }
+  ],
+  "outputsCount": 48,
+  "outputsSample": [
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_00_t0000.png",
+      "sha256": "d0645ce3381e3d4858a1d0da78ad33b7a3d9ef3af3f941196fd6c943afc93478"
+    },
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_01_t0107.png",
+      "sha256": "d0645ce3381e3d4858a1d0da78ad33b7a3d9ef3af3f941196fd6c943afc93478"
+    },
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_02_t0213.png",
+      "sha256": "8ba7b332d650423987fcbea9a26282dedd561a7e066d76896502555c55d893f3"
+    },
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_03_t0320.png",
+      "sha256": "e10a3497286b75bcd446e15b72c1949b3b3b477b0ca94413fe1004772339af63"
+    },
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_04_t0427.png",
+      "sha256": "ce70847c9170797368f313114bd16927b1cd8eb14350cc754af2689f1d4c8115"
+    },
+    {
+      "variant": "1080w",
+      "width": 1080,
+      "path": "branding/_launch/frames_variants/1080w/launch_05_t0533.png",
+      "sha256": "abb53178cd38e24eab5e32f0cddca223501e8dcbfa22960d89a7ab48538ef6d6"
+    }
+  ],
+  "derivedFrom": {
+    "launchExport": "branding/_launch/app_launch_animation_export.step24.json"
+  },
+  "notes": [
+    "Variants are downscaled from 1080-wide frames for bandwidth/low-end performance.",
+    "Runtime can pick variant based on DPR/device capability."
+  ]
+}

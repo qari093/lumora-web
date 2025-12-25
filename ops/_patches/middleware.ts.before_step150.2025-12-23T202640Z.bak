@@ -1,0 +1,15 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+/**
+ * Tests import this module. Keep it stable and Edge-safe.
+ * Actual /api/_health compatibility is handled via next.config rewrites (Node-side),
+ * not middleware (to avoid dev edge adapter URL parsing crashes).
+ */
+export function middleware(_req: NextRequest) {
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/((?!api/).*)"]
+};

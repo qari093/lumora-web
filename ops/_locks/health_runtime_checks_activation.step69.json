@@ -1,0 +1,11 @@
+{
+  "step": 69,
+  "kind": "health_runtime_checks_activation",
+  "createdAt": "2025-12-22T12:13:59Z",
+  "env": { "LUMORA_HEALTHCHECKS_ENABLED": "1" },
+  "endpoints": ["/api/health"],
+  "notes": [
+    "Health/runtime checks are ON for Private Live.",
+    "If you have additional health routes (softlaunch, tl-audio), keep them allowlisted in middleware."
+  ]
+}

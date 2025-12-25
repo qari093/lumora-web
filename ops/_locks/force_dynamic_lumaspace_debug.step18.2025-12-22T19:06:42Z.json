@@ -1,0 +1,10 @@
+{
+  "step": 18,
+  "kind": "force_dynamic_debug_route",
+  "createdAt": "2025-12-22T19:06:42Z",
+  "file": "app/lumaspace/debug/page.tsx",
+  "notes": [
+    "Explicitly marked /lumaspace/debug as force-dynamic",
+    "Eliminates static prerender ambiguity and build noise"
+  ]
+}

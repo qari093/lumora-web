@@ -1,0 +1,18 @@
+{
+  "step": 75,
+  "kind": "private_tester_invites_prepared",
+  "createdAt": "2025-12-22T12:23:36Z",
+  "artifacts": {
+    "inviteEmailTemplate": "ops/private_testers/invite_email_template.step75.md",
+    "allowlistTemplateCsv": "ops/private_testers/testers_allowlist_template.step75.csv"
+  },
+  "privateAccess": {
+    "cookieName": "lumora_private_access",
+    "inviteUrlFormat": "/?access=***",
+    "helperEndpoint": "/api/private/access?token=***"
+  },
+  "notes": [
+    "Fill CSV with real testers (20–50) and send invite link out-of-band.",
+    "Do not commit real emails/tokens."
+  ]
+}

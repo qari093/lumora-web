@@ -1,0 +1,14 @@
+{
+  "step": 77,
+  "kind": "portal_feedback_collection_prepared",
+  "createdAt": "2025-12-22T12:28:37Z",
+  "artifacts": {
+    "formTemplate": "ops/private_testers/portal_feedback_form.step77.md",
+    "captureScript": "scripts/ops/capture_portal_feedback.step77.sh",
+    "outputDir": "ops/_feedback"
+  },
+  "notes": [
+    "Run capture script per tester to create a portal feedback file.",
+    "Keep feedback private; may include personal device details."
+  ]
+}

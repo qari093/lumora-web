@@ -1,0 +1,9 @@
+{
+  "step": 90,
+  "kind": "phase_runner_hardening_ready",
+  "createdAt": "2025-12-22T13:00:14Z",
+  "artifacts": {
+    "runner": "scripts/ops/phase_runner_safe.sh",
+    "report": "ops/_analysis/phase_runner_hardening.step90.json"
+  }
+}

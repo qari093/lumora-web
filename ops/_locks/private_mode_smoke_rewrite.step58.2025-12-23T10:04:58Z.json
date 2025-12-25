@@ -1,0 +1,12 @@
+{
+  "step": 58,
+  "kind": "private_mode_smoke_rewrite",
+  "createdAt": "2025-12-23T10:04:58Z",
+  "script": "ops/_runbooks/private_mode_smoke.sh",
+  "backup": "ops/_patches/private_mode_smoke.sh.before_step58.20251223T100457Z.bak",
+  "output": "ops/_analysis/private_mode_smoke.step58.out",
+  "notes": [
+    "Rewrote smoke script to avoid node-based payload generation and eliminate unbound vars",
+    "Robust env parsing + email extraction + cookie mint + gate verify"
+  ]
+}

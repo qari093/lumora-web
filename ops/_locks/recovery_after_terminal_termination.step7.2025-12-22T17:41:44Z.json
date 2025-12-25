@@ -1,0 +1,16 @@
+{
+  "step": 7,
+  "kind": "recovery_after_terminal_termination",
+  "createdAt": "2025-12-22T17:41:44Z",
+  "phaseC": {
+    "cap": "110",
+    "stateFile": ".lumora_phase_c_state",
+    "capFile": ".lumora_phase_c_cap.step101",
+    "guard": "scripts/ops/phase_c_step_guard.step101.sh"
+  },
+  "notes": [
+    "Killed possible runaway next/node/watchdog processes (best-effort).",
+    "Pruned hardkill logs to keep newest 10.",
+    "Verified Phase C remains hard-capped at 110."
+  ]
+}

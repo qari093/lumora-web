@@ -1,0 +1,29 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+/**
+ * Step 90 — Minimal, Edge-safe middleware.
+ * Purpose: legacy alias /api/_health -> /api/healthz
+ *
+ * Notes:
+ * - App Router treats "_" segments as private; do not implement /api/_health as a route segment.
+ * - Keep middleware limited to this single path to avoid edge adapter issues elsewhere.
+ */
+export function middleware(req: NextRequest) {
+  if (req.nextUrl.pathname === "/api/_health") {
+    // Edge-safe: use a proper absolute URL based on request URL.
+    const url = new URL(req.url);
+    url.pathname = "/api/healthz";
+    url.search = "";
+    const res = NextResponse.rewrite(url);
+    res.headers.set("x-middleware-rewrite", "/api/healthz");
+    res.headers.set("cache-control", "no-store");
+    return res;
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/api/_health"]
+};

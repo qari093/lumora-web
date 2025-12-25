@@ -1,0 +1,156 @@
+import { NextRequest, NextResponse } from "next/server";
+
+function isStaticFilePath(pathname: string): boolean {
+  return (
+    pathname.startsWith("/_next/static") ||
+    pathname.startsWith("/_next/image") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/manifest.json" ||
+    /\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|js|map|txt|xml|woff|woff2|ttf|eot)$/.test(pathname)
+  );
+}
+
+function isPrivateMode(): boolean {
+  const launchMode = (process.env.LAUNCH_MODE || process.env.LUMORA_LAUNCH_MODE || "").toLowerCase();
+  const publicAccess = (process.env.PUBLIC_ACCESS || process.env.LUMORA_PUBLIC_ACCESS || "").trim();
+  return launchMode === "private" || publicAccess === "0";
+}
+
+function parseAllowlist(): string[] {
+  const raw = (process.env.LUMORA_PRIVATE_ALLOWLIST || "").trim();
+  if (!raw) return [];
+  return raw
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function getEmailCookie(req: NextRequest): string {
+  return (req.cookies.get("lumora_email")?.value || "").trim().toLowerCase();
+}
+
+function isGateBypassPath(pathname: string): boolean {
+  if (isStaticFilePath(pathname)) return true;
+
+  // Gate bypass: onboarding + health + internal readiness
+  if (pathname === "/private-access") return true;
+
+  if (pathname === "/api/private-access") return true;
+  if (pathname === "/api/private/access") return true;
+
+  if (pathname === "/api/health" || pathname === "/api/healthz" || pathname === "/api/readyz") return true;
+
+  // Allow video-gen guard itself (used by middleware cap check)
+  if (pathname === "/api/video-gen/guard") return true;
+
+  return false;
+}
+
+async function enforceVideoGenCap(req: NextRequest): Promise<Response | null> {
+  // STEP6: VIDEO_GEN_CAP_MIDDLEWARE (kept)
+  // Private launch: enforce daily cap for any POST under /api/video-gen/* (except /guard itself).
+  // This calls the server route /api/video-gen/guard which tracks the counter (file-lock).
+  try {
+    const pathname = req.nextUrl.pathname;
+    if (!isPrivateMode()) return null;
+    if (req.method !== "POST") return null;
+    if (!pathname.startsWith("/api/video-gen/")) return null;
+    if (pathname === "/api/video-gen/guard") return null;
+
+    const url = req.nextUrl.clone();
+    url.pathname = "/api/video-gen/guard";
+    url.search = "";
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-lumora-cap-check": "1",
+      },
+      body: JSON.stringify({ path: pathname }),
+      cache: "no-store",
+    });
+
+    if (res.status === 429) {
+      const retryAfter = res.headers.get("retry-after") || "";
+      const body = await res.text().catch(() => "");
+      return new Response(body || "Video generation cap reached", {
+        status: 429,
+        headers: {
+          "content-type": "text/plain; charset=utf-8",
+          ...(retryAfter ? { "retry-after": retryAfter } : {}),
+        },
+      });
+    }
+
+    return null;
+  } catch {
+    // Fail-open (per spec)
+    return null;
+  }
+}
+
+export async function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  // 1) Video-gen cap enforcement (private only)
+  const capRes = await enforceVideoGenCap(req);
+  if (capRes) return capRes;
+
+  // 2) Private allowlist gate (fail-closed if allowlist empty)
+  if (isPrivateMode()) {
+    if (!isGateBypassPath(pathname)) {
+      const allowlist = parseAllowlist();
+      const email = getEmailCookie(req);
+
+      const allowed = allowlist.length > 0 && !!email && allowlist.includes(email);
+
+      if (!allowed) {
+        const url = req.nextUrl.clone();
+        url.pathname = "/private-access";
+        url.searchParams.set("next", pathname);
+        const res = NextResponse.redirect(url, 307);
+        res.headers.set("cache-control", "no-store");
+        return res;
+      }
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  // Run on everything except Next internals/static assets (robots.txt excluded intentionally)
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/api/_health",
+    "/api/:path*"
+  ],
+};
+
+export function middleware(request: NextRequest) {
+  const __p = (request as any)?.nextUrl?.pathname || "";
+  // Step71: /api/_health rewrite + health bypass must happen BEFORE private gate
+  if (__p === "/api/_health") {
+    const url = (request as any).nextUrl.clone();
+    url.pathname = "/api/healthz";
+    return NextResponse.rewrite(url);
+  }
+  if (
+    __p === "/api/health" ||
+    __p === "/api/healthz" ||
+    __p === "/api/ads/health" ||
+    __p === "/api/emml/health" ||
+    __p === "/api/hybrid/health"
+  ) {
+    return NextResponse.next();
+  }
+if (request.nextUrl?.pathname === "/api/_health") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/api/healthz";
+    return NextResponse.rewrite(url);
+  }
+  return NextResponse.next();
+}

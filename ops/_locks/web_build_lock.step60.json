@@ -1,0 +1,18 @@
+{
+  "step": 60,
+  "kind": "web_build_lock",
+  "createdAt": "2025-12-22T11:57:12Z",
+  "packageManager": "npm",
+  "git": {
+    "sha": "e7d2cf19ecf3e779e18f9d0308b9230acd515348",
+    "dirty": true
+  },
+  "checks": {
+    "typecheck": false,
+    "build": false
+  },
+  "notes": [
+    "This locks the current web build state for Private Live phase.",
+    "If typecheck/build are false, address only stability fixes (Step 59 freeze)."
+  ]
+}

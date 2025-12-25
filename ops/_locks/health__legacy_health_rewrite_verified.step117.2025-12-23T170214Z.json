@@ -1,0 +1,12 @@
+{
+  "step": 117,
+  "kind": "health__legacy_health_rewrite_verified",
+  "createdAt": "2025-12-23T170214Z",
+  "files": ["next.config.mjs"],
+  "artifacts": ["/tmp/step117_next_config_rewrites_snapshot.txt"],
+  "notes": [
+    "Verified /api/_health returns 200 application/json",
+    "Confirmed next.config rewrites are non-recursive",
+    "Captured rewrite snapshot for audit/debug"
+  ]
+}

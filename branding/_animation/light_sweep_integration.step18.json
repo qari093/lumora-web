@@ -1,0 +1,43 @@
+{
+  "step": 18,
+  "kind": "light_sweep_integration",
+  "createdAt": "2025-12-22T10:26:52.847Z",
+  "derivedFrom": {
+    "choreography": "branding/_animation/reveal_choreography.step9.json",
+    "bladeMask": "branding/_layers/blade.mask.svg"
+  },
+  "sweep": {
+    "startMs": 120,
+    "endMs": 820,
+    "durationMs": 700,
+    "direction": "left_to_right",
+    "blend": "overlay_additive_look",
+    "constraint": "must_not_modify_base_blade_colors"
+  },
+  "previews": [
+    {
+      "progress": 0,
+      "path": "branding/_animation/light_sweep_previews/sweep_000.png"
+    },
+    {
+      "progress": 0.25,
+      "path": "branding/_animation/light_sweep_previews/sweep_025.png"
+    },
+    {
+      "progress": 0.5,
+      "path": "branding/_animation/light_sweep_previews/sweep_050.png"
+    },
+    {
+      "progress": 0.75,
+      "path": "branding/_animation/light_sweep_previews/sweep_075.png"
+    },
+    {
+      "progress": 1,
+      "path": "branding/_animation/light_sweep_previews/sweep_100.png"
+    }
+  ],
+  "notes": [
+    "These previews show only the sweep overlay masked by blade geometry.",
+    "Final runtime will composite sweep above locked blade layer without recoloring."
+  ]
+}

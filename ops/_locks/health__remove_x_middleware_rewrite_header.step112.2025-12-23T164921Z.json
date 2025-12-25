@@ -1,0 +1,14 @@
+{
+  "step": 112,
+  "kind": "health__remove_x_middleware_rewrite_header",
+  "createdAt": "2025-12-23T164921Z",
+  "files": [
+    "app/api/health-alias/route.ts",
+    "src/app/api/health-alias/route.ts"
+  ],
+  "notes": [
+    "Removed forbidden x-middleware-rewrite response header from App Route (Next throws 500 if present)",
+    "Added x-health-legacy-target=/api/healthz as a safe diagnostic hint",
+    "Restarted dev server; verified /api/health-alias and /api/_health behavior"
+  ]
+}

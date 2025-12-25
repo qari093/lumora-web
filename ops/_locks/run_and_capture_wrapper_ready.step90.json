@@ -1,0 +1,10 @@
+{
+  "step": 90,
+  "kind": "run_and_capture_wrapper_ready",
+  "createdAt": "2025-12-22T13:08:04Z",
+  "wrapper": "scripts/ops/run_and_capture_step.sh",
+  "use": [
+    "sh scripts/ops/run_and_capture_step.sh /tmp/phase_step.sh",
+    "sh scripts/ops/run_and_capture_step.sh /tmp/phase_step.sh 300"
+  ]
+}

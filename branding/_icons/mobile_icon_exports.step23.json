@@ -1,0 +1,135 @@
+{
+  "step": 23,
+  "kind": "mobile_icon_static_export",
+  "createdAt": "2025-12-22T10:34:07.454Z",
+  "source": {
+    "svgPath": "public/brand/holo-badge.svg",
+    "svgSha256": "bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5"
+  },
+  "outputs": [
+    {
+      "platform": "master",
+      "size": 1024,
+      "path": "branding/_icons/png/icon_master_1024.png",
+      "sha256": "95c71814ade8c77b44f4ad476d1516e82062a29be849806adc44afd5d7939198"
+    },
+    {
+      "platform": "ios",
+      "size": 1024,
+      "path": "branding/_icons/png/icon_ios_1024.png",
+      "sha256": "95c71814ade8c77b44f4ad476d1516e82062a29be849806adc44afd5d7939198"
+    },
+    {
+      "platform": "ios",
+      "size": 180,
+      "path": "branding/_icons/png/icon_ios_180.png",
+      "sha256": "576237d96c0ae72554a6263e8a098353d856752c7c54799d0bc72536eb3e818f"
+    },
+    {
+      "platform": "ios",
+      "size": 167,
+      "path": "branding/_icons/png/icon_ios_167.png",
+      "sha256": "44f53fd603d951549b83ef29f05181933679cf96564a5d383833c7ba3c460728"
+    },
+    {
+      "platform": "ios",
+      "size": 152,
+      "path": "branding/_icons/png/icon_ios_152.png",
+      "sha256": "3531931f66726cef39eb8a1bf113256f1ea721b8fb5e80755c29cd771a0aac70"
+    },
+    {
+      "platform": "ios",
+      "size": 120,
+      "path": "branding/_icons/png/icon_ios_120.png",
+      "sha256": "fb54c1fdba7895f632eaf4836283b4490c1fc34af9abee69a644f5209c40b240"
+    },
+    {
+      "platform": "ios",
+      "size": 87,
+      "path": "branding/_icons/png/icon_ios_87.png",
+      "sha256": "19bdde73e58abbb6921e12f5830e482a2b9e5c7e4df6c0b5e1947e48dca5a9a9"
+    },
+    {
+      "platform": "ios",
+      "size": 80,
+      "path": "branding/_icons/png/icon_ios_80.png",
+      "sha256": "8c1bcb4694f66821db191318514e8055598063e04a12944b8c021434c8affb92"
+    },
+    {
+      "platform": "ios",
+      "size": 76,
+      "path": "branding/_icons/png/icon_ios_76.png",
+      "sha256": "6166b91d946394a144dd68c3efed6f7490579643f608b2a877205fa1a8dfd4d0"
+    },
+    {
+      "platform": "ios",
+      "size": 60,
+      "path": "branding/_icons/png/icon_ios_60.png",
+      "sha256": "c33eb2c9bd40f12b10ddd04a583677822a9a546faa3d26f351500b74e2fafde3"
+    },
+    {
+      "platform": "ios",
+      "size": 58,
+      "path": "branding/_icons/png/icon_ios_58.png",
+      "sha256": "29f805947692f79ec386352154db491fbf1ed2f24fe325e13af980c03a5b1f32"
+    },
+    {
+      "platform": "ios",
+      "size": 40,
+      "path": "branding/_icons/png/icon_ios_40.png",
+      "sha256": "cee63065132ac9924a5224754584e3271f6fe141f97a6dc7a1534d766acc6d75"
+    },
+    {
+      "platform": "ios",
+      "size": 29,
+      "path": "branding/_icons/png/icon_ios_29.png",
+      "sha256": "9495a5ae734eef0e952a388fd114d3cda72f37da5fbf909947722ab8cd6435a1"
+    },
+    {
+      "platform": "ios",
+      "size": 20,
+      "path": "branding/_icons/png/icon_ios_20.png",
+      "sha256": "98c529a0c4bd2ea8af8c0405281f8f0ee07eb238f200940992c79541fd95d83e"
+    },
+    {
+      "platform": "android",
+      "size": 512,
+      "path": "branding/_icons/png/icon_android_512.png",
+      "sha256": "8f041e0585c8bf5bc6e33545b57a300e58de4af143d9b50ddb1e657bd1357ce2"
+    },
+    {
+      "platform": "android",
+      "size": 192,
+      "path": "branding/_icons/png/icon_android_192.png",
+      "sha256": "c77b3febc38cc50e6c28371255d4724810f53790d778c8ea4e03b6d685c67f43"
+    },
+    {
+      "platform": "android",
+      "size": 144,
+      "path": "branding/_icons/png/icon_android_144.png",
+      "sha256": "3363742333f8e8920e41221b5bf2199ad6e0249dcf60ca0f853fe29c90582323"
+    },
+    {
+      "platform": "android",
+      "size": 96,
+      "path": "branding/_icons/png/icon_android_96.png",
+      "sha256": "c8cd7e5e1b7ba82f0b4be3cb5c743467efb68769a8a11ebd6721f529aedc67a7"
+    },
+    {
+      "platform": "android",
+      "size": 72,
+      "path": "branding/_icons/png/icon_android_72.png",
+      "sha256": "63c78b366ee2fc4641c76c4e7d2f5e4f84bbf6ad09dc7c9debc693bbfa23a2ee"
+    },
+    {
+      "platform": "android",
+      "size": 48,
+      "path": "branding/_icons/png/icon_android_48.png",
+      "sha256": "8ab4bfa86226f104169c17cf5c74b983a69d5b5e13f7795fe9fe2440d021d2a3"
+    }
+  ],
+  "notes": [
+    "Exports are raster-only; no SVG modifications.",
+    "If your SVG includes extra padding, adjust source asset upstream (requires new brand sign-off)."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "step": 48,
+  "kind": "color_histogram_verification_quant16",
+  "createdAt": "2025-12-22T11:39:18.472Z",
+  "quantization": "16-level per RGB channel; alpha=0 excluded from color bins",
+  "assets": [
+    {
+      "name": "blade",
+      "path": "branding/_exports/png/blade_master_2048.png",
+      "sha256": "3a2fe6c3b3a44cf0219ed95176c54b4e1baa874fe6083424289857d16a42b34e",
+      "width": 2048,
+      "height": 559,
+      "histogram": {
+        "bins": 2,
+        "alpha": {
+          "opaque": 1133769,
+          "semi": 675,
+          "transparent": 10388,
+          "total": 1144832
+        },
+        "topBins": [
+          {
+            "bin": {
+              "rq": 1,
+              "gq": 1,
+              "bq": 2
+            },
+            "approxHex": "#181828",
+            "count": 1134358
+          },
+          {
+            "bin": {
+              "rq": 2,
+              "gq": 2,
+              "bq": 3
+            },
+            "approxHex": "#282838",
+            "count": 86
+          }
+        ]
+      }
+    },
+    {
+      "name": "wordmark",
+      "path": "branding/_exports/png/wordmark_master_2048.png",
+      "sha256": "8dd251d0fea9c230a2719142f568cef99da895086cb8f099a67c5e3b3736beaa",
+      "width": 2048,
+      "height": 512,
+      "histogram": {
+        "bins": 3,
+        "alpha": {
+          "opaque": 0,
+          "semi": 1039856,
+          "transparent": 8720,
+          "total": 1048576
+        },
+        "topBins": [
+          {
+            "bin": {
+              "rq": 0,
+              "gq": 0,
+              "bq": 0
+            },
+            "approxHex": "#080808",
+            "count": 1039567
+          },
+          {
+            "bin": {
+              "rq": 0,
+              "gq": 0,
+              "bq": 1
+            },
+            "approxHex": "#080818",
+            "count": 249
+          },
+          {
+            "bin": {
+              "rq": 1,
+              "gq": 1,
+              "bq": 1
+            },
+            "approxHex": "#181818",
+            "count": 40
+          }
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "This verifies color distribution stability (quantized histogram).",
+    "If Step 2 blade spectrum lock exists, compare top bins conceptually (manual review)."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "step": 145,
+  "kind": "health__commit_ads_health_only",
+  "createdAt": "2025-12-23T201343Z",
+  "files": ["app/api/ads/health/route.ts"],
+  "notes": [
+    "Committed ONLY /api/ads/health route contract fix (ts:string + cache-control:no-store)",
+    "Left all other modified/untracked files untouched"
+  ]
+}

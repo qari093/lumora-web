@@ -1,0 +1,21 @@
+{
+  "step": 58,
+  "kind": "production_enable_flag",
+  "createdAt": "2025-12-22T11:52:54Z",
+  "brandTag": "lumora-brand-v1-24ae4458da22",
+  "enabled": false,
+  "gates": [
+    "Step 53 sign-off completed (Brand + Frontend + QA/Operator).",
+    "Device matrix smoke pass performed (Step 51).",
+    "OS coverage policy accepted (Step 52).",
+    "Rollback package exists (Step 57)."
+  ],
+  "howToEnable": [
+    "Set enabled=true in this JSON and commit (or toggle via your feature-flag system).",
+    "Optionally bind to ENV: LUMORA_BRAND_SPLASH_ENABLED=1"
+  ],
+  "notes": [
+    "Default is disabled to prevent premature activation.",
+    "Activation should be performed only after sign-off."
+  ]
+}

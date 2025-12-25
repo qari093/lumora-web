@@ -1,0 +1,14 @@
+{
+  "step": 70,
+  "kind": "telemetry_activation_silent_mode",
+  "createdAt": "2025-12-22T12:15:58Z",
+  "env": {
+    "LUMORA_TELEMETRY_ENABLED": "1",
+    "LUMORA_TELEMETRY_MODE": "silent"
+  },
+  "endpoints": ["/api/telemetry/event"],
+  "notes": [
+    "Silent mode acknowledges events without logging/persisting.",
+    "Use for Private Live to avoid noise; persist later when stability is proven."
+  ]
+}

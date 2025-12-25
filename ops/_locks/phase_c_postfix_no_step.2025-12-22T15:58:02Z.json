@@ -1,0 +1,9 @@
+{
+  "kind": "phase_c_postfix_no_step",
+  "createdAt": "2025-12-22T15:58:02Z",
+  "guard": "scripts/ops/phase_c_step_guard.step101.sh",
+  "resume": "/tmp/lumora_phase_c_resume_110.sh",
+  "capFile": ".lumora_phase_c_cap.step101",
+  "stateFile": ".lumora_phase_c_state",
+  "notes": ["No new step was created; Phase C remains hard-capped at 110."]
+}

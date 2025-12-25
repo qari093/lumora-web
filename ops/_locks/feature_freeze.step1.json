@@ -1,0 +1,9 @@
+{
+  "step": 1,
+  "kind": "feature_freeze",
+  "createdAt": "2025-12-22T17:24:33Z",
+  "notes": [
+    "All new feature development frozen.",
+    "Only fixes, stability, and launch prep allowed."
+  ]
+}

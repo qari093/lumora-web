@@ -1,0 +1,18 @@
+{
+  "step": 118,
+  "kind": "health__git_sanity_snapshot",
+  "createdAt": "2025-12-23T192649Z",
+  "files": [
+    "next.config.mjs",
+    "app/api/healthz/route.ts",
+    "src/app/api/healthz/route.ts",
+    "app/api/health-alias/route.ts",
+    "src/app/api/health-alias/route.ts",
+    "scripts/health/ci_gate.sh",
+    "package.json"
+  ],
+  "notes": [
+    "Captured git status + diff sanity after health fixes (steps 96–117 range)",
+    "No code changes applied in this step; snapshot-only"
+  ]
+}

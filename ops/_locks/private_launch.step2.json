@@ -1,0 +1,11 @@
+{
+  "step": 2,
+  "kind": "private_launch_mode",
+  "createdAt": "2025-12-22T17:25:54Z",
+  "notes": [
+    "App running in private launch mode",
+    "Access restricted to whitelisted users",
+    "All engines active (no feature suppression)",
+    "Public visibility disabled"
+  ]
+}

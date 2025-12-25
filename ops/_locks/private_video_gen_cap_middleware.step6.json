@@ -1,0 +1,13 @@
+{
+  "step": 6,
+  "kind": "private_video_gen_cap_middleware",
+  "createdAt": "2025-12-22T17:36:53Z",
+  "files": [
+    "middleware.ts"
+  ],
+  "notes": [
+    "Middleware now enforces cap for POST /api/video-gen/* by calling /api/video-gen/guard.",
+    "Fail-open on guard/network errors.",
+    "Guard route tracks daily cap via ops/_limits/video_gen_cap_state.json"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "step": 118,
+  "kind": "health__git_sanity_snapshot",
+  "createdAt": "2025-12-23T17:40:44Z",
+  "artifacts": ["/tmp/step118_git_snapshot.txt"],
+  "notes": [
+    "Captured git status and focused diffs",
+    "Explicitly excluded package-lock.json to avoid terminal hang",
+    "Snapshot-only; no code changes"
+  ]
+}

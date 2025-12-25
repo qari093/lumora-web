@@ -1,0 +1,33 @@
+{
+  "step": 10,
+  "kind": "blade_as_mask_confirmation",
+  "createdAt": "2025-12-22T10:09:05.455Z",
+  "bladeSvg": {
+    "path": "public/brand/holo-badge.svg",
+    "sha256": "bada6f3ee97c0ea6ef6d76976d96cc2baed4b3491c5db35bcb0f689d076ef5c5",
+    "viewBox": "0 0 110 30",
+    "geomCounts": {
+      "path": 0,
+      "polygon": 0,
+      "rect": 1,
+      "circle": 0,
+      "ellipse": 0,
+      "line": 0
+    },
+    "hasMaskOrClipPath": false
+  },
+  "decision": {
+    "bladeUsedAs": "mask_source_geometry",
+    "allowedOps": [
+      "clipPath",
+      "mask",
+      "alphaMask"
+    ],
+    "forbiddenOps": [
+      "edit_blade_geometry",
+      "recolor_blade",
+      "deform_blade"
+    ]
+  },
+  "notes": "Mask uses blade geometry as-is and is bound to Step 3 geometry lock."
+}

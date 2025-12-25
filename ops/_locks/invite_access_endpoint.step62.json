@@ -1,0 +1,11 @@
+{
+  "step": 62,
+  "kind": "invite_access_allowlist",
+  "createdAt": "2025-12-22T12:00:29Z",
+  "endpoint": "/api/private/access?token=***",
+  "cookie": "lumora_private_access",
+  "notes": [
+    "Use this endpoint to set access cookie explicitly (useful if middleware already exists).",
+    "Do not log or expose the token; keep it only in .env.local."
+  ]
+}

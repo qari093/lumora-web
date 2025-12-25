@@ -1,0 +1,12 @@
+{
+  "step": 150,
+  "kind": "health__middleware_noop_exclude_api",
+  "createdAt": "2025-12-23T202640Z",
+  "files": ["middleware.ts"],
+  "notes": [
+    "Middleware made a strict NO-OP",
+    "Excluded /api/* from middleware matcher to avoid API/health interference",
+    "Rewrites in next.config handle /api/_health compatibility",
+    "Ran vitest health suite and committed only middleware.ts"
+  ]
+}

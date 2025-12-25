@@ -1,0 +1,15 @@
+{
+  "step": 3,
+  "kind": "private_allowlist_gate",
+  "createdAt": "2025-12-22T17:28:18Z",
+  "files": [
+    "middleware.ts",
+    "app/private-access/page.tsx",
+    ".env.local (LUMORA_PRIVATE_ALLOWLIST)"
+  ],
+  "notes": [
+    "Private launch access now gated by allowlist",
+    "Cookie lumora_email set via ?email= onboarding",
+    "Fail-closed if allowlist is empty"
+  ]
+}

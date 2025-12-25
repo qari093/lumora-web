@@ -1,0 +1,9 @@
+{
+  "step": 89,
+  "kind": "private_live_next_phase_ready",
+  "createdAt": "2025-12-22T12:56:05Z",
+  "artifacts": {
+    "decisionMd": "ops/_decision/private_live_next_phase.step89.md",
+    "decisionJson": "ops/_decision/private_live_next_phase.step89.json"
+  }
+}

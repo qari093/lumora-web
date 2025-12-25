@@ -1,0 +1,23 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+type J = Record<string, unknown>;
+
+function ok(extra: J = {}) {
+  return NextResponse.json({ ok: true, service: "ads", ...extra }, { status: 200 });
+}
+
+function err(error: string, status = 200, extra: J = {}) {
+  // NOTE: Health endpoints must not leak internals and must not hard-fail CI.
+  return NextResponse.json({ ok: false, service: "ads", error, ...extra }, { status });
+}
+
+export async function GET() {
+  try {
+    // Keep it static + dependency-safe. No dynamic require/import.
+    return ok({ ts: new Date().toISOString() });
+  } catch {
+    return err("degraded", 200);
+  }
+}

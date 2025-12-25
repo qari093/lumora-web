@@ -1,0 +1,10 @@
+{
+  "step": 65,
+  "kind": "private_smoke_run",
+  "createdAt": "2025-12-23T10:49:54Z",
+  "output": "ops/_analysis/private_mode_smoke.step65.out",
+  "notes": [
+    "Executed ops:private-smoke via package.json script",
+    "Captured output artifact for operator review"
+  ]
+}

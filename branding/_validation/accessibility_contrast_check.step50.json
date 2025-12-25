@@ -1,0 +1,218 @@
+{
+  "step": 50,
+  "kind": "accessibility_contrast_check_estimate",
+  "createdAt": "2025-12-22T11:42:59.683Z",
+  "method": "WCAG contrast ratio estimate using alpha-weighted luminance quantiles (p10/p50/p90)",
+  "assets": [
+    {
+      "name": "blade",
+      "path": "branding/_exports/png/blade_master_2048.png",
+      "sha256": "3a2fe6c3b3a44cf0219ed95176c54b4e1baa874fe6083424289857d16a42b34e",
+      "width": 2048,
+      "height": 559,
+      "results": [
+        {
+          "background": "white",
+          "bg": {
+            "rgb": [
+              255,
+              255,
+              255
+            ],
+            "luma": 1
+          },
+          "fg": {
+            "p10": 0.009189219295824108,
+            "p50": 0.009189219295824108,
+            "p90": 0.009189219295824108
+          },
+          "contrast": {
+            "p10": 17.74,
+            "p50": 17.74,
+            "p90": 17.74
+          }
+        },
+        {
+          "background": "light_gray",
+          "bg": {
+            "rgb": [
+              245,
+              245,
+              245
+            ],
+            "luma": 0.9130986517934191
+          },
+          "fg": {
+            "p10": 0.009189219295824108,
+            "p50": 0.009189219295824108,
+            "p90": 0.009189219295824108
+          },
+          "contrast": {
+            "p10": 16.272,
+            "p50": 16.272,
+            "p90": 16.272
+          }
+        },
+        {
+          "background": "black",
+          "bg": {
+            "rgb": [
+              0,
+              0,
+              0
+            ],
+            "luma": 0
+          },
+          "fg": {
+            "p10": 0.009189219295824108,
+            "p50": 0.009189219295824108,
+            "p90": 0.009189219295824108
+          },
+          "contrast": {
+            "p10": 1.184,
+            "p50": 1.184,
+            "p90": 1.184
+          }
+        },
+        {
+          "background": "near_black",
+          "bg": {
+            "rgb": [
+              14,
+              14,
+              18
+            ],
+            "luma": 0.004511105666559549
+          },
+          "fg": {
+            "p10": 0.009189219295824108,
+            "p50": 0.009189219295824108,
+            "p90": 0.009189219295824108
+          },
+          "contrast": {
+            "p10": 1.086,
+            "p50": 1.086,
+            "p90": 1.086
+          }
+        }
+      ],
+      "flags": [
+        {
+          "background": "black",
+          "contrastP50": 1.184
+        },
+        {
+          "background": "near_black",
+          "contrastP50": 1.086
+        }
+      ]
+    },
+    {
+      "name": "wordmark",
+      "path": "branding/_exports/png/wordmark_master_2048.png",
+      "sha256": "8dd251d0fea9c230a2719142f568cef99da895086cb8f099a67c5e3b3736beaa",
+      "width": 2048,
+      "height": 512,
+      "results": [
+        {
+          "background": "white",
+          "bg": {
+            "rgb": [
+              255,
+              255,
+              255
+            ],
+            "luma": 1
+          },
+          "fg": {
+            "p10": 0.0034219779968466643,
+            "p50": 0.0034219779968466643,
+            "p90": 0.0034219779968466643
+          },
+          "contrast": {
+            "p10": 19.655,
+            "p50": 19.655,
+            "p90": 19.655
+          }
+        },
+        {
+          "background": "light_gray",
+          "bg": {
+            "rgb": [
+              245,
+              245,
+              245
+            ],
+            "luma": 0.9130986517934191
+          },
+          "fg": {
+            "p10": 0.0034219779968466643,
+            "p50": 0.0034219779968466643,
+            "p90": 0.0034219779968466643
+          },
+          "contrast": {
+            "p10": 18.028,
+            "p50": 18.028,
+            "p90": 18.028
+          }
+        },
+        {
+          "background": "black",
+          "bg": {
+            "rgb": [
+              0,
+              0,
+              0
+            ],
+            "luma": 0
+          },
+          "fg": {
+            "p10": 0.0034219779968466643,
+            "p50": 0.0034219779968466643,
+            "p90": 0.0034219779968466643
+          },
+          "contrast": {
+            "p10": 1.068,
+            "p50": 1.068,
+            "p90": 1.068
+          }
+        },
+        {
+          "background": "near_black",
+          "bg": {
+            "rgb": [
+              14,
+              14,
+              18
+            ],
+            "luma": 0.004511105666559549
+          },
+          "fg": {
+            "p10": 0.0034219779968466643,
+            "p50": 0.0034219779968466643,
+            "p90": 0.0034219779968466643
+          },
+          "contrast": {
+            "p10": 1.02,
+            "p50": 1.02,
+            "p90": 1.02
+          }
+        }
+      ],
+      "flags": [
+        {
+          "background": "black",
+          "contrastP50": 1.068
+        },
+        {
+          "background": "near_black",
+          "contrastP50": 1.02
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "This is an estimate; final accessibility is assessed in actual UI contexts.",
+    "Wordmark should generally target ≥ 4.5:1 for small text equivalents; logos are more flexible but we still flag low ratios."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "step": 86,
+  "kind": "stability_verification_ready",
+  "createdAt": "2025-12-22T12:46:42Z",
+  "artifacts": {
+    "doc": "ops/private_testers/stability_verification_pass.step86.md",
+    "script": "scripts/ops/run_stability_verification.step86.sh",
+    "report": "ops/_analysis/stability_verification_report.step86.json"
+  },
+  "runnerExitCode": 0
+}

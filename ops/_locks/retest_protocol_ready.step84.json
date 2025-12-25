@@ -1,0 +1,9 @@
+{
+  "step": 84,
+  "kind": "retest_protocol_ready",
+  "createdAt": "2025-12-22T12:42:47Z",
+  "artifacts": {
+    "protocol": "ops/private_testers/retest_protocol.step84.md",
+    "captureScript": "scripts/ops/capture_retest_session.step84.sh"
+  }
+}

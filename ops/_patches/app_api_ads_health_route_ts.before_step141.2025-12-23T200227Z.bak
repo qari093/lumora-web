@@ -1,0 +1,16 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+export async function GET() {
+  // Health endpoints must never throw; must be stable for CI.
+  return NextResponse.json(
+    {
+      ok: true,
+      system: "ads",
+      route: "/api/ads/health",
+      ts: new Date().toISOString(),
+    },
+    { status: 200 }
+  );
+}

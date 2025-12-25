@@ -1,0 +1,36 @@
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+};
+export default nextConfig;
+
+
+/** Step 94: legacy health compatibility (Node-side) */
+async function __step94_rewrites__merge(existing) {
+  const legacy = [{ source: "/api/_health", destination: "/api/health-alias" }];
+  if (!existing) return legacy;
+  try {
+    const out = typeof existing === "function" ? await existing() : existing;
+    if (Array.isArray(out)) return [...legacy, ...out];
+    if (out && typeof out === "object") {
+      // Next also supports { beforeFiles, afterFiles, fallback } shape
+      const merged = { ...out };
+      const bf = Array.isArray(out.beforeFiles) ? out.beforeFiles : [];
+      merged.beforeFiles = [...legacy, ...bf];
+      return merged;
+    }
+    return legacy;
+  } catch {
+    return legacy;
+  }
+}
+
+
+try {
+  // eslint-disable-next-line no-undef
+  if (typeof nextConfig === "object" && nextConfig) {
+    // eslint-disable-next-line no-undef
+    nextConfig.rewrites = () => __step94_rewrites__merge(nextConfig.rewrites);
+  }
+} catch {}
