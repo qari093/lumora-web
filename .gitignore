@@ -132,3 +132,4 @@ ops/_analysis/*.ndjson
 ops/_analysis/*.json
 ops/_analysis/*.txt
 ops/_analysis/
+*.log
