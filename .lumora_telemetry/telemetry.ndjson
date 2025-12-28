@@ -1580,3 +1580,4 @@
 {"testerId":"anon_01ac513e3caae6d4","ts":1766854764,"type":"route_time","path":"/live"}
 {"testerId":"anon_01ac513e3caae6d4","ts":1766854770,"type":"route_time","path":"/live"}
 {"testerId":"anon_01ac513e3caae6d4","ts":1766854772,"type":"route_view","path":"/live/room/demo-room"}
+{"testerId":"anon_581594fdc297e83e","ts":1766937603,"type":"route_view","path":"/videos"}

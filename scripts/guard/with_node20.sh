@@ -1,29 +1,41 @@
 #!/bin/sh
 set -euo pipefail
 
-want_major="20"
+# Enforce Node 20 for a single command invocation.
+# Works even when invoked from non-interactive shells by sourcing nvm explicitly.
 
-# nvm hates npm_config_prefix (often set by brew/global installs). Neutralize it.
-unset npm_config_prefix NPM_CONFIG_PREFIX PREFIX
+need() { command -v "$1" >/dev/null 2>&1; }
 
-# Locate + source nvm
-if [ -n "${NVM_DIR:-}" ] && [ -s "${NVM_DIR}/nvm.sh" ]; then
-  # shellcheck disable=SC1090
-  . "${NVM_DIR}/nvm.sh"
-elif [ -s "$HOME/.nvm/nvm.sh" ]; then
-  # shellcheck disable=SC1090
-  . "$HOME/.nvm/nvm.sh"
-elif command -v nvm >/dev/null 2>&1; then
-  : # nvm function may already be available
-else
-  echo "❌ nvm not found; cannot ensure Node $want_major for this command"
-  node -v || true
+if [ "${1:-}" = "" ]; then
+  echo "usage: $0 <command...>" >&2
   exit 2
 fi
 
-# Install/use Node 20 in *this process*, then exec the requested command under it.
-nvm install "$want_major" >/dev/null
-nvm use "$want_major" >/dev/null
+# Resolve NVM_DIR
+if [ -n "${NVM_DIR:-}" ]; then
+  :
+elif [ -d "$HOME/.nvm" ]; then
+  NVM_DIR="$HOME/.nvm"
+elif [ -d "/usr/local/opt/nvm" ]; then
+  NVM_DIR="$HOME/.nvm"
+else
+  NVM_DIR="$HOME/.nvm"
+fi
+export NVM_DIR
 
-echo "✓ exec under Node $(node -v)"
+# Load nvm
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # shellcheck disable=SC1090
+  . "$NVM_DIR/nvm.sh"
+else
+  echo "❌ nvm.sh not found at: $NVM_DIR/nvm.sh" >&2
+  echo "   Install nvm or set NVM_DIR correctly." >&2
+  exit 3
+fi
+
+# Install/use Node 20 and run command in that environment
+nvm install 20 >/dev/null
+nvm use 20 >/dev/null
+
+echo "✓ exec under Node $(node -v) ($(command -v node))"
 exec "$@"
