@@ -2,26 +2,14 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 /**
- * Middleware is intentionally a NO-OP.
- *
- * Health routing (/api/_health legacy behavior) is handled via next.config rewrites,
- * not middleware, to avoid Edge/runtime header/URL parsing issues.
- *
- * We also EXCLUDE /api/* from middleware execution to keep APIs stable + fast.
+ * Safe pass-through middleware.
+ * Rationale: previous patches introduced runtime ReferenceErrors (req/request undefined) causing global 500s.
+ * This restores a valid Next.js middleware signature and lets route handlers own behavior.
  */
-export function middleware(_req: NextRequest) {
-
-  // Fast-path: never rewrite dedicated internal health endpoint
-  if (_req.nextUrl.pathname === "/api/_health") {
-    return NextResponse.next();
-  }
+export function middleware(_request: NextRequest) {
   return NextResponse.next();
 }
 
-/**
- * Run middleware only for non-API pages.
- * (Prevents any interference with /api/* handlers and health probes.)
- */
 export const config = {
-  matcher: ["/((?!api/).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

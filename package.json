@@ -130,7 +130,22 @@
     "brand:guard": "sh scripts/brand/no_touch_blade_guard.step13.sh",
     "ops:private-smoke": "sh ops/_runbooks/private_mode_smoke.sh",
     "ops:private-smoke:out": "sh ops/_runbooks/private_mode_smoke.sh > ops/_analysis/private_mode_smoke.latest.out 2>&1",
-    "final:test": "sh scripts/final/smoke.sh"
+    "final:test": "sh scripts/final/smoke.sh",
+    "db:seed": "npx prisma db seed",
+    "persona:gate": "sh scripts/persona/ci_gate.sh",
+    "live:gate": "sh scripts/live/ci_gate.sh",
+    "live:smoke": "sh scripts/live/restart_dev_and_smoke.sh",
+    "test:live": "vitest run tests/live",
+    "ci:live": "npm run -s with:node20 -- sh scripts/health/live_ci_gate.sh",
+    "health:live": "sh scripts/live/health_macro.sh",
+    "guard:no-heredoc": "sh scripts/live/no_heredoc_guard.sh",
+    "live:contracts": "sh scripts/live/contract_suite.sh",
+    "guard:live:no-heredoc": "sh scripts/live/no_heredoc_guard.sh",
+    "ci:live:gate": "sh scripts/live/ci_gate.sh",
+    "guard:node": "sh scripts/guard/check_node_engine.sh",
+    "boot:node20": "sh scripts/guard/nvm_use_node20.sh",
+    "dev:node20": "npm run -s with:node20 -- next dev",
+    "with:node20": "sh scripts/guard/with_node20.sh"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -182,7 +197,8 @@
     "undici": "^7.16.0",
     "uuid": "^13.0.0",
     "zod": "^4.1.11",
-    "zustand": "^4.5.7"
+    "zustand": "^4.5.7",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -208,7 +224,8 @@
   },
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": "20.x",
+    "pnpm": "10.x"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.53.1"
@@ -218,5 +235,8 @@
     "vite": {
       "esbuild": "0.25.9"
     }
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   }
 }

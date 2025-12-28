@@ -1,0 +1,49 @@
+{
+  "videos": [
+    {
+      "id": "demo-1",
+      "title": "Neon Runner — Hyper Cut",
+      "desc": "Fast cuts, glow trails, perfect loop. Demo content.",
+      "seconds": 19,
+      "tag": "GMAR",
+      "href": "/watch/demo-1",
+      "videoUrl": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "posterUrl": "https://picsum.photos/seed/lumora-neon/1200/675"
+    },
+    {
+      "id": "demo-2",
+      "title": "Zen Focus — 20s Reset",
+      "desc": "Breath + calm overlay. Demo content.",
+      "seconds": 20,
+      "tag": "NEXA",
+      "href": "/watch/demo-2",
+      "videoUrl": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm",
+      "posterUrl": "https://picsum.photos/seed/lumora-zen/1200/675"
+    },
+    {
+      "id": "demo-3",
+      "title": "Street Food — 15s Sizzle",
+      "desc": "Food micro-story. Demo content.",
+      "seconds": 15,
+      "tag": "Movies",
+      "href": "/watch/demo-3",
+      "videoUrl": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "posterUrl": "https://picsum.photos/seed/lumora-food/1200/675"
+    }
+  ],
+  "gmarGames": [
+    { "slug": "neon-runner", "title": "Neon Runner", "desc": "Endless runner demo with quick-start rules + placeholder gameplay loop.", "cta": "Play", "href": "/gmar/games/neon-runner" },
+    { "slug": "hyper-flappy", "title": "Hyper Flappy", "desc": "Tap-to-fly demo with score and restart loop.", "cta": "Play", "href": "/gmar/games/hyper-flappy" },
+    { "slug": "astro-shooter", "title": "Astro Shooter", "desc": "Aim + fire demo with simple wave loop.", "cta": "Play", "href": "/gmar/games/astro-shooter" }
+  ],
+  "movies": [
+    { "id": "m-1", "title": "Midnight Drift", "desc": "Neo-noir short (demo listing).", "seconds": 92, "href": "/movies/watch/m-1" },
+    { "id": "m-2", "title": "Skyline Pulse", "desc": "City rhythm cut (demo listing).", "seconds": 88, "href": "/movies/watch/m-2" },
+    { "id": "m-3", "title": "Sunrise Memoir", "desc": "Warm vignette (demo listing).", "seconds": 75, "href": "/movies/watch/m-3" }
+  ],
+  "nexaModules": [
+    { "slug": "sleep", "title": "Sleep", "desc": "Sleep GX demo dashboard entry.", "href": "/nexa" },
+    { "slug": "nutrition", "title": "Nutrition", "desc": "Nutrition GX demo dashboard entry.", "href": "/nexa" },
+    { "slug": "recovery", "title": "Recovery", "desc": "Recovery GX demo dashboard entry.", "href": "/nexa" }
+  ]
+}

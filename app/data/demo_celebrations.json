@@ -1,0 +1,22 @@
+{
+  "celebrations": [
+    {
+      "slug": "launch-spark",
+      "title": "Launch Spark",
+      "status": "live",
+      "startsAt": "2025-12-25T00:00:00Z",
+      "endsAt": "2025-12-28T00:00:00Z",
+      "reward": { "pulse": 25, "zencoins": 3 },
+      "message": "Claim your first Pulse burst and light the universe."
+    },
+    {
+      "slug": "winter-flow",
+      "title": "Winter Flow",
+      "status": "upcoming",
+      "startsAt": "2025-12-29T00:00:00Z",
+      "endsAt": "2026-01-02T00:00:00Z",
+      "reward": { "pulse": 15, "zencoins": 1 },
+      "message": "Daily calm streaks unlock a soft bonus."
+    }
+  ]
+}

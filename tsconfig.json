@@ -14,8 +14,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -25,16 +25,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*",
-        "./src/*"
-      ],
-      "src/*": [
-        "src/*"
+        "./*"
       ]
     },
-    "types": [
-      "node"
-    ],
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "plugins": [
@@ -45,9 +38,11 @@
   },
   "include": [
     "next-env.d.ts",
-    "src/app/fyp/**/*",
-    "src/components/fyp/**/*",
-    "src/components/harmony/**/*",
+    "app/live/**/*",
+    "app/persona/**/*",
+    "app/api/persona/**/*",
+    "app/_client/persona/**/*",
+    "src/lib/persona/**/*",
     ".next/types/**/*.ts"
   ],
   "exclude": [
@@ -56,6 +51,7 @@
     "out",
     "public/demo/media/**/*",
     "backups/**/*",
-    "scripts/**/*"
+    "scripts/**/*",
+    "src/_app_disabled_*/**/*"
   ]
 }

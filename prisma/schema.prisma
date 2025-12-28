@@ -566,17 +566,158 @@ model ReflectionJournal {
 }
 
 model EmmlSnapshot {
-  health String
+  health         String
   heatSampleSize Int
   indicesTracked Int
-  marketsOnline Int
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
-  composite Json? @default("{}")
-  indicesJson Json @default("{}")
-  marketsJson Json @default("{}")
-  metaJson  Json @default("{}")
+  marketsOnline  Int
+  createdAt      DateTime @default(now())
+  id             String   @id @default(cuid())
+  updatedAt      DateTime @updatedAt
+  composite      Json?    @default("{}")
+  indicesJson    Json     @default("{}")
+  marketsJson    Json     @default("{}")
+  metaJson       Json     @default("{}")
 
   @@map("emml_snapshot")
+}
+
+//
+// ### LUMORA_PERSONA_CORE_SCHEMA_BEGIN
+// Canonical counts (locked): Avatars=120, Persona-derived Reactions/Emojis=480
+//
+
+enum PersonaAssetKind {
+  AVATAR
+  REACTION
+}
+
+enum PersonaEmotion {
+  NEUTRAL
+  HAPPY
+  SAD
+  ANGRY
+  SURPRISED
+  DISGUSTED
+  FEARFUL
+  CALM
+  FOCUSED
+  TIRED
+  CONFIDENT
+}
+
+enum PersonaReactionType {
+  LIKE
+  LOVE
+  LAUGH
+  WOW
+  SAD
+  ANGRY
+  CLAP
+  FIRE
+  OK
+  THINKING
+  HEART
+  PARTY
+}
+
+model PersonaProfile {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  avatars        PersonaAsset[]           @relation("PersonaProfileAvatars")
+  reactions      PersonaAsset[]           @relation("PersonaProfileReactions")
+  userSelections PersonaUserSelection[]
+  mappings       PersonaReactionMapping[]
+
+  @@index([isDefault])
+  @@map("persona_profiles")
+}
+
+model PersonaAsset {
+  id        String           @id @default(cuid())
+  profileId String
+  kind      PersonaAssetKind
+  emotion   PersonaEmotion   @default(NEUTRAL)
+  code      String // stable internal code, e.g. "avatar_001", "react_010"
+  label     String?
+  // Store either remote URL (CDN) or local public path. Keep both optional but at least one should exist at runtime.
+  url       String?
+  localPath String?
+  width     Int?
+  height    Int?
+  mimeType  String?
+  isActive  Boolean          @default(true)
+  sortOrder Int              @default(0)
+  meta      Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profileAvatars PersonaProfile @relation("PersonaProfileAvatars", fields: [profileId], references: [id], onDelete: Cascade)
+
+  // Separate relation alias for reactions to allow clean includes
+  profileReactions PersonaProfile? @relation("PersonaProfileReactions", fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, kind, code])
+  @@index([profileId, kind, emotion])
+  @@index([kind, isActive])
+  @@map("persona_assets")
+}
+
+model PersonaReactionMapping {
+  id        String              @id @default(cuid())
+  profileId String
+  reaction  PersonaReactionType
+  emotion   PersonaEmotion      @default(NEUTRAL)
+  // References PersonaAsset.code where kind=REACTION (enforced by app logic + unique constraint on asset)
+  assetCode String
+  intensity Float? // 0..1 optional, used by Live/Feed nuance
+  isActive  Boolean             @default(true)
+  meta      Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, reaction, emotion])
+  @@index([profileId, reaction])
+  @@index([profileId, emotion])
+  @@map("persona_reaction_mappings")
+}
+
+model PersonaUserSelection {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  profileId  String
+  avatarCode String? // currently selected avatar asset code (kind=AVATAR)
+  // Future: allow multiple packs; keep minimal now.
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Restrict)
+
+  @@index([profileId])
+  @@map("persona_user_selections")
+}
+
+//
+// ### LUMORA_PERSONA_CORE_SCHEMA_END
+//
+
+model PersonaVoiceState {
+  id           String   @id @default(cuid())
+  personaCode  String
+  isSpeaking   Boolean  @default(false)
+  volume       Float    @default(0)
+  emotionHint  String?
+  updatedAt    DateTime @updatedAt
+
+  @@index([personaCode])
 }

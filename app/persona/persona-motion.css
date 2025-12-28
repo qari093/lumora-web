@@ -1,0 +1,24 @@
+.persona-idle {
+  transform: scale(1);
+  transition: transform .2s ease;
+}
+
+.persona-talking {
+  transform: scale(1.04);
+  animation: talkPulse .4s ease-in-out infinite alternate;
+}
+
+.persona-excited {
+  transform: scale(1.08);
+  animation: excitePulse .25s ease-in-out infinite alternate;
+}
+
+@keyframes talkPulse {
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.05); }
+}
+
+@keyframes excitePulse {
+  from { transform: scale(1.05) rotate(-1deg); }
+  to   { transform: scale(1.1) rotate(1deg); }
+}

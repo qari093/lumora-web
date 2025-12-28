@@ -1,4 +1,4 @@
-import { OWNER_ID } from "@/src/app/vendor/owner";
+import { OWNER_ID } from "@/app/vendor/owner";
 
 export const dynamic = "force-dynamic";
 

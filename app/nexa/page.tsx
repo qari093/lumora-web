@@ -1,11 +1,34 @@
-// app/nexa/page.tsx
+import { PortalShell } from "@/app/_components/ui/PortalShell";
+import { getDemoContent } from "@/app/_lib/demo/content";
+
 export const dynamic = "force-dynamic";
-export default function Page(){ 
+
+export default function Page() {
+  const demo = getDemoContent();
+
   return (
-    <main style={{padding:24,fontFamily:"system-ui,Segoe UI,Arial"}}>
-      <h1 style={{fontSize:28,fontWeight:900,margin:"8px 0"}}>NEXA Hub</h1>
-      <p style={{opacity:.7,margin:"6px 0 14px"}}>Placeholder page for <code>/nexa</code>. Wire real UI later.</p>
-      <p><a href="/overlay-demo" style={{textDecoration:"underline"}}>Back to Overlay Demo</a></p>
-    </main>
+    <PortalShell
+      title="NEXA"
+      subtitle="Calm + focus hub (demo)"
+      icon="🧠"
+      accent="#a78bfa"
+    >
+      (<div style={{ display: "grid", gap: 12 }}>
+      <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)" }}>
+        <div style={{ fontWeight: 900 }}>Today’s focus</div>
+        <div style={{ fontSize: 13, opacity: 0.85, marginTop: 6 }}>
+          Demo panel: Calm Index, Focus Ratio, Burnout Risk (placeholder values).
+        </div>
+        <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
+          <div>🫧 Calm Index: <b>0.78</b></div>
+          <div>🎯 Focus Ratio: <b>0.64</b></div>
+          <div>⚠️ Burnout Risk: <b>0.21</b></div>
+        </div>
+      </div>
+      <div style={{ fontSize: 12, opacity: 0.75 }}>
+        This page is intentionally distinct to confirm iPhone rendering + routing.
+      </div>
+    </div>)
+    </PortalShell>
   );
 }

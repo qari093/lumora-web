@@ -110,3 +110,25 @@ COPY_ENDS_HERE
 # Lumora scratch / backups
 .lumora/
 *.bak.*
+.lumora_*
+.lumora_data/
+.lumora_telemetry/
+/tmp/
+**/*.bak_step*
+**/*.bak_step*.ts
+**/*.bak_step*.tsx
+**/*.bak_step*.sh
+**/*.bak_step*.*
+scripts/health/*.bak_step*
+middleware.ts.bak_step*
+tsconfig.json.bak_step*
+app/**/page.tsx.bak_step*
+lib/**.bak_step*
+src/_app_disabled_*
+pnpm-debug.log*
+# Lumora ops analysis captures (never commit)
+ops/_analysis/*.log
+ops/_analysis/*.ndjson
+ops/_analysis/*.json
+ops/_analysis/*.txt
+ops/_analysis/

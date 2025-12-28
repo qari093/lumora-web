@@ -2,7 +2,16 @@
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-};
+
+  async headers() {
+    return [
+      {
+        source: "/persona/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      {
+        source: "/persona/manifest.json",
+        headers: [{ key: "Cache-Control", value: "public, max-age=60, s-maxage=300, stale-while-revalidate=86400" }] } ];
+  } };
 
 /** Step 96: legacy /api/_health compatibility via rewrites (SAFE, non-recursive) */
 const __step96_original_rewrites__ = nextConfig?.rewrites;
