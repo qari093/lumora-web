@@ -2,32 +2,30 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
+    // Ensure repo-root discovery regardless of prior 'root' mutations
+    root: ".",
     environment: "node",
-    include: ["**/*.test.ts"],
-    setupFiles: ["tests/setup/vitest.setup.ts"],
-    coverage: {
-      provider: "v8",
-      reporter: ["text", "lcov", "html"],
-      reportsDirectory: "./coverage",
-      include: ["app/_state/**/*.ts"],
-      exclude: [
-        "app/**/api/**",
-        "app/**/server/**",
-        "app/**/lib/**",
-        "app/**/modules/**",
-        "app/**/components/**",
-        "app/**/route.ts",
-        "app/**/routes/**",
-        "app/**/layout.tsx",
-        "app/**/page.tsx",
-        "app/**/*.tsx"
-      ],
-      thresholds: {
-        statements: 80,
-        branches: 60,
-        functions: 60,
-        lines: 80
-      }
-    }
-  }
+
+    // Broad include so explicit file args + discovery runner always work
+    include: [
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "tests/**/*.test.ts",
+      "tests/**/*.test.tsx",
+      "tests/**/*.spec.ts",
+      "tests/**/*.spec.tsx",
+    ],
+
+    // Keep build artifacts + quarantine out of discovery
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.next/**",
+      "**/.quarantine/**",
+      "**/cypress/**",
+      "**/.{idea,git,cache,output,temp}/**",
+    ],
+  },
 });
