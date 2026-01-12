@@ -23,3 +23,6 @@ This marks the **frozen baseline** for the Offline Videos subsystem.
 
 - BaselineFrozenAtUTC: 2026-01-12T12:15:49Z
 - BaselineFrozenFromSHA: b05a0ddf55cb3fdc71498b562e184cb2891d3738
+
+- BaselineFrozenAtUTC: 2026-01-12T12:19:25Z
+- BaselineFrozenFromSHA: 67b0fff95da98165643ba7b262c67e20be4202da
