@@ -7,10 +7,12 @@ const nextConfig = {
     return [
       {
         source: "/persona/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       {
         source: "/persona/manifest.json",
-        headers: [{ key: "Cache-Control", value: "public, max-age=60, s-maxage=300, stale-while-revalidate=86400" }] } ];
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },{ key: "Cache-Control", value: "public, max-age=60, s-maxage=300, stale-while-revalidate=86400" }] } ];
   } };
 
 /** Step 96: legacy /api/_health compatibility via rewrites (SAFE, non-recursive) */
