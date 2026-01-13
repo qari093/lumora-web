@@ -111,3 +111,5 @@ fi
 
 echo
 echo "Step 1463 — done"
+```
+<!-- lumora: auto-closed unbalanced fence to prevent heredoc paste hangs -->

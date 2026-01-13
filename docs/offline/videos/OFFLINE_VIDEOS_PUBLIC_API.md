@@ -1,16 +1,18 @@
-# Offline Videos — Public API Surface
+# Offline Videos — Public API
 
-This document records the **public** (stable) API surface of the Offline Videos runtime.
+This document defines the **stable public surface** for Offline Videos.
 
-**Canonical module path:**
-- `src/lib/offline/videos/index.ts`
+## Canonical import
 
-**Core exports (must remain stable):**
-- `signFrame(frame, cfg)`
-- `verifyFrame(frame, cfg, nowMs)`
-- `createInMemorySeenCache(opts?)`
-- `createInMemoryRateLimiter(opts?)`
+    import * as OfflineVideos from "src/lib/offline/videos";
 
-**Notes:**
-- Internal helpers/types may change without notice.
-- Tests should import only from the canonical index (or explicitly from the canonical runtime file when needed).
+## Stable exports (contract)
+
+- signFrame(frame, key?)
+- verifyFrame(frame, key?)
+- createInMemorySeenCache({ ttlMs?, max? })
+- rateLimitConsume({ key, limit, windowMs }, nowMs?)
+
+Notes:
+- This doc intentionally uses **indented code blocks** instead of fenced blocks to avoid
+  unclosed-fence issues during automated script generation and copy/paste.
