@@ -145,7 +145,9 @@
     "guard:node": "sh scripts/guard/check_node_engine.sh",
     "boot:node20": "sh scripts/guard/nvm_use_node20.sh",
     "dev:node20": "npm run -s with:node20 -- next dev",
-    "with:node20": "sh scripts/guard/with_node20.sh"
+    "with:node20": "sh scripts/guard/with_node20.sh",
+    "ci:md-fences": "sh scripts/guard/ci_md_fence_gate.sh",
+    "ci:heredocs": "sh scripts/guard/ci_heredoc_gate.sh"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
