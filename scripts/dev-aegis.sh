@@ -94,3 +94,7 @@ pkill -f "next dev" >/dev/null 2>&1 || true
 
 # نیا dev سرور شروع کریں
 PORT=${PORT:-3000} npx next dev
+
+BASH
+
+BASH
