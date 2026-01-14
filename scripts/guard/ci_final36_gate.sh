@@ -155,6 +155,10 @@ trap stop_dev EXIT INT TERM
 sh scripts/guard/ci_md_fence_gate.sh
 sh scripts/guard/ci_heredoc_gate.sh
 
+echo "▶️ Node -e quoting guard"
+sh scripts/guard/ci_node_e_quoting_guard.sh
+
+
 sh scripts/tests/run_offline.sh
 
 run_tsc
