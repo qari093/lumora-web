@@ -210,3 +210,5 @@ echo "✓ Final36 CI Gate passed"
 
 echo "▶️ Stray heredoc prompt guard"
 sh scripts/guard/ci_stray_heredoc_prompt_guard.sh
+
+[ -f scripts/guard/ci_guard_mode_guard.sh ] && echo "▶️ Guard mode guard" && sh scripts/guard/ci_guard_mode_guard.sh
