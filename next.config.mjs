@@ -1,48 +1,42 @@
-/** @type {import("next").NextConfig} */
-const nextConfig = {
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+import base from "./next.config.base.mjs";
 
+/**
+ * Final36 Security Overlay
+ * - Adds baseline security headers + CSP without relying on brittle string edits
+ * - Preserves any existing base.headers() output by appending an additional global rule
+ */
+const CSP = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "img-src 'self' data: blob:",
+  "media-src 'self' data: blob:",
+  "font-src 'self' data:",
+  "style-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "connect-src 'self' https: wss:",
+].join("; ");
+
+const BASELINE = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  { key: "Content-Security-Policy", value: CSP },
+];
+
+export default {
+  ...base,
   async headers() {
-    return [
-      {
-        source: "/persona/:path*",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
-      {
-        source: "/persona/manifest.json",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },{ key: "Cache-Control", value: "public, max-age=60, s-maxage=300, stale-while-revalidate=86400" }] } ];
-  } };
-
-/** Step 96: legacy /api/_health compatibility via rewrites (SAFE, non-recursive) */
-const __step96_original_rewrites__ = nextConfig?.rewrites;
-
-async function __step96_merge_rewrites__() {
-  const legacy = [{ source: "/api/_health", destination: "/api/health-alias" }];
-
-  let out;
-  try {
-    out = typeof __step96_original_rewrites__ === "function"
-      ? await __step96_original_rewrites__()
-      : __step96_original_rewrites__;
-  } catch {
-    out = undefined;
-  }
-
-  if (!out) return legacy;
-  if (Array.isArray(out)) return [...legacy, ...out];
-
-  if (out && typeof out === "object") {
-    const merged = { ...out };
-    const bf = Array.isArray((out).beforeFiles) ? (out).beforeFiles : [];
-    (merged).beforeFiles = [...legacy, ...bf];
-    return merged;
-  }
-
-  return legacy;
-}
-
-nextConfig.rewrites = __step96_merge_rewrites__;
-
-export default nextConfig;
+    const existing =
+      typeof base?.headers === "function" ? await base.headers() : [];
+    const arr = Array.isArray(existing) ? existing : [];
+    // Append a global rule to guarantee CSP/headers are present.
+    arr.push({
+      source: "/:path*",
+      headers: BASELINE,
+    });
+    return arr;
+  },
+};
