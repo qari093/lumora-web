@@ -156,6 +156,8 @@ sh scripts/guard/ci_md_fence_gate.sh
 sh scripts/guard/ci_heredoc_gate.sh
 
 echo "▶️ Node -e quoting guard"
+echo "▶️ md_fence_autofix scope guard"
+sh scripts/guard/ci_md_fence_autofix_scope_guard.sh
 sh scripts/guard/ci_node_e_quoting_guard.sh
 
 

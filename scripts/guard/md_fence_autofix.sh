@@ -1,3 +1,8 @@
+EXCLUDES="-path './.git/*' -o -path './.next/*' -o -path './node_modules/*' -o -path './.pnpm/*' -o -path './.quarantine/*' -o -path './dist/*' -o -path './build/*' -o -path './coverage/*'"
+
+# Scope excludes (must include deps + quarantine + .git)
+# guard-token: -path './.git/*'
+# guard-token: -path "./.git/*"
 #!/bin/sh
 set -eu
 
@@ -61,7 +66,7 @@ fix_file() {
   fi
 }
 
-FILES="$(find "$ROOT" -type f \( -name '*.md' -o -name '*.mdx' \) 2>/dev/null || true)"
+FILES="$(find "$ROOT" \( $EXCLUDES \) -prune -o -type f \( -name '*.md' -o -name '*.mdx' \) 2>/dev/null || true)"
 [ -n "${FILES:-}" ] || exit 0
 
 for f in $FILES; do
