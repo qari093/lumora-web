@@ -1,4 +1,20 @@
 #!/bin/sh
+
+
+# lumora_final36_guard_order_v1
+# Stable guard order (idempotent): md-fence -> heredoc -> node-e quoting -> md-fence scope -> stray heredoc prompt
+run_guard() {
+  name="$1"; shift
+  echo "▶️ ${name}"
+  sh "$@"
+}
+
+[ -f scripts/guard/ci_md_fence_gate.sh ] && run_guard "Markdown Fence CI Gate" scripts/guard/ci_md_fence_gate.sh
+[ -f scripts/guard/ci_heredoc_gate.sh ] && run_guard "Heredoc CI Gate" scripts/guard/ci_heredoc_gate.sh
+[ -f scripts/guard/ci_node_e_quoting_guard.sh ] && run_guard "Node -e quoting guard" scripts/guard/ci_node_e_quoting_guard.sh
+[ -f scripts/guard/ci_md_fence_autofix_scope_guard.sh ] && run_guard "md_fence_autofix scope guard" scripts/guard/ci_md_fence_autofix_scope_guard.sh
+[ -f scripts/guard/ci_stray_heredoc_prompt_guard.sh ] && run_guard "Stray heredoc prompt guard" scripts/guard/ci_stray_heredoc_prompt_guard.sh
+
 set -eu
 
 echo "▶️ Final36 CI Gate (md-fences + heredocs + offline + typecheck + health + portals)"
