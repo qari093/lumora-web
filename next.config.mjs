@@ -1,5 +1,4 @@
-import base from "./next.config.base.mjs";
-
+import base from "./next.config.base.mjs"
 /**
  * Final36 Security Overlay
  * - Adds baseline security headers + CSP without relying on brittle string edits
@@ -26,7 +25,7 @@ const BASELINE = [
   { key: "Content-Security-Policy", value: CSP },
 ];
 
-export default {
+const nextConfig = {
   ...base,
   async headers() {
     const existing =
@@ -40,3 +39,19 @@ export default {
     return arr;
   },
 };
+
+
+/* FINAL36_HSTS_PROD_ONLY */
+const __final36_orig_headers = nextConfig.headers;
+nextConfig.headers = async () => {
+  const rules = __final36_orig_headers ? await __final36_orig_headers() : [];
+  const enable = process.env.LUMORA_ENABLE_HSTS === "1";
+  if (!enable) return rules;
+  const hsts = { key: "Strict-Transport-Security", value: "max-age=15552000; includeSubDomains" };
+  return (rules || []).map((r) => ({
+    ...r,
+    headers: Array.isArray(r.headers) ? [...r.headers, hsts] : [hsts],
+  }));
+};
+
+export default nextConfig;
