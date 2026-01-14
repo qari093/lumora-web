@@ -189,3 +189,6 @@ run_vitest_dir tests/portals
 echo "✓ portals suite passed"
 
 echo "✓ Final36 CI Gate passed"
+
+echo "▶️ Stray heredoc prompt guard"
+sh scripts/guard/ci_stray_heredoc_prompt_guard.sh
