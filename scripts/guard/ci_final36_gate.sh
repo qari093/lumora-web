@@ -167,6 +167,20 @@ export BASE_URL
 run_vitest_dir tests/health
 echo "✓ health suite passed"
 
+
+###############################################################################
+# ▶️ Security suite
+###############################################################################
+echo "• security suite (headers + CSP)"
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm -s vitest run tests/security/security_headers_smoke.test.ts
+  pnpm -s vitest run tests/security/csp_header_smoke.test.ts
+else
+  npx --yes vitest run tests/security/security_headers_smoke.test.ts
+  npx --yes vitest run tests/security/csp_header_smoke.test.ts
+fi
+echo "✓ security suite passed"
+
 run_vitest_dir tests/portals
 echo "✓ portals suite passed"
 
