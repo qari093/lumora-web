@@ -2,7 +2,6 @@
 
 If your shell shows a prompt like:
 
-    heredoc>
 
 it means a command you started is waiting for the heredoc terminator line.
 
