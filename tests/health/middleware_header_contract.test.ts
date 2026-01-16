@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 
 const PORT = process.env.PORT ?? "8088";
 const BASE = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
+const HEALTH_TIMEOUT_MS = Number(process.env.LUMORA_HEALTH_TEST_TIMEOUT_MS || 30000);
 
 async function get(path: string, timeoutMs = 8000) {
   const ac = new AbortController();

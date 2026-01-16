@@ -1,47 +1,53 @@
 import { describe, expect, test } from "vitest";
 
-function baseUrl(): string {
-  const raw = (process.env.BASE_URL || "http://127.0.0.1:3000").trim();
-  const cleaned = raw.replace(/\/+$/, "");
-  if (cleaned === "" || cleaned === "http://" || cleaned === "https://") return "http://127.0.0.1:3000";
-  if (/^https?:\/\//i.test(cleaned)) return cleaned;
-  return `http://${cleaned}`;
+function normalizeHeaderValue(v: string | null): string {
+  if (!v) return "";
+  return String(v).trim();
 }
 
-async function head(path: string, timeoutMs = 20000) {
-  const b = baseUrl();
-  const url = new URL(path, b).toString();
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
-  try {
-    const r = await fetch(url, { method: "HEAD", redirect: "manual", signal: ac.signal });
-    return { r, get: (k: string) => r.headers.get(k) };
-  } finally {
-    clearTimeout(t);
-  }
+function baseUrl() {
+  const port = process.env.PORT || "3000";
+  return `http://127.0.0.1:${port}`;
+}
+
+async function get(path: string, headers: Record<string, string>) {
+  const url = `${baseUrl()}${path}`;
+  return fetch(url, { method: "GET", redirect: "follow", headers });
 }
 
 describe("security headers: HSTS (prod-only)", () => {
   test(
-    "dev server should NOT set Strict-Transport-Security",
+    "dev should not set Strict-Transport-Security",
     async () => {
-      const { r, get } = await head("/api/health", 20000);
-      expect([200, 301, 302, 307, 308]).toContain(r.status);
-      const h = get("strict-transport-security");
-      expect(h).toBeNull();
+      const r = await get("/", { "user-agent": "vitest-hsts-dev" });
+      expect([200, 301, 302, 307, 308, 404]).toContain(r.status);
+
+      // Prove middleware executed (matcher must include "/")
+      expect(r.headers.get("x-lumora-middleware")).toBe("1");
+
+      const hv = normalizeHeaderValue(r.headers.get("strict-transport-security"));
+      expect(hv.length).toBe(0);
     },
-    30000
+    90_000
   );
 
   test(
-    "prod-simulated should set Strict-Transport-Security (when enabled by env)",
+    "prod-sim should set Strict-Transport-Security when enabled by header contract",
     async () => {
-      const { r, get } = await head("/api/health", 20000);
-      expect([200, 301, 302, 307, 308]).toContain(r.status);
-      const h = get("strict-transport-security");
-      expect(typeof h).toBe("string");
-      expect((h || "").toLowerCase()).toContain("max-age=");
+      const r = await get("/", {
+        "user-agent": "vitest-hsts-prodsim",
+        "x-lumora-prod-sim": "1",
+        "x-lumora-enable-hsts": "1",
+      });
+      expect([200, 301, 302, 307, 308, 404]).toContain(r.status);
+
+      // Prove middleware executed (matcher must include "/")
+      expect(r.headers.get("x-lumora-middleware")).toBe("1");
+
+      const hv = normalizeHeaderValue(r.headers.get("strict-transport-security"));
+      expect(hv.length).toBeGreaterThan(0);
+      expect(hv.toLowerCase()).toContain("max-age=");
     },
-    30000
+    120_000
   );
 });

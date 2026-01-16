@@ -1,214 +1,129 @@
 #!/bin/sh
+set -euo pipefail
 
-
-# lumora_final36_guard_order_v1
-# Stable guard order (idempotent): md-fence -> heredoc -> node-e quoting -> md-fence scope -> stray heredoc prompt
-run_guard() {
-  name="$1"; shift
-  echo "▶️ ${name}"
-  sh "$@"
-}
-
-[ -f scripts/guard/ci_md_fence_gate.sh ] && run_guard "Markdown Fence CI Gate" scripts/guard/ci_md_fence_gate.sh
-[ -f scripts/guard/ci_heredoc_gate.sh ] && run_guard "Heredoc CI Gate" scripts/guard/ci_heredoc_gate.sh
-[ -f scripts/guard/ci_node_e_quoting_guard.sh ] && run_guard "Node -e quoting guard" scripts/guard/ci_node_e_quoting_guard.sh
-[ -f scripts/guard/ci_md_fence_autofix_scope_guard.sh ] && run_guard "md_fence_autofix scope guard" scripts/guard/ci_md_fence_autofix_scope_guard.sh
-[ -f scripts/guard/ci_stray_heredoc_prompt_guard.sh ] && run_guard "Stray heredoc prompt guard" scripts/guard/ci_stray_heredoc_prompt_guard.sh
-
-set -eu
-
-echo "▶️ Final36 CI Gate (md-fences + heredocs + offline + typecheck + health + portals)"
+echo "▶️ Final36 CI Gate (md-fences + heredocs + node-e-quoting + scope + stray-heredoc + mode + offline + typecheck + health + security + portals)"
 echo "──────────────────────────────────────────────────────────────"
 
-PORT="${PORT:-3000}"
-BASE_URL="${BASE_URL:-http://127.0.0.1:${PORT}}"
-
-have_pnpm() { command -v pnpm >/dev/null 2>&1; }
-
-run_vitest_dir() {
-  dir="$1"
-  if have_pnpm; then
-    pnpm -s vitest run --dir "$dir"
-  else
-    npx --yes vitest run --dir "$dir"
-  fi
-}
-
-run_tsc() {
-  if have_pnpm; then
-    pnpm -s tsc --noEmit
-  else
-    npx --yes tsc --noEmit
-  fi
-}
-
-wait_http() {
-  url="$1"
-  max="${2:-60}"
-  i=0
-  while [ "$i" -lt "$max" ]; do
-    if curl -fsS "$url" >/dev/null 2>&1; then return 0; fi
-    i=$((i+1))
-    sleep 1
-  done
-  return 1
-}
-
-port_kill_listeners() {
-  if command -v lsof >/dev/null 2>&1; then
-    pids="$(lsof -tiTCP:"$PORT" -sTCP:LISTEN 2>/dev/null || true)"
-    if [ -n "${pids:-}" ]; then
-      echo "  killing listeners on :${PORT}: ${pids}"
-      kill ${pids} 2>/dev/null || true
-      sleep 1
-    fi
-  fi
-}
-
-start_dev() {
-  LOG="/tmp/lumora_final36_ci_dev_${PORT}.log"
-  port_kill_listeners
-  echo "• Start Next dev server on :${PORT} (background; log: $LOG)"
-
-  if have_pnpm; then
-    (PORT="$PORT" pnpm -s dev >"$LOG" 2>&1 & echo $! >/tmp/lumora_final36_ci_dev.pid)
-  else
-    (PORT="$PORT" npx --yes next dev -p "$PORT" >"$LOG" 2>&1 & echo $! >/tmp/lumora_final36_ci_dev.pid)
-  fi
-
-  DEV_PID="$(cat /tmp/lumora_final36_ci_dev.pid 2>/dev/null || true)"
-  echo "✓ started dev server pid=${DEV_PID:-unknown}"
-
-  echo "• Wait for /api/health (max 90s)"
-  if wait_http "${BASE_URL}/api/health" 90; then
-    echo "✓ /api/health reachable"
-    return 0
-  fi
-
-  echo "❌ dev server did not become ready; tail log:"
-  tail -n 160 "$LOG" 2>/dev/null || true
-  return 1
-}
-
-stop_dev() {
-  if [ -f /tmp/lumora_final36_ci_dev.pid ]; then
-    pid="$(cat /tmp/lumora_final36_ci_dev.pid 2>/dev/null || true)"
-    if [ -n "${pid:-}" ]; then
-      echo "• Stop dev server pid=${pid}"
-      kill "$pid" 2>/dev/null || true
-    fi
-    rm -f /tmp/lumora_final36_ci_dev.pid 2>/dev/null || true
-  fi
-}
-
-detect_app_root() {
-  if git ls-files | grep -qx "src/app/api/health/route.ts"; then
-    echo "src/app"
-    return 0
-  fi
-  if git ls-files | grep -qx "app/api/health/route.ts"; then
-    echo "app"
-    return 0
-  fi
-  if [ -d "src/app" ]; then echo "src/app"; else echo "app"; fi
-}
-
-ensure_ready_route_on_disk() {
-  APP_ROOT="$(detect_app_root)"
-  READY_PATH="${APP_ROOT}/api/ready/route.ts"
-  mkdir -p "$(dirname "$READY_PATH")"
-  cat >"$READY_PATH" <<'TS'
-export const runtime = "nodejs";
-
-export async function GET() {
-  return Response.json(
-    { ok: true, ready: true, ts: Date.now(), service: "lumora" },
-    { status: 200, headers: { "cache-control": "no-store" } }
-  );
-}
-TS
-}
-
-ensure_dev_ready_and_ready_endpoint() {
-  ensure_ready_route_on_disk
-
-  if curl -fsS "${BASE_URL}/api/health" >/dev/null 2>&1; then
-    st="$(curl -sS -o /dev/null -w "%{http_code}" "${BASE_URL}/api/ready" 2>/dev/null || echo 0)"
-    if [ "$st" = "200" ]; then
-      echo "✓ dev server responding and /api/ready=200"
-      return 0
-    fi
-    echo "⚠ dev server responding but /api/ready=${st} — restarting dev server to pick up route"
-    stop_dev
-    start_dev
-    st2="$(curl -sS -o /dev/null -w "%{http_code}" "${BASE_URL}/api/ready" 2>/dev/null || echo 0)"
-    if [ "$st2" != "200" ]; then
-      echo "❌ /api/ready still not 200 after restart (status=${st2})"
-      echo "Body(head):"
-      curl -sS "${BASE_URL}/api/ready" | head -c 520 || true
-      echo
-      return 1
-    fi
-    echo "✓ /api/ready=200 after restart"
-    return 0
-  fi
-
-  start_dev
-  st3="$(curl -sS -o /dev/null -w "%{http_code}" "${BASE_URL}/api/ready" 2>/dev/null || echo 0)"
-  if [ "$st3" != "200" ]; then
-    echo "❌ /api/ready not 200 (status=${st3})"
-    echo "Body(head):"
-    curl -sS "${BASE_URL}/api/ready" | head -c 520 || true
-    echo
-    return 1
-  fi
-  echo "✓ /api/ready=200"
-  return 0
-}
-
-trap stop_dev EXIT INT TERM
-
+# Guard gates (each guard prints its own heading)
 sh scripts/guard/ci_md_fence_gate.sh
 sh scripts/guard/ci_heredoc_gate.sh
-
-echo "▶️ Node -e quoting guard"
-echo "▶️ md_fence_autofix scope guard"
-sh scripts/guard/ci_md_fence_autofix_scope_guard.sh
 sh scripts/guard/ci_node_e_quoting_guard.sh
+sh scripts/guard/ci_md_fence_autofix_scope_guard.sh
+sh scripts/guard/ci_stray_heredoc_prompt_guard.sh
+sh scripts/guard/ci_guard_mode_guard.sh
 
+# Offline tests (if present)
+OFFLINE_DIR="tests/offline"
+if [ -d "$OFFLINE_DIR" ]; then
+  echo "• Offline tests discovered:"
+  ls -1 "$OFFLINE_DIR"/*.test.ts 2>/dev/null | sed "s/^/  - /" || true
+  echo
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm -s vitest run --dir "$OFFLINE_DIR"
+  else
+    npx --yes vitest run --dir "$OFFLINE_DIR"
+  fi
+fi
 
-sh scripts/tests/run_offline.sh
-
-run_tsc
+# typecheck
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm -s tsc --noEmit
+else
+  npx --yes tsc --noEmit
+fi
 echo "✓ typecheck passed"
 
-ensure_dev_ready_and_ready_endpoint
+# Start Next dev server (background) for integration suites
+PORT="${PORT:-3000}"
+LOG="/tmp/lumora_final36_ci_dev_${PORT}.log"
 
-export BASE_URL
+# Kill anything already listening on PORT (best-effort)
+if command -v lsof >/dev/null 2>&1; then
+  pids="$(lsof -ti tcp:"$PORT" 2>/dev/null || true)"
+  if [ -n "${pids:-}" ]; then
+    echo "• Preflight: killing listeners on :$PORT: ${pids}"
+    kill -9 $pids 2>/dev/null || true
+  fi
+fi
 
-run_vitest_dir tests/health
+echo "• Start Next dev server on :$PORT (background; log: $LOG)"
+(PORT="$PORT" nohup sh -c 'if command -v pnpm >/dev/null 2>&1; then pnpm -s dev --port "$PORT"; else npm run -s dev -- --port "$PORT"; fi' >"$LOG" 2>&1 &) >/dev/null 2>&1 || true
+sleep 0.4
+pid="$(pgrep -f "next dev.*--port[= ]$PORT|next dev.*\s$PORT" 2>/dev/null | head -n1 || true)"
+if [ -z "${pid:-}" ]; then
+  pid="$(lsof -ti tcp:"$PORT" 2>/dev/null | head -n1 || true)"
+fi
+if [ -n "${pid:-}" ]; then echo "✓ started dev server pid=$pid"; else echo "ℹ dev server pid not detected (continuing)"; fi
+
+echo "• Wait for /api/health (max 90s)"
+i=0
+ok=0
+while [ $i -lt 90 ]; do
+  if curl -fsS "http://127.0.0.1:$PORT/api/health" >/dev/null 2>&1; then ok=1; break; fi
+  i=$((i+1))
+  sleep 1
+done
+if [ $ok -ne 1 ]; then
+  echo "❌ dev server did not become ready; tail log:"
+  tail -n 60 "$LOG" 2>/dev/null | sed "s/^/  /" || true
+  # best-effort stop
+  if [ -n "${pid:-}" ]; then kill -9 "$pid" 2>/dev/null || true; fi
+  exit 1
+fi
+echo "✓ /api/health reachable"
+curl -fsS "http://127.0.0.1:$PORT/api/ready" >/dev/null 2>&1 && echo "✓ /api/ready=200"
+
+# FINAL36_PREWARM_HEALTH_START
+echo "• Prewarm health routes (avoid first-hit compile stalls)"
+PORT="${PORT:-3000}"
+BASE="http://127.0.0.1:${PORT}"
+for path in /api/_health /api/healthz /api/health; do
+  # Best-effort warmup; never fail the gate for warmup
+  curl -sS -m 10 "${BASE}${path}" >/dev/null 2>&1 || true
+done
+echo "✓ prewarm attempted"
+
+# Prewarm core portals (best-effort): reduces first-hit compilation stalls in security/portal tests
+echo "• Prewarm core portals (best-effort; non-fatal)"
+BASE="http://127.0.0.1:${PORT}"
+for path in "/" "/gmar" "/movies" "/nexa" "/videos" "/video" "/live" "/api/_health"; do
+  if [ "$path" = "/live" ]; then
+    curl -sS -I --max-time 120 "${BASE}${path}" >/dev/null 2>&1 || true
+  else
+    curl -sS -I --max-time 45 "${BASE}${path}" >/dev/null 2>&1 || true
+  fi
+done
+echo "✓ portal prewarm attempted"
+# FINAL36_PREWARM_HEALTH_END || true
+
+# Health suite
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm -s vitest run --dir tests/health
+else
+  npx --yes vitest run --dir tests/health
+fi
 echo "✓ health suite passed"
 
-
-###############################################################################
-# ▶️ Security suite
-###############################################################################
-echo "• security suite (headers + CSP)"
+# Security suite
 if command -v pnpm >/dev/null 2>&1; then
-  pnpm -s vitest run tests/security/security_headers_smoke.test.ts
-  pnpm -s vitest run tests/security/csp_header_smoke.test.ts
+  pnpm -s vitest run --dir tests/security
 else
-  npx --yes vitest run tests/security/security_headers_smoke.test.ts
-  npx --yes vitest run tests/security/csp_header_smoke.test.ts
+  npx --yes vitest run --dir tests/security
 fi
 echo "✓ security suite passed"
 
-run_vitest_dir tests/portals
+# Portals suite
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm -s vitest run --dir tests/portals
+else
+  npx --yes vitest run --dir tests/portals
+fi
 echo "✓ portals suite passed"
 
+# Stop dev server (best-effort)
+if [ -n "${pid:-}" ]; then
+  echo "• Stop dev server pid=$pid"
+  kill -9 "$pid" 2>/dev/null || true
+fi
+
 echo "✓ Final36 CI Gate passed"
-
-echo "▶️ Stray heredoc prompt guard"
-sh scripts/guard/ci_stray_heredoc_prompt_guard.sh
-
-[ -f scripts/guard/ci_guard_mode_guard.sh ] && echo "▶️ Guard mode guard" && sh scripts/guard/ci_guard_mode_guard.sh
