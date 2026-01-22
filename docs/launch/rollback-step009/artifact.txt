@@ -1,0 +1,4 @@
+ok=true
+ts=2026-01-22T14:57:46Z
+snapshot_dir=backup/launch_step008_20260122T145611Z
+rollback_script=/tmp/lumora_launch_rollback_from_step008.sh
