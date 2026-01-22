@@ -1,0 +1,11 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ × tests/health/health_smoke.test.ts > health smoke > /api/health responds and is json (smoke, robust) 26197ms
+   → BASE_RESOLVED is not defined
+
+ Test Files  1 failed | 2 skipped (3)
+      Tests  1 failed (2)
+   Start at  17:21:55
+   Duration  41.08s (transform 110ms, setup 0ms, collect 80ms, tests 40.03s, environment 0ms, prepare 225ms)
+
