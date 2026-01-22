@@ -1,0 +1,6 @@
+ts=2026-01-22T14:56:11Z
+.env=present bytes=36
+.env.local=present bytes=2008
+.env.production.local=present bytes=425
+.env.test=missing
+.env.test.local=missing
