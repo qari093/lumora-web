@@ -51,3 +51,7 @@ export const requireVendorOwner = requireVendorOwnerId;
 export const resolveOwnerId = resolveVendorOwnerId;
 
 export default { resolveVendorOwnerId, getVendorOwnerId, requireVendorOwnerId };
+
+// Added by launch(step11): stabilize build by exporting OWNER_ID used by vendor pages.
+// NOTE: Keep stable for dev/demo; replace with authenticated owner binding in later steps.
+export const OWNER_ID = process.env.NEXT_PUBLIC_VENDOR_OWNER_ID || "owner_dev_1769094299039";
