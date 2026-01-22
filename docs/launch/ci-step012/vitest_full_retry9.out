@@ -1,0 +1,46 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.persist.test.ts:150:9
+Step 15.105 — persist spec loaded
+
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > rehydrates balance/current/history from localStorage
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > persists after actions then survives module reload
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > starts from defaults on corrupt storage and does not throw
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > portal-hubs exposes ratelimit headers consistently 2458ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > rooms exposes ratelimit headers consistently 2428ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > health-badge exposes ratelimit headers consistently 1232ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > alias routes return 410 quickly and still include ratelimit headers 1829ms
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/health returns base contract
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/health?deep=1 returns deep contract with checks.self_healthz
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/healthz contract
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/emml/health contract
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/hybrid/health contract
+ ✓ tests/health/health_contract_unit.test.ts > health API contract (unit) > GET /api/ads/health contract
+ ✓ tests/create/create.rsc-markers.test.ts > Create RSC markers > /create has shell + ui + all CTAs in RSC 708ms
+ ✓ tests/create/create.rsc-markers.test.ts > Create RSC markers > /create/upload has shell + ui + all CTAs in RSC 3401ms
+ ✓ tests/create/create.rsc-markers.test.ts > Create RSC markers > /create/record has shell + ui + all CTAs in RSC 2740ms
+ ✓ tests/create/create.rsc-markers.test.ts > Create RSC markers > /create/publish has shell + ui + all CTAs in RSC 1700ms
+ ✓ tests/create/create.rsc-markers.test.ts > Create RSC markers > /creator emits NEXT_REDIRECT in RSC and /create contains markers 2465ms
+stdout | tests/state.store.migration.spec.ts:131:9
+Step 15.103 — migration spec loaded
+
+ ✓ tests/state.store.migration.spec.ts > LumaSpace Store — migration & rehydrate > rehydrates from compat key {version, state:{...}} with mood/history
+ ✓ tests/state.store.migration.spec.ts > LumaSpace Store — migration & rehydrate > prefers compat key over primary when both exist
+ ✓ tests/state.store.migration.spec.ts > LumaSpace Store — migration & rehydrate > falls back to primary key when compat is missing
+ ✓ tests/state.store.migration.spec.ts > LumaSpace Store — migration & rehydrate > starts from defaults when only corrupt data exists (both keys removed)
+stdout | tests/state.store.migration.test.ts:131:9
+Step 15.97 — migration spec loaded
+
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > rehydrates from compat key {version, state:{...}} with mood/history
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > prefers compat key over primary when both exist
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > falls back to primary key when compat is missing
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > starts from defaults when only corrupt data exists (both keys removed)
+ × tests/health/middleware_health.test.ts > health endpoints + middleware rewrite > /api/health returns JSON ok 2444ms
+   → fetch failed
+
+ Test Files  1 failed | 6 passed | 53 skipped (60)
+      Tests  1 failed | 26 passed (30)
+   Start at  16:57:55
+   Duration  46.62s (transform 278ms, setup 3ms, collect 552ms, tests 39.90s, environment 4ms, prepare 1.83s)
+
