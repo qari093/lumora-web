@@ -1,0 +1,1 @@
+vitest_runtime=single_thread_no_pool
