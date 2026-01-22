@@ -1,0 +1,25 @@
+   ▲ Next.js 15.5.6
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.2.103:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 8s
+ ○ Compiling /api/health ...
+ ✓ Compiled /api/health in 8.3s (294 modules)
+ GET /api/health 200 in 8907ms
+ ○ Compiling /api/live/portal-hubs ...
+ ✓ Compiled /api/live/portal-hubs in 770ms (299 modules)
+ GET /api/live/portal-hubs 200 in 999ms
+ ○ Compiling /api/live/rooms ...
+ ✓ Compiled /api/live/rooms in 671ms (302 modules)
+ GET /api/live/rooms 200 in 890ms
+ ✓ Compiled /api/live/health-badge in 226ms (304 modules)
+ GET /api/live/health-badge 200 in 430ms
+ ✓ Compiled /api/live/room-list in 292ms (306 modules)
+ GET /api/live/room-list 410 in 506ms
+ ○ Compiling /api/live/rooms/list ...
+ ✓ Compiled /api/live/rooms/list in 530ms (308 modules)
+ GET /api/live/rooms/list 410 in 954ms
+ ✓ Compiled /api/live/rooms/public in 293ms (310 modules)
+ GET /api/live/rooms/public 410 in 543ms

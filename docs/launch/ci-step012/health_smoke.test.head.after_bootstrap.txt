@@ -138,26 +138,3 @@ describe("health smoke", () => {
     },
     30000
   );
-
-  test(
-    "/api/health?deep=1 does not hang",
-    async () => {
-      const out = await retry(
-        async () => {
-          const r = await getJson("/api/health?deep=1&timeout_ms=1200", 8000);
-          if (r.status !== 200) throw new Error(`status:${r.status}`);
-          if (!r.ct.includes("application/json")) throw new Error(`ct:${r.ct}`);
-          if (!r.json || r.json.deep !== true) throw new Error(`json:${r.text.slice(0, 120)}`);
-          return r;
-        },
-        25000
-      );
-
-      expect(out.status).toBe(200);
-      expect(out.ct).toContain("application/json");
-      expect(out.json.deep).toBe(true);
-      expect(out.json.checks?.self_healthz).toBeTypeOf("object");
-    },
-    30000
-  );
-});
