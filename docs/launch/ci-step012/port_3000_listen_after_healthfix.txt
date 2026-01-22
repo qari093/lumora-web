@@ -1,0 +1,2 @@
+COMMAND   PID       USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    66582 waqarahmad   13u  IPv6 0xfb9ce2109af4a4da      0t0  TCP *:3000 (LISTEN)
