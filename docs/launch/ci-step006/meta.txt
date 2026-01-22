@@ -1,0 +1,5 @@
+date_utc=2026-01-22T14:46:23Z
+node=v20.20.0
+pnpm=10.17.0
+base_url=http://127.0.0.1:3000
+git_rev=31b2f46c
