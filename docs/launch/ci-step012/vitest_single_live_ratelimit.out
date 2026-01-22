@@ -1,13 +1,13 @@
 
  RUN  v1.6.1 /Users/waqarahmad/lumora-web
 
- ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > portal-hubs exposes ratelimit headers consistently 831ms
- ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > rooms exposes ratelimit headers consistently 561ms
- ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > health-badge exposes ratelimit headers consistently 322ms
- ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > alias routes return 410 quickly and still include ratelimit headers 1042ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > portal-hubs exposes ratelimit headers consistently 948ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > rooms exposes ratelimit headers consistently 646ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > health-badge exposes ratelimit headers consistently 400ms
+ ✓ tests/live/rate_limit.contract.test.ts > Live rate limit contracts > alias routes return 410 quickly and still include ratelimit headers 1152ms
 
  Test Files  1 passed (1)
       Tests  4 passed (4)
-   Start at  16:40:07
-   Duration  3.62s (transform 96ms, setup 0ms, collect 108ms, tests 2.76s, environment 0ms, prepare 174ms)
+   Start at  16:42:05
+   Duration  3.86s (transform 80ms, setup 0ms, collect 76ms, tests 3.15s, environment 0ms, prepare 156ms)
 
