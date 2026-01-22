@@ -118,22 +118,3 @@ describe("Live rate limit contracts", () => {
     async () => {
       const base = baseUrl();
       const aliases = ["/api/live/room-list", "/api/live/rooms/list", "/api/live/rooms/public"];
-      for (const p of aliases) {
-        const r = await httpGetRetryOnce(`${base}${p}`, { timeoutMs: 6000, retryDelayMs: 200 });
-        expect(r.status).toBe(410);
-
-        const lim = toNum(r.headers["x-ratelimit-limit"]);
-        const rem = toNum(r.headers["x-ratelimit-remaining"]);
-        const reset = toNum(r.headers["x-ratelimit-reset"]);
-        expect(lim).not.toBeNull();
-        expect(rem).not.toBeNull();
-        expect(reset).not.toBeNull();
-
-        const body = JSON.parse(r.bodyText || "{}") as any;
-        expect(body?.ok).toBe(false);
-        expect(body?.error?.code).toBe("ROUTE_DEPRECATED");
-      }
-    },
-    35000
-  );
-});
