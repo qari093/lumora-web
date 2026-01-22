@@ -1,0 +1,10 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ❯ tests/api.lumaspace.ping.spec.ts  (1 test) 30015ms
+
+ Test Files  1 failed (1)
+      Tests   (1)
+   Start at  19:42:24
+   Duration  31.31s (transform 116ms, setup 92ms, collect 21ms, tests 30.02s, environment 0ms, prepare 271ms)
+
