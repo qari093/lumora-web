@@ -1,0 +1,6 @@
+?? backup/
+?? docs/launch/ci-step012/git_porcelain_final.txt
+?? docs/launch/ci-step012/lint.out
+?? docs/launch/ci-step012/meta.txt
+?? docs/launch/db-step007/migrate_status.txt
+?? docs/launch/repro-step010/lumora_build_step010_20260122T150146Z.tgz
