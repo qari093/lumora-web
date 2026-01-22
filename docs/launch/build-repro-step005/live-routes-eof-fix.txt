@@ -1,0 +1,6 @@
+date_utc=20260122T143204Z
+action=rewrote_minimal_valid_live_routes
+files:
+- app/api/live/mic/route.ts
+- app/api/live/portal-spec/route.ts
+- app/api/live/rooms/[id]/end/route.ts

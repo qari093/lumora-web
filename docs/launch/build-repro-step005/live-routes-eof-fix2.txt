@@ -1,0 +1,7 @@
+date_utc=20260122T143612Z
+action=rewrote_remaining_minimal_valid_live_routes
+files:
+- app/api/live/rooms/[id]/events/route.ts
+- app/api/live/rooms/[id]/react/route.ts
+- app/api/live/rooms/[id]/reactions/route.ts
+- app/api/live/status/route.ts

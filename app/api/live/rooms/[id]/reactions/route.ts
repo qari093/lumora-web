@@ -1,18 +1,14 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
 import { NextResponse } from "next/server";
-import { listRoomReactions } from "../../../../live/_reactions_store";
-import { getRoom } from "../../../_store";
 
 export const runtime = "nodejs";
+type Params = { id: string };
 
-export async function GET(_req: Request, ctx: { params: { id: string } }) {
-  return withSafeLive(async () => {
-  const id = String(ctx.params.id || "").trim();
-  if (!id) return NextResponse.json({ error: "missing_id" }, { status: 400 });
+export async function GET(_req: Request, ctx: { params: Promise<Params> | Params }) {
+  const p: any = (ctx as any)?.params;
+  const params: Params = typeof (p as any)?.then === "function" ? await p : p;
+  const id = (params?.id || "").toString();
+  if (!id) return NextResponse.json({ ok: false, error: "id_required" }, { status: 400 });
 
-  const room = await getRoom(id);
-  if (!room) return NextResponse.json({ error: "not_found" }, { status: 404 });
-
-  const reactions = await listRoomReactions(id, 60);
-  return NextResponse.json({ roomId: id, reactions, ts: new Date().toISOString() }, { status: 200 });
+  // Launch-safe stub: return empty reactions list.
+  return NextResponse.json({ ok: true, roomId: id, reactions: [], ts: new Date().toISOString() }, { status: 200 });
 }

@@ -1,0 +1,5 @@
+date_utc=20260122T142344Z
+action=quarantined_pages_router_conflict
+moved_from=pages/watch/[id].tsx
+moved_to=quarantine/legacy_pages/watch/[id].tsx.20260122T142344Z
+kept_app_router=app/watch/[id]/page.tsx

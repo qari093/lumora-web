@@ -1,0 +1,5 @@
+Step 1 autostash created:
+  message: lumora-launch-step001-autostash-20260122T140322Z
+  list:
+stash@{0}: On main: lumora-launch-step001-autostash-20260122T140322Z
+stash@{1}: On main: AUTO: offline-videos-step1-baseline-20260112-115514

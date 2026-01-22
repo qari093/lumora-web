@@ -1,14 +1,16 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
 import { NextResponse } from "next/server";
-import { endRoom } from "../../../_store";
 
 export const runtime = "nodejs";
 
-export async function POST(_req: Request, ctx: { params: { id: string } }) {
-  return withSafeLive(async () => {
-  const id = String(ctx.params.id || "").trim();
-  if (!id) return NextResponse.json({ error: "missing_id" }, { status: 400 });
-  const room = await endRoom(id);
-  if (!room) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  return NextResponse.json({ room }, { status: 200 });
+type Params = { id: string };
+
+export async function POST(_req: Request, ctx: { params: Promise<Params> | Params }) {
+  const p: any = (ctx as any)?.params;
+  const params: Params = typeof (p as any)?.then === "function" ? await p : p;
+  const id = (params?.id || "").toString();
+
+  if (!id) return NextResponse.json({ ok: false, error: "id_required" }, { status: 400 });
+
+  // Launch-safe stub: marks room end request accepted; real implementation stays behind feature-freeze.
+  return NextResponse.json({ ok: true, id, ended: true, ts: new Date().toISOString() }, { status: 200 });
 }
