@@ -1,0 +1,14 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/state.store.migration.spec.ts > LumaSpace Store — migration & rehydrate > rehydrates from compat key {version, state:{...}} with mood/history
+ReferenceError: localStorage is not defined
+ ❯ tests/state.store.migration.spec.ts:21:5
+     19| 
+     20|   it("rehydrates from compat key {version, state:{...}} with mood/hist…
+     21|     localStorage.setItem(
+       |     ^
+     22|       COMPAT,
+     23|       JSON.stringify({
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

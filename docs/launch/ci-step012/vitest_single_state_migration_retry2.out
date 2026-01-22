@@ -1,0 +1,16 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.migration.test.ts:131:9
+Step 15.97 — migration spec loaded
+
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > rehydrates from compat key {version, state:{...}} with mood/history
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > prefers compat key over primary when both exist
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > falls back to primary key when compat is missing
+ ✓ tests/state.store.migration.test.ts > LumaSpace Store — migration & rehydrate > starts from defaults when only corrupt data exists (both keys removed)
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  16:54:38
+   Duration  881ms (transform 111ms, setup 0ms, collect 76ms, tests 95ms, environment 0ms, prepare 217ms)
+
