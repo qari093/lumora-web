@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { BASE, withHealthServer } from "./helpers/healthTestUtils";
 
 // LUMORA_HEALTH_TEST_BOOTSTRAP_V2
 // END LUMORA_TEST_NEXT_DEV_BOOTSTRAP
@@ -83,6 +84,8 @@ afterAll(async () => {
 
 
 import { describe, it, expect } from "vitest";
+
+withHealthServer();
 
 describe("health middleware rewrite — minimal suite guard (auto)", () => {
   const BASE = process.env.BASE_URL || "http://127.0.0.1:3000";

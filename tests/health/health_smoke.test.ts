@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { BASE, withHealthServer } from "./helpers/healthTestUtils";
 
 // LUMORA_HEALTH_SMOKE_BOOTSTRAP_V2
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
@@ -80,7 +81,7 @@ async function getJson(path: string, timeoutMs: number): Promise<{ status: numbe
   const ac = new AbortController();
   const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
   try {
-    const res = await fetch(new URL(path, BASE_RESOLVED), { cache: "no-store", signal: ac.signal });
+    const res = await fetch(new URL(path, BASE), { cache: "no-store", signal: ac.signal });
     const ct = res.headers.get("content-type") ?? "";
     const text = await res.text();
     const json = ct.includes("application/json") ? JSON.parse(text) : null;
@@ -109,12 +110,12 @@ async function retry<T>(fn: () => Promise<T>, totalMs: number): Promise<T> {
   throw (lastErr instanceof Error ? lastErr : new Error(String(lastErr ?? "retry-timeout")));
 }
 
+withHealthServer();
+
 describe("health smoke", () => {
 
-  let BASE_RESOLVED = __LUMORA_BASE;
-  beforeAll(async () => {
-    BASE_RESOLVED = await __ensureServerReady();
-  });
+  let BASE = __LUMORA_BASE;
+    });
 
   it(
     "/api/health responds and is json (smoke, robust)",
