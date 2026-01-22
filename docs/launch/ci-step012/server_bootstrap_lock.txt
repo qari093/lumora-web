@@ -1,0 +1,2 @@
+base_url_locked=true
+server_bootstrap=centralized_vitest_setup

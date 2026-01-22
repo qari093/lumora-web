@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    setupFiles: ["./tests/setup/vitest.browser.setup.ts"],
+    setupFiles: ["./tests/setup/vitest.browser.setup.ts", "./tests/setup/vitest.server.setup.ts"],
     // 🔒 Launch-safe deterministic mode
     threads: false,
     pool: "forks",
