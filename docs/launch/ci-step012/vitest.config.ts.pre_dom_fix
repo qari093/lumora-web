@@ -26,8 +26,6 @@ export default defineConfig({
       "**/.quarantine/**",
       "**/cypress/**",
       "**/.{idea,git,cache,output,temp}/**",
-    
-      "tests/emml.state.client.test.ts"
     ],
   },
 });

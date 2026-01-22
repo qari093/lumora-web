@@ -1,0 +1,14 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.persist.test.ts:129:9
+Step 15.105 — persist spec loaded
+
+ × tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > rehydrates balance/current/history from localStorage
+   → Cannot read properties of undefined (reading 'setItem')
+
+ Test Files  1 failed | 59 skipped (60)
+      Tests  1 failed (3)
+   Start at  16:25:43
+   Duration  1.68s (transform 138ms, setup 0ms, collect 143ms, tests 8ms, environment 0ms, prepare 433ms)
+
