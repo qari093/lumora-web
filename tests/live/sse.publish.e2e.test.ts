@@ -65,7 +65,9 @@ async function postJson(url: string, body: any) {
   return { status: r.status, text: t };
 }
 
-describe("Live SSE publish E2E", () => {
+describe.serial("Live SSE publish E2E", () => {
+  testTimeout: 20000,
+
   test(
     "SSE stream receives published event",
     async () => {
