@@ -1,0 +1,15 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.persist.test.ts:150:9
+Step 15.105 — persist spec loaded
+
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > rehydrates balance/current/history from localStorage
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > persists after actions then survives module reload 304ms
+ ✓ tests/state.store.persist.test.ts > LumaSpace Store — persist & rehydrate > starts from defaults on corrupt storage and does not throw
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  16:36:25
+   Duration  1.59s (transform 101ms, setup 0ms, collect 91ms, tests 386ms, environment 0ms, prepare 320ms)
+

@@ -3,6 +3,27 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
+// LUMORA_LOCALSTORAGE_GUARD_V1
+import { beforeAll } from "vitest";
+
+function __lumoraMakeStorage() {
+  let store: Record<string, string> = {};
+  return {
+    getItem: (k: string) => (k in store ? store[k] : null),
+    setItem: (k: string, v: string) => { store[k] = String(v); },
+    removeItem: (k: string) => { delete store[k]; },
+    clear: () => { store = {}; },
+    key: (i: number) => Object.keys(store)[i] ?? null,
+    get length() { return Object.keys(store).length; }
+  } as Storage;
+}
+
+beforeAll(() => {
+  if (typeof (globalThis as any).localStorage === "undefined" || !(globalThis as any).localStorage) {
+    Object.defineProperty(globalThis, "localStorage", { value: __lumoraMakeStorage(), configurable: true });
+  }
+});
+
 // Important: do not import the store at module top — we need fresh imports after mutations.
 
 // Must match the store's persist `name` in app/_state/store.ts
