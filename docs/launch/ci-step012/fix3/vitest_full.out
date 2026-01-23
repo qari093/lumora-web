@@ -1,0 +1,84 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/health/health_contract_unit.test.ts  (6 tests) 1127ms
+ ❯ tests/state.store.migration.test.ts  (0 test)
+ ❯ tests/state.store.migration.spec.ts  (0 test)
+ ❯ tests/live/sse.publish.e2e.test.ts  (0 test)
+ ✓ tests/api.lumaspace.ping.spec.ts  (1 test) 4734ms
+ ✓ tests/health/middleware_health.test.ts  (1 test) 7902ms
+ ✓ tests/live/events.sse.contract.test.ts  (1 test) 2863ms
+ ✓ tests/live/room_state.publish.contract.test.ts  (1 test) 11013ms
+ ✓ tests/health/health_smoke.test.ts  (1 test) 1400ms
+ ✓ tests/live/portal_hubs.contract.test.ts  (1 test) 2976ms
+ ❯ tests/portals/portals_routes_smoke.test.ts  (1 test | 1 failed) 20006ms
+   ❯ tests/portals/portals_routes_smoke.test.ts > portals: route smoke > all portal routes respond (200 or redirect)
+     → This operation was aborted
+ ❯ tests/live/rooms.contract.test.ts  (1 test | 1 failed) 16171ms
+   ❯ tests/live/rooms.contract.test.ts > Live API contract: /api/live/rooms > returns 200 with ratelimit headers and stable envelope
+     → HTTP GET timeout after 8000ms: http://127.0.0.1:3000/api/live/rooms
+ ✓ tests/emml.feature.test.ts  (5 tests) 3ms
+ ❯ tests/live/live_rooms_list.contract.test.ts  (0 test)
+ ✓ tests/live/room_state.contract.test.ts  (1 test) 4226ms
+ ✓ tests/persona/persona_manifest.contract.test.ts  (1 test) 6560ms
+ ✓ tests/live/health_page.contract.test.ts  (2 tests) 17916ms
+ ✓ tests/security/hsts_header_prod_only.test.ts  (2 tests) 7676ms
+ ✓ tests/state.store.edges.test.ts  (4 tests) 5ms
+ ✓ tests/emml.contract.test.ts  (4 tests) 7ms
+ ✓ tests/offline/offline_p2p_replay_protection.test.ts  (2 tests) 1ms
+ ✓ tests/health/middleware_header_contract.test.ts  (2 tests) 7713ms
+ ✓ tests/state.store.test.ts  (3 tests) 36ms
+ ✓ tests/security/csp_header_smoke.test.ts  (2 tests) 44144ms
+ ✓ tests/emml.snapshot.test.ts  (3 tests) 344ms
+ ✓ tests/offline/offline_public_contract.test.ts  (2 tests) 1ms
+ ✓ tests/offline/offline_p2p_chunk_protocol.test.ts  (2 tests) 11ms
+ ✓ tests/health/version_api_smoke.test.ts  (1 test) 4387ms
+ ✓ tests/emml.ui.contract.test.ts  (4 tests) 13ms
+ ✓ tests/emml.snapshot.writer.test.ts  (2 tests) 32ms
+ ✓ tests/health/middleware_rewrite_unit.test.ts  (3 tests) 6ms
+ ✓ tests/emml.docs.test.ts  (3 tests) 2ms
+ ✓ tests/security/security_headers_smoke.test.ts  (2 tests) 30332ms
+ ✓ tests/offline/offline_p2p_rate_limit.test.ts  (2 tests) 2ms
+ ✓ tests/health/health_api_smoke.test.ts  (1 test) 824ms
+ ✓ tests/health/ready_api_smoke.test.ts  (1 test) 4680ms
+ ✓ tests/emml.chart.test.ts  (3 tests) 2ms
+ ✓ tests/emml.client.test.ts  (3 tests) 19ms
+ ✓ tests/emml.state.test.ts  (3 tests) 3ms
+ ✓ tests/emml.ingest.test.ts  (3 tests) 6ms
+ ✓ tests/emml.compute.test.ts  (3 tests) 12ms
+ ✓ tests/emml.chart.client.test.ts  (3 tests) 10ms
+ ✓ tests/emml.sse.test.ts  (3 tests) 2ms
+ ✓ tests/offline/offline_p2p_node_crypto_fallback.test.ts  (1 test) 2ms
+ ✓ tests/emml.aggregate.test.ts  (3 tests) 1ms
+ ✓ tests/emml.health.test.ts  (2 tests) 462ms
+ ❯ tests/emml.seed.test.ts  (3 tests | 3 failed) 126ms
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML index
+     → expected 0 to be greater than 0
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML market and asset
+     → expected 0 to be greater than 0
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have some EMML ticks for demo charts
+     → expected 0 to be greater than 0
+ ❯ tests/emml.chart.ui.test.ts  (3 tests | 1 failed) 14ms
+   ❯ tests/emml.chart.ui.test.ts > EMML Chart UI — Live Chart Page > should render with EMML Live Chart title
+     → expected false to be true // Object.is equality
+ ✓ tests/persona/privacy.test.ts  (2 tests) 2ms
+ ✓ tests/persona/manifest.test.ts  (1 test) 8ms
+ ✓ tests/emml.snapshot.cron.test.ts  (2 tests) 25ms
+ ✓ tests/persona/reactionMatrix.test.ts  (3 tests) 1ms
+ ✓ tests/emml.analyzer.test.ts  (2 tests) 2ms
+ ❯ tests/api.lumaspace.state.spec.ts  (0 test)
+ ❯ tests/lumaspace.state-banner.util.spec.ts  (0 test)
+ ✓ tests/offline/offline_public_surface.test.ts  (1 test) 1ms
+ ❯ tests/performance/lighthouse.spec.ts  (0 test)
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 3 unhandled errors during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+ Test Files  11 failed | 46 passed (58)
+      Tests  6 failed | 106 passed (117)
+     Errors  3 errors
+   Start at  16:53:01
+   Duration  148.46s (transform 1.50s, setup 122.73s, collect 2.87s, tests 197.81s, environment 7ms, prepare 6.37s)
+
