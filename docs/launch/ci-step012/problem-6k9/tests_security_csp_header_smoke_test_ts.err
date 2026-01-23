@@ -1,0 +1,32 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on root and core portals (deterministic)
+Error: curl HEAD failed: / — Command failed: curl -sS -I --max-time 60 http://127.0.0.1:3000/
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+
+ ❯ headViaCurl tests/security/csp_header_smoke.test.ts:33:11
+     31|   } catch (e: any) {
+     32|     const msg = (e && e.message) ? String(e.message) : "curl_failed";
+     33|     throw new Error("curl HEAD failed: " + path + " — " + msg);
+       |           ^
+     34|   }
+     35| }
+ ❯ tests/security/csp_header_smoke.test.ts:43:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on /api/health
+Error: curl HEAD failed: /api/health — Command failed: curl -sS -I --max-time 35 http://127.0.0.1:3000/api/health
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+
+ ❯ headViaCurl tests/security/csp_header_smoke.test.ts:33:11
+     31|   } catch (e: any) {
+     32|     const msg = (e && e.message) ? String(e.message) : "curl_failed";
+     33|     throw new Error("curl HEAD failed: " + path + " — " + msg);
+       |           ^
+     34|   }
+     35| }
+ ❯ tests/security/csp_header_smoke.test.ts:55:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

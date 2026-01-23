@@ -1,0 +1,14 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ❯ tests/health/middleware_header_contract.test.ts  (2 tests | 2 failed) 31ms
+   ❯ tests/health/middleware_header_contract.test.ts > middleware header contract (integration) > /api/_health returns JSON
+     → fetch failed
+   ❯ tests/health/middleware_header_contract.test.ts > middleware header contract (integration) > /api/health does not include x-middleware-rewrite header
+     → fetch failed
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  20:06:32
+   Duration  1.60s (transform 124ms, setup 225ms, collect 22ms, tests 31ms, environment 0ms, prepare 306ms)
+

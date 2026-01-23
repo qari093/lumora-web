@@ -1,0 +1,18 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ❯ tests/security/csp_header_smoke.test.ts  (2 tests | 2 failed) 59ms
+   ❯ tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on root and core portals (deterministic)
+     → curl HEAD failed: / — Command failed: curl -sS -I --max-time 60 http://127.0.0.1:3000/
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+
+   ❯ tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on /api/health
+     → curl HEAD failed: /api/health — Command failed: curl -sS -I --max-time 35 http://127.0.0.1:3000/api/health
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  20:07:33
+   Duration  2.11s (transform 190ms, setup 273ms, collect 17ms, tests 59ms, environment 0ms, prepare 686ms)
+

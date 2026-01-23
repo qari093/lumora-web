@@ -1,0 +1,14 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ❯ tests/security/hsts_header_prod_only.test.ts  (2 tests | 2 failed) 31ms
+   ❯ tests/security/hsts_header_prod_only.test.ts > security headers: HSTS (prod-only) > dev should not set Strict-Transport-Security
+     → fetch failed
+   ❯ tests/security/hsts_header_prod_only.test.ts > security headers: HSTS (prod-only) > prod-sim should set Strict-Transport-Security when enabled by header contract
+     → fetch failed
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  20:07:37
+   Duration  1.82s (transform 79ms, setup 140ms, collect 33ms, tests 31ms, environment 0ms, prepare 269ms)
+
