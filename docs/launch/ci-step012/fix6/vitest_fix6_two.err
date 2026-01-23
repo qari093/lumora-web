@@ -1,0 +1,33 @@
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: Cannot find package 'jsdom' imported from /Users/waqarahmad/lumora-web/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.25/node_modules/vitest/dist/vendor/index.GVFv9dZ0.js
+ ❯ Object.getPackageJSONURL node:internal/modules/package_json_reader:268:9
+ ❯ packageResolve node:internal/modules/esm/resolve:768:81
+ ❯ moduleResolve node:internal/modules/esm/resolve:858:18
+ ❯ defaultResolve node:internal/modules/esm/resolve:990:11
+ ❯ ModuleLoader.#cachedDefaultResolve node:internal/modules/esm/loader:749:20
+ ❯ ModuleLoader.resolve node:internal/modules/esm/loader:726:38
+ ❯ ModuleLoader.getModuleJobForImport node:internal/modules/esm/loader:312:38
+ ❯ onImport.tracePromise.__proto__ node:internal/modules/esm/loader:677:36
+ ❯ TracingChannel.tracePromise node:diagnostics_channel:344:14
+ ❯ ModuleLoader.import node:internal/modules/esm/loader:676:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 'ERR_MODULE_NOT_FOUND' }
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: Cannot find package 'jsdom' imported from /Users/waqarahmad/lumora-web/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.25/node_modules/vitest/dist/vendor/index.GVFv9dZ0.js
+ ❯ Object.getPackageJSONURL node:internal/modules/package_json_reader:268:9
+ ❯ packageResolve node:internal/modules/esm/resolve:768:81
+ ❯ moduleResolve node:internal/modules/esm/resolve:858:18
+ ❯ defaultResolve node:internal/modules/esm/resolve:990:11
+ ❯ ModuleLoader.#cachedDefaultResolve node:internal/modules/esm/loader:749:20
+ ❯ ModuleLoader.resolve node:internal/modules/esm/loader:726:38
+ ❯ ModuleLoader.getModuleJobForImport node:internal/modules/esm/loader:312:38
+ ❯ onImport.tracePromise.__proto__ node:internal/modules/esm/loader:677:36
+ ❯ TracingChannel.tracePromise node:diagnostics_channel:344:14
+ ❯ ModuleLoader.import node:internal/modules/esm/loader:676:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 'ERR_MODULE_NOT_FOUND' }
+

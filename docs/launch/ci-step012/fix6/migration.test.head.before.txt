@@ -1,5 +1,4 @@
-// @vitest-environment jsdom
-import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 // LUMORA_TEST_LOCALSTORAGE_POLYFILL
 (function ensureLocalStorage(){
@@ -119,14 +118,3 @@ describe("LumaSpace Store — migration & rehydrate", () => {
     // ensure we can still mutate and persist cleanly afterwards
     s.credit(5);
     const after = useAppStore.getState();
-    expect(after.balance).toBe(5);
-
-    const raw = localStorage.getItem(PRIMARY) || "{}";
-    const parsed = JSON.parse(raw);
-    const state = (parsed as any).state ?? parsed;
-
-    expect(state.balance).toBe(5);
-  });
-});
-
-console.log("Step 15.103 — migration spec loaded");
