@@ -1,0 +1,64 @@
+(node:63247) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 message listeners added to [process]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63246) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 message listeners added to [process]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63248) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 message listeners added to [process]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+⎯⎯⎯⎯⎯⎯ Failed Suites 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/api.lumaspace.ping.spec.ts [ tests/api.lumaspace.ping.spec.ts ]
+ FAIL  tests/emml.contract.test.ts [ tests/emml.contract.test.ts ]
+ FAIL  tests/health/middleware_health.test.ts [ tests/health/middleware_health.test.ts ]
+ FAIL  tests/offline/offline_p2p_replay_protection.test.ts [ tests/offline/offline_p2p_replay_protection.test.ts ]
+ FAIL  tests/live/room_state.publish.contract.test.ts [ tests/live/room_state.publish.contract.test.ts ]
+ FAIL  tests/portals/portals_routes_smoke.test.ts [ tests/portals/portals_routes_smoke.test.ts ]
+ FAIL  tests/security/security_headers_smoke.test.ts [ tests/security/security_headers_smoke.test.ts ]
+Error: Test server not healthy within timeout (20000ms) @ http://127.0.0.1:3000
+ ❯ Module.ensureServerReady tests/helpers/ensureServer.ts:157:9
+    155|   }
+    156| 
+    157|   throw new Error(
+       |         ^
+    158|     "Test server not healthy within timeout (" +
+    159|       String(maxWaitMs) +
+ ❯ tests/setup/vitest.server.setup.ts:10:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on root and core portals (pinpoint slow route)
+Error: HEAD failed: /video (25008ms) — aborted
+ ❯ head tests/security/csp_header_smoke.test.ts:19:11
+     17|     const ms = Date.now() - started;
+     18|     const msg = typeof e?.message === "string" ? e.message : "fetch_fa…
+     19|     throw new Error(`HEAD failed: ${path} (${ms}ms) — ${msg}`);
+       |           ^
+     20|   } finally {
+     21|     clearTimeout(t);
+ ❯ tests/security/csp_header_smoke.test.ts:35:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: Worker exited unexpectedly
+ ❯ ChildProcess.<anonymous> node_modules/.pnpm/tinypool@0.8.4/node_modules/tinypool/dist/esm/index.js:185:34
+ ❯ ChildProcess.emit node:events:520:35
+ ❯ ChildProcess._handle.onexit node:internal/child_process:294:12
+
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: Worker exited unexpectedly
+ ❯ ChildProcess.<anonymous> node_modules/.pnpm/tinypool@0.8.4/node_modules/tinypool/dist/esm/index.js:185:34
+ ❯ ChildProcess.emit node:events:520:35
+ ❯ ChildProcess._handle.onexit node:internal/child_process:294:12
+
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: Worker exited unexpectedly
+ ❯ ChildProcess.<anonymous> node_modules/.pnpm/tinypool@0.8.4/node_modules/tinypool/dist/esm/index.js:185:34
+ ❯ ChildProcess.emit node:events:520:35
+ ❯ ChildProcess._handle.onexit node:internal/child_process:294:12
+
+
