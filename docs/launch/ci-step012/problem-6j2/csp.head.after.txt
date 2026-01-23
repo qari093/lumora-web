@@ -1,0 +1,62 @@
+     1	import { describe, expect, test } from "vitest";
+     2	import { execFileSync } from "node:child_process";
+     3	
+     4	const BASE =
+     5	  (process.env.BASE_URL ||
+     6	    process.env.LUMORA_TEST_BASE ||
+     7	    process.env.NEXT_PUBLIC_BASE_URL ||
+     8	    "http://127.0.0.1:3000").replace(/\/$/, "");
+     9	
+    10	const PORTAL_HEAD_TIMEOUT_S = 60;
+    11	
+    12	function headViaCurl(path: string, timeoutS = PORTAL_HEAD_TIMEOUT_S): { status: number; headers: Record<string, string> } {
+    13	  const url = BASE + path;
+    14	  try {
+    15	    const out = execFileSync(
+    16	      "curl",
+    17	      ["-sS", "-I", "--max-time", String(timeoutS), url],
+    18	      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }
+    19	    );
+    20	    const lines = out.split(/\r?\n/).filter(Boolean);
+    21	    const statusLine = lines.find((l) => /^HTTP\//i.test(l)) || "";
+    22	    const m = statusLine.match(/\s(\d{3})\s/);
+    23	    const status = m ? Number(m[1]) : 0;
+    24	
+    25	    const headers: Record<string, string> = {};
+    26	    for (const l of lines) {
+    27	      const i = l.indexOf(":");
+    28	      if (i > 0) headers[l.slice(0, i).trim().toLowerCase()] = l.slice(i + 1).trim();
+    29	    }
+    30	    return { status, headers };
+    31	  } catch (e: any) {
+    32	    const msg = (e && e.message) ? String(e.message) : "curl_failed";
+    33	    throw new Error("curl HEAD failed: " + path + " — " + msg);
+    34	  }
+    35	}
+    36	
+    37	describe("security headers: CSP smoke", () => {
+    38	  test(
+    39	    "sets Content-Security-Policy on root and core portals (deterministic)",
+    40	    async () => {
+    41	      const paths = ["/", "/gmar", "/movies", "/nexa", "/video", "/live", "/lumaspace"];
+    42	      for (const p of paths) {
+    43	        const r = headViaCurl(p);
+    44	        expect([200, 301, 302, 307, 308]).toContain(r.status);
+    45	        const csp = (r.headers["content-security-policy"] || "").toString();
+    46	        expect(csp.length).toBeGreaterThan(0);
+    47	      }
+    48	    },
+    49	    240_000
+    50	  );
+    51	
+    52	  test(
+    53	    "sets Content-Security-Policy on /api/health",
+    54	    async () => {
+    55	      const r = headViaCurl("/api/health", 35);
+    56	      expect([200, 301, 302, 307, 308]).toContain(r.status);
+    57	      const csp = (r.headers["content-security-policy"] || "").toString();
+    58	      expect(csp.length).toBeGreaterThan(0);
+    59	    },
+    60	    120_000
+    61	  );
+    62	});

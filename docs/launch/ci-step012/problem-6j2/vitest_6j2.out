@@ -1,0 +1,10 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/security/csp_header_smoke.test.ts  (2 tests) 13820ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  18:37:14
+   Duration  18.17s (transform 148ms, setup 1.58s, collect 17ms, tests 13.82s, environment 0ms, prepare 694ms)
+
