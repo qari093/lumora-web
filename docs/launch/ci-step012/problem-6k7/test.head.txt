@@ -1,0 +1,61 @@
+     1	import { describe, it, expect } from "vitest";
+     2	
+     3	type FetchOut = { status: number; ct: string; head: string };
+     4	
+     5	async function fetchHead(url: string, timeoutMs = 15000): Promise<FetchOut> {
+     6	  const ac = new AbortController();
+     7	  const t = setTimeout(() => ac.abort(), timeoutMs);
+     8	  try {
+     9	    const r = await fetch(url, { redirect: "manual", signal: ac.signal });
+    10	    const ct = (r.headers.get("content-type") || "").toLowerCase();
+    11	    const txt = await r.text();
+    12	    return { status: r.status, ct, head: txt.slice(0, 220) };
+    13	  } finally {
+    14	    clearTimeout(t);
+    15	  }
+    16	}
+    17	
+    18	const base = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
+    19	
+    20	// Keep this list aligned with Lumora “all portals active” requirement.
+    21	// Allow redirects (auth, canonicalization) but disallow 404/500.
+    22	const PATHS: Array<{ path: string; name: string }> = [
+    23	  { path: "/", name: "home" },
+    24	  { path: "/fyp", name: "FYP" },
+    25	  { path: "/gmar", name: "GMAR" },
+    26	  { path: "/videos", name: "Videos" },
+    27	  { path: "/nexa", name: "NEXA" },
+    28	  { path: "/movies", name: "Movies" },
+    29	  { path: "/live", name: "Live" },
+    30	  { path: "/share", name: "Share" },
+    31	  { path: "/celebrations", name: "Celebrations" },
+    32	];
+    33	
+    34	describe("portals: route smoke", () => {
+    35	  it(
+    36	    "all portal routes respond (200 or redirect)",
+    37	    async () => {
+    38	      const bad: Array<{ name: string; path: string; status: number; head: string }> = [];
+    39	      for (const p of PATHS) {
+    40	        const u = `${base}${p.path}`;
+    41	        const out = await fetchHead(u, 20000);
+    42	        const ok = out.status === 200 || out.status === 301 || out.status === 302 || out.status === 307 || out.status === 308;
+    43	        if (!ok) bad.push({ name: p.name, path: p.path, status: out.status, head: out.head });
+    44	        // If 200, should be HTML-ish (Next pages) or JSON for API-like pages
+    45	        if (out.status === 200) {
+    46	          const htmlish = out.ct.includes("text/html") || out.head.includes("<!DOCTYPE html") || out.head.includes("<html");
+    47	          const jsonish = out.ct.includes("application/json") || out.head.trim().startsWith("{");
+    48	          expect(htmlish || jsonish).toBe(true);
+    49	        }
+    50	      }
+    51	      if (bad.length) {
+    52	        throw new Error(
+    53	          `Portal smoke failures:\n` +
+    54	            bad.map((b) => `- ${b.name} ${b.path}: ${b.status}\n  head: ${b.head.replace(/\s+/g, " ").slice(0, 180)}`).join("\n")
+    55	        );
+    56	      }
+    57	      expect(bad.length).toBe(0);
+    58	    },
+    59	    60000
+    60	  );
+    61	});
