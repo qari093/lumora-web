@@ -1,0 +1,60 @@
+import { execFileSync, spawn } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import http from "node:http";
+import https from "node:https";
+
+type EnsureOpts = {
+  baseUrl?: string;
+  maxWaitMs?: number;
+  pollMs?: number;
+  port?: number;
+};
+
+function sanitizeBaseUrl(raw: string | undefined, port: number): string {
+  const fallback = "http://127.0.0.1:" + String(port);
+  const v0 = (raw ?? "").toString().trim();
+  if (!v0) return fallback;
+
+  const v = /^https?:\/\//i.test(v0) ? v0 : "http://" + v0;
+
+  try {
+    const u = new URL(v);
+    if (!u.hostname) return fallback;
+    if (u.origin === "null") return fallback;
+    return u.origin;
+  } catch {
+    return fallback;
+  }
+}
+
+function isPortListening(port: number): boolean {
+  try {
+    execFileSync(
+      "sh",
+      ["-lc", "lsof -nP -iTCP:" + String(port) + " -sTCP:LISTEN >/dev/null 2>&1"],
+      { stdio: "ignore" }
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function tryExistingPid(port: number): boolean {
+  const pidFile = "/tmp/lumora_next_dev_" + String(port) + ".pid";
+  try {
+    const pid = Number(readFileSync(pidFile, "utf8").trim());
+    if (!pid || pid <= 0) return false;
+    try {
+      process.kill(pid, 0);
+      return true;
+    } catch {
+      return false;
+    }
+  } catch {
+    return false;
+  }
+}
+
+function trySpawnNextDev(port: number): void {
+  const pidFile = "/tmp/lumora_next_dev_" + String(port) + ".pid";

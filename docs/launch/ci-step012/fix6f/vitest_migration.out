@@ -1,0 +1,17 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+stdout | tests/state.store.migration.spec.ts:132:9
+Step 15.103 — migration spec loaded
+
+ ✓ tests/state.store.migration.spec.ts  (4 tests) 158ms
+stdout | tests/state.store.migration.test.ts:132:9
+Step 15.97 — migration spec loaded
+
+ ✓ tests/state.store.migration.test.ts  (4 tests) 111ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  17:48:42
+   Duration  8.18s (transform 264ms, setup 2.81s, collect 104ms, tests 269ms, environment 7.68s, prepare 1.30s)
+

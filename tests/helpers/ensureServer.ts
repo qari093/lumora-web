@@ -1,5 +1,7 @@
 import { execFileSync, spawn } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
+import http from "node:http";
+import https from "node:https";
 
 type EnsureOpts = {
   baseUrl?: string;
@@ -13,14 +15,11 @@ function sanitizeBaseUrl(raw: string | undefined, port: number): string {
   const v0 = (raw ?? "").toString().trim();
   if (!v0) return fallback;
 
-  // Normalize missing scheme.
   const v = /^https?:\/\//i.test(v0) ? v0 : "http://" + v0;
 
-  // Validate URL strictly; reject empty host, malformed, or placeholder roots.
   try {
     const u = new URL(v);
     if (!u.hostname) return fallback;
-    // Guard against values like "http:///" or "http://"
     if (u.origin === "null") return fallback;
     return u.origin;
   } catch {
@@ -64,7 +63,6 @@ function trySpawnNextDev(port: number): void {
   if (isPortListening(port)) return;
   if (tryExistingPid(port)) return;
 
-  // Single shell command string, no template literals.
   const cmd =
     "cd ~/lumora-web && " +
     '(pnpm -s dev -- -p ' +
@@ -83,31 +81,59 @@ function trySpawnNextDev(port: number): void {
   } catch {}
 }
 
-async function fetchOk(url: string, timeoutMs: number): Promise<boolean> {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(), timeoutMs);
-  try {
-    const r = await fetch(url, { cache: "no-store", signal: ac.signal as any });
-    if (!r.ok) return false;
-    const ct = (r.headers.get("content-type") || "").toLowerCase();
-    if (ct.includes("application/json")) {
-      const j = await r.json().catch(() => null);
-      return !!j;
+function httpOk(urlStr: string, timeoutMs: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    let u: URL;
+    try {
+      u = new URL(urlStr);
+    } catch {
+      resolve(false);
+      return;
     }
-    const txt = await r.text().catch(() => "");
-    return txt.length > 0;
-  } catch {
-    return false;
-  } finally {
-    clearTimeout(t);
-  }
+
+    const lib = u.protocol === "https:" ? https : http;
+
+    const req = lib.request(
+      {
+        protocol: u.protocol,
+        hostname: u.hostname,
+        port: u.port ? Number(u.port) : u.protocol === "https:" ? 443 : 80,
+        path: u.pathname + (u.search || ""),
+        method: "GET",
+        headers: { "cache-control": "no-store" },
+      },
+      (res) => {
+        const ok = !!res.statusCode && res.statusCode >= 200 && res.statusCode < 300;
+        if (!ok) {
+          res.resume();
+          resolve(false);
+          return;
+        }
+
+        const chunks: Buffer[] = [];
+        res.on("data", (d) => chunks.push(Buffer.isBuffer(d) ? d : Buffer.from(String(d))));
+        res.on("end", () => {
+          const buf = Buffer.concat(chunks);
+          resolve(buf.length > 0);
+        });
+      }
+    );
+
+    req.on("error", () => resolve(false));
+    req.setTimeout(timeoutMs, () => {
+      try {
+        req.destroy(new Error("timeout"));
+      } catch {}
+      resolve(false);
+    });
+    req.end();
+  });
 }
 
 export async function ensureServerReady(opts: EnsureOpts = {}): Promise<string> {
   const port = Number(opts.port || process.env.PORT || 3000);
   const base = sanitizeBaseUrl(opts.baseUrl || process.env.BASE_URL, port);
 
-  // Publish sanitized BASE_URL for all tests.
   process.env.BASE_URL = base;
 
   const maxWaitMs = Number(opts.maxWaitMs ?? 20000);
@@ -124,7 +150,7 @@ export async function ensureServerReady(opts: EnsureOpts = {}): Promise<string> 
     if (!isPortListening(port)) {
       trySpawnNextDev(port);
     }
-    if (await fetchOk(health, 1200)) return base;
+    if (await httpOk(health, 1200)) return base;
     await new Promise((r) => setTimeout(r, pollMs));
   }
 
