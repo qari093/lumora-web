@@ -1,0 +1,14 @@
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/emml.seed.test.ts [ tests/emml.seed.test.ts ]
+ReferenceError: beforeAll is not defined
+ ❯ tests/emml.seed.test.ts:19:3
+     17|   let __emmlSeedReason: string | undefined;
+     18| 
+     19|   beforeAll(async () => {
+       |   ^
+     20|     const r = await ensureEmmlSeed();
+     21|     __emmlSeeded = r.seeded;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
