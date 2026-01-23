@@ -1,0 +1,38 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lumaspace.state-banner.util.spec.ts > deriveModeLabel > returns a descriptive label for demo mode
+TypeError: deriveModeLabel is not a function
+ ❯ tests/lumaspace.state-banner.util.spec.ts:6:12
+      4| describe("deriveModeLabel", () => {
+      5|   it("returns a descriptive label for demo mode", () => {
+      6|     expect(deriveModeLabel("demo")).toMatch(/Demo/i);
+       |            ^
+      7|   });
+      8| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/lumaspace.state-banner.util.spec.ts > deriveModeLabel > returns a descriptive label for beta mode
+TypeError: deriveModeLabel is not a function
+ ❯ tests/lumaspace.state-banner.util.spec.ts:10:12
+      8| 
+      9|   it("returns a descriptive label for beta mode", () => {
+     10|     expect(deriveModeLabel("beta")).toMatch(/Beta/i);
+       |            ^
+     11|   });
+     12| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lumaspace.state-banner.util.spec.ts > deriveModeLabel > returns a descriptive label for live mode
+TypeError: deriveModeLabel is not a function
+ ❯ tests/lumaspace.state-banner.util.spec.ts:14:12
+     12| 
+     13|   it("returns a descriptive label for live mode", () => {
+     14|     expect(deriveModeLabel("live")).toMatch(/Live/i);
+       |            ^
+     15|   });
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
