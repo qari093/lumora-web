@@ -1,5 +1,5 @@
+import { describe, it, expect, beforeAll } from "vitest";
 // @ts-nocheck
-import { describe, it, expect } from "vitest";
 import { ensureEmmlSeed } from "./helpers/emmlSeed";
 import { PrismaClient } from "@prisma/client";
 
