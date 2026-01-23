@@ -1,0 +1,23 @@
+     1	// @ts-nocheck
+     2	import { describe, it, expect } from "vitest";
+     3	import { existsSync, readFileSync } from "node:fs";
+     4	import { join } from "node:path";
+     5	
+     6	const root = process.cwd();
+     7	const pagePath = join(root, "app/emml/chart/page.tsx");
+     8	
+     9	describe("EMML Chart UI — Live Chart Page", () => {
+    10	  it("should have the EMML chart page file", () => {
+    11	    expect(existsSync(pagePath)).toBe(true);
+    12	  });
+    13	
+    14	  it("should reference fetchEmmlChart helper", () => {
+    15	    const src = readFileSync(pagePath, "utf8");
+    16	    expect(src.includes("fetchEmmlChart")).toBe(true);
+    17	  });
+    18	
+    19	  it("should render with EMML Live Chart title", () => {
+    20	    const src = readFileSync(pagePath, "utf8");
+    21	    expect(src.includes("EMML Live Chart")).toBe(true);
+    22	  });
+    23	});

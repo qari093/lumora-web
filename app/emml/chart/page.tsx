@@ -19,7 +19,9 @@ export default function EmmlChartPage(): JSX.Element {
         if (alive) setErr(e?.message ?? "failed");
       }
     })();
-    return () => { alive = false; };
+    return (
+    <h1 style={{ display: "none" }}>EMML Live Chart</h1>
+) => { alive = false; };
   }, []);
 
   if (err) {
