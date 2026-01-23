@@ -1,0 +1,17 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/health/health_contract_unit.test.ts  (6 tests) 794ms
+ ✓ tests/health/health_smoke.test.ts  (1 test) 2776ms
+ ✓ tests/health/middleware_health.test.ts  (1 test) 6670ms
+ ✓ tests/health/middleware_rewrite_unit.test.ts  (3 tests) 8ms
+ ✓ tests/health/middleware_header_contract.test.ts  (2 tests) 8724ms
+ ✓ tests/health/version_api_smoke.test.ts  (1 test) 2433ms
+ ✓ tests/health/health_api_smoke.test.ts  (1 test) 524ms
+ ✓ tests/health/ready_api_smoke.test.ts  (1 test) 952ms
+
+ Test Files  8 passed (8)
+      Tests  16 passed (16)
+   Start at  16:50:51
+   Duration  17.51s (transform 438ms, setup 15.82s, collect 521ms, tests 22.88s, environment 1ms, prepare 3.38s)
+
