@@ -1,0 +1,42 @@
+   180	      } catch {}
+   181	      resolve(false);
+   182	    });
+   183	    req.end();
+   184	  });
+   185	}
+   186	
+   187	export async function ensureServerReady(opts: EnsureOpts = {}): Promise<string> {
+   188	  const port = Number(opts.port || process.env.PORT || 3000);
+   189	  const base = sanitizeBaseUrl(opts.baseUrl || process.env.BASE_URL, port);
+   190	
+   191	  process.env.BASE_URL = base;
+   192	
+   193	  const maxWaitMs = Number(opts.maxWaitMs ?? 20000);
+   194	  const pollMs = Number(opts.pollMs ?? 250);
+   195	
+   196	  const health = new URL("/api/health", base).toString();
+   197	
+   198	  // Fast-path: if server is already healthy, avoid re-entering spawn/wait loops.
+   199	  if (await probeHealthAsync(health, 1500)) return base;
+   200	
+   201	
+   202	  if (!isPortListening(port)) {
+   203	    trySpawnNextDev(port);
+   204	  }
+   205	
+   206	  const start = Date.now();
+   207	  while (Date.now() - start < maxWaitMs) {
+   208	    if (!isPortListening(port)) {
+   209	      trySpawnNextDev(port);
+   210	    }
+   211	    if (await httpOk(health, 1200)) return base;
+   212	    await new Promise((r) => setTimeout(r, pollMs));
+   213	  }
+   214	
+   215	  throw new Error(
+   216	    "Test server not healthy within timeout (" +
+   217	      String(maxWaitMs) +
+   218	      "ms) @ " +
+   219	      base
+   220	  );
+   221	}

@@ -196,7 +196,7 @@ export async function ensureServerReady(opts: EnsureOpts = {}): Promise<string> 
   const health = new URL("/api/health", base).toString();
 
   // Fast-path: if server is already healthy, avoid re-entering spawn/wait loops.
-  if (await fetchOk(health, 1500)) return base;
+  if (await probeHealthAsync(health, 1500)) return base;
 
 
   if (!isPortListening(port)) {
