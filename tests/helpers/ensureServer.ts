@@ -63,13 +63,18 @@ function trySpawnNextDev(port: number): void {
   if (isPortListening(port)) return;
   if (tryExistingPid(port)) return;
 
+  
+  // Single shell command string, no template literals.
+  // IMPORTANT: use PORT env + explicit '.' for next dev, and keep quoting simple.
   const cmd =
     "cd ~/lumora-web && " +
-    '(PORT=' + String(port) +
-    ' pnpm -s dev || PORT=' + String(port) +
-    " pnpm -s exec next dev .) >> \"' +
+    '(PORT=' +
+    String(port) +
+    ' pnpm -s dev || PORT=' +
+    String(port) +
+    " pnpm -s exec next dev .) >> \"" +
     logFile +
-    '\" 2>&1';
+    "\" 2>&1";
 
   const child = spawn("sh", ["-lc", cmd], { detached: true, stdio: "ignore" });
   child.unref();
