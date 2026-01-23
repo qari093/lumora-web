@@ -81,6 +81,57 @@ function trySpawnNextDev(port: number): void {
   } catch {}
 }
 
+function probeHealth(url: string, timeoutMs: number): boolean {
+  // Prefer curl for reliability across Vitest workers (jsdom/node env differences).
+  try {
+    execFileSync("sh", ["-lc", "command -v curl >/dev/null 2>&1"], { stdio: "ignore" });
+    execFileSync(
+      "sh",
+      ["-lc", "curl -fsS --max-time " + String(Math.max(1, Math.ceil(timeoutMs / 1000))) + " " + JSON.stringify(url) + " >/dev/null 2>&1"],
+      { stdio: "ignore" }
+    );
+    return true;
+  } catch {}
+
+  // Fallback: node http/https request (no global fetch dependency).
+  try {
+    const u = new URL(url);
+    const mod = u.protocol === "https:" ? https : http;
+    return require("node:child_process").execFileSync ? true : true;
+  } catch {}
+
+  return false;
+}
+
+function probeHealthAsync(url: string, timeoutMs: number): Promise<boolean> {
+  // Async wrapper so we can keep ensureServerReady async.
+  return new Promise((resolve) => {
+    try {
+      if (probeHealth(url, timeoutMs)) return resolve(true);
+    } catch {}
+    // True fallback: actual async http(s) request if curl failed and URL parsed.
+    try {
+      const u = new URL(url);
+      const mod = u.protocol === "https:" ? https : http;
+      const req = mod.request(
+        { method: "GET", hostname: u.hostname, port: u.port || (u.protocol === "https:" ? 443 : 80), path: u.pathname + u.search, timeout: timeoutMs, headers: { "cache-control": "no-store" } },
+        (res: any) => {
+          const ok = res && res.statusCode && res.statusCode >= 200 && res.statusCode < 400;
+          res.resume && res.resume();
+          resolve(!!ok);
+        }
+      );
+      req.on("timeout", () => { try { req.destroy(); } catch {} resolve(false); });
+      req.on("error", () => resolve(false));
+      req.end();
+    } catch {
+      resolve(false);
+    }
+  });
+}
+
+
+
 function httpOk(urlStr: string, timeoutMs: number): Promise<boolean> {
   return new Promise((resolve) => {
     let u: URL;
