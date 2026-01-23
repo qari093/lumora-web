@@ -1,0 +1,10 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/portals/portals_routes_smoke.test.ts  (1 test) 3066ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  19:57:40
+   Duration  4.81s (transform 78ms, setup 332ms, collect 13ms, tests 3.07s, environment 0ms, prepare 230ms)
+
