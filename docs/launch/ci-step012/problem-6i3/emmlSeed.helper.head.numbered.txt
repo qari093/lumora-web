@@ -1,0 +1,120 @@
+     1	import { readFileSync } from "node:fs";
+     2	import { Prisma, PrismaClient } from "@prisma/client";
+     3	
+     4	type ModelName = "EmmlIndex" | "EmmlMarket" | "EmmlAsset" | "EmmlTick";
+     5	
+     6	type ScalarKind =
+     7	  | "String"
+     8	  | "Int"
+     9	  | "BigInt"
+    10	  | "Boolean"
+    11	  | "DateTime"
+    12	  | "Float"
+    13	  | "Decimal"
+    14	  | "Json"
+    15	  | "Bytes";
+    16	
+    17	type FieldSpec = {
+    18	  name: string;
+    19	  type: ScalarKind;
+    20	  optional: boolean;
+    21	  isArray: boolean;
+    22	  hasDefault: boolean;
+    23	};
+    24	
+    25	function isScalar(t: string): t is ScalarKind {
+    26	  return (
+    27	    t === "String" ||
+    28	    t === "Int" ||
+    29	    t === "BigInt" ||
+    30	    t === "Boolean" ||
+    31	    t === "DateTime" ||
+    32	    t === "Float" ||
+    33	    t === "Decimal" ||
+    34	    t === "Json" ||
+    35	    t === "Bytes"
+    36	  );
+    37	}
+    38	
+    39	function parseModelBlock(schemaText: string, modelName: ModelName): FieldSpec[] {
+    40	  const re = new RegExp(String.raw`model\s+${modelName}\s*\{([\s\S]*?)\n\}`, "m");
+    41	  const m = schemaText.match(re);
+    42	  if (!m) return [];
+    43	  const body = m[1] || "";
+    44	  const lines = body
+    45	    .split("\n")
+    46	    .map((l) => l.trim())
+    47	    .filter((l) => l && !l.startsWith("//"));
+    48	
+    49	  const out: FieldSpec[] = [];
+    50	  for (const line of lines) {
+    51	    // Skip block attributes and model attributes.
+    52	    if (line.startsWith("@@") || line.startsWith("@")) continue;
+    53	
+    54	    // Field line: <name> <type>[?][[]] ...attrs
+    55	    // Example: id String @id @default(cuid())
+    56	    const parts = line.split(/\s+/);
+    57	    if (parts.length < 2) continue;
+    58	
+    59	    const name = parts[0];
+    60	    let typeToken = parts[1];
+    61	
+    62	    const isArray = typeToken.endsWith("[]");
+    63	    if (isArray) typeToken = typeToken.slice(0, -2);
+    64	
+    65	    const optional = typeToken.endsWith("?");
+    66	    if (optional) typeToken = typeToken.slice(0, -1);
+    67	
+    68	    if (!isScalar(typeToken)) continue;
+    69	
+    70	    const hasDefault = line.includes("@default(") || line.includes("@updatedAt") || line.includes("@id");
+    71	
+    72	    out.push({ name, type: typeToken, optional, isArray, hasDefault });
+    73	  }
+    74	  return out;
+    75	}
+    76	
+    77	function stableId(prefix: string): string {
+    78	  return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+    79	}
+    80	
+    81	function scalarValue(spec: FieldSpec): any {
+    82	  switch (spec.type) {
+    83	    case "String":
+    84	      return stableId(spec.name);
+    85	    case "Int":
+    86	      return 1;
+    87	    case "BigInt":
+    88	      return BigInt(1);
+    89	    case "Boolean":
+    90	      return false;
+    91	    case "DateTime":
+    92	      return new Date();
+    93	    case "Float":
+    94	      return 1.0;
+    95	    case "Decimal":
+    96	      return new Prisma.Decimal("1.0");
+    97	    case "Json":
+    98	      return { ok: true, field: spec.name };
+    99	    case "Bytes":
+   100	      return Buffer.from("seed");
+   101	    default:
+   102	      return null;
+   103	  }
+   104	}
+   105	
+   106	function buildRequiredData(
+   107	  fields: FieldSpec[],
+   108	  overrides: Record<string, any> = {}
+   109	): Record<string, any> {
+   110	  const data: Record<string, any> = {};
+   111	  for (const f of fields) {
+   112	    if (f.isArray) continue;
+   113	    if (f.optional) continue;
+   114	    if (f.hasDefault) continue;
+   115	    if (Object.prototype.hasOwnProperty.call(overrides, f.name)) continue;
+   116	    data[f.name] = scalarValue(f);
+   117	  }
+   118	  for (const [k, v] of Object.entries(overrides)) data[k] = v;
+   119	  return data;
+   120	}

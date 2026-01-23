@@ -1,0 +1,50 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > seed gate diagnostic
+ReferenceError: __seedOk is not defined
+ ❯ tests/emml.seed.test.ts:27:5
+     25|     // This keeps the suite meaningful while not failing CI when DB pr…
+     26|     // If seed could not be applied, subsequent asserts are skipped.
+     27|     if (!__seedOk) {
+       |     ^
+     28|       expect(typeof __seedReason === "string" || __seedReason === unde…
+     29|     } else {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML index
+ReferenceError: __seedOk is not defined
+ ❯ tests/emml.seed.test.ts:35:5
+     33| 
+     34|   it("should have at least one EMML index", async () => {
+     35|     if (!__seedOk) return;
+       |     ^
+     36|     const count = await db.emmlIndex.count();
+     37|     expect(count).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML market and asset
+ReferenceError: __seedOk is not defined
+ ❯ tests/emml.seed.test.ts:41:5
+     39| 
+     40|   it("should have at least one EMML market and asset", async () => {
+     41|     if (!__seedOk) return;
+       |     ^
+     42|     const marketCount = await db.emmlMarket.count();
+     43|     const assetCount = await db.emmlAsset.count();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have some EMML ticks for demo charts
+ReferenceError: __seedOk is not defined
+ ❯ tests/emml.seed.test.ts:49:5
+     47| 
+     48|   it("should have some EMML ticks for demo charts", async () => {
+     49|     if (!__seedOk) return;
+       |     ^
+     50|     const tickCount = await db.emmlTick.count();
+     51|     expect(tickCount).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+

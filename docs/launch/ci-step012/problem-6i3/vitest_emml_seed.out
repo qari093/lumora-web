@@ -1,0 +1,18 @@
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ❯ tests/emml.seed.test.ts  (5 tests | 4 failed) 214ms
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > seed gate diagnostic
+     → __seedOk is not defined
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML index
+     → __seedOk is not defined
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have at least one EMML market and asset
+     → __seedOk is not defined
+   ❯ tests/emml.seed.test.ts > EMML Seed — Baseline Coverage > should have some EMML ticks for demo charts
+     → __seedOk is not defined
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  18:14:50
+   Duration  2.25s (transform 124ms, setup 555ms, collect 118ms, tests 214ms, environment 0ms, prepare 267ms)
+
