@@ -1,0 +1,19 @@
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/state.store.migration.spec.ts [ tests/state.store.migration.spec.ts ]
+ FAIL  tests/state.store.migration.test.ts [ tests/state.store.migration.test.ts ]
+TypeError: Invalid base URL: http:///
+ ❯ new URLImpl node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL-impl.js:14:15
+ ❯ Object.exports.setup node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL.js:54:12
+ ❯ new URL node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL.js:115:22
+ ❯ Module.ensureServerReady tests/helpers/ensureServer.ts:103:18
+    101|   const pollMs = Number(opts.pollMs ?? 250);
+    102| 
+    103|   const health = new URL("/api/health", base).toString();
+       |                  ^
+    104| 
+    105|   if (!isPortListening(port)) {
+ ❯ tests/setup/vitest.server.setup.ts:10:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
