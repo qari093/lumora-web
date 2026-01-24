@@ -1,0 +1,4 @@
+toolchain_preflight_rc=0
+hashlock_next_build_rc=2
+vitest_step12_clamped_rc=skip
+final_fail_flag=1

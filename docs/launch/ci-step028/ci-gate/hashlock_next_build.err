@@ -1,0 +1,1 @@
+usage: hashlock_next_build.sh <NEXT_DIR> <OUT_HASH_FILE>
