@@ -146,3 +146,26 @@ ops/_analysis/
 .github/workflows_disabled/
 .disabled_routes/
 # Local env files (never commit). Keep .env.example committed.
+# --- Lumora launch local scratch (ignore) ---
+backup/
+docs/launch/ci-step012*/
+docs/launch/ci-step018/
+docs/launch/db-step007/
+docs/launch/repro-step010/
+docs/launch/ci-step021/termination/*.txt
+docs/launch/ci-step012/_isolate_files.txt
+docs/launch/ci-step012/**
+docs/launch/ci-step012-final/**
+docs/launch/ci-step012-final/
+docs/launch/ci-step012-final
+docs/launch/ci-step012/final*/
+docs/launch/ci-step012/fix*/
+docs/launch/ci-step012/problem-*/
+docs/launch/ci-step012/*.out
+docs/launch/ci-step012/*.err
+docs/launch/ci-step012/*.rc.txt
+docs/launch/ci-step012/*.tail.txt
+docs/launch/ci-step012/**/next_action.txt
+docs/launch/ci-step012/**/rc.txt
+docs/launch/ci-step012/**/last_cmd.txt
+# Local env variants (never track)

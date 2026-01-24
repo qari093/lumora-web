@@ -1,1 +1,0 @@
-{"ok":true,"service":"LumaSpace","role":"health-ping","ts":"2026-01-22T18:59:19.280Z","unix":1769108359,"env":"development"}

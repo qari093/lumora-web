@@ -1,9 +1,0 @@
-import { ensureServerReady } from "../helpers/ensureServer";
-
-// Force a valid BASE_URL for the test runtime if env is missing/invalid.
-const raw = (process.env.BASE_URL || "").trim();
-if (!(raw.startsWith("http://") || raw.startsWith("https://"))) {
-  process.env.BASE_URL = "http://127.0.0.1:3000";
-}
-
-await ensureServerReady({ maxWaitMs: 20_000 });

@@ -1,6 +1,0 @@
-import { ensureServerReady } from "../helpers/ensureServer";
-
-// IMPORTANT: no beforeAll/afterAll hooks here.
-// This module is executed as a setupFile; run once at load-time.
-// ensureServerReady is hard-bounded (~20s) so it can never hit hookTimeout.
-await ensureServerReady({ maxWaitMs: 20_000 });

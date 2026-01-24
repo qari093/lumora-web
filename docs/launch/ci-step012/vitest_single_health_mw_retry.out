@@ -1,9 +1,0 @@
-
- RUN  v1.6.1 /Users/waqarahmad/lumora-web
-
-
- Test Files  1 failed (1)
-      Tests  no tests
-   Start at  17:03:00
-   Duration  950ms (transform 36ms, setup 0ms, collect 0ms, tests 0ms, environment 0ms, prepare 247ms)
-

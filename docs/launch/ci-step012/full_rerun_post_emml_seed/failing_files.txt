@@ -1,8 +1,0 @@
-tests/api.lumaspace.ping.spec.ts [ tests/api.lumaspace.ping.spec.ts ]
-tests/emml.contract.test.ts [ tests/emml.contract.test.ts ]
-tests/health/middleware_health.test.ts [ tests/health/middleware_health.test.ts ]
-tests/live/room_state.publish.contract.test.ts [ tests/live/room_state.publish.contract.test.ts ]
-tests/offline/offline_p2p_replay_protection.test.ts [ tests/offline/offline_p2p_replay_protection.test.ts ]
-tests/portals/portals_routes_smoke.test.ts [ tests/portals/portals_routes_smoke.test.ts ]
-tests/security/csp_header_smoke.test.ts > security headers: CSP smoke > sets Content-Security-Policy on root and core portals (pinpoint slow route)
-tests/security/security_headers_smoke.test.ts [ tests/security/security_headers_smoke.test.ts ]

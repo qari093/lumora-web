@@ -1,2 +1,0 @@
-109:function probeHealthAsync(url: string, timeoutMs: number): Promise<boolean> {
-199:  if (await probeHealthAsync(health, 1500)) return base;

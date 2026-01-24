@@ -1,4 +1,0 @@
-ok=true
-ts=2026-01-22T15:02:30Z
-tarball=lumora_build_step010_20260122T150146Z.tgz
-tarball_path=docs/launch/repro-step010/lumora_build_step010_20260122T150146Z.tgz
