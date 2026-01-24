@@ -1,0 +1,7 @@
+toolchain_preflight_rc=0
+next_build_rc=n/a
+hashlock_next_build_rc=0
+vitest_step12_clamped_rc=1
+final_fail_flag=1
+hash_file_path=docs/launch/ci-step029/hashlock-fix/next_build.sha256
+hash_file_head=e4932338188cf0fbd08fb45f8b04421b523d0b2d9b90f197b5ad2e24fec94306 diagnostics/build-diagnostics.json 963084116c2e41f37ae40bb9e7b57236834798d483ece5c4d5e6f1c719338899 diagnostics/framework.json 91068b45f492e74fb4e0c6e2974f9e766ce174252032bf41f4a42efda688aa9e fallback-build-manifest.json 

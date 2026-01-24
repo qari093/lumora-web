@@ -1,0 +1,43 @@
+(node:24222) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 message listeners added to [process]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 1 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/live/sse.publish.e2e.test.ts [2m[ tests/live/sse.publish.e2e.test.ts ][22m
+[31m[1mTypeError[22m: describe.serial is not a function[39m
+[36m [2m❯[22m tests/live/sse.publish.e2e.test.ts:[2m68:10[22m[39m
+    [90m 66| [39m}
+    [90m 67| [39m
+    [90m 68| [39mdescribe[33m.[39m[34mserial[39m([32m"Live SSE publish E2E"[39m[33m,[39m () [33m=>[39m {
+    [90m   | [39m         [31m^[39m
+    [90m 69| [39m  testTimeout[33m:[39m [34m20000[39m[33m,[39m
+    [90m 70| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 1 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_health.test.ts[2m > [22mhealth middleware rewrite — minimal suite guard (auto)[2m > [22m/api/health returns JSON ok (minimal)
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m tests/health/middleware_health.test.ts:[2m93:17[22m[39m
+    [90m 91| [39m  [35mconst[39m [33mBASE[39m [33m=[39m process[33m.[39menv[33m.[39m[33mBASE_URL[39m [33m||[39m [32m"http://127.0.0.1:3000"[39m[33m;[39m
+    [90m 92| [39m  [34mit[39m([32m"/api/health returns JSON ok (minimal)"[39m[33m,[39m [35masync[39m () [33m=>[39m {
+    [90m 93| [39m    [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m([35mnew[39m [33mURL[39m([32m"/api/health"[39m[33m,[39m [33mBASE[39m)[33m,[39m { cache[33m:[39m [32m"no[39m…
+    [90m   | [39m                [31m^[39m
+    [90m 94| [39m    [34mexpect[39m(res[33m.[39mok)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 95| [39m    [35mconst[39m ct [33m=[39m res[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m??[39m [32m""[39m[33m;[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Unhandled Error [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Worker exited unexpectedly[39m
+[90m [2m❯[22m ChildProcess.<anonymous> node_modules/.pnpm/tinypool@0.8.4/node_modules/tinypool/dist/esm/index.js:[2m185:34[22m[39m
+[90m [2m❯[22m ChildProcess.emit node:events:[2m536:35[22m[39m
+[90m [2m❯[22m ChildProcess._handle.onexit node:internal/child_process:[2m293:12[22m[39m
+
+

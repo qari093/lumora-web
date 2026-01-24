@@ -1,0 +1,8 @@
+date_utc=2026-01-24T16:49:35Z
+pwd=/Users/waqarahmad/lumora-web
+nvmrc=20.20.0
+node_version=v20.20.0
+npm_version=10.8.2
+which_node=/Users/waqarahmad/.nvm/versions/node/v20.20.0/bin/node
+which_npm=/Users/waqarahmad/.nvm/versions/node/v20.20.0/bin/npm
+which_pnpm=/Users/waqarahmad/.nvm/versions/node/v20.20.0/bin/pnpm
