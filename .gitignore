@@ -145,3 +145,4 @@ ops/_analysis/
 *.pfx
 .github/workflows_disabled/
 .disabled_routes/
+# Local env files (never commit). Keep .env.example committed.
