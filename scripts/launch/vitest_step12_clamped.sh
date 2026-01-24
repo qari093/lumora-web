@@ -1,5 +1,8 @@
 #!/bin/sh
 set -euo pipefail
+
+LAUNCH_GIT_SAFE="scripts/launch/git_safe.sh"
+g(){ if [ -x "$LAUNCH_GIT_SAFE" ]; then "$LAUNCH_GIT_SAFE" "$@"; else git --no-pager "$@"; fi }
 export NODE_OPTIONS="${NODE_OPTIONS:-} --max-old-space-size=4096"
 export UV_THREADPOOL_SIZE=1
 export TINYPOOL_MIN_THREADS=1

@@ -1,5 +1,8 @@
 #!/bin/sh
 set -euo pipefail
+
+LAUNCH_GIT_SAFE="scripts/launch/git_safe.sh"
+g(){ if [ -x "$LAUNCH_GIT_SAFE" ]; then "$LAUNCH_GIT_SAFE" "$@"; else git --no-pager "$@"; fi }
 want="20.20.0"
 got="$(node -v | sed 's/^v//')"
 if [ "$got" != "$want" ]; then

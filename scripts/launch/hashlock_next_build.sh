@@ -1,6 +1,9 @@
 #!/bin/sh
 set -euo pipefail
 
+LAUNCH_GIT_SAFE="scripts/launch/git_safe.sh"
+g(){ if [ -x "$LAUNCH_GIT_SAFE" ]; then "$LAUNCH_GIT_SAFE" "$@"; else git --no-pager "$@"; fi }
+
 # Usage:
 #   sh scripts/launch/hashlock_next_build.sh <NEXT_DIR> <OUT_HASH_FILE>
 # NEXT_DIR should be a directory that contains ".next" (repo root) OR an actual ".next" dir.

@@ -1,0 +1,3 @@
+stash@{0}: On main: wip: launch-step20-20260124T155543Z (clean worktree for step progression)
+stash@{1}: On main: lumora-launch-step001-autostash-20260122T140322Z
+stash@{2}: On main: AUTO: offline-videos-step1-baseline-20260112-115514
