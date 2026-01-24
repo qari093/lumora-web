@@ -28,3 +28,11 @@ g() {
     git --no-pager "$@"
   fi
 }
+
+###############################################################################
+# Node guard (auto-load nvm + enforce pinned node version)
+###############################################################################
+if [ -f "scripts/launch/node_guard.sh" ]; then
+  # shellcheck disable=SC1091
+  . "scripts/launch/node_guard.sh"
+fi
