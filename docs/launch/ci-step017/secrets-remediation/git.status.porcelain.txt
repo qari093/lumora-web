@@ -1,0 +1,121 @@
+ M .env.test.local
+ M .nvmrc
+ M app/api/_health/route.ts
+ M app/api/health/route.ts
+ M app/api/live/events/route.ts
+ M app/api/live/healthz/route.ts
+ M app/api/live/portal-hubs/route.ts
+ M app/api/live/publish/route.ts
+ M app/api/live/room-list/route.ts
+ M app/api/live/room-state/route.ts
+ M app/api/live/rooms/list/route.ts
+ M app/api/live/rooms/public/route.ts
+ M app/api/live/rooms/route.ts
+ M app/api/lumaspace/ping/route.ts
+ M app/api/persona/manifest/route.ts
+ M app/api/ready/route.ts
+ M app/api/version/route.ts
+ M app/emml/chart/page.tsx
+ D app/live/health/route.ts
+ D app/live/healthz/route.ts
+ M docs/launch/ci-step012/next_dev_retry14.out
+ M middleware.ts
+ M package.json
+ M pnpm-lock.yaml
+ M tests/live/sse.publish.e2e.test.ts
+?? .node-version
+?? app/api/live/health/
+?? app/live/health/page.tsx
+?? app/live/healthz/page.tsx
+?? backup/
+?? docs/launch/ci-step012-final/
+?? docs/launch/ci-step012/_isolate_files.txt
+?? docs/launch/ci-step012/api.lumaspace.ping.spec.ts.before.step12_7.bak
+?? docs/launch/ci-step012/api.lumaspace.ping.spec.ts.head.step12_7.txt
+?? docs/launch/ci-step012/diag_meta_step12_6.txt
+?? docs/launch/ci-step012/diag_step12_8.tail.err.txt
+?? docs/launch/ci-step012/diag_step12_8.tail.out.txt
+?? docs/launch/ci-step012/final-node-lts-stable-server/
+?? docs/launch/ci-step012/final/
+?? docs/launch/ci-step012/final_gate/
+?? docs/launch/ci-step012/final_gate_v2/
+?? docs/launch/ci-step012/fix1/
+?? docs/launch/ci-step012/fix1b/next_action.txt
+?? docs/launch/ci-step012/fix1c/next_action.txt
+?? docs/launch/ci-step012/fix1d/next_action.txt
+?? docs/launch/ci-step012/fix1e/next_action.txt
+?? docs/launch/ci-step012/fix3/next_action.txt
+?? docs/launch/ci-step012/fix4/next_action.txt
+?? docs/launch/ci-step012/fix5/spec.head.before.txt
+?? docs/launch/ci-step012/fix6/next_action.txt
+?? docs/launch/ci-step012/fix6b/
+?? docs/launch/ci-step012/fix6c_hotfix/next_action.txt
+?? docs/launch/ci-step012/fix6c_hotfix2/next_action.txt
+?? docs/launch/ci-step012/fix6d/next_action.txt
+?? docs/launch/ci-step012/fix6e/
+?? docs/launch/ci-step012/fix6f/vitest.server.setup.numbered.txt
+?? docs/launch/ci-step012/fix6i/next_action.txt
+?? docs/launch/ci-step012/fix6i1/next_action.txt
+?? docs/launch/ci-step012/full_rerun_post_emml_seed/next_action.txt
+?? docs/launch/ci-step012/isolate_step12_6.err
+?? docs/launch/ci-step012/isolate_step12_6.err.tail.txt
+?? docs/launch/ci-step012/isolate_step12_6.out
+?? docs/launch/ci-step012/isolate_step12_6.out.tail.txt
+?? docs/launch/ci-step012/isolate_step12_6.rc.txt
+?? docs/launch/ci-step012/lint.out
+?? "docs/launch/ci-step012/lsof_vitest_83766 83767 83765 83752_head.txt"
+?? docs/launch/ci-step012/meta.txt
+?? docs/launch/ci-step012/minimal/
+?? docs/launch/ci-step012/next_dev_migration_fix.err
+?? docs/launch/ci-step012/next_dev_migration_fix.out
+?? docs/launch/ci-step012/next_dev_migration_spec_fix.err
+?? docs/launch/ci-step012/next_dev_migration_spec_fix.out
+?? docs/launch/ci-step012/problem-6i2/next_action.txt
+?? docs/launch/ci-step012/problem-6i3/next_action.txt
+?? docs/launch/ci-step012/problem-6j3/
+?? docs/launch/ci-step012/problem-6j4/
+?? docs/launch/ci-step012/problem-6j5/
+?? docs/launch/ci-step012/problem-6j6/
+?? docs/launch/ci-step012/problem-6k4/next_action.txt
+?? docs/launch/ci-step012/problem-6k4a/
+?? docs/launch/ci-step012/problem-6k5/next_action.txt
+?? docs/launch/ci-step012/problem-6k6/
+?? docs/launch/ci-step012/problem-6k6b/last_cmd.txt
+?? docs/launch/ci-step012/problem-6k6b/rc.txt
+?? docs/launch/ci-step012/problem-6k7c/
+?? docs/launch/ci-step012/step12_10_status.txt
+?? docs/launch/ci-step012/vitest_full_step12_6.err
+?? docs/launch/ci-step012/vitest_full_step12_6.out
+?? docs/launch/ci-step012/vitest_full_step12_6.rc.txt
+?? docs/launch/ci-step012/vitest_full_step12_6.tail.txt
+?? docs/launch/ci-step012/vitest_ps_before_kill.txt
+?? docs/launch/ci-step012/vitest_ps_final.txt
+?? docs/launch/ci-step012/vitest_rc_retry15.txt
+?? docs/launch/ci-step012/vitest_recent_files.txt
+?? docs/launch/ci-step012/vitest_single_ping_spec.step12_7.err
+?? docs/launch/ci-step012/vitest_single_ping_spec.step12_7.out
+?? docs/launch/ci-step012/vitest_single_ping_spec.step12_7.rc.txt
+?? docs/launch/ci-step012b/
+?? docs/launch/ci-step012d/
+?? docs/launch/ci-step012e/
+?? docs/launch/ci-step012g/
+?? docs/launch/ci-step012i/
+?? docs/launch/ci-step012j/
+?? docs/launch/ci-step012k/
+?? docs/launch/ci-step012l/
+?? docs/launch/ci-step012n/
+?? docs/launch/ci-step012o/
+?? docs/launch/ci-step012p/
+?? docs/launch/ci-step012q/
+?? docs/launch/ci-step012r/
+?? docs/launch/ci-step012s/
+?? docs/launch/ci-step013/
+?? docs/launch/ci-step014/
+?? docs/launch/ci-step015/
+?? docs/launch/ci-step015b/
+?? docs/launch/ci-step016/
+?? docs/launch/ci-step017/
+?? docs/launch/db-step007/migrate_status.txt
+?? docs/launch/repro-step010/lumora_build_step010_20260122T150146Z.tgz
+?? lib/emml/fetchEmmlChart.ts
+?? scripts/launch/

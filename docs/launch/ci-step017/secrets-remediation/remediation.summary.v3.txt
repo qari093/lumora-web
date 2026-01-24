@@ -1,0 +1,5 @@
+ts=2026-01-24T13:00:42Z
+node=v20.20.0
+scan_pattern=high-signal-only
+exclusions=v2 (nested node_modules + .d.ts)
+tracked_secret_hits=0

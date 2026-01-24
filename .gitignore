@@ -133,3 +133,15 @@ ops/_analysis/*.json
 ops/_analysis/*.txt
 ops/_analysis/
 *.log
+
+# ── Lumora Launch Hardening (Step 17) ──
+# Local envs / secrets / certs must never be tracked
+!.env.sample
+!.env.ci.example
+!.env.production.example
+.cert/
+*.key
+*.p12
+*.pfx
+.github/workflows_disabled/
+.disabled_routes/
