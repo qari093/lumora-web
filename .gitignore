@@ -169,3 +169,6 @@ docs/launch/ci-step012/**/next_action.txt
 docs/launch/ci-step012/**/rc.txt
 docs/launch/ci-step012/**/last_cmd.txt
 # Local env variants (never track)
+docs/launch/step*/
+docs/launch/ci-*
+.tools/pnpm
