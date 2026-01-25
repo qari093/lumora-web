@@ -81,3 +81,35 @@ export interface TranslationPipeline {
   onAudio(cb: (pcm16: Buffer, tMs: number) => void): void;
   stop(): Promise<void>;
 }
+
+
+/**
+ * LumaLink Translation UI Controls (Session-level contract)
+ * NOTE: Types only — UI and wiring are implemented in later steps.
+ */
+export type TranslationTone = "formal" | "neutral" | "informal";
+
+export type LanguageSelector = {
+  /** auto-detect language from input audio/text (default true) */
+  autoDetect: boolean;
+  /** manual source language override when autoDetect=false */
+  from?: string;
+  /** target language (required when enabled) */
+  to: string;
+};
+
+export type TranslationUIControls = {
+  /** Left side: language control (auto-detect + from/to) */
+  language: LanguageSelector;
+  /** Right side: tone/style control */
+  tone: TranslationTone;
+};
+
+export type TranslationSessionScope = "message" | "voice_call" | "video_call";
+
+export type TranslationSessionParams = {
+  /** Must apply uniformly to messages + voice + video */
+  scope: TranslationSessionScope;
+  /** UI controls locked in Step 61 */
+  ui: TranslationUIControls;
+};
