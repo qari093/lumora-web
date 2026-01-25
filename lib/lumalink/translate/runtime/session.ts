@@ -11,7 +11,21 @@ import type {
 import { assertNoStorage } from "@/lib/lumalink/translate/core/privacy";
 import { clampLatencyBudgetMs, defaultLatencyBudgetMs } from "@/lib/lumalink/translate/core/latency";
 import { createPipeline } from "@/lib/lumalink/translate/core/pipeline";
+import { applySessionParamsToCallConfig } from "@/lib/lumalink/translate/runtime/uiControls";
 import { createMockProviders } from "@/lib/lumalink/translate/core/mockProviders";
+
+function effectiveCfgFromSessionParams(cfg: any): any {
+  try {
+    const sp = (cfg as any)?.sessionParams;
+    if (!sp) return cfg;
+    // Apply UI controls uniformly: messages, voice calls, video calls.
+    // This is runtime-only wiring; no persistence, no network, privacy remains no-storage.
+    return applySessionParamsToCallConfig(cfg, sp);
+  } catch {
+    return cfg;
+  }
+}
+
 
 type Handlers = {
   onCaption?: (c: CaptionChunk) => void;
@@ -24,6 +38,7 @@ export function createTranslationSession(
   providers: ProviderBundle,
   handlers: Handlers = {}
 ): TranslationSessionHandle {
+  config = effectiveCfgFromSessionParams(config);
   assertNoStorage(config.privacy);
 
   const mode: SessionMode = (config.mode ?? "duplex") as SessionMode;
