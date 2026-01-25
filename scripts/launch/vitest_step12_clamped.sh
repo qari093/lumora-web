@@ -1,4 +1,13 @@
+# hard timeout guard (avoid terminal stalls)
+TIMEOUT_SECS="${VITEST_TIMEOUT_SECS:-420}"
+TO=""
+if command -v gtimeout >/dev/null 2>&1; then TO="gtimeout"; elif command -v timeout >/dev/null 2>&1; then TO="timeout"; fi
+
 #!/bin/sh
+
+# auto-load pinned node for launch
+if [ -f "scripts/launch/node_guard.sh" ]; then . "scripts/launch/node_guard.sh"; fi
+
 set -euo pipefail
 
 LAUNCH_GIT_SAFE="scripts/launch/git_safe.sh"

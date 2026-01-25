@@ -1,0 +1,139 @@
+✓ node_guard: Node v20.20.0 active
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/waqarahmad/lumora-web[39m
+
+[90mstdout[2m | tests/state.store.persist.test.ts:150:9[22m[39m
+Step 15.105 — persist spec loaded
+
+ [32m✓[39m tests/state.store.persist.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 136[2mms[22m[39m
+ [33m❯[39m tests/live/rate_limit.contract.test.ts [2m ([22m[2m4 tests[22m [2m|[22m [31m4 failed[39m[2m)[22m[33m 1004[2mms[22m[39m
+[31m   [33m❯[31m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mportal-hubs exposes ratelimit headers consistently[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+[31m   [33m❯[31m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mrooms exposes ratelimit headers consistently[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+[31m   [33m❯[31m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mhealth-badge exposes ratelimit headers consistently[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+[31m   [33m❯[31m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22malias routes return 410 quickly and still include ratelimit headers[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [32m✓[39m tests/health/health_contract_unit.test.ts [2m ([22m[2m6 tests[22m[2m)[22m[33m 784[2mms[22m[39m
+ [32m✓[39m tests/create/create.rsc-markers.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[33m 47195[2mms[22m[39m
+ [33m❯[39m tests/live/sse.publish.e2e.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 240016[2mms[22m[39m
+ [33m❯[39m tests/health/middleware_health.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 240012[2mms[22m[39m
+ [33m❯[39m tests/api.lumaspace.ping.spec.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 9942[2mms[22m[39m
+[31m   [33m❯[31m tests/api.lumaspace.ping.spec.ts[2m > [22mLumaSpace API — ping (integration)[2m > [22mGET /api/lumaspace/ping responds (200) and indicates liveness[39m
+[31m     → fetch failed[39m
+ [33m❯[39m tests/live/room_state.publish.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 8[2mms[22m[39m
+[31m   [33m❯[31m tests/live/room_state.publish.contract.test.ts[2m > [22mLive room-state publish contract[2m > [22mPOST /api/live/publish updates GET /api/live/room-state timestamps[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/live/events.sse.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 3[2mms[22m[39m
+[31m   [33m❯[31m tests/live/events.sse.contract.test.ts[2m > [22mLive SSE contract: /api/live/events[2m > [22mreturns 200 + text/event-stream and emits connected event quickly[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/portals/portals_routes_smoke.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 3[2mms[22m[39m
+[31m   [33m❯[31m tests/portals/portals_routes_smoke.test.ts[2m > [22mportals: route smoke[2m > [22mall portal routes respond (200 or redirect)[39m
+[31m     → fetch failed[39m
+ [33m❯[39m tests/health/health_smoke.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 20168[2mms[22m[39m
+[31m   [33m❯[31m tests/health/health_smoke.test.ts[2m > [22mhealth smoke[2m > [22m/api/health responds and is json (smoke, robust)[39m
+[31m     → Test server not healthy within 20000ms. last=fetch failed[39m
+ [33m❯[39m tests/live/portal_hubs.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 128[2mms[22m[39m
+[31m   [33m❯[31m tests/live/portal_hubs.contract.test.ts[2m > [22mLive API contract: /api/live/portal-hubs[2m > [22mreturns 200 + ratelimit headers + expected JSON shape[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/live/rooms.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 163[2mms[22m[39m
+[31m   [33m❯[31m tests/live/rooms.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mreturns 200 with ratelimit headers and stable envelope[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/live/live_rooms_list.contract.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 252[2mms[22m[39m
+[31m   [33m❯[31m tests/live/live_rooms_list.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mreturns 200 + ratelimit headers + stable JSON envelope[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+[31m   [33m❯[31m tests/live/live_rooms_list.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mdeprecated aliases return 410 quickly (no hangs)[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/security/csp_header_smoke.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 60[2mms[22m[39m
+[31m   [33m❯[31m tests/security/csp_header_smoke.test.ts[2m > [22msecurity headers: CSP smoke[2m > [22msets Content-Security-Policy on root and core portals (deterministic)[39m
+[31m     → curl HEAD failed: / — Command failed: curl -sS -I --max-time 60 http://127.0.0.1:3000/
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+[39m
+[31m   [33m❯[31m tests/security/csp_header_smoke.test.ts[2m > [22msecurity headers: CSP smoke[2m > [22msets Content-Security-Policy on /api/health[39m
+[31m     → curl HEAD failed: /api/health — Command failed: curl -sS -I --max-time 35 http://127.0.0.1:3000/api/health
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+[39m
+ [33m❯[39m tests/live/room_state.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 3[2mms[22m[39m
+[31m   [33m❯[31m tests/live/room_state.contract.test.ts[2m > [22mLive room-state contract: /api/live/room-state[2m > [22mGET returns 200 + ok:true + roomId[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [32m✓[39m tests/emml.feature.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+ [33m❯[39m tests/live/health_page.contract.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 247[2mms[22m[39m
+[31m   [33m❯[31m tests/live/health_page.contract.test.ts[2m > [22mLive page: /live/health[2m > [22mhealthz probe is warmable and then fast, returns marker[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+[31m   [33m❯[31m tests/live/health_page.contract.test.ts[2m > [22mLive page: /live/health[2m > [22mhealth page is warmable and then fast, returns marker/title[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [32m✓[39m tests/emml.seed.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[90m 239[2mms[22m[39m
+ [33m❯[39m tests/persona/persona_manifest.contract.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 2[2mms[22m[39m
+[31m   [33m❯[31m tests/persona/persona_manifest.contract.test.ts[2m > [22mPersona manifest: /api/persona/manifest[2m > [22mreturns ok:true and emojis array (seeded should be >=1)[39m
+[31m     → connect ECONNREFUSED 127.0.0.1:3000[39m
+ [33m❯[39m tests/security/hsts_header_prod_only.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33m❯[31m tests/security/hsts_header_prod_only.test.ts[2m > [22msecurity headers: HSTS (prod-only)[2m > [22mdev should not set Strict-Transport-Security[39m
+[31m     → fetch failed[39m
+[31m   [33m❯[31m tests/security/hsts_header_prod_only.test.ts[2m > [22msecurity headers: HSTS (prod-only)[2m > [22mprod-sim should set Strict-Transport-Security when enabled by header contract[39m
+[31m     → fetch failed[39m
+ [32m✓[39m tests/state.store.edges.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [33m❯[39m tests/security/security_headers_smoke.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33m❯[31m tests/security/security_headers_smoke.test.ts[2m > [22msecurity headers: smoke[2m > [22mhealth includes X-Content-Type-Options: nosniff[39m
+[31m     → fetch failed[39m
+[31m   [33m❯[31m tests/security/security_headers_smoke.test.ts[2m > [22msecurity headers: smoke[2m > [22mcore portal routes exist (no 404) and include nosniff[39m
+[31m     → fetch failed[39m
+ [32m✓[39m tests/emml.contract.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m✓[39m tests/offline/offline_p2p_replay_protection.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [33m❯[39m tests/health/middleware_header_contract.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33m❯[31m tests/health/middleware_header_contract.test.ts[2m > [22mmiddleware header contract (integration)[2m > [22m/api/_health returns JSON[39m
+[31m     → fetch failed[39m
+[31m   [33m❯[31m tests/health/middleware_header_contract.test.ts[2m > [22mmiddleware header contract (integration)[2m > [22m/api/health does not include x-middleware-rewrite header[39m
+[31m     → fetch failed[39m
+ [32m✓[39m tests/state.store.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 39[2mms[22m[39m
+ [32m✓[39m tests/emml.snapshot.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 40[2mms[22m[39m
+ [32m✓[39m tests/offline/offline_public_contract.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [33m❯[39m tests/health/version_api_smoke.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 5[2mms[22m[39m
+[31m   [33m❯[31m tests/health/version_api_smoke.test.ts[2m > [22m/api/version smoke[2m > [22mreturns 200 and JSON with ok/service/version fields[39m
+[31m     → fetch failed[39m
+ [32m✓[39m tests/offline/offline_p2p_chunk_protocol.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m✓[39m tests/emml.ui.contract.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+ [32m✓[39m tests/emml.snapshot.writer.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 31[2mms[22m[39m
+ [32m✓[39m tests/health/middleware_rewrite_unit.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+ [32m✓[39m tests/emml.docs.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [33m❯[39m tests/health/health_api_smoke.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 62[2mms[22m[39m
+[31m   [33m❯[31m tests/health/health_api_smoke.test.ts[2m > [22m/api/health smoke[2m > [22mreturns 200 and JSON-ish body[39m
+[31m     → fetch failed[39m
+ [33m❯[39m tests/health/ready_api_smoke.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33m❯[31m tests/health/ready_api_smoke.test.ts[2m > [22m/api/ready smoke[2m > [22mreturns 200 and JSON-ish body[39m
+[31m     → fetch failed[39m
+ [32m✓[39m tests/offline/offline_p2p_rate_limit.test.ts [2m ([22m[2m2 tests[22m[2m)[22m
+ [32m✓[39m tests/emml.client.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m✓[39m tests/emml.chart.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 2[2mms[22m[39m
+ [32m✓[39m tests/emml.state.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 2[2mms[22m[39m
+ [32m✓[39m tests/emml.compute.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [32m✓[39m tests/emml.ingest.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [32m✓[39m tests/emml.chart.client.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m✓[39m tests/emml.sse.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [32m✓[39m tests/offline/offline_p2p_node_crypto_fallback.test.ts [2m ([22m[2m1 test[22m[2m)[22m[90m 5[2mms[22m[39m
+ [32m✓[39m tests/emml.aggregate.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [32m✓[39m tests/emml.health.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 46[2mms[22m[39m
+ [32m✓[39m tests/persona/privacy.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 4[2mms[22m[39m
+ [32m✓[39m tests/persona/manifest.test.ts [2m ([22m[2m1 test[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m✓[39m tests/emml.chart.ui.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 4[2mms[22m[39m
+ [32m✓[39m tests/emml.snapshot.cron.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m✓[39m tests/performance/lighthouse.spec.ts [2m ([22m[2m1 test[22m[2m)[22m
+ [32m✓[39m tests/persona/reactionMatrix.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+ [32m✓[39m tests/api.lumaspace.state.spec.ts [2m ([22m[2m1 test[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m✓[39m tests/emml.analyzer.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[90m 1[2mms[22m[39m
+ [32m✓[39m tests/lumaspace.state-banner.util.spec.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 2[2mms[22m[39m
+ [32m✓[39m tests/offline/offline_public_surface.test.ts [2m ([22m[2m1 test[22m[2m)[22m
+[90mstdout[2m | tests/state.store.migration.spec.ts:132:9[22m[39m
+Step 15.103 — migration spec loaded
+
+ [32m✓[39m tests/state.store.migration.spec.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 145[2mms[22m[39m
+[90mstdout[2m | tests/state.store.migration.test.ts:132:9[22m[39m
+Step 15.97 — migration spec loaded
+
+ [32m✓[39m tests/state.store.migration.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 23[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m21 failed[39m[22m[2m | [22m[1m[32m39 passed[39m[22m[90m (60)[39m
+[2m      Tests [22m [1m[31m28 failed[39m[22m[2m | [22m[1m[32m112 passed[39m[22m[90m (142)[39m
+[2m   Start at [22m 18:56:05
+[2m   Duration [22m 577.23s[2m (transform 1.56s, setup 9.36s, collect 1.92s, tests 560.91s, environment 1.72s, prepare 817ms)[22m
+

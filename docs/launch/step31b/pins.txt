@@ -1,0 +1,9 @@
+date_utc=2026-01-25T09:43:29Z
+pwd=/Users/waqarahmad/lumora-web
+node=v24.7.0
+npm=11.5.1
+pnpm_shell=10.28.1
+pnpm_pinned=10.28.1
+which_node=/usr/local/bin/node
+which_pnpm=/usr/local/bin/pnpm
+PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/usr/local/opt/python@3.11/bin:/Users/waqarahmad/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand

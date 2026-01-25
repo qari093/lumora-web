@@ -1,0 +1,104 @@
+(node:98348) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 51 message listeners added to [process]. MaxListeners is 50. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 60 [27m[22m⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/api.lumaspace.ping.spec.ts [2m[ tests/api.lumaspace.ping.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/api.lumaspace.state.spec.ts [2m[ tests/api.lumaspace.state.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.aggregate.test.ts [2m[ tests/emml.aggregate.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.analyzer.test.ts [2m[ tests/emml.analyzer.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.client.test.ts [2m[ tests/emml.chart.client.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.test.ts [2m[ tests/emml.chart.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.ui.test.ts [2m[ tests/emml.chart.ui.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.client.test.ts [2m[ tests/emml.client.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.compute.test.ts [2m[ tests/emml.compute.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.contract.test.ts [2m[ tests/emml.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.docs.test.ts [2m[ tests/emml.docs.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.feature.test.ts [2m[ tests/emml.feature.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.health.test.ts [2m[ tests/emml.health.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.ingest.test.ts [2m[ tests/emml.ingest.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.seed.test.ts [2m[ tests/emml.seed.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.cron.test.ts [2m[ tests/emml.snapshot.cron.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.test.ts [2m[ tests/emml.snapshot.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.writer.test.ts [2m[ tests/emml.snapshot.writer.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.sse.test.ts [2m[ tests/emml.sse.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.state.test.ts [2m[ tests/emml.state.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.ui.contract.test.ts [2m[ tests/emml.ui.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/lumaspace.state-banner.util.spec.ts [2m[ tests/lumaspace.state-banner.util.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.edges.test.ts [2m[ tests/state.store.edges.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.persist.test.ts [2m[ tests/state.store.persist.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.test.ts [2m[ tests/state.store.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/create/create.rsc-markers.test.ts [2m[ tests/create/create.rsc-markers.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_api_smoke.test.ts [2m[ tests/health/health_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_contract_unit.test.ts [2m[ tests/health/health_contract_unit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_smoke.test.ts [2m[ tests/health/health_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_header_contract.test.ts [2m[ tests/health/middleware_header_contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_health.test.ts [2m[ tests/health/middleware_health.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_rewrite_unit.test.ts [2m[ tests/health/middleware_rewrite_unit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/ready_api_smoke.test.ts [2m[ tests/health/ready_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/version_api_smoke.test.ts [2m[ tests/health/version_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/events.sse.contract.test.ts [2m[ tests/live/events.sse.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/health_page.contract.test.ts [2m[ tests/live/health_page.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/live_rooms_list.contract.test.ts [2m[ tests/live/live_rooms_list.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/portal_hubs.contract.test.ts [2m[ tests/live/portal_hubs.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts [2m[ tests/live/rate_limit.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.contract.test.ts [2m[ tests/live/room_state.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.publish.contract.test.ts [2m[ tests/live/room_state.publish.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rooms.contract.test.ts [2m[ tests/live/rooms.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_chunk_protocol.test.ts [2m[ tests/offline/offline_p2p_chunk_protocol.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_node_crypto_fallback.test.ts [2m[ tests/offline/offline_p2p_node_crypto_fallback.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_rate_limit.test.ts [2m[ tests/offline/offline_p2p_rate_limit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_replay_protection.test.ts [2m[ tests/offline/offline_p2p_replay_protection.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_public_contract.test.ts [2m[ tests/offline/offline_public_contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_public_surface.test.ts [2m[ tests/offline/offline_public_surface.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/performance/lighthouse.spec.ts [2m[ tests/performance/lighthouse.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/manifest.test.ts [2m[ tests/persona/manifest.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/persona_manifest.contract.test.ts [2m[ tests/persona/persona_manifest.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/privacy.test.ts [2m[ tests/persona/privacy.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/reactionMatrix.test.ts [2m[ tests/persona/reactionMatrix.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/portals/portals_routes_smoke.test.ts [2m[ tests/portals/portals_routes_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/csp_header_smoke.test.ts [2m[ tests/security/csp_header_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/hsts_header_prod_only.test.ts [2m[ tests/security/hsts_header_prod_only.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/security_headers_smoke.test.ts [2m[ tests/security/security_headers_smoke.test.ts ][22m
+[31m[1mTypeError[22m: Invalid URL[39m
+[36m [2m❯[22m Module.ensureServer tests/_helpers/ensureServer.ts:[2m55:17[22m[39m
+    [90m 53| [39m  })[33m;[39m
+    [90m 54| [39m
+    [90m 55| [39m  [35mawait[39m [34mwaitFor[39m([35mnew[39m [33mURL[39m([32m"/api/health"[39m[33m,[39m [33mBASE[39m)[33m.[39m[34mtoString[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m   | [39m                [31m^[39m
+    [90m 56| [39m}
+    [90m 57| [39m
+[90m [2m❯[22m tests/_helpers/vitest.server.setup.ts:[2m5:3[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '/api/health', base: '/' }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/60]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.migration.spec.ts [2m[ tests/state.store.migration.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.migration.test.ts [2m[ tests/state.store.migration.test.ts ][22m
+[31m[1mTypeError[22m: Invalid base URL: /[39m
+[90m [2m❯[22m new URLImpl node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL-impl.js:[2m14:15[22m[39m
+[90m [2m❯[22m Object.exports.setup node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL.js:[2m54:12[22m[39m
+[90m [2m❯[22m new URL node_modules/.pnpm/whatwg-url@15.1.0/node_modules/whatwg-url/lib/URL.js:[2m115:22[22m[39m
+[36m [2m❯[22m Module.ensureServer tests/_helpers/ensureServer.ts:[2m55:17[22m[39m
+    [90m 53| [39m  })[33m;[39m
+    [90m 54| [39m
+    [90m 55| [39m  [35mawait[39m [34mwaitFor[39m([35mnew[39m [33mURL[39m([32m"/api/health"[39m[33m,[39m [33mBASE[39m)[33m.[39m[34mtoString[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m   | [39m                [31m^[39m
+    [90m 56| [39m}
+    [90m 57| [39m
+[90m [2m❯[22m tests/_helpers/vitest.server.setup.ts:[2m5:3[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/60]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/live/sse.publish.e2e.test.ts [2m[ tests/live/sse.publish.e2e.test.ts ][22m
+[31m[1mReferenceError[22m: beforeAll is not defined[39m
+[36m [2m❯[22m tests/live/sse.publish.e2e.test.ts:[2m70:3[22m[39m
+    [90m 68| [39m
+    [90m 69| [39mdescribe[33m.[39m[34msequential[39m([32m"Live SSE publish E2E"[39m[33m,[39m () [33m=>[39m {
+    [90m 70| [39m  [34mbeforeAll[39m([35masync[39m () [33m=>[39m {
+    [90m   | [39m  [31m^[39m
+    [90m 71| [39m    [35mawait[39m [34mensureServer[39m({ timeoutMs[33m:[39m [34m45000[39m })[33m;[39m
+    [90m 72| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/60]⎯[22m[39m
+

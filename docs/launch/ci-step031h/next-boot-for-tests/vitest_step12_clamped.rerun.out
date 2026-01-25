@@ -1,0 +1,79 @@
+✓ node_guard: Node v20.20.0 active
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/waqarahmad/lumora-web[39m
+
+[90mstdout[2m | tests/state.store.persist.test.ts:150:9[22m[39m
+Step 15.105 — persist spec loaded
+
+ [33m❯[39m tests/state.store.persist.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 1351[2mms[22m[39m
+ [33m❯[39m tests/live/rate_limit.contract.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 888[2mms[22m[39m
+ [33m❯[39m tests/health/health_contract_unit.test.ts [2m ([22m[2m6 tests[22m[2m)[22m[33m 752[2mms[22m[39m
+ [33m❯[39m tests/create/create.rsc-markers.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[33m 1472[2mms[22m[39m
+ [33m❯[39m tests/live/sse.publish.e2e.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 758[2mms[22m[39m
+ [33m❯[39m tests/health/middleware_health.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 820[2mms[22m[39m
+ [33m❯[39m tests/api.lumaspace.ping.spec.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 740[2mms[22m[39m
+ [33m❯[39m tests/live/room_state.publish.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 744[2mms[22m[39m
+ [33m❯[39m tests/live/events.sse.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 760[2mms[22m[39m
+ [33m❯[39m tests/portals/portals_routes_smoke.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 743[2mms[22m[39m
+ [33m❯[39m tests/health/health_smoke.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 703[2mms[22m[39m
+ [33m❯[39m tests/live/portal_hubs.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 712[2mms[22m[39m
+ [33m❯[39m tests/live/rooms.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 977[2mms[22m[39m
+ [33m❯[39m tests/live/live_rooms_list.contract.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1100[2mms[22m[39m
+ [33m❯[39m tests/security/csp_header_smoke.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1065[2mms[22m[39m
+ [33m❯[39m tests/live/room_state.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 1254[2mms[22m[39m
+ [33m❯[39m tests/emml.feature.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[33m 851[2mms[22m[39m
+ [33m❯[39m tests/live/health_page.contract.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1517[2mms[22m[39m
+ [33m❯[39m tests/emml.seed.test.ts [2m ([22m[2m5 tests[22m[2m)[22m[33m 1296[2mms[22m[39m
+ [33m❯[39m tests/persona/persona_manifest.contract.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 1427[2mms[22m[39m
+ [33m❯[39m tests/security/hsts_header_prod_only.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1215[2mms[22m[39m
+ [33m❯[39m tests/state.store.edges.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 2340[2mms[22m[39m
+ [33m❯[39m tests/security/security_headers_smoke.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1518[2mms[22m[39m
+ [33m❯[39m tests/emml.contract.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 895[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_p2p_replay_protection.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 793[2mms[22m[39m
+ [33m❯[39m tests/health/middleware_header_contract.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 750[2mms[22m[39m
+ [33m❯[39m tests/state.store.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 1436[2mms[22m[39m
+ [33m❯[39m tests/emml.snapshot.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 1307[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_public_contract.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1163[2mms[22m[39m
+ [33m❯[39m tests/health/version_api_smoke.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 1771[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_p2p_chunk_protocol.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1251[2mms[22m[39m
+ [33m❯[39m tests/emml.ui.contract.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 1025[2mms[22m[39m
+ [33m❯[39m tests/emml.snapshot.writer.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 869[2mms[22m[39m
+ [33m❯[39m tests/health/middleware_rewrite_unit.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 859[2mms[22m[39m
+ [33m❯[39m tests/emml.docs.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 841[2mms[22m[39m
+ [33m❯[39m tests/health/health_api_smoke.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 917[2mms[22m[39m
+ [33m❯[39m tests/health/ready_api_smoke.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 880[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_p2p_rate_limit.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1148[2mms[22m[39m
+ [33m❯[39m tests/emml.client.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 1011[2mms[22m[39m
+ [33m❯[39m tests/emml.chart.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 942[2mms[22m[39m
+ [33m❯[39m tests/emml.state.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 850[2mms[22m[39m
+ [33m❯[39m tests/emml.compute.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 923[2mms[22m[39m
+ [33m❯[39m tests/emml.ingest.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 837[2mms[22m[39m
+ [33m❯[39m tests/emml.chart.client.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 932[2mms[22m[39m
+ [33m❯[39m tests/emml.sse.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 846[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_p2p_node_crypto_fallback.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 927[2mms[22m[39m
+ [33m❯[39m tests/emml.aggregate.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 1015[2mms[22m[39m
+ [33m❯[39m tests/emml.health.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 946[2mms[22m[39m
+ [33m❯[39m tests/persona/privacy.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 911[2mms[22m[39m
+ [33m❯[39m tests/persona/manifest.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 934[2mms[22m[39m
+ [33m❯[39m tests/emml.chart.ui.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 933[2mms[22m[39m
+ [33m❯[39m tests/emml.snapshot.cron.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 863[2mms[22m[39m
+ [33m❯[39m tests/performance/lighthouse.spec.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 885[2mms[22m[39m
+ [33m❯[39m tests/persona/reactionMatrix.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 981[2mms[22m[39m
+ [33m❯[39m tests/api.lumaspace.state.spec.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 957[2mms[22m[39m
+ [33m❯[39m tests/emml.analyzer.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 932[2mms[22m[39m
+ [33m❯[39m tests/lumaspace.state-banner.util.spec.ts [2m ([22m[2m3 tests[22m[2m)[22m[33m 911[2mms[22m[39m
+ [33m❯[39m tests/offline/offline_public_surface.test.ts [2m ([22m[2m1 test[22m[2m)[22m[33m 930[2mms[22m[39m
+[90mstdout[2m | tests/state.store.migration.spec.ts:132:9[22m[39m
+Step 15.103 — migration spec loaded
+
+ [33m❯[39m tests/state.store.migration.spec.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 858[2mms[22m[39m
+[90mstdout[2m | tests/state.store.migration.test.ts:132:9[22m[39m
+Step 15.97 — migration spec loaded
+
+ [33m❯[39m tests/state.store.migration.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[33m 813[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m60 failed[39m[22m[90m (60)[39m
+[2m      Tests [22m [90m (142)[39m
+[2m   Start at [22m 19:28:01
+[2m   Duration [22m 71.86s[2m (transform 1.11s, setup 5.65s, collect 1.51s, tests 61.05s, environment 1.54s, prepare 525ms)[22m
+

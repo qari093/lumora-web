@@ -1,0 +1,5 @@
+Step 31 completion confirmation
+TS=2026-01-25T11:45:19Z
+Unit baseline: docs/launch/step31f/vitest_unit.status.env
+Integration buckets (SSE/Health+Portals/Security): docs/launch/step47/status.env
+Build: .next/BUILD_ID

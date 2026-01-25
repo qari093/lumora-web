@@ -1,0 +1,41 @@
+ app/api/live/events/route.ts                       |   5 +
+ .../ci-step030/vitest-fixes/runtime_pins.txt       |   7 +
+ .../vitest-fixes/sse.publish.e2e.test.ts.before    | 120 +++++++++
+ .../vitest-fixes/vitest.config.ts.before           |  37 +++
+ .../vitest-fixes/vitest_step12_clamped.rerun.err   |  30 +++
+ .../vitest-fixes/vitest_step12_clamped.rerun.out   |  85 +++++++
+ .../vitest-fixes/vitest_step12_clamped.rerun.rc    |   1 +
+ .../sse-route-robust-fix/route.ts.before           | 115 +++++++++
+ .../sse-route-robust-fix/sse_file_anchor.txt       |   1 +
+ .../sse-route-robust-fix/sse_route_excerpt.txt     | 120 +++++++++
+ .../vitest_step12_clamped.rerun.err                |  37 +++
+ .../vitest_step12_clamped.rerun.out                |  85 +++++++
+ .../vitest_step12_clamped.rerun.rc                 |   1 +
+ .../middleware_health.test.ts.before               | 100 ++++++++
+ .../sse.publish.e2e.test.ts.before                 | 125 ++++++++++
+ .../vitest_step12_clamped.rerun.err                | 104 ++++++++
+ .../vitest_step12_clamped.rerun.out                |  78 ++++++
+ .../vitest_step12_clamped.rerun.rc                 |   1 +
+ .../vitest_step12_clamped.rerun.err                | 271 +++++++++++++++++++++
+ .../vitest_step12_clamped.rerun.out                | 139 +++++++++++
+ .../vitest_step12_clamped.rerun.rc                 |   1 +
+ .../vitest_step12_clamped.rerun.err                |  75 ++++++
+ .../vitest_step12_clamped.rerun.out                |  79 ++++++
+ .../vitest_step12_clamped.rerun.rc                 |   1 +
+ .../ci-step031j/build-diagnostics/next_build.err   |   0
+ .../ci-step031j/build-diagnostics/next_build.out   |   0
+ .../ci-step031j/build-diagnostics/next_build.rc    |   1 +
+ .../build-diagnostics/prisma_validate.err          |  19 ++
+ .../build-diagnostics/prisma_validate.out          |   2 +
+ .../ci-step031j/build-diagnostics/runtime_pins.txt |   7 +
+ .../ci-step031j/build-diagnostics/tsc_noemit.err   |   0
+ .../ci-step031j/build-diagnostics/tsc_noemit.out   |   0
+ scripts/launch/vitest_step12_clamped.sh            |   9 +
+ tests/_helpers/ensureServer.ts                     |  23 ++
+ tests/_helpers/nextTestServer.ts                   | 108 ++++++++
+ tests/_helpers/vitest.maxlisteners.setup.ts        |  10 +
+ tests/_helpers/vitest.server.setup.ts              |  11 +
+ tests/health/middleware_health.test.ts             |   5 +
+ tests/live/sse.publish.e2e.test.ts                 |   7 +-
+ vitest.config.ts                                   |   2 +-
+ 40 files changed, 1820 insertions(+), 2 deletions(-)

@@ -33,11 +33,6 @@ export async function GET(req: NextRequest) {
 
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
-      // Initial frame to confirm SSE connection for tests/clients.
-      // E2E expects to observe 'connected' to confirm stream readiness.
-      try {
-        controller.enqueue(new TextEncoder().encode('event: connected\ndata: connected\n\n'));
-      } catch {}
         const safeEnq = (s: string) => {
           try {
             controller.enqueue(enc.encode(s));

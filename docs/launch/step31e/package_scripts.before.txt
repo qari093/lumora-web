@@ -1,0 +1,21 @@
+final:test=sh scripts/final/smoke.sh
+guard:registry:test=sh scripts/guard-registry-extract.test.sh
+test=vitest run --reporter=basic
+test:cc-tower-monetization-ready=vitest run tests/cc-tower.api.monetizationReady.test.ts
+test:emml-ci=node scripts/emml.seed.cjs && vitest run tests/emml --passWithNoTests
+test:gmar-core=vitest run tests/gmar.*.test.ts
+test:gmar-monetization=vitest run tests/gmar.telemetry.revenueEvents.test.ts tests/gmar.telemetry.revenueBus.test.ts tests/gmar.telemetry.metricsSink.test.ts tests/gmar.telemetry.revenueHelpers.test.ts tests/gmar.runtime.monetizationFacade.test.ts
+test:gmar-monetization-api=vitest run tests/gmar.api.monetizationSnapshot.test.ts
+test:gmar-monetization-manifest=vitest run tests/cc-tower.monetization.manifest.test.ts
+test:gmar-offers=vitest run tests/gmar.economy.products.test.ts tests/gmar.economy.priceMapping.test.ts tests/gmar.economy.offers.test.ts
+test:gmar-universe=vitest run tests/gmar.echoForge.core.test.ts tests/gmar.echoForge.mapper.test.ts tests/gmar.echoForge.recordingBuffer.test.ts tests/gmar.echoForge.shardIntel.test.ts tests/gmar.echoForge.threeBrain.test.ts tests/gmar.echoForge.scoringLabels.test.ts tests/gmar.echoForge.autoCaption.test.ts tests/gmar.echoForge.gallery.test.ts tests/gmar.echoForge.captureUX.test.ts tests/gmar.echoForge.multiShare.test.ts tests/gmar.echoForge.viralTier1.test.ts tests/gmar.echoForge.viralTier2.test.ts tests/gmar.echoForge.viralTier3.test.ts tests/gmar.echoForge.viralTier4.test.ts tests/gmar.echoForge.viralTier5.test.ts tests/gmar.universe.eventBus.test.ts tests/gmar.universe.emotionBridge.test.ts tests/gmar.universe.fypSync.test.ts tests/gmar.universe.emmlSync.test.ts tests/gmar.universe.avatarJourneySync.test.ts tests/gmar.universe.memoryVaultSync.test.ts tests/gmar.universe.treasureWorlds.test.ts tests/gmar.universe.treasureSpawnEngine.test.ts tests/gmar.universe.universeSyncOrchestrator.test.ts
+test:gmar-zendoro=vitest run tests/gmar.zendoro.bridge.test.ts tests/gmar.zendoro.localAdapter.test.ts tests/gmar.zendoro.pipeline.test.ts
+test:health=vitest run --dir tests/health
+test:health:dir=vitest run --dir tests/health
+test:health:file=vitest run tests/health/middleware_health.test.ts
+test:health:smoke=vitest run tests/health/health_smoke.test.ts
+test:integration=vitest run tests/state.store.test.ts tests/state.store.persist.test.ts tests/state.store.migration.test.ts tests/gmar.runtime.runner.test.ts tests/gmar.runtime.events.test.ts tests/gmar.runtime.rewards.test.ts tests/gmar.runtime.loot.test.ts tests/gmar.loadTestHarness.test.ts tests/lumaspace.sync.test.ts tests/cc-tower.api.monetizationReady.test.ts tests/cc-tower.monetization.manifest.test.ts
+test:live=vitest run tests/live
+test:lumaspace=bash scripts/integration/phase25.step13.sh
+test:run=vitest run
+test:unit=sh scripts/launch/step31/vitest_unit.sh

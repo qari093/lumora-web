@@ -1,0 +1,30 @@
+(node:38217) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 51 message listeners added to [process]. MaxListeners is 50. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+[31m⎯⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 1 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/live/sse.publish.e2e.test.ts[2m > [22mLive SSE publish E2E[2m > [22mSSE stream receives published event
+[31m[1mAssertionError[22m: expected '' to contain 'connected'[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- connected[39m
+
+[36m [2m❯[22m tests/live/sse.publish.e2e.test.ts:[2m94:21[22m[39m
+    [90m 92| [39m      {
+    [90m 93| [39m        [35mconst[39m buf [33m=[39m [35mawait[39m [34m__lumoraWaitForConnected[39m(sse[33m,[39m [34m10000[39m)[33m;[39m
+    [90m 94| [39m        [34mexpect[39m(buf)[33m.[39m[34mtoContain[39m([32m"connected"[39m)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 95| [39m      }
+    [90m 96| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Unhandled Error [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Worker exited unexpectedly[39m
+[90m [2m❯[22m ChildProcess.<anonymous> node_modules/.pnpm/tinypool@0.8.4/node_modules/tinypool/dist/esm/index.js:[2m185:34[22m[39m
+[90m [2m❯[22m ChildProcess.emit node:events:[2m536:35[22m[39m
+[90m [2m❯[22m ChildProcess._handle.onexit node:internal/child_process:[2m293:12[22m[39m
+
+

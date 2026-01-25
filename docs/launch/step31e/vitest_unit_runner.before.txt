@@ -1,0 +1,18 @@
+     1	#!/bin/sh
+     2	set -euo pipefail
+     3	
+     4	export CI="${CI:-1}"
+     5	export NEXT_TELEMETRY_DISABLED=1
+     6	export NODE_OPTIONS="${NODE_OPTIONS:-} --unhandled-rejections=strict"
+     7	
+     8	ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+     9	cd "$ROOT" || exit 1
+    10	
+    11	# Keep runs stable
+    12	export VITEST_MAX_THREADS="${VITEST_MAX_THREADS:-1}"
+    13	
+    14	if command -v .tools/pnpm10 >/dev/null 2>&1; then
+    15	  pnpm -s vitest run --config vitest.unit.config.ts -c vitest.unit.config.ts --pool=forks --maxWorkers=1 --minWorkers=1 --testTimeout=60000 --hookTimeout=60000
+    16	else
+    17	  npx --yes vitest run --config vitest.unit.config.ts -c vitest.unit.config.ts --pool=forks --maxWorkers=1 --minWorkers=1 --testTimeout=60000 --hookTimeout=60000
+    18	fi

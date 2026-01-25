@@ -1,0 +1,75 @@
+v20.20.0 is already installed.
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 60 [27m[22m⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/api.lumaspace.ping.spec.ts [2m[ tests/api.lumaspace.ping.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/api.lumaspace.state.spec.ts [2m[ tests/api.lumaspace.state.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.aggregate.test.ts [2m[ tests/emml.aggregate.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.analyzer.test.ts [2m[ tests/emml.analyzer.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.client.test.ts [2m[ tests/emml.chart.client.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.test.ts [2m[ tests/emml.chart.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.chart.ui.test.ts [2m[ tests/emml.chart.ui.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.client.test.ts [2m[ tests/emml.client.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.compute.test.ts [2m[ tests/emml.compute.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.contract.test.ts [2m[ tests/emml.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.docs.test.ts [2m[ tests/emml.docs.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.feature.test.ts [2m[ tests/emml.feature.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.health.test.ts [2m[ tests/emml.health.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.ingest.test.ts [2m[ tests/emml.ingest.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.seed.test.ts [2m[ tests/emml.seed.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.cron.test.ts [2m[ tests/emml.snapshot.cron.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.test.ts [2m[ tests/emml.snapshot.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.snapshot.writer.test.ts [2m[ tests/emml.snapshot.writer.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.sse.test.ts [2m[ tests/emml.sse.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.state.test.ts [2m[ tests/emml.state.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/emml.ui.contract.test.ts [2m[ tests/emml.ui.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/lumaspace.state-banner.util.spec.ts [2m[ tests/lumaspace.state-banner.util.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.edges.test.ts [2m[ tests/state.store.edges.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.migration.spec.ts [2m[ tests/state.store.migration.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.migration.test.ts [2m[ tests/state.store.migration.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.persist.test.ts [2m[ tests/state.store.persist.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/state.store.test.ts [2m[ tests/state.store.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/create/create.rsc-markers.test.ts [2m[ tests/create/create.rsc-markers.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_api_smoke.test.ts [2m[ tests/health/health_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_contract_unit.test.ts [2m[ tests/health/health_contract_unit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_smoke.test.ts [2m[ tests/health/health_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_header_contract.test.ts [2m[ tests/health/middleware_header_contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_health.test.ts [2m[ tests/health/middleware_health.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_rewrite_unit.test.ts [2m[ tests/health/middleware_rewrite_unit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/ready_api_smoke.test.ts [2m[ tests/health/ready_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/health/version_api_smoke.test.ts [2m[ tests/health/version_api_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/events.sse.contract.test.ts [2m[ tests/live/events.sse.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/health_page.contract.test.ts [2m[ tests/live/health_page.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/live_rooms_list.contract.test.ts [2m[ tests/live/live_rooms_list.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/portal_hubs.contract.test.ts [2m[ tests/live/portal_hubs.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts [2m[ tests/live/rate_limit.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.contract.test.ts [2m[ tests/live/room_state.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.publish.contract.test.ts [2m[ tests/live/room_state.publish.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rooms.contract.test.ts [2m[ tests/live/rooms.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/sse.publish.e2e.test.ts [2m[ tests/live/sse.publish.e2e.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_chunk_protocol.test.ts [2m[ tests/offline/offline_p2p_chunk_protocol.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_node_crypto_fallback.test.ts [2m[ tests/offline/offline_p2p_node_crypto_fallback.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_rate_limit.test.ts [2m[ tests/offline/offline_p2p_rate_limit.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_p2p_replay_protection.test.ts [2m[ tests/offline/offline_p2p_replay_protection.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_public_contract.test.ts [2m[ tests/offline/offline_public_contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/offline/offline_public_surface.test.ts [2m[ tests/offline/offline_public_surface.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/performance/lighthouse.spec.ts [2m[ tests/performance/lighthouse.spec.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/manifest.test.ts [2m[ tests/persona/manifest.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/persona_manifest.contract.test.ts [2m[ tests/persona/persona_manifest.contract.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/privacy.test.ts [2m[ tests/persona/privacy.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/reactionMatrix.test.ts [2m[ tests/persona/reactionMatrix.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/portals/portals_routes_smoke.test.ts [2m[ tests/portals/portals_routes_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/csp_header_smoke.test.ts [2m[ tests/security/csp_header_smoke.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/hsts_header_prod_only.test.ts [2m[ tests/security/hsts_header_prod_only.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/security/security_headers_smoke.test.ts [2m[ tests/security/security_headers_smoke.test.ts ][22m
+[31m[1mError[22m: nextTestServer exited code=1 signal=none[39m
+[36m [2m❯[22m ChildProcess.<anonymous> tests/_helpers/nextTestServer.ts:[2m68:16[22m[39m
+    [90m 66| [39m    child[33m.[39m[34mon[39m([32m"exit"[39m[33m,[39m (code[33m,[39m signal) [33m=>[39m {
+    [90m 67| [39m      [35mif[39m (code [33m!==[39m [35mnull[39m [33m&&[39m code [33m!==[39m [34m0[39m) {
+    [90m 68| [39m        [34mreject[39m([35mnew[39m [33mError[39m([32m`nextTestServer exited code=[39m[36m${[39mcode[36m}[39m[32m signal=[39m[36m${[39m…
+    [90m   | [39m               [31m^[39m
+    [90m 69| [39m      }
+    [90m 70| [39m    })[33m;[39m
+[90m [2m❯[22m ChildProcess.emit node:events:[2m524:28[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/60]⎯[22m[39m
+

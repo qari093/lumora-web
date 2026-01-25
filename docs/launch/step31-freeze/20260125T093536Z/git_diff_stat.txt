@@ -1,0 +1,6 @@
+ tests/_helpers/ensureServer.ts              | 16 ++++---
+ tests/_helpers/nextTestServer.ts            | 71 ++++++++++++++++++++---------
+ tests/_helpers/vitest.maxlisteners.setup.ts |  2 +-
+ tests/_helpers/vitest.server.setup.ts       | 17 ++++---
+ tests/live/sse.publish.e2e.test.ts          |  6 ++-
+ 5 files changed, 73 insertions(+), 39 deletions(-)

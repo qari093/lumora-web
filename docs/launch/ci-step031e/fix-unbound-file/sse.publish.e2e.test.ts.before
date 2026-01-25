@@ -1,6 +1,6 @@
-import { describe, expect, test, beforeAll, afterAll } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
+import { ensureServer } from "../_helpers/ensureServer";
 /* LUMORA_SSE_FLAKE_GUARD_V1 */
 async function __lumoraSleep(ms: number) { return new Promise((r) => setTimeout(r, ms)); }
 async function __lumoraWaitForConnected(sse: any, maxMs = 10000) {
@@ -70,8 +70,6 @@ describe.sequential("Live SSE publish E2E", () => {
   beforeAll(async () => {
     await ensureServer({ timeoutMs: 45000 });
   });
-  afterAll(async () => { await shutdownServer(); });
-
 
   testTimeout: 20000,
 

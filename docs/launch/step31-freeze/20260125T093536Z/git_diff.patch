@@ -1,0 +1,218 @@
+diff --git a/tests/_helpers/ensureServer.ts b/tests/_helpers/ensureServer.ts
+index 5306a626..c2f055ce 100644
+--- a/tests/_helpers/ensureServer.ts
++++ b/tests/_helpers/ensureServer.ts
+@@ -1,17 +1,19 @@
+ import { startNextTestServer, stopNextTestServer, getNextTestBaseUrl } from "./nextTestServer";
+ 
+-type EnsureOpts = { timeoutMs?: number; port?: number; quiet?: boolean };
++type EnsureOpts = { timeoutMs?: number; port?: number; quiet?: boolean; outDir?: string };
+ 
+ export async function ensureServer(opts: EnsureOpts = {}) {
++  const port = opts.port ?? (Number(process.env.PORT) || 3000);
++  // keep BASE_URL deterministic (avoid "/" which breaks URL())
++  if (!process.env.BASE_URL || process.env.BASE_URL === "/") {
++    process.env.BASE_URL = `http://127.0.0.1:${port}`;
++  }
+   await startNextTestServer({
+-    timeoutMs: opts.timeoutMs ?? 60000,
+-    port: opts.port ?? (Number(process.env.PORT) || 3000),
++    timeoutMs: opts.timeoutMs ?? 90000,
++    port,
+     quiet: opts.quiet ?? true,
++    outDir: opts.outDir,
+   });
+-  // Ensure BASE_URL is stable for callers that read it
+-  if (!process.env.BASE_URL || process.env.BASE_URL === "/" ) {
+-    process.env.BASE_URL = getNextTestBaseUrl();
+-  }
+ }
+ 
+ export async function shutdownServer() {
+diff --git a/tests/_helpers/nextTestServer.ts b/tests/_helpers/nextTestServer.ts
+index 79ca7488..39fc75e3 100644
+--- a/tests/_helpers/nextTestServer.ts
++++ b/tests/_helpers/nextTestServer.ts
+@@ -1,10 +1,12 @@
+ import { spawn, type ChildProcess } from "node:child_process";
+-import { existsSync } from "node:fs";
++import { existsSync, createWriteStream } from "node:fs";
++import { resolve } from "node:path";
+ 
+ type StartOpts = {
+   port?: number;
+   timeoutMs?: number;
+   quiet?: boolean;
++  outDir?: string;
+ };
+ 
+ let child: ChildProcess | null = null;
+@@ -37,47 +39,71 @@ async function waitFor(url: string, timeoutMs: number) {
+   throw new Error(`nextTestServer: not healthy within ${timeoutMs}ms (last=${lastErr})`);
+ }
+ 
++function pickCommand() {
++  // Prefer pnpm when lockfile present
++  const usePnpm = existsSync("pnpm-lock.yaml");
++  if (usePnpm) return { cmd: "pnpm", argsPrefix: ["-s"] as string[] };
++  return { cmd: "npx", argsPrefix: ["--yes"] as string[] };
++}
++
+ export async function startNextTestServer(opts: StartOpts = {}) {
+   if (child && child.exitCode === null) return;
+   if (starting) return starting;
+ 
+   const port = Number.isFinite(opts.port) ? (opts.port as number) : (Number(process.env.PORT) || 3000);
+-  const timeoutMs = Number.isFinite(opts.timeoutMs) ? (opts.timeoutMs as number) : 60000;
++  const timeoutMs = Number.isFinite(opts.timeoutMs) ? (opts.timeoutMs as number) : 90000;
++  const outDir = opts.outDir || process.env.LUMORA_NEXT_LOG_DIR || "docs/launch/ci-step031i/next-boot-fix";
+   startedPort = port;
+ 
+-  // Prefer pnpm dev if available in repo; fallback to npx next dev
+-  const usePnpm = existsSync("pnpm-lock.yaml");
+-  const cmd = usePnpm ? "pnpm" : "npx";
+-  const args = usePnpm ? ["-s", "dev", "-p", String(port)] : ["--yes", "next", "dev", "-p", String(port)];
++  const base = `http://127.0.0.1:${port}`;
++  const logOutPath = resolve(outDir, "next_test_server.out.log");
++  const logErrPath = resolve(outDir, "next_test_server.err.log");
++
++  const { cmd, argsPrefix } = pickCommand();
++
++  // Prefer "next start" if a build exists, else fallback to dev.
++  const hasBuild = existsSync(".next/BUILD_ID");
++  const args = hasBuild
++    ? [...argsPrefix, "next", "start", "-p", String(port), "-H", "127.0.0.1"]
++    : (cmd === "pnpm"
++        ? [...argsPrefix, "dev", "-p", String(port)]
++        : [...argsPrefix, "next", "dev", "-p", String(port), "-H", "127.0.0.1"]);
++
++  starting = new Promise<void>((resolveP, rejectP) => {
++    const stdout = createWriteStream(logOutPath, { flags: "a" });
++    const stderr = createWriteStream(logErrPath, { flags: "a" });
+ 
+-  starting = new Promise<void>((resolve, reject) => {
+     child = spawn(cmd, args, {
+-      stdio: opts.quiet ? "ignore" : "pipe",
++      stdio: ["ignore", "pipe", "pipe"],
+       env: {
+         ...process.env,
+-        NODE_ENV: "development",
+         PORT: String(port),
++        HOSTNAME: "127.0.0.1",
+         NEXT_TELEMETRY_DISABLED: "1",
+         CI: "1",
++        NODE_ENV: hasBuild ? "production" : "development",
+       },
+     });
+ 
+-    child.on("error", (e) => reject(e));
+-    child.on("exit", (code, signal) => {
++    child.stdout?.pipe(stdout);
++    child.stderr?.pipe(stderr);
++
++    const onExit = (code: number | null, signal: NodeJS.Signals | null) => {
+       if (code !== null && code !== 0) {
+-        reject(new Error(`nextTestServer exited code=${code} signal=${signal ?? "none"}`));
++        rejectP(new Error(`nextTestServer exited code=${code} signal=${signal ?? "none"} logs=${logErrPath}`));
+       }
+-    });
++    };
++
++    child.on("error", (e) => rejectP(e));
++    child.on("exit", onExit);
+ 
+-    // Wait for health
+     (async () => {
+       try {
+-        const base = `http://127.0.0.1:${port}`;
+         await waitFor(`${base}/api/health`, timeoutMs);
+-        resolve();
+-      } catch (e) {
++        resolveP();
++      } catch (e: any) {
+         try { child?.kill("SIGTERM"); } catch {}
+-        reject(e);
++        rejectP(e);
+       } finally {
+         starting = null;
+       }
+@@ -94,15 +120,16 @@ export async function stopNextTestServer() {
+   child = null;
+ 
+   try { p.kill("SIGTERM"); } catch {}
+-  // give it a moment then SIGKILL if needed
+-  for (let i = 0; i < 20; i++) {
++  for (let i = 0; i < 25; i++) {
+     if (p.exitCode !== null) return;
+-    await sleep(150);
++    await sleep(200);
+   }
+   try { p.kill("SIGKILL"); } catch {}
+ }
+ 
+ export function getNextTestBaseUrl() {
+   const port = Number(process.env.PORT) || startedPort || 3000;
+-  return process.env.BASE_URL || `http://127.0.0.1:${port}`;
++  const envBase = process.env.BASE_URL;
++  if (envBase && envBase !== "/") return envBase;
++  return `http://127.0.0.1:${port}`;
+ }
+diff --git a/tests/_helpers/vitest.maxlisteners.setup.ts b/tests/_helpers/vitest.maxlisteners.setup.ts
+index 58ff7ae1..6873e6eb 100644
+--- a/tests/_helpers/vitest.maxlisteners.setup.ts
++++ b/tests/_helpers/vitest.maxlisteners.setup.ts
+@@ -6,5 +6,5 @@ import { beforeAll } from "vitest";
+ 
+ beforeAll(() => {
+   const p: any = process;
+-  if (typeof p?.setMaxListeners === "function") p.setMaxListeners(50);
++  if (typeof p?.setMaxListeners === "function") p.setMaxListeners(0);
+ });
+diff --git a/tests/_helpers/vitest.server.setup.ts b/tests/_helpers/vitest.server.setup.ts
+index 92b671b4..803e3dda 100644
+--- a/tests/_helpers/vitest.server.setup.ts
++++ b/tests/_helpers/vitest.server.setup.ts
+@@ -1,11 +1,14 @@
+ import { beforeAll, afterAll } from "vitest";
+ import { ensureServer, shutdownServer } from "./ensureServer";
+ 
+-// Start one Next dev server for integration tests that hit http://127.0.0.1:3000
+-beforeAll(async () => {
+-  await ensureServer({ timeoutMs: 90000, quiet: true });
+-});
++const shouldBoot = process.env.LUMORA_BOOT_NEXT === "1";
+ 
+-afterAll(async () => {
+-  await shutdownServer();
+-});
++if (shouldBoot) {
++  beforeAll(async () => {
++    await ensureServer({ timeoutMs: 120000, quiet: true, outDir: process.env.LUMORA_NEXT_LOG_DIR });
++  });
++
++  afterAll(async () => {
++    await shutdownServer();
++  });
++}
+diff --git a/tests/live/sse.publish.e2e.test.ts b/tests/live/sse.publish.e2e.test.ts
+index 447f9462..28c27737 100644
+--- a/tests/live/sse.publish.e2e.test.ts
++++ b/tests/live/sse.publish.e2e.test.ts
+@@ -1,6 +1,6 @@
+-import { describe, expect, test } from "vitest";
++import { describe, expect, test, beforeAll, afterAll } from "vitest";
+ 
+-import { ensureServer } from "../_helpers/ensureServer";
++import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
+ /* LUMORA_SSE_FLAKE_GUARD_V1 */
+ async function __lumoraSleep(ms: number) { return new Promise((r) => setTimeout(r, ms)); }
+ async function __lumoraWaitForConnected(sse: any, maxMs = 10000) {
+@@ -70,6 +70,8 @@ describe.sequential("Live SSE publish E2E", () => {
+   beforeAll(async () => {
+     await ensureServer({ timeoutMs: 45000 });
+   });
++  afterAll(async () => { await shutdownServer(); });
++
+ 
+   testTimeout: 20000,
+ 

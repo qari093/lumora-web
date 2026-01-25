@@ -1,0 +1,9 @@
+timestamp_utc=20260125T093536Z
+pwd=/Users/waqarahmad/lumora-web
+branch=main
+commit=f17ec735a1f6458bc1c78104f0e26578e9988657
+node=v24.7.0
+npm=11.5.1
+pnpm=9.15.4
+which_node=/usr/local/bin/node
+which_pnpm=/usr/local/bin/pnpm

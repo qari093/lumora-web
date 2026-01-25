@@ -1,10 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { BASE, withHealthServer } from "./helpers/healthTestUtils";
-import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
-
-beforeAll(async () => { await ensureServer({ timeoutMs: 45000 }); });
-afterAll(async () => { await shutdownServer(); });
-
 
 // LUMORA_HEALTH_TEST_BOOTSTRAP_V2
 // END LUMORA_TEST_NEXT_DEV_BOOTSTRAP

@@ -1,0 +1,271 @@
+v20.20.0 is already installed.
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 2 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_health.test.ts [2m[ tests/health/middleware_health.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m tests/live/sse.publish.e2e.test.ts[2m > [22mLive SSE publish E2E
+[31m[1mError[22m: Hook timed out in 240000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/30]⎯[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 28 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/api.lumaspace.ping.spec.ts[2m > [22mLumaSpace API — ping (integration)[2m > [22mGET /api/lumaspace/ping responds (200) and indicates liveness
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m fetchTextRobust tests/api.lumaspace.ping.spec.ts:[2m23:19[22m[39m
+    [90m 21| [39m    [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m([35mnew[39m [33mError[39m([32m`abort:[39m[36m${[39mtimeoutMs[36m}[39m[32mm[39m…
+    [90m 22| [39m    [35mtry[39m {
+    [90m 23| [39m      [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { cache[33m:[39m [32m"no-store"[39m[33m,[39m signal[33m:[39m ac[33m.[39msig…
+    [90m   | [39m                  [31m^[39m
+    [90m 24| [39m      [35mconst[39m text [33m=[39m [35mawait[39m res[33m.[39m[34mtext[39m()[33m;[39m
+    [90m 25| [39m      [35mconst[39m ct [33m=[39m (res[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m??[39m [32m""[39m)[33m.[39m[34mtoLowerCase[39m()[33m;[39m
+[90m [2m❯[22m it.timeout tests/api.lumaspace.ping.spec.ts:[2m58:33[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_api_smoke.test.ts[2m > [22m/api/health smoke[2m > [22mreturns 200 and JSON-ish body
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m fetchJson tests/health/health_api_smoke.test.ts:[2m9:15[22m[39m
+    [90m  7| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m  8| [39m  [35mtry[39m {
+    [90m  9| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { redirect[33m:[39m [32m"follow"[39m[33m,[39m signal[33m:[39m ac[33m.[39msignal…
+    [90m   | [39m              [31m^[39m
+    [90m 10| [39m    [35mconst[39m ct [33m=[39m (r[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m||[39m [32m""[39m)[33m.[39m[34mtoLowerCase[39m()[33m;[39m
+    [90m 11| [39m    [35mconst[39m txt [33m=[39m [35mawait[39m r[33m.[39m[34mtext[39m()[33m;[39m
+[90m [2m❯[22m tests/health/health_api_smoke.test.ts:[2m24:33[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/health_smoke.test.ts[2m > [22mhealth smoke[2m > [22m/api/health responds and is json (smoke, robust)
+[31m[1mError[22m: Test server not healthy within 20000ms. last=fetch failed[39m
+[36m [2m❯[22m ensureHealthWithin tests/health/health_smoke.test.ts:[2m54:9[22m[39m
+    [90m 52| [39m    [35mawait[39m [34msleep[39m([34m350[39m)[33m;[39m
+    [90m 53| [39m  }
+    [90m 54| [39m  [35mthrow[39m [35mnew[39m [33mError[39m([32m`Test server not healthy within [39m[36m${[39mmaxWaitMs[36m}[39m[32mms. last[39m…
+    [90m   | [39m        [31m^[39m
+    [90m 55| [39m}
+    [90m 56| [39m
+[90m [2m❯[22m tests/health/health_smoke.test.ts:[2m63:7[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_header_contract.test.ts[2m > [22mmiddleware header contract (integration)[2m > [22m/api/_health returns JSON
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m get tests/health/middleware_header_contract.test.ts:[2m11:17[22m[39m
+    [90m  9| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m([35mnew[39m [33mError[39m([32m`abort:[39m[36m${[39mtimeoutMs[36m}[39m[32mms`[39m…
+    [90m 10| [39m  [35mtry[39m {
+    [90m 11| [39m    [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m([35mnew[39m [33mURL[39m(path[33m,[39m [33mBASE[39m)[33m,[39m { cache[33m:[39m [32m"no-store"[39m[33m,[39m …
+    [90m   | [39m                [31m^[39m
+    [90m 12| [39m    [35mconst[39m text [33m=[39m [35mawait[39m res[33m.[39m[34mtext[39m()[33m;[39m
+    [90m 13| [39m    [35mreturn[39m { res[33m,[39m text }[33m;[39m
+[90m [2m❯[22m tests/health/middleware_header_contract.test.ts:[2m23:29[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/middleware_header_contract.test.ts[2m > [22mmiddleware header contract (integration)[2m > [22m/api/health does not include x-middleware-rewrite header
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m get tests/health/middleware_header_contract.test.ts:[2m11:17[22m[39m
+    [90m  9| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m([35mnew[39m [33mError[39m([32m`abort:[39m[36m${[39mtimeoutMs[36m}[39m[32mms`[39m…
+    [90m 10| [39m  [35mtry[39m {
+    [90m 11| [39m    [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m([35mnew[39m [33mURL[39m(path[33m,[39m [33mBASE[39m)[33m,[39m { cache[33m:[39m [32m"no-store"[39m[33m,[39m …
+    [90m   | [39m                [31m^[39m
+    [90m 12| [39m    [35mconst[39m text [33m=[39m [35mawait[39m res[33m.[39m[34mtext[39m()[33m;[39m
+    [90m 13| [39m    [35mreturn[39m { res[33m,[39m text }[33m;[39m
+[90m [2m❯[22m tests/health/middleware_header_contract.test.ts:[2m35:29[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/ready_api_smoke.test.ts[2m > [22m/api/ready smoke[2m > [22mreturns 200 and JSON-ish body
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m fetchJson tests/health/ready_api_smoke.test.ts:[2m9:15[22m[39m
+    [90m  7| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m  8| [39m  [35mtry[39m {
+    [90m  9| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { redirect[33m:[39m [32m"follow"[39m[33m,[39m signal[33m:[39m ac[33m.[39msignal…
+    [90m   | [39m              [31m^[39m
+    [90m 10| [39m    [35mconst[39m ct [33m=[39m (r[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m||[39m [32m""[39m)[33m.[39m[34mtoLowerCase[39m()[33m;[39m
+    [90m 11| [39m    [35mconst[39m txt [33m=[39m [35mawait[39m r[33m.[39m[34mtext[39m()[33m;[39m
+[90m [2m❯[22m tests/health/ready_api_smoke.test.ts:[2m24:33[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/health/version_api_smoke.test.ts[2m > [22m/api/version smoke[2m > [22mreturns 200 and JSON with ok/service/version fields
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m fetchJson tests/health/version_api_smoke.test.ts:[2m7:15[22m[39m
+    [90m  5| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m  6| [39m  [35mtry[39m {
+    [90m  7| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { signal[33m:[39m ac[33m.[39msignal })[33m;[39m
+    [90m   | [39m              [31m^[39m
+    [90m  8| [39m    [35mconst[39m ct [33m=[39m (r[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m||[39m [32m""[39m)[33m.[39m[34mtoLowerCase[39m()[33m;[39m
+    [90m  9| [39m    [35mconst[39m txt [33m=[39m [35mawait[39m r[33m.[39m[34mtext[39m()[33m;[39m
+[90m [2m❯[22m tests/health/version_api_smoke.test.ts:[2m27:33[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/live/events.sse.contract.test.ts[2m > [22mLive SSE contract: /api/live/events[2m > [22mreturns 200 + text/event-stream and emits connected event quickly
+[31m[1m[7m FAIL [27m[22m[39m tests/live/health_page.contract.test.ts[2m > [22mLive page: /live/health[2m > [22mhealthz probe is warmable and then fast, returns marker
+[31m[1m[7m FAIL [27m[22m[39m tests/live/health_page.contract.test.ts[2m > [22mLive page: /live/health[2m > [22mhealth page is warmable and then fast, returns marker/title
+[31m[1m[7m FAIL [27m[22m[39m tests/live/live_rooms_list.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mreturns 200 + ratelimit headers + stable JSON envelope
+[31m[1m[7m FAIL [27m[22m[39m tests/live/live_rooms_list.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mdeprecated aliases return 410 quickly (no hangs)
+[31m[1m[7m FAIL [27m[22m[39m tests/live/portal_hubs.contract.test.ts[2m > [22mLive API contract: /api/live/portal-hubs[2m > [22mreturns 200 + ratelimit headers + expected JSON shape
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mportal-hubs exposes ratelimit headers consistently
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mrooms exposes ratelimit headers consistently
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22mhealth-badge exposes ratelimit headers consistently
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rate_limit.contract.test.ts[2m > [22mLive rate limit contracts[2m > [22malias routes return 410 quickly and still include ratelimit headers
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.contract.test.ts[2m > [22mLive room-state contract: /api/live/room-state[2m > [22mGET returns 200 + ok:true + roomId
+[31m[1m[7m FAIL [27m[22m[39m tests/live/room_state.publish.contract.test.ts[2m > [22mLive room-state publish contract[2m > [22mPOST /api/live/publish updates GET /api/live/room-state timestamps
+[31m[1m[7m FAIL [27m[22m[39m tests/live/rooms.contract.test.ts[2m > [22mLive API contract: /api/live/rooms[2m > [22mreturns 200 with ratelimit headers and stable envelope
+[31m[1m[7m FAIL [27m[22m[39m tests/persona/persona_manifest.contract.test.ts[2m > [22mPersona manifest: /api/persona/manifest[2m > [22mreturns ok:true and emojis array (seeded should be >=1)
+[31m[1mError[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/portals/portals_routes_smoke.test.ts[2m > [22mportals: route smoke[2m > [22mall portal routes respond (200 or redirect)
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m fetchHead tests/portals/portals_routes_smoke.test.ts:[2m9:15[22m[39m
+    [90m  7| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m()[33m,[39m timeoutMs)[33m;[39m
+    [90m  8| [39m  [35mtry[39m {
+    [90m  9| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { redirect[33m:[39m [32m"manual"[39m[33m,[39m signal[33m:[39m ac[33m.[39msignal…
+    [90m   | [39m              [31m^[39m
+    [90m 10| [39m    [35mconst[39m ct [33m=[39m (r[33m.[39mheaders[33m.[39m[35mget[39m([32m"content-type"[39m) [33m||[39m [32m""[39m)[33m.[39m[34mtoLowerCase[39m()[33m;[39m
+    [90m 11| [39m    [35mconst[39m txt [33m=[39m [35mawait[39m r[33m.[39m[34mtext[39m()[33m;[39m
+[90m [2m❯[22m tests/portals/portals_routes_smoke.test.ts:[2m41:21[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/csp_header_smoke.test.ts[2m > [22msecurity headers: CSP smoke[2m > [22msets Content-Security-Policy on root and core portals (deterministic)
+[31m[1mError[22m: curl HEAD failed: / — Command failed: curl -sS -I --max-time 60 http://127.0.0.1:3000/
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+[39m
+[36m [2m❯[22m headViaCurl tests/security/csp_header_smoke.test.ts:[2m33:11[22m[39m
+    [90m 31| [39m  } [35mcatch[39m (e[33m:[39m any) {
+    [90m 32| [39m    [35mconst[39m msg [33m=[39m (e [33m&&[39m e[33m.[39mmessage) [33m?[39m [33mString[39m(e[33m.[39mmessage) [33m:[39m [32m"curl_failed"[39m[33m;[39m
+    [90m 33| [39m    [35mthrow[39m [35mnew[39m [33mError[39m([32m"curl HEAD failed: "[39m [33m+[39m path [33m+[39m [32m" — "[39m [33m+[39m msg)[33m;[39m
+    [90m   | [39m          [31m^[39m
+    [90m 34| [39m  }
+    [90m 35| [39m}
+[90m [2m❯[22m tests/security/csp_header_smoke.test.ts:[2m43:19[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/csp_header_smoke.test.ts[2m > [22msecurity headers: CSP smoke[2m > [22msets Content-Security-Policy on /api/health
+[31m[1mError[22m: curl HEAD failed: /api/health — Command failed: curl -sS -I --max-time 35 http://127.0.0.1:3000/api/health
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Couldn't connect to server
+[39m
+[36m [2m❯[22m headViaCurl tests/security/csp_header_smoke.test.ts:[2m33:11[22m[39m
+    [90m 31| [39m  } [35mcatch[39m (e[33m:[39m any) {
+    [90m 32| [39m    [35mconst[39m msg [33m=[39m (e [33m&&[39m e[33m.[39mmessage) [33m?[39m [33mString[39m(e[33m.[39mmessage) [33m:[39m [32m"curl_failed"[39m[33m;[39m
+    [90m 33| [39m    [35mthrow[39m [35mnew[39m [33mError[39m([32m"curl HEAD failed: "[39m [33m+[39m path [33m+[39m [32m" — "[39m [33m+[39m msg)[33m;[39m
+    [90m   | [39m          [31m^[39m
+    [90m 34| [39m  }
+    [90m 35| [39m}
+[90m [2m❯[22m tests/security/csp_header_smoke.test.ts:[2m55:17[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/hsts_header_prod_only.test.ts[2m > [22msecurity headers: HSTS (prod-only)[2m > [22mdev should not set Strict-Transport-Security
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m tests/security/hsts_header_prod_only.test.ts:[2m22:17[22m[39m
+    [90m 20| [39m    [32m"dev should not set Strict-Transport-Security"[39m[33m,[39m
+    [90m 21| [39m    [35masync[39m () [33m=>[39m {
+    [90m 22| [39m      [35mconst[39m r [33m=[39m [35mawait[39m [35mget[39m([32m"/"[39m[33m,[39m { [32m"user-agent"[39m[33m:[39m [32m"vitest-hsts-dev"[39m })[33m;[39m
+    [90m   | [39m                [31m^[39m
+    [90m 23| [39m      [34mexpect[39m([[34m200[39m[33m,[39m [34m301[39m[33m,[39m [34m302[39m[33m,[39m [34m307[39m[33m,[39m [34m308[39m[33m,[39m [34m404[39m])[33m.[39m[34mtoContain[39m(r[33m.[39mstatus)[33m;[39m
+    [90m 24| [39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/hsts_header_prod_only.test.ts[2m > [22msecurity headers: HSTS (prod-only)[2m > [22mprod-sim should set Strict-Transport-Security when enabled by header contract
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m tests/security/hsts_header_prod_only.test.ts:[2m37:17[22m[39m
+    [90m 35| [39m    [32m"prod-sim should set Strict-Transport-Security when enabled by hea[39m…
+    [90m 36| [39m    [35masync[39m () [33m=>[39m {
+    [90m 37| [39m      [35mconst[39m r [33m=[39m [35mawait[39m [35mget[39m([32m"/"[39m[33m,[39m {
+    [90m   | [39m                [31m^[39m
+    [90m 38| [39m        [32m"user-agent"[39m[33m:[39m [32m"vitest-hsts-prodsim"[39m[33m,[39m
+    [90m 39| [39m        [32m"x-lumora-prod-sim"[39m[33m:[39m [32m"1"[39m[33m,[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/security_headers_smoke.test.ts[2m > [22msecurity headers: smoke[2m > [22mhealth includes X-Content-Type-Options: nosniff
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m head tests/security/security_headers_smoke.test.ts:[2m12:17[22m[39m
+    [90m 10| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m([35mnew[39m [33mError[39m([32m"aborted"[39m))[33m,[39m timeoutMs…
+    [90m 11| [39m  [35mtry[39m {
+    [90m 12| [39m    [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { method[33m:[39m [32m"HEAD"[39m[33m,[39m cache[33m:[39m [32m"no-store"[39m[33m,[39m …
+    [90m   | [39m                [31m^[39m
+    [90m 13| [39m    [35mreturn[39m { status[33m:[39m res[33m.[39mstatus[33m,[39m headers[33m:[39m res[33m.[39mheaders }[33m;[39m
+    [90m 14| [39m  } [35mfinally[39m {
+[90m [2m❯[22m tests/security/security_headers_smoke.test.ts:[2m28:17[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/30]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/security/security_headers_smoke.test.ts[2m > [22msecurity headers: smoke[2m > [22mcore portal routes exist (no 404) and include nosniff
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m head tests/security/security_headers_smoke.test.ts:[2m12:17[22m[39m
+    [90m 10| [39m  [35mconst[39m t [33m=[39m [34msetTimeout[39m(() [33m=>[39m ac[33m.[39m[34mabort[39m([35mnew[39m [33mError[39m([32m"aborted"[39m))[33m,[39m timeoutMs…
+    [90m 11| [39m  [35mtry[39m {
+    [90m 12| [39m    [35mconst[39m res [33m=[39m [35mawait[39m [34mfetch[39m(url[33m,[39m { method[33m:[39m [32m"HEAD"[39m[33m,[39m cache[33m:[39m [32m"no-store"[39m[33m,[39m …
+    [90m   | [39m                [31m^[39m
+    [90m 13| [39m    [35mreturn[39m { status[33m:[39m res[33m.[39mstatus[33m,[39m headers[33m:[39m res[33m.[39mheaders }[33m;[39m
+    [90m 14| [39m  } [35mfinally[39m {
+[90m [2m❯[22m tests/security/security_headers_smoke.test.ts:[2m41:19[22m[39m
+
+[31m[1mCaused by: Error[22m: connect ECONNREFUSED 127.0.0.1:3000[39m
+[90m [2m❯[22m TCPConnectWrap.afterConnect [as oncomplete] node:net:[2m1611:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errno: -61, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000 }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/30]⎯[22m[39m
+

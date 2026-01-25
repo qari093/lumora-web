@@ -1,0 +1,7 @@
+date_utc=2026-01-24T18:43:36Z
+pwd=/Users/waqarahmad/lumora-web
+node_version=v20.20.0
+npm_version=10.8.2
+pnpm_version=9.15.4
+next_version=15.5.6
+vitest_version=1.6.1
