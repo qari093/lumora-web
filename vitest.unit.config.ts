@@ -1,11 +1,17 @@
 import { defineConfig, mergeConfig } from "vitest/config";
+import path from "node:path";
 import base from "./vitest.config";
 
 export default mergeConfig(
   // @ts-expect-error - base config typing varies by vitest version
   base,
   defineConfig({
-    test: {
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "."),
+    },
+  },
+test: {
       name: "unit",
       // Unit-only allowlist by exclusion (server-dependent suites are excluded)
       exclude: [
