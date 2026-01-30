@@ -1,37 +1,17 @@
 import { defineConfig } from "vitest/config";
+import path from "node:path";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "."),
+    },
+  },
   test: {
-    setupFiles: ["tests/_helpers/vitest.server.setup.ts", "./tests/setup/vitest.browser.setup.ts", "./tests/setup/vitest.server.setup.ts", "./tests/_helpers/vitest.maxlisteners.setup.ts", "tests/_helpers/vitest.maxlisteners.setup.ts"],
-    // 🔒 Launch-safe deterministic mode
-    threads: false,
-    pool: "forks",
-    maxConcurrency: 1,
-    isolate: false,
-
-    // ⛔ Prevent empty / broken suites from failing launch
-    exclude: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.next/**",
-
-      // known empty / legacy / malformed tests
-      "**/*.empty.test.*",
-      "**/*.broken.test.*",
-      "**/emml.state.client.test.ts",
-      "**/.quarantine/**",
-      "**/.quarantine/**/*",
-      "**/.quarantine/**/**"
-    ],
-
-    // 🧠 Environment defaults (browser-like tests handled later)
-    environment: "node",
-
-    // ⏱️ Generous but finite timeouts
-    testTimeout: 30_000,
-    hookTimeout: 30_000,
-
-    // 📜 Clean reporting
-    reporters: ["default"],
+    setupFiles: ["tests/vitest.setup.ts"],
+    environment: "jsdom",
+    globals: true,
+    restoreMocks: true,
+    clearMocks: true,
   },
 });

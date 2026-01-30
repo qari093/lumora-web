@@ -1,0 +1,12 @@
+{
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.organizeImports": false
+  },
+  "files.watcherExclude": {
+    "**/.next/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true
+  }
+}

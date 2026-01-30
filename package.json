@@ -149,7 +149,9 @@
     "ci:md-fences": "sh scripts/guard/ci_md_fence_gate.sh",
     "ci:heredocs": "sh scripts/guard/ci_heredoc_gate.sh",
     "ci:final36": "sh scripts/guard/ci_final36_gate.sh",
-    "test:unit": "sh scripts/launch/step31/vitest_unit.sh"
+    "test:unit": "sh scripts/launch/step31/vitest_unit.sh",
+    "build:guard": "sh scripts/launch/build_guard.sh",
+    "vercel-build": "npm run build:guard && next build"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -223,6 +225,7 @@
     "prisma": "^6.18.0",
     "stripe": "^16.12.0",
     "svgo": "^3.3.2",
+    "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vitest": "^1.6.0"
@@ -240,9 +243,6 @@
     "vite": {
       "esbuild": "0.25.9"
     }
-  },
-  "prisma": {
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "packageManager": "pnpm@10.28.1"
 }

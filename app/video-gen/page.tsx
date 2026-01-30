@@ -1,14 +1,22 @@
-export default function VideoGenPage() {
+import Link from "next/link";
+
+export const runtime = "nodejs";
+
+export default async function VideoGenPage() {
   return (
-    <main style={{ padding: 24, maxWidth: 980, margin: "0 auto", fontFamily: "system-ui, -apple-system, Segoe UI, Roboto" }}>
-      <h1 style={{ marginBottom: 10 }}>Video Generation</h1>
-      <p style={{ opacity: 0.9, lineHeight: 1.5 }}>
-        Video Generation Engine is enabled for Private Live testing.
+    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto" }}>
+      <h1 style={{ fontSize: 28, fontWeight: 700 }}>Video Gen (Test Phase)</h1>
+      <p style={{ opacity: 0.8 }}>
+        This page is a minimal guarded hook to the Video Gen API. It does not store prompts server-side.
       </p>
-      <div style={{ marginTop: 16, padding: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12 }}>
-        <p style={{ margin: 0, opacity: 0.85 }}>
-          Wire your generation UI/API endpoints here (engine runs LIVE + ASSISTED per canonical doctrine).
-        </p>
+
+      <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <Link href="/video-gen/demo" style={{ padding: "10px 14px", border: "1px solid rgba(255,255,255,.2)", borderRadius: 10 }}>
+          Open Demo
+        </Link>
+        <Link href="/portals" style={{ padding: "10px 14px", border: "1px solid rgba(255,255,255,.2)", borderRadius: 10 }}>
+          Back to Portals
+        </Link>
       </div>
     </main>
   );

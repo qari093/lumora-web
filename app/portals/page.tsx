@@ -103,3 +103,7 @@ export default function PortalsIndexPage() {
 </main>
   );
 }
+
+
+// injected: video-gen portal link
+export const __videoGenPortalLink = <a href="/video-gen">Video Gen</a>;

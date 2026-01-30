@@ -1,7 +1,11 @@
+import { features } from "@/config/features";
 import { NextRequest, NextResponse } from "next/server";
 import { enforceVideoGenDailyCap } from "@/app/_server/videoGenCap";
 
 export async function POST(req: NextRequest) {
+  if (!features.videoGenUserEnabled) {
+    return new Response(JSON.stringify({ ok:false, error:"video_gen_disabled" }), { status:403 });
+  }
   const cap = await enforceVideoGenDailyCap(req);
   if (!cap.ok) {
     return NextResponse.json(

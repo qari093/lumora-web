@@ -712,12 +712,35 @@ model PersonaUserSelection {
 //
 
 model PersonaVoiceState {
-  id           String   @id @default(cuid())
-  personaCode  String
-  isSpeaking   Boolean  @default(false)
-  volume       Float    @default(0)
-  emotionHint  String?
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  personaCode String
+  isSpeaking  Boolean  @default(false)
+  volume      Float    @default(0)
+  emotionHint String?
+  updatedAt   DateTime @updatedAt
 
   @@index([personaCode])
+}
+
+enum VideoGenStatus {
+  queued
+  running
+  done
+  failed
+}
+
+model VideoGenJob {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String?
+  prompt    String
+  status    VideoGenStatus @default(queued)
+  progress  Int            @default(0) // 0..100
+  resultUrl String?
+  error     String?
+
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
 }

@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "crons": [],
+  "github": {
+    "silent": true
+  }
+}

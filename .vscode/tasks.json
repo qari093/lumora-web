@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lumora Doctor: FAST",
+      "type": "shell",
+      "command": "MODE=FAST MAKE_VSCODE=0 sh /tmp/lumora_doctor_scan.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lumora Doctor: FULL",
+      "type": "shell",
+      "command": "MODE=FULL MAKE_VSCODE=0 sh /tmp/lumora_doctor_scan.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lumora Doctor: CI",
+      "type": "shell",
+      "command": "MODE=CI MAKE_VSCODE=0 sh /tmp/lumora_doctor_scan.sh",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Tooling / execution artifacts
+tests/**
+tools/**
+.quarantine/**
+docs/launch/**
+scripts/**
+**/*.cjs
+**/*.mjs
+
+# Build output
+.next/**
+dist/**

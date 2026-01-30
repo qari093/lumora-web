@@ -1,100 +1,71 @@
-import TelemetryTracker from "@/app/_client/TelemetryTracker";
-import LumenDock from "./_client/LumenDock";
-import StartupSplash from "./_client/StartupSplash";
-/* NOTE: Add preload link manually if layout does not render <head>
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Lumora" />
- */
-// FILE: app/layout.tsx
-// Server layout → mounts a single client RuntimeRoot to avoid using next/dynamic with ssr:false in server files.
+// app/layout.tsx
+import "@/resources/custom.css";
+import "./globals.css";
 
-import "./_styles/emoji.css";
-import "./_styles/holo.css";
+import type { Metadata, Viewport } from "next";
+import { baseURL, meta, fonts } from "@/resources/once-ui.config";
+import ClientLayout from "@/components/ClientLayout";
+import SplashGate from "@/components/splash/SplashGate";
+import BootMark from "@/components/splash/BootMark";
 
-import type {Metadata, Viewport} from "next";
-import RuntimeRoot from "./_client/runtime-root";
-import { SplashGate } from "./_client/brand/SplashGate";
+const LUMORA_THEME_COLOR = "#070b14";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: LUMORA_THEME_COLOR,
+};
 
 export const metadata: Metadata = {
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Lumora" },
+  metadataBase: (() => {
+    try {
+      return new URL(baseURL);
+    } catch {
+      return undefined;
+    }
+  })(),
+  title: meta?.home?.title ?? "Lumora",
+  description: meta?.home?.description ?? "Lumora",
+  applicationName: "Lumora",
+
+  // PWA
   manifest: "/manifest.webmanifest",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  title: "Lumora",
-  description: "Next-gen social-commerce-gaming-media platform.",
-
-  openGraph: {
-    type: "website",
-    siteName: "Lumora",
-    title: "Lumora",
-    description: "Lumora private preview",
-    images: [{ url: "/lumora-share-logo.svg", width: 1024, height: 1024, alt: "Lumora" }],
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Lumora",
-    description: "Lumora private preview",
-    images: ["/lumora-share-logo.svg"],
+  // iOS standalone (Next emits apple-web-app tags, but some iOS flows still expect the legacy meta)
+  appleWebApp: {
+    capable: true,
+    title: meta?.home?.title ?? "Lumora",
+    statusBarStyle: "black-translucent",
   },
 
+  // Extra hardening: force legacy iOS capable meta + mobile capable meta into <head>
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "mobile-web-app-capable": "yes",
+    "format-detection": "telephone=no",
+  },
 };
-export const viewport: Viewport = {
-};
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const SPLASH_DEBUG = process.env.NEXT_PUBLIC_LUMORA_DEBUG_SPLASH === "1";
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        id="lumora-root"
-        data-app="lumora"
-        style={{ overscrollBehaviorY: "contain", WebkitTapHighlightColor: "transparent" }}
-      >
-      {/* STEP135_TOPNAV */}
-      <div style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        backdropFilter: "blur(10px)",
-        background: "rgba(255,255,255,0.72)",
-        borderBottom: "1px solid rgba(0,0,0,0.08)"
-      }}>
-        <div style={{
-          maxWidth: 1040,
-          margin: "0 auto",
-          padding: "10px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 12
-        }}>
-          <a href="/" style={{ fontWeight: 900, letterSpacing: "-0.02em", textDecoration: "none", color: "inherit" }}>
-            Lumora
-          </a>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "flex-end" }}>
-            <a href="/fyp" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>FYP</a>
-            <a href="/gmar" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>GMAR</a>
-            <a href="/videos" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>Videos</a>
-            <a href="/nexa" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>NEXA</a>
-            <a href="/movies" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>Movies</a>
-            <a href="/celebrations" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>Celebrations</a>
-            <a href="/share" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>Share</a>
-            <a href="/live" style={{ textDecoration: "none", color: "inherit", opacity: 0.85, fontSize: 13 }}>Live</a>
-          </div>
-        </div>
-      </div>
-
-        <div id="lumora-splash-root" data-step="STEP133_SPLASH_READY" />
-        <StartupSplash />
-        <LumenDock />
-
-        <TelemetryTracker />
-        {/* SplashGate intentionally disabled for stability */}
-<noscript>Enable JavaScript for the best Lumora experience.</noscript>
-        <RuntimeRoot />
-        <SplashGate disabled>{children}</SplashGate>
+    <html lang="en" suppressHydrationWarning data-lumora-theme="darkglass">
+      <head>
+        <meta name="color-scheme" content="dark" />
+      </head>
+      <body className="lumora-root">
+        
+        <SplashGate durationMs={1400} fadeOutMs={220} />
+        <BootMark />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

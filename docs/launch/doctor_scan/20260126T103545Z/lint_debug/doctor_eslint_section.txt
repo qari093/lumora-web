@@ -1,0 +1,5 @@
+== ESLint / next lint ==
+sh: -c: line 1: syntax error near unexpected token `('
+sh: -c: line 1: `if [ -f package.json ] && node -e 'const p=require("./package.json"); process.exit((p.scripts&&p.scripts.lint)?0:1)'; then'
+⚠️ ESLint / next lint (rc=2)
+

@@ -1,0 +1,115 @@
+
+/* LUMORA_THEME_V1 */
+:root{
+  --lum-bg0: #05070c;
+  --lum-bg1: #081222;
+  --lum-card: rgba(255,255,255,0.06);
+  --lum-card2: rgba(255,255,255,0.10);
+  --lum-line: rgba(255,255,255,0.10);
+  --lum-text: rgba(255,255,255,0.92);
+  --lum-text2: rgba(255,255,255,0.70);
+  --lum-accent: rgba(84, 215, 255, 0.85);
+  --lum-accent2: rgba(190, 110, 255, 0.75);
+  --lum-radius: 22px;
+  --lum-shadow: 0 10px 40px rgba(0,0,0,0.55);
+}
+
+html, body { height: 100%; }
+body{
+  margin:0;
+  color: var(--lum-text);
+  background:
+    radial-gradient(1200px 700px at 12% 10%, rgba(84,215,255,0.20), transparent 55%),
+    radial-gradient(900px 600px at 88% 18%, rgba(190,110,255,0.14), transparent 52%),
+    radial-gradient(1100px 800px at 50% 120%, rgba(50,255,180,0.08), transparent 60%),
+    linear-gradient(180deg, var(--lum-bg1), var(--lum-bg0));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a{ color: inherit; text-decoration: none; }
+a:hover{ opacity: 0.95; }
+
+header, nav{
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--lum-line);
+}
+
+main{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 16px 90px;
+}
+
+h1, h2, h3{ letter-spacing: -0.02em; }
+p{ color: var(--lum-text2); }
+
+button, .btn, a.btn{
+  appearance:none;
+  border: 1px solid var(--lum-line);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  color: var(--lum-text);
+  border-radius: 999px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+}
+button:active, .btn:active{ transform: translateY(1px); }
+
+.lum-card, .card, .panel, section, article{
+  border-radius: var(--lum-radius);
+}
+
+.lum-glass{
+  background: linear-gradient(180deg, var(--lum-card2), var(--lum-card));
+  border: 1px solid var(--lum-line);
+  box-shadow: var(--lum-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.lum-hero{
+  padding: 22px;
+}
+
+.lum-tile{
+  padding: 18px;
+}
+
+.lum-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--lum-line);
+  background: rgba(0,0,0,0.22);
+  border-radius:999px;
+  padding: 8px 12px;
+}
+
+.lum-accent{
+  box-shadow:
+    0 0 0 1px rgba(84,215,255,0.10),
+    0 12px 40px rgba(84,215,255,0.08);
+}
+
+.lum-gradient-text{
+  background: linear-gradient(90deg, rgba(84,215,255,0.95), rgba(190,110,255,0.9));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 640px){
+  main{ padding-bottom: 120px; }
+}
+
+/* Lumora Theme Marker (darkglass) */
+html[data-lumora-theme="darkglass"] {
+  color-scheme: dark;
+}
+
+/* Lumora Root Hook */
+.lumora-root {
+  min-height: 100vh;
+}

@@ -1,0 +1,15 @@
+/* once-ui fallback (only used when package css files are missing) */
+:root{
+  color-scheme: dark;
+  --lumora-bg0:#050812;
+  --lumora-bg1:#070b14;
+  --lumora-ink:#e7eeff;
+  --lumora-muted:#a9b6d3;
+  --lumora-glass:rgba(255,255,255,.06);
+  --lumora-glass-2:rgba(255,255,255,.09);
+  --lumora-border:rgba(173,198,255,.16);
+}
+html,body{height:100%;}
+body{margin:0;background:radial-gradient(1200px 800px at 50% 0%, #0b1430 0%, var(--lumora-bg0) 55%, #040611 100%);color:var(--lumora-ink);}
+*{box-sizing:border-box;}
+a{color:inherit;}

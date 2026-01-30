@@ -1,3 +1,4 @@
+import TranslationControlsBar from "@/components/lumalink/TranslationControlsBar";
 // FILE: app/_client/drawers-provider.tsx
 // Optimized DrawersProvider — ensures safe mount, avoids double render and supports deferred hydration
 
@@ -15,7 +16,10 @@ export default function DrawersProvider() {
   useEffect(() => {
     // slight delay to avoid blocking main thread during hydration
     const timer = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(timer);
+    return (
+      {/* Translation UI Controls (feature-flagged) */}
+      {process.env.NEXT_PUBLIC_LUMALINK_TRANSLATION_UI_CONTROLS === "1" ? <TranslationControlsBar /> : null}
+) => cancelAnimationFrame(timer);
   }, []);
 
   return (

@@ -171,6 +171,31 @@ export default function HomePage() {
           <TileCard key={t.href} {...t} />
         ))}
       </section>
+    
+      <div style={{ marginTop: 16 }}>
+        <a href="/video" style={{ textDecoration: "underline" }}>Open Video Portal</a>
+      </div>
+
+    
+      <div style={{ marginTop: 12 }}>
+        <a href="/live" style={{ textDecoration: "underline" }}>Open Live Portal</a>
+      </div>
+
+    
+      <div style={{ marginTop: 12 }}>
+        <a href="/nexa" style={{ textDecoration: "underline" }}>Open NEXA Portal</a>
+      </div>
+
+    
+      <div style={{ marginTop: 12 }}>
+        <a href="/movies" style={{ textDecoration: "underline" }}>Open Movies Portal</a>
+      </div>
+
+    
+      <div style={{ marginTop: 12 }}>
+        <a href="/music" style={{ textDecoration: "underline" }}>Open Music Portal</a>
+      </div>
+
     </main>
   );
 }

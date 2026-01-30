@@ -1,1 +1,16 @@
-{ "root": true, "extends": ["next/core-web-vitals"] }
+{
+  "root": true,
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "globals": {
+    "process": "readonly",
+    "console": "readonly",
+    "Buffer": "readonly"
+  }
+}
