@@ -1,6 +1,26 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+// LUMORA_MW_BYPASS_STEP15 — CI stability: never rewrite/guard health + create shells
+const __LUMORA_MW_BYPASS__ = new Set([
+  "/api/health",
+  "/api/_health",
+  "/api/ready",
+  "/api/version",
+  "/health",
+  "/ready",
+  "/version",
+  "/create",
+]);
+
+function __lumoraShouldBypass(pathname: string) {
+  if (__LUMORA_MW_BYPASS__.has(pathname)) return true;
+  if (pathname.startsWith("/create/")) return true;
+  if (pathname.startsWith("/api/health") || pathname.startsWith("/api/_health") || pathname.startsWith("/api/ready") || pathname.startsWith("/api/version")) return true;
+  return false;
+}
+
+
 function lumoraFinalize(res: any, req?: any) {
   try {
     const headers = res?.headers;
@@ -82,7 +102,12 @@ export function middleware(undefined: NextRequest, req?: any) {
   try {
     const url = new URL(undefined.url);
     const pathname = url.pathname || "";
-    if (pathname.startsWith("/api/")) {
+    
+    // LUMORA_MW_BYPASS_STEP15 short-circuit
+    if (__lumoraShouldBypass(pathname)) {
+      return NextResponse.next();
+    }
+if (pathname.startsWith("/api/")) {
       return NextResponse.next();
     }
   } catch (_e) {}
