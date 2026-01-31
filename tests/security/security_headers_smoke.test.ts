@@ -1,19 +1,21 @@
 import { describe, expect, test } from "vitest";
 
+function __resolveTestBase(): string {
+  const env = process.env.TEST_BASE_URL || process.env.BASE_URL;
+  if (env && env !== "/") return env;
+  return "http://127.0.0.1:3000";
+}
+
+const BASE = __resolveTestBase();
+
 type HeadOut = { status: number; headers: Headers };
 
-const BASE = new URL(process.env.LUMORA_TEST_BASE || "http://127.0.0.1:3000");
 
-async function head(path: string, timeoutMs = 25_000): Promise<HeadOut> {
-  const url = new URL(path, BASE);
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(new Error("aborted")), timeoutMs);
-  try {
-    const res = await fetch(url, { method: "HEAD", cache: "no-store", signal: ac.signal });
-    return { status: res.status, headers: res.headers };
-  } finally {
-    clearTimeout(t);
-  }
+async function head(path: string, timeoutMs = 15000) {
+  const url = String(new URL(path, BASE));
+  const to = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout:" + timeoutMs + "ms")), timeoutMs));
+  const res = (await Promise.race([fetch(url, { method: "HEAD", cache: "no-store" as any }), to])) as Response;
+  return { status: res.status, headers: res.headers };
 }
 
 function getHeader(h: Headers, name: string): string {

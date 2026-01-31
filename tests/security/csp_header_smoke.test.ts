@@ -1,7 +1,14 @@
 import { describe, expect, test } from "vitest";
-import { execFileSync } from "node:child_process";
+import { execFileSync, execSync } from "node:child_process";
 
-const BASE =
+function __resolveTestBase(): string {
+  const env = process.env.TEST_BASE_URL || process.env.BASE_URL;
+  if (env && env !== "/") return env;
+  return "http://127.0.0.1:3000";
+}
+
+const BASE = __resolveTestBase();
+
   (process.env.BASE_URL ||
     process.env.LUMORA_TEST_BASE ||
     process.env.NEXT_PUBLIC_BASE_URL ||
@@ -9,23 +16,28 @@ const BASE =
 
 const PORTAL_HEAD_TIMEOUT_S = 60;
 
-function headViaCurl(path: string, timeoutS = PORTAL_HEAD_TIMEOUT_S): { status: number; headers: Record<string, string> } {
-  const url = BASE + path;
+function headViaCurl(path: string, maxTimeSec = 60): { status: number; headers: Record<string, string> } {
+  const base = (typeof BASE === "string" && BASE.length) ? BASE : "http://127.0.0.1:3000";
+  const url = String(new URL(path, base));
   try {
-    const out = execFileSync(
-      "curl",
-      ["-sS", "-I", "--max-time", String(timeoutS), url],
-      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }
-    );
-    const lines = out.split(/\r?\n/).filter(Boolean);
-    const statusLine = lines.find((l) => /^HTTP\//i.test(l)) || "";
-    const m = statusLine.match(/\s(\d{3})\s/);
-    const status = m ? Number(m[1]) : 0;
+    // Print headers, then print a final line with status marker for robust parsing.
+    const out = execSync(`curl -sS -i --max-time ${maxTimeSec} "${url}" -X HEAD -o - -w "\n__LUMORA_STATUS__:%{http_code}\n"`, {
+      stdio: ["ignore", "pipe", "pipe"],
+    }).toString("utf8");
+
+    const lines = out.split(/\r?\n/);
+    const statusLine = lines.find((l) => l.startsWith("__LUMORA_STATUS__:")) || "";
+    const codeStr = statusLine.split(":")[1] || "";
+    const status = Number(codeStr.trim() || "0") || 0;
 
     const headers: Record<string, string> = {};
-    for (const l of lines) {
-      const i = l.indexOf(":");
-      if (i > 0) headers[l.slice(0, i).trim().toLowerCase()] = l.slice(i + 1).trim();
+    for (const line of lines) {
+      const idx = line.indexOf(":");
+      if (idx > 0) {
+        const k = line.slice(0, idx).trim().toLowerCase();
+        const v = line.slice(idx + 1).trim();
+        if (k) headers[k] = v;
+      }
     }
     return { status, headers };
   } catch (e: any) {
