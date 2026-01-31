@@ -13,7 +13,7 @@ async function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, tim
   return (await Promise.race([fetch(input, safeInit), __timeoutPromise(timeoutMs)])) as Response;
 }
 
-const base = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
+const base = process.env.NEXT_TEST_BASE_URL || process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
 
 async function fetchJson(url: string, timeoutMs = 15000) {
   try {

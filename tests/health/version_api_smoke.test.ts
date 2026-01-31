@@ -61,7 +61,7 @@ describe("/api/version smoke", () => {
 it(
     "returns 200 and JSON with ok/service/version fields",
     async () => {
-      const base = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
+      const base = process.env.NEXT_TEST_BASE_URL || process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
       const { r, ct, j, txt } = await fetchJson(`${base}/api/version`, 40000);
       expect(r.status).toBe(200);
       expect(ct).toContain("application/json");

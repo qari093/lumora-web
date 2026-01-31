@@ -1,22 +1,20 @@
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function versionGuess() {
+  return (
+    process.env.NEXT_PUBLIC_APP_VERSION ||
+    process.env.APP_VERSION ||
+    process.env.VERCEL_GIT_COMMIT_SHA ||
+    "dev"
+  );
+}
 
 export async function GET() {
-  // Must be fast, side-effect free, and never depend on DB/network/env.
-  // Used by CI integration tests and platform health probes.
   return NextResponse.json(
-    {
-      ok: true,
-      route: "/api/_health",
-      service: "lumora",
-      ts: Date.now(),
-    },
-    {
-      status: 200,
-      headers: {
-        "cache-control": "no-store, max-age=0",
-      },
-    }
+    { ok: true, service: "lumora-web", version: versionGuess(), ts: Date.now() },
+    { status: 200, headers: { "cache-control": "no-store" } }
   );
 }
