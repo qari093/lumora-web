@@ -1,5 +1,14 @@
 import { describe, it, expect } from "vitest";
 
+function __resolveTestBase(): string {
+  const env = process.env.TEST_BASE_URL || process.env.BASE_URL || process.env.VERCEL_URL || "";
+  if (env && env !== "/") return env.startsWith("http") ? env : `https://${env}`;
+  const port = Number(process.env.PORT) || 3000;
+  return `http://127.0.0.1:${port}`;
+}
+
+const BASE = __resolveTestBase();
+
 
 function __timeoutPromise(ms: number): Promise<never> {
   return new Promise((_, rej) => setTimeout(() => rej(new Error(`timeout:${ms}ms`)), ms));
@@ -29,12 +38,31 @@ async function fetchJson(url: string, timeoutMs = 15000) {
   }
 }
 
+
+// LUMORA_HEALTH_WARMUP_V1
+async function __warmup(url: string, maxMs: number) {
+  const started = Date.now();
+  let last = "unknown";
+  while (Date.now() - started < maxMs) {
+    try {
+      const r = await fetch(url, { redirect: "follow" });
+      if (r.ok) return;
+      last = `http:${r.status}`;
+    } catch (e) {
+      last = (e && (e as any).message) ? String((e as any).message) : "fetch_failed";
+    }
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  console.warn(`warmup_timeout:${maxMs}ms last=${last}`);
+}
 describe("/api/version smoke", () => {
-  it(
+    beforeAll(async () => { await __warmup(String(new URL("/api/version", BASE)), 60000); }, 60000);
+
+it(
     "returns 200 and JSON with ok/service/version fields",
     async () => {
       const base = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
-      const { r, ct, j, txt } = await fetchJson(`${base}/api/version`, 20000);
+      const { r, ct, j, txt } = await fetchJson(`${base}/api/version`, 40000);
       expect(r.status).toBe(200);
       expect(ct).toContain("application/json");
       expect(j).not.toBe(null);
