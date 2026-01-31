@@ -2,6 +2,18 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, createWriteStream } from "node:fs";
 import { resolve } from "node:path";
 
+function __withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`timeout:${label}:${ms}ms`)), ms);
+    p.then(
+      (v) => { clearTimeout(timer); resolve(v); },
+      (e) => { clearTimeout(timer); reject(e); }
+    );
+  });
+}
+
+
+
 type StartOpts = {
   port?: number;
   timeoutMs?: number;
@@ -22,14 +34,12 @@ async function waitFor(url: string, timeoutMs: number) {
   let lastErr = "unknown";
   while (Date.now() - started < timeoutMs) {
     try {
-      const ac = new AbortController();
-      const t = setTimeout(() => ac.abort(), 3000);
       try {
-        const res = await fetch(url, { cache: "no-store", signal: ac.signal as any });
+        const res = await __withTimeout(fetch(url, { cache: "no-store"as any }), timeoutMs, "fetch");
         if (res.ok) return;
         lastErr = `http:${res.status}`;
       } finally {
-        clearTimeout(t);
+
       }
     } catch (e: any) {
       lastErr = (e && e.message) ? String(e.message) : "fetch_failed";

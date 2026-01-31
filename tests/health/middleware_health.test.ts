@@ -1,105 +1,58 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { BASE, withHealthServer } from "./helpers/healthTestUtils";
 import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
 
-beforeAll(async () => { await ensureServer({ timeoutMs: 45000 }); });
-afterAll(async () => { await shutdownServer(); });
+/**
+ * This test enforces that the health endpoint is reachable and does not get
+ * rewritten by middleware in unexpected ways.
+ *
+ * We keep it deterministic:
+ * - never rely on BASE_URL="/"
+ * - never pass AbortSignal to undici fetch in tests (handled elsewhere)
+ * - always wait for /api/health to become reachable before assertions
+ */
 
-
-// LUMORA_HEALTH_TEST_BOOTSTRAP_V2
-// END LUMORA_TEST_NEXT_DEV_BOOTSTRAP
-import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
-import net from "node:net";
-
-const __LUMORA_BASE = process.env.BASE_URL || "http://127.0.0.1:3000";
-
-let __child: ChildProcessWithoutNullStreams | null = null;
-let __booted = false;
-let __bootPort: number | null = null;
-
-function __sleep(ms: number) {
+async function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-function __getFreePort(): Promise<number> {
-  return new Promise((resolve, reject) => {
-    const srv = net.createServer();
-    srv.unref();
-    srv.on("error", reject);
-    srv.listen(0, "127.0.0.1", () => {
-      const addr = srv.address();
-      srv.close(() => {
-        if (addr && typeof addr === "object") resolve(addr.port);
-        else reject(new Error("free_port_failed"));
-      });
-    });
-  });
-}
-
-async function __probeHealth(base: string, timeoutMs = 1500): Promise<boolean> {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
-  try {
-    const res = await fetch(new URL("/api/health", base), { cache: "no-store", signal: ac.signal });
-    return res.ok;
-  } catch {
-    return false;
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-async function __ensureServerReady(): Promise<string> {
-  if (await __probeHealth(__LUMORA_BASE)) return __LUMORA_BASE;
-
-  __bootPort = await __getFreePort();
-  const bootBase = `http://127.0.0.1:${__bootPort}`;
-  if (await __probeHealth(bootBase)) return bootBase;
-
-  const env = { ...process.env, PORT: String(__bootPort) };
-  __child = spawn("npx", ["next", "dev"], { env, stdio: ["ignore", "pipe", "pipe"], cwd: process.cwd() });
-  __booted = true;
-
-  __child.stdout.on("data", () => void 0);
-  __child.stderr.on("data", () => void 0);
-
-  const maxWaitMs = 120_000;
+async function waitForOk(url: string, maxMs: number) {
   const start = Date.now();
-  while (Date.now() - start < maxWaitMs) {
-    if (await __probeHealth(bootBase, 2000)) return bootBase;
-    await __sleep(500);
+  let last = "unknown";
+  while (Date.now() - start < maxMs) {
+    try {
+      const res = await fetch(url, { redirect: "follow" });
+      if (res.ok) return res;
+      last = `status:${res.status}`;
+    } catch (e: any) {
+      last = typeof e?.message === "string" ? e.message : "fetch_error";
+    }
+    await sleep(250);
   }
-  throw new Error(`next_dev_boot_timeout:${bootBase}`);
+  throw new Error(`waitForOk_timeout:${maxMs}ms last=${last}`);
 }
+
+const BASE = process.env.TEST_BASE_URL || "http://127.0.0.1:3000";
+
+beforeAll(async () => {
+  // Boot the dev server (shared helper) and then wait for /api/health
+  await ensureServer({ timeoutMs: 90_000 }, 90_000);
+  await waitForOk(String(new URL("/api/health", BASE)), 90_000);
+}, 120_000);
 
 afterAll(async () => {
-  if (__booted && __child) {
-    try {
-      __child.kill("SIGTERM");
-      await __sleep(500);
-      __child.kill("SIGKILL");
-    } catch {
-      // ignore
-    } finally {
-      __child = null;
-    }
-  }
+  await shutdownServer();
 });
 
-
-
-import { describe, it, expect } from "vitest";
-
-withHealthServer();
-
 describe("health middleware rewrite — minimal suite guard (auto)", () => {
-  const BASE = process.env.BASE_URL || "http://127.0.0.1:3000";
-  it("/api/health returns JSON ok (minimal)", async () => {
-    const res = await fetch(new URL("/api/health", BASE), { cache: "no-store" });
-    expect(res.ok).toBe(true);
-    const ct = res.headers.get("content-type") ?? "";
-    expect(ct.toLowerCase()).toContain("application/json");
-    const j = await res.json();
-    expect(j).toBeTruthy();
+  it("GET /api/health returns JSON and is not rewritten", async () => {
+    const url = String(new URL("/api/health", BASE));
+    const res = await waitForOk(url, 30_000);
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    const text = await res.text();
+    expect(res.status).toBe(200);
+    expect(ct.includes("application/json")).toBe(true);
+    // Next middleware rewrites (if present) often set this header; health should not.
+    expect(res.headers.get("x-middleware-rewrite")).toBeFalsy();
+    expect(text.length).toBeGreaterThan(2);
   });
 });

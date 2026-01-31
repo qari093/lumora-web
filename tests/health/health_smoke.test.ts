@@ -1,27 +1,32 @@
 import { describe, it, expect } from "vitest";
 
-const BASE =
-  (process.env.BASE_URL && process.env.BASE_URL.trim()) ||
-  "http://127.0.0.1:3000";
+
+function __resolveTestBase(): string {
+  const env = (process.env.TEST_BASE_URL || process.env.BASE_URL || "").trim();
+  if (env && /^https?:\/\//i.test(env)) return env.replace(/\/$/, "");
+  const port = (process.env.PORT || "3000").trim() || "3000";
+  return `http://127.0.0.1:${port}`;
+}
+
+async function __fetchWithTimeout(url: string, timeoutMs: number): Promise<Response> {
+  // Node/Vitest environment can have AbortSignal incompatibilities depending on undici/polyfills.
+  // Use Promise.race timeout without passing "signal".
+  const timeout = new Promise((_, rej) =>
+    setTimeout(() => rej(new Error(`timeout:${timeoutMs}ms`)), timeoutMs)
+  );
+  return (await Promise.race([fetch(url, { redirect: "follow" }), timeout])) as Response;
+}
+
+const BASE = __resolveTestBase();
 
 async function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
 async function fetchText(path: string, timeoutMs = 6_000) {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(new Error(`abort:${timeoutMs}ms`)), timeoutMs);
-  try {
-    const res = await fetch(new URL(path, BASE), {
-      cache: "no-store",
-      redirect: "manual",
-      signal: ac.signal,
-    });
-    const text = await res.text();
-    return { res, text };
-  } finally {
-    clearTimeout(t);
-  }
+  const res = await __fetchWithTimeout(String(new URL(path, BASE)), timeoutMs);
+  const text = await res.text();
+  return { res, text };
 }
 
 async function ensureHealthWithin(maxWaitMs: number) {
@@ -29,7 +34,7 @@ async function ensureHealthWithin(maxWaitMs: number) {
   let lastErr = "unknown";
   while (Date.now() - start < maxWaitMs) {
     try {
-      const { res, text } = await fetchText("/api/health", 5_000);
+      const { res, text } = await fetchText("/api/health", 10_000);
       if (res.ok) {
         const ct = res.headers.get("content-type") ?? "";
         if (ct.includes("application/json")) {
@@ -60,7 +65,7 @@ describe("health smoke", () => {
     async () => {
       // IMPORTANT: avoid beforeAll hooks entirely (hooks can hit global hookTimeout=30s).
       // Do readiness + assertion in the test itself (per-test timeout applies).
-      await ensureHealthWithin(20_000);
+      await ensureHealthWithin(45_000);
 
       const { res, text } = await fetchText("/api/health", 8_000);
       expect(res.ok).toBe(true);

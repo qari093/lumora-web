@@ -1,19 +1,31 @@
 import { describe, it, expect } from "vitest";
 
+
+function __timeoutPromise(ms: number): Promise<never> {
+  return new Promise((_, rej) => setTimeout(() => rej(new Error(`timeout:${ms}ms`)), ms));
+}
+
+async function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, timeoutMs: number): Promise<Response> {
+  // Avoid AbortSignal instance mismatch (undici fetch vs jsdom/happy-dom signals) by not passing "signal".
+  const safeInit: RequestInit = { ...init };
+  // @ts-expect-error - ensure signal removed even if typed
+  delete (safeInit as any).signal;
+  return (await Promise.race([fetch(input, safeInit), __timeoutPromise(timeoutMs)])) as Response;
+}
+
 const base = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
 
 async function fetchJson(url: string, timeoutMs = 15000) {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(), timeoutMs);
   try {
-    const r = await fetch(url, { redirect: "follow", signal: ac.signal });
+    const r = await fetchWithTimeout(url, {
+redirect: "follow",
+}, timeoutMs);
     const ct = (r.headers.get("content-type") || "").toLowerCase();
     const txt = await r.text();
     let j: any = null;
     try { j = JSON.parse(txt); } catch { j = null; }
     return { r, ct, txt, j };
   } finally {
-    clearTimeout(t);
   }
 }
 
