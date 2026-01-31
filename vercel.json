@@ -1,7 +1,5 @@
 {
-  "framework": "nextjs",
-  "crons": [],
-  "github": {
-    "silent": true
-  }
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile",
+  "buildCommand": "corepack enable && pnpm -s build",
+  "framework": "nextjs"
 }
