@@ -1,58 +1,81 @@
-import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-export const runtime = "nodejs";
+type ReqBody = {
+  userId: string;
+  credits: number; // credits to purchase
+  // optional overrides
+  successUrl?: string;
+  cancelUrl?: string;
+};
 
-const stripeSecret = process.env.STRIPE_SECRET_KEY;
-const successUrl = process.env.STRIPE_SUCCESS_URL || "http://localhost:3000/shop?status=success";
-const cancelUrl  = process.env.STRIPE_CANCEL_URL  || "http://localhost:3000/shop?status=cancel";
+function json(status: number, body: any) {
+  return NextResponse.json(body, { status });
+}
 
-const stripe = stripeSecret
-  ? new Stripe(stripeSecret, { apiVersion: "2024-06-20" })
-  : null;
-
-export async function POST(req: NextRequest) {
-  let body: any;
-  const contentType = req.headers.get("content-type") || "";
+export async function POST(req: Request) {
   try {
-    if (!contentType.toLowerCase().includes("application/json")) {
-      return NextResponse.json(
-        { ok: false, error: "Content-Type must be application/json" },
-        { status: 400 }
-      );
+    const secret = process.env.STRIPE_SECRET_KEY || "";
+    if (!secret) {
+      return json(500, { ok: false, error: "missing_STRIPE_SECRET_KEY" });
     }
-    body = await req.json();
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "Invalid JSON", hint: "Ensure Content-Type: application/json and raw JSON body" },
-      { status: 400 }
-    );
-  }
 
-  const { userId, priceId } = body || {};
-  if (!userId || !priceId) {
-    return NextResponse.json({ ok: false, error: "Missing userId or priceId" }, { status: 400 });
-  }
+    const appUrl = (process.env.APP_URL || "http://127.0.0.1:3000").replace(/\/+$/, "");
+    const raw = (await req.json().catch(() => null)) as ReqBody | null;
 
-  if (!stripe) {
-    return NextResponse.json({ ok: false, error: "Stripe not configured yet" }, { status: 501 });
-  }
+    const userId = (raw?.userId || "").trim();
+    const credits = Number(raw?.credits ?? 0);
 
-  try {
+    if (!userId) return json(400, { ok: false, error: "userId_required" });
+    if (!Number.isFinite(credits) || credits <= 0) return json(400, { ok: false, error: "credits_invalid" });
+
+    const successUrl = (raw?.successUrl || `${appUrl}/wallet?stripe=success`).trim();
+    const cancelUrl = (raw?.cancelUrl || `${appUrl}/wallet?stripe=cancel`).trim();
+
+    const stripe = new Stripe(secret, { apiVersion: "2024-06-20" });
+
+    // Minimal Stripe config. Your product/pricing can be swapped later.
+    // Here we treat "credits" as quantity of a single unit-price item in EUR cents.
+    // NOTE: You can replace this with a real Price ID once you finalize pricing.
+    const unitAmountCents = Math.max(1, Math.trunc(credits)) * 100; // 1 credit => €1.00 (placeholder)
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      line_items: [{ price: priceId, quantity: 1 }],
       success_url: successUrl,
       cancel_url: cancelUrl,
-      metadata: { userId }, // helpful later in your webhook
+      line_items: [
+        {
+          price_data: {
+            currency: "eur",
+            product_data: { name: "Lumora Credits" },
+            unit_amount: unitAmountCents,
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: { userId, credits: String(Math.trunc(credits)) },
     });
 
-    return NextResponse.json({ ok: true, url: session.url }, { status: 200 });
-  } catch (err: any) {
-    console.error("Stripe create session failed:", err);
-    return NextResponse.json(
-      { ok: false, error: err?.message || "Stripe error creating session" },
-      { status: 500 }
-    );
+    // Persist session for webhook fulfillment (guarded: no hard dependency on schema typing)
+    try {
+      const tx = prisma as any;
+      if (tx?.stripeCheckoutSession?.create) {
+        await tx.stripeCheckoutSession.create({
+          data: {
+            userId,
+            credits: Math.trunc(credits),
+            stripeSession: session.id,
+            status: "created",
+          },
+        });
+      }
+    } catch {
+      // non-fatal: webhook can still use metadata, or you can enforce DB later
+    }
+
+    return json(200, { ok: true, url: session.url, sessionId: session.id });
+  } catch (e: any) {
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    return json(500, { ok: false, error: msg, ts: Date.now() });
   }
 }
