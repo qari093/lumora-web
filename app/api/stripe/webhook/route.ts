@@ -1,84 +1,50 @@
-export const config = { api: { bodyParser: false } };
-
-import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
 
 export async function POST(req: Request) {
-  const whSecret = process.env.STRIPE_WEBHOOK_SECRET;
-  if (!whSecret) {
-    console.error("[stripe:webhook] Missing STRIPE_WEBHOOK_SECRET");
-    return NextResponse.json({ ok: false, error: "server misconfigured" }, { status: 500 });
-  }
+  const body = await req.text();
+  const sig = headers().get("stripe-signature");
 
-  const sig = req.headers.get("stripe-signature") || "";
-  const raw = Buffer.from(await req.arrayBuffer());
+  if (!sig) {
+    return NextResponse.json({ ok: false, error: "missing_signature" }, { status: 400 });
+  }
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(raw, sig, whSecret);
+    event = stripe.webhooks.constructEvent(
+      body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
   } catch (err: any) {
-    console.error("[stripe:webhook] signature verification failed:", err?.message || err);
-    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+    return NextResponse.json({ ok: false, error: err.message }, { status: 400 });
   }
 
-  try {
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const record = await prisma.stripeCheckoutSession.findUnique({
+      where: { stripeSession: session.id },
+    });
 
-      const userId  = (session.metadata?.userId ?? "demo-user-123");
-      const credits = Number(session.metadata?.credits ?? 0);
-      const amount  = Number(session.amount_total ?? 0); // in cents
-      const currency = (session.currency ?? "usd").toLowerCase();
-      const sessionId = session.id;
-      const paymentIntent = typeof session.payment_intent === "string"
-        ? session.payment_intent
-        : session.payment_intent?.id;
-
-      // idempotent write: transaction sessionId is unique
-      await prisma.$transaction(async (tx) => {
-        // ensure account exists
-        await tx.account.upsert({
-          where: { id: userId },
-          update: {},
-          create: { id: userId },
-        });
-
-        // create transaction (will throw if session already processed)
-        await tx.creditTransaction.create({
-          data: {
-            accountId: userId,
-            stripeSessionId: sessionId,
-            stripePaymentIntent: paymentIntent ?? null,
-            amount,
-            currency,
-            credits,
-          },
-        });
-
-        // increment balance
-        await tx.account.update({
-          where: { id: userId },
-          data: { balance: { increment: credits } },
-        });
-      });
-
-      console.log(`[stripe:webhook] credited ${credits} to ${userId} (session ${sessionId})`);
+    if (record && record.status !== "fulfilled") {
+      await prisma.$transaction([
+        prisma.wallet.update({
+          where: { userId: record.userId },
+          data: { credits: { increment: record.credits } },
+        }),
+        prisma.stripeCheckoutSession.update({
+          where: { id: record.id },
+          data: { status: "fulfilled", fulfilledAt: new Date() },
+        }),
+      ]);
     }
-
-    return NextResponse.json({ received: true }, { status: 200 });
-  } catch (err: any) {
-    console.error("[stripe:webhook] handler error:", err?.message || err);
-    return NextResponse.json({ ok: false, error: String(err?.message || err) }, { status: 500 });
   }
+
+  return NextResponse.json({ received: true });
 }
-
-// Stripe needs the raw body, so disable Nexts body parsing for this route
-
