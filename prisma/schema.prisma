@@ -7,6 +7,31 @@ datasource db {
   url      = env("DATABASE_URL") // dev: file:./prisma/dev.db
 }
 
+
+
+model CelebrationEIRollup5m {
+  id            String      @id @default(cuid())
+  celebrationId String
+  celebration   Celebration @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  windowStart   DateTime
+  reactions     Int         @default(0)
+  eiScore       Float       @default(0)
+  moodVec       Json?
+
+  @@unique([celebrationId, windowStart])
+  @@index([windowStart])
+}
+model EmotionIndexDaily {
+  id           String      @id @default(cuid())
+  day          DateTime
+  emotion      EmotionKind
+  ei           Float
+  count        Int         @default(0)
+  avgIntensity Float       @default(0)
+
+  @@unique([day, emotion])
+  @@index([emotion, day])
+}
 model Account {
   id           String              @id // user id (text in SQLite)
   balance      Int                 @default(0)
@@ -75,6 +100,7 @@ enum EmotionKind {
 /**
  * EMML: Core Models
  */
+
 model EmotionEvent {
   id        String       @id @default(cuid())
   kind      String
@@ -89,17 +115,8 @@ model EmotionEvent {
   @@index([emotion])
 }
 
-model EmotionIndexDaily {
-  id           String      @id @default(cuid())
-  day          DateTime
-  emotion      EmotionKind
-  ei           Float
-  count        Int         @default(0)
-  avgIntensity Float       @default(0)
 
-  @@unique([day, emotion])
-  @@index([emotion, day])
-}
+
 
 model EmotionMarketTick {
   id            String       @id @default(cuid())
@@ -277,6 +294,7 @@ model CelebrationParticipant {
   @@index([userId, joinedAt])
 }
 
+
 model CelebrationReaction {
   id            String       @id @default(cuid())
   celebrationId String
@@ -293,19 +311,8 @@ model CelebrationReaction {
   @@index([userId, createdAt])
 }
 
-model CelebrationEIRollup5m {
-  id            String      @id @default(cuid())
-  celebrationId String
-  celebration   Celebration @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
-  windowStart   DateTime
-  reactions     Int         @default(0)
-  eiScore       Float       @default(0)
-  moodVec       Json?
-  spamDiscarded Int         @default(0)
 
-  @@unique([celebrationId, windowStart])
-  @@index([windowStart])
-}
+
 
 model CelebrationReward {
   id            String      @id @default(cuid())
@@ -345,7 +352,7 @@ model CelebrationBadge {
 model AdminCelebrationControls {
   id        Int      @id @default(1)
   config    Json?
-  updatedAt DateTime @updatedAt
+  
 }
 
 model GlobalNowLiveTicker {
@@ -507,7 +514,7 @@ model Aura {
 model ShadowGarden {
   id        String     @id @default(cuid())
   entries   Json
-  lastEntry DateTime?
+  
   world     UserWorld?
 }
 
@@ -573,11 +580,10 @@ model EmmlSnapshot {
   createdAt      DateTime @default(now())
   id             String   @id @default(cuid())
   updatedAt      DateTime @updatedAt
-  composite      Json?    @default("{}")
-  indicesJson    Json     @default("{}")
-  marketsJson    Json     @default("{}")
-  metaJson       Json     @default("{}")
-
+  composite      Json?
+  indicesJson    Json
+  marketsJson    Json
+  metaJson       Json
   @@map("emml_snapshot")
 }
 
@@ -655,7 +661,7 @@ model PersonaAsset {
   sortOrder Int              @default(0)
   meta      Json?
 
-  createdAt DateTime @default(now())
+  
   updatedAt DateTime @updatedAt
 
   profileAvatars PersonaProfile @relation("PersonaProfileAvatars", fields: [profileId], references: [id], onDelete: Cascade)
@@ -680,7 +686,7 @@ model PersonaReactionMapping {
   isActive  Boolean             @default(true)
   meta      Json?
 
-  createdAt DateTime @default(now())
+  
   updatedAt DateTime @updatedAt
 
   profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -742,5 +748,45 @@ model VideoGenJob {
   error     String?
 
   @@index([status, createdAt])
+  @@index([userId, createdAt])
+}
+
+model Wallet {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  credits   Int     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ledger WalletLedger[]
+}
+
+model WalletLedger {
+  id          String   @id @default(cuid())
+  walletId    String
+  userId      String
+  direction   String   // credit | debit
+  amount      Int
+  source      String   // stripe | system | manual
+  refId       String   // stripeSession / internal ref
+  createdAt   DateTime @default(now())
+
+  wallet Wallet @relation(fields: [walletId], references: [id])
+
+  @@index([userId])
+  @@unique([source, refId]) // idempotency guard
+}
+
+model StripeCheckoutSession {
+  id             String   @id @default(cuid())
+  userId         String
+  credits        Int
+  stripeSession  String   @unique
+  status         String   @default("created") // created | paid | fulfilled | canceled | failed
+  currency       String?  @default("eur")
+  amountCents    Int?     // optional: store amount for audit
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
   @@index([userId, createdAt])
 }

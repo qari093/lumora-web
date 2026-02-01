@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { creditWalletOnce } from "@/lib/walletLedger";
@@ -40,10 +41,17 @@ export async function POST(req: Request) {
       if (!userId) return json(400, { ok: false, error: "metadata_userId_required" });
       if (!Number.isFinite(credits) || credits <= 0) return json(400, { ok: false, error: "metadata_credits_invalid" });
 
-      const refId = String(session.id || "").trim();
+      
+const refId = String(session.id || "").trim();
       if (!refId) return json(500, { ok: false, error: "missing_session_id" });
 
-      const applied = await creditWalletOnce({
+
+      await prisma.stripeCheckoutSession.update({
+        where: { stripeSession: refId },
+        data: { status: "paid" },
+      }).catch(() => null);
+      
+const applied = await creditWalletOnce({
         userId,
         amount: Math.trunc(credits),
         source: "stripe",
@@ -52,6 +60,13 @@ export async function POST(req: Request) {
 
       if (!applied.ok) return json(500, { ok: false, error: applied.error });
 
+
+      if (!applied.alreadyApplied) {
+        await prisma.stripeCheckoutSession.update({
+          where: { stripeSession: refId },
+          data: { status: "fulfilled" },
+        }).catch(() => null);
+      }
       return json(200, { ok: true, applied: applied.alreadyApplied ? "already" : "credited" });
     }
 

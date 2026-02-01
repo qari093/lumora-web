@@ -54,25 +54,17 @@ export async function POST(req: Request) {
         },
       ],
       metadata: { userId, credits: String(Math.trunc(credits)) },
+    });    
+    await prisma.stripeCheckoutSession.create({
+      data: {
+        userId,
+        credits: Math.trunc(credits),
+        stripeSession: session.id,
+        status: "created",
+        currency: String(session.currency || "eur"),
+        amountCents: typeof session.amount_total === "number" ? session.amount_total : null,
+      },
     });
-
-    // Persist session for webhook fulfillment (guarded: no hard dependency on schema typing)
-    try {
-      const tx = prisma as any;
-      if (tx?.stripeCheckoutSession?.create) {
-        await tx.stripeCheckoutSession.create({
-          data: {
-            userId,
-            credits: Math.trunc(credits),
-            stripeSession: session.id,
-            status: "created",
-          },
-        });
-      }
-    } catch {
-      // non-fatal: webhook can still use metadata, or you can enforce DB later
-    }
-
     return json(200, { ok: true, url: session.url, sessionId: session.id });
   } catch (e: any) {
     const msg = typeof e?.message === "string" ? e.message : "internal_error";
