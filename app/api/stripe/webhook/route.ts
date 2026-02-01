@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     const allowLive = (process.env.STRIPE_ALLOW_LIVE_MODE || "").trim() === "true";
     if (secret.startsWith("sk_live_") && !allowLive) {
-      return json(403, { ok: false, error: "live_mode_blocked_set_STRIPE_ALLOW_LIVE_MODE_true" });
+      return json(403, { ok: false, error: "stripe_live_mode_blocked" });
     }
   
     if (!whSecret) return json(500, { ok: false, error: "missing_STRIPE_WEBHOOK_SECRET" });
