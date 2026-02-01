@@ -13,6 +13,12 @@ export async function POST(req: Request) {
     if (!secret) return json(500, { ok: false, error: "missing_STRIPE_SECRET_KEY" });
 
     const whSecret = (process.env.STRIPE_WEBHOOK_SECRET || "").trim();
+
+    const allowLive = (process.env.STRIPE_ALLOW_LIVE_MODE || "").trim() === "true";
+    if (secret.startsWith("sk_live_") && !allowLive) {
+      return json(403, { ok: false, error: "live_mode_blocked_set_STRIPE_ALLOW_LIVE_MODE_true" });
+    }
+  
     if (!whSecret) return json(500, { ok: false, error: "missing_STRIPE_WEBHOOK_SECRET" });
 
     const sig = req.headers.get("stripe-signature");
