@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   // Extra hardening: force legacy iOS capable meta + mobile capable meta into <head>
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
   other: {
     "apple-mobile-web-app-capable": "yes",
     "mobile-web-app-capable": "yes",
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning data-lumora-theme="darkglass">
       <head>
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
         <meta name="color-scheme" content="dark" />
       </head>
       <body className="lumora-root">
