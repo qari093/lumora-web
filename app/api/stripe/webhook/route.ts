@@ -1,51 +1,64 @@
-import { creditWalletOnce } from "@/lib/walletLedger";
-import Stripe from "stripe";
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import Stripe from "stripe";
+import { creditWalletOnce } from "@/lib/walletLedger";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-});
+function json(status: number, body: any) {
+  return NextResponse.json(body, { status });
+}
 
 export async function POST(req: Request) {
-  const body = await req.text();
-  const sig = headers().get("stripe-signature");
-
-  if (!sig) {
-    return NextResponse.json({ ok: false, error: "missing_signature" }, { status: 400 });
-  }
-
-  let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
-  } catch (err: any) {
-    return NextResponse.json({ ok: false, error: err.message }, { status: 400 });
-  }
+    const secret = (process.env.STRIPE_SECRET_KEY || "").trim();
+    if (!secret) return json(500, { ok: false, error: "missing_STRIPE_SECRET_KEY" });
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-    const record = await prisma.stripeCheckoutSession.findUnique({
-      where: { stripeSession: session.id },
-    });
+    const whSecret = (process.env.STRIPE_WEBHOOK_SECRET || "").trim();
+    if (!whSecret) return json(500, { ok: false, error: "missing_STRIPE_WEBHOOK_SECRET" });
 
-    if (record && record.status !== "fulfilled") {
-      await prisma.$transaction([
-        prisma.wallet.update({
-          where: { userId: record.userId },
-          data: { credits: { increment: record.credits } },
-        }),
-        prisma.stripeCheckoutSession.update({
-          where: { id: record.id },
-          data: { status: "fulfilled", fulfilledAt: new Date() },
-        }),
-      ]);
+    const sig = req.headers.get("stripe-signature");
+    if (!sig) return json(400, { ok: false, error: "missing_stripe_signature" });
+
+    const stripe = new Stripe(secret, { apiVersion: "2024-06-20" });
+    const body = await req.text();
+
+    let event: Stripe.Event;
+    try {
+      event = stripe.webhooks.constructEvent(body, sig, whSecret);
+    } catch (e: any) {
+      const msg = typeof e?.message === "string" ? e.message : "invalid_signature";
+      return json(400, { ok: false, error: "invalid_signature", detail: msg });
     }
-  }
 
-  return NextResponse.json({ received: true });
+    // Handle only what we need for credits fulfillment
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
+
+      // Prefer metadata; fallback is not supported here (contract: metadata required)
+      const userId = String((session.metadata as any)?.userId || "").trim();
+      const creditsRaw = String((session.metadata as any)?.credits || "").trim();
+      const credits = Number(creditsRaw);
+
+      if (!userId) return json(400, { ok: false, error: "metadata_userId_required" });
+      if (!Number.isFinite(credits) || credits <= 0) return json(400, { ok: false, error: "metadata_credits_invalid" });
+
+      const refId = String(session.id || "").trim();
+      if (!refId) return json(500, { ok: false, error: "missing_session_id" });
+
+      const applied = await creditWalletOnce({
+        userId,
+        amount: Math.trunc(credits),
+        source: "stripe",
+        refId,
+      });
+
+      if (!applied.ok) return json(500, { ok: false, error: applied.error });
+
+      return json(200, { ok: true, applied: applied.alreadyApplied ? "already" : "credited" });
+    }
+
+    // Ignore other events (ack)
+    return json(200, { ok: true, ignored: true, type: event.type });
+  } catch (e: any) {
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    return json(500, { ok: false, error: msg, ts: Date.now() });
+  }
 }
