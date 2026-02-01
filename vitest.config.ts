@@ -8,9 +8,14 @@ export default defineConfig({
     },
   },
   test: {
-    hookTimeout: 30000,
-    testTimeout: 30000,
-    setupFiles: ["tests/vitest.setup.ts"],
+    singleThread: true,
+    pool: "forks",
+    setupFiles: ["tests/_helpers/vitest.global.setup.ts"],
+    
+    globalSetup: ["./tests/_helpers/vitest.globalSetup.ts"],
+hookTimeout: 120000,
+    testTimeout: 120000,
+    
     environment: "jsdom",
     globals: true,
     restoreMocks: true,

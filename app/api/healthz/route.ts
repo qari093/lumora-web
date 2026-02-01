@@ -1,13 +1,21 @@
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-export const runtime = "nodejs";
-
-export async function GET(_req: NextRequest) {
+// /api/healthz — stable alias for platform health checks.
+// Contract MUST match tests/health/health_contract_unit.test.ts expectations:
+// { ok: true, service: string, ts: number, ... }
+export async function GET() {
   return NextResponse.json(
-    { ok: true, service: "lumora", route: "/api/healthz", ts: Date.now() },
-    { status: 200, headers: { "cache-control": "no-store" } }
+    {
+      ok: true,
+      service: "healthz",
+      ts: Date.now(),
+    },
+    {
+      status: 200,
+      headers: {
+        "cache-control": "no-store",
+        "content-type": "application/json; charset=utf-8",
+      },
+    }
   );
 }
