@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { deriveModeLabel } from "../app/_components/lumaspace/state-banner";
 
 describe("deriveModeLabel", () => {
-  it("returns a descriptive label for demo mode", () => {
+  it("returns a descriptive label for preview mode", () => {
     expect(deriveModeLabel("demo")).toMatch(/Demo/i);
   });
 

@@ -45,7 +45,6 @@ export default function CelebrationPage({ params }: { params: { slug: string } }
     try {
       const res = await fetch(`/api/celebrations/${encodeURIComponent(slug)}/demo`, {
         method: "POST",
-        headers: { "content-type": "application/json", "x-user-id": "DEMO_USER_ID" },
         body: JSON.stringify({ action })
       });
       if (!res.ok) throw new Error(`action ${action} failed (${res.status})`);
