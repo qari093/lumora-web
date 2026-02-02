@@ -78,6 +78,21 @@ function setEmailCookie(res: NextResponse, email: string) {
 }
 
 export async function POST(req: NextRequest) {
+// LUMORA_AUTH_FIRST_GUARD: enforce auth before validating request params
+const authHeader = (req.headers.get("authorization") || "").trim();
+const hasBearer = /^bearer\s+\S+/i.test(authHeader);
+const hasXUser = ((req.headers.get("x-user-id") || "").trim().length > 0);
+
+// NextRequest cookies API is available in route handlers; tolerate undefined in tests
+const c1 = (req.cookies?.get?.("lumora_session")?.value || "").trim();
+const c2 = (req.cookies?.get?.("__Secure-lumora_session")?.value || "").trim();
+const hasSession = (c1.length > 0) || (c2.length > 0);
+
+// If no auth signal is present, return 401 immediately (do not leak param-validation behavior).
+if (!hasBearer && !hasSession && !hasXUser) {
+  return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
+}
+
   try {
     const body = (await req.json().catch(() => ({}))) as Payload;
     const email = normalizeEmail(body.email);
