@@ -78,6 +78,38 @@ function setEmailCookie(res: NextResponse, email: string) {
 }
 
 export async function POST(req: NextRequest) {
+  // LUMORA_AUTH_FIRST_GATE_PRIVATE_ACCESS
+  // Auth-first: do not leak validation errors to unauthenticated callers.
+  const authHeader = req.headers.get("authorization") || "";
+  const uidHeader =
+    req.headers.get("x-user-id") ||
+    req.headers.get("x-lumora-user-id") ||
+    req.headers.get("x-user") ||
+    "";
+
+  // NextRequest cookies API (available in route handlers)
+  const cookieNames = [
+    "lumora_session",
+    "lumora_access",
+    "next-auth.session-token",
+    "__Secure-next-auth.session-token",
+    "authjs.session-token",
+    "__Secure-authjs.session-token"
+  ];
+  let hasSessionCookie = false;
+  try {
+    for (const name of cookieNames) {
+      const v = req.cookies?.get?.(name)?.value;
+      if (v && String(v).length > 8) { hasSessionCookie = true; break; }
+    }
+  } catch (_) {}
+
+  const authed = Boolean(authHeader.trim()) || Boolean(String(uidHeader).trim()) || hasSessionCookie;
+  if (!authed) {
+    return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
+  }
+
+
 // LUMORA_AUTH_FIRST_GUARD: enforce auth before validating request params
 const authHeader = (req.headers.get("authorization") || "").trim();
 const hasBearer = /^bearer\s+\S+/i.test(authHeader);
