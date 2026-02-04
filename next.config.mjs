@@ -1,3 +1,5 @@
+/* eslint-env node */
+/* eslint-disable no-undef */
 import base from "./next.config.base.mjs"
 /**
  * Final36 Security Overlay

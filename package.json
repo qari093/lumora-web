@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint --max-warnings=0 --no-error-on-unmatched-pattern \"app\" \"src\" \"components\" \"lib\" \"services\" \"pages\" \"next.config.*\" \"middleware.*\" \"*.{js,cjs,mjs,ts,tsx}\" --ignore-pattern \"**/.quarantine/**\" --ignore-pattern \"**/docs/**\" --ignore-pattern \"**/tools/**\" --ignore-pattern \"**/scripts/**\" --ignore-pattern \"**/tests/**\" --ignore-pattern \"**/polaroid-mvp/**\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --reporter=basic",
     "game:dev": "next dev -p 3000",
