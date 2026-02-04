@@ -1,6 +1,12 @@
 import { describe, expect, test } from "vitest";
 import { config, middleware } from "../../middleware";
 
+function __baseUrl(): string {
+  const u = process.env.LUMORA_TEST_BASE_URL;
+  return (u && typeof u === 'string' && u.startsWith('http')) ? u : '" + __baseUrl() + "';
+}
+
+
 type NextUrlLike = URL & { clone: () => URL };
 
 type ReqLike = { nextUrl: NextUrlLike };

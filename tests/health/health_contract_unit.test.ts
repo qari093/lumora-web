@@ -1,5 +1,11 @@
 import { describe, expect, test } from "vitest";
 
+function __baseUrl(): string {
+  const u = process.env.LUMORA_TEST_BASE_URL;
+  return (u && typeof u === 'string' && u.startsWith('http')) ? u : '" + __baseUrl() + "';
+}
+
+
 /**
  * These are UNIT contract tests (no server, no fetch).
  * They validate that our route handlers produce stable JSON shapes.

@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 /**
  * Wallet compatibility surface for API routes.
  *
@@ -194,3 +195,98 @@ export async function transferEuros(args: {
     return { ok: false, error: typeof e?.message === "string" ? e.message : "transfer_failed" };
   }
 }
+
+
+export async function getWalletBalance(..._args: any[]) {
+  throw new Error("wallet_balance_not_implemented");
+}
+export async function getWalletHistory(..._args: any[]) {
+  throw new Error("wallet_history_not_implemented");
+}
+
+// --- Wallet API surface (Launch Step 24) ---
+export type WalletBalance = {
+  ok: true;
+  ownerId: string;
+  walletId?: string;
+  currency: string;
+  available: string; // decimal string
+  pending: string;   // decimal string
+  ts: number;
+} | {
+  ok: false;
+  ownerId?: string;
+  error: "ownerId_required" | "wallet_not_found" | "internal_error";
+  ts: number;
+};
+
+export type WalletHistoryItem = {
+  id: string;
+  ts: number;
+  type: string;
+  amount: string;      // decimal string
+  currency: string;
+  memo?: string | null;
+  refType?: string | null;
+  refId?: string | null;
+  direction?: "credit" | "debit" | "neutral";
+};
+
+export type WalletHistory = {
+  ok: true;
+  ownerId: string;
+  currency: string;
+  items: WalletHistoryItem[];
+  cursor?: string | null;
+  ts: number;
+} | {
+  ok: false;
+  ownerId?: string;
+  error: "ownerId_required" | "wallet_not_found" | "internal_error";
+  ts: number;
+};
+
+function decToString(v: any): string {
+  if (v == null) return "0";
+  if (typeof v === "string") return v;
+  if (typeof v === "number") return String(v);
+  if (typeof v === "bigint") return v.toString();
+  // Prisma Decimal has toString()
+  if (typeof v?.toString === "function") return v.toString();
+  return "0";
+}
+
+async function findPrimaryWallet(ownerId: string) {
+  // Support multiple possible schemas by probing.
+  // 1) Wallet model: { id, ownerId, currency, available, pending } or similar
+  // 2) WalletBalance table or Ledger-derived balance
+  // We prefer Wallet table if present.
+  const client: any = (globalThis as any).prisma || (await import("@/lib/prisma")).prisma;
+  const prismaAny: any = client;
+
+  if (prismaAny?.wallet?.findFirst) {
+    const w = await prismaAny.wallet.findFirst({
+      where: { ownerId },
+      orderBy: [{ createdAt: "asc" }, { id: "asc" }].filter(Boolean) as any
+    });
+    return { kind: "wallet", w };
+  }
+
+  // Fallback: Wallets model (plural)
+  if (prismaAny?.wallets?.findFirst) {
+    const w = await prismaAny.wallets.findFirst({
+      where: { ownerId },
+      orderBy: [{ createdAt: "asc" }, { id: "asc" }].filter(Boolean) as any
+    });
+    return { kind: "wallets", w };
+  }
+
+  // Fallback: compute from ledger if available
+  if (prismaAny?.ledgerEntry?.findMany || prismaAny?.ledger?.findMany) {
+    return { kind: "ledger", w: null };
+  }
+
+  throw new Error("wallet_schema_not_detected");
+}
+
+
