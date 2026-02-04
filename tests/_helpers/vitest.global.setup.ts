@@ -46,7 +46,7 @@ function writeMarker(): void {
 
 function ensureNextBuild(): void {
   if (process.env.NEXT_TEST_FORCE_BUILD === "1") {
-    execSync("npx -y next build", { stdio: "inherit" });
+    execSync("npx --yes next build", { stdio: "inherit" });
     writeMarker();
     return;
   }
@@ -59,7 +59,7 @@ function ensureNextBuild(): void {
     return;
   }
 
-  execSync("npx -y next build", { stdio: "inherit" });
+  execSync("npx --yes next build", { stdio: "inherit" });
   writeMarker();
 }
 

@@ -19,7 +19,7 @@ function __applyMigrationsOnce() {
   // @ts-ignore
   if (globalThis[key]) return;
   try {
-    execSync("npx -y prisma migrate deploy", {
+    execSync("npx --yes prisma migrate deploy", {
       stdio: "pipe",
       env: { ...process.env, DATABASE_URL: __testDbUrl },
     });
