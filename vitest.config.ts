@@ -10,7 +10,9 @@ resolve: {
     },
   },
   test: {
-    exclude: ['**/.quarantine/**'],
+    
+    reporters: ['default', 'hanging-process'],
+exclude: ['**/.quarantine/**'],
     singleThread: true,
     pool: "forks",
     setupFiles: ["tests/_helpers/vitest.global.setup.ts"],
