@@ -27,7 +27,7 @@ const BASELINE = [
   { key: "Content-Security-Policy", value: CSP },
 ];
 
-const nextConfig = {
+let nextConfig = {
   ...base,
   async headers() {
     const existing =
@@ -54,6 +54,32 @@ nextConfig.headers = async () => {
     ...r,
     headers: Array.isArray(r.headers) ? [...r.headers, hsts] : [hsts],
   }));
+};
+
+
+// __LUMORA_MANIFEST_HEADERS_WRAP_V7__
+// Force-prepend manifest headers regardless of how headers() is implemented.
+// This avoids brittle AST injection into an existing headers() body.
+const __lumoraManifestRule = {
+  source: "/manifest.webmanifest",
+  headers: [
+    { key: "Cache-Control", value: "public, max-age=3600, immutable" },
+    { key: "X-Lumora-Manifest-Headers", value: "1" },
+  ],
+};
+
+const __lumoraPrevHeaders = nextConfig && (nextConfig.headers || nextConfig.headers);
+nextConfig = nextConfig || {};
+nextConfig.headers = async () => {
+  let prev = [];
+  try {
+    prev = typeof __lumoraPrevHeaders === "function" ? await __lumoraPrevHeaders() : [];
+  } catch {
+    prev = [];
+  }
+  if (!Array.isArray(prev)) prev = [];
+  prev = prev.filter((r) => !(r && r.source === "/manifest.webmanifest"));
+  return [__lumoraManifestRule, ...prev];
 };
 
 export default nextConfig;
