@@ -135,6 +135,9 @@ export function middleware(request) {
     if (!h.has("x-frame-options")) h.set("X-Frame-Options", "DENY");
     if (!h.has("permissions-policy")) h.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
 
-    return resp;
+    
+    // __LUMORA_MW_CSP_STEP53_BASELINE__
+    if (!h.has("content-security-policy")) h.set("Content-Security-Policy", "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; font-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https: wss:; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests");
+return resp;
   });
 }
