@@ -35,7 +35,7 @@ function lumoraHasAuth(req: any): boolean {
   return /(session|token|auth|jwt|sid|next-auth)/i.test(cookie);
 }
 
-export function middleware(req: NextRequest) {
+function __lumora_mw_inner(req: NextRequest) {
 
   // __LUMORA_ICON_MW_STEP49_RETRY2__
   // Force icon cache + proof header even when Next headers() are bypassed for special routes/static assets.
@@ -117,3 +117,24 @@ export const config = {
     "/((?!api|_next/static|_next/image|favicon.ico|icon-.*\.png|apple-touch-icon\.png).*)"
   ],
 };
+
+
+/**
+ * __LUMORA_MW_WRAP_STEP53_ALL__
+ * Guarantee baseline security headers across ALL matched routes (including /wallet).
+ * Do not weaken; only set when missing.
+ */
+export function middleware(request) {
+  const maybe = __lumora_mw_inner(request);
+  return Promise.resolve(maybe).then((respMaybe) => {
+    const resp = respMaybe ?? NextResponse.next();
+    const h = resp.headers;
+
+    if (!h.has("x-content-type-options")) h.set("X-Content-Type-Options", "nosniff");
+    if (!h.has("referrer-policy")) h.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    if (!h.has("x-frame-options")) h.set("X-Frame-Options", "DENY");
+    if (!h.has("permissions-policy")) h.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+
+    return resp;
+  });
+}
