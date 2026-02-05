@@ -102,8 +102,18 @@ export function middleware(req: NextRequest) {
 }
 
 // LUMORA_MW_MATCHER_CONFIG — ensure middleware runs for wallet UI + wallet APIs
+
+
+
+
+
+/**
+ * __LUMORA_MIDDLEWARE_MATCHER_STEP53_ROOT__
+ * Explicitly include '/' so security headers apply to homepage.
+ */
 export const config = {
-  matcher: ["/manifest.webmanifest", "/wallet", "/wallet/:path*", "/api/wallet/:path*", "/api/wallets/:path*"],
-}
-
-
+  matcher: [
+    "/",
+    "/((?!api|_next/static|_next/image|favicon.ico|icon-.*\.png|apple-touch-icon\.png).*)"
+  ],
+};
