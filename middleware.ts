@@ -1,6 +1,28 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+
+/**
+ * __LUMORA_SECURITY_HEADERS_STEP53__
+ * Enforce baseline security headers on ALL non-API responses.
+ * (API routes may emit their own; Step 53 verifies core pages.)
+ */
+function lumoraApplySecurityHeaders(res: any) {
+  try {
+    // Don’t overwrite if already set upstream
+    if (!res.headers.get("x-content-type-options")) res.headers.set("x-content-type-options", "nosniff");
+    if (!res.headers.get("x-frame-options")) res.headers.set("x-frame-options", "DENY");
+    if (!res.headers.get("referrer-policy")) res.headers.set("referrer-policy", "strict-origin-when-cross-origin");
+    if (!res.headers.get("permissions-policy")) res.headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
+    // Only set CSP if missing (avoid breaking existing CSP logic elsewhere)
+    if (!res.headers.get("content-security-policy")) {
+      res.headers.set("content-security-policy",
+        "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:");
+    }
+  } catch {}
+  return res;
+}
+
 /* LUMORA_WALLET_MW_GATE */
 function lumoraHasAuth(req: any): boolean {
   const auth = (req.headers.get("authorization") || "").trim();
@@ -74,11 +96,14 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  const __res = NextResponse.next();
+  // __LUMORA_SECURITY_HEADERS_APPLY_STEP53__
+  return lumoraApplySecurityHeaders(__res);
 }
 
 // LUMORA_MW_MATCHER_CONFIG — ensure middleware runs for wallet UI + wallet APIs
 export const config = {
   matcher: ["/manifest.webmanifest", "/wallet", "/wallet/:path*", "/api/wallet/:path*", "/api/wallets/:path*"],
 }
+
 
