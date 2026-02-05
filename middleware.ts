@@ -14,6 +14,39 @@ function lumoraHasAuth(req: any): boolean {
 }
 
 export function middleware(req: NextRequest) {
+
+  // __LUMORA_ICON_MW_STEP49_RETRY2__
+  // Force icon cache + proof header even when Next headers() are bypassed for special routes/static assets.
+  // Applies to: /favicon.ico, /icon, /apple-icon, /icon.png, /apple-icon.png
+  {
+    const p = req.nextUrl.pathname || "";
+    const isFavicon = p === "/favicon.ico";
+    const isIcon = p === "/icon" || p === "/apple-icon" || p === "/icon.png" || p === "/apple-icon.png";
+    if (isFavicon || isIcon) {
+      const res = NextResponse.next();
+      res.headers.set("X-Lumora-Icon-Headers", "1");
+      if (isFavicon) {
+        res.headers.set("Cache-Control", "public, max-age=86400, immutable");
+      } else {
+        res.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      }
+      return res;
+    }
+  }
+
+
+  // Step 46 — enforce cache headers for PWA manifest (must override static/metadata defaults)
+  try {
+    const pathname = req?.nextUrl?.pathname || "";
+    if (pathname === "/manifest.webmanifest") {
+      res.headers.set("X-Lumora-MW-Hit", "1");const res = NextResponse.next();
+      res.headers.set("Cache-Control", "public, max-age=3600, immutable");
+      res.headers.set("Content-Type", "application/manifest+json");
+      res.headers.set("X-Content-Type-Options", "nosniff");
+      
+      return res;
+    }
+  } catch {}
   // LUMORA_WALLET_API_AUTH_GUARD — auth-first: deny unauthenticated wallet API calls BEFORE any payload validation
   // Applies to: /api/wallet/* and /api/wallets/*
   {
@@ -46,10 +79,6 @@ export function middleware(req: NextRequest) {
 
 // LUMORA_MW_MATCHER_CONFIG — ensure middleware runs for wallet UI + wallet APIs
 export const config = {
-  matcher: [
-    "/wallet",
-    "/wallet/:path*",
-    "/api/wallet/:path*",
-    "/api/wallets/:path*",
-  ],
-};
+  matcher: ["/manifest.webmanifest", "/wallet", "/wallet/:path*", "/api/wallet/:path*", "/api/wallets/:path*"],
+}
+
