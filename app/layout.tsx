@@ -7,6 +7,7 @@ import { baseURL, meta, fonts } from "@/resources/once-ui.config";
 import ClientLayout from "@/components/ClientLayout";
 import SplashGate from "@/components/splash/SplashGate";
 import BootMark from "@/components/splash/BootMark";
+import ServiceWorkerRegister from "@/components/pwa/ServiceWorkerRegister";
 
 const LUMORA_THEME_COLOR = "#070b14";
 
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="dark" />
       </head>
       <body className="lumora-root">
+        <ServiceWorkerRegister />
         
         <SplashGate durationMs={1400} fadeOutMs={220} />
         <BootMark />
