@@ -111,14 +111,6 @@ function __lumora_mw_inner(req: NextRequest) {
  * __LUMORA_MIDDLEWARE_MATCHER_STEP53_ROOT__
  * Explicitly include '/' so security headers apply to homepage.
  */
-export const config = {
-  matcher: [
-    "/",
-    "/((?!api|_next/static|_next/image|favicon.ico|icon-.*\.png|apple-touch-icon\.png).*)"
-  ],
-};
-
-
 /**
  * __LUMORA_MW_WRAP_STEP53_ALL__
  * Guarantee baseline security headers across ALL matched routes (including /wallet).
@@ -141,3 +133,9 @@ export function middleware(request) {
 return resp;
   });
 }
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|manifest.webmanifest|sitemap.xml|apple-icon|icon).*)",
+  ],
+};
