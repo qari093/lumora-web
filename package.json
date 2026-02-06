@@ -151,7 +151,8 @@
     "ci:final36": "sh scripts/guard/ci_final36_gate.sh",
     "test:unit": "sh scripts/launch/step31/vitest_unit.sh",
     "build:guard": "sh scripts/launch/build_guard.sh",
-    "vercel-build": "npm run build:guard && next build"
+    "vercel-build": "npm run build:guard && next build",
+    "ci:launch-headers": "sh scripts/ci/launch_headers_gate.sh"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
