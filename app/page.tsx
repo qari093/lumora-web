@@ -34,6 +34,7 @@ export default function HomePage() {
 
   return (
     <main className="lumoHome">
+      <div style={{ marginTop: 16 }}><a href="/portals">→ View all portals</a></div>
       {/* STEP133_SPLASH_READY */}
       <span id="STEP133_SPLASH_READY" style={{ display: "none" }}>
         STEP133_SPLASH_READY
