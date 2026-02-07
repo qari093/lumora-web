@@ -1,20 +1,30 @@
-import PortalShell from "@/components/portals/PortalShell";
-import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
+import { loadLiveRooms } from "@/lib/live/loadRooms";
 
-export const dynamic = "force-dynamic";
+export default function LivePage() {
+  const rooms = loadLiveRooms();
 
-export default async function LivePage() {
   return (
-    <PortalShell title="Live" subtitle="Rooms + realtime (shell active)">
-      <PortalStatusGrid />
-      <section style={{ marginTop: 14 }}>
-        <h2 style={{ margin: "10px 0", fontSize: 16 }}>Room operations</h2>
-        <ul style={{ margin: 0, paddingLeft: 18, opacity: 0.9, lineHeight: 1.6 }}>
-          <li>Public rooms: <code>/api/live/rooms/public</code></li>
-          <li>Create/publish: <code>/api/live/publish</code></li>
-          <li>Status: <code>/api/live/status</code></li>
-        </ul>
-      </section>
-    </PortalShell>
+    <main className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Live</h1>
+      <p className="opacity-70 text-sm">
+        Community rooms are active in seed mode (no streaming infra required yet).
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {rooms.map(r => (
+          <a
+            key={r.id}
+            href={r.cta}
+            className="rounded-xl border p-5 hover:bg-white/5 transition"
+          >
+            <div className="text-lg font-medium">{r.title}</div>
+            <div className="text-sm opacity-70">{r.topic}</div>
+            <div className="mt-2 text-xs uppercase opacity-50">
+              Status: {r.status}
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
   );
 }

@@ -1,3 +1,4 @@
+import { PrimaryNav } from "@/components/nav/PrimaryNav";
 // app/layout.tsx
 import "@/resources/custom.css";
 import "./globals.css";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="dark" />
       </head>
       <body className="lumora-root">
+<PrimaryNav />
         <ServiceWorkerRegister />
         
         <SplashGate durationMs={1400} fadeOutMs={220} />

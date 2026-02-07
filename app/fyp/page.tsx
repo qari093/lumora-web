@@ -1,3 +1,4 @@
+import PortalHero from "@/components/portals/PortalHero";
 import { loadFypFeed } from "@/lib/fyp/loadFeed";
 
 export default function FypPage() {
