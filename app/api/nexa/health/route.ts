@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
+import { getNexaHealth } from "@/lib/nexa/runtime";
 
 export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    portal: "nexa",
-    status: "stub",
-    note: "NEXA portal health endpoint alive. Portal not activated.",
-    ts: Date.now(),
-  });
+  return NextResponse.json(getNexaHealth(), { status: 200 });
 }
