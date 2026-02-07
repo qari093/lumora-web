@@ -1,0 +1,23 @@
+[
+  {
+    "id": "fyp-001",
+    "title": "Welcome to Lumora",
+    "subtitle": "Your unified digital space",
+    "type": "system",
+    "cta": "/portals"
+  },
+  {
+    "id": "fyp-002",
+    "title": "GMAR is Live",
+    "subtitle": "Astro Shooter & Zen Flow ready",
+    "type": "game",
+    "cta": "/gmar"
+  },
+  {
+    "id": "fyp-003",
+    "title": "CineVerse Preview",
+    "subtitle": "Movies portal is active",
+    "type": "video",
+    "cta": "/movies"
+  }
+]

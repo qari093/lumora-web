@@ -1,23 +1,17 @@
-import PortalShell from "@/components/portals/PortalShell";
-import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
+import { loadVideoFeed } from "@/lib/videos/loadVideos";
 
-export const dynamic = "force-dynamic";
+export default function VideosPage() {
+  const videos = loadVideoFeed();
 
-export default async function VideosPage() {
   return (
-    <PortalShell title="Videos" subtitle="Feed + upload (shell active)">
-      <PortalStatusGrid />
-      <section style={{ marginTop: 14 }}>
-        <h2 style={{ margin: "10px 0", fontSize: 16 }}>Actions</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          <a href="/videos/upload" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
-            Upload
-          </a>
-          <a href="/video-gen" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
-            Video Generator
-          </a>
+    <main className="p-6 space-y-4">
+      <h1 className="text-2xl font-semibold">Videos</h1>
+      {videos.map(v => (
+        <div key={v.id} className="rounded-xl border p-4 flex justify-between">
+          <div>{v.title}</div>
+          <div className="text-sm opacity-60">{v.duration}</div>
         </div>
-      </section>
-    </PortalShell>
+      ))}
+    </main>
   );
 }
