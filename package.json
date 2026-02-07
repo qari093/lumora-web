@@ -7,7 +7,7 @@
     "vercel:build": "prisma generate && next build",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "pnpm -s run start:custom",
     "lint": "eslint --max-warnings=0 --no-error-on-unmatched-pattern \"app\" \"src\" \"components\" \"lib\" \"services\" \"pages\" \"next.config.*\" \"middleware.*\" \"*.{js,cjs,mjs,ts,tsx}\" --ignore-pattern \"**/.quarantine/**\" --ignore-pattern \"**/docs/**\" --ignore-pattern \"**/tools/**\" --ignore-pattern \"**/scripts/**\" --ignore-pattern \"**/tests/**\" --ignore-pattern \"**/polaroid-mvp/**\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --reporter=basic",
@@ -154,7 +154,9 @@
     "vercel-build": "npm run build:guard && next build",
     "ci:launch-headers": "sh scripts/ci/launch_headers_gate.sh",
     "ci:terminal-safety": "sh scripts/ci/terminal_safety_gate.sh",
-    "ci:launch-mega": "sh scripts/ci/launch_mega_gate.sh"
+    "ci:launch-mega": "sh scripts/ci/launch_mega_gate.sh",
+    "start:next": "next start",
+    "start:custom": "node server/lumora_prod_server.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
