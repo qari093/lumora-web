@@ -60,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning data-lumora-theme="darkglass">
+        <meta name="lumora-data-mode" content={process.env.LUMORA_DATA_MODE || "seed"} />
       <head>
 
         <meta name="color-scheme" content="dark" />
