@@ -1,0 +1,1 @@
+Paste Trap Guard\n\nRun this if your terminal gets stuck in a prompt like '$ >....', 'bquote>', 'dquote>', 'heredoc>' etc.\n\nCommand:\nsh scripts/guard/paste_trap_guard.sh\n
