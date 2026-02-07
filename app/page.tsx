@@ -200,3 +200,38 @@ export default function HomePage() {
     </main>
   );
 }
+
+/* --- Lumora Home Portals Bar (Step 3/12) --- */
+function _LumoraHomePortalsBar() {
+  const portals = [
+    { href: "/portals", label: "Portals" },
+    { href: "/fyp", label: "FYP" },
+    { href: "/videos", label: "Videos" },
+    { href: "/gmar", label: "GMAR" },
+    { href: "/nexa", label: "NEXA" },
+    { href: "/movies", label: "Movies" },
+    { href: "/music", label: "Music" },
+    { href: "/live", label: "Live" },
+    { href: "/lumaspace", label: "LumaSpace" },
+  ];
+
+  return (
+    <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", gap: 10 }}>
+      {portals.map(p => (
+        <a
+          key={p.href}
+          href={p.href}
+          style={{
+            padding: "8px 12px",
+            borderRadius: 999,
+            border: "1px solid #1f2937",
+            background: "#0b1020",
+            textDecoration: "none",
+          }}
+        >
+          {p.label}
+        </a>
+      ))}
+    </div>
+  );
+}
