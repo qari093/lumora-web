@@ -11,6 +11,23 @@ const HOST = process.env.HOST || "127.0.0.1";
 const CC_TARGET = process.env.CC_TARGET || "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400";
 const MANIFEST_PATH = path.join(process.cwd(), "public", "manifest.webmanifest");
 
+const SECURITY_HEADERS = {
+  "content-security-policy": process.env.LUMORA_CSP || "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:",
+  "permissions-policy": process.env.LUMORA_PERMISSIONS_POLICY || "camera=(), microphone=(), geolocation=()",
+  "referrer-policy": process.env.LUMORA_REFERRER_POLICY || "strict-origin-when-cross-origin",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "DENY"
+};
+
+function applySecurityHeaders(res) {
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
+    // don't clobber if Next already set, but ensure present
+    if (!res.hasHeader(k)) res.setHeader(k, v);
+  }
+  // diagnostics marker
+  res.setHeader("X-Lumora-Sec", "1");
+}
+
 function serveManifest(req, res, pathname) {
   console.log(`[manifest] intercept pathname="${pathname}" method=${req.method}`);
   let data;
@@ -29,6 +46,7 @@ function serveManifest(req, res, pathname) {
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/manifest+json; charset=utf-8");
+  applySecurityHeaders(res);
   res.setHeader("Cache-Control", CC_TARGET);
   res.setHeader("Last-Modified", new Date(st.mtimeMs).toUTCString());
   res.setHeader("X-Lumora-Server", "custom");
@@ -54,11 +72,14 @@ async function main() {
         if (serveManifest(req, res, p)) return;
       }
 
+      applySecurityHeaders(res);
+
       await handle(req, res);
     } catch (e) {
       console.error("internal_error", e);
       res.statusCode = 500;
       res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      applySecurityHeaders(res);
       res.setHeader("X-Lumora-Server", "custom");
       res.end("internal_error");
     }
