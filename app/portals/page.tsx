@@ -1,75 +1,42 @@
-import { getPortalRegistry } from "@/lib/portals/registry";
+import Link from "next/link";
+import { PORTAL_STATUS } from "@/lib/portals/status";
+import PortalStatusBadge from "@/components/portals/PortalStatusBadge";
+
+const PORTALS = [
+  { id: "fyp", title: "FYP", href: "/fyp" },
+  { id: "videos", title: "Videos", href: "/videos" },
+  { id: "gmar", title: "GMAR", href: "/gmar" },
+  { id: "nexa", title: "NEXA", href: "/nexa" },
+  { id: "movies", title: "Movies", href: "/movies" },
+  { id: "music", title: "Music", href: "/music" },
+  { id: "live", title: "Live", href: "/live" },
+  { id: "share", title: "Share", href: "/share" }
+];
 
 export default function PortalsHubPage() {
-  const portals = getPortalRegistry();
-
   return (
-    <main style={{ padding: 24 }}>
-      <h1 style={{ fontSize: 28, marginBottom: 8 }}>Lumora Portals</h1>
-      <p style={{ opacity: 0.7, marginBottom: 24 }}>
-        All portals are visible. Status reflects data readiness.
-      </p>
+    <main className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Portals</h1>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 16,
-        }}
-      >
-        {portals.map((p) => {
-          const isActive = p.status === "active";
-          const isSeed = p.status === "seed";
-          const isMock = p.status === "mock";
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {PORTALS.map(p => (
+          <Link
+            key={p.id}
+            href={p.href}
+            className="rounded-xl border p-4 hover:bg-white/5 transition"
+          >
+            <div className="flex items-center justify-between">
+              <div className="font-medium">{p.title}</div>
+              <PortalStatusBadge status={PORTAL_STATUS[p.id]} />
+            </div>
 
-          const badge =
-            isActive ? "ACTIVE" : isSeed ? "SEED" : isMock ? "MOCK" : "OFFLINE";
-
-          const color =
-            isActive
-              ? "#22c55e"
-              : isSeed
-              ? "#38bdf8"
-              : isMock
-              ? "#f59e0b"
-              : "#ef4444";
-
-          return (
-            <a
-              key={p.id}
-              href={p.href}
-              style={{
-                display: "block",
-                borderRadius: 14,
-                padding: 16,
-                textDecoration: "none",
-                background: "#0b1020",
-                border: "1px solid #1f2937",
-                boxShadow: "0 0 0 1px rgba(255,255,255,0.03)",
-              }}
-            >
-              <div style={{ fontSize: 18, fontWeight: 600 }}>{p.title}</div>
-              <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
-                {p.href}
-              </div>
-
-              <div
-                style={{
-                  marginTop: 14,
-                  display: "inline-block",
-                  padding: "4px 10px",
-                  borderRadius: 999,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: "#020617",
-                  background: color,
-                }}
-              >
-                {badge}
-              </div>
-            </a>
-          );
-        })}
+            <div className="text-xs opacity-60 mt-2">
+              {PORTAL_STATUS[p.id] === "active" && "Fully active portal"}
+              {PORTAL_STATUS[p.id] === "seed" && "Seed demo content"}
+              {PORTAL_STATUS[p.id] === "shell" && "UI shell only"}
+            </div>
+          </Link>
+        ))}
       </div>
     </main>
   );
