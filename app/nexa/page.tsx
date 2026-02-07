@@ -1,21 +1,25 @@
+import PortalShell from "@/components/portals/PortalShell";
+import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
+
 export const dynamic = "force-dynamic";
 
-export default function NexaPortalPage() {
+export default async function NexaPage() {
   return (
-    <main style={{ padding: 24 }}>
-      <h1 style={{ fontSize: 28, marginBottom: 8 }}>NEXA</h1>
-      <p style={{ opacity: 0.85, marginBottom: 16 }}>
-        Portal is now active (minimal). GX engines activation comes next.
-      </p>
-
-      <section style={{ padding: 16, border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>Status</h2>
-        <ul style={{ lineHeight: 1.7 }}>
-          <li>UI: active (placeholder)</li>
-          <li>API health: <code>/api/nexa/health</code></li>
-          <li>GX engines: not yet enabled</li>
+    <PortalShell title="NEXA" subtitle="Wellness engines (shell active)">
+      <PortalStatusGrid />
+      <section style={{ marginTop: 14 }}>
+        <h2 style={{ margin: "10px 0", fontSize: 16 }}>Engines</h2>
+        <ul style={{ margin: 0, paddingLeft: 18, opacity: 0.9, lineHeight: 1.6 }}>
+          <li>Sleep</li>
+          <li>Hydration</li>
+          <li>Nutrition</li>
+          <li>Training</li>
+          <li>Recovery</li>
         </ul>
+        <p style={{ marginTop: 10, opacity: 0.8, fontSize: 13 }}>
+          Next steps will connect these to GX schema + dashboards.
+        </p>
       </section>
-    </main>
+    </PortalShell>
   );
 }

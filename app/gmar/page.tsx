@@ -1,34 +1,26 @@
-import { PortalShell } from "@/app/_components/ui/PortalShell";
-import { getDemoContent } from "@/app/_lib/demo/content";
+import PortalShell from "@/components/portals/PortalShell";
+import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const demo = getDemoContent();
-
+export default async function GmarPage() {
   return (
-    <PortalShell
-      title="GMAR"
-      subtitle="Arcade portal (demo tiles)"
-      icon="🎮"
-      accent="#fb7185"
-    >
-      (<div style={{ display: "grid", gap: 12 }}>
-      <div style={{ fontSize: 13, opacity: 0.85 }}>Demo arcade tiles (visual differentiation).</div>
-      <div style={{ display: "grid", gap: 10 }}>
-        {demo.games.map((g) => (
-          <a key={g.slug} href={`/gmar/games/${g.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-            <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-              <div style={{ display: "grid", gap: 4 }}>
-                <div style={{ fontWeight: 900 }}>{g.name}</div>
-                <div style={{ fontSize: 12, opacity: 0.75 }}>{g.genre} • {g.status}</div>
-              </div>
-              <div aria-hidden style={{ fontSize: 22 }}>🕹️</div>
-            </div>
+    <PortalShell title="GMAR" subtitle="Games portal (shell active)">
+      <PortalStatusGrid />
+      <section style={{ marginTop: 14 }}>
+        <h2 style={{ margin: "10px 0", fontSize: 16 }}>Quick links</h2>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          <a href="/gmar/games/astro-shooter" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
+            Astro Shooter (placeholder route)
           </a>
-        ))}
-      </div>
-    </div>)
+          <a href="/gmar/games/zen-flow" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
+            Zen Flow (placeholder route)
+          </a>
+        </div>
+        <p style={{ marginTop: 10, opacity: 0.8, fontSize: 13 }}>
+          Next steps will attach real game catalog + launch tiles.
+        </p>
+      </section>
     </PortalShell>
   );
 }

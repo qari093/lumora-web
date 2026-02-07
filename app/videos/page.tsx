@@ -1,34 +1,23 @@
-import { PortalShell } from "@/app/_components/ui/PortalShell";
-import { getDemoContent } from "@/app/_lib/demo/content";
+import PortalShell from "@/components/portals/PortalShell";
+import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const demo = getDemoContent();
-
+export default async function VideosPage() {
   return (
-    <PortalShell
-      title="Videos"
-      subtitle="Browse demo videos (grid list)"
-      icon="��"
-      accent="#60a5fa"
-    >
-      (<div style={{ display: "grid", gap: 10 }}>
-      <div style={{ fontSize: 13, opacity: 0.85 }}>Collection view • tap to watch.</div>
-      <div style={{ display: "grid", gap: 10 }}>
-        {demo.videos.map((v) => (
-          <a key={v.id} href={`/watch/${v.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-            <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-              <div style={{ display: "grid", gap: 4 }}>
-                <div style={{ fontWeight: 900 }}>{v.title}</div>
-                <div style={{ fontSize: 12, opacity: 0.75 }}>{v.tags?.join(" • ")}</div>
-              </div>
-              <div aria-hidden style={{ fontSize: 22 }}>🎬</div>
-            </div>
+    <PortalShell title="Videos" subtitle="Feed + upload (shell active)">
+      <PortalStatusGrid />
+      <section style={{ marginTop: 14 }}>
+        <h2 style={{ margin: "10px 0", fontSize: 16 }}>Actions</h2>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          <a href="/videos/upload" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
+            Upload
           </a>
-        ))}
-      </div>
-    </div>)
+          <a href="/video-gen" style={{ padding: "10px 12px", borderRadius: 14, border: "1px solid #1f2937", background: "#0b1020", textDecoration: "none" }}>
+            Video Generator
+          </a>
+        </div>
+      </section>
     </PortalShell>
   );
 }

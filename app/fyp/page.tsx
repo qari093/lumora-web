@@ -1,36 +1,20 @@
-import { PortalShell } from "@/app/_components/ui/PortalShell";
-import { getDemoContent } from "@/app/_lib/demo/content";
+import PortalShell from "@/components/portals/PortalShell";
+import PortalStatusGrid from "@/components/portals/PortalStatusGrid";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const demo = getDemoContent();
-
+export default async function FypPage() {
   return (
-    <PortalShell
-      title="FYP"
-      subtitle="Swipe-style demo feed (tap a tile)"
-      icon="🔥"
-      accent="#ffb020"
-    >
-      (<div style={{ display: "grid", gap: 12 }}>
-      <div style={{ fontSize: 13, opacity: 0.85 }}>
-        Demo items: <b>{demo.videos.length}</b> • Tap any tile to open Watch.
-      </div>
-      <div style={{ display: "grid", gap: 10 }}>
-        {demo.videos.map((v) => (
-          <a key={v.id} href={`/watch/${v.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-            <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-              <div style={{ display: "grid", gap: 4 }}>
-                <div style={{ fontWeight: 900 }}>{v.title}</div>
-                <div style={{ fontSize: 12, opacity: 0.75 }}>{v.creator} • {v.durationSec}s</div>
-              </div>
-              <div aria-hidden style={{ fontSize: 22 }}>▶️</div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>)
+    <PortalShell title="FYP" subtitle="For You feed (shell active)">
+      <PortalStatusGrid />
+      <section style={{ marginTop: 14 }}>
+        <h2 style={{ margin: "10px 0", fontSize: 16 }}>What’s live right now</h2>
+        <ul style={{ margin: 0, paddingLeft: 18, opacity: 0.9, lineHeight: 1.6 }}>
+          <li>Feed endpoint: <code>/api/fyp/feed</code></li>
+          <li>Generate endpoint: <code>/api/fyp/generate</code></li>
+          <li>Interact endpoint: <code>/api/fyp/interact</code></li>
+        </ul>
+      </section>
     </PortalShell>
   );
 }
