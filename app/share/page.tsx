@@ -1,30 +1,41 @@
-import { PortalShell } from "@/app/_components/ui/PortalShell";
-import { getDemoContent } from "@/app/_lib/demo/content";
-
-export const dynamic = "force-dynamic";
-
-export default function Page() {
-  const demo = getDemoContent();
-
+export default function SharePage() {
   return (
-    <PortalShell
-      title="Share"
-      subtitle="Demo share hub"
-      icon="📤"
-      accent="#38bdf8"
-    >
-      (<div style={{ display: "grid", gap: 12 }}>
-      <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)" }}>
-        <div style={{ fontWeight: 900 }}>Share links</div>
-        <div style={{ fontSize: 13, opacity: 0.85, marginTop: 6 }}>
-          Demo: copy + share actions can be wired next.
+    <main className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Share</h1>
+
+      <p className="opacity-70 text-sm">
+        Share your Lumora experience. Seed mode UI.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl border p-5 space-y-2">
+          <div className="font-medium">Invite Friends</div>
+          <div className="text-sm opacity-70">
+            Generate private invite links (coming next).
+          </div>
+        </div>
+
+        <div className="rounded-xl border p-5 space-y-2">
+          <div className="font-medium">Share a Portal</div>
+          <div className="text-sm opacity-70">
+            Share FYP, GMAR, NEXA, Movies, Music, Live.
+          </div>
+        </div>
+
+        <div className="rounded-xl border p-5 space-y-2">
+          <div className="font-medium">Creator Links</div>
+          <div className="text-sm opacity-70">
+            Public profile & highlights (future).
+          </div>
+        </div>
+
+        <div className="rounded-xl border p-5 space-y-2">
+          <div className="font-medium">Export Moments</div>
+          <div className="text-sm opacity-70">
+            Clips, screenshots, reactions (future).
+          </div>
         </div>
       </div>
-      <div style={{ display: "grid", gap: 8 }}>
-        <a href="/fyp" style={{ padding: 12, borderRadius: 12, background: "rgba(255,255,255,0.06)", display: "block", fontWeight: 900, textDecoration: "none", color: "inherit" }}>Copy FYP link</a>
-        <a href="/movies/portal" style={{ padding: 12, borderRadius: 12, background: "rgba(255,255,255,0.06)", display: "block", fontWeight: 900, textDecoration: "none", color: "inherit" }}>Copy Movies link</a>
-      </div>
-    </div>)
-    </PortalShell>
+    </main>
   );
 }

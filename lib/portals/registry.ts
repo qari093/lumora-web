@@ -34,3 +34,10 @@ export function getPortalRegistry(): PortalDef[] {
 
   return base;
 }
+
+export const SHARE_PORTAL = {
+  id: "share",
+  title: "Share",
+  href: "/share",
+  status: "active"
+};
