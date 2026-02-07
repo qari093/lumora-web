@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sleep-gx",
+    "title": "Sleep GX",
+    "tagline": "Recovery & circadian balance",
+    "status": "active",
+    "cta": "/nexa/sleep"
+  },
+  {
+    "id": "focus-gx",
+    "title": "Focus GX",
+    "tagline": "Attention & deep work",
+    "status": "active",
+    "cta": "/nexa/focus"
+  },
+  {
+    "id": "energy-gx",
+    "title": "Energy GX",
+    "tagline": "Daily vitality management",
+    "status": "active",
+    "cta": "/nexa/energy"
+  },
+  {
+    "id": "calm-gx",
+    "title": "Calm GX",
+    "tagline": "Stress & nervous system",
+    "status": "active",
+    "cta": "/nexa/calm"
+  }
+]
