@@ -1,0 +1,40 @@
+name: Launch Gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  launch-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9'
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build (required for prod header checks)
+        run: pnpm -s next build
+
+      - name: CI Mega Gate (launch headers + terminal safety)
+        run: pnpm -s run ci:launch-mega
+
+      - name: Terminal Safety Gate (redundant explicit)
+        run: pnpm -s run ci:terminal-safety
