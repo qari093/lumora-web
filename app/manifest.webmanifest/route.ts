@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+export const dynamic = "force-static";
 import { NextResponse } from "next/server";
 import manifest from "@/app/manifest";
 
