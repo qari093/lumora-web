@@ -1,0 +1,16 @@
+[
+  {
+    "id": "astro-shooter",
+    "title": "Astro Shooter",
+    "tagline": "Fast. Neon. Competitive.",
+    "status": "live",
+    "cta": "/gmar/games/astro-shooter"
+  },
+  {
+    "id": "zen-flow",
+    "title": "Zen Flow",
+    "tagline": "Calm. Balance. Rhythm.",
+    "status": "live",
+    "cta": "/gmar/games/zen-flow"
+  }
+]
