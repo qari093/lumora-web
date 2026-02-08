@@ -28,3 +28,17 @@ export function rateLimitHeaders() {
     "x-ratelimit-reset": String(h.resetSec),
   } as Record<string, string>;
 }
+
+export function addSoftRateLimitHeaders(res: any, opts?: { limit?: number; windowSec?: number }) {
+  try {
+    const limit = Number(opts?.limit ?? 120);
+    const windowSec = Number(opts?.windowSec ?? 60);
+    const now = Date.now();
+    const reset = Math.floor(now / 1000) + windowSec;
+    res?.headers?.set?.("x-ratelimit-limit", String(limit));
+    res?.headers?.set?.("x-ratelimit-remaining", String(limit));
+    res?.headers?.set?.("x-ratelimit-reset", String(reset));
+  } catch {
+    // no-op
+  }
+}

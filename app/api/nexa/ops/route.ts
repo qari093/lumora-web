@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { readNexaOpsSnapshot } from "@/lib/nexa/ops_snapshot";
 import { addSoftRateLimitHeaders } from "@/lib/nexa/rl";
-
 export async function GET() {
   try {
     const snap = await readNexaOpsSnapshot();

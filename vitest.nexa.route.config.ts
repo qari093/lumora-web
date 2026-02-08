@@ -1,6 +1,10 @@
 import { defineConfig } from "vitest/config";
 import path from "node:path";
 
+// Ensure HTTP tests have a base URL (default: local dev port)
+process.env.NEXA_BASE_URL = process.env.NEXA_BASE_URL || `http://127.0.0.1:${process.env.PORT || 3040}`;
+
+
 export default defineConfig({
   resolve: {
     alias: {
