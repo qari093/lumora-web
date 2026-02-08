@@ -4,7 +4,13 @@ set +e
 PORT="${PORT:-3040}"
 BASE="http://127.0.0.1:${PORT}"
 
+# Next.js dev may cold-compile each route on first hit; keep timeouts generous.
+TIMEOUT_SEC="${TIMEOUT_SEC:-20}"
+RETRY="${RETRY:-2}"
+RETRY_DELAY="${RETRY_DELAY:-1}"
+
 echo "NEXA healthcheck — ${BASE}"
+echo "timeout=${TIMEOUT_SEC}s retry=${RETRY} retry_delay=${RETRY_DELAY}s"
 echo
 
 curl_one() {
@@ -17,15 +23,17 @@ curl_one() {
   : >"$body"
 
   echo "• GET ${path}"
-  curl -sS -m 2 -D "$hdr" "$url" >"$body"
+  # --retry-all-errors is supported in modern curl; if not, curl will still run and return nonzero.
+  curl -sS -m "${TIMEOUT_SEC}" \
+    --retry "${RETRY}" --retry-delay "${RETRY_DELAY}" --retry-all-errors \
+    -D "$hdr" "$url" >"$body"
   local rc=$?
 
-  # status line (if any)
   local status_line
   status_line="$(tr -d '\r' < "$hdr" | sed -n '1p')"
 
   if [ "$rc" -ne 0 ]; then
-    echo "  ❌ curl rc=${rc} (server down / connection / TLS / timeout)"
+    echo "  ❌ curl rc=${rc}"
     echo "  url=${url}"
     echo "  status=${status_line:-none}"
   else
@@ -38,8 +46,20 @@ curl_one() {
   echo "— body (head 520) —"
   head -c 520 "$body" || true
   echo
+  return 0
 }
 
+# Warmup pass (helps avoid rc=28 on first compile-heavy endpoints)
+echo "• Warmup pass (route compilation)"
+curl_one "/api/nexa/metrics"
+curl_one "/api/nexa/diag"
+curl_one "/api/nexa/info"
+curl_one "/api/nexa"
+echo "✓ warmup done"
+echo
+
+# Primary pass (should now be fast and stable)
+echo "• Primary pass"
 curl_one "/api/nexa/health"
 curl_one "/api/nexa/metrics"
 curl_one "/api/nexa/diag"
