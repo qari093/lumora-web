@@ -61,7 +61,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SplashGate durationMs={1400} fadeOutMs={220} />
         <BootMark />
         <ClientLayout>{children}</ClientLayout>
-      </body>
+      <script
+  dangerouslySetInnerHTML={{
+    __html: `(function(){try{if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){});}}catch(e){}})();`,
+  }}
+/>
+</body>
     </html>
   );
 }

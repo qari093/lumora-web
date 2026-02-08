@@ -1,78 +1,68 @@
-self.addEventListener('install',e=>{
-  self.skipWaiting();
-  e.waitUntil((async()=>{
-    const c=await caches.open('gmar-core-v1');
-    await c.addAll([
-      '/',
-      '/video-seed.json',
-      '/offline-ads.json'
-    ].map(u=>new Request(u,{cache:'reload'})));
+/* Lumora minimal PWA service worker (dev-friendly)
+   - caches app shell assets + offline page
+   - network-first for navigation, fallback to offline.html
+   - stale-while-revalidate for same-origin GET assets
+*/
+const CACHE_VERSION = "lumora-pwa-v1";
+const SHELL = [
+  "/offline.html",
+  "/manifest.webmanifest",
+  "/pwa/apple-touch-icon.png",
+  "/pwa/icon-192.png",
+  "/pwa/icon-512.png",
+  "/pwa/maskable-512.png",
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_VERSION);
+    await cache.addAll(SHELL);
+    await self.skipWaiting();
   })());
 });
-self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});
 
-const cacheFirst = async (req) => {
-  const c = await caches.open('gmar-media-v1');
-  const hit = await c.match(req);
-  if(hit) return hit;
-  try{
-    const net = await fetch(req, {credentials:'omit'});
-    if(net.ok){
-      c.put(req, net.clone());
-    }
-    return net;
-  }catch{
-    return caches.match('/'); // fallback
-  }
-};
-
-self.addEventListener('fetch',e=>{
-  const url=new URL(e.request.url);
-  if(url.pathname.startsWith('/videos/') || url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm')){
-    e.respondWith(cacheFirst(e.request));
-  }
+self.addEventListener("activate", (event) => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map((k) => (k === CACHE_VERSION ? Promise.resolve() : caches.delete(k))));
+    await self.clients.claim();
+  })());
 });
 
-async function prefetchList(urls){
-  const c = await caches.open('gmar-media-v1');
-  await Promise.all(urls.map(async u=>{
-    try{
-      const r = await fetch(u,{credentials:'omit'});
-      if(r.ok) await c.put(u,r.clone());
-    }catch{}
-  }));
+function isSameOrigin(url) {
+  try { return new URL(url).origin === self.location.origin; } catch { return false; }
 }
 
-self.addEventListener('message',e=>{
-  const {type,payload}=e.data||{};
-  if(type==='CACHE_URLS' && Array.isArray(payload)) prefetchList(payload);
-  if(type==='PREFETCH_VIDEOS'){
-    fetch('/video-seed.json').then(r=>r.json()).then(d=>{
-      const arr=Array.isArray(d)?d:(d.urls||[]);
-      prefetchList(arr);
-    }).catch(()=>{});
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  const url = req.url;
+
+  if (req.method !== "GET") return;
+
+  // Navigation requests: network-first, fallback offline
+  if (req.mode === "navigate") {
+    event.respondWith((async () => {
+      try {
+        const res = await fetch(req);
+        return res;
+      } catch {
+        const cache = await caches.open(CACHE_VERSION);
+        return (await cache.match("/offline.html")) || new Response("offline", { status: 200 });
+      }
+    })());
+    return;
   }
-});
 
-// adaptive prune hint
-self.addEventListener("message",(e)=>{ try{ if(e && e.data && e.data.type==="PRUNE_HINT"){ /* hook */ } }catch{} });
-
-self.addEventListener("fetch",event=>{
-  try{
-    const u=new URL(event.request.url);
-    if(event.request.method==="GET" && (u.pathname.startsWith("/api/zshop/") || u.pathname.startsWith("/images/products/"))){
-      event.respondWith((async()=>{
-        const cache=await caches.open("zshop-v1");
-        try{
-          const net=await fetch(event.request);
-          cache.put(event.request,net.clone());
-          return net;
-        }catch(e){
-          const hit=await cache.match(event.request);
-          if(hit) return hit;
-          throw e;
-        }
-      })());
-    }
-  }catch(_){}
+  // Same-origin assets: stale-while-revalidate
+  if (isSameOrigin(url)) {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_VERSION);
+      const cached = await cache.match(req);
+      const fetchPromise = fetch(req).then((res) => {
+        if (res && res.ok) cache.put(req, res.clone());
+        return res;
+      }).catch(() => cached);
+      return cached || fetchPromise;
+    })());
+  }
 });
