@@ -10,6 +10,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: [
+    "tests/nexa/**/*.test.ts",
       "tests/nexa/nexa_runtime.test.ts",
       "tests/nexa/nexa_metrics.test.ts",
       "tests/nexa/nexa_metrics_route.test.ts",
