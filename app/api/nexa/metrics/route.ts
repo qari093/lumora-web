@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getNexaRuntimeHealth } from "@/lib/nexa/runtime";
+import { getNexaRuntimeMetrics } from "@/lib/nexa/metrics";
 import { rateLimitHeaders } from "@/lib/nexa/rl";
 
 export const dynamic = "force-dynamic";
@@ -7,12 +7,12 @@ export const revalidate = 0;
 
 export function GET() {
   try {
-    const payload = getNexaRuntimeHealth();
+    const payload = getNexaRuntimeMetrics();
     return NextResponse.json(payload, {
       status: 200,
       headers: {
         "cache-control": "no-store, max-age=0",
-        "x-nexa-health": "1",
+        "x-nexa-metrics": "1",
         ...rateLimitHeaders(),
       },
     });
