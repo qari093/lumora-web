@@ -30,20 +30,22 @@ fi
 # Start dev server in background if not running.
 if [ ! -f "${PID_FILE}" ]; then
   echo "• Starting dev server -> ${LOG_FILE}"
+  echo "  cmd: PORT=${PORT} pnpm -s dev"
   if command -v pnpm >/dev/null 2>&1; then
-    ( PORT="${PORT}" pnpm -s dev -- --port "${PORT}" >>"${LOG_FILE}" 2>&1 ) &
+    ( PORT="${PORT}" pnpm -s dev >>"${LOG_FILE}" 2>&1 ) &
   else
-    ( PORT="${PORT}" npx -y next dev --port "${PORT}" >>"${LOG_FILE}" 2>&1 ) &
+    # Next.js dev respects PORT env too
+    ( PORT="${PORT}" npx -y next dev >>"${LOG_FILE}" 2>&1 ) &
   fi
   pid="$!"
   echo "${pid}" > "${PID_FILE}"
   echo "✓ started pid=${pid}"
 fi
 
-# Wait until reachable (max ~25s)
+# Wait until reachable (max ~35s)
 echo "• Waiting for ${URL}"
 ok=0
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25; do
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35; do
   curl -sS -m 1 "${URL}" >/dev/null 2>&1
   if [ "$?" -eq 0 ]; then
     ok=1
@@ -55,8 +57,8 @@ done
 if [ "$ok" -ne 1 ]; then
   echo "❌ Server not reachable after wait: ${URL}"
   echo "• Tail log (${LOG_FILE}):"
-  tail -n 120 "${LOG_FILE}" || true
-  echo "• You can stop the process with:"
+  tail -n 160 "${LOG_FILE}" || true
+  echo "• Stop process:"
   echo "  kill $(cat "${PID_FILE}" 2>/dev/null)"
   exit 0
 fi
