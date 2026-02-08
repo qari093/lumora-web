@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 20.8 — Expanding EI dataset with community & global emotional context integration..."

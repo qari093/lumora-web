@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 18.10 — Finalizing Phase 18 UX + Performance Enhancements (verification + optional commit/tag)..."

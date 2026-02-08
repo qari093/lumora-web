@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 EXCLUDES="-path './.git/*' -o -path './.next/*' -o -path './node_modules/*' -o -path './.pnpm/*' -o -path './.quarantine/*' -o -path './dist/*' -o -path './build/*' -o -path './coverage/*'"
 
 # Scope excludes (must include deps + quarantine + .git)

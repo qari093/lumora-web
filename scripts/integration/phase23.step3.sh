@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 23.3 — Wiring growth experiments & A/B testing harness (variants, flags, metrics)..."

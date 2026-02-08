@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 23.4 — Integrating engagement-driven notifications & win-back campaigns..."

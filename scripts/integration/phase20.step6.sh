@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 20.6 — Connecting EI events to gentle nudges & notifications (micro-coaching, check-ins, reminders)..."

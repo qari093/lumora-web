@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 18.6 — Optimizing API latency & caching (HTTP cache headers, SWR/React Query patterns, CDN rules)..."

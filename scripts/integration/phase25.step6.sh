@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/usr/bin/env bash
 # Step 25.6 — LumaSpace API routes + tests + smoke checks
 set -euo pipefail

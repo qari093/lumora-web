@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/usr/bin/env bash
 # Step 25.11 — LumaSpace /api/lumaspace/state contract verifier (with schemaVersion)
 set -euo pipefail

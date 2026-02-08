@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 19.6 — Integrating adaptive AI scaling (autoscale thresholds, cold-start mitigation, and inference batching)..."

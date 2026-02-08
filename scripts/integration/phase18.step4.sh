@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 18.4 — Auditing and optimizing fonts & critical CSS (self-hosting, fallback stacks, FOUT/FOIT control)..."

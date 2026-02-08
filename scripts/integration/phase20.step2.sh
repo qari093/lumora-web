@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 20.2 — Wiring Emotion Mirror v2 into EI pipeline (logging, reflection hooks, and context sync)..."

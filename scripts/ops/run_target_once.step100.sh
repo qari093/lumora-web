@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
 set -eu
 TARGET="${1:-/tmp/phase_step_target.sh}"

@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 20.4 — Integrating EI metric aggregation layer (daily mood averages, focus ratio, calm index)..."

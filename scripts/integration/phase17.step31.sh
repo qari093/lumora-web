@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 17.31 — Connecting emotional market data layer (EMML) with ZC valuation, burn/reissue, and dividend logic..."

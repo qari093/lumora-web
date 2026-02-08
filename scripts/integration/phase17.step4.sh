@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 17.4 — Integrating LumaSpace feature flags (emotion classifier, geo router, AR fallback, ZC caps) into central toggle provider..."

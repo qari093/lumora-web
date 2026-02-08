@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/usr/bin/env bash
 # Step 25.10 — Inject LumaSpaceStateBanner into LumaSpace pages (fixed variant)
 set -euo pipefail

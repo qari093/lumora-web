@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
 set -euo pipefail
 # Strict gate: fails if any script contains heredoc openers like: <<EOF / <<'EOF' / <<SH / etc.

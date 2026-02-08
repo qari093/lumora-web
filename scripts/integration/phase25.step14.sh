@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/usr/bin/env bash
 # Step 25.14 — LumaSpace CI wiring (npm script + GitHub Actions workflow)
 set -euo pipefail

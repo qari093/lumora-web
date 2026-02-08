@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 # hard timeout guard (avoid terminal stalls)
 TIMEOUT_SECS="${VITEST_TIMEOUT_SECS:-420}"
 TO=""

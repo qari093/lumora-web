@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 18.9 — Re-running Lighthouse/Core Web Vitals to confirm no regressions after UX + performance tweaks..."

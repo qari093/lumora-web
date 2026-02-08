@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
 set +e
 # Prints base URL like http://127.0.0.1:3000 or empty if none.

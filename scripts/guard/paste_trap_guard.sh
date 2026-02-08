@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
 set -euo pipefail
 # Detect being in a stuck paste prompt like: "$ >...." / "bquote>" / "dquote>" / "heredoc>"

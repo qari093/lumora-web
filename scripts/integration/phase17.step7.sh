@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 17.7 — Integrating rate limits, spam guard, and fraud detection middleware into API routes and client fetch layer..."

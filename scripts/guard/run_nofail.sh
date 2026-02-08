@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
 # Usage: sh scripts/guard/run_nofail.sh -- <command...>
 set -u

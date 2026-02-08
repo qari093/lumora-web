@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 17.35 — Finalizing LumaSpace Phase 17 integration audit (verify all subsystems, commit, push, and tag release)..."

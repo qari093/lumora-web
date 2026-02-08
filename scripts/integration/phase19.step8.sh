@@ -1,3 +1,4 @@
+. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/bash
 set -euo pipefail
 echo "🚀 Step 19.8 — Integrating anomaly detection for AI inference outputs (entropy deviation, confidence drift, threshold alerts)..."
