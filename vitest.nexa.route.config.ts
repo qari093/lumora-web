@@ -17,6 +17,8 @@ export default defineConfig({
       "tests/nexa/nexa_info_route.test.ts",
       "tests/nexa/nexa_index_route.test.ts",
       "tests/nexa/middleware_smoke.test.ts",
+      "tests/nexa/nexa_validate.test.ts",
+      "tests/nexa/nexa_contract.test.ts"
     ],
     globalSetup: [],
     setupFiles: [],

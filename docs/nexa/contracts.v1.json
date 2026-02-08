@@ -1,0 +1,36 @@
+{
+  "service": "nexa",
+  "version": "v1",
+  "endpoints": [
+    {
+      "path": "/api/nexa/health",
+      "method": "GET",
+      "headers": ["cache-control", "x-nexa-health", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset"],
+      "shape": { "ok": "boolean", "ts": "number", "service": "string", "version": "string" }
+    },
+    {
+      "path": "/api/nexa/metrics",
+      "method": "GET",
+      "headers": ["cache-control", "x-nexa-metrics", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset"],
+      "shape": { "ok": "boolean", "ts": "number", "uptimeMs": "number", "node": "object", "process": "object", "system": "object" }
+    },
+    {
+      "path": "/api/nexa/diag",
+      "method": "GET",
+      "headers": ["cache-control", "x-nexa-diag", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset"],
+      "shape": { "ok": "boolean", "ts": "number", "health": "object", "metrics": "object" }
+    },
+    {
+      "path": "/api/nexa/info",
+      "method": "GET",
+      "headers": ["cache-control", "x-nexa-info", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset"],
+      "shape": { "ok": "boolean", "ts": "number", "service": "string", "node": "object", "app": "object" }
+    },
+    {
+      "path": "/api/nexa",
+      "method": "GET",
+      "headers": ["cache-control", "x-nexa-index", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset"],
+      "shape": { "ok": "boolean", "ts": "number", "service": "string", "routes": "array" }
+    }
+  ]
+}
