@@ -1,28 +1,19 @@
 #!/bin/sh
-set -euo pipefail
+set +e
+set +u
 echo "NEXA freeze gate — contracts immutability (advisory; nonfatal)"
-cd ~/lumora-web || exit 0
-
+cd ~/lumora-web 2>/dev/null || exit 0
 CONTRACTS="docs/nexa/contracts.v1.json"
 LOCK=".lumora_nexa_contracts_v1_sha.lock"
-if [ ! -f "$CONTRACTS" ] || [ ! -f "$LOCK" ]; then
-  echo "⚠️ missing contracts or lock; skip"
-  exit 0
-fi
-
-CUR="$(shasum -a 256 "$CONTRACTS" | awk '{print $1}')"
-LOCKED="$(grep -E '^NEXA_CONTRACTS_V1_SHA256=' "$LOCK" | head -n1 | cut -d= -f2- || true)"
-if [ -z "${LOCKED:-}" ]; then
-  echo "⚠️ lock unreadable; skip"
-  exit 0
-fi
-
-if [ "$CUR" = "$LOCKED" ]; then
-  echo "✓ OK: contracts.v1.json unchanged"
+[ -f "$CONTRACTS" ] || { echo "⚠️ missing contracts"; exit 0; }
+[ -f "$LOCK" ] || { echo "⚠️ missing lock"; exit 0; }
+CUR="$(shasum -a 256 "$CONTRACTS" 2>/dev/null | awk '{print $1}' 2>/dev/null)"
+LOCKED="$(grep -E '^NEXA_CONTRACTS_V1_SHA256=' "$LOCK" | head -n1 | cut -d= -f2- 2>/dev/null)"
+if [ -n "$CUR" ] && [ -n "$LOCKED" ] && [ "$CUR" = "$LOCKED" ]; then
+  echo "✓ OK: contracts unchanged"
 else
-  echo "⚠️ WARN: contracts.v1.json changed since freeze"
+  echo "⚠️ WARN: contracts changed or unreadable"
   echo "  locked=$LOCKED"
   echo "  current=$CUR"
-  echo "  If this is intentional: bump contracts version + refresh lock."
 fi
 exit 0
