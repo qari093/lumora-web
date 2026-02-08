@@ -1,68 +1,50 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { readNexaOpsSnapshot } from "@/lib/nexa/ops_snapshot";
-import { addSoftRateLimitHeaders } from "@/lib/nexa/rl";
 
-/*__LUMORA_OPS_SNAPSHOT_HELPERS__*/
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-function opsSnapshotPath(req: NextRequest): string {
+function getPortFromReq(req: Request): string {
+  try {
+    const u = new URL(req.url);
+    return (u.searchParams.get("port") || "").trim();
+  } catch {
+    return "";
+  }
+}
+
+function snapshotPathForPort(port: string): string {
   // default matches scripts/nexa/ops_bundle_v2.sh
-  const url = new URL(req.url);
-  const qOut = url.searchParams.get("out") || "";
-  const qPort = url.searchParams.get("port") || "";
-  // optional override for tests / operators
-  if (qOut) return qOut;
-  // legacy: if port is provided, keep same filename (still in /tmp)
-  if (qPort) return "/tmp/lumora_nexa_ops.json";
+  // allow per-port override for multi-port dev, but keep safe under /tmp
+  if (port && /^[0-9]{2,5}$/.test(port)) return `/tmp/lumora_nexa_ops_${port}.json`;
   return "/tmp/lumora_nexa_ops.json";
 }
 
-function okFallback(now: number) {
-  return {
-    ok: true,
-    ts: now,
-    source: "fallback",
-    note: "snapshot_missing_or_unreadable",
-  };
+function withHeaders(res: NextResponse): NextResponse {
+  // Always set these, even on errors
+  res.headers.set("x-nexa-ops", "1");
+  res.headers.set("cache-control", "no-store, max-age=0");
+  return res;
 }
 
-export async function GET(req: NextRequest) {
-  const now = Date.now();
-  let status = 200;
+export async function GET(req: Request): Promise<NextResponse> {
+  const port = getPortFromReq(req);
+  const path = snapshotPathForPort(port);
 
   try {
-    const path = opsSnapshotPath(req);
-    const snap = readNexaOpsSnapshot(path);
-
-    // If snapshot read fails or returns non-ok, still return 200 with ok:true fallback
-    // (keeps ops page + unit tests stable in dev/test envs).
-    const body =
-      snap && typeof snap === "object"
-        ? { ...snap, ts: (snap as any).ts ?? now }
-        : okFallback(now);
-
+    // Never throw to the runtime: any failure returns ok:false but 200 for ops visibility
+    const data = await readNexaOpsSnapshot(path);
     const res = NextResponse.json(
-      body && (body as any).ok === true ? body : okFallback(now),
-      200
+      { ok: true, ts: Date.now(), source: { path, port: port || null }, data },
+      { status: 200 }
     );
-
-    // headers ALWAYS set
-    addSoftRateLimitHeaders(res);
-    res.headers.set("x-nexa-ops", "1");
-    res.headers.set("cache-control", "no-store, max-age=0");
-    return res;
+    return withHeaders(res);
   } catch (e: any) {
-    // Never throw: return ok:true fallback but also include error for debugging
     const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    status = 200;
-
     const res = NextResponse.json(
-      { ...okFallback(now), error: msg },
-      status
+      { ok: false, ts: Date.now(), error: msg, source: { path, port: port || null } },
+      { status: 200 }
     );
-
-    addSoftRateLimitHeaders(res);
-    res.headers.set("x-nexa-ops", "1");
-    res.headers.set("cache-control", "no-store, max-age=0");
-    return res;
+    return withHeaders(res);
   }
 }
