@@ -13,6 +13,8 @@ export default defineConfig({
       "tests/nexa/nexa_runtime.test.ts",
       "tests/nexa/nexa_metrics.test.ts",
       "tests/nexa/nexa_metrics_route.test.ts",
+      "tests/nexa/nexa_diag_route.test.ts",
+      "tests/nexa/nexa_info_route.test.ts",
     ],
     globalSetup: [],
     setupFiles: [],
