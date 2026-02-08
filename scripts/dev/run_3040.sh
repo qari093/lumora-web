@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+
+# macOS dev guardrails (best-effort)
+sh scripts/dev/mac_limits.sh >/dev/null 2>&1 || true
+
 # Resolve PORT (default 3040)
 . "$(cd "$(dirname "$0")" && pwd)/port_resolve.sh" 2>/dev/null || . "scripts/dev/port_resolve.sh" 2>/dev/null || true
 set +e
