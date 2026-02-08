@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+cd ~/lumora-web 2>/dev/null || exit 0
+
+# Only enforce when contracts file is touched (staged or modified)
+if git diff --name-only --cached | grep -q '^docs/nexa/contracts\.v1\.json$' || \
+   git diff --name-only        | grep -q '^docs/nexa/contracts\.v1\.json$'; then
+  sh scripts/nexa/contracts_freeze_check.sh
+fi
+
+exit 0
