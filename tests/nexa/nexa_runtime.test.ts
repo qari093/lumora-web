@@ -1,12 +1,14 @@
-import { describe, it, expect } from "vitest";
-import { getNexaHealth } from "../../lib/nexa/runtime";
+import { describe, expect, it } from "vitest";
+import { getNexaRuntimeHealth } from "../../lib/nexa/runtime";
 
 describe("NEXA runtime health", () => {
   it("returns valid health object", () => {
-    const h = getNexaHealth();
+    const h = getNexaRuntimeHealth();
     expect(h.ok).toBe(true);
-    expect(["seed", "live", "shadow"]).toContain(h.mode);
-    expect(typeof h.modules).toBe("number");
+    expect(h.service).toBe("nexa");
     expect(typeof h.ts).toBe("number");
+    expect(h.ts).toBeGreaterThan(0);
+    expect(typeof h.version).toBe("string");
+    expect(h.version.length).toBeGreaterThan(0);
   });
 });

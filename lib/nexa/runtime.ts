@@ -1,16 +1,18 @@
-export type NexaHealth = {
-  ok: boolean;
-  mode: "seed" | "live" | "shadow";
-  modules: number;
+export type NexaRuntimeHealth = {
+  ok: true;
   ts: number;
+  service: "nexa";
+  version: string;
 };
 
-export function getNexaHealth(): NexaHealth {
-  const mode =
-    (process.env.LUMORA_DATA_MODE as "seed" | "live" | "shadow") || "seed";
-
-  // Seed-safe deterministic number (GX modules grid)
-  const modules = mode === "seed" ? 12 : 0;
-
-  return { ok: true, mode, modules, ts: Date.now() };
+export function getNexaRuntimeHealth(): NexaRuntimeHealth {
+  return {
+    ok: true,
+    ts: Date.now(),
+    service: "nexa",
+    version: process.version,
+  };
 }
+
+// Backward-compatible alias (in case any earlier code/tests referenced a different name)
+export const getNexaHealth = getNexaRuntimeHealth;
