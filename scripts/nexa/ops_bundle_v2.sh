@@ -44,4 +44,24 @@ else
 fi
 echo
 
+
+# Snapshot mirroring (generic + port-specific)
+PORT_CLEAN="$(printf "%s" "${PORT:-3040}" | tr -cd '0-9')"
+[ -n "${PORT_CLEAN}" ] || PORT_CLEAN="3040"
+GENERIC_OUT="${OUT:-/tmp/lumora_nexa_ops.json}"
+PORT_OUT="/tmp/lumora_nexa_ops_${PORT_CLEAN}.json"
+
+# Ensure generic exists; if OUT was custom, also mirror to generic
+if [ -f "${GENERIC_OUT}" ]; then
+  cp -f "${GENERIC_OUT}" "${PORT_OUT}" 2>/dev/null || true
+else
+  # If custom OUT is used, mirror it to generic path
+  if [ -n "${OUT:-}" ] && [ -f "${OUT}" ]; then
+    cp -f "${OUT}" "${GENERIC_OUT}" 2>/dev/null || true
+    cp -f "${OUT}" "${PORT_OUT}" 2>/dev/null || true
+  fi
+fi
+echo "✓ snapshot mirror: ${GENERIC_OUT} -> ${PORT_OUT}"
+
+
 echo "✅ NEXA ops bundle v2 — done"
