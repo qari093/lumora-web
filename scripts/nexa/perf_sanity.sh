@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+# --- Lumora policy: DEV safe defaults (prevents infinite relief loops) ---
+DEV_MODE="${DEV_MODE:-1}"
+AUTO_RELIEF="${AUTO_RELIEF:-0}"
+FREE_CHECK="${FREE_CHECK:-0}"
+LOAD1_WARN="${LOAD1_WARN:-60}"
+FREE_PCT_WARN="${FREE_PCT_WARN:-3}"
+MAX_RELIEF="${MAX_RELIEF:-1}"
+CONSEC_REQUIRED="${CONSEC_REQUIRED:-2}"
+COOLDOWN_SEC="${COOLDOWN_SEC:-45}"
+MAX_RUN_SEC="${MAX_RUN_SEC:-90}"
+
+if [ "$DEV_MODE" = "1" ]; then
+  # Next.js dev is noisy on macOS (watchers, JIT, cold compiles). Never auto-restart in dev.
+  AUTO_RELIEF=0
+  FREE_CHECK=0
+fi
+# --- End policy ---
+
 
 PORT="${PORT:-3040}"
 LOAD1_WARN="${LOAD1_WARN:-60}"
