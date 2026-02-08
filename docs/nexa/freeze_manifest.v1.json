@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "ts": 1770566139621,
+  "scope": "nexa_freeze_v1",
+  "files": [
+    {
+      "path": "docs/nexa/contracts.v1.json",
+      "exists": true,
+      "sha256": "271ae19979b2e687637ab3c1d95642937630267f93635708f18bc606090cffbc"
+    },
+    {
+      "path": ".lumora_nexa_contracts_v1_sha.lock",
+      "exists": true,
+      "sha256": "975e55eb1be86655484e4f7816af9965b128b1fa227bef70b051976031289f05"
+    },
+    {
+      "path": "app/api/nexa/ops/route.ts",
+      "exists": true,
+      "sha256": "7f91dcd6c11b7bc3d80b1e2db594ba7cbe3bea942bddcc6fecc6dff80fafda1e"
+    },
+    {
+      "path": "lib/nexa/ops_snapshot.ts",
+      "exists": true,
+      "sha256": "d073c741f2ac31b69bb91d4372014e19d4388f327bd1ff89019a950941e7b17f"
+    },
+    {
+      "path": "vitest.nexa.route.config.ts",
+      "exists": true,
+      "sha256": "82d317cb2b58c19fca3bcc021d82bbe55129b6968e81a6d70d446b3273b6efe7"
+    },
+    {
+      "path": "scripts/nexa/contracts_freeze_check.sh",
+      "exists": true,
+      "sha256": "ed06274f9767a720f5ddb66b4e6501b5afe2127a581a091806717fd65c686105"
+    },
+    {
+      "path": ".githooks/pre-commit",
+      "exists": true,
+      "sha256": "9b92cb606abf2db6306005d9dd767b08770630df559a9b95a9cde64eb4b9dc8c"
+    },
+    {
+      "path": "scripts/guard/ci_nexa_freeze_gate.sh",
+      "exists": true,
+      "sha256": "03f1bbf79143af28aaa3db099115ae416f2e65ecc5fd166db4fe56250a528b18"
+    },
+    {
+      "path": "scripts/nexa/ops_bundle_v2.sh",
+      "exists": true,
+      "sha256": "342115a8a0318c69b496727a8cc7a44ed4c2dc23d3538b6c75f746e9444e7eed"
+    }
+  ]
+}
