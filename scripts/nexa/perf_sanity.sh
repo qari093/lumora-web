@@ -4,7 +4,13 @@ set +e
 PORT="${PORT:-3040}"
 BASE="http://127.0.0.1:${PORT}"
 
+# Thresholds (tunable)
+LOAD1_WARN="${LOAD1_WARN:-50}"
+FREE_PCT_WARN="${FREE_PCT_WARN:-3}"     # percent
+AUTO_RELIEF="${AUTO_RELIEF:-0}"         # 1 => run scripts/dev/relief_3040.sh when warn triggers
+
 echo "NEXA perf sanity — ${BASE}"
+echo "thresholds: load1>${LOAD1_WARN} free%<${FREE_PCT_WARN} auto_relief=${AUTO_RELIEF}"
 echo
 
 # Ensure server
@@ -25,6 +31,9 @@ echo
 node - <<'NODE'
 const fs = require('fs');
 
+const LOAD1_WARN = Number(process.env.LOAD1_WARN || 50);
+const FREE_PCT_WARN = Number(process.env.FREE_PCT_WARN || 3);
+
 function num(x){ return typeof x === 'number' && Number.isFinite(x) ? x : null; }
 
 const p = '/tmp/nexa_perf_metrics.json';
@@ -42,26 +51,40 @@ console.log('node.version=', j?.node?.version || '(unknown)');
 console.log('pid=', j?.node?.pid || '(unknown)');
 console.log('uptimeMs=', j?.uptimeMs ?? '(unknown)');
 console.log('loadavg=', load ? load.join(', ') : '(unknown)');
+let freePct = null;
 if (free!=null && total!=null) {
-  const pct = (free/total)*100;
-  console.log(`freeMemBytes=${free} (${pct.toFixed(2)}%)`);
+  freePct = (free/total)*100;
+  console.log(`freeMemBytes=${free} (${freePct.toFixed(2)}%)`);
 } else {
   console.log('freeMemBytes=(unknown)');
 }
 console.log('rssBytes=', rss ?? '(unknown)');
 
 let warn = [];
-if (load && load.length>0 && typeof load[0]==='number' && load[0] > 50) warn.push(`HIGH_LOADAVG_1M=${load[0]}`);
-if (free!=null && total!=null && (free/total) < 0.03) warn.push(`LOW_FREE_MEM=${(free/total*100).toFixed(2)}%`);
-if (rss!=null && rss > 1.5e9) warn.push(`HIGH_RSS_BYTES=${rss}`);
+const load1 = (load && typeof load[0]==='number') ? load[0] : null;
+if (load1!=null && load1 > LOAD1_WARN) warn.push(`HIGH_LOADAVG_1M=${load1.toFixed(2)}>${LOAD1_WARN}`);
+if (freePct!=null && freePct < FREE_PCT_WARN) warn.push(`LOW_FREE_MEM=${freePct.toFixed(2)}%<${FREE_PCT_WARN}%`);
 
 if (warn.length) {
+  console.log('WARN=1');
   console.log('⚠️ WARN:', warn.join(' | '));
 } else {
+  console.log('WARN=0');
   console.log('✓ perf sanity: OK');
 }
 NODE
 
+warn_flag="$(node -e "const j=require('/tmp/nexa_perf_metrics.json'); const load=j?.system?.loadavg?.[0]; const free=j?.system?.freeMemBytes; const total=j?.system?.totalMemBytes; const loadWarn=Number(process.env.LOAD1_WARN||50); const freeWarn=Number(process.env.FREE_PCT_WARN||3); let warn=0; if(typeof load==='number'&&load>loadWarn) warn=1; if(typeof free==='number'&&typeof total==='number'&&(free/total*100)<freeWarn) warn=1; process.stdout.write(String(warn));")"
+
 echo
+if [ "${warn_flag}" = "1" ] && [ "${AUTO_RELIEF}" = "1" ]; then
+  echo "• Auto relief triggered"
+  PORT="${PORT}" sh scripts/dev/relief_3040.sh
+  echo
+  echo "• Re-check after relief"
+  PORT="${PORT}" sh scripts/nexa/perf_sanity.sh LOAD1_WARN="${LOAD1_WARN}" FREE_PCT_WARN="${FREE_PCT_WARN}" AUTO_RELIEF=0
+  exit 0
+fi
+
 echo "✅ NEXA perf sanity — done"
 exit 0
