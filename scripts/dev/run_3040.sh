@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+. "/Users/waqarahmad/lumora-web/.lumora_safe_bootstrap.sh" >/dev/null 2>&1 || true
 . "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/usr/bin/env bash
 
@@ -10,6 +12,7 @@ sh scripts/dev/mac_limits.sh >/dev/null 2>&1 || true
 set +e
 
 PORT="${PORT:-3040}"
+HOST="${HOST:-0.0.0.0}"
 URL="http://127.0.0.1:${PORT}/api/nexa/health"
 PID_FILE=".lumora_dev_${PORT}.pid"
 LOG_FILE="/tmp/lumora_dev_${PORT}.log"
@@ -38,12 +41,12 @@ fi
 # Start dev server in background if not running.
 if [ ! -f "${PID_FILE}" ]; then
   echo "• Starting dev server -> ${LOG_FILE}"
-  echo "  cmd: PORT=${PORT} pnpm -s dev"
+  echo "  cmd: PORT=${PORT} pnpm -s dev" --hostname "${HOST}"
   if command -v pnpm >/dev/null 2>&1; then
     ( PORT="${PORT}" pnpm -s dev >>"${LOG_FILE}" 2>&1 ) &
   else
     # Next.js dev respects PORT env too
-    ( PORT="${PORT}" npx -y next dev >>"${LOG_FILE}" 2>&1 ) &
+    ( PORT="${PORT}" npx -y next dev >>"${LOG_FILE}" 2>&1 ) & --hostname "${HOST}"
   fi
   pid="$!"
   echo "${pid}" > "${PID_FILE}"
