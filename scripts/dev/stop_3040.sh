@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Resolve PORT (default 3040)
+. "$(cd "$(dirname "$0")" && pwd)/port_resolve.sh" 2>/dev/null || . "scripts/dev/port_resolve.sh" 2>/dev/null || true
 set +e
 
 PORT="${PORT:-3040}"

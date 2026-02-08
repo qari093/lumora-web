@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Resolve PORT (default 3040)
+. "$(cd "$(dirname "$0")" && pwd)/port_resolve.sh" 2>/dev/null || . "scripts/dev/port_resolve.sh" 2>/dev/null || true
 set -euo pipefail
 cd "${LUMORA_ROOT:-$HOME/lumora-web}"
 PORT="${PORT:-3040}"
