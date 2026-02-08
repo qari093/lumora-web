@@ -3,7 +3,7 @@
    - network-first for navigation, fallback to offline.html
    - stale-while-revalidate for same-origin GET assets
 */
-const CACHE_VERSION = "lumora-pwa-v1";
+const CACHE_VERSION = "lumora-pwa-v1-20260208170231";
 const SHELL = [
   "/offline.html",
   "/manifest.webmanifest",
