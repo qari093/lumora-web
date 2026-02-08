@@ -1,15 +1,88 @@
 #!/usr/bin/env bash
+
+PORT="${PORT:-3040}"
+LOAD1_WARN="${LOAD1_WARN:-60}"
+FREE_PCT_WARN="${FREE_PCT_WARN:-3}"
+AUTO_RELIEF="${AUTO_RELIEF:-0}"
+MAX_RELIEF="${MAX_RELIEF:-1}"
+COOLDOWN_SEC="${COOLDOWN_SEC:-45}"
+CONSEC_REQUIRED="${CONSEC_REQUIRED:-2}"
+STATE_FILE="${STATE_FILE:-/tmp/nexa_perf_sanity_state.json}"
+
+read_state(){
+  if [ -f "${STATE_FILE}" ]; then
+    python3 - <<'PYS' "${STATE_FILE}" 2>/dev/null || true
+import json,sys
+p=sys.argv[1]
+try: d=json.load(open(p))
+except Exception: d={}
+print(d.get("consec_warn",0))
+print(d.get("relief_used",0))
+PYS
+  else
+    echo "0"; echo "0"
+  fi
+}
+
+write_state(){
+  consec="${1:-0}"; relief="${2:-0}"
+  python3 - <<'PYS' "${STATE_FILE}" "${consec}" "${relief}" 2>/dev/null || true
+import json,sys
+p=sys.argv[1]; con=int(sys.argv[2]); rel=int(sys.argv[3])
+json.dump({"consec_warn":con,"relief_used":rel}, open(p,"w"))
+PYS
+}
+
+
+PORT="${PORT:-3040}"
+STATE_FILE="${STATE_FILE:-/tmp/nexa_perf_sanity_state.json}"
+
+read_state() {
+  if [ -f "${STATE_FILE}" ]; then
+    python3 - <<'PYS' "${STATE_FILE}" 2>/dev/null || true
+import json,sys
+p=sys.argv[1]
+try:
+  d=json.load(open(p))
+except Exception:
+  d={}
+print(d.get("consec_warn",0))
+print(d.get("relief_used",0))
+PYS
+  else
+    echo "0"
+    echo "0"
+  fi
+}
+
+write_state() {
+  consec="${1:-0}"
+  relief="${2:-0}"
+  python3 - <<'PYS' "${STATE_FILE}" "${consec}" "${relief}" 2>/dev/null || true
+import json,sys,os
+p=sys.argv[1]
+con=int(sys.argv[2])
+rel=int(sys.argv[3])
+json.dump({"consec_warn":con,"relief_used":rel}, open(p,"w"))
+PYS
+}
+
 set +e
 
 PORT="${PORT:-3040}"
 BASE="http://127.0.0.1:${PORT}"
 
 # Thresholds (tunable)
-LOAD1_WARN="${LOAD1_WARN:-50}"
-FREE_PCT_WARN="${FREE_PCT_WARN:-3}"     # percent
-AUTO_RELIEF="${AUTO_RELIEF:-0}"         # 1 => run scripts/dev/relief_3040.sh when warn triggers
 
 echo "NEXA perf sanity — ${BASE}"
+START_TS="${START_TS:-$(date +%s)}"
+NOW_TS="$(date +%s)"
+ELAPSED="$((NOW_TS-START_TS))"
+if [ "$ELAPSED" -ge "$MAX_RUN_SEC" ]; then
+  echo "⚠️ MAX_RUN_SEC reached (${ELAPSED}s >= ${MAX_RUN_SEC}s). Stopping to prevent long-running loops."
+  exit 0
+fi
+
 echo "thresholds: load1>${LOAD1_WARN} free%<${FREE_PCT_WARN} auto_relief=${AUTO_RELIEF}"
 echo
 
@@ -78,8 +151,45 @@ warn_flag="$(node -e "const j=require('/tmp/nexa_perf_metrics.json'); const load
 
 echo
 if [ "${warn_flag}" = "1" ] && [ "${AUTO_RELIEF}" = "1" ]; then
-  echo "• Auto relief triggered"
+# Hysteresis + max-relief guard (prevents infinite loop)
+consec_warn="$(read_state | sed -n '1p' 2>/dev/null || echo 0)"
+relief_used="$(read_state | sed -n '2p' 2>/dev/null || echo 0)"
+
+if [ "${WARN:-0}" = "1" ]; then
+  consec_warn="$((consec_warn+1))"
+else
+  consec_warn="0"
+fi
+
+write_state "${consec_warn}" "${relief_used}"
+
+if [ "${AUTO_RELIEF}" != "1" ]; then
+  exit 0
+fi
+
+if [ "${WARN:-0}" != "1" ]; then
+  echo "✓ WARN present; relief decision evaluated"
+  exit 0
+fi
+
+if [ "${consec_warn}" -lt "${CONSEC_REQUIRED}" ]; then
+  echo "• WARN seen ${consec_warn}/${CONSEC_REQUIRED} times — waiting for confirmation before relief"
+  exit 0
+fi
+
+if [ "${relief_used}" -ge "${MAX_RELIEF}" ]; then
+  echo "⛔ AUTO_RELIEF blocked: relief_used=${relief_used} >= MAX_RELIEF=${MAX_RELIEF} (prevent loop)"
+  exit 0
+fi
+
+relief_used="$((relief_used+1))"
+write_state "${consec_warn}" "${relief_used}"
+  echo "• Auto relief triggered (guarded: hysteresis + max relief)"
   PORT="${PORT}" sh scripts/dev/relief_3040.sh
+echo "• Cooldown ${COOLDOWN_SEC}s (let memory/load settle)"; sleep "${COOLDOWN_SEC}"
+echo "• Single re-check after relief (no further relief allowed this run)"; AUTO_RELIEF=0 sh scripts/nexa/perf_sanity.sh || true
+echo "✓ re-check done"
+exit 0
   echo
   echo "• Re-check after relief"
   PORT="${PORT}" sh scripts/nexa/perf_sanity.sh LOAD1_WARN="${LOAD1_WARN}" FREE_PCT_WARN="${FREE_PCT_WARN}" AUTO_RELIEF=0
