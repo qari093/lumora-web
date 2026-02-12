@@ -328,3 +328,7 @@ VirtualBox VMs/
 .env.local
 .env.development.local
 .env.test.local
+
+# vitest local artifacts
+.vitest_next_log
+.vitest_next_*
