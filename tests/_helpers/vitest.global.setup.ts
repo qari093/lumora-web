@@ -1,90 +1,152 @@
-/**
- * Vitest global setup for Lumora launch suites.
- *
- * IMPORTANT: Vitest expects this file to default-export an async function
- * that optionally returns a teardown function.
- *
- * We start a Next server once per vitest run, set an env base URL for tests,
- * and ensure teardown stops the server to avoid hanging-process reporter.
- */
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
-import { startNextTestServer, type NextServerHandle } from "./next.testServer";
+import net from "node:net";
+import { spawn } from "node:child_process";
 
-let handle: NextServerHandle | null = null;
+const ROOT = process.cwd();
+const PID_FILE = path.join(ROOT, ".vitest_next_pid");
+const LOG_FILE = path.join(ROOT, ".vitest_next_log");
 
-function hasNextBuild(): boolean {
+function sleep(ms: number) {
+  return new Promise<void>((r) => setTimeout(r, ms));
+}
+
+function pidAlive(pid: number): boolean {
   try {
-    const p = path.join(process.cwd(), ".next", "BUILD_ID");
-    return fs.existsSync(p) && fs.statSync(p).isFile();
+    process.kill(pid, 0);
+    return true;
   } catch {
     return false;
   }
 }
 
-function markerPath(): string {
-  return path.join(process.cwd(), ".quarantine", "vitest_next_build.marker");
-}
-
-function isMarkerFresh(maxAgeMs: number): boolean {
+function readPid(): number | null {
   try {
-    const p = markerPath();
-    if (!fs.existsSync(p)) return false;
-    const st = fs.statSync(p);
-    return Date.now() - st.mtimeMs < maxAgeMs;
+    if (!fs.existsSync(PID_FILE)) return null;
+    const s = fs.readFileSync(PID_FILE, "utf8").trim();
+    const n = Number(s);
+    return Number.isFinite(n) && n > 0 ? n : null;
   } catch {
-    return false;
+    return null;
   }
 }
 
-function writeMarker(): void {
-  const p = markerPath();
-  fs.mkdirSync(path.dirname(p), { recursive: true });
-  fs.writeFileSync(p, String(Date.now()) + "\n", "utf8");
+async function isPortFree(host: string, port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const srv = net.createServer();
+    srv.once("error", () => resolve(false));
+    srv.listen(port, host, () => srv.close(() => resolve(true)));
+  });
 }
 
-function ensureNextBuild(): void {
-  if (process.env.NEXT_TEST_FORCE_BUILD === "1") {
-    execSync("npx --yes next build", { stdio: "inherit" });
-    writeMarker();
-    return;
+async function findFreePort(host: string, startPort: number, maxTries = 40): Promise<number> {
+  for (let i = 0; i < maxTries; i++) {
+    const p = startPort + i;
+    // eslint-disable-next-line no-await-in-loop
+    const free = await isPortFree(host, p);
+    if (free) return p;
   }
-
-  const fresh = isMarkerFresh(6 * 60 * 60 * 1000); // 6h
-  if (hasNextBuild() && fresh) return;
-
-  if (hasNextBuild() && !process.env.NEXT_TEST_REQUIRE_FRESH_BUILD) {
-    writeMarker();
-    return;
-  }
-
-  execSync("npx --yes next build", { stdio: "inherit" });
-  writeMarker();
+  throw new Error(`no_free_port_from_${startPort}`);
 }
 
-export default async function globalSetup(): Promise<() => Promise<void>> {
-  ensureNextBuild();
+async function waitFor(url: string, ms = 30000) {
+  if (typeof fetch !== "function") {
+    throw new Error("global_fetch_unavailable: run Node 18+ (prefer Node 20)");
+  }
+  const start = Date.now();
+  while (Date.now() - start < ms) {
+    try {
+      const r = await fetch(url, { method: "GET", headers: { accept: "application/json" } });
+      if (r.ok) return;
+    } catch {}
+    await sleep(300);
+  }
+  throw new Error(`timeout_waiting_for_http ${url}`);
+}
 
-  if (!handle) {
-    handle = await startNextTestServer({
-      port: Number(process.env.NEXT_TEST_PORT || 4173),
-      mode: "start",
-      quiet: process.env.NEXT_TEST_VERBOSE !== "1",
-      waitMs: 120000,
-    });
+function tailLog(n = 160): string {
+  try {
+    if (!fs.existsSync(LOG_FILE)) return "(no .vitest_next_log)";
+    const s = fs.readFileSync(LOG_FILE, "utf8");
+    const lines = s.split(/\r?\n/);
+    return lines.slice(Math.max(0, lines.length - n)).join("\n");
+  } catch (e: any) {
+    return `tail_failed: ${String(e?.message || e)}`;
+  }
+}
+
+export default async function globalSetup() {
+  const HOST = process.env.TEST_HOST || "127.0.0.1";
+  const START_PORT = Number(process.env.TEST_PORT || "4174");
+  const PORT = await findFreePort(HOST, START_PORT, 40);
+  const BASE = `http://${HOST}:${PORT}`;
+
+  const e = process.env as Record<string, string | undefined>;
+  e.TEST_HOST = HOST;
+  e.TEST_PORT = String(PORT);
+  e.NEXT_PUBLIC_SITE_URL = BASE;
+  e.NEXT_PUBLIC_WEB_URL = BASE;
+  e.APP_URL = BASE;
+  e.SITE_URL = BASE;
+  e.BASE_URL = BASE;
+  e.LUMORA_BASE_URL = BASE;
+
+  // Reuse existing server if alive & healthy
+  const existing = readPid();
+  if (existing && pidAlive(existing)) {
+    try {
+      await waitFor(`${BASE}/api/healthz`, 15000);
+      return async () => {};
+    } catch {
+      // fallthrough to spawn
+    }
   }
 
-  // Make tests deterministic: they should call this base URL.
-  process.env.LUMORA_TEST_BASE_URL = handle.baseUrl;
+  // Clear stale pid file
+  try { if (fs.existsSync(PID_FILE)) fs.unlinkSync(PID_FILE); } catch {}
 
-  // Return teardown
+  // Reset log file
+  try { fs.writeFileSync(LOG_FILE, "", "utf8"); } catch {}
+
+  // Prefer pnpm if available (more reliable than npx in some setups)
+  const usePnpm = (() => {
+    try {
+      const p = spawn(process.platform === "win32" ? "where" : "command", process.platform === "win32" ? ["pnpm"] : ["-v", "pnpm"]);
+      p.kill();
+      return true;
+    } catch {
+      return false;
+    }
+  })();
+
+  const cmd = usePnpm ? (process.platform === "win32" ? "pnpm.cmd" : "pnpm") : (process.platform === "win32" ? "npx.cmd" : "npx");
+  const args = usePnpm
+    ? ["-s", "next", "dev", "-p", String(PORT), "-H", HOST]
+    : ["next", "dev", "-p", String(PORT), "-H", HOST];
+
+  const child = spawn(cmd, args, {
+    cwd: ROOT,
+    stdio: ["ignore", "pipe", "pipe"],
+    env: { ...process.env, NODE_ENV: "test" },
+  });
+
+  fs.writeFileSync(PID_FILE, String(child.pid), "utf8");
+
+  const out = fs.createWriteStream(LOG_FILE, { flags: "a" });
+  child.stdout.pipe(out);
+  child.stderr.pipe(out);
+
+  try {
+    await waitFor(`${BASE}/api/healthz`, 45000);
+  } catch (err: any) {
+    const logTail = tailLog(220);
+    throw new Error(`${String(err?.message || err)}\n\n---- .vitest_next_log (tail) ----\n${logTail}\n---- end ----`);
+  }
+
   return async () => {
     try {
-      await handle?.stop?.();
-    } finally {
-      handle = null;
-      delete process.env.LUMORA_TEST_BASE_URL;
-    }
+      process.kill(child.pid);
+    } catch {}
+    try { if (fs.existsSync(PID_FILE)) fs.unlinkSync(PID_FILE); } catch {}
   };
 }

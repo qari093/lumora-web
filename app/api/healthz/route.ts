@@ -1,21 +1,14 @@
-import { NextResponse } from "next/server";
+import { getServiceName, getAppVersion, jsonResponse } from "@/lib/health/contract";
 
-// /api/healthz — stable alias for platform health checks.
-// Contract MUST match tests/health/health_contract_unit.test.ts expectations:
-// { ok: true, service: string, ts: number, ... }
-export async function GET() {
-  return NextResponse.json(
-    {
-      ok: true,
-      service: "healthz",
-      ts: Date.now(),
-    },
-    {
-      status: 200,
-      headers: {
-        "cache-control": "no-store",
-        "content-type": "application/json; charset=utf-8",
-      },
-    }
-  );
+export const runtime = "nodejs";
+
+export async function GET(_req: Request) {
+  const body = {
+    ok: true,
+    service: getServiceName(),
+    route: "/api/healthz",
+    ts: Date.now(), // contract expects number here
+    version: getAppVersion(),
+  };
+  return jsonResponse(body, 200);
 }

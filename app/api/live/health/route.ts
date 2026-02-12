@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
+import { getLiveHealth } from "@/lib/live/runtime";
 
 export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    portal: "live",
-    status: "stub",
-    note: "Live portal health endpoint alive. Portal not activated.",
-    ts: Date.now(),
+  return NextResponse.json(getLiveHealth(), {
+    headers: { "X-Lumora-Live": "1" },
   });
 }

@@ -1,66 +1,58 @@
-import { NextResponse } from "next/server";
-import os from "os";
+import { getBaseUrlFromRequest, getServiceName, getAppVersion, isoNow, jsonResponse } from "@/lib/health/contract";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
-function iso(ms: number): string {
-  return new Date(ms).toISOString();
-}
-
-function envName(): string {
-  const v =
-    process.env.LUMORA_ENV ||
-    process.env.NEXT_PUBLIC_LUMORA_ENV ||
-    process.env.VERCEL_ENV ||
-    process.env.NODE_ENV ||
-    "dev";
-  return typeof v === "string" && v.length ? v : "dev";
+async function pingHealthz(baseUrl: string, timeoutMs: number) {
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), timeoutMs);
+  const start = Date.now();
+  try {
+    const res = await fetch(`${baseUrl}/api/healthz`, {
+      method: "GET",
+      headers: { accept: "application/json" },
+      signal: controller.signal,
+      cache: "no-store",
+    });
+    const latency = Date.now() - start;
+    return { ok: res.ok, status: res.status, latency_ms: latency };
+  } catch {
+    const latency = Date.now() - start;
+    return { ok: false, status: 0, latency_ms: latency };
+  } finally {
+    clearTimeout(t);
+  }
 }
 
 export async function GET(req: Request) {
-  const u = new URL(req.url);
-  const deep = u.searchParams.get("deep") === "1";
-  const now = Date.now();
+  const url = new URL(req.url);
+  const deep = url.searchParams.get("deep") === "1";
 
-  // Base contract (tests expect NO `checks` key when deep=0)
-  const base: any = {
+  const baseUrl = getBaseUrlFromRequest(req);
+  const timeoutMs = Number(process.env.LUMORA_HEALTH_TIMEOUT_MS || 2000);
+
+  const base = {
     ok: true,
-    service: "lumora-web",
+    service: getServiceName(),
     route: "/api/health",
-    ts: iso(now),
-    node: os.hostname(),
-    env: envName(),
+    ts: isoNow(),
+    version: getAppVersion(),
+    node: process.version,
+    env: process.env.NODE_ENV || "development",
   };
 
-  if (!deep) {
-    return NextResponse.json(base, {
-      status: 200,
-      headers: { "cache-control": "no-store" },
-    });
-  }
+  if (!deep) return jsonResponse(base, 200);
 
-  // Deep contract
-  const t0 = Date.now();
-  const selfOk = true;
-  const t1 = Date.now();
+  const self = await pingHealthz(baseUrl, timeoutMs);
 
-  const deepBody: any = {
+  const body = {
     ...base,
-    deep: true,
-    timeout_ms: 2000,
-    base_url: u.origin,
+    deep: true as const,
+    base_url: baseUrl,
+    timeout_ms: timeoutMs,
     checks: {
-      self_healthz: {
-        ok: selfOk,
-        status: 200,
-        latency_ms: Math.max(0, t1 - t0),
-      },
+      self_healthz: self,
     },
   };
 
-  return NextResponse.json(deepBody, {
-    status: 200,
-    headers: { "cache-control": "no-store" },
-  });
+  return jsonResponse(body, 200);
 }
