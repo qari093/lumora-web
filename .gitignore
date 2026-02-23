@@ -332,3 +332,11 @@ VirtualBox VMs/
 # vitest local artifacts
 .vitest_next_log
 .vitest_next_*
+
+# Block Lumora step backup artifacts
+*.bak_step*
+# macOS trash / protected dirs
+**/.Trash/
+.Trashes/
+**/.Trashes/
+**/.DS_Store
