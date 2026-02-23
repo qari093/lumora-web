@@ -1,3 +1,5 @@
+import { writeRouteMetricsSnapshotIfEnabled } from "@/lib/telemetry/snapshot";
+import { recordRouteDuration } from "@/lib/telemetry/metrics";
 export type TelemetryEvent = {
   route?: string
   durationMs?: number
@@ -12,7 +14,14 @@ const ENABLED =
   process.env.LUMORA_TELEMETRY === "1"
 
 export function record(event: TelemetryEvent) {
-  if (!ENABLED) return
+  try {
+    const r = (event as any)?.route;
+    const d = (event as any)?.durationMs;
+    if (typeof r === "string" && typeof d === "number" && Number.isFinite(d)) {
+      recordRouteDuration(r, d);
+    }
+  } catch { /* ignore */ }
+if (!ENABLED) return
 
   const payload = {
     ...event,
@@ -21,6 +30,10 @@ export function record(event: TelemetryEvent) {
 
   // Structured JSON log for ingestion (Workers / VM compatible)
   console.log(JSON.stringify({ type: "telemetry", ...payload }))
+  try {
+    void writeRouteMetricsSnapshotIfEnabled();
+  } catch { /* ignore */ }
+
 }
 
 export function timed<T>(
