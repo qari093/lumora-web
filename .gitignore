@@ -340,3 +340,6 @@ VirtualBox VMs/
 .Trashes/
 **/.Trashes/
 **/.DS_Store
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step11_repo_guard_lock
