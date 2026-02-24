@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# --- repo scope guard (prevents HOME root drift) ---
+bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/repo_scope_guard.sh"
+# ------------------------------------------------------
 set +e; set +u; set +o pipefail
 
 # If current shell is zsh, disable history expansion (prevents paste crashes)
