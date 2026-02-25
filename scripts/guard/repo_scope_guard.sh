@@ -51,6 +51,24 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Python project/venv signals (repo drift signal)
+if [ -d "${HOME_DIR}/.venv" ]; then
+  say "❌ repo_scope_guard: HOME has .venv (unsafe python venv): ${HOME_DIR}/.venv"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/venv" ]; then
+  say "❌ repo_scope_guard: HOME has venv (unsafe python venv): ${HOME_DIR}/venv"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/pyproject.toml" ]; then
+  say "❌ repo_scope_guard: HOME has pyproject.toml (unsafe python project): ${HOME_DIR}/pyproject.toml"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/__pycache__" ]; then
+  say "❌ repo_scope_guard: HOME has __pycache__ (unsafe python cache): ${HOME_DIR}/__pycache__"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Next.js / Turbo build artifacts
 if [ -d "${HOME_DIR}/.next" ]; then
   say "❌ repo_scope_guard: HOME has .next (unsafe build artifact): ${HOME_DIR}/.next"
