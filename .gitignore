@@ -355,3 +355,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step14_githooks_guardrail_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step15_git_clean_locks_assertion_lock
