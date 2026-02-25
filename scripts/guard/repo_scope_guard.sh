@@ -1,3 +1,13 @@
+
+# Hard gate: HOME must not contain global git config artifacts
+if [ -f "${HOME_DIR}/.gitconfig" ]; then
+  say "❌ repo_scope_guard: HOME has .gitconfig (unsafe): ${HOME_DIR}/.gitconfig"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.git-credentials" ]; then
+  say "❌ repo_scope_guard: HOME has .git-credentials (unsafe): ${HOME_DIR}/.git-credentials"
+  exit 1
+fi
 #!/usr/bin/env bash
 set -euo pipefail
 
