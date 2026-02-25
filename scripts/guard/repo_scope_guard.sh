@@ -4,6 +4,19 @@ set -euo pipefail
 say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
+
+# Hard gate: HOME must not contain node_modules (prevents npm/pnpm drift at HOME)
+if [ -d "${HOME_DIR}/node_modules" ]; then
+  say "❌ repo_scope_guard: HOME/node_modules exists (unsafe): ${HOME_DIR}/node_modules"
+  exit 1
+fi
+
+# Hard guard: if HOME has a .git dir/file, it is effectively a git repo/worktree.
+# This catches `git init` even before `git rev-parse` is usable in some states.
+if [ -e "${HOME_DIR}/.git" ]; then
+  say "❌ repo_scope_guard: HOME contains .git (${HOME_DIR}/.git)"
+  exit 1
+fi
 TARGET_DEFAULT="${HOME_DIR}/lumora-web"
 TARGET="${LUMORA_ROOT:-$TARGET_DEFAULT}"
 
