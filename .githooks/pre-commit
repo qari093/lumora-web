@@ -1,3 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# LUMORA_HARDENING_GITHOOKS_GUARDRAIL
+# Prevent hooks from stripping tracked .lumora_* lock markers.
+# If hook scripts do formatting or filtering, they must never touch .lumora_* files.
+
+if git diff --cached --name-only | grep -Eq "^(\\.lumora_)"; then
+  # allow commit; do not modify index entries for .lumora_*
+  :
+fi
+
+# --- existing hook content below (if any) ---
 #!/bin/sh
 set -e
 

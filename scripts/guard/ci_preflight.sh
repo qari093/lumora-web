@@ -5,6 +5,9 @@ bash "$(cd "$(dirname "$0")" && pwd)/repo_scope_guard.sh"
 
 set -euo pipefail
 
+# Lumora Hardening: ensure hooks guardrail is present
+bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/githooks_guardrail_check.sh"
+
 echo "CI preflight: prisma validate + typecheck + eslint warning budget gate"
 
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"

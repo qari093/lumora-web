@@ -352,3 +352,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (EOF allow-rules; must be after .lumora_* ignore)
 !.lumora_hardening_step13_repo_scope_guard_wired_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step14_githooks_guardrail_lock
