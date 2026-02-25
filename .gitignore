@@ -433,3 +433,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step40_negative_home_ruby_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step41_negative_home_gradle_java_guard_lock

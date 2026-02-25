@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Java/Gradle project signals
+if [ -f "${HOME_DIR}/build.gradle" ] || [ -f "${HOME_DIR}/build.gradle.kts" ]; then
+  echo "❌ repo_scope_guard: HOME has build.gradle"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/pom.xml" ]; then
+  echo "❌ repo_scope_guard: HOME has pom.xml"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.gradle" ]; then
+  echo "❌ repo_scope_guard: HOME has .gradle directory"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Ruby project signals
 if [ -f "${HOME_DIR}/Gemfile" ]; then
   say "❌ repo_scope_guard: HOME has Gemfile: ${HOME_DIR}/Gemfile"
