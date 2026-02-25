@@ -6,6 +6,20 @@ say(){ printf "%s\n" "$*"; }
 HOME_DIR="${HOME}"
 
 # Hard gate: HOME must not contain node_modules (prevents npm/pnpm drift at HOME)
+
+# Hard gate: HOME must not look like a repo working tree
+if [ -f "${HOME_DIR}/.gitmodules" ]; then
+  say "❌ repo_scope_guard: HOME has .gitmodules (unsafe): ${HOME_DIR}/.gitmodules"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.github" ]; then
+  say "❌ repo_scope_guard: HOME has .github dir (unsafe): ${HOME_DIR}/.github"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.gitignore" ]; then
+  say "❌ repo_scope_guard: HOME has .gitignore (unsafe): ${HOME_DIR}/.gitignore"
+  exit 1
+fi
 if [ -d "${HOME_DIR}/node_modules" ]; then
   say "❌ repo_scope_guard: HOME/node_modules exists (unsafe): ${HOME_DIR}/node_modules"
   exit 1
