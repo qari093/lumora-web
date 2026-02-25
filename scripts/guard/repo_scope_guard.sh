@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Python requirements/project lock files
+if [ -f "${HOME_DIR}/requirements.txt" ]; then
+  echo "❌ repo_scope_guard: HOME has requirements.txt"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/Pipfile" ]; then
+  echo "❌ repo_scope_guard: HOME has Pipfile"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/poetry.lock" ]; then
+  echo "❌ repo_scope_guard: HOME has poetry.lock"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain PHP/Composer project signals
 if [ -f "${HOME_DIR}/composer.json" ]; then
   echo "❌ repo_scope_guard: HOME has composer.json"

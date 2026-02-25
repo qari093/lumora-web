@@ -448,3 +448,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step45_negative_home_php_composer_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step46_negative_home_python_requirements_guard_lock
