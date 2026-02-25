@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 # --- repo scope guard (prevents HOME root drift) ---
 bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/repo_scope_guard.sh"
+__LUMORA_GUARD_RC__=$?
+if [ "${__LUMORA_GUARD_RC__:-0}" -ne 0 ]; then
+  exit "${__LUMORA_GUARD_RC__}"
+fi
+
 # ------------------------------------------------------
 set +e; set +u; set +o pipefail
 
@@ -26,5 +33,5 @@ fi
 
 if [ "${1-}" = "--" ]; then shift; fi
 [ "${#}" -gt 0 ] || exit 0
-"$@" || true
-exit 0
+"$@"
+exit $?
