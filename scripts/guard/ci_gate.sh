@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Hard-scope guard execution through run_safe (enforces repo_scope_guard)
+RUN_SAFE="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/run_safe.sh"
+
+
 # Repo scope hard gate (prevents HOME/root drift)
 bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/repo_scope_guard.sh"
 
@@ -41,3 +45,6 @@ else
   npx -y next build
 fi
 echo "✓ build ok"
+
+# Default: pass-through via run_safe
+"$RUN_SAFE" -- "$@"
