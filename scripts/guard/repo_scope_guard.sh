@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain project configs (tsconfig/next.config*)
+if [ -f "${HOME_DIR}/tsconfig.json" ] || [ -f "${HOME_DIR}/jsconfig.json" ]; then
+  say "❌ repo_scope_guard: HOME has tsconfig/jsconfig (unsafe): ${HOME_DIR}/tsconfig.json or jsconfig.json"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/next.config.js" ] || [ -f "${HOME_DIR}/next.config.mjs" ] || [ -f "${HOME_DIR}/next.config.ts" ]; then
+  say "❌ repo_scope_guard: HOME has next.config* (unsafe): ${HOME_DIR}/next.config.*"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain .env files (often indicates wrong cwd / unsafe secrets scope)
 if [ -f "${HOME_DIR}/.env" ]; then
   say "❌ repo_scope_guard: HOME has .env file (unsafe): ${HOME_DIR}/.env"
