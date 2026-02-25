@@ -5,6 +5,9 @@ bash "$(cd "$(dirname "$0")" && pwd)/repo_scope_guard.sh"
 
 set -euo pipefail
 
+echo "• guard: git clean guardrail"
+bash scripts/guard/git_clean_guardrail_check.sh
+
 # Lumora Hardening: ensure hooks guardrail is present
 bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/guard/githooks_guardrail_check.sh"
 
