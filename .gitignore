@@ -424,3 +424,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step37_negative_home_terraform_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step38_negative_home_cloud_kube_guard_lock

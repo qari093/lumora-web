@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain cloud/kube config dirs (repo drift signal)
+if [ -d "${HOME_DIR}/.kube" ]; then
+  say "❌ repo_scope_guard: HOME has .kube (unsafe kube config dir): ${HOME_DIR}/.kube"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.aws" ]; then
+  say "❌ repo_scope_guard: HOME has .aws (unsafe aws config dir): ${HOME_DIR}/.aws"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.config/gcloud" ]; then
+  say "❌ repo_scope_guard: HOME has .config/gcloud (unsafe gcloud config dir): ${HOME_DIR}/.config/gcloud"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain IaC / Terraform signals (repo drift signal)
 if [ -d "${HOME_DIR}/.terraform" ]; then
   say "❌ repo_scope_guard: HOME has .terraform (unsafe terraform dir): ${HOME_DIR}/.terraform"
