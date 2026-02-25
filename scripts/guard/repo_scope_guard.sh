@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain secret stores (repo drift + sensitive context)
+if [ -d "${HOME_DIR}/.ssh" ]; then
+  say "❌ repo_scope_guard: HOME has .ssh (sensitive dir): ${HOME_DIR}/.ssh"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.gnupg" ]; then
+  say "❌ repo_scope_guard: HOME has .gnupg (sensitive dir): ${HOME_DIR}/.gnupg"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain cloud/kube config dirs (repo drift signal)
 if [ -d "${HOME_DIR}/.kube" ]; then
   say "❌ repo_scope_guard: HOME has .kube (unsafe kube config dir): ${HOME_DIR}/.kube"
