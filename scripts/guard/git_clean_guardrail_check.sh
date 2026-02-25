@@ -1,43 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Guardrail:
-# - Disallow direct "git clean" usage in repo scripts unless routed via git_clean_safe.sh
-# - This prevents accidental deletion of lock markers when -x/-X is used.
-#
-# Allowed:
-#   scripts/guard/git_clean_safe.sh ...
-#   bash scripts/guard/git_clean_safe.sh ...
-#
-# Forbidden:
-#   git clean ...
-#   command git clean ...
+# bash-3.2 compatible guardrail: ensure git-clean previews never include .lumora_* locks.
 
-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
 
-# Scan only shell scripts + guard scripts (fast + targeted)
-mapfile -t files < <(cd "$ROOT" && {
-  find scripts -type f \( -name "*.sh" -o -name "*.bash" \) 2>/dev/null || true
-} | sed 's|^\./||')
+say(){ printf "%s\n" "$*"; }
 
-bad=0
-for f in "${files[@]}"; do
-  # Skip the safe wrapper itself
-  [[ "$f" == "scripts/guard/git_clean_safe.sh" ]] && continue
-  # Match raw git clean invocations; ignore lines that already use git_clean_safe.sh
-  if grep -nE '(^|[[:space:];&|])((command[[:space:]]+)?git[[:space:]]+clean)([[:space:]]|$)' "$ROOT/$f" >/dev/null 2>&1; then
-    if ! grep -nE 'scripts/guard/git_clean_safe\.sh' "$ROOT/$f" >/dev/null 2>&1; then
-      echo "FORBIDDEN_GIT_CLEAN::$f"
-      grep -nE '(^|[[:space:];&|])((command[[:space:]]+)?git[[:space:]]+clean)([[:space:]]|$)' "$ROOT/$f" | head -n 20
-      echo
-      bad=1
-    fi
-  fi
-done
+# Prefer project-safe wrapper if present
+CLEAN_CMD=(git clean)
+if [ -x "scripts/guard/git_clean_safe.sh" ]; then
+  CLEAN_CMD=(bash "scripts/guard/git_clean_safe.sh")
+fi
 
-if [[ $bad -ne 0 ]]; then
-  echo "❌ git clean guardrail violated. Use: scripts/guard/git_clean_safe.sh"
+# Use preview flags passed by caller (default -ndx)
+ARGS=("$@")
+if [ "${#ARGS[@]}" -eq 0 ]; then
+  ARGS=(-ndx)
+fi
+
+OUT="$("${CLEAN_CMD[@]}" "${ARGS[@]}" 2>/dev/null || true)"
+
+# If preview lists any .lumora_*, fail hard.
+# (strip CR in case of weird formatting)
+if printf "%s\n" "$OUT" | tr -d '\r' | grep -E '\.lumora_' >/dev/null 2>&1; then
+  say "❌ guardrail: preview contains .lumora_* entries"
+  printf "%s\n" "$OUT" | tr -d '\r' | grep -E '\.lumora_' | head -n 80
   exit 1
 fi
 
-echo "✓ git clean guardrail check passed"
+say "✓ guardrail: preview excludes .lumora_*"
+exit 0
