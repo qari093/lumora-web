@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Rust project signals
+if [ -f "${HOME_DIR}/Cargo.toml" ]; then
+  echo "❌ repo_scope_guard: HOME has Cargo.toml"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/Cargo.lock" ]; then
+  echo "❌ repo_scope_guard: HOME has Cargo.lock"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.cargo" ]; then
+  echo "❌ repo_scope_guard: HOME has .cargo directory"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Go module signals
 if [ -f "${HOME_DIR}/go.mod" ]; then
   echo "❌ repo_scope_guard: HOME has go.mod"
