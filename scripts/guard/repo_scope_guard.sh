@@ -51,6 +51,24 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Node version manager signals
+if [ -d "${HOME_DIR}/.nvm" ]; then
+  echo "❌ repo_scope_guard: HOME has .nvm"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.nvmrc" ]; then
+  echo "❌ repo_scope_guard: HOME has .nvmrc"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.node-version" ]; then
+  echo "❌ repo_scope_guard: HOME has .node-version"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.tool-versions" ]; then
+  echo "❌ repo_scope_guard: HOME has .tool-versions"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain python site-packages/dist-packages directories
 if [ -d "${HOME_DIR}/site-packages" ]; then
   echo "❌ repo_scope_guard: HOME has site-packages"
