@@ -51,6 +51,24 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain system package manager signals
+if [ -d "${HOME_DIR}/.linuxbrew" ] || [ -d "${HOME_DIR}/.homebrew" ]; then
+  echo "❌ repo_scope_guard: HOME has Homebrew directory"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.config/apt" ]; then
+  echo "❌ repo_scope_guard: HOME has apt config directory"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.chocolatey" ]; then
+  echo "❌ repo_scope_guard: HOME has Chocolatey directory"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/scoop" ]; then
+  echo "❌ repo_scope_guard: HOME has Scoop directory"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Node version manager signals
 if [ -d "${HOME_DIR}/.nvm" ]; then
   echo "❌ repo_scope_guard: HOME has .nvm"
