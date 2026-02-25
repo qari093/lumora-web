@@ -361,3 +361,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step15_git_clean_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step17_preflight_hard_gate_lock
