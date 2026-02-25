@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain python site-packages/dist-packages directories
+if [ -d "${HOME_DIR}/site-packages" ]; then
+  echo "❌ repo_scope_guard: HOME has site-packages"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/dist-packages" ]; then
+  echo "❌ repo_scope_guard: HOME has dist-packages"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Python requirements/project lock files
 if [ -f "${HOME_DIR}/requirements.txt" ]; then
   echo "❌ repo_scope_guard: HOME has requirements.txt"

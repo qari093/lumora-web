@@ -451,3 +451,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step46_negative_home_python_requirements_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step47_negative_home_python_sitepackages_guard_lock
