@@ -2,6 +2,20 @@
 # Hard gate: HOME must not contain global git config artifacts
 
 # Hard gate: HOME must not contain package-manager rc files (often indicates project drift)
+
+# Hard gate: HOME must not contain IDE project dirs (often indicates repo drift)
+if [ -d "${HOME_DIR}/.vscode" ]; then
+  say "❌ repo_scope_guard: HOME has .vscode dir (unsafe): ${HOME_DIR}/.vscode"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.idea" ]; then
+  say "❌ repo_scope_guard: HOME has .idea dir (unsafe): ${HOME_DIR}/.idea"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.cursor" ]; then
+  say "❌ repo_scope_guard: HOME has .cursor dir (unsafe): ${HOME_DIR}/.cursor"
+  exit 1
+fi
 if [ -f "${HOME_DIR}/.npmrc" ]; then
   say "❌ repo_scope_guard: HOME has .npmrc (unsafe): ${HOME_DIR}/.npmrc"
   exit 1
