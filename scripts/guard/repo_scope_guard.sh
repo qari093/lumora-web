@@ -51,6 +51,25 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain IaC / Terraform signals (repo drift signal)
+if [ -d "${HOME_DIR}/.terraform" ]; then
+  say "❌ repo_scope_guard: HOME has .terraform (unsafe terraform dir): ${HOME_DIR}/.terraform"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/terraform.tfstate" ]; then
+  say "❌ repo_scope_guard: HOME has terraform.tfstate (unsafe terraform state): ${HOME_DIR}/terraform.tfstate"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/terraform.tfstate.backup" ]; then
+  say "❌ repo_scope_guard: HOME has terraform.tfstate.backup (unsafe terraform state): ${HOME_DIR}/terraform.tfstate.backup"
+  exit 1
+fi
+# Also block common terraform configs at HOME root
+if ls "${HOME_DIR}"/*.tf >/dev/null 2>&1; then
+  say "❌ repo_scope_guard: HOME has *.tf files (unsafe terraform config): ${HOME_DIR}/*.tf"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Docker project signals (repo drift signal)
 if [ -d "${HOME_DIR}/.docker" ]; then
   say "❌ repo_scope_guard: HOME has .docker (unsafe docker config dir): ${HOME_DIR}/.docker"
