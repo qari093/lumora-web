@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Docker project signals (repo drift signal)
+if [ -d "${HOME_DIR}/.docker" ]; then
+  say "❌ repo_scope_guard: HOME has .docker (unsafe docker config dir): ${HOME_DIR}/.docker"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/docker-compose.yml" ]; then
+  say "❌ repo_scope_guard: HOME has docker-compose.yml (unsafe compose project): ${HOME_DIR}/docker-compose.yml"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/docker-compose.yaml" ]; then
+  say "❌ repo_scope_guard: HOME has docker-compose.yaml (unsafe compose project): ${HOME_DIR}/docker-compose.yaml"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Python project/venv signals (repo drift signal)
 if [ -d "${HOME_DIR}/.venv" ]; then
   say "❌ repo_scope_guard: HOME has .venv (unsafe python venv): ${HOME_DIR}/.venv"
