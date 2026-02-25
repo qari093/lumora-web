@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Prisma project artifacts (schema/config)
+if [ -d "${HOME_DIR}/prisma" ] || [ -f "${HOME_DIR}/schema.prisma" ] || [ -f "${HOME_DIR}/prisma/schema.prisma" ]; then
+  say "❌ repo_scope_guard: HOME has prisma/ schema (unsafe): ${HOME_DIR}/prisma or schema.prisma"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/prisma.config.ts" ] || [ -f "${HOME_DIR}/prisma.config.js" ] || [ -f "${HOME_DIR}/prisma.config.mjs" ]; then
+  say "❌ repo_scope_guard: HOME has prisma.config* (unsafe): ${HOME_DIR}/prisma.config.*"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain project configs (tsconfig/next.config*)
 if [ -f "${HOME_DIR}/tsconfig.json" ] || [ -f "${HOME_DIR}/jsconfig.json" ]; then
   say "❌ repo_scope_guard: HOME has tsconfig/jsconfig (unsafe): ${HOME_DIR}/tsconfig.json or jsconfig.json"
