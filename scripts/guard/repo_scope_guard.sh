@@ -34,6 +34,14 @@ say "✓ repo_scope_guard: HOME is not a git repo"
 # 2) HOME must NOT contain package.json (prevents naive root autodetect from picking HOME)
 if [ -f "$HOME_DIR/package.json" ]; then
   say "❌ repo_scope_guard: HOME/package.json exists: $HOME_DIR/package.json"
+
+# Hard gate: HOME must not contain JS lockfiles (prevents tool drift at HOME)
+for f in "pnpm-lock.yaml" "yarn.lock" "package-lock.json"; do
+  if [ -f "${HOME_DIR}/${f}" ]; then
+    say "❌ repo_scope_guard: HOME lockfile exists (unsafe): ${HOME_DIR}/${f}"
+    exit 1
+  fi
+done
   say "   Fix: move it out (quarantine) e.g.:"
   say "     mkdir -p \"$HOME_DIR/.lumora_quarantine_home_root_files\""
   say "     mv \"$HOME_DIR/package.json\" \"$HOME_DIR/.lumora_quarantine_home_root_files/package.json.$(date -u +%Y%m%dT%H%M%SZ)\""
