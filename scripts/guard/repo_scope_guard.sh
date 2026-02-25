@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Go module signals
+if [ -f "${HOME_DIR}/go.mod" ]; then
+  echo "❌ repo_scope_guard: HOME has go.mod"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/go.sum" ]; then
+  echo "❌ repo_scope_guard: HOME has go.sum"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Java/Gradle project signals
 if [ -f "${HOME_DIR}/build.gradle" ] || [ -f "${HOME_DIR}/build.gradle.kts" ]; then
   echo "❌ repo_scope_guard: HOME has build.gradle"
