@@ -1,5 +1,27 @@
 
 # Hard gate: HOME must not contain global git config artifacts
+
+# Hard gate: HOME must not contain package-manager rc files (often indicates project drift)
+if [ -f "${HOME_DIR}/.npmrc" ]; then
+  say "❌ repo_scope_guard: HOME has .npmrc (unsafe): ${HOME_DIR}/.npmrc"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.yarnrc" ]; then
+  say "❌ repo_scope_guard: HOME has .yarnrc (unsafe): ${HOME_DIR}/.yarnrc"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.yarnrc.yml" ]; then
+  say "❌ repo_scope_guard: HOME has .yarnrc.yml (unsafe): ${HOME_DIR}/.yarnrc.yml"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.pnpmrc" ]; then
+  say "❌ repo_scope_guard: HOME has .pnpmrc (unsafe): ${HOME_DIR}/.pnpmrc"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.pnpmfile.cjs" ]; then
+  say "❌ repo_scope_guard: HOME has .pnpmfile.cjs (unsafe): ${HOME_DIR}/.pnpmfile.cjs"
+  exit 1
+fi
 if [ -f "${HOME_DIR}/.gitconfig" ]; then
   say "❌ repo_scope_guard: HOME has .gitconfig (unsafe): ${HOME_DIR}/.gitconfig"
   exit 1
