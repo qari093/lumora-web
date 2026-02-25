@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Ruby project signals
+if [ -f "${HOME_DIR}/Gemfile" ]; then
+  say "❌ repo_scope_guard: HOME has Gemfile: ${HOME_DIR}/Gemfile"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.bundle" ]; then
+  say "❌ repo_scope_guard: HOME has .bundle: ${HOME_DIR}/.bundle"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/.ruby-version" ]; then
+  say "❌ repo_scope_guard: HOME has .ruby-version: ${HOME_DIR}/.ruby-version"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain secret stores (repo drift + sensitive context)
 if [ -d "${HOME_DIR}/.ssh" ]; then
   say "❌ repo_scope_guard: HOME has .ssh (sensitive dir): ${HOME_DIR}/.ssh"
