@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain Next.js / Turbo build artifacts
+if [ -d "${HOME_DIR}/.next" ]; then
+  say "❌ repo_scope_guard: HOME has .next (unsafe build artifact): ${HOME_DIR}/.next"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/.turbo" ]; then
+  say "❌ repo_scope_guard: HOME has .turbo (unsafe build artifact): ${HOME_DIR}/.turbo"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Prisma project artifacts (schema/config)
 if [ -d "${HOME_DIR}/prisma" ] || [ -f "${HOME_DIR}/schema.prisma" ] || [ -f "${HOME_DIR}/prisma/schema.prisma" ]; then
   say "❌ repo_scope_guard: HOME has prisma/ schema (unsafe): ${HOME_DIR}/prisma or schema.prisma"
