@@ -442,3 +442,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step43_negative_home_rust_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step44_negative_home_dotnet_guard_lock

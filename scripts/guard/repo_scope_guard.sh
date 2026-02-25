@@ -51,6 +51,21 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain .NET project signals
+if [ -d "${HOME_DIR}/.nuget" ]; then
+  echo "❌ repo_scope_guard: HOME has .nuget directory"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/global.json" ]; then
+  echo "❌ repo_scope_guard: HOME has global.json"
+  exit 1
+fi
+# detect .NET solution/project files (bounded; HOME should not be a repo/workspace)
+if find "${HOME_DIR}" -maxdepth 2 -type f \( -name "*.csproj" -o -name "*.sln" \) -print -quit 2>/dev/null | grep -q .; then
+  echo "❌ repo_scope_guard: HOME has .NET project/solution files (*.csproj/*.sln)"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain Rust project signals
 if [ -f "${HOME_DIR}/Cargo.toml" ]; then
   echo "❌ repo_scope_guard: HOME has Cargo.toml"
