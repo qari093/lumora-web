@@ -51,6 +51,16 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain .env files (often indicates wrong cwd / unsafe secrets scope)
+if [ -f "${HOME_DIR}/.env" ]; then
+  say "❌ repo_scope_guard: HOME has .env file (unsafe): ${HOME_DIR}/.env"
+  exit 1
+fi
+if ls "${HOME_DIR}/.env."* >/dev/null 2>&1; then
+  say "❌ repo_scope_guard: HOME has .env.* files (unsafe): ${HOME_DIR}/.env.*"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain node_modules (prevents npm/pnpm drift at HOME)
 
 # Hard gate: HOME must not look like a repo working tree

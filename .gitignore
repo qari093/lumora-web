@@ -400,3 +400,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step29_negative_home_vscode_git_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step30_negative_home_env_guard_lock
