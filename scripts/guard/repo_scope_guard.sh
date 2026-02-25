@@ -51,6 +51,20 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# Hard gate: HOME must not contain PHP/Composer project signals
+if [ -f "${HOME_DIR}/composer.json" ]; then
+  echo "❌ repo_scope_guard: HOME has composer.json"
+  exit 1
+fi
+if [ -f "${HOME_DIR}/composer.lock" ]; then
+  echo "❌ repo_scope_guard: HOME has composer.lock"
+  exit 1
+fi
+if [ -d "${HOME_DIR}/vendor" ]; then
+  echo "❌ repo_scope_guard: HOME has vendor directory"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain .NET project signals
 if [ -d "${HOME_DIR}/.nuget" ]; then
   echo "❌ repo_scope_guard: HOME has .nuget directory"
