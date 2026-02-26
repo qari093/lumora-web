@@ -2,6 +2,15 @@
 # CRITICAL_NODE_LOADER_ENV_INJECTION_PROTECTION
 
 # CRITICAL_RUBY_ENV_INJECTION_PROTECTION
+
+# CRITICAL_PERL_ENV_INJECTION_PROTECTION
+# Block Perl runtime/library injection via env.
+for _v in PERL5OPT PERL5LIB; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: Perl env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block Ruby runtime/library injection via env. Even if Ruby isn't used here,
 # these variables can be abused when scripts shell out to ruby tooling.
 for _v in RUBYOPT RUBYLIB GEM_HOME GEM_PATH; do
