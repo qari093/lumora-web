@@ -97,6 +97,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_PYTHON_STARTUP_ENV_INJECTION_PROTECTION
 
 # CRITICAL_PYTHON_INSPECT_PROFILE_ENV_INJECTION_PROTECTION
+
+# CRITICAL_PYTHON_BYTECODE_ENV_INJECTION_PROTECTION
+# Prevent env knobs that change python bytecode/cache behavior and can redirect writes.
+for _v in PYTHONDONTWRITEBYTECODE PYTHONPYCACHEPREFIX; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: python bytecode env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block python environment toggles that can change execution/behavior or leak details.
 for _v in PYTHONINSPECT PYTHONPROFILEIMPORTTIME; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
