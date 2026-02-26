@@ -74,6 +74,13 @@ HOME_DIR="${HOME}"
 # CRITICAL_LOADER_INJECTION_ENV_PROTECTION
 
 # CRITICAL_SHELL_ENV_INJECTION_PROTECTION
+
+# CRITICAL_EXPORTED_FUNCTION_INJECTION_PROTECTION
+# Block exported bash functions (Shellshock-style env vectors, BASH_FUNC_*).
+if /usr/bin/env | /usr/bin/grep -q "^BASH_FUNC_"; then
+  echo "❌ repo_scope_guard: exported function injection detected (BASH_FUNC_*)"
+  exit 1
+fi
 # Block environment-based shell injection vectors used by bash/sh.
 # BASH_ENV is sourced by non-interactive bash; ENV by POSIX sh (e.g. /bin/sh).
 if [ -n "${BASH_ENV-}" ] || [ -n "${ENV-}" ]; then
