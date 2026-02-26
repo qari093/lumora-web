@@ -23,6 +23,15 @@ if [ -n "${SHELLOPTS-}" ]; then
 fi
 # Prevent git behavior tampering via environment (aliases, pagers, external editors).
 for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
+
+# CRITICAL_GIT_ENV_OVERRIDES_EXTENDED
+# Block additional git env overrides that can redirect repository/index/object DB.
+for _v in GIT_DIR GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_ALTERNATE_OBJECT_DIRECTORIES; do
+  eval "_val=\${${_v}-}"
+  if [ -n "${_val}" ]; then
+    echo "❌ repo_scope_guard: unsafe ${_v} is set"; exit 1
+  fi
+done
   _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
   if [ -n "${_v:-}" ]; then
     echo "❌ repo_scope_guard: unsafe ${_k} env is set"; exit 1
