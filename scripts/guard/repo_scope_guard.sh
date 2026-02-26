@@ -35,6 +35,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_PYTHON_ENV_INJECTION_PROTECTION
 
 # CRITICAL_NODE_ENV_INJECTION_PROTECTION
+
+# CRITICAL_SSL_ENV_INJECTION_PROTECTION
+# Prevent TLS trust store hijack via env override.
+for _v in SSL_CERT_FILE SSL_CERT_DIR; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: ${_v} env override detected"
+    exit 1
+  fi
+done
 # Prevent node runtime hijack via env flags or path override.
 for _v in NODE_OPTIONS NODE_PATH; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
