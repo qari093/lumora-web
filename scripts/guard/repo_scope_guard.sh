@@ -1,5 +1,31 @@
 
 # CRITICAL_TERM_ENV_PROTECTION
+
+# CRITICAL_LOCALE_ENV_PROTECTION
+# Locale env can alter parsing/behavior in subtle ways; allow only safe charset-ish values.
+_lumora_locale_ok() {
+  case "${1:-}" in
+    ""|C|POSIX|C.UTF-8|en_US.UTF-8|de_DE.UTF-8) return 0;;
+    # Generic UTF-8 locales (avoid metacharacters)
+    *UTF-8|*utf8|*utf-8)
+      case "$1" in *[\;\&\|\`\$\$begin:math:text$\$end:math:text$\<\>\{\}\$begin:math:display$\$end:math:display$\"\']* ) return 1;; esac
+      return 0;;
+  esac
+  return 1
+}
+if [ -n "${LANG:-}" ] && ! _lumora_locale_ok "$LANG"; then
+  echo "❌ repo_scope_guard: unsafe LANG ($LANG)"; exit 1
+fi
+if [ -n "${LANGUAGE:-}" ] && ! _lumora_locale_ok "$LANGUAGE"; then
+  echo "❌ repo_scope_guard: unsafe LANGUAGE ($LANGUAGE)"; exit 1
+fi
+# Block any LC_* with unsafe chars (also blocks command-substitution attempts)
+for _k in $(/usr/bin/env | /usr/bin/awk -F= '/^LC_[A-Z0-9_]+=/ {print $1}'); do
+  _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
+  if ! _lumora_locale_ok "${_v:-}"; then
+    echo "❌ repo_scope_guard: unsafe ${_k} (${_v})"; exit 1
+  fi
+done
 # TERMINFO/TERMCAP can be abused to influence terminal behavior; require absolute safe paths.
 if [ -n "${TERMINFO:-}" ]; then
   case "$TERMINFO" in
