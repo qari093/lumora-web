@@ -511,3 +511,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step66_repo_scope_guard_umask_protection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step67_repo_scope_guard_tmpdir_protection_lock

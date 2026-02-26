@@ -82,6 +82,21 @@ HOME_DIR="${HOME}"
 # CRITICAL_CDPATH_INJECTION_PROTECTION
 
 # CRITICAL_UMASK_PROTECTION
+
+# CRITICAL_TMPDIR_PROTECTION
+# TMPDIR must be absolute and not world-writable outside system tmp
+if [ -n "${TMPDIR:-}" ]; then
+  case "$TMPDIR" in
+    /*) : ;;
+    *) echo "❌ repo_scope_guard: TMPDIR must be absolute ($TMPDIR)"; exit 1;;
+  esac
+  if [ -d "$TMPDIR" ]; then
+    perms="$(ls -ld "$TMPDIR" 2>/dev/null | awk '{print $1}')"
+    case "$perms" in
+      drwxrwxrwx*) echo "❌ repo_scope_guard: TMPDIR world-writable ($TMPDIR)"; exit 1;;
+    esac
+  fi
+fi
 # Block overly permissive umask (e.g., 000, 002)
 current_umask="$(umask)"
 case "$current_umask" in
