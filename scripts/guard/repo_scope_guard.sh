@@ -27,6 +27,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GIT_ENV_OVERRIDES_EXTENDED
 
 # CRITICAL_GIT_CONFIG_ENV_PROTECTION
+
+# CRITICAL_GIT_TRACE_ENV_PROTECTION
+# Block git trace/debug env variables that may alter behavior or leak paths.
+for _v in GIT_TRACE GIT_TRACE_PACKET GIT_TRACE_PERFORMANCE GIT_TRACE_SETUP GIT_TRACE_SHALLOW; do
+  eval "_val=\${${_v}-}"
+  if [ -n "${_val}" ]; then
+    echo "❌ repo_scope_guard: unsafe ${_v} is set"; exit 1
+  fi
+done
 # Block global/system git config overrides.
 for _v in GIT_CONFIG_GLOBAL GIT_CONFIG_SYSTEM; do
   eval "_val=\${${_v}-}"
