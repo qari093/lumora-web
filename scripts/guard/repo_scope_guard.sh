@@ -66,6 +66,13 @@ HOME_DIR="${HOME}"
 # CRITICAL_GIT_ENV_OVERRIDE_BLOCK
 
 # CRITICAL_PATH_TAMPER_PROTECTION
+
+# CRITICAL_IFS_TAMPER_PROTECTION
+# IFS should be default (space, tab, newline). Tampering can break parsing/guards.
+if [ "${IFS-}" != $' \t\n' ]; then
+  echo "❌ repo_scope_guard: unsafe IFS override detected"
+  exit 1
+fi
 if [ -z "${PATH:-}" ]; then
   echo "❌ repo_scope_guard: PATH is empty"
   exit 1
