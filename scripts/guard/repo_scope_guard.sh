@@ -95,6 +95,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_PAGER_ENV_INJECTION_PROTECTION
 
 # CRITICAL_PYTHON_STARTUP_ENV_INJECTION_PROTECTION
+
+# CRITICAL_PYTHON_INSPECT_PROFILE_ENV_INJECTION_PROTECTION
+# Block python environment toggles that can change execution/behavior or leak details.
+for _v in PYTHONINSPECT PYTHONPROFILEIMPORTTIME; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: python env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent Python startup hooks from altering tool behavior.
 for _v in PYTHONSTARTUP PYTHONWARNINGS; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
