@@ -70,6 +70,13 @@ HOME_DIR="${HOME}"
 # CRITICAL_IFS_TAMPER_PROTECTION
 
 # CRITICAL_SHELL_OPTS_ENV_PROTECTION
+
+# CRITICAL_LOADER_INJECTION_ENV_PROTECTION
+# Block dynamic loader injection via env (Linux/macOS). This is a common tactic to hijack subprocesses.
+if [ -n "${LD_PRELOAD-}" ] || [ -n "${LD_LIBRARY_PATH-}" ] || [ -n "${DYLD_INSERT_LIBRARIES-}" ] || [ -n "${DYLD_LIBRARY_PATH-}" ] || [ -n "${DYLD_FRAMEWORK_PATH-}" ]; then
+  echo "❌ repo_scope_guard: dynamic loader injection env detected (LD_*/DYLD_*)"
+  exit 1
+fi
 # These are readonly in bash when set by the shell, but can be injected via env into scripts.
 # We treat presence in env as suspicious and fail fast.
 if [ -n "${SHELLOPTS-}" ] || [ -n "${BASHOPTS-}" ]; then
