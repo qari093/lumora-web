@@ -4,6 +4,15 @@
 # CRITICAL_RUBY_ENV_INJECTION_PROTECTION
 
 # CRITICAL_PERL_ENV_INJECTION_PROTECTION
+
+# CRITICAL_LD_ENV_INJECTION_PROTECTION
+# Block dynamic linker injection via env.
+for _v in LD_PRELOAD LD_LIBRARY_PATH; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: dynamic linker env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block Perl runtime/library injection via env.
 for _v in PERL5OPT PERL5LIB; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
