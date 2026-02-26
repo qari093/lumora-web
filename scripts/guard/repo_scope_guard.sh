@@ -5,6 +5,12 @@
 
 # CRITICAL_GIT_ENV_INJECTION_PROTECTION
 
+# CRITICAL_GIT_EXEC_PATH_INJECTION
+# Prevent overriding git's exec path (can redirect sub-commands).
+if [ -n "${GIT_EXEC_PATH-}" ]; then
+  echo "❌ repo_scope_guard: unsafe GIT_EXEC_PATH is set"; exit 1
+fi
+
 # CRITICAL_BASHOPTS_SHELLOPTS_SANITIZE
 # Shell may leak/propagate unsafe options; ensure we run with a safe baseline.
 # (SHELLOPTS may be readonly in some shells; handle safely.)
