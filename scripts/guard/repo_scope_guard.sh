@@ -6,6 +6,15 @@
 # CRITICAL_PERL_ENV_INJECTION_PROTECTION
 
 # CRITICAL_LD_ENV_INJECTION_PROTECTION
+
+# CRITICAL_DYLD_ENV_INJECTION_PROTECTION
+# Block macOS dynamic loader injection via DYLD_* env.
+for _v in DYLD_INSERT_LIBRARIES DYLD_LIBRARY_PATH DYLD_FRAMEWORK_PATH; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: macOS dynamic loader env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block dynamic linker injection via env.
 for _v in LD_PRELOAD LD_LIBRARY_PATH; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
