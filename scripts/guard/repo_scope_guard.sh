@@ -4,6 +4,17 @@
 # CRITICAL_LOCALE_ENV_PROTECTION
 
 # CRITICAL_GIT_ENV_INJECTION_PROTECTION
+
+# CRITICAL_BASHOPTS_SHELLOPTS_SANITIZE
+# Shell may leak/propagate unsafe options; ensure we run with a safe baseline.
+# (SHELLOPTS may be readonly in some shells; handle safely.)
+if [ -n "${BASHOPTS-}" ]; then
+  echo "❌ repo_scope_guard: unsafe BASHOPTS is set"; exit 1
+fi
+if [ -n "${SHELLOPTS-}" ]; then
+  # If shell exports SHELLOPTS, it's a sign of a modified shell state. Block.
+  echo "❌ repo_scope_guard: unsafe SHELLOPTS is set"; exit 1
+fi
 # Prevent git behavior tampering via environment (aliases, pagers, external editors).
 for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
   _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
