@@ -33,6 +33,21 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_HOME_OVERRIDE_PROTECTION
 
 # CRITICAL_PWD_OVERRIDE_PROTECTION
+
+# CRITICAL_SHLVL_SANITIZE
+# Prevent abnormal shell nesting abuse via SHLVL.
+if [ -n "${SHLVL:-}" ]; then
+  case "$SHLVL" in
+    ''|*[!0-9]*)
+      echo "❌ repo_scope_guard: SHLVL must be numeric"
+      exit 1
+      ;;
+  esac
+  if [ "$SHLVL" -gt 50 ]; then
+    echo "❌ repo_scope_guard: SHLVL too large (possible recursion abuse)"
+    exit 1
+  fi
+fi
 # Prevent PWD override (must be absolute and match physical cwd).
 if [ -n "${PWD:-}" ]; then
   case "$PWD" in

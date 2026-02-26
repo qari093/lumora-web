@@ -544,3 +544,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step77_repo_scope_guard_pwd_override_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step78_repo_scope_guard_shlvl_sanitize_lock
