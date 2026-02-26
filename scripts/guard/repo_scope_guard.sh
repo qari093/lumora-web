@@ -39,6 +39,23 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_ULIMIT_SANITY_BASELINE
 
 # CRITICAL_CMD_HASH_POISON_PROTECTION
+
+# CRITICAL_ZSH_COMMAND_PATH_POISON_PROTECTION
+# zsh can override command resolution via $command_path/$path and associative $commands.
+# We block unsafe command_path (non-absolute entries) and unexpected BASH_CMDS export surface.
+if [ -n "${command_path-}" ]; then
+  _cp="${command_path}"
+  case "$_cp" in
+    /*) : ;;
+    *) echo "❌ repo_scope_guard: unsafe command_path (must be absolute)"; exit 1 ;;
+  esac
+fi
+
+# Some environments export BASH_CMDS (bash hash table) into env; treat as tampering signal.
+if env | grep -q '^BASH_CMDS=' 2>/dev/null; then
+  echo "❌ repo_scope_guard: BASH_CMDS env detected (command table injection surface)"
+  exit 1
+fi
 # Prevent PATH-agnostic command spoofing via bash built-in `hash -p`.
 # If `env` is hash-pinned to a non-absolute or non-/usr/bin path, fail.
 if command -v hash >/dev/null 2>&1; then

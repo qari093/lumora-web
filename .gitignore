@@ -553,3 +553,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step80_repo_scope_guard_cmd_hash_poison_protection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step81_repo_scope_guard_bash_command_path_override_lock
