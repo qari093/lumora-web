@@ -52,6 +52,17 @@ say(){ printf "%s\n" "$*"; }
 HOME_DIR="${HOME}"
 
 # REPO_ROOT_STRICT_CHECK
+
+# REALPATH_STRICT_CHECK
+REAL_PWD="$(cd "$PWD" 2>/dev/null && pwd -P)"
+REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
+case "$REAL_PWD" in
+  "$REAL_ROOT"/*|"$REAL_ROOT") ;;
+  *)
+    echo "❌ repo_scope_guard: symlink escape detected (outside repo root)"
+    exit 1
+    ;;
+esac
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [ -z "$REPO_ROOT" ]; then
   echo "❌ repo_scope_guard: not inside a git repository"
