@@ -1,4 +1,15 @@
 
+# CRITICAL_NODE_LOADER_ENV_INJECTION_PROTECTION
+# Block Node runtime loader injection vectors via NODE_OPTIONS.
+# (e.g., --require / --loader / --import / --eval / -r / -e)
+if env | grep -q "^NODE_OPTIONS=" 2>/dev/null; then
+  _no="$(printf "%s" "${NODE_OPTIONS:-}" )"
+  if printf "%s" "$_no" | grep -Eq '(^|[[:space:]])(--require|-r|--loader|--import|--eval|-e)([[:space:]]|$)'; then
+    echo "❌ repo_scope_guard: NODE_OPTIONS loader/require/eval injection detected"
+    exit 1
+  fi
+fi
+
 # CRITICAL_TERM_ENV_PROTECTION
 
 # CRITICAL_LOCALE_ENV_PROTECTION
