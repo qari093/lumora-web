@@ -64,6 +64,18 @@ HOME_DIR="${HOME}"
 # REAL_GITDIR_BOUNDARY_STRICT_CHECK
 
 # CRITICAL_GIT_ENV_OVERRIDE_BLOCK
+
+# CRITICAL_PATH_TAMPER_PROTECTION
+if [ -z "${PATH:-}" ]; then
+  echo "❌ repo_scope_guard: PATH is empty"
+  exit 1
+fi
+case ":$PATH:" in
+  *"::"*|*":.:"*|*":./:"*)
+    echo "❌ repo_scope_guard: unsafe PATH (empty or relative segments)"
+    exit 1
+  ;;
+esac
 if [ -n "${GIT_WORK_TREE:-}" ] || [ -n "${GIT_CEILING_DIRECTORIES:-}" ]; then
   echo "❌ repo_scope_guard: critical git env override detected"
   exit 1
