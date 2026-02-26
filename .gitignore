@@ -463,3 +463,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step50_negative_home_system_pkg_mgr_guard_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step51_repo_scope_guard_self_protection_lock

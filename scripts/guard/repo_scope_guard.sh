@@ -51,6 +51,17 @@ say(){ printf "%s\n" "$*"; }
 
 HOME_DIR="${HOME}"
 
+# REPO_ROOT_STRICT_CHECK
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "$REPO_ROOT" ]; then
+  echo "❌ repo_scope_guard: not inside a git repository"
+  exit 1
+fi
+if [ "$PWD" != "$REPO_ROOT" ]; then
+  echo "❌ repo_scope_guard: must execute from repo root only"
+  exit 1
+fi
+
 # Hard gate: HOME must not contain system package manager signals
 if [ -d "${HOME_DIR}/.linuxbrew" ] || [ -d "${HOME_DIR}/.homebrew" ]; then
   echo "❌ repo_scope_guard: HOME has Homebrew directory"
