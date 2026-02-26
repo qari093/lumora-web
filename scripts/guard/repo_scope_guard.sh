@@ -62,6 +62,12 @@ HOME_DIR="${HOME}"
 # GITFILE_POINTER_STRICT_CHECK
 
 # REAL_GITDIR_BOUNDARY_STRICT_CHECK
+
+# CRITICAL_GIT_ENV_OVERRIDE_BLOCK
+if [ -n "${GIT_WORK_TREE:-}" ] || [ -n "${GIT_CEILING_DIRECTORIES:-}" ]; then
+  echo "❌ repo_scope_guard: critical git env override detected"
+  exit 1
+fi
 if command -v git >/dev/null 2>&1; then
   gitdir="$(git rev-parse --git-dir 2>/dev/null || true)"
   if [ -n "$gitdir" ]; then

@@ -481,3 +481,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step56_repo_scope_guard_real_gitdir_boundary_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step57_repo_scope_guard_env_override_protection_lock
