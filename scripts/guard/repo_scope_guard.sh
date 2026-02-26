@@ -68,6 +68,14 @@ HOME_DIR="${HOME}"
 # CRITICAL_PATH_TAMPER_PROTECTION
 
 # CRITICAL_IFS_TAMPER_PROTECTION
+
+# CRITICAL_SHELL_OPTS_ENV_PROTECTION
+# These are readonly in bash when set by the shell, but can be injected via env into scripts.
+# We treat presence in env as suspicious and fail fast.
+if [ -n "${SHELLOPTS-}" ] || [ -n "${BASHOPTS-}" ]; then
+  echo "❌ repo_scope_guard: unsafe shell options env override detected (SHELLOPTS/BASHOPTS)"
+  exit 1
+fi
 # IFS should be default (space, tab, newline). Tampering can break parsing/guards.
 if [ "${IFS-}" != $' \t\n' ]; then
   echo "❌ repo_scope_guard: unsafe IFS override detected"
