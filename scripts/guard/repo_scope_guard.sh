@@ -37,6 +37,26 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_SHLVL_SANITIZE
 
 # CRITICAL_ULIMIT_SANITY_BASELINE
+
+# CRITICAL_CMD_HASH_POISON_PROTECTION
+# Prevent PATH-agnostic command spoofing via bash built-in `hash -p`.
+# If `env` is hash-pinned to a non-absolute or non-/usr/bin path, fail.
+if command -v hash >/dev/null 2>&1; then
+  _hp_out="$(hash -t env 2>/dev/null || true)"
+  if [ -n "$_hp_out" ]; then
+    case "$_hp_out" in
+      /usr/bin/env) : ;;
+      /*)
+        echo "❌ repo_scope_guard: env is hash-pinned to unexpected path ($_hp_out)"
+        exit 1
+        ;;
+      *)
+        echo "❌ repo_scope_guard: env is hash-pinned to non-absolute path ($_hp_out)"
+        exit 1
+        ;;
+    esac
+  fi
+fi
 # Prevent resource exhaustion or sabotage via extreme ulimit values.
 # Enforce minimum open files and processes thresholds.
 min_nofile=64
