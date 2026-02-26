@@ -547,3 +547,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step78_repo_scope_guard_shlvl_sanitize_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step79_repo_scope_guard_ulimit_sanity_lock

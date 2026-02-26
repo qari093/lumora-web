@@ -35,6 +35,28 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_PWD_OVERRIDE_PROTECTION
 
 # CRITICAL_SHLVL_SANITIZE
+
+# CRITICAL_ULIMIT_SANITY_BASELINE
+# Prevent resource exhaustion or sabotage via extreme ulimit values.
+# Enforce minimum open files and processes thresholds.
+min_nofile=64
+min_nproc=32
+
+cur_nofile=$(ulimit -n 2>/dev/null || echo 0)
+cur_nproc=$(ulimit -u 2>/dev/null || echo 0)
+
+case "$cur_nofile" in ''|*[!0-9]*) cur_nofile=0 ;; esac
+case "$cur_nproc" in ''|*[!0-9]*) cur_nproc=0 ;; esac
+
+if [ "$cur_nofile" -lt "$min_nofile" ]; then
+  echo "❌ repo_scope_guard: ulimit -n too low ($cur_nofile)"
+  exit 1
+fi
+
+if [ "$cur_nproc" -lt "$min_nproc" ]; then
+  echo "❌ repo_scope_guard: ulimit -u too low ($cur_nproc)"
+  exit 1
+fi
 # Prevent abnormal shell nesting abuse via SHLVL.
 if [ -n "${SHLVL:-}" ]; then
   case "$SHLVL" in
