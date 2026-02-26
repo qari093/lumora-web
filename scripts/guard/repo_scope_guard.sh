@@ -3,6 +3,15 @@
 
 # CRITICAL_RUBY_ENV_INJECTION_PROTECTION
 
+# CRITICAL_RUST_CARGO_ENV_INJECTION_PROTECTION
+# Prevent wrapper/flags/home overrides that can redirect execution or write locations.
+for _v in RUSTFLAGS RUSTC_WRAPPER CARGO_HOME CARGO_TARGET_DIR; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: rust/cargo env injection detected (${_v})"
+    exit 1
+  fi
+done
+
 # CRITICAL_PERL_ENV_INJECTION_PROTECTION
 
 # CRITICAL_LD_ENV_INJECTION_PROTECTION
