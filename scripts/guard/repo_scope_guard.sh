@@ -72,6 +72,19 @@ HOME_DIR="${HOME}"
 # CRITICAL_SHELL_OPTS_ENV_PROTECTION
 
 # CRITICAL_LOADER_INJECTION_ENV_PROTECTION
+
+# CRITICAL_SHELL_ENV_INJECTION_PROTECTION
+# Block environment-based shell injection vectors used by bash/sh.
+# BASH_ENV is sourced by non-interactive bash; ENV by POSIX sh (e.g. /bin/sh).
+if [ -n "${BASH_ENV-}" ] || [ -n "${ENV-}" ]; then
+  echo "❌ repo_scope_guard: shell env injection detected (BASH_ENV/ENV)"
+  exit 1
+fi
+# SHELL must be an absolute path if set (defense-in-depth against odd wrappers)
+if [ -n "${SHELL-}" ] && [ "${SHELL#/}" = "${SHELL}" ]; then
+  echo "❌ repo_scope_guard: unsafe SHELL (not absolute)"
+  exit 1
+fi
 # Block dynamic loader injection via env (Linux/macOS). This is a common tactic to hijack subprocesses.
 if [ -n "${LD_PRELOAD-}" ] || [ -n "${LD_LIBRARY_PATH-}" ] || [ -n "${DYLD_INSERT_LIBRARIES-}" ] || [ -n "${DYLD_LIBRARY_PATH-}" ] || [ -n "${DYLD_FRAMEWORK_PATH-}" ]; then
   echo "❌ repo_scope_guard: dynamic loader injection env detected (LD_*/DYLD_*)"
