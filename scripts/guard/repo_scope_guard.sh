@@ -31,6 +31,23 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GIT_TRACE_ENV_PROTECTION
 
 # CRITICAL_HOME_OVERRIDE_PROTECTION
+
+# CRITICAL_PWD_OVERRIDE_PROTECTION
+# Prevent PWD override (must be absolute and match physical cwd).
+if [ -n "${PWD:-}" ]; then
+  case "$PWD" in
+    /*) : ;;
+    *)
+      echo "❌ repo_scope_guard: PWD must be absolute"
+      exit 1
+      ;;
+  esac
+  _phys="$(pwd -P 2>/dev/null || true)"
+  if [ -n "${_phys:-}" ] && [ "$PWD" != "$_phys" ]; then
+    echo "❌ repo_scope_guard: PWD mismatch (env override)"
+    exit 1
+  fi
+fi
 # Prevent HOME override to arbitrary or relative locations.
 if [ -n "${HOME:-}" ]; then
   case "$HOME" in
