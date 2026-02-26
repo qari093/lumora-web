@@ -60,6 +60,22 @@ HOME_DIR="${HOME}"
 # GIT_SUBMODULE_STRICT_CHECK
 
 # GITFILE_POINTER_STRICT_CHECK
+
+# REAL_GITDIR_BOUNDARY_STRICT_CHECK
+if command -v git >/dev/null 2>&1; then
+  gitdir="$(git rev-parse --git-dir 2>/dev/null || true)"
+  if [ -n "$gitdir" ]; then
+    gitdir_real="$(cd "$gitdir" 2>/dev/null && pwd -P || true)"
+    root_real="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
+    case "$gitdir_real" in
+      "$root_real"/*|"$root_real") ;;
+      *)
+        echo "❌ repo_scope_guard: real gitdir escapes repo root boundary"
+        exit 1
+        ;;
+    esac
+  fi
+fi
 if [ -f ".git" ]; then
   gitfile="$(sed -n '1p' .git 2>/dev/null || true)"
   case "$gitfile" in
