@@ -1,5 +1,15 @@
 
 # CRITICAL_NODE_LOADER_ENV_INJECTION_PROTECTION
+
+# CRITICAL_RUBY_ENV_INJECTION_PROTECTION
+# Block Ruby runtime/library injection via env. Even if Ruby isn't used here,
+# these variables can be abused when scripts shell out to ruby tooling.
+for _v in RUBYOPT RUBYLIB GEM_HOME GEM_PATH; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: Ruby env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block Node runtime loader injection vectors via NODE_OPTIONS.
 # (e.g., --require / --loader / --import / --eval / -r / -e)
 if env | grep -q "^NODE_OPTIONS=" 2>/dev/null; then
