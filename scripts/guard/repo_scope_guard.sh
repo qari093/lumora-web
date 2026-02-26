@@ -80,6 +80,16 @@ HOME_DIR="${HOME}"
 # CRITICAL_PS4_XTRACE_INJECTION_PROTECTION
 
 # CRITICAL_CDPATH_INJECTION_PROTECTION
+
+# CRITICAL_UMASK_PROTECTION
+# Block overly permissive umask (e.g., 000, 002)
+current_umask="$(umask)"
+case "$current_umask" in
+  000|002|0222|0777)
+    echo "❌ repo_scope_guard: unsafe umask detected ($current_umask)"
+    exit 1
+  ;;
+esac
 # Block CDPATH which can alter cd resolution behavior.
 if [ "${CDPATH-}" != "" ]; then
   echo "❌ repo_scope_guard: unsafe CDPATH detected"
