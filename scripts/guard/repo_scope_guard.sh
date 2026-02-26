@@ -58,6 +58,34 @@ HOME_DIR="${HOME}"
 # GIT_WORKTREE_STRICT_CHECK
 
 # GIT_SUBMODULE_STRICT_CHECK
+
+# GITFILE_POINTER_STRICT_CHECK
+if [ -f ".git" ]; then
+  gitfile="$(sed -n '1p' .git 2>/dev/null || true)"
+  case "$gitfile" in
+    gitdir:*)
+      gd="${gitfile#gitdir:}"
+      gd="$(printf "%s" "$gd" | sed 's/^ *//;s/ *$//')" 
+      # resolve relative path against REPO_ROOT
+      if [ -n "$gd" ]; then
+        if [ "${gd#/}" = "$gd" ]; then
+          gd_path="$REPO_ROOT/$gd"
+        else
+          gd_path="$gd"
+        fi
+        gd_real="$(cd "$(dirname "$gd_path")" 2>/dev/null && pwd -P)/$(basename "$gd_path")"
+        root_real="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
+        case "$gd_real" in
+          "$root_real"/*|"$root_real") ;;
+          *)
+            echo "❌ repo_scope_guard: .git file points outside repo (gitdir escape)"
+            exit 1
+            ;;
+        esac
+      fi
+      ;;
+  esac
+fi
 if [ -d ".git/modules" ]; then
   for d in .git/modules/*; do
     [ -d "$d" ] || continue

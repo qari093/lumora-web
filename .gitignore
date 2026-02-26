@@ -475,3 +475,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step54_repo_scope_guard_submodule_escape_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step55_repo_scope_guard_gitfile_guard_lock
