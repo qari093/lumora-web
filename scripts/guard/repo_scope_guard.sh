@@ -56,6 +56,22 @@ HOME_DIR="${HOME}"
 # REALPATH_STRICT_CHECK
 
 # GIT_WORKTREE_STRICT_CHECK
+
+# GIT_SUBMODULE_STRICT_CHECK
+if [ -d ".git/modules" ]; then
+  for d in .git/modules/*; do
+    [ -d "$d" ] || continue
+    REAL_MOD="$(cd "$d" 2>/dev/null && pwd -P)"
+    REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
+    case "$REAL_MOD" in
+      "$REAL_ROOT"/*|"$REAL_ROOT") ;;
+      *)
+        echo "❌ repo_scope_guard: submodule gitdir escape detected"
+        exit 1
+        ;;
+    esac
+  done
+fi
 if [ -f ".git" ]; then
   if grep -q "^gitdir: " .git 2>/dev/null; then
     GITDIR_PATH="$(sed -n 's/^gitdir: //p' .git | head -n1)"
