@@ -2,6 +2,20 @@
 # CRITICAL_TERM_ENV_PROTECTION
 
 # CRITICAL_LOCALE_ENV_PROTECTION
+
+# CRITICAL_GIT_ENV_INJECTION_PROTECTION
+# Prevent git behavior tampering via environment (aliases, pagers, external editors).
+for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
+  _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
+  if [ -n "${_v:-}" ]; then
+    echo "❌ repo_scope_guard: unsafe ${_k} env is set"; exit 1
+  fi
+done
+
+# Any GIT_CONFIG_* can inject arbitrary config including aliases/sshCommand/core.pager.
+for _k in $(/usr/bin/env | /usr/bin/awk -F= '/^GIT_CONFIG_(COUNT|KEY_|VALUE_)/ {print $1}'); do
+  echo "❌ repo_scope_guard: unsafe ${_k} env is set"; exit 1
+done
 # Locale env can alter parsing/behavior in subtle ways; allow only safe charset-ish values.
 _lumora_locale_ok() {
   case "${1:-}" in
