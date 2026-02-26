@@ -37,6 +37,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_NODE_ENV_INJECTION_PROTECTION
 
 # CRITICAL_SSL_ENV_INJECTION_PROTECTION
+
+# CRITICAL_GPG_SSH_ENV_INJECTION_PROTECTION
+# Prevent signing / SSH hijack via env override.
+for _v in GIT_SSH GIT_SSH_COMMAND GPG_TTY GNUPGHOME SSH_AUTH_SOCK; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: ${_v} env override detected"
+    exit 1
+  fi
+done
 # Prevent TLS trust store hijack via env override.
 for _v in SSL_CERT_FILE SSL_CERT_DIR; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
