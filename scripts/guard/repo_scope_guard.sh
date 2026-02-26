@@ -76,6 +76,17 @@ HOME_DIR="${HOME}"
 # CRITICAL_SHELL_ENV_INJECTION_PROTECTION
 
 # CRITICAL_EXPORTED_FUNCTION_INJECTION_PROTECTION
+
+# CRITICAL_PS4_XTRACE_INJECTION_PROTECTION
+# Block PS4 prompt injection used in set -x tracing exploits.
+if [ "${PS4-}" != "" ]; then
+  case "${PS4}" in
+    *"$("*|*"`"* )
+      echo "❌ repo_scope_guard: unsafe PS4 detected (command substitution in xtrace prompt)"
+      exit 1
+      ;;
+  esac
+fi
 # Block exported bash functions (Shellshock-style env vectors, BASH_FUNC_*).
 if /usr/bin/env | /usr/bin/grep -q "^BASH_FUNC_"; then
   echo "❌ repo_scope_guard: exported function injection detected (BASH_FUNC_*)"
