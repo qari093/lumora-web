@@ -29,6 +29,22 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GIT_CONFIG_ENV_PROTECTION
 
 # CRITICAL_GIT_TRACE_ENV_PROTECTION
+
+# CRITICAL_HOME_OVERRIDE_PROTECTION
+# Prevent HOME override to arbitrary or relative locations.
+if [ -n "${HOME:-}" ]; then
+  case "$HOME" in
+    /*) : ;;
+    *)
+      echo "❌ repo_scope_guard: HOME must be absolute"
+      exit 1
+      ;;
+  esac
+  if [ ! -d "$HOME" ]; then
+    echo "❌ repo_scope_guard: HOME does not exist"
+    exit 1
+  fi
+fi
 # Block git trace/debug env variables that may alter behavior or leak paths.
 for _v in GIT_TRACE GIT_TRACE_PACKET GIT_TRACE_PERFORMANCE GIT_TRACE_SETUP GIT_TRACE_SHALLOW; do
   eval "_val=\${${_v}-}"
