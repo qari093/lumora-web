@@ -1,4 +1,17 @@
 
+# CRITICAL_TERM_ENV_PROTECTION
+# TERMINFO/TERMCAP can be abused to influence terminal behavior; require absolute safe paths.
+if [ -n "${TERMINFO:-}" ]; then
+  case "$TERMINFO" in
+    /*) : ;;
+    *) echo "❌ repo_scope_guard: TERMINFO must be absolute ($TERMINFO)"; exit 1;;
+  esac
+fi
+if [ -n "${TERMCAP:-}" ]; then
+  # TERMCAP should not be set in CI/automation contexts
+  echo "❌ repo_scope_guard: TERMCAP must not be set"; exit 1
+fi
+
 # Hard gate: HOME must not contain global git config artifacts
 
 # Hard gate: HOME must not contain package-manager rc files (often indicates project drift)
