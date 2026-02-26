@@ -43,6 +43,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_HISTORY_ENV_INJECTION_PROTECTION
 
 # CRITICAL_EDITOR_ENV_INJECTION_PROTECTION
+
+# CRITICAL_PAGER_ENV_INJECTION_PROTECTION
+# Prevent pager-based command execution pivots.
+for _v in PAGER LESS MORE; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: ${_v} env override detected"
+    exit 1
+  fi
+done
 # Prevent editor command injection pivots.
 for _v in EDITOR VISUAL; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
