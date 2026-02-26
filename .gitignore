@@ -505,3 +505,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step64_repo_scope_guard_ps4_xtrace_injection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step65_repo_scope_guard_cdpath_injection_lock

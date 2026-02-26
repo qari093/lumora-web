@@ -78,6 +78,13 @@ HOME_DIR="${HOME}"
 # CRITICAL_EXPORTED_FUNCTION_INJECTION_PROTECTION
 
 # CRITICAL_PS4_XTRACE_INJECTION_PROTECTION
+
+# CRITICAL_CDPATH_INJECTION_PROTECTION
+# Block CDPATH which can alter cd resolution behavior.
+if [ "${CDPATH-}" != "" ]; then
+  echo "❌ repo_scope_guard: unsafe CDPATH detected"
+  exit 1
+fi
 # Block PS4 prompt injection used in set -x tracing exploits.
 if [ "${PS4-}" != "" ]; then
   case "${PS4}" in
