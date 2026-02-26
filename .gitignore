@@ -559,3 +559,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step82_repo_scope_guard_git_protocol_injection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step83_repo_scope_guard_pythonpath_injection_lock

@@ -31,6 +31,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GIT_TRACE_ENV_PROTECTION
 
 # CRITICAL_GIT_PROTOCOL_INJECTION_PROTECTION
+
+# CRITICAL_PYTHON_ENV_INJECTION_PROTECTION
+# Prevent python interpreter hijack via env path pivot.
+for _v in PYTHONPATH PYTHONHOME; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: ${_v} env override detected"
+    exit 1
+  fi
+done
 # Prevent protocol pivot via env (e.g., enabling disallowed transports).
 for _v in GIT_PROTOCOL GIT_ALLOW_PROTOCOL; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
