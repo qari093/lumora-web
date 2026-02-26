@@ -54,6 +54,26 @@ HOME_DIR="${HOME}"
 # REPO_ROOT_STRICT_CHECK
 
 # REALPATH_STRICT_CHECK
+
+# GIT_WORKTREE_STRICT_CHECK
+if [ -f ".git" ]; then
+  if grep -q "^gitdir: " .git 2>/dev/null; then
+    GITDIR_PATH="$(sed -n 's/^gitdir: //p' .git | head -n1)"
+    case "$GITDIR_PATH" in
+      /*) ;;
+      *) GITDIR_PATH="$PWD/$GITDIR_PATH" ;;
+    esac
+    REAL_GITDIR="$(cd "$(dirname "$GITDIR_PATH")" 2>/dev/null && pwd -P)"
+    REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
+    case "$REAL_GITDIR" in
+      "$REAL_ROOT"/*|"$REAL_ROOT") ;;
+      *)
+        echo "❌ repo_scope_guard: git worktree escape detected"
+        exit 1
+        ;;
+    esac
+  fi
+fi
 REAL_PWD="$(cd "$PWD" 2>/dev/null && pwd -P)"
 REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
 case "$REAL_PWD" in
