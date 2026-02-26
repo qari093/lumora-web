@@ -6,6 +6,15 @@
 # CRITICAL_RUST_CARGO_ENV_INJECTION_PROTECTION
 
 # CRITICAL_GO_ENV_INJECTION_PROTECTION
+
+# CRITICAL_DENO_BUN_ENV_INJECTION_PROTECTION
+# Prevent alternate install/cache dirs that can pivot runtime/tooling behavior.
+for _v in DENO_DIR DENO_INSTALL BUN_INSTALL; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: deno/bun env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent module/cache/root overrides and debug flags that alter build/runtime behavior.
 for _v in GODEBUG GOMOD GOMODCACHE GOPATH GOROOT; do
   if env | grep -q "^${_v}=" 2>/dev/null; then

@@ -610,3 +610,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step99_repo_scope_guard_go_env_injection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step100_repo_scope_guard_deno_bun_env_injection_lock
