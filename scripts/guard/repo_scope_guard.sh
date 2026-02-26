@@ -4,6 +4,15 @@
 # CRITICAL_RUBY_ENV_INJECTION_PROTECTION
 
 # CRITICAL_RUST_CARGO_ENV_INJECTION_PROTECTION
+
+# CRITICAL_GO_ENV_INJECTION_PROTECTION
+# Prevent module/cache/root overrides and debug flags that alter build/runtime behavior.
+for _v in GODEBUG GOMOD GOMODCACHE GOPATH GOROOT; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: go env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent wrapper/flags/home overrides that can redirect execution or write locations.
 for _v in RUSTFLAGS RUSTC_WRAPPER CARGO_HOME CARGO_TARGET_DIR; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
