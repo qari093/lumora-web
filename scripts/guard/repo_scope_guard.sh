@@ -130,6 +130,20 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_AI_PROVIDER_ENV_INJECTION_PROTECTION
 
 # CRITICAL_DOCKER_CONTAINER_ENV_INJECTION_PROTECTION
+
+# CRITICAL_NODE_PACKAGE_MANAGER_ENV_INJECTION_PROTECTION
+# Block env-driven package-manager pivots that can redirect registries, scripts, hooks, cache, or lifecycle behavior.
+# Keep this conservative: most CI should not inherit these from the shell.
+for _v in NPM_CONFIG_USERCONFIG NPM_CONFIG_GLOBALCONFIG NPM_CONFIG_PREFIX NPM_CONFIG_CACHE \
+          NPM_CONFIG_REGISTRY NPM_CONFIG_HTTPS_PROXY NPM_CONFIG_PROXY NPM_CONFIG_CA \
+          NPM_CONFIG_STRICT_SSL NPM_CONFIG_SCRIPTS_PREPEND_NODE_PATH \
+          YARN_RC_FILENAME YARN_ENABLE_SCRIPTS YARN_NPM_REGISTRY_SERVER YARN_HTTP_PROXY YARN_HTTPS_PROXY \
+          PNPM_HOME PNPM_STORE_PATH PNPM_CACHE_DIR PNPM_REGISTRY; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: node package manager env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block inherited container tooling env that can redirect builds, context, or socket pivots.
 for _v in DOCKER_HOST DOCKER_CONTEXT DOCKER_CONFIG DOCKER_CERT_PATH DOCKER_TLS_VERIFY \
           CONTAINER_HOST CONTAINER_SOCK; do
