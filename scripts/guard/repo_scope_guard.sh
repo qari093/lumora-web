@@ -124,6 +124,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_AZURE_ENV_INJECTION_PROTECTION
 
 # CRITICAL_GCP_ENV_INJECTION_PROTECTION
+
+# CRITICAL_CLOUDFLARE_ENV_INJECTION_PROTECTION
+# Block inherited Cloudflare API material (tokens/keys) that could pivot Workers/R2/Stream.
+for _v in CLOUDFLARE_API_TOKEN CLOUDFLARE_API_KEY CLOUDFLARE_EMAIL CF_API_TOKEN CF_API_KEY CF_EMAIL CF_ACCESS_TOKEN; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: Cloudflare credential env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block inherited Google/GCP auth/material that can pivot cloud APIs.
 for _v in GOOGLE_APPLICATION_CREDENTIALS GOOGLE_CLOUD_PROJECT GCLOUD_PROJECT GOOGLE_API_KEY GCP_ACCESS_TOKEN; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
