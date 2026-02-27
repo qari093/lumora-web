@@ -122,6 +122,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_AWS_ENV_INJECTION_PROTECTION
 
 # CRITICAL_AZURE_ENV_INJECTION_PROTECTION
+
+# CRITICAL_GCP_ENV_INJECTION_PROTECTION
+# Block inherited Google/GCP auth/material that can pivot cloud APIs.
+for _v in GOOGLE_APPLICATION_CREDENTIALS GOOGLE_CLOUD_PROJECT GCLOUD_PROJECT GOOGLE_API_KEY GCP_ACCESS_TOKEN; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: GCP credential env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block inherited Azure auth/material that can pivot cloud APIs.
 for _v in AZURE_CLIENT_ID AZURE_TENANT_ID AZURE_CLIENT_SECRET AZURE_FEDERATED_TOKEN_FILE AZURE_SUBSCRIPTION_ID; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
