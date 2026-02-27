@@ -126,6 +126,17 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GCP_ENV_INJECTION_PROTECTION
 
 # CRITICAL_CLOUDFLARE_ENV_INJECTION_PROTECTION
+
+# CRITICAL_AI_PROVIDER_ENV_INJECTION_PROTECTION
+# Block inherited AI provider API keys/tokens that could leak or redirect paid inference.
+for _v in OPENAI_API_KEY OPENAI_ORG_ID OPENAI_PROJECT OPENAI_BASE_URL \
+          ANTHROPIC_API_KEY ANTHROPIC_BASE_URL \
+          HF_TOKEN HUGGINGFACEHUB_API_TOKEN HUGGINGFACE_API_TOKEN; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: AI provider credential env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block inherited Cloudflare API material (tokens/keys) that could pivot Workers/R2/Stream.
 for _v in CLOUDFLARE_API_TOKEN CLOUDFLARE_API_KEY CLOUDFLARE_EMAIL CF_API_TOKEN CF_API_KEY CF_EMAIL CF_ACCESS_TOKEN; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
