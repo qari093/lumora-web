@@ -640,3 +640,6 @@ VirtualBox VMs/
 
 # Lumora hardening markers (allow tracked locks)
 !.lumora_hardening_step109_repo_scope_guard_npm_yarn_pnpm_env_injection_lock
+
+# Lumora hardening markers (allow tracked locks)
+!.lumora_hardening_step110_repo_scope_guard_java_env_injection_lock

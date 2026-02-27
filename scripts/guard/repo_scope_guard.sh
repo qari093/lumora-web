@@ -132,6 +132,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_DOCKER_CONTAINER_ENV_INJECTION_PROTECTION
 
 # CRITICAL_NODE_PACKAGE_MANAGER_ENV_INJECTION_PROTECTION
+
+# CRITICAL_JAVA_ENV_INJECTION_PROTECTION
+# Prevent JVM option injection via environment variables (common in build tooling and wrappers).
+for _v in JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: java env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block env-driven package-manager pivots that can redirect registries, scripts, hooks, cache, or lifecycle behavior.
 # Keep this conservative: most CI should not inherit these from the shell.
 for _v in NPM_CONFIG_USERCONFIG NPM_CONFIG_GLOBALCONFIG NPM_CONFIG_PREFIX NPM_CONFIG_CACHE \
