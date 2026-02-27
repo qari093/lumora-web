@@ -116,6 +116,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_GPG_SSH_ENV_INJECTION_PROTECTION
 
 # CRITICAL_PROXY_ENV_INJECTION_PROTECTION
+
+# CRITICAL_SSH_AGENT_ENV_INJECTION_PROTECTION
+# Prevent agent/socket pivots (credential use/exfil via inherited agent).
+for _v in SSH_AUTH_SOCK SSH_AGENT_PID; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: SSH agent env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent network proxy pivots (can exfiltrate tokens, tamper dependency fetch, etc.).
 for _v in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
