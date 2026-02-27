@@ -128,6 +128,16 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_CLOUDFLARE_ENV_INJECTION_PROTECTION
 
 # CRITICAL_AI_PROVIDER_ENV_INJECTION_PROTECTION
+
+# CRITICAL_DOCKER_CONTAINER_ENV_INJECTION_PROTECTION
+# Block inherited container tooling env that can redirect builds, context, or socket pivots.
+for _v in DOCKER_HOST DOCKER_CONTEXT DOCKER_CONFIG DOCKER_CERT_PATH DOCKER_TLS_VERIFY \
+          CONTAINER_HOST CONTAINER_SOCK; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: container tooling env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Block inherited AI provider API keys/tokens that could leak or redirect paid inference.
 for _v in OPENAI_API_KEY OPENAI_ORG_ID OPENAI_PROJECT OPENAI_BASE_URL \
           ANTHROPIC_API_KEY ANTHROPIC_BASE_URL \
