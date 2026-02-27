@@ -118,6 +118,16 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_PROXY_ENV_INJECTION_PROTECTION
 
 # CRITICAL_SSH_AGENT_ENV_INJECTION_PROTECTION
+
+# CRITICAL_AWS_ENV_INJECTION_PROTECTION
+# Prevent inherited cloud creds from being used/exfiltrated by child processes.
+# (Access key / secret / session token are enough to pivot cloud APIs.)
+for _v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: AWS credential env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent agent/socket pivots (credential use/exfil via inherited agent).
 for _v in SSH_AUTH_SOCK SSH_AGENT_PID; do
   if env | grep -q "^${_v}=" 2>/dev/null; then
