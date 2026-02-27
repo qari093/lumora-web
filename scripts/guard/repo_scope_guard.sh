@@ -120,6 +120,15 @@ for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
 # CRITICAL_SSH_AGENT_ENV_INJECTION_PROTECTION
 
 # CRITICAL_AWS_ENV_INJECTION_PROTECTION
+
+# CRITICAL_AZURE_ENV_INJECTION_PROTECTION
+# Block inherited Azure auth/material that can pivot cloud APIs.
+for _v in AZURE_CLIENT_ID AZURE_TENANT_ID AZURE_CLIENT_SECRET AZURE_FEDERATED_TOKEN_FILE AZURE_SUBSCRIPTION_ID; do
+  if env | grep -q "^${_v}=" 2>/dev/null; then
+    echo "❌ repo_scope_guard: Azure credential env injection detected (${_v})"
+    exit 1
+  fi
+done
 # Prevent inherited cloud creds from being used/exfiltrated by child processes.
 # (Access key / secret / session token are enough to pivot cloud APIs.)
 for _v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN; do
