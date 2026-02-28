@@ -1,1073 +1,198 @@
+#!/usr/bin/env bash
+set -euo pipefail
 
-# CRITICAL_NODE_LOADER_ENV_INJECTION_PROTECTION
+say(){ printf "%s\n" "$*"; }
 
-# CRITICAL_RUBY_ENV_INJECTION_PROTECTION
+################################################################################
+# SAFE SHELL OPTION VALIDATION
+################################################################################
 
-# CRITICAL_RUST_CARGO_ENV_INJECTION_PROTECTION
-
-# CRITICAL_GO_ENV_INJECTION_PROTECTION
-
-# CRITICAL_DENO_BUN_ENV_INJECTION_PROTECTION
-# Prevent alternate install/cache dirs that can pivot runtime/tooling behavior.
-for _v in DENO_DIR DENO_INSTALL BUN_INSTALL; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: deno/bun env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent module/cache/root overrides and debug flags that alter build/runtime behavior.
-for _v in GODEBUG GOMOD GOMODCACHE GOPATH GOROOT; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: go env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent wrapper/flags/home overrides that can redirect execution or write locations.
-for _v in RUSTFLAGS RUSTC_WRAPPER CARGO_HOME CARGO_TARGET_DIR; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: rust/cargo env injection detected (${_v})"
-    exit 1
-  fi
-done
-
-# CRITICAL_PERL_ENV_INJECTION_PROTECTION
-
-# CRITICAL_LD_ENV_INJECTION_PROTECTION
-
-# CRITICAL_DYLD_ENV_INJECTION_PROTECTION
-# Block macOS dynamic loader injection via DYLD_* env.
-for _v in DYLD_INSERT_LIBRARIES DYLD_LIBRARY_PATH DYLD_FRAMEWORK_PATH; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: macOS dynamic loader env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block dynamic linker injection via env.
-for _v in LD_PRELOAD LD_LIBRARY_PATH; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: dynamic linker env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block Perl runtime/library injection via env.
-for _v in PERL5OPT PERL5LIB; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: Perl env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block Ruby runtime/library injection via env. Even if Ruby isn't used here,
-# these variables can be abused when scripts shell out to ruby tooling.
-for _v in RUBYOPT RUBYLIB GEM_HOME GEM_PATH; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: Ruby env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block Node runtime loader injection vectors via NODE_OPTIONS.
-# (e.g., --require / --loader / --import / --eval / -r / -e)
-if env | grep -q "^NODE_OPTIONS=" 2>/dev/null; then
-  _no="$(printf "%s" "${NODE_OPTIONS:-}" )"
-  if printf "%s" "$_no" | grep -Eq '(^|[[:space:]])(--require|-r|--loader|--import|--eval|-e)([[:space:]]|$)'; then
-    echo "❌ repo_scope_guard: NODE_OPTIONS loader/require/eval injection detected"
-    exit 1
-  fi
-fi
-
-# CRITICAL_TERM_ENV_PROTECTION
-
-# CRITICAL_LOCALE_ENV_PROTECTION
-
-# CRITICAL_GIT_ENV_INJECTION_PROTECTION
-
-# CRITICAL_GIT_EXEC_PATH_INJECTION
-# Prevent overriding git's exec path (can redirect sub-commands).
-if [ -n "${GIT_EXEC_PATH-}" ]; then
-  echo "❌ repo_scope_guard: unsafe GIT_EXEC_PATH is set"; exit 1
-fi
-
-# CRITICAL_BASHOPTS_SHELLOPTS_SANITIZE
-# Shell may leak/propagate unsafe options; ensure we run with a safe baseline.
-# (SHELLOPTS may be readonly in some shells; handle safely.)
-if [ -n "${BASHOPTS-}" ]; then
-  echo "❌ repo_scope_guard: unsafe BASHOPTS is set"; exit 1
-fi
-if [ -n "${SHELLOPTS-}" ]; then
-  # If shell exports SHELLOPTS, it's a sign of a modified shell state. Block.
-  echo "❌ repo_scope_guard: unsafe SHELLOPTS is set"; exit 1
-fi
-# Prevent git behavior tampering via environment (aliases, pagers, external editors).
-for _k in GIT_PAGER PAGER GIT_EDITOR VISUAL EDITOR; do
-
-# CRITICAL_GIT_ENV_OVERRIDES_EXTENDED
-
-# CRITICAL_GIT_CONFIG_ENV_PROTECTION
-
-# CRITICAL_GIT_TRACE_ENV_PROTECTION
-
-# CRITICAL_GIT_PROTOCOL_INJECTION_PROTECTION
-
-# CRITICAL_PYTHON_ENV_INJECTION_PROTECTION
-
-# CRITICAL_NODE_ENV_INJECTION_PROTECTION
-
-# CRITICAL_SSL_ENV_INJECTION_PROTECTION
-
-# CRITICAL_GPG_SSH_ENV_INJECTION_PROTECTION
-
-# CRITICAL_PROXY_ENV_INJECTION_PROTECTION
-
-# CRITICAL_SSH_AGENT_ENV_INJECTION_PROTECTION
-
-# CRITICAL_AWS_ENV_INJECTION_PROTECTION
-
-# CRITICAL_AZURE_ENV_INJECTION_PROTECTION
-
-# CRITICAL_GCP_ENV_INJECTION_PROTECTION
-
-# CRITICAL_CLOUDFLARE_ENV_INJECTION_PROTECTION
-
-# CRITICAL_AI_PROVIDER_ENV_INJECTION_PROTECTION
-
-# CRITICAL_DOCKER_CONTAINER_ENV_INJECTION_PROTECTION
-
-# CRITICAL_NODE_PACKAGE_MANAGER_ENV_INJECTION_PROTECTION
-
-# CRITICAL_JAVA_ENV_INJECTION_PROTECTION
-# Prevent JVM option injection via environment variables (common in build tooling and wrappers).
-for _v in JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: java env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block env-driven package-manager pivots that can redirect registries, scripts, hooks, cache, or lifecycle behavior.
-# Keep this conservative: most CI should not inherit these from the shell.
-for _v in NPM_CONFIG_USERCONFIG NPM_CONFIG_GLOBALCONFIG NPM_CONFIG_PREFIX NPM_CONFIG_CACHE \
-          NPM_CONFIG_REGISTRY NPM_CONFIG_HTTPS_PROXY NPM_CONFIG_PROXY NPM_CONFIG_CA \
-          NPM_CONFIG_STRICT_SSL NPM_CONFIG_SCRIPTS_PREPEND_NODE_PATH \
-          YARN_RC_FILENAME YARN_ENABLE_SCRIPTS YARN_NPM_REGISTRY_SERVER YARN_HTTP_PROXY YARN_HTTPS_PROXY \
-          PNPM_HOME PNPM_STORE_PATH PNPM_CACHE_DIR PNPM_REGISTRY; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: node package manager env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block inherited container tooling env that can redirect builds, context, or socket pivots.
-for _v in DOCKER_HOST DOCKER_CONTEXT DOCKER_CONFIG DOCKER_CERT_PATH DOCKER_TLS_VERIFY \
-          CONTAINER_HOST CONTAINER_SOCK; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: container tooling env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block inherited AI provider API keys/tokens that could leak or redirect paid inference.
-for _v in OPENAI_API_KEY OPENAI_ORG_ID OPENAI_PROJECT OPENAI_BASE_URL \
-          ANTHROPIC_API_KEY ANTHROPIC_BASE_URL \
-          HF_TOKEN HUGGINGFACEHUB_API_TOKEN HUGGINGFACE_API_TOKEN; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: AI provider credential env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block inherited Cloudflare API material (tokens/keys) that could pivot Workers/R2/Stream.
-for _v in CLOUDFLARE_API_TOKEN CLOUDFLARE_API_KEY CLOUDFLARE_EMAIL CF_API_TOKEN CF_API_KEY CF_EMAIL CF_ACCESS_TOKEN; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: Cloudflare credential env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block inherited Google/GCP auth/material that can pivot cloud APIs.
-for _v in GOOGLE_APPLICATION_CREDENTIALS GOOGLE_CLOUD_PROJECT GCLOUD_PROJECT GOOGLE_API_KEY GCP_ACCESS_TOKEN; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: GCP credential env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block inherited Azure auth/material that can pivot cloud APIs.
-for _v in AZURE_CLIENT_ID AZURE_TENANT_ID AZURE_CLIENT_SECRET AZURE_FEDERATED_TOKEN_FILE AZURE_SUBSCRIPTION_ID; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: Azure credential env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent inherited cloud creds from being used/exfiltrated by child processes.
-# (Access key / secret / session token are enough to pivot cloud APIs.)
-for _v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: AWS credential env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent agent/socket pivots (credential use/exfil via inherited agent).
-for _v in SSH_AUTH_SOCK SSH_AGENT_PID; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: SSH agent env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent network proxy pivots (can exfiltrate tokens, tamper dependency fetch, etc.).
-for _v in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: proxy env injection detected (${_v})"
-    exit 1
-  fi
-done
-
-# CRITICAL_HISTORY_ENV_INJECTION_PROTECTION
-
-# CRITICAL_EDITOR_ENV_INJECTION_PROTECTION
-
-# CRITICAL_PAGER_ENV_INJECTION_PROTECTION
-
-# CRITICAL_PYTHON_STARTUP_ENV_INJECTION_PROTECTION
-
-# CRITICAL_PYTHON_INSPECT_PROFILE_ENV_INJECTION_PROTECTION
-
-# CRITICAL_PYTHON_BYTECODE_ENV_INJECTION_PROTECTION
-# Prevent env knobs that change python bytecode/cache behavior and can redirect writes.
-for _v in PYTHONDONTWRITEBYTECODE PYTHONPYCACHEPREFIX; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: python bytecode env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Block python environment toggles that can change execution/behavior or leak details.
-for _v in PYTHONINSPECT PYTHONPROFILEIMPORTTIME; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: python env injection detected (${_v})"
-    exit 1
-  fi
-done
-# Prevent Python startup hooks from altering tool behavior.
-for _v in PYTHONSTARTUP PYTHONWARNINGS; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent pager-based command execution pivots.
-for _v in PAGER LESS MORE; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent editor command injection pivots.
-for _v in EDITOR VISUAL; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent history-file/persistence pivots.
-for _v in HISTFILE HISTSIZE HISTCONTROL; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent signing / SSH hijack via env override.
-for _v in GIT_SSH GIT_SSH_COMMAND GPG_TTY GNUPGHOME SSH_AUTH_SOCK; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent TLS trust store hijack via env override.
-for _v in SSL_CERT_FILE SSL_CERT_DIR; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent node runtime hijack via env flags or path override.
-for _v in NODE_OPTIONS NODE_PATH; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent python interpreter hijack via env path pivot.
-for _v in PYTHONPATH PYTHONHOME; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-# Prevent protocol pivot via env (e.g., enabling disallowed transports).
-for _v in GIT_PROTOCOL GIT_ALLOW_PROTOCOL; do
-  if env | grep -q "^${_v}=" 2>/dev/null; then
-    echo "❌ repo_scope_guard: ${_v} env override detected"
-    exit 1
-  fi
-done
-
-# CRITICAL_HOME_OVERRIDE_PROTECTION
-
-# CRITICAL_PWD_OVERRIDE_PROTECTION
-
-# CRITICAL_SHLVL_SANITIZE
-
-# CRITICAL_ULIMIT_SANITY_BASELINE
-
-# CRITICAL_CMD_HASH_POISON_PROTECTION
-
-# CRITICAL_ZSH_COMMAND_PATH_POISON_PROTECTION
-# zsh can override command resolution via $command_path/$path and associative $commands.
-# We block unsafe command_path (non-absolute entries) and unexpected BASH_CMDS export surface.
-if [ -n "${command_path-}" ]; then
-  _cp="${command_path}"
-  case "$_cp" in
-    /*) : ;;
-    *) echo "❌ repo_scope_guard: unsafe command_path (must be absolute)"; exit 1 ;;
+lumora_shellopts_ok(){
+  local v="${1:-}"
+  case "$v" in
+    (*[!a-z0-9:-]* ) return 1 ;;
+    (*) return 0 ;;
   esac
-fi
+}
 
-# Some environments export BASH_CMDS (bash hash table) into env; treat as tampering signal.
-if env | grep -q '^BASH_CMDS=' 2>/dev/null; then
-  echo "❌ repo_scope_guard: BASH_CMDS env detected (command table injection surface)"
-  exit 1
-fi
-# Prevent PATH-agnostic command spoofing via bash built-in `hash -p`.
-# If `env` is hash-pinned to a non-absolute or non-/usr/bin path, fail.
-if command -v hash >/dev/null 2>&1; then
-  _hp_out="$(hash -t env 2>/dev/null || true)"
-  if [ -n "$_hp_out" ]; then
-    case "$_hp_out" in
-      /usr/bin/env) : ;;
-      /*)
-        echo "❌ repo_scope_guard: env is hash-pinned to unexpected path ($_hp_out)"
-        exit 1
-        ;;
-      *)
-        echo "❌ repo_scope_guard: env is hash-pinned to non-absolute path ($_hp_out)"
-        exit 1
-        ;;
-    esac
+################################################################################
+# ENV INJECTION BLOCKS (CRITICAL)
+################################################################################
+
+block_env_vars(){
+  for _v in "$@"; do
+    if env | grep -q "^${_v}=" 2>/dev/null; then
+      echo "❌ repo_scope_guard: env injection detected (${_v})"
+      exit 1
+    fi
+  done
+}
+
+# Dynamic loaders
+block_env_vars LD_PRELOAD LD_LIBRARY_PATH DYLD_INSERT_LIBRARIES DYLD_LIBRARY_PATH DYLD_FRAMEWORK_PATH
+
+# Shell injection
+block_env_vars BASH_ENV ENV
+
+# Node loader
+if env | grep -q "^NODE_OPTIONS=" 2>/dev/null; then
+  if printf "%s" "${NODE_OPTIONS:-}" | grep -Eq '(^|[[:space:]])(--require|-r|--loader|--import|--eval|-e)([[:space:]]|$)'; then
+    echo "❌ repo_scope_guard: NODE_OPTIONS loader injection detected"
+    exit 1
   fi
 fi
-# Prevent resource exhaustion or sabotage via extreme ulimit values.
-# Enforce minimum open files and processes thresholds.
-min_nofile=64
-min_nproc=32
 
-cur_nofile=$(ulimit -n 2>/dev/null || echo 0)
-cur_nproc=$(ulimit -u 2>/dev/null || echo 0)
+################################################################################
+# BASIC SHELL SANITY
+################################################################################
 
-case "$cur_nofile" in ''|*[!0-9]*) cur_nofile=0 ;; esac
-case "$cur_nproc" in ''|*[!0-9]*) cur_nproc=0 ;; esac
-
-if [ "$cur_nofile" -lt "$min_nofile" ]; then
-  echo "❌ repo_scope_guard: ulimit -n too low ($cur_nofile)"
+if [ -n "${CDPATH-}" ]; then
+  echo "❌ repo_scope_guard: unsafe CDPATH detected"
   exit 1
 fi
 
-if [ "$cur_nproc" -lt "$min_nproc" ]; then
-  echo "❌ repo_scope_guard: ulimit -u too low ($cur_nproc)"
-  exit 1
-fi
-# Prevent abnormal shell nesting abuse via SHLVL.
-if [ -n "${SHLVL:-}" ]; then
-  case "$SHLVL" in
-    ''|*[!0-9]*)
-      echo "❌ repo_scope_guard: SHLVL must be numeric"
+if [ -n "${PS4-}" ]; then
+  case "${PS4}" in
+    *'$('*|*'`'* )
+      echo "❌ repo_scope_guard: unsafe PS4 detected"
       exit 1
       ;;
   esac
-  if [ "$SHLVL" -gt 50 ]; then
-    echo "❌ repo_scope_guard: SHLVL too large (possible recursion abuse)"
+fi
+
+if [ "${IFS-}" != $' \t\n' ]; then
+  echo "❌ repo_scope_guard: unsafe IFS override"
+  exit 1
+fi
+
+if [ -z "${PATH:-}" ]; then
+  echo "❌ repo_scope_guard: PATH empty"
+  exit 1
+fi
+
+case ":$PATH:" in
+  *"::"*|*":.:"*|*":./:"*)
+    echo "❌ repo_scope_guard: unsafe PATH segments"
+    exit 1
+  ;;
+esac
+
+################################################################################
+# SHELL OPTIONS SANITY
+################################################################################
+
+if [ -n "${SHELLOPTS-}" ]; then
+  if ! lumora_shellopts_ok "${SHELLOPTS}"; then
+    echo "❌ repo_scope_guard: unsafe SHELLOPTS content"
     exit 1
   fi
 fi
-# Prevent PWD override (must be absolute and match physical cwd).
+
+if [ -n "${BASHOPTS-}" ]; then
+  if ! lumora_shellopts_ok "${BASHOPTS}"; then
+    echo "❌ repo_scope_guard: unsafe BASHOPTS content"
+    exit 1
+  fi
+fi
+
+################################################################################
+# TMPDIR & UMASK
+################################################################################
+
+if [ -n "${TMPDIR:-}" ]; then
+  case "$TMPDIR" in
+    /*) ;;
+    *) echo "❌ repo_scope_guard: TMPDIR must be absolute"; exit 1 ;;
+  esac
+fi
+
+current_umask="$(umask)"
+case "$current_umask" in
+  000|002|0222|0777)
+    echo "❌ repo_scope_guard: unsafe umask ($current_umask)"
+    exit 1
+  ;;
+esac
+
+################################################################################
+# GIT ENV OVERRIDES
+################################################################################
+
+block_env_vars GIT_DIR GIT_WORK_TREE GIT_CEILING_DIRECTORIES \
+               GIT_INDEX_FILE GIT_OBJECT_DIRECTORY \
+               GIT_ALTERNATE_OBJECT_DIRECTORIES \
+               GIT_EXEC_PATH
+
+################################################################################
+# PWD / HOME SANITY
+################################################################################
+
 if [ -n "${PWD:-}" ]; then
   case "$PWD" in
-    /*) : ;;
-    *)
-      echo "❌ repo_scope_guard: PWD must be absolute"
-      exit 1
-      ;;
+    /*) ;;
+    *) echo "❌ repo_scope_guard: PWD must be absolute"; exit 1 ;;
   esac
-  _phys="$(pwd -P 2>/dev/null || true)"
-  if [ -n "${_phys:-}" ] && [ "$PWD" != "$_phys" ]; then
-    echo "❌ repo_scope_guard: PWD mismatch (env override)"
-    exit 1
-  fi
 fi
-# Prevent HOME override to arbitrary or relative locations.
+
 if [ -n "${HOME:-}" ]; then
   case "$HOME" in
-    /*) : ;;
-    *)
-      echo "❌ repo_scope_guard: HOME must be absolute"
-      exit 1
-      ;;
+    /*) ;;
+    *) echo "❌ repo_scope_guard: HOME must be absolute"; exit 1 ;;
   esac
   if [ ! -d "$HOME" ]; then
     echo "❌ repo_scope_guard: HOME does not exist"
     exit 1
   fi
 fi
-# Block git trace/debug env variables that may alter behavior or leak paths.
-for _v in GIT_TRACE GIT_TRACE_PACKET GIT_TRACE_PERFORMANCE GIT_TRACE_SETUP GIT_TRACE_SHALLOW; do
-  eval "_val=\${${_v}-}"
-  if [ -n "${_val}" ]; then
-    echo "❌ repo_scope_guard: unsafe ${_v} is set"; exit 1
-  fi
-done
-# Block global/system git config overrides.
-for _v in GIT_CONFIG_GLOBAL GIT_CONFIG_SYSTEM; do
-  eval "_val=\${${_v}-}"
-  if [ -n "${_val}" ]; then
-    echo "❌ repo_scope_guard: unsafe ${_v} is set"; exit 1
-  fi
-done
-# Block additional git env overrides that can redirect repository/index/object DB.
-for _v in GIT_DIR GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_ALTERNATE_OBJECT_DIRECTORIES; do
-  eval "_val=\${${_v}-}"
-  if [ -n "${_val}" ]; then
-    echo "❌ repo_scope_guard: unsafe ${_v} is set"; exit 1
-  fi
-done
-  _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
-  if [ -n "${_v:-}" ]; then
-    echo "❌ repo_scope_guard: unsafe ${_k} env is set"; exit 1
-  fi
-done
 
-# Any GIT_CONFIG_* can inject arbitrary config including aliases/sshCommand/core.pager.
-for _k in $(/usr/bin/env | /usr/bin/awk -F= '/^GIT_CONFIG_(COUNT|KEY_|VALUE_)/ {print $1}'); do
-  echo "❌ repo_scope_guard: unsafe ${_k} env is set"; exit 1
-done
-# Locale env can alter parsing/behavior in subtle ways; allow only safe charset-ish values.
-_lumora_locale_ok() {
-  case "${1:-}" in
-    ""|C|POSIX|C.UTF-8|en_US.UTF-8|de_DE.UTF-8) return 0;;
-    # Generic UTF-8 locales (avoid metacharacters)
-    *UTF-8|*utf8|*utf-8)
-      case "$1" in *[\;\&\|\`\$\$begin:math:text$\$end:math:text$\<\>\{\}\$begin:math:display$\$end:math:display$\"\']* ) return 1;; esac
-      return 0;;
-  esac
-  return 1
-}
-if [ -n "${LANG:-}" ] && ! _lumora_locale_ok "$LANG"; then
-  echo "❌ repo_scope_guard: unsafe LANG ($LANG)"; exit 1
-fi
-if [ -n "${LANGUAGE:-}" ] && ! _lumora_locale_ok "$LANGUAGE"; then
-  echo "❌ repo_scope_guard: unsafe LANGUAGE ($LANGUAGE)"; exit 1
-fi
-# Block any LC_* with unsafe chars (also blocks command-substitution attempts)
-for _k in $(/usr/bin/env | /usr/bin/awk -F= '/^LC_[A-Z0-9_]+=/ {print $1}'); do
-  _v="$(/usr/bin/env | /usr/bin/awk -F= -v k="$_k" '$1==k {print substr($0, index($0,$2))}')"
-  if ! _lumora_locale_ok "${_v:-}"; then
-    echo "❌ repo_scope_guard: unsafe ${_k} (${_v})"; exit 1
-  fi
-done
-# TERMINFO/TERMCAP can be abused to influence terminal behavior; require absolute safe paths.
-if [ -n "${TERMINFO:-}" ]; then
-  case "$TERMINFO" in
-    /*) : ;;
-    *) echo "❌ repo_scope_guard: TERMINFO must be absolute ($TERMINFO)"; exit 1;;
-  esac
-fi
-if [ -n "${TERMCAP:-}" ]; then
-  # TERMCAP should not be set in CI/automation contexts
-  echo "❌ repo_scope_guard: TERMCAP must not be set"; exit 1
-fi
+################################################################################
+# REPO ROOT VALIDATION
+################################################################################
 
-# Hard gate: HOME must not contain global git config artifacts
-
-# Hard gate: HOME must not contain package-manager rc files (often indicates project drift)
-
-# Hard gate: HOME must not contain IDE project dirs (often indicates repo drift)
-if [ -d "${HOME_DIR}/.vscode" ]; then
-  say "❌ repo_scope_guard: HOME has .vscode dir (unsafe): ${HOME_DIR}/.vscode"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.idea" ]; then
-  say "❌ repo_scope_guard: HOME has .idea dir (unsafe): ${HOME_DIR}/.idea"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.cursor" ]; then
-  say "❌ repo_scope_guard: HOME has .cursor dir (unsafe): ${HOME_DIR}/.cursor"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.npmrc" ]; then
-  say "❌ repo_scope_guard: HOME has .npmrc (unsafe): ${HOME_DIR}/.npmrc"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.yarnrc" ]; then
-  say "❌ repo_scope_guard: HOME has .yarnrc (unsafe): ${HOME_DIR}/.yarnrc"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.yarnrc.yml" ]; then
-  say "❌ repo_scope_guard: HOME has .yarnrc.yml (unsafe): ${HOME_DIR}/.yarnrc.yml"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.pnpmrc" ]; then
-  say "❌ repo_scope_guard: HOME has .pnpmrc (unsafe): ${HOME_DIR}/.pnpmrc"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.pnpmfile.cjs" ]; then
-  say "❌ repo_scope_guard: HOME has .pnpmfile.cjs (unsafe): ${HOME_DIR}/.pnpmfile.cjs"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.gitconfig" ]; then
-  say "❌ repo_scope_guard: HOME has .gitconfig (unsafe): ${HOME_DIR}/.gitconfig"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.git-credentials" ]; then
-  say "❌ repo_scope_guard: HOME has .git-credentials (unsafe): ${HOME_DIR}/.git-credentials"
-  exit 1
-fi
-#!/usr/bin/env bash
-set -euo pipefail
-
-say(){ printf "%s\n" "$*"; }
-
-HOME_DIR="${HOME}"
-
-# REPO_ROOT_STRICT_CHECK
-
-# REALPATH_STRICT_CHECK
-
-# GIT_WORKTREE_STRICT_CHECK
-
-# GIT_SUBMODULE_STRICT_CHECK
-
-# GITFILE_POINTER_STRICT_CHECK
-
-# REAL_GITDIR_BOUNDARY_STRICT_CHECK
-
-# CRITICAL_GIT_ENV_OVERRIDE_BLOCK
-
-# CRITICAL_PATH_TAMPER_PROTECTION
-
-# CRITICAL_IFS_TAMPER_PROTECTION
-
-# CRITICAL_SHELL_OPTS_ENV_PROTECTION
-
-# CRITICAL_LOADER_INJECTION_ENV_PROTECTION
-
-# CRITICAL_SHELL_ENV_INJECTION_PROTECTION
-
-# CRITICAL_EXPORTED_FUNCTION_INJECTION_PROTECTION
-
-# CRITICAL_PS4_XTRACE_INJECTION_PROTECTION
-
-# CRITICAL_CDPATH_INJECTION_PROTECTION
-
-# CRITICAL_UMASK_PROTECTION
-
-# CRITICAL_TMPDIR_PROTECTION
-# TMPDIR must be absolute and not world-writable outside system tmp
-if [ -n "${TMPDIR:-}" ]; then
-  case "$TMPDIR" in
-    /*) : ;;
-    *) echo "❌ repo_scope_guard: TMPDIR must be absolute ($TMPDIR)"; exit 1;;
-  esac
-  if [ -d "$TMPDIR" ]; then
-    perms="$(ls -ld "$TMPDIR" 2>/dev/null | awk '{print $1}')"
-    case "$perms" in
-      drwxrwxrwx*) echo "❌ repo_scope_guard: TMPDIR world-writable ($TMPDIR)"; exit 1;;
-    esac
-  fi
-fi
-# Block overly permissive umask (e.g., 000, 002)
-current_umask="$(umask)"
-case "$current_umask" in
-  000|002|0222|0777)
-    echo "❌ repo_scope_guard: unsafe umask detected ($current_umask)"
-    exit 1
-  ;;
-esac
-# Block CDPATH which can alter cd resolution behavior.
-if [ "${CDPATH-}" != "" ]; then
-  echo "❌ repo_scope_guard: unsafe CDPATH detected"
-  exit 1
-fi
-# Block PS4 prompt injection used in set -x tracing exploits.
-if [ "${PS4-}" != "" ]; then
-  case "${PS4}" in
-    *"$("*|*"`"* )
-      echo "❌ repo_scope_guard: unsafe PS4 detected (command substitution in xtrace prompt)"
-      exit 1
-      ;;
-  esac
-fi
-# Block exported bash functions (Shellshock-style env vectors, BASH_FUNC_*).
-if /usr/bin/env | /usr/bin/grep -q "^BASH_FUNC_"; then
-  echo "❌ repo_scope_guard: exported function injection detected (BASH_FUNC_*)"
-  exit 1
-fi
-# Block environment-based shell injection vectors used by bash/sh.
-# BASH_ENV is sourced by non-interactive bash; ENV by POSIX sh (e.g. /bin/sh).
-if [ -n "${BASH_ENV-}" ] || [ -n "${ENV-}" ]; then
-  echo "❌ repo_scope_guard: shell env injection detected (BASH_ENV/ENV)"
-  exit 1
-fi
-# SHELL must be an absolute path if set (defense-in-depth against odd wrappers)
-if [ -n "${SHELL-}" ] && [ "${SHELL#/}" = "${SHELL}" ]; then
-  echo "❌ repo_scope_guard: unsafe SHELL (not absolute)"
-  exit 1
-fi
-# Block dynamic loader injection via env (Linux/macOS). This is a common tactic to hijack subprocesses.
-if [ -n "${LD_PRELOAD-}" ] || [ -n "${LD_LIBRARY_PATH-}" ] || [ -n "${DYLD_INSERT_LIBRARIES-}" ] || [ -n "${DYLD_LIBRARY_PATH-}" ] || [ -n "${DYLD_FRAMEWORK_PATH-}" ]; then
-  echo "❌ repo_scope_guard: dynamic loader injection env detected (LD_*/DYLD_*)"
-  exit 1
-fi
-# These are readonly in bash when set by the shell, but can be injected via env into scripts.
-# We treat presence in env as suspicious and fail fast.
-if [ -n "${SHELLOPTS-}" ] || [ -n "${BASHOPTS-}" ]; then
-  echo "❌ repo_scope_guard: unsafe shell options env override detected (SHELLOPTS/BASHOPTS)"
-  exit 1
-fi
-# IFS should be default (space, tab, newline). Tampering can break parsing/guards.
-if [ "${IFS-}" != $' \t\n' ]; then
-  echo "❌ repo_scope_guard: unsafe IFS override detected"
-  exit 1
-fi
-if [ -z "${PATH:-}" ]; then
-  echo "❌ repo_scope_guard: PATH is empty"
-  exit 1
-fi
-case ":$PATH:" in
-  *"::"*|*":.:"*|*":./:"*)
-    echo "❌ repo_scope_guard: unsafe PATH (empty or relative segments)"
-    exit 1
-  ;;
-esac
-if [ -n "${GIT_WORK_TREE:-}" ] || [ -n "${GIT_CEILING_DIRECTORIES:-}" ]; then
-  echo "❌ repo_scope_guard: critical git env override detected"
-  exit 1
-fi
-if command -v git >/dev/null 2>&1; then
-  gitdir="$(git rev-parse --git-dir 2>/dev/null || true)"
-  if [ -n "$gitdir" ]; then
-    gitdir_real="$(cd "$gitdir" 2>/dev/null && pwd -P || true)"
-    root_real="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
-    case "$gitdir_real" in
-      "$root_real"/*|"$root_real") ;;
-      *)
-        echo "❌ repo_scope_guard: real gitdir escapes repo root boundary"
-        exit 1
-        ;;
-    esac
-  fi
-fi
-if [ -f ".git" ]; then
-  gitfile="$(sed -n '1p' .git 2>/dev/null || true)"
-  case "$gitfile" in
-    gitdir:*)
-      gd="${gitfile#gitdir:}"
-      gd="$(printf "%s" "$gd" | sed 's/^ *//;s/ *$//')" 
-      # resolve relative path against REPO_ROOT
-      if [ -n "$gd" ]; then
-        if [ "${gd#/}" = "$gd" ]; then
-          gd_path="$REPO_ROOT/$gd"
-        else
-          gd_path="$gd"
-        fi
-        gd_real="$(cd "$(dirname "$gd_path")" 2>/dev/null && pwd -P)/$(basename "$gd_path")"
-        root_real="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
-        case "$gd_real" in
-          "$root_real"/*|"$root_real") ;;
-          *)
-            echo "❌ repo_scope_guard: .git file points outside repo (gitdir escape)"
-            exit 1
-            ;;
-        esac
-      fi
-      ;;
-  esac
-fi
-if [ -d ".git/modules" ]; then
-  for d in .git/modules/*; do
-    [ -d "$d" ] || continue
-    REAL_MOD="$(cd "$d" 2>/dev/null && pwd -P)"
-    REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
-    case "$REAL_MOD" in
-      "$REAL_ROOT"/*|"$REAL_ROOT") ;;
-      *)
-        echo "❌ repo_scope_guard: submodule gitdir escape detected"
-        exit 1
-        ;;
-    esac
-  done
-fi
-if [ -f ".git" ]; then
-  if grep -q "^gitdir: " .git 2>/dev/null; then
-    GITDIR_PATH="$(sed -n 's/^gitdir: //p' .git | head -n1)"
-    case "$GITDIR_PATH" in
-      /*) ;;
-      *) GITDIR_PATH="$PWD/$GITDIR_PATH" ;;
-    esac
-    REAL_GITDIR="$(cd "$(dirname "$GITDIR_PATH")" 2>/dev/null && pwd -P)"
-    REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
-    case "$REAL_GITDIR" in
-      "$REAL_ROOT"/*|"$REAL_ROOT") ;;
-      *)
-        echo "❌ repo_scope_guard: git worktree escape detected"
-        exit 1
-        ;;
-    esac
-  fi
-fi
-REAL_PWD="$(cd "$PWD" 2>/dev/null && pwd -P)"
-REAL_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)"
-case "$REAL_PWD" in
-  "$REAL_ROOT"/*|"$REAL_ROOT") ;;
-  *)
-    echo "❌ repo_scope_guard: symlink escape detected (outside repo root)"
-    exit 1
-    ;;
-esac
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [ -z "$REPO_ROOT" ]; then
   echo "❌ repo_scope_guard: not inside a git repository"
   exit 1
 fi
+
 if [ "$PWD" != "$REPO_ROOT" ]; then
-  echo "❌ repo_scope_guard: must execute from repo root only"
+  echo "❌ repo_scope_guard: must execute from repo root"
   exit 1
 fi
 
-# Hard gate: HOME must not contain system package manager signals
-if [ -d "${HOME_DIR}/.linuxbrew" ] || [ -d "${HOME_DIR}/.homebrew" ]; then
-  echo "❌ repo_scope_guard: HOME has Homebrew directory"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.config/apt" ]; then
-  echo "❌ repo_scope_guard: HOME has apt config directory"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.chocolatey" ]; then
-  echo "❌ repo_scope_guard: HOME has Chocolatey directory"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/scoop" ]; then
-  echo "❌ repo_scope_guard: HOME has Scoop directory"
-  exit 1
-fi
+################################################################################
+# TARGET VALIDATION
+################################################################################
 
-# Hard gate: HOME must not contain Node version manager signals
-if [ -d "${HOME_DIR}/.nvm" ]; then
-  echo "❌ repo_scope_guard: HOME has .nvm"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.nvmrc" ]; then
-  echo "❌ repo_scope_guard: HOME has .nvmrc"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.node-version" ]; then
-  echo "❌ repo_scope_guard: HOME has .node-version"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.tool-versions" ]; then
-  echo "❌ repo_scope_guard: HOME has .tool-versions"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain python site-packages/dist-packages directories
-if [ -d "${HOME_DIR}/site-packages" ]; then
-  echo "❌ repo_scope_guard: HOME has site-packages"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/dist-packages" ]; then
-  echo "❌ repo_scope_guard: HOME has dist-packages"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Python requirements/project lock files
-if [ -f "${HOME_DIR}/requirements.txt" ]; then
-  echo "❌ repo_scope_guard: HOME has requirements.txt"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/Pipfile" ]; then
-  echo "❌ repo_scope_guard: HOME has Pipfile"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/poetry.lock" ]; then
-  echo "❌ repo_scope_guard: HOME has poetry.lock"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain PHP/Composer project signals
-if [ -f "${HOME_DIR}/composer.json" ]; then
-  echo "❌ repo_scope_guard: HOME has composer.json"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/composer.lock" ]; then
-  echo "❌ repo_scope_guard: HOME has composer.lock"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/vendor" ]; then
-  echo "❌ repo_scope_guard: HOME has vendor directory"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain .NET project signals
-if [ -d "${HOME_DIR}/.nuget" ]; then
-  echo "❌ repo_scope_guard: HOME has .nuget directory"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/global.json" ]; then
-  echo "❌ repo_scope_guard: HOME has global.json"
-  exit 1
-fi
-# detect .NET solution/project files (bounded; HOME should not be a repo/workspace)
-if find "${HOME_DIR}" -maxdepth 2 -type f \( -name "*.csproj" -o -name "*.sln" \) -print -quit 2>/dev/null | grep -q .; then
-  echo "❌ repo_scope_guard: HOME has .NET project/solution files (*.csproj/*.sln)"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Rust project signals
-if [ -f "${HOME_DIR}/Cargo.toml" ]; then
-  echo "❌ repo_scope_guard: HOME has Cargo.toml"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/Cargo.lock" ]; then
-  echo "❌ repo_scope_guard: HOME has Cargo.lock"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.cargo" ]; then
-  echo "❌ repo_scope_guard: HOME has .cargo directory"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Go module signals
-if [ -f "${HOME_DIR}/go.mod" ]; then
-  echo "❌ repo_scope_guard: HOME has go.mod"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/go.sum" ]; then
-  echo "❌ repo_scope_guard: HOME has go.sum"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Java/Gradle project signals
-if [ -f "${HOME_DIR}/build.gradle" ] || [ -f "${HOME_DIR}/build.gradle.kts" ]; then
-  echo "❌ repo_scope_guard: HOME has build.gradle"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/pom.xml" ]; then
-  echo "❌ repo_scope_guard: HOME has pom.xml"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.gradle" ]; then
-  echo "❌ repo_scope_guard: HOME has .gradle directory"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Ruby project signals
-if [ -f "${HOME_DIR}/Gemfile" ]; then
-  say "❌ repo_scope_guard: HOME has Gemfile: ${HOME_DIR}/Gemfile"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.bundle" ]; then
-  say "❌ repo_scope_guard: HOME has .bundle: ${HOME_DIR}/.bundle"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.ruby-version" ]; then
-  say "❌ repo_scope_guard: HOME has .ruby-version: ${HOME_DIR}/.ruby-version"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain secret stores (repo drift + sensitive context)
-if [ -d "${HOME_DIR}/.ssh" ]; then
-  say "❌ repo_scope_guard: HOME has .ssh (sensitive dir): ${HOME_DIR}/.ssh"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.gnupg" ]; then
-  say "❌ repo_scope_guard: HOME has .gnupg (sensitive dir): ${HOME_DIR}/.gnupg"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain cloud/kube config dirs (repo drift signal)
-if [ -d "${HOME_DIR}/.kube" ]; then
-  say "❌ repo_scope_guard: HOME has .kube (unsafe kube config dir): ${HOME_DIR}/.kube"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.aws" ]; then
-  say "❌ repo_scope_guard: HOME has .aws (unsafe aws config dir): ${HOME_DIR}/.aws"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.config/gcloud" ]; then
-  say "❌ repo_scope_guard: HOME has .config/gcloud (unsafe gcloud config dir): ${HOME_DIR}/.config/gcloud"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain IaC / Terraform signals (repo drift signal)
-if [ -d "${HOME_DIR}/.terraform" ]; then
-  say "❌ repo_scope_guard: HOME has .terraform (unsafe terraform dir): ${HOME_DIR}/.terraform"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/terraform.tfstate" ]; then
-  say "❌ repo_scope_guard: HOME has terraform.tfstate (unsafe terraform state): ${HOME_DIR}/terraform.tfstate"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/terraform.tfstate.backup" ]; then
-  say "❌ repo_scope_guard: HOME has terraform.tfstate.backup (unsafe terraform state): ${HOME_DIR}/terraform.tfstate.backup"
-  exit 1
-fi
-# Also block common terraform configs at HOME root
-if ls "${HOME_DIR}"/*.tf >/dev/null 2>&1; then
-  say "❌ repo_scope_guard: HOME has *.tf files (unsafe terraform config): ${HOME_DIR}/*.tf"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Docker project signals (repo drift signal)
-if [ -d "${HOME_DIR}/.docker" ]; then
-  say "❌ repo_scope_guard: HOME has .docker (unsafe docker config dir): ${HOME_DIR}/.docker"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/docker-compose.yml" ]; then
-  say "❌ repo_scope_guard: HOME has docker-compose.yml (unsafe compose project): ${HOME_DIR}/docker-compose.yml"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/docker-compose.yaml" ]; then
-  say "❌ repo_scope_guard: HOME has docker-compose.yaml (unsafe compose project): ${HOME_DIR}/docker-compose.yaml"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Python project/venv signals (repo drift signal)
-if [ -d "${HOME_DIR}/.venv" ]; then
-  say "❌ repo_scope_guard: HOME has .venv (unsafe python venv): ${HOME_DIR}/.venv"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/venv" ]; then
-  say "❌ repo_scope_guard: HOME has venv (unsafe python venv): ${HOME_DIR}/venv"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/pyproject.toml" ]; then
-  say "❌ repo_scope_guard: HOME has pyproject.toml (unsafe python project): ${HOME_DIR}/pyproject.toml"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/__pycache__" ]; then
-  say "❌ repo_scope_guard: HOME has __pycache__ (unsafe python cache): ${HOME_DIR}/__pycache__"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Next.js / Turbo build artifacts
-if [ -d "${HOME_DIR}/.next" ]; then
-  say "❌ repo_scope_guard: HOME has .next (unsafe build artifact): ${HOME_DIR}/.next"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.turbo" ]; then
-  say "❌ repo_scope_guard: HOME has .turbo (unsafe build artifact): ${HOME_DIR}/.turbo"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain Prisma project artifacts (schema/config)
-if [ -d "${HOME_DIR}/prisma" ] || [ -f "${HOME_DIR}/schema.prisma" ] || [ -f "${HOME_DIR}/prisma/schema.prisma" ]; then
-  say "❌ repo_scope_guard: HOME has prisma/ schema (unsafe): ${HOME_DIR}/prisma or schema.prisma"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/prisma.config.ts" ] || [ -f "${HOME_DIR}/prisma.config.js" ] || [ -f "${HOME_DIR}/prisma.config.mjs" ]; then
-  say "❌ repo_scope_guard: HOME has prisma.config* (unsafe): ${HOME_DIR}/prisma.config.*"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain project configs (tsconfig/next.config*)
-if [ -f "${HOME_DIR}/tsconfig.json" ] || [ -f "${HOME_DIR}/jsconfig.json" ]; then
-  say "❌ repo_scope_guard: HOME has tsconfig/jsconfig (unsafe): ${HOME_DIR}/tsconfig.json or jsconfig.json"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/next.config.js" ] || [ -f "${HOME_DIR}/next.config.mjs" ] || [ -f "${HOME_DIR}/next.config.ts" ]; then
-  say "❌ repo_scope_guard: HOME has next.config* (unsafe): ${HOME_DIR}/next.config.*"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain .env files (often indicates wrong cwd / unsafe secrets scope)
-if [ -f "${HOME_DIR}/.env" ]; then
-  say "❌ repo_scope_guard: HOME has .env file (unsafe): ${HOME_DIR}/.env"
-  exit 1
-fi
-if ls "${HOME_DIR}/.env."* >/dev/null 2>&1; then
-  say "❌ repo_scope_guard: HOME has .env.* files (unsafe): ${HOME_DIR}/.env.*"
-  exit 1
-fi
-
-# Hard gate: HOME must not contain node_modules (prevents npm/pnpm drift at HOME)
-
-# Hard gate: HOME must not look like a repo working tree
-if [ -f "${HOME_DIR}/.gitmodules" ]; then
-  say "❌ repo_scope_guard: HOME has .gitmodules (unsafe): ${HOME_DIR}/.gitmodules"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/.github" ]; then
-  say "❌ repo_scope_guard: HOME has .github dir (unsafe): ${HOME_DIR}/.github"
-  exit 1
-fi
-if [ -f "${HOME_DIR}/.gitignore" ]; then
-  say "❌ repo_scope_guard: HOME has .gitignore (unsafe): ${HOME_DIR}/.gitignore"
-  exit 1
-fi
-if [ -d "${HOME_DIR}/node_modules" ]; then
-  say "❌ repo_scope_guard: HOME/node_modules exists (unsafe): ${HOME_DIR}/node_modules"
-  exit 1
-fi
-
-# Hard guard: if HOME has a .git dir/file, it is effectively a git repo/worktree.
-# This catches `git init` even before `git rev-parse` is usable in some states.
-if [ -e "${HOME_DIR}/.git" ]; then
-  say "❌ repo_scope_guard: HOME contains .git (${HOME_DIR}/.git)"
-  exit 1
-fi
+HOME_DIR="$HOME"
 TARGET_DEFAULT="${HOME_DIR}/lumora-web"
 TARGET="${LUMORA_ROOT:-$TARGET_DEFAULT}"
 
-say "repo_scope_guard: HOME=$HOME_DIR"
-say "repo_scope_guard: TARGET=$TARGET"
-
-# 1) HOME must NOT be a git repo
-if git -C "$HOME_DIR" rev-parse --show-toplevel >/dev/null 2>&1; then
-  say "❌ repo_scope_guard: HOME is a git repo: $(git -C "$HOME_DIR" rev-parse --show-toplevel)"
-  say "   Fix: run 'rm -rf \"$HOME_DIR/.git\"' only if it was accidental; ensure real repo is ~/lumora-web."
-  exit 1
-fi
-say "✓ repo_scope_guard: HOME is not a git repo"
-
-# 2) HOME must NOT contain package.json (prevents naive root autodetect from picking HOME)
-if [ -f "$HOME_DIR/package.json" ]; then
-  say "❌ repo_scope_guard: HOME/package.json exists: $HOME_DIR/package.json"
-
-# Hard gate: HOME must not contain JS lockfiles (prevents tool drift at HOME)
-for f in "pnpm-lock.yaml" "yarn.lock" "package-lock.json"; do
-  if [ -f "${HOME_DIR}/${f}" ]; then
-    say "❌ repo_scope_guard: HOME lockfile exists (unsafe): ${HOME_DIR}/${f}"
-    exit 1
-  fi
-done
-  say "   Fix: move it out (quarantine) e.g.:"
-  say "     mkdir -p \"$HOME_DIR/.lumora_quarantine_home_root_files\""
-  say "     mv \"$HOME_DIR/package.json\" \"$HOME_DIR/.lumora_quarantine_home_root_files/package.json.$(date -u +%Y%m%dT%H%M%SZ)\""
-  exit 1
-fi
-say "✓ repo_scope_guard: HOME/package.json absent"
-
-# 3) TARGET must exist and be a git repo with top-level == TARGET
 if [ ! -d "$TARGET" ]; then
-  say "❌ repo_scope_guard: missing TARGET dir: $TARGET"
+  echo "❌ repo_scope_guard: TARGET missing ($TARGET)"
   exit 1
 fi
+
 if ! git -C "$TARGET" rev-parse --show-toplevel >/dev/null 2>&1; then
-  say "❌ repo_scope_guard: TARGET is not a git repo: $TARGET"
+  echo "❌ repo_scope_guard: TARGET not a git repo"
   exit 1
 fi
+
 TOP="$(git -C "$TARGET" rev-parse --show-toplevel)"
 if [ "$TOP" != "$TARGET" ]; then
-  say "❌ repo_scope_guard: TARGET git root mismatch: $TOP != $TARGET"
+  echo "❌ repo_scope_guard: TARGET git root mismatch"
   exit 1
 fi
-say "✓ repo_scope_guard: TARGET git root ok: $TOP"
 
-# 4) TARGET status output must not mention HOME folders (extra safety)
+################################################################################
+# FINAL STATUS CHECK
+################################################################################
+
 STATUS_OUT="$(git -C "$TARGET" status -sb 2>&1 || true)"
-if echo "$STATUS_OUT" | grep -Eq 'Desktop/|Documents/|Library/|Downloads/|Pictures/|Movies/|Music/|\.Trash/'; then
-  say "❌ repo_scope_guard: TARGET status contains HOME folders; scope drift suspected"
-  say "$STATUS_OUT" | sed -n '1,120p'
+if echo "$STATUS_OUT" | grep -Eq 'Desktop/|Documents/|Library/|Downloads/'; then
+  echo "❌ repo_scope_guard: TARGET status contains HOME folders"
   exit 1
 fi
-say "✓ repo_scope_guard: TARGET status clean of HOME folders"
+
+say "✓ repo_scope_guard: all checks passed"
+exit 0
