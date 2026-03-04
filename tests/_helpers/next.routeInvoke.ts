@@ -1,98 +1,131 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import fs from "node:fs";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { NextRequest } from "next/server";
 
 export type InvokeResult = {
   status: number;
-  headers: Record<string, string>;
-  bodyText: string;
-  json: any | null;
+  body: any;
+  headers?: Record<string, string>;
+  bodyText?: string;
 };
 
-function toHeadersObj(h: Headers): Record<string, string> {
+function repoRoot(): string {
+  // vitest runs from repo root usually, but be defensive
+  const cwd = process.cwd();
+  // if tests are executed from within subdir, try to climb until package.json
+  let d = cwd;
+  for (let i = 0; i < 8; i++) {
+    if (fs.existsSync(path.join(d, "package.json"))) return d;
+    const up = path.dirname(d);
+    if (up === d) break;
+    d = up;
+  }
+  return cwd;
+}
+
+function toAbsoluteUrl(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  const u = url.startsWith("/") ? url : `/${url}`;
+  return `http://127.0.0.1${u}`;
+}
+
+function normalizeRoute(url: string): string {
+  // accept "/api/x", "api/x", or absolute URL
+  try {
+    const u = new URL(url);
+    return u.pathname;
+  } catch {
+    return url.startsWith("/") ? url : `/${url}`;
+  }
+}
+
+function resolveRouteFile(routePath: string): string | null {
+  const rp = normalizeRoute(routePath);
+
+  // Only support Next App Router route modules for tests
+  // "/api/foo/bar" -> "app/api/foo/bar/route.ts"
+  const seg = rp.replace(/^\/+/, "").split("?")[0].split("#")[0];
+  const candidateRel = path.join(...seg.split("/"), "route.ts");
+
+  const root = repoRoot();
+  const c1 = path.join(root, "app", candidateRel);
+  const c2 = path.join(root, "src", "app", candidateRel);
+
+  if (fs.existsSync(c1)) return c1;
+  if (fs.existsSync(c2)) return c2;
+
+  // Sometimes routes are ".tsx" (rare) or compiled to ".js" in ts-node env
+  const c1tsx = c1.replace(/\.ts$/, ".tsx");
+  const c2tsx = c2.replace(/\.ts$/, ".tsx");
+  if (fs.existsSync(c1tsx)) return c1tsx;
+  if (fs.existsSync(c2tsx)) return c2tsx;
+
+  return null;
+}
+
+async function importRouteModule(routeUrlOrPath: string): Promise<any | null> {
+  const fp = resolveRouteFile(routeUrlOrPath);
+  if (!fp) return null;
+
+  // Ensure ESM import works and avoid module cache between tests
+  const u = pathToFileURL(fp).toString() + `?t=${Date.now()}`;
+  return import(u);
+}
+
+function headersToObject(h: Headers): Record<string, string> {
   const out: Record<string, string> = {};
-  h.forEach((v, k) => (out[k.toLowerCase()] = v));
+  h.forEach((v, k) => (out[k] = v));
   return out;
 }
 
-function normalizeRouteModule(mod: any): any {
-  let cur = mod;
-  for (let i = 0; i < 8; i++) {
-    if (cur?.GET || cur?.POST || cur?.PUT || cur?.PATCH || cur?.DELETE) return cur;
-    if (cur?.default) { cur = cur.default; continue; }
-    if (cur?.route) { cur = cur.route; continue; }
-    if (cur?.handler) { cur = cur.handler; continue; }
-    break;
+async function safeReadText(res: any): Promise<string> {
+  try {
+    if (res && typeof res.text === "function") return await res.text();
+  } catch {}
+  try {
+    if (res && typeof res.arrayBuffer === "function") {
+      const ab = await res.arrayBuffer();
+      return new TextDecoder().decode(ab);
+    }
+  } catch {}
+  return "";
+}
+
+async function safeReadJson(res: any): Promise<any | null> {
+  try {
+    if (res && typeof res.json === "function") return await res.json();
+  } catch {}
+  const t = await safeReadText(res);
+  try {
+    return t ? JSON.parse(t) : null;
+  } catch {
+    return null;
   }
-  return cur;
 }
 
-function stripQueryHash(p: string): string {
-  const q = p.indexOf("?");
-  const h = p.indexOf("#");
-  let cut = p.length;
-  if (q >= 0) cut = Math.min(cut, q);
-  if (h >= 0) cut = Math.min(cut, h);
-  return p.slice(0, cut);
-}
-
-function toAbsoluteUrl(input: string): string {
-  const raw = (input || "").trim();
-  // already absolute
-  if (/^https?:\/\//i.test(raw)) return raw;
-  const p = raw.startsWith("/") ? raw : "/" + raw;
-  // stable base for tests; host irrelevant for route handlers
-  return "http://127.0.0.1:3000" + p;
-}
-
-function urlPathToRouteModulePath(urlPath: string): string {
-  // Accept "/api/portals/alive" or "api/portals/alive"
-  const clean = stripQueryHash(urlPath).trim();
-  const p = clean.startsWith("/") ? clean : "/" + clean;
-  if (!p.startsWith("/api/")) return clean;
-
-  // tests/_helpers -> ../../app is project-root-relative (Vite resolves TS)
-  // "/api/x/y" -> "../../app/api/x/y/route"
-  return "../../app" + p + "/route";
-}
-
-async function loadRouteModule(modOrPath: any): Promise<any> {
-  if (typeof modOrPath === "string") {
-    const mapped = urlPathToRouteModulePath(modOrPath);
-    const mod0 = await import(mapped);
-    return normalizeRouteModule(mod0);
-  }
-  return normalizeRouteModule(modOrPath);
-}
-
-/**
- * In-process invoker for Next.js App Router route handlers.
- * Supports:
- *  - invokeGET("/api/portals/alive")
- *  - invokeGET(routeModuleObject, "/api/portals/alive")
- */
 export async function invokeGET(
-  modOrUrl: any,
-  urlMaybe?: string,
+  url: string,
   init?: { headers?: Record<string, string> }
 ): Promise<InvokeResult> {
-  const isUrlOnly = typeof modOrUrl === "string" && (urlMaybe === undefined || urlMaybe === null);
-  const url = isUrlOnly ? (modOrUrl as string) : (urlMaybe as string);
+  const abs = toAbsoluteUrl(url);
+  const req = new NextRequest(abs, { headers: init?.headers });
 
-  const mod = isUrlOnly ? await loadRouteModule(modOrUrl) : await loadRouteModule(modOrUrl);
-
-  if (!mod?.GET) {
-    const k = mod && typeof mod === "object" ? Object.keys(mod) : [];
-    const kd = mod?.default && typeof mod.default === "object" ? Object.keys(mod.default) : [];
-    throw new Error("route_missing_GET keys: mod=" + JSON.stringify(k) + " mod.default=" + JSON.stringify(kd));
+  const mod: any = await importRouteModule(url);
+  if (!mod || typeof mod.GET !== "function") {
+    return { status: 404, body: { ok: false, error: "route_not_found" } };
   }
 
-  const req = new NextRequest(toAbsoluteUrl(url), { headers: init?.headers || {} });
-  const res = await mod.GET(req);
-  const bodyText = await res.text();
-  let json: any = null;
-  try { json = JSON.parse(bodyText); } catch { json = null; }
-  return { status: res.status, headers: toHeadersObj(res.headers), bodyText, json };
-}
+  const res: any = await mod.GET(req);
 
-export function isJsonLike(x: any): boolean {
-  return x !== null && typeof x === "object" && !Array.isArray(x);
+  // NextResponse / Response compatible
+  const status = typeof res?.status === "number" ? res.status : 200;
+  const headers = res?.headers ? headersToObject(res.headers) : undefined;
+
+  const json = await safeReadJson(res);
+  if (json !== null) return { status, body: json, headers };
+
+  const bodyText = await safeReadText(res);
+  return { status, body: bodyText ? { ok: false, raw: bodyText } : { ok: false }, headers, bodyText };
 }
