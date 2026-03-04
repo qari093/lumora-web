@@ -1,0 +1,1 @@
+(Internal) Step 67 fixed: avoid zsh PIPESTATUS access when not in bash.

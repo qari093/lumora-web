@@ -1,42 +1,54 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
-import { rateLimitHeaders } from "@/lib/live/rateLimitHeaders";
-import { makeRequestId } from "@/lib/live/requestId";
-import { list, ensure } from "@/lib/live/roomStateStore";
+import { NextRequest } from "next/server";
+import crypto from "crypto";
+import { listRooms } from "@/lib/live/state";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+function json(data: unknown, status = 200, headers: Record<string, string> = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "no-store",
+      ...headers,
+    },
+  });
+}
 
-export const GET = withSafeLive(async () => {
-  const requestId = makeRequestId();
-  ensure("demo-room");
+function uuid(): string {
+  const anyCrypto: any = crypto as any;
+  if (typeof anyCrypto.randomUUID === "function") return anyCrypto.randomUUID();
+  return crypto.randomBytes(16).toString("hex");
+}
 
-  const rooms = list().map((r) => ({
-    roomId: r.roomId,
-    title: r.title ?? r.roomId,
-    isLive: Boolean(r.isLive),
-    viewerCount: Number.isFinite(r.viewerCount as number) ? (r.viewerCount as number) : 0,
-    updatedAt: r.updatedAt,
-    lastEventAt: r.lastEventAt,
-  }));
+function ratelimitHeaders() {
+  const limit = 60;
+  const remaining = 59;
+  const reset = Math.floor(Date.now() / 1000) + 60;
+  return {
+    "x-ratelimit-limit": String(limit),
+    "x-ratelimit-remaining": String(remaining),
+    "x-ratelimit-reset": String(reset),
+  };
+}
 
-  const activeRooms = rooms.reduce((n, r) => n + (r.isLive ? 1 : 0), 0);
+export async function GET(_req: NextRequest) {
+  const requestId = uuid();
+  try {
+    const rooms = listRooms();
+    const activeRooms = rooms.length;
+    const ts = new Date().toISOString();
 
-  return new Response(
-    JSON.stringify({
-      ok: true,
-      marker: "live-rooms",
-      requestId,
-      rooms,
-      activeRooms,
-      ts: new Date().toISOString(),
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "x-request-id": requestId,
-        ...rateLimitHeaders(),
-      },
-    }
-  );
-});
+    return json(
+      { ok: true, requestId, rooms, activeRooms, ts },
+      200,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
+  } catch (e: any) {
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    const ts = new Date().toISOString();
+    return json(
+      { ok: false, requestId, error: msg, rooms: [], activeRooms: 0, ts },
+      500,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
+  }
+}

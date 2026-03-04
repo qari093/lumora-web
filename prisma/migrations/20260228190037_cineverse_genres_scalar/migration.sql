@@ -1,0 +1,4 @@
+-- NO-OP (dev reset-safe)
+-- This migration previously attempted to CREATE TABLE CineVerseMovie again, which breaks `prisma migrate reset`.
+-- CineVerseMovie is created in the earlier migration and already matches current schema (genres is TEXT).
+-- Keeping this migration as a no-op preserves migration history and makes resets deterministic.

@@ -121,8 +121,8 @@ export default function LiveRoomClient() {
     } catch {}
     setWellnessOpen(false);
   };
-  const [sseOk, setSseOk] = useState<boolean>(false);
-  const [lastSavedAt, setLastSavedAt] = useState<string>("");
+  const [_sseOk, setSseOk] = useState<boolean>(false);
+  const [_lastSavedAt, _setLastSavedAt] = useState<string>("");
   const lastMicPostAtRef = useRef<number>(0);
 
   const didInit = useRef(false);

@@ -1,9 +1,7 @@
 import { LedgerEntry, Wallet } from "./types";
 
 declare global {
-  // eslint-disable-next-line no-var
   var __WALLET_STORE: Map<string, Wallet> | undefined;
-  // eslint-disable-next-line no-var
   var __LEDGER_STORE: Map<string, LedgerEntry> | undefined;
 }
 

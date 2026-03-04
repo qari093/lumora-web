@@ -1,30 +1,62 @@
-import TranslationControlsBar from "@/components/lumalink/TranslationControlsBar";
-// FILE: app/_client/drawers-provider.tsx
-// Optimized DrawersProvider — ensures safe mount, avoids double render and supports deferred hydration
+'use client';
 
-"use client";
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import dynamic from "next/dynamic";
-import { Suspense, useEffect, useState } from "react";
+export type DrawerId =
+  | 'none'
+  | 'nav'
+  | 'share'
+  | 'wallet'
+  | 'settings'
+  | 'profile'
+  | 'portal'
+  | (string & {});
 
-// Lazy import DrawersHost to prevent hydration mismatch on SSR
-const DrawersHost = dynamic(() => import("./drawers-host"), { ssr: false });
+export type DrawerState = {
+  open: boolean;
+  id: DrawerId;
+  payload?: unknown;
+};
 
-export default function DrawersProvider() {
-  const [ready, setReady] = useState(false);
+type Ctx = {
+  state: DrawerState;
+  openDrawer: (id: DrawerId, payload?: unknown) => void;
+  closeDrawer: () => void;
+  toggleDrawer: (id: DrawerId, payload?: unknown) => void;
+};
 
-  useEffect(() => {
-    // slight delay to avoid blocking main thread during hydration
-    const timer = requestAnimationFrame(() => setReady(true));
-    return (
-      {/* Translation UI Controls (feature-flagged) */}
-      {process.env.NEXT_PUBLIC_LUMALINK_TRANSLATION_UI_CONTROLS === "1" ? <TranslationControlsBar /> : null}
-) => cancelAnimationFrame(timer);
+const DrawersContext = createContext<Ctx | null>(null);
+
+export function useDrawers(): Ctx {
+  const v = useContext(DrawersContext);
+  if (!v) throw new Error('useDrawers must be used within <DrawersProvider>');
+  return v;
+}
+
+export default function DrawersProvider({ children }: { children: React.ReactNode }) {
+  const [state, setState] = useState<DrawerState>({ open: false, id: 'none' });
+
+  const openDrawer = useCallback((id: DrawerId, payload?: unknown) => {
+    setState({ open: true, id, payload });
   }, []);
 
-  return (
-    <Suspense fallback={null}>
-      {ready && <DrawersHost />}
-    </Suspense>
-  );
+  const closeDrawer = useCallback(() => {
+    setState((s) => ({ ...s, open: false, id: 'none', payload: undefined }));
+  }, []);
+
+  const toggleDrawer = useCallback((id: DrawerId, payload?: unknown) => {
+    setState((s) => {
+      const willOpen = !(s.open && s.id === id);
+      return willOpen ? { open: true, id, payload } : { ...s, open: false, id: 'none', payload: undefined };
+    });
+  }, []);
+
+  const value = useMemo<Ctx>(() => ({ state, openDrawer, closeDrawer, toggleDrawer }), [
+    state,
+    openDrawer,
+    closeDrawer,
+    toggleDrawer,
+  ]);
+
+  return <DrawersContext.Provider value={value}>{children}</DrawersContext.Provider>;
 }

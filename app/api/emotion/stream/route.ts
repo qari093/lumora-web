@@ -8,8 +8,8 @@ export async function GET(_req: NextRequest) {
   const stream = new TransformStream();
   const writer = stream.writable.getWriter();
 
-  // Fan out from bus to this response
-  const bus = new TransformStream<string, Uint8Array>({
+  // Fan out from _bus to this response
+  const _bus = new TransformStream<string, Uint8Array>({
     transform(chunk, controller) {
       controller.enqueue(new TextEncoder().encode(chunk));
     },

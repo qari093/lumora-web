@@ -1,0 +1,219 @@
+{
+  "ok": false,
+  "cap": 25,
+  "warnings": 30,
+  "hits": [
+    {
+      "file": "app/(diag)/offline-diagnostics/page.tsx",
+      "line": 102,
+      "col": 3,
+      "message": "The 'refresh' function makes the dependencies of useEffect Hook (at line 168) change on every render. To fix this, wrap the definition of 'refresh' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/admin/celebrations/moderation/ParticipantsPanel.tsx",
+      "line": 73,
+      "col": 6,
+      "message": "React Hook useEffect has a missing dependency: 'fetchAudit'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/api/health/route.ts",
+      "line": 1,
+      "col": 10,
+      "message": "'withTelemetry' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/portals/alive/route.ts",
+      "line": 56,
+      "col": 11,
+      "message": "'ok' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/celebrations/[slug]/page.tsx",
+      "line": 25,
+      "col": 3,
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 38) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/creator/review/page.tsx",
+      "line": 23,
+      "col": 3,
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 34) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/me/space/ZENPreview.tsx",
+      "line": 18,
+      "col": 3,
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 36) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/me/space/page.tsx",
+      "line": 1,
+      "col": 8,
+      "message": "'VibeWall' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 2,
+      "col": 15,
+      "message": "'VibeTagLite' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 4,
+      "col": 8,
+      "message": "'VibeTray' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 5,
+      "col": 8,
+      "message": "'VibeStatusBadge' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 47,
+      "col": 7,
+      "message": "'vibeLiteOn' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 50,
+      "col": 10,
+      "message": "'vibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 50,
+      "col": 20,
+      "message": "'setVibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 51,
+      "col": 10,
+      "message": "'vibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 51,
+      "col": 20,
+      "message": "'setVibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 52,
+      "col": 9,
+      "message": "'lastVibeAtRef' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 53,
+      "col": 9,
+      "message": "'cooldownMs' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/LumoraVideoInterface.tsx",
+      "line": 75,
+      "col": 3,
+      "message": "The 'refreshLedger' function makes the dependencies of useEffect Hook (at line 101) change on every render. To fix this, wrap the definition of 'refreshLedger' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/lumaspace/RecorderEngine.tsx",
+      "line": 150,
+      "col": 6,
+      "message": "React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/lumaspace/RecorderEngine.tsx",
+      "line": 155,
+      "col": 6,
+      "message": "React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/lumaspace/RecorderEngine.tsx",
+      "line": 235,
+      "col": 6,
+      "message": "React Hook useCallback has missing dependencies: 'handleError' and 'stopInternal'. Either include them or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/lumaspace/RecorderEngine.tsx",
+      "line": 421,
+      "col": 6,
+      "message": "React Hook useEffect has a missing dependency: 'start'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/portals/AlivePulse.tsx",
+      "line": 18,
+      "col": 10,
+      "message": "'tick' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/components/coin/BalanceCard.tsx",
+      "line": 8,
+      "col": 3,
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 19) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/components/coin/LedgerTable.tsx",
+      "line": 10,
+      "col": 3,
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 21) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/hooks/useEnergy.ts",
+      "line": 73,
+      "col": 6,
+      "message": "React Hook React.useEffect has a missing dependency: 'crew'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/lib/uid.ts",
+      "line": 1,
+      "col": 10,
+      "message": "'cookies' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/uid.ts",
+      "line": 2,
+      "col": 10,
+      "message": "'randomUUID' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/uid.ts",
+      "line": 4,
+      "col": 7,
+      "message": "'COOKIE' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    }
+  ],
+  "command": "pnpm -s build",
+  "ts": 1772013669145
+}

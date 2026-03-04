@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { withLog } from "@/lib/api/wrap";
 import { logInfo } from "@/lib/log";
 

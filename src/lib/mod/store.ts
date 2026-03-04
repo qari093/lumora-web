@@ -15,7 +15,6 @@ export type Report = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __MOD_STORE: Map<string, Report> | undefined;
 }
 const STORE: Map<string, Report> = (globalThis.__MOD_STORE ||= new Map());

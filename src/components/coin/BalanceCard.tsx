@@ -16,7 +16,7 @@ export default function BalanceCard({ userId }: { userId: string }) {
     }
   }
 
-  useEffect(() => { load(); }, [userId]);
+  useEffect(() => { load(); }, [userId, load]);
 
   return (
     <div style={{padding:16,border:"1px solid #333",borderRadius:8}}>

@@ -7,7 +7,6 @@ export default function LiveError(props: { error: Error & { digest?: string }; r
 
   React.useEffect(() => {
     try {
-      // eslint-disable-next-line no-console
       console.error('[LiveError]', error);
     } catch {}
   }, [error]);

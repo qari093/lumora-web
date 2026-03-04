@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const EMOTIONS = ["neutral", "happy", "sad", "angry", "surprised", "focused", "calm"] as const;
-type Emotion = (typeof EMOTIONS)[number];
+type _Emotion = (typeof EMOTIONS)[number];
 
 function safeCode(code: string | null): string | null {
   if (!code) return null;

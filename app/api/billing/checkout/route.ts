@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   let Stripe: any;
   try {
     ({ default: Stripe } = await import("stripe"));
-  } catch (e:any) {
+  } catch (_e: any) {
     return NextResponse.json({ ok:false, error:"STRIPE_SDK_MISSING", message:"Install stripe: npm i stripe", requestId:id }, { status:200, headers:{ "x-request-id": id } });
   }
 
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       metadata: { ownerId, euros: euros.toString(), note }
     });
     return NextResponse.json({ ok:true, url: session.url, id: session.id, requestId:id }, { status:200, headers:{ "x-request-id": id } });
-  } catch (e:any) {
+  } catch (_e: any) {
     return NextResponse.json({ ok:false, error:"STRIPE_ERROR", message:String(e?.message||e), requestId:id }, { status:200, headers:{ "x-request-id": id } });
   }
 }

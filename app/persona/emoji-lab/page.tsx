@@ -60,7 +60,7 @@ export default function EmojiLabPage({
               }}
             >
               <div style={{ fontWeight: 700 }}>{code}</div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {}
               <img
                 src={`/persona/emojis/${code}.svg`}
                 alt={code}

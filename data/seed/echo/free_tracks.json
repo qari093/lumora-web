@@ -1,0 +1,18 @@
+[
+  {
+    "id": "echo_free_001",
+    "title": "Beethoven Symphony No.5",
+    "artist": "Ludwig van Beethoven",
+    "license": "Public Domain",
+    "audioUrl": "https://archive.org/download/BeethovenSymphony5_201603/BeethovenSymphony5.mp3",
+    "genre": "Classical"
+  },
+  {
+    "id": "echo_free_002",
+    "title": "Mozart Eine kleine Nachtmusik",
+    "artist": "Wolfgang Amadeus Mozart",
+    "license": "Public Domain",
+    "audioUrl": "https://archive.org/download/EineKleineNachtmusik_201603/EineKleineNachtmusik.mp3",
+    "genre": "Classical"
+  }
+]

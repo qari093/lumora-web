@@ -78,7 +78,6 @@ class LiveBus {
 
 // Dev hot-reload safe singleton
 declare global {
-  // eslint-disable-next-line no-var
   var __lumoraLiveBus: LiveBus | undefined;
 }
 

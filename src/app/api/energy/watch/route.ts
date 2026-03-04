@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { bearerUid, limit } from "@/lib/security";
+import { bearerUid, limit } from "../../../../lib/security";
 import { award } from "@/lib/energyStore";
 import { addVideoEnergy } from "@/lib/videoEnergyStore";
 import { addEnergyToCrewOf } from "@/lib/crewStore";

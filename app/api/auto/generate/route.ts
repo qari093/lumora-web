@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { addGenerated } from "../../fyp/_store";
 import { pickLocale } from "../../../../lib/locale";
 import { getClientIp, geoByIp, currencyFor } from "../../../../lib/geo";
@@ -21,7 +20,7 @@ export async function POST(req: Request) {
     const locale = pickLocale(req);
     const ip = getClientIp(req);
     const geo = await geoByIp(ip);
-    const hl = locale.lang;
+    const _hl = locale.lang;
     const gl = geo.country || "US";
     const ccy = currencyFor(gl);
 

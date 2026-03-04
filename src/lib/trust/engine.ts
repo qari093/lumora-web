@@ -3,9 +3,7 @@ export type TrustVerdict =
   | { ok: false; reason: "BLOCKED_IP" | "UA_BLOCKED" | "RATE_LIMITED"; flags: string[]; meta: any };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __TRUST_BUCKETS: Map<string, { tokens: number; updatedAt: number }> | undefined;
-  // eslint-disable-next-line no-var
   var __TRUST_STATS: { ipHits: Map<string, number>; uaHits: Map<string, number>; blocks: Map<string, number> } | undefined;
 }
 const BUCKETS: Map<string, { tokens: number; updatedAt: number }> = (globalThis.__TRUST_BUCKETS ||= new Map());

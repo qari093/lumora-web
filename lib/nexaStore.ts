@@ -65,7 +65,7 @@ function user(deviceId: string) {
 // ✅ XP / LEVEL SYSTEM
 //==============================
 export function addXP(deviceId: string, amount: number) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   u.xp += amount;
   const newLevel = Math.floor(u.xp / 100) + 1;
   if (newLevel > u.level) {
@@ -81,7 +81,7 @@ export function addXP(deviceId: string, amount: number) {
 // ✅ HYDRATION TRACKER
 //==============================
 export function addWater(deviceId: string, ml: number) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   u.waterMl += ml;
   u.lastHydrationAt = Date.now();
   if (u.waterMl >= u.waterGoalMl && !u.badges.includes("Hydration Hero")) {
@@ -97,7 +97,7 @@ export function addWater(deviceId: string, ml: number) {
 // ✅ BREATHING SESSION
 //==============================
 export function addBreath(deviceId: string, type: string, seconds: number) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   addXP(deviceId, Math.floor(seconds / 5));
   emit("breath:done", { device: deviceId, type, seconds });
   saveDB();
@@ -108,7 +108,7 @@ export function addBreath(deviceId: string, type: string, seconds: number) {
 // ✅ BADGE SYSTEM
 //==============================
 export function addBadge(deviceId: string, badge: string) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   if (!u.badges.includes(badge)) {
     u.badges.push(badge);
     emit("badge:new", { device: deviceId, badge });
@@ -121,7 +121,7 @@ export function addBadge(deviceId: string, badge: string) {
 // ✅ WEEKLY REFLECTION
 //==============================
 export function weeklyReflect(deviceId: string) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   u.xp += 50;
   u.waterMl = 0;
   emit("weekly:reflect", { device: deviceId, weekXP: 50 });
@@ -133,7 +133,7 @@ export function weeklyReflect(deviceId: string) {
 // ✅ SUMMARY
 //==============================
 export function getSummary(deviceId: string) {
-  const u = user(deviceId);
+  const _u = user(deviceId);
   const pct = Math.min(100, Math.round((u.waterMl / u.waterGoalMl) * 100));
   return {
     ok: true,

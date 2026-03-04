@@ -3,7 +3,6 @@ export type HitKey = { type: HitType; cid: string; rid: string; ip: string; ua: 
 export type HitRecord = { count: number; firstAt: number; lastAt: number; expAt: number };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __AD_TRACK: Map<string, HitRecord> | undefined;
 }
 

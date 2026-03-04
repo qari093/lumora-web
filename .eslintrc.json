@@ -62,5 +62,15 @@
         "Buffer": "readonly"
       }
     }
-  ]
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  }
 }

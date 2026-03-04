@@ -46,7 +46,6 @@ export function GestureLogger(props: GestureLoggerProps = {}) {
       if (onFlush) {
         onFlush(copy);
       } else if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
         console.debug("[GestureLogger] flush", copy.length, "samples", force ? "(forced)" : "");
       }
     };

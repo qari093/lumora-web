@@ -1,8 +1,6 @@
-import { NextResponse } from "next/server";
-
 export function GET(req: Request) {
   const url = new URL(req.url);
-  const origin = url.origin;
+  const _origin = url.origin;
   const js = `(function(){
     function originOf(ref){
       try{ if(!ref) return null; var u=new URL(ref); return u.origin || (u.protocol+"//"+u.host); }catch(e){ return null; }

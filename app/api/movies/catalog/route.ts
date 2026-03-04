@@ -1,26 +1,13 @@
 import { NextResponse } from "next/server";
-import { getSeedMovies, seedMoviesEnabled } from "@/lib/cineverse/seedMovies";
+import { SEED_MOVIES } from "@/lib/movies/catalog";
 
-export const runtime = "nodejs";
-
-export async function GET() {
-  try {
-    const items = getSeedMovies();
-    return NextResponse.json(
-      {
-        ok: true,
-        mode: seedMoviesEnabled() ? "seed" : "disabled",
-        count: items.length,
-        items,
-        ts: Date.now(),
-      },
-      { status: 200, headers: { "Cache-Control": "no-store" } }
-    );
-  } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    return NextResponse.json(
-      { ok: false, error: msg, ts: Date.now() },
-      { status: 500, headers: { "Cache-Control": "no-store" } }
-    );
-  }
+export function GET() {
+  const res = NextResponse.json(
+    { ok: true, ts: Date.now(), count: SEED_MOVIES.length, items: SEED_MOVIES },
+    { status: 200 }
+  );
+  res.headers.set("cache-control", "no-store");
+  res.headers.set("content-type", "application/json; charset=utf-8");
+  res.headers.set("x-lumora-movies", "catalog-v1");
+  return res;
 }

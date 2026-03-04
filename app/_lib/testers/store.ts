@@ -21,7 +21,6 @@ export type StoreShape = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __LUMORA_TESTER_STORE__: StoreShape | undefined;
 }
 

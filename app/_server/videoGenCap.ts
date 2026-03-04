@@ -20,7 +20,7 @@ function capValue(): number {
 
 function utcDay(): string {
   const d = new Date();
-  const y = d.getUTCFullYear();
+  const _y = d.getUTCFullYear();
   const m = String(d.getUTCMonth() + 1).padStart(2, "0");
   const dd = String(d.getUTCDate()).padStart(2, "0");
   return `${y}-${m}-${dd}`;
@@ -45,7 +45,6 @@ async function withLock<T>(fn: () => Promise<T>): Promise<T> {
   const lockDir = lockDirPath();
   for (let i = 0; i < 50; i++) {
     try {
-      // eslint-disable-next-line no-undef
       require("fs").mkdirSync(lockDir);
       break;
     } catch {
@@ -56,7 +55,6 @@ async function withLock<T>(fn: () => Promise<T>): Promise<T> {
     return await fn();
   } finally {
     try {
-      // eslint-disable-next-line no-undef
       require("fs").rmdirSync(lockDir);
     } catch {}
   }
@@ -65,7 +63,6 @@ async function withLock<T>(fn: () => Promise<T>): Promise<T> {
 function readState(): CapState {
   const p = stateFilePath();
   try {
-    // eslint-disable-next-line no-undef
     const fs = require("fs");
     if (!fs.existsSync(p)) return { day: utcDay(), count: 0 };
     const raw = String(fs.readFileSync(p, "utf8") || "").trim();
@@ -81,7 +78,6 @@ function readState(): CapState {
 function writeState(s: CapState) {
   const p = stateFilePath();
   try {
-    // eslint-disable-next-line no-undef
     const fs = require("fs");
     fs.mkdirSync(`${process.cwd()}/ops/_limits`, { recursive: true });
     fs.writeFileSync(p, JSON.stringify(s, null, 2) + "\n", "utf8");
@@ -92,7 +88,7 @@ export type VideoGenCapDecision =
   | { ok: true; remaining: number; cap: number; day: string }
   | { ok: false; remaining: 0; cap: number; day: string; retryAfterSec: number };
 
-export async function enforceVideoGenDailyCap(req: NextRequest): Promise<VideoGenCapDecision> {
+export async function enforceVideoGenDailyCap(_req: NextRequest): Promise<VideoGenCapDecision> {
   if (!isPrivateLaunch()) {
     // no cap in non-private modes
     return { ok: true, remaining: Number.MAX_SAFE_INTEGER, cap: Number.MAX_SAFE_INTEGER, day: utcDay() };

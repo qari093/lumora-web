@@ -1,22 +1,11 @@
-"use client";
-import React, { useState } from "react";
-import HoloPanel from "@/app/_modules/emojis/holo-panel";
-import AvatarBar from "@/app/_modules/avatars/holo-avatar";
+/* FILE: app/(demo)/nexmoji/page.tsx
+   Server wrapper to prevent Next static prerender/export crashes for Nexmoji. */
 
-export default function Page() {
-  const [activeAvatarId, setActiveAvatarId] = useState<string | null>(null);
-  const [prompt, setPrompt] = useState<string>("");
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-  return (
-    <main style={{ padding: 20 }}>
-      <AvatarBar
-        activeId={activeAvatarId}
-        onSelect={(a) => {
-          setActiveAvatarId(a.id);
-          setPrompt(a.mood ? a.mood : a.name);
-        }}
-      />
-      <HoloPanel enablePulse={true} /* externalPrompt={prompt} */ />
-    </main>
-  );
+import NexmojiClient from "./NexmojiClient";
+
+export default function NexmojiPage() {
+  return <NexmojiClient />;
 }

@@ -53,7 +53,8 @@ export function useEnergy(){
   },[]);
 
   // bootstrap
-  React.useEffect(()=>{ refreshMe(); refreshPool(); refreshCrew(); }, [refreshMe, refreshPool, refreshCrew]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(()=>{ refreshMe(); refreshPool(); refreshCrew(); }, [refreshMe, refreshPool, refreshCrew, crew]);
 
   // light global pool polling
   React.useEffect(()=>{ const id = setInterval(()=>refreshPool(), 4000); return ()=>clearInterval(id); }, [refreshPool]);

@@ -1,4 +1,3 @@
-import { prisma } from "@/lib/prisma";
 /**
  * Wallet compatibility surface for API routes.
  *
@@ -246,17 +245,7 @@ export type WalletHistory = {
   ts: number;
 };
 
-function decToString(v: any): string {
-  if (v == null) return "0";
-  if (typeof v === "string") return v;
-  if (typeof v === "number") return String(v);
-  if (typeof v === "bigint") return v.toString();
-  // Prisma Decimal has toString()
-  if (typeof v?.toString === "function") return v.toString();
-  return "0";
-}
-
-async function findPrimaryWallet(ownerId: string) {
+async function _findPrimaryWallet(ownerId: string) {
   // Support multiple possible schemas by probing.
   // 1) Wallet model: { id, ownerId, currency, available, pending } or similar
   // 2) WalletBalance table or Ledger-derived balance

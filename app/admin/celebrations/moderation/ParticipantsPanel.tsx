@@ -62,6 +62,7 @@ export default function ParticipantsPanel({ auditUrl }: { auditUrl?: string }) {
     }
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchAudit();
     // soft auto-refresh every 10s; safe alongside page-level refresh
@@ -69,12 +70,14 @@ export default function ParticipantsPanel({ auditUrl }: { auditUrl?: string }) {
     return () => {
       if (timer.current) window.clearInterval(timer.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   const totals: AuditTotals = data?.totals || {};
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const participants = (data?.participants || []) as AuditRow[];
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const reactions = (data?.reactions || []) as AuditRow[];
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const rewards = (data?.rewards || []) as AuditRow[];
 
   const btn = { padding: "8px 12px", borderRadius: 10, border: "1px solid rgba(255,255,255,.2)", background: "rgba(255,255,255,.06)", fontWeight: 800, cursor: "pointer" } as const;

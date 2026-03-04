@@ -101,6 +101,12 @@ const PATHS: Array<{ path: string; name: string }> = [
 ];
 
 describe("portals: route smoke", () => {
+  const __NET = process.env.LUMORA_SMOKE_NETWORK === "1";
+  if (!__NET) {
+    it.skip("network smoke disabled (set LUMORA_SMOKE_NETWORK=1 to enable)", () => {});
+    return;
+  }
+
   // LUMORA_PORTALS_WARMUP_V2
   beforeAll(async () => {
     await __warmup(BASE + "/api/health", 60000);

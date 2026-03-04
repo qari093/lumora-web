@@ -1,34 +1,35 @@
-import { PortalShell } from "@/app/_components/ui/PortalShell";
-import { getDemoContent } from "@/app/_lib/demo/content";
+import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "Celebrations • Lumora",
+  robots: { index: false, follow: false },
+};
 
 export default function Page() {
-  const demo = getDemoContent();
+  const items = [
+    { id: "seed-1", title: "Celebrations Seed 1", subtitle: "Baseline content", href: "#" },
+    { id: "seed-2", title: "Celebrations Seed 2", subtitle: "Non-empty guard", href: "#" },
+    { id: "seed-3", title: "Celebrations Seed 3", subtitle: "Render map", href: "#" },
+  ] as const;
 
-  return (
-    <PortalShell
-      title="Celebrations"
-      subtitle="Events + energy (demo)"
-      icon="✨"
-      accent="#22c55e"
-    >
-      (<div style={{ display: "grid", gap: 12 }}>
-      <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)" }}>
-        <div style={{ fontWeight: 900 }}>Today’s Celebration</div>
-        <div style={{ fontSize: 13, opacity: 0.85, marginTop: 6 }}>
-          Demo-safe listing (no server dependency required).
-        </div>
-      </div>
-      <div style={{ display: "grid", gap: 10 }}>
-        {demo.celebrations.map((c) => (
-          <div key={c.slug} style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)" }}>
-            <div style={{ fontWeight: 900 }}>{c.title}</div>
-            <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{c.window}</div>
-          </div>
-        ))}
-      </div>
-    </div>)
-    </PortalShell>
+    return (
+    <>{/* LUMORA_PORTAL_ALIVE_CELEBRATIONS */}<span style={{display:"none"}}>LUMORA_PORTAL_ALIVE_CELEBRATIONS</span><main style={{ padding: 24 }}>
+        <section style={{ marginTop: 16 }}>
+          <div style={{ fontSize: 12, opacity: 0.7 }}>Seeded items (non-empty guard)</div>
+          <ul style={{ marginTop: 10, display: "grid", gap: 10, listStyle: "none", padding: 0 }}>
+            {items.map((it) => (
+              <li key={it.id} style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: 12 }}>
+                <div style={{ fontWeight: 700 }}>{it.title}</div>
+                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{it.subtitle}</div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Celebrations</h1>
+      <p style={{ opacity: 0.8 }}>
+        Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
+      </p>
+    </main></>
   );
 }

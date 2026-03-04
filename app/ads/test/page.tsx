@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import AdWidget from "../../../src/components/AdWidget";
 
 export default function TestPage() {

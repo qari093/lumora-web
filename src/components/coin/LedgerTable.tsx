@@ -18,7 +18,7 @@ export default function LedgerTable({ userId, limit=10 }: { userId: string; limi
     }
   }
 
-  useEffect(() => { load(); }, [userId, limit]);
+  useEffect(() => { load(); }, [userId, limit, load]);
 
   return (
     <div style={{padding:16,border:"1px solid #333",borderRadius:8}}>

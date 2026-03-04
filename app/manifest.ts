@@ -5,15 +5,13 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Lumora",
     short_name: "Lumora",
     description: "Your Space… Your Pace.",
-    start_url: "/?source=a2hs",
-    scope: "/",
+    start_url: "/",
     display: "standalone",
     background_color: "#000000",
-    theme_color: "#00B3FF",
+    theme_color: "#0A0A0A",
     icons: [
-      { src: "/pwa/icon-192.png", sizes: "192x192", type: "image/png" },
-      { src: "/pwa/icon-512.png", sizes: "512x512", type: "image/png" },
-      { src: "/pwa/maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+      { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" }
     ]
   };
 }

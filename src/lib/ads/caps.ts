@@ -6,7 +6,6 @@ export type CapVerdict = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __AD_CAPS: Map<string, { last: number; hourHits: number; dayHits: number; hourStart: number; dayStart: number }> | undefined;
 }
 

@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
-import { Heart, MessageCircle, Gift, Users, Volume2, VolumeX, Sparkles, Crown, Gamepad2, Target, Home, Share2 } from "lucide-react";
+import React, { useState } from "react";
+
 
 export default function LumoraVideoPro({ room = "main-room" }: { room?: string }) {
   const [coins, setCoins] = useState(640);

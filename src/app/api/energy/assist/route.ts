@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { bearerUid, limit } from "@/lib/security";
+import { bearerUid, limit } from "../../../../lib/security";
 import { snapshotMe } from "@/lib/energyStore";
 import { getRedis } from "@/lib/redis";
 import { addVideoEnergy } from "@/lib/videoEnergyStore";

@@ -67,7 +67,7 @@ export default async function PersonaLabPage({
             }}
           >
             <div style={{ fontWeight: 700, textTransform: "capitalize" }}>{e}</div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            {}
             <img
               src={`/persona/avatars/${e}/${code}.svg`}
               alt={`${code} ${e}`}

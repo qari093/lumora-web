@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
  * DEV-ONLY: resets anonymous tester identity and clears any in-memory
  * event stores if present. This must not be usable in production.
  */
-export async function POST(req: NextRequest) {
+export async function POST(_req: NextRequest) {
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
   }

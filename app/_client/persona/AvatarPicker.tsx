@@ -130,7 +130,7 @@ export default function AvatarPicker({ selected = null, onSelect }: AvatarPicker
                 active ? "ring-2 ring-black" : "ring-0",
               ].join(" ")}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {}
               <img
                 src={url}
                 alt={f}

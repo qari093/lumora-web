@@ -29,3 +29,6 @@ export const fonts = {
   label: { variable: "" },
   code: { variable: "" },
 } as const;
+
+// Added for Next build: keep legacy layout import stable
+export const _meta = meta;

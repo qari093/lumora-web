@@ -12,7 +12,6 @@ function fallbackProfile(personaCode: string): Profile {
 
 async function tryPrismaProfile(personaCode: string): Promise<Profile | null> {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require("@/src/lib/prisma");
     const prisma = (mod?.prisma ?? mod?.default ?? null) as any;
     if (!prisma) return null;

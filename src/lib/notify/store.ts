@@ -18,9 +18,7 @@ export type Notification = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var __NOTIFY_SUBS: Map<string, Subscription> | undefined;
-  // eslint-disable-next-line no-var
   var __NOTIFY_INBOX: Map<string, Notification> | undefined;
 }
 const SUBS: Map<string, Subscription> = (globalThis.__NOTIFY_SUBS ||= new Map());

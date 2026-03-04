@@ -1,68 +1,137 @@
-import React from "react";
-import TranslationControlsBar from "@/components/lumalink/TranslationControlsBar";
+'use client';
 
-type Tone = "formal" | "neutral" | "informal";
+import React, { useMemo } from 'react';
 
-export default function TranslationControlsBar() {
-  const enabled = process.env.NEXT_PUBLIC_LUMALINK_TRANSLATION_UI === "1";
-  if (!enabled) return null;
+export type LumaLinkTone = 'neutral' | 'formal' | 'informal';
+
+export type TranslationControlsValue = {
+  enabled: boolean;
+  autoDetect: boolean;
+  from: string; // BCP-47 or short code (e.g., "en", "de")
+  to: string;
+  tone: LumaLinkTone;
+};
+
+export type TranslationControlsBarProps = {
+  value: TranslationControlsValue;
+  onChange: (next: TranslationControlsValue) => void;
+  languages?: Array<{ code: string; label: string }>;
+  className?: string;
+};
+
+const DEFAULT_LANGS: Array<{ code: string; label: string }> = [
+  { code: 'auto', label: 'Auto' },
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'fr', label: 'Français' },
+  { code: 'es', label: 'Español' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'pt', label: 'Português' },
+  { code: 'ar', label: 'العربية' },
+  { code: 'ur', label: 'اردو' },
+  { code: 'hi', label: 'हिन्दी' },
+];
+
+function clampTone(t: string): LumaLinkTone {
+  if (t === 'formal' || t === 'informal' || t === 'neutral') return t;
+  return 'neutral';
+}
+
+export function TranslationControlsBar(props: TranslationControlsBarProps) {
+  const { value, onChange, className } = props;
+  const langs = useMemo(() => props.languages?.length ? props.languages : DEFAULT_LANGS, [props.languages]);
+
+  const set = (patch: Partial<TranslationControlsValue>) => onChange({ ...value, ...patch });
+
+  const fromOptions = langs.filter((l) => l.code !== 'auto');
+  const toOptions = langs.filter((l) => l.code !== 'auto');
 
   return (
-      {/* Translation UI Controls (feature-flagged) */}
-      {process.env.NEXT_PUBLIC_LUMALINK_TRANSLATION_UI_CONTROLS === "1" ? (
-        <TranslationControlsBar />
-      ) : null}
-
     <div
-      data-testid="lumalink-translation-controls"
+      className={className}
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 12,
-        padding: "6px 10px",
-        borderRadius: 10,
-        border: "1px solid rgba(255,255,255,0.10)",
-        background: "rgba(255,255,255,0.04)",
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        padding: '10px 12px',
+        borderRadius: 14,
+        border: '1px solid rgba(255,255,255,0.12)',
+        background: 'rgba(10,12,18,0.35)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
       }}
+      aria-label="Translation controls"
     >
       {/* Left: language control */}
-      <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
-        <label style={{ display: "flex", alignItems: "center", gap: 6, whiteSpace: "nowrap" }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
           <input
             type="checkbox"
-            defaultChecked
-            aria-label="Auto-detect language"
-            disabled
+            checked={value.enabled}
+            onChange={(e) => set({ enabled: e.target.checked })}
+            aria-label="Enable translation"
           />
-          <span style={{ fontSize: 12, opacity: 0.85 }}>Auto</span>
+          <span style={{ fontSize: 12, opacity: 0.9 }}>Translate</span>
         </label>
 
-        <select aria-label="From language" disabled style={{ fontSize: 12, opacity: 0.85 }}>
-          <option value="auto">From: Auto</option>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+          <input
+            type="checkbox"
+            checked={value.autoDetect}
+            onChange={(e) => set({ autoDetect: e.target.checked })}
+            aria-label="Auto-detect language"
+            disabled={!value.enabled}
+          />
+          <span style={{ fontSize: 12, opacity: value.enabled ? 0.9 : 0.45 }}>Auto</span>
+        </label>
+
+        <select
+          value={value.from}
+          onChange={(e) => set({ from: e.target.value })}
+          disabled={!value.enabled || value.autoDetect}
+          aria-label="From language"
+          style={{ flex: 1, minWidth: 90, maxWidth: 170 }}
+        >
+          {fromOptions.map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.label}
+            </option>
+          ))}
         </select>
 
-        <select aria-label="To language" disabled style={{ fontSize: 12, opacity: 0.85 }}>
-          <option value="en">To: EN</option>
-          <option value="de">To: DE</option>
-          <option value="fr">To: FR</option>
-          <option value="es">To: ES</option>
+        <span style={{ opacity: 0.6, fontSize: 12 }}>→</span>
+
+        <select
+          value={value.to}
+          onChange={(e) => set({ to: e.target.value })}
+          disabled={!value.enabled}
+          aria-label="To language"
+          style={{ flex: 1, minWidth: 90, maxWidth: 170 }}
+        >
+          {toOptions.map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.label}
+            </option>
+          ))}
         </select>
       </div>
 
       {/* Right: tone control */}
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 12, opacity: 0.85, whiteSpace: 'nowrap' }}>Tone</span>
         <select
-          aria-label="Translation tone"
-          defaultValue={"neutral" as Tone}
-          disabled
-          style={{ fontSize: 12, opacity: 0.85 }}
+          value={value.tone}
+          onChange={(e) => set({ tone: clampTone(e.target.value) })}
+          disabled={!value.enabled}
+          aria-label="Tone"
         >
-          <option value="formal">Formal</option>
           <option value="neutral">Neutral</option>
+          <option value="formal">Formal</option>
           <option value="informal">Informal</option>
         </select>
       </div>
     </div>
   );
 }
+
+export default TranslationControlsBar;

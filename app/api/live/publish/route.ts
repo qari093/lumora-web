@@ -1,55 +1,69 @@
-import { NextResponse } from "next/server";
-import { publish } from "@/lib/live/sseBus";
-import {
-  ensureRoom,
-  bumpRoomLastEventAt,
-} from "@/lib/live/roomStateStore";
+import { NextRequest } from "next/server";
+import crypto from "crypto";
+import { publish, getRoomState } from "@/lib/live/state";
 
-function json(ok: boolean, body: any, status = 200) {
-  return NextResponse.json(
-    { ok, ...body, ts: new Date().toISOString() },
-    { status }
-  );
+function json(data: unknown, status = 200, headers: Record<string, string> = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "no-store",
+      ...headers,
+    },
+  });
 }
 
-export async function POST(req: Request) {
+function uuid(): string {
+  const anyCrypto: any = crypto as any;
+  if (typeof anyCrypto.randomUUID === "function") return anyCrypto.randomUUID();
+  return crypto.randomBytes(16).toString("hex");
+}
+
+function ratelimitHeaders() {
+  const limit = 60;
+  const remaining = 59;
+  const reset = Math.floor(Date.now() / 1000) + 60;
+  return {
+    "x-ratelimit-limit": String(limit),
+    "x-ratelimit-remaining": String(remaining),
+    "x-ratelimit-reset": String(reset),
+  };
+}
+
+function toISO(ms: number): string | null {
+  if (!ms || ms <= 0) return null;
+  return new Date(ms).toISOString();
+}
+
+export async function POST(req: NextRequest) {
+  const requestId = uuid();
   try {
-    const ctype = String(req.headers.get("content-type") || "");
-    if (!ctype.toLowerCase().includes("application/json")) {
-      return json(false, { error: { code: "BAD_REQUEST", message: "content-type must be application/json" } }, 400);
-    }
+    const body = (await req.json().catch(() => ({}))) as any;
+    const roomId = String(body?.roomId || body?.roomid || "demo-room").trim() || "demo-room";
 
-    const raw = await req.json().catch(() => null);
-    const roomId = String(raw?.roomId || "").trim();
-    if (!roomId) {
-      return json(false, { error: { code: "BAD_REQUEST", message: "roomId is required" } }, 400);
-    }
+    publish(roomId, { kind: "event" });
 
-    const kind = (raw?.kind === "event" || raw?.kind === "keepalive" || raw?.kind === "connected")
-      ? raw.kind
-      : "event";
+    const r = getRoomState(roomId);
 
-    const payload = (raw && typeof raw === "object")
-      ? (raw.payload ?? raw.data ?? null)
-      : null;
-
-    // Ensure room exists and bump lastEventAt for publish contract
-    ensureRoom(roomId);
-    bumpRoomLastEventAt(roomId);
-
-    // Broadcast SSE event
-    const evt = publish(roomId, "event", {
-      kind,
-      payload,
-    });
-
-    return json(true, {
-      marker: "live-publish",
-      roomId,
-      kind: "event",
-      event: evt,
-    });
+    return json(
+      {
+        ok: true,
+        requestId,
+        roomId: r.id,
+        roomid: r.id,
+        updatedAt: r.updatedAt,
+        lastPublishAt: r.lastPublishAt,
+        lastEventAt: toISO(r.lastEventAt),
+      },
+      200,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
   } catch (e: any) {
-    return json(false, { error: { code: "LIVE_PUBLISH_ERROR", message: String(e?.message || e || "unknown") } }, 500);
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    return json(
+      { ok: false, requestId, error: msg },
+      500,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
   }
 }

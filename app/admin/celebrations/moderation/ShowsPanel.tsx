@@ -6,7 +6,7 @@ function openShowsCsv(slug: string){
   }catch{}
 }
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 type Show = {
@@ -37,7 +37,7 @@ const btn = {
 } as const;
 
 export default function ShowsPanel({ slug, apiBase }:{ slug:string; apiBase:string }) {
-  const router = useRouter();
+  const _router = useRouter();
   const [shows, setShows] = useState<Show[]>([]);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -51,13 +51,13 @@ export default function ShowsPanel({ slug, apiBase }:{ slug:string; apiBase:stri
   const [loading, setLoading] = useState(false);
   const base = apiBase || `/api/celebrations/${slug}/shows`;
 
-  async function refresh() {
+  const refresh = useCallback(async () => {
     const r = await fetch(base, { cache:"no-store" });
     const j = await r.json();
     if (j?.ok) setShows(j.shows);
-  }
+  }, [base]);
 
-  useEffect(() => { refresh(); }, []);
+  useEffect(() => { refresh(); }, [refresh]);
 
   function combineISO(d:string, t:string) {
     if (!d || !t) return null;

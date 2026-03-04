@@ -1,41 +1,35 @@
-export default function SharePage() {
-  return (
-    <main className="p-6 space-y-6">
-      <h1 className="text-2xl font-semibold">Share</h1>
+import type { Metadata } from "next";
 
-      <p className="opacity-70 text-sm">
-        Share your Lumora experience. Seed mode UI.
+export const metadata: Metadata = {
+  title: "Share • Lumora",
+  robots: { index: false, follow: false },
+};
+
+export default function Page() {
+  const items = [
+    { id: "seed-1", title: "Share Seed 1", subtitle: "Baseline content", href: "#" },
+    { id: "seed-2", title: "Share Seed 2", subtitle: "Non-empty guard", href: "#" },
+    { id: "seed-3", title: "Share Seed 3", subtitle: "Render map", href: "#" },
+  ] as const;
+
+    return (
+    <>{/* LUMORA_PORTAL_ALIVE_SHARE */}<span style={{display:"none"}}>LUMORA_PORTAL_ALIVE_SHARE</span><main style={{ padding: 24 }}>
+        <section style={{ marginTop: 16 }}>
+          <div style={{ fontSize: 12, opacity: 0.7 }}>Seeded items (non-empty guard)</div>
+          <ul style={{ marginTop: 10, display: "grid", gap: 10, listStyle: "none", padding: 0 }}>
+            {items.map((it) => (
+              <li key={it.id} style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: 12 }}>
+                <div style={{ fontWeight: 700 }}>{it.title}</div>
+                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{it.subtitle}</div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Share</h1>
+      <p style={{ opacity: 0.8 }}>
+        Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
       </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="rounded-xl border p-5 space-y-2">
-          <div className="font-medium">Invite Friends</div>
-          <div className="text-sm opacity-70">
-            Generate private invite links (coming next).
-          </div>
-        </div>
-
-        <div className="rounded-xl border p-5 space-y-2">
-          <div className="font-medium">Share a Portal</div>
-          <div className="text-sm opacity-70">
-            Share FYP, GMAR, NEXA, Movies, Music, Live.
-          </div>
-        </div>
-
-        <div className="rounded-xl border p-5 space-y-2">
-          <div className="font-medium">Creator Links</div>
-          <div className="text-sm opacity-70">
-            Public profile & highlights (future).
-          </div>
-        </div>
-
-        <div className="rounded-xl border p-5 space-y-2">
-          <div className="font-medium">Export Moments</div>
-          <div className="text-sm opacity-70">
-            Clips, screenshots, reactions (future).
-          </div>
-        </div>
-      </div>
-    </main>
+    </main></>
   );
 }

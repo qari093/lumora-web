@@ -1,18 +1,8 @@
+import { PORTALS } from "@/core/portals";
 import Link from "next/link";
 import { PORTAL_STATUS } from "@/lib/portals/status";
 import PortalStatusBadge from "@/components/portals/PortalStatusBadge";
-
-const PORTALS = [
-  { id: "fyp", title: "FYP", href: "/fyp" },
-  { id: "videos", title: "Videos", href: "/videos" },
-  { id: "gmar", title: "GMAR", href: "/gmar" },
-  { id: "nexa", title: "NEXA", href: "/nexa" },
-  { id: "movies", title: "Movies", href: "/movies" },
-  { id: "music", title: "Music", href: "/music" },
-  { id: "live", title: "Live", href: "/live" },
-  { id: "share", title: "Share", href: "/share" }
-];
-
+const _portals = PORTALS;
 export default function PortalsHubPage() {
   return (
     <main className="p-6 space-y-6">

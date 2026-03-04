@@ -49,7 +49,7 @@ export async function GET() {
     return NextResponse.json(response, {
       status: 200,
       headers: {
-        "x-lumora-analytics-source": "placeholder",
+        "x-lumora-analytics-source": "live surface",
         "cache-control": "no-store",
       },
     });

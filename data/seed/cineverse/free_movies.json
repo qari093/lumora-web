@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cine_free_001",
+    "title": "Night of the Living Dead (1968)",
+    "source": "public_domain",
+    "license": "Public Domain",
+    "videoUrl": "https://archive.org/download/night_of_the_living_dead/night_of_the_living_dead_512kb.mp4",
+    "resolution": null,
+    "category": "Movies"
+  },
+  {
+    "id": "cine_free_002",
+    "title": "The General (1926)",
+    "source": "public_domain",
+    "license": "Public Domain",
+    "videoUrl": "https://archive.org/download/TheGeneral1926/TheGeneral1926_512kb.mp4",
+    "resolution": null,
+    "category": "Movies"
+  }
+]

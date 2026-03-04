@@ -13,7 +13,7 @@ async function worldIdByEmail(email: string){
   return world.id;
 }
 
-async function getWorldIdByEmail(email: string) {
+async function _getWorldIdByEmail(email: string) {
   let user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
     user = await prisma.user.create({ data: { email } });

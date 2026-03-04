@@ -7,8 +7,6 @@ datasource db {
   url      = env("DATABASE_URL") // dev: file:./prisma/dev.db
 }
 
-
-
 model CelebrationEIRollup5m {
   id            String      @id @default(cuid())
   celebrationId String
@@ -21,6 +19,7 @@ model CelebrationEIRollup5m {
   @@unique([celebrationId, windowStart])
   @@index([windowStart])
 }
+
 model EmotionIndexDaily {
   id           String      @id @default(cuid())
   day          DateTime
@@ -32,6 +31,7 @@ model EmotionIndexDaily {
   @@unique([day, emotion])
   @@index([emotion, day])
 }
+
 model Account {
   id           String              @id // user id (text in SQLite)
   balance      Int                 @default(0)
@@ -115,9 +115,6 @@ model EmotionEvent {
   @@index([emotion])
 }
 
-
-
-
 model EmotionMarketTick {
   id            String       @id @default(cuid())
   ts            DateTime     @default(now())
@@ -189,6 +186,8 @@ model User {
   celebrationRewards      CelebrationReward[]      @relation("UserRewards")
   celebrationStreak       CelebrationStreak?       @relation("UserStreak")
   celebrationBadges       CelebrationBadge[]       @relation("UserBadges")
+
+  vibeTransactions VibeTransaction[]
 }
 
 // === Celebrations (v1) ===
@@ -294,7 +293,6 @@ model CelebrationParticipant {
   @@index([userId, joinedAt])
 }
 
-
 model CelebrationReaction {
   id            String       @id @default(cuid())
   celebrationId String
@@ -310,9 +308,6 @@ model CelebrationReaction {
   @@index([celebrationId, createdAt])
   @@index([userId, createdAt])
 }
-
-
-
 
 model CelebrationReward {
   id            String      @id @default(cuid())
@@ -350,9 +345,8 @@ model CelebrationBadge {
 }
 
 model AdminCelebrationControls {
-  id        Int      @id @default(1)
-  config    Json?
-  
+  id     Int   @id @default(1)
+  config Json?
 }
 
 model GlobalNowLiveTicker {
@@ -512,10 +506,10 @@ model Aura {
 }
 
 model ShadowGarden {
-  id        String     @id @default(cuid())
-  entries   Json
-  
-  world     UserWorld?
+  id      String @id @default(cuid())
+  entries Json
+
+  world UserWorld?
 }
 
 model ZenLink {
@@ -584,6 +578,7 @@ model EmmlSnapshot {
   indicesJson    Json
   marketsJson    Json
   metaJson       Json
+
   @@map("emml_snapshot")
 }
 
@@ -661,7 +656,6 @@ model PersonaAsset {
   sortOrder Int              @default(0)
   meta      Json?
 
-  
   updatedAt DateTime @updatedAt
 
   profileAvatars PersonaProfile @relation("PersonaProfileAvatars", fields: [profileId], references: [id], onDelete: Cascade)
@@ -686,7 +680,6 @@ model PersonaReactionMapping {
   isActive  Boolean             @default(true)
   meta      Json?
 
-  
   updatedAt DateTime @updatedAt
 
   profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -752,9 +745,9 @@ model VideoGenJob {
 }
 
 model Wallet {
-  id        String  @id @default(cuid())
-  userId    String  @unique
-  credits   Int     @default(0)
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  credits   Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -762,31 +755,118 @@ model Wallet {
 }
 
 model WalletLedger {
-  id          String   @id @default(cuid())
-  walletId    String
-  userId      String
-  direction   String   // credit | debit
-  amount      Int
-  source      String   // stripe | system | manual
-  refId       String   // stripeSession / internal ref
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  walletId  String
+  userId    String
+  direction String // credit | debit
+  amount    Int
+  source    String // stripe | system | manual
+  refId     String // stripeSession / internal ref
+  createdAt DateTime @default(now())
 
   wallet Wallet @relation(fields: [walletId], references: [id])
 
-  @@index([userId])
   @@unique([source, refId]) // idempotency guard
+  @@index([userId])
 }
 
 model StripeCheckoutSession {
-  id             String   @id @default(cuid())
-  userId         String
-  credits        Int
-  stripeSession  String   @unique
-  status         String   @default("created") // created | paid | fulfilled | canceled | failed
-  currency       String?  @default("eur")
-  amountCents    Int?     // optional: store amount for audit
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id            String   @id @default(cuid())
+  userId        String
+  credits       Int
+  stripeSession String   @unique
+  status        String   @default("created") // created | paid | fulfilled | canceled | failed
+  currency      String?  @default("eur")
+  amountCents   Int? // optional: store amount for audit
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([userId, createdAt])
 }
+
+// --- Vibe Tags Lite (auto-added) ---
+enum VibeCategory {
+  AWE
+  WARMTH
+  ENERGY
+  INSIGHT
+}
+
+enum VibeRarity {
+  CORE
+  SEASONAL
+  EARNED
+}
+
+model VibeTag {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  label     String
+  category  VibeCategory
+  intensity Int          @default(3) // 1..5
+  rarity    VibeRarity   @default(CORE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  transactions VibeTransaction[]
+}
+
+model VibeTransaction {
+  id        String       @id @default(cuid())
+  userId    String
+  videoId   String
+  vibeId    String
+  category  VibeCategory
+  createdAt DateTime     @default(now())
+
+  // Lite telemetry (safe, optional)
+  watchMs   Int? // session duration before tagging (ms)
+  entropy   Float? // anti-spam heuristic score
+  isPassive Boolean @default(false)
+
+  vibe VibeTag @relation(fields: [vibeId], references: [id], onDelete: Cascade)
+  user User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, videoId, vibeId])
+  @@index([userId, createdAt])
+  @@index([videoId, createdAt])
+  @@index([vibeId, createdAt])
+}
+
+model CineverseMovie__DISABLED {
+  id          String   @id
+  title       String
+  source      String
+  license     String
+  videoUrl    String
+  resolution  String
+  category    String
+  createdAt   DateTime @default(now())
+
+  @@ignore
+}
+
+
+model EchoTrack {
+  id        String   @id
+  title     String
+  artist    String
+  license   String
+  audioUrl  String
+  genre     String
+  createdAt DateTime @default(now())
+}
+
+model CineVerseMovie {
+  id        String   @id
+  title     String
+  source    String
+  license   String
+  videoUrl  String
+  resolution String?
+  category  String?
+  createdAt DateTime @default(now())
+
+  @@map("CineverseMovie")
+}
+

@@ -57,7 +57,7 @@ export function avatarSvg(seed: string, size: number = 160): string {
   const cx = Math.floor(size * 0.5);
   const cy = Math.floor(size * 0.46);
 
-  const eyeX = Math.floor(size * 0.28);
+  const _eyeX = Math.floor(size * 0.28);
   const eyeY = Math.floor(size * 0.43);
   const eyeDX = Math.floor(size * 0.18);
 

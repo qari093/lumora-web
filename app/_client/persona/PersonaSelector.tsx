@@ -100,7 +100,6 @@ export default function PersonaSelector() {
           <div className="text-sm font-medium">Selected</div>
           <div className="mt-3 aspect-square w-full overflow-hidden rounded-xl border bg-black/20">
             {avatars.find((a) => a.code === selected)?.url ? (
-              // eslint-disable-next-line @next/next/no-img-element
               <img
                 alt={selected}
                 src={avatars.find((a) => a.code === selected)!.url}
@@ -132,7 +131,7 @@ export default function PersonaSelector() {
                   )}
                   onClick={() => setSelected(a.code)}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {}
                   <img alt={a.code} src={a.url} className="h-full w-full object-cover" />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-black/50 px-1 py-0.5 text-[10px] text-white/90 opacity-0 transition-opacity group-hover:opacity-100">
                     {a.code}

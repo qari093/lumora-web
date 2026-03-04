@@ -4,7 +4,6 @@ import { getCampaign, setState } from "@/src/lib/vendor/campaign";
 import { computeCampaignSpendEuros } from "@/src/lib/vendor/campaign_spend";
 
 declare global {
-  // eslint-disable-next-line no-var
   var __AD_PAUSED: Set<string> | undefined;
 }
 const PAUSED: Set<string> = (globalThis.__AD_PAUSED ||= new Set());

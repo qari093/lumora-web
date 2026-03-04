@@ -1,10 +1,56 @@
+import * as React from "react";
+import type { VibeTagLite } from "@/lib/vibe/coreTags";
+import { vibeTagsLiteEnabled } from "@/lib/flags/vibeTags";
+import VibeTray from "@/components/vibe/VibeTray";
+import VibeStatusBadge from "@/components/vibe/VibeStatusBadge";
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { Heart, Gift, Sparkles, Users, Volume2, VolumeX, Gamepad2 } from "lucide-react";
+import { Heart, Users, Volume2, VolumeX, Gamepad2 } from "lucide-react";
+import VibeTrayMount from "@/components/vibe/VibeTrayMount";
 
 type Ledger = { total: number; value: number };
 
 export default function LumoraVideoInterface({ room }: { room: string }) {
+  
+  const [vibeWatchMs, setVibeWatchMs] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    /* VIBE_WATCHMS_VIDEO_WIRE */
+    // Best-effort: find nearest <video> under this component and derive watchMs from currentTime.
+    // If the UI changes later, this remains safe (no throw).
+    const root = (typeof document !== "undefined") ? document : null;
+    if (!root) return;
+    const pickVideo = (): HTMLVideoElement | null => {
+      // Prefer a video within the component subtree if a data hook exists; else fallback to first video.
+      const hooked = root.querySelector("video[data-lumora-video='1']") as any;
+      if (hooked && hooked.tagName === "VIDEO") return hooked;
+      const v = root.querySelector("video") as any;
+      return v && v.tagName === "VIDEO" ? v : null;
+    };
+    const video = pickVideo();
+    if (!video) return;
+    const onTime = () => {
+      const ms = Math.max(0, Math.floor((Number(video.currentTime) || 0) * 1000));
+      setVibeWatchMs(ms);
+    };
+    // Initialize + subscribe
+    onTime();
+    video.addEventListener("timeupdate", onTime);
+    video.addEventListener("loadedmetadata", onTime);
+    video.addEventListener("seeked", onTime);
+    return () => {
+      video.removeEventListener("timeupdate", onTime);
+      video.removeEventListener("loadedmetadata", onTime);
+      video.removeEventListener("seeked", onTime);
+    };
+  }, []);
+const vibeLiteOn = React.useMemo(() => {
+    try { return vibeTagsLiteEnabled(); } catch { return false; }
+  }, []);
+  const [vibeOpen, setVibeOpen] = React.useState(false);
+  const [vibeBusy, setVibeBusy] = React.useState(false);
+  const lastVibeAtRef = React.useRef<number>(0);
+  const cooldownMs = 3000;
   const [zencoins, setZencoins] = useState(640);
   const [isLiked, setIsLiked] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -52,7 +98,7 @@ export default function LumoraVideoInterface({ room }: { room: string }) {
     }
   }
 
-  useEffect(() => { refreshLedger(); }, [room]);
+  useEffect(() => { refreshLedger(); }, [room, refreshLedger]);
 
   return (
     <div className="h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex flex-col relative overflow-hidden text-white">
@@ -123,6 +169,7 @@ export default function LumoraVideoInterface({ room }: { room: string }) {
           <div key={n.id} className="bg-black/80 px-4 py-2 rounded-full text-sm">{n.message}</div>
         ))}
       </div>
-    </div>
+          <VibeTrayMount userId={"me"} videoId={"video_current"} watchMs={vibeWatchMs} />
+</div>
   );
 }

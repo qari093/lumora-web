@@ -1,55 +1,86 @@
-export type ResolutionBucket = {
-  label: string
-  count: number
-  bytes: number
-  lastSeen: number
-}
+export type ResolutionDistItem = {
+  label: string;
+  count: number;
+  bytes: number;
+};
 
-type Bucket = {
-  label: string
-  count: number
-  bytes: number
-  lastSeen: number
-}
+type Entry = { label: string; bytes: number };
 
-const buckets = new Map<string, Bucket>()
+const g = globalThis as any;
+const KEY = "__LUMORA_RESOLUTION_ENTRIES__";
+
+function getStore(): Entry[] {
+  if (!Array.isArray(g[KEY])) g[KEY] = [];
+  return g[KEY] as Entry[];
+}
 
 export function resetResolutionForTest() {
-  buckets.clear()
+  g[KEY] = [];
 }
 
-function normalizeLabel(input: string): string {
-  const s = (input || "").toString().trim().toLowerCase()
-  if (!s) return "unknown"
+function toHeightPFromWxH(s: string): string | null {
+  const m = s.match(/^(\d{2,5})\s*[xX]\s*(\d{2,5})$/);
+  if (!m) return null;
+  const w = Number(m[1]);
+  const h = Number(m[2]);
+  if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) return null;
+  return `${h}p`;
+}
 
-  // Accept common formats: "720p", "1080", "1080p", "1920x1080"
-  if (/^\d{3,4}p$/.test(s)) return s
-  if (/^\d{3,4}$/.test(s)) return `${s}p`
-  const m = s.match(/(\d{3,4})\s*x\s*(\d{3,4})/)
-  if (m) {
-    // Use height as canonical, e.g. 1920x1080 -> 1080p
-    const h = Number(m[2])
-    if (Number.isFinite(h) && h > 0) return `${h}p`
+function normalizeLabel(raw: string): string {
+  const s = (raw || "").trim().toLowerCase();
+  if (!s) return "unknown";
+  const fromWxH = toHeightPFromWxH(s);
+  if (fromWxH) return fromWxH;
+
+  const hp = s.match(/^(\d{3,4})p$/);
+  if (hp) return `${Number(hp[1])}p`;
+
+  // Accept known aliases
+  if (s === "hd") return "720p";
+  if (s === "fhd") return "1080p";
+  if (s === "uhd" || s === "4k") return "2160p";
+
+  return s;
+}
+
+export function recordResolutionCappedUsage(args: {
+  requestedLabel: string;
+  enforcedHeight?: number;
+  wasCapped: boolean;
+  bytes: number;
+}) {
+  const bytes = Number.isFinite(args.bytes) && args.bytes > 0 ? args.bytes : 0;
+  const store = getStore();
+
+  // Always record requested bucket (telemetry may be "disabled" elsewhere; this is local in-memory only)
+  const requested = normalizeLabel(args.requestedLabel);
+  store.push({ label: `requested:${requested}`, bytes });
+
+  // Record enforced bucket when capped (or when explicitly provided)
+  if (args.wasCapped && Number.isFinite(args.enforcedHeight) && (args.enforcedHeight as number) > 0) {
+    store.push({ label: `enforced:${normalizeLabel(String(args.enforcedHeight) + "p")}`, bytes });
   }
-  return s
 }
 
-export function recordResolutionUsage(label: string, bytes: number) {
-  const key = normalizeLabel(label)
-  const b = buckets.get(key) ?? { label: key, count: 0, bytes: 0, lastSeen: 0 }
-  b.count += 1
-  b.bytes += Math.max(0, Number.isFinite(bytes) ? bytes : 0)
-  b.lastSeen = Date.now()
-  buckets.set(key, b)
-}
+export function getResolutionDistribution(limit = 50): ResolutionDistItem[] {
+  const store = getStore();
+  const map = new Map<string, { count: number; bytes: number }>();
 
-export function getResolutionDistribution(): ResolutionBucket[] {
-  return [...buckets.values()]
-    .sort((a, b) => b.bytes - a.bytes)
-    .map((b) => ({
-      label: b.label,
-      count: b.count,
-      bytes: b.bytes,
-      lastSeen: b.lastSeen,
-    }))
+  for (const e of store) {
+    const k = e.label;
+    const cur = map.get(k) || { count: 0, bytes: 0 };
+    cur.count += 1;
+    cur.bytes += e.bytes;
+    map.set(k, cur);
+  }
+
+  const out: ResolutionDistItem[] = Array.from(map.entries()).map(([label, v]) => ({
+    label,
+    count: v.count,
+    bytes: v.bytes,
+  }));
+
+  out.sort((a, b) => b.bytes - a.bytes || b.count - a.count || a.label.localeCompare(b.label));
+  return out.slice(0, Math.max(1, limit));
 }

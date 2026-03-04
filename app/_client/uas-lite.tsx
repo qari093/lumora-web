@@ -10,11 +10,32 @@ export default function UasLite() {
   };
   const closesRef = useRef<number[]>([]);
   const now = () => Date.now();
-  const getQuietUntil = () => Number(localStorage.getItem(cfg.storageKey) || 0);
+  const _getQuietUntil = () => Number(localStorage.getItem(cfg.storageKey) || 0);
   const setQuietUntil = (ms: number) => localStorage.setItem(cfg.storageKey, String(ms));
-  const setQuietHours = (h: number) => setQuietUntil(now() + h * 3600_000);
+  const _setQuietHours = (h: number) => setQuietUntil(now() + h * 3600_000);
 
   useEffect(() => {
+    const _getQuietUntil = () => {
+      try {
+        const raw = localStorage.getItem(cfg.storageKey);
+        if (!raw) return 0;
+        const v = JSON.parse(raw);
+        return typeof v?.quietUntil === "number" ? v.quietUntil : 0;
+      } catch {
+        return 0;
+      }
+    };
+
+    const _setQuietHours = (hours: number) => {
+      try {
+        const quietUntil = Date.now() + Math.max(0, hours) * 60 * 60 * 1000;
+        localStorage.setItem(cfg.storageKey, JSON.stringify({ quietUntil }));
+      } catch {
+        // ignore
+      }
+    };
+
+
     if (typeof window === "undefined") return;
 
     const onOpen = () => {
@@ -51,7 +72,8 @@ export default function UasLite() {
       removeEventListener("lumora:overlay-close", onClose as EventListener);
       delete (window as any).UAS;
     };
-  }, []);
+  
+  }, [cfg.maxCloses, cfg.quietHours, cfg.storageKey, cfg.windowMs]);
 
   return null;
 }

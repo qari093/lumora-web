@@ -1,52 +1,30 @@
-import { getJobFromDb } from "@/lib/video_gen/store";
+import { getJob } from "@/lib/video-gen/engine";
 
-export const runtime = "nodejs";
-
-function json(body: any, status = 200): Response {
+function j(body: any, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json; charset=utf-8" },
   });
 }
 
-function mapStoreToHttp(r: any): { status: number; body: any } {
-  if (r?.ok === true) {
-    const j = r.data;
-    return {
-      status: 200,
-      body: {
-        ok: true,
-        job: {
-          jobId: j.jobId,
-          status: j.status,
-          resultUrl: j.resultUrl,
-          error: j.error,
-        },
-      },
-    };
-  }
-
-  const code = String(r?.code || "internal_error");
-  const detail = typeof r?.detail === "string" ? r.detail : undefined;
-
-  if (code === "bad_request") return { status: 400, body: { ok: false, error: "bad_request", detail } };
-  if (code === "not_found") return { status: 404, body: { ok: false, error: "not_found", detail } };
-  if (code === "db_unavailable") return { status: 503, body: { ok: false, error: "db_unavailable", detail } };
-
-  return { status: 500, body: { ok: false, error: "internal_error", detail } };
-}
-
-export async function GET(req: Request): Promise<Response> {
+export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const jobId = url.searchParams.get("jobId") || "";
-    if (!jobId) return json({ ok: false, error: "bad_request", detail: "jobId_required" }, 400);
+    const jobId = (url.searchParams.get("jobId") || "").trim();
+    if (!jobId) return j({ ok: false, error: "jobId_required", ts: Date.now() }, 400);
 
-    const r = await getJobFromDb(jobId);
-    const mapped = mapStoreToHttp(r);
-    return json(mapped.body, mapped.status);
+    const job = getJob(jobId);
+    if (!job) return j({ ok: false, error: "not_found", ts: Date.now() }, 404);
+
+    if (job.status === "done") {
+      return j({ ok: true, jobId: job.jobId, status: "done", ts: Date.now() }, 200);
+    }
+    if (job.status === "failed") {
+      return j({ ok: false, jobId: job.jobId, status: "failed", error: job.error || "failed", ts: Date.now() }, 200);
+    }
+    return j({ ok: true, jobId: job.jobId, status: job.status, ts: Date.now() }, 200);
   } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "unknown";
-    return json({ ok: false, error: "internal_error", detail: msg }, 500);
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    return j({ ok: false, error: msg, ts: Date.now() }, 500);
   }
 }

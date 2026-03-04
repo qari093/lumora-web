@@ -7,7 +7,6 @@ export default function LiveRoomError(props: { error: Error & { digest?: string 
 
   React.useEffect(() => {
     try {
-      // eslint-disable-next-line no-console
       console.error('[LiveRoomError]', error);
     } catch {}
   }, [error]);

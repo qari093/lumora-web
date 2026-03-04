@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 import type { GenJob, GenRequest, GenStatus } from "./types";
-import { detectLanguage, defaultVoice, captionStyle, translate } from "./i18n";
-import { makeFusion, scriptPrompt, brollPrompt } from "./prompts";
+import { detectLanguage, _defaultVoice, captionStyle, translate } from "./i18n";
+import { makeFusion, scriptPrompt, _brollPrompt } from "./prompts";
 
 // ---------- utilities ----------
-const sleep = (ms:number)=>new Promise(r=>setTimeout(r,ms));
+const _sleep = (ms:number)=>new Promise(r=>setTimeout(r,ms));
 const id = ()=>Math.random().toString(36).slice(2);
 const ensureDir = (p:string)=>{ fs.mkdirSync(p, { recursive: true }); return p; };
 

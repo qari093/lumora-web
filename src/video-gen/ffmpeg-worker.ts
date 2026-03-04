@@ -30,7 +30,7 @@ function sh(cmd: string, args: string[]) {
   const r = spawnSync(cmd, args, { stdio: "inherit" });
   if (r.status !== 0) throw new Error(`${cmd} failed (exit ${r.status})`);
 }
-function escapeFF(s: string) { return s.replace(/:/g,"\\:").replace(/,/g,"\\,"); }
+function _escapeFF(s: string) { return s.replace(/:/g,"\\:").replace(/,/g,"\\,"); }
 
 function buildVideoFilters(plan: Plan, clipInputIdx: number[]) {
   const w = plan.width, h = plan.height, fps = plan.fps;

@@ -33,7 +33,6 @@ export function eligibleForRadius(
 
 /** Dev consent + whereami store (per IP) */
 declare global {
-  // eslint-disable-next-line no-var
   var __GEO_CONSENT: Map<string, { consent: "granted" | "denied"; at: number }> | undefined;
 }
 export const CONSENTS: Map<string, { consent: "granted" | "denied"; at: number }> =

@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { selectAvatar, setMood } from "@/app/_modules/emotion/emotion-model";
+import { _selectAvatar, _setMood } from "@/app/_modules/emotion/emotion-model";
 
 export type Avatar = {
   id: string;
@@ -46,7 +46,6 @@ export function HoloAvatar({
     >
       <span className="ring" style={{ borderColor: avatar.accent ?? "#00f3ff" }} />
       {avatar.imageUrl ? (
-        // eslint-disable-next-line @next/next/no-img-element
         <img src={avatar.imageUrl} alt={avatar.name} />
       ) : (
         <span className="initials">{initials}</span>

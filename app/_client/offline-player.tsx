@@ -15,7 +15,7 @@ export default function OfflinePlayer({ src, poster }: Props) {
 
   useEffect(() => {
     let hls: any | null = null;
-    let canceled = false;
+    let _canceled = false;
 
     async function boot() {
       setErr(null);

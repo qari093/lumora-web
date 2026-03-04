@@ -130,8 +130,8 @@ export default function RecorderEngine(props: RecorderEngineProps) {
     [mode],
   );
 
-  const safeSetStatus = useCallback(
-    (next: RecorderEngineStatus) => {
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  const safeSetStatus = useCallback((next: RecorderEngineStatus) => {
       setStatusState(next);
       onStatusChange?.(next);
     },
@@ -147,12 +147,12 @@ export default function RecorderEngine(props: RecorderEngineProps) {
       window.clearTimeout(maxTimerRef.current);
       maxTimerRef.current = null;
     }
-  }, []);
+  }, [handleError, stopInternal]);
 
   const resetElapsed = useCallback(() => {
     setElapsedSec(0);
     startTimeRef.current = null;
-  }, []);
+  }, [handleError, stopInternal]);
 
   const cleanupMedia = useCallback(() => {
     if (mediaRecorderRef.current) {
@@ -412,12 +412,12 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   }, [stopInternal]);
 
   // Auto-start when requested and supported
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!autoStart) return;
     if (!isSupported && mode === "browser") return;
     void start();
     // we intentionally ignore "start" dependencies beyond what's needed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoStart, isSupported, mode]);
 
   // Cleanup on unmount

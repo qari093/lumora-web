@@ -123,7 +123,7 @@ function __lumora__old_verifyFrame(frame: any, cfg: any, nowSec: number): Promis
 {
   try {
     const __cfg: any = cfg || {};
-    const __now: number = Number(nowSec ?? now ?? 0);
+    const __now: number = Number(nowSec ?? _now ?? 0);
     const __raw: any = (typeof frame === "object" && frame) ? frame : {};
     const __sigProvided = String(__raw.sig ?? __raw.s ?? "");
     if (!__sigProvided) return { ok: false, reason: "frame_bad_sig", error: "frame_bad_sig" };
@@ -171,7 +171,7 @@ function __lumora__old_verifyFrame(frame: any, cfg: any, nowSec: number): Promis
     if (__seenEnabled && __sid) {
       const __k = __sid + ":" + String(__seq) + ":" + __sigProvided;
       if (__lumora_seenSigCache.has(__k)) return { ok: false, reason: "replay", error: "replay" };
-      __lumora_seenSigCache.set(__k, __now || Date.now());
+      __lumora_seenSigCache.set(__k, __now || Date._now());
     }
 
     // Rate limiting (token bucket per sid)
@@ -241,7 +241,6 @@ async function __lumora_hmacHex__dup_decl_2_L157(secret: string, payload: string
 
   // Node path (Vitest)
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const crypto = (0, eval)("require")("crypto");
     return crypto.createHmac("sha256", sec).update(msg).digest("hex");
   } catch (_) {}
@@ -326,7 +325,7 @@ function pickSecret(cfg: any): string | undefined {
 
   const arr = (cfg as any).sharedSecrets;
   if (Array.isArray(arr)) {
-    for (const x of arr) {
+    for (const _x of arr) {
       if (typeof x === "string" && x.length) return x;
     }
   }
@@ -356,9 +355,9 @@ function pickSecret(cfg: any): string | undefined {
 function __chunk_createInMemorySeenCache(opts?: { maxEntries?: number }) {
   const max = Math.max(128, Math.min(20000, (opts?.maxEntries ?? 5000) | 0));
   const map = new Map<string, number>();
-  const prune = (now: number) => {
+  const prune = (_now: number) => {
     for (const [k, exp] of map) {
-      if (exp <= now) map.delete(k);
+      if (exp <= _now) map.delete(k);
     }
     while (map.size > max) {
       const it = map.keys().next();
@@ -367,15 +366,15 @@ function __chunk_createInMemorySeenCache(opts?: { maxEntries?: number }) {
     }
   };
   return {
-    has: (k: string, now: number) => {
-      prune(now);
+    has: (k: string, _now: number) => {
+      prune(_now);
       const exp = map.get(k);
-      return typeof exp === "number" && exp > now;
+      return typeof exp === "number" && exp > _now;
     },
-    add: (k: string, expAt: number, now: number) => {
-      prune(now);
+    add: (k: string, expAt: number, _now: number) => {
+      prune(_now);
       map.set(k, expAt);
-      prune(now);
+      prune(_now);
     },
     size: () => map.size,
     clear: () => map.clear(),
@@ -431,7 +430,6 @@ async function hmacLikeHex(message: string, secret: string): Promise<string> {
 
   // Node fallback (vitest / local dev)
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const crypto = require("node:crypto");
     return crypto.createHmac("sha256", Buffer.from(secBytes)).update(Buffer.from(msgBytes)).digest("hex");
   } catch {
@@ -478,7 +476,6 @@ function __lumora_hmacHex__dup_decl_2_L485(key: string, msg: string): string {
   // Browser-safe + Node-safe: WebCrypto if present, fallback to Node crypto.
   // This is sync via Node crypto; verifyFrame/signFrame below use the sync path.
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const crypto = require("crypto");
     return crypto.createHmac("sha256", String(key)).update(String(msg)).digest("hex");
   } catch {
@@ -588,7 +585,7 @@ function normalizeFrame(input: any): any {
   return f;
 }
 
-function canonicalFramePayload(frame: any): string {
+function _canonicalFramePayload(frame: any): string {
   // Deterministic, null-safe canonical payload for signing/verifying.
   // Must never throw (tests + production hardening).
   const f: any = frame ?? {};
@@ -646,7 +643,7 @@ function canonicalFramePayload(frame: any): string {
   return stableStringify(out);
 }
 
-async function resolveSecretForToken(cfg: any, token: any): Promise<string> {
+async function _resolveSecretForToken(cfg: any, token: any): Promise<string> {
   const base = String(cfg?.sharedSecret || "");
 
   // kid can appear under multiple names depending on minting/version.
@@ -721,12 +718,12 @@ function __p2pRequirePeerBindingFromCfg(cfg: any): boolean {
   );
 }
 
-async function signLikeHex(sharedSecret: string, payload: string): Promise<string> {
+async function _signLikeHex(sharedSecret: string, payload: string): Promise<string> {
   // Same minimal approach used in peer_auth: hash(secret + "|" + payload)
   return await sha256Hex(`${sharedSecret}|${payload}`);
 }
 
-/* removed duplicate resolveSecretForToken (function) */
+/* removed duplicate _resolveSecretForToken (function) */
 
 /* FIX6P_HELPERS_START */
 /**
@@ -821,12 +818,12 @@ async function __chunk_signFrame(frame: any, cfg: any): Promise<any> {
   const secret = pickSecret(cfgAny);
   if (!secret) return __lumora_setSig_v2(frameAny, "");
 
-  // Ensure timestamp is stable; do NOT use "now" from verifier.
+  // Ensure timestamp is stable; do NOT use "_now" from verifier.
   const ts =
     typeof frameAny.timestamp === "number" ? frameAny.timestamp :
     typeof frameAny.ts === "number" ? frameAny.ts :
     typeof frameAny.time === "number" ? frameAny.time :
-    Date.now();
+    Date._now();
 
   // Do not mutate input; write timestamp back if missing.
   const base = { ...frameAny, timestamp: ts };
@@ -932,7 +929,7 @@ async function __chunk_verifyFrame(
   nowMs?: number
 ): Promise<any> {
   try {
-    const now = typeof nowMs === "number" ? nowMs : Date.now();
+    const _now = typeof nowMs === "number" ? nowMs : Date._now();
     if (!signed || typeof signed !== "object") return { ok: false, reason: "frame_invalid" };
 
     const cfgAny: any = cfg as any;
@@ -947,8 +944,8 @@ async function __chunk_verifyFrame(
 
     const maxSkewMs = typeof cfgAny?.maxClockSkewMs === "number" ? cfgAny.maxClockSkewMs : 60_000;
     const maxAgeMs = typeof cfgAny?.maxFrameAgeMs === "number" ? cfgAny.maxFrameAgeMs : 120_000;
-    if (ts > now + maxSkewMs) return { ok: false, reason: "frame_ts_future" };
-    if (now - ts > maxAgeMs) return { ok: false, reason: "frame_ts_expired" };
+    if (ts > _now + maxSkewMs) return { ok: false, reason: "frame_ts_future" };
+    if (_now - ts > maxAgeMs) return { ok: false, reason: "frame_ts_expired" };
 
     // token presence
     const token = (nf as any).token;
@@ -1012,7 +1009,7 @@ export function createInMemoryRateLimiter(
   /** peerKey -> { tokens, lastMs } */
   const m = new Map<string, { tokens: number; lastMs: number }>();
 
-  function sweep(now: number) {
+  function sweep(_now: number) {
     if (m.size <= maxPeers) return;
     const entries = Array.from(m.entries())
       .map(([k, v]) => [k, v.lastMs] as const)
@@ -1023,19 +1020,19 @@ export function createInMemoryRateLimiter(
 
   return {
     allow(peerKey: string, cost: number, nowMs: number) {
-      const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+      const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
       const c = Math.max(1, Math.floor(cost || 1));
       const key = peerKey && String(peerKey).length ? String(peerKey) : "anon";
       let st = m.get(key);
-      if (!st) st = { tokens: capacity, lastMs: now };
-      const dt = Math.max(0, now - st.lastMs);
+      if (!st) st = { tokens: capacity, lastMs: _now };
+      const dt = Math.max(0, _now - st.lastMs);
       const refill = (dt / 1000) * refillPerSec;
       st.tokens = Math.min(capacity, st.tokens + refill);
-      st.lastMs = now;
+      st.lastMs = _now;
       const ok = st.tokens >= c;
       if (ok) st.tokens -= c;
       m.set(key, st);
-      sweep(now);
+      sweep(_now);
       return ok;
     },
   };
@@ -1155,10 +1152,10 @@ export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number })
   const m = new Map<string, number>();
 
   function sweep(nowMs: number) {
-    const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+    const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
     // TTL eviction
     for (const [k, t] of m.entries()) {
-      if (now - t > ttlMs) m.delete(k);
+      if (_now - t > ttlMs) m.delete(k);
     }
     // Size eviction (drop oldest)
     if (m.size <= max) return;
@@ -1172,9 +1169,9 @@ export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number })
       return m.has(String(k));
     },
     add(k: string, nowMs: number) {
-      const now = Number.isFinite(nowMs) ? nowMs : Date.now();
-      m.set(String(k), now);
-      sweep(now);
+      const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
+      m.set(String(k), _now);
+      sweep(_now);
     },
     sweep,
   };
@@ -1197,7 +1194,7 @@ export async function signFrame(frame: any, cfg: __LumoraSigCfg): Promise<any> {
 
 export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number): Promise<any> {
   try {
-    const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+    const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
     const f0 = frame && typeof frame === "object" ? frame : null;
     if (!f0) return { ok: false, reason: "frame_invalid" };
 
@@ -1226,8 +1223,8 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
     // Clock skew checks (tests expect past/future/clock_skew reasons)
     const maxSkew = Math.max(0, Math.floor(cfg?.maxClockSkewMs ?? 30_000));
     if (sentAt && maxSkew) {
-      if (sentAt < now - maxSkew) return { ok: false, reason: "clock_skew_past" };
-      if (sentAt > now + maxSkew) return { ok: false, reason: "clock_skew_future" };
+      if (sentAt < _now - maxSkew) return { ok: false, reason: "clock_skew_past" };
+      if (sentAt > _now + maxSkew) return { ok: false, reason: "clock_skew_future" };
     }
 
     // Replay protection (tests enable seenCache + replayWindowMs)
@@ -1237,12 +1234,12 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
       const k = String(sid || "") + ":" + String(seq) + ":" + sig;
       // Consider frame too old/new by replay window if sentAt present
       if (sentAt && windowMs) {
-        if (sentAt < now - windowMs) return { ok: false, reason: "past" };
-        if (sentAt > now + windowMs) return { ok: false, reason: "future" };
+        if (sentAt < _now - windowMs) return { ok: false, reason: "past" };
+        if (sentAt > _now + windowMs) return { ok: false, reason: "future" };
       }
       if (seen.has(k)) return { ok: false, reason: "replay" };
-      seen.add(k, now);
-      if (typeof seen.sweep === "function") seen.sweep(now);
+      seen.add(k, _now);
+      if (typeof seen.sweep === "function") seen.sweep(_now);
     }
 
     // Payload size budget (oversized test)
@@ -1259,7 +1256,7 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
       const typ = String(t || "");
       let cost = 1;
       if (typ === "chunk_res") cost = 5 + Math.min(50, Math.ceil(__lumora__payloadBytes(payload) / 1024));
-      const ok = rl.allow(peerKey, cost, now);
+      const ok = rl.allow(peerKey, cost, _now);
       if (!ok) return { ok: false, reason: "rate_limit" };
     }
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cookies, headers } from "next/headers";
 
 export type VendorOwner = { ownerId: string; source: "cookie" | "header" | "demo" };

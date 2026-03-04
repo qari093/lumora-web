@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { prisma } from "../../src/lib/prisma";
 import { charge, CLICK_COST_CENTS, CURRENCY } from "../../src/lib/billing";
 import { isOwnerAllowed } from "../../src/lib/owners";
@@ -53,7 +52,7 @@ export async function GET(req: Request) {
     }
 
     // Persist click event
-    const saved = await prisma.adEvent.create({
+    const _saved = await prisma.adEvent.create({
       data: {
         viewKey: adId,
         campaignId: ownerId,
@@ -71,7 +70,7 @@ export async function GET(req: Request) {
         reason: "charge-click",
         currency,
       });
-    } catch (e) {
+    } catch (_e) {
       // swallow billing errors; keep UX fast
     }
 

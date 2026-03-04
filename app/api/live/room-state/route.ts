@@ -1,42 +1,69 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
-import { rateLimitHeaders } from "@/lib/live/rateLimitHeaders";
-import { makeRequestId } from "@/lib/live/requestId";
-import { get, ensure } from "@/lib/live/roomStateStore";
+import { NextRequest } from "next/server";
+import crypto from "crypto";
+import { getRoomState } from "@/lib/live/state";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+function json(data: unknown, status = 200, headers: Record<string, string> = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "no-store",
+      ...headers,
+    },
+  });
+}
 
-export const GET = withSafeLive(async (req: Request) => {
-  const requestId = makeRequestId();
-  const url = new URL(req.url);
-  const roomId = String(url.searchParams.get("roomId") || "demo-room");
-  ensure(roomId);
-  const state = get(roomId);
+function uuid(): string {
+  const anyCrypto: any = crypto as any;
+  if (typeof anyCrypto.randomUUID === "function") return anyCrypto.randomUUID();
+  return crypto.randomBytes(16).toString("hex");
+}
 
-  return new Response(
-    JSON.stringify({
-      ok: true,
-      marker: "live-room-state",
-      requestId,
-      roomId,
-      state: {
-        roomId: state.roomId,
-        title: state.title ?? state.roomId,
-        isLive: Boolean(state.isLive),
-        viewerCount: Number.isFinite(state.viewerCount as number) ? (state.viewerCount as number) : 0,
-        updatedAt: state.updatedAt,
-        lastEventAt: state.lastEventAt,
+function ratelimitHeaders() {
+  const limit = 60;
+  const remaining = 59;
+  const reset = Math.floor(Date.now() / 1000) + 60;
+  return {
+    "x-ratelimit-limit": String(limit),
+    "x-ratelimit-remaining": String(remaining),
+    "x-ratelimit-reset": String(reset),
+  };
+}
+
+function toISO(ms: number): string | null {
+  if (!ms || ms <= 0) return null;
+  return new Date(ms).toISOString();
+}
+
+export async function GET(req: NextRequest) {
+  const requestId = uuid();
+  try {
+    const url = new URL(req.url);
+    const roomId = (url.searchParams.get("roomId") || "").trim() || "demo-room";
+    const r = getRoomState(roomId);
+
+    return json(
+      {
+        ok: true,
+        requestId,
+        roomId: r.id,
+        roomid: r.id,
+        title: r.title,
+        viewers: r.viewers,
+        createdAt: r.createdAt,
+        updatedAt: r.updatedAt,
+        lastPublishAt: r.lastPublishAt,
+        lastEventAt: toISO(r.lastEventAt),
       },
-      lastEventAt: state.lastEventAt,
-      ts: new Date().toISOString(),
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "x-request-id": requestId,
-        ...rateLimitHeaders(),
-      },
-    }
-  );
-});
+      200,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
+  } catch (e: any) {
+    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    return json(
+      { ok: false, requestId, error: msg },
+      500,
+      { ...ratelimitHeaders(), "x-request-id": requestId }
+    );
+  }
+}

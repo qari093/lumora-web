@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 function json(data: any, status = 200) {
   return NextResponse.json(data, { status, headers: { "cache-control": "no-store" } });

@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { getOrSetUid } from "@/lib/uid";
 import { crewOf } from "@/lib/crewStore";
 
@@ -20,7 +19,7 @@ export async function GET(){
       // @ts-ignore
       controller._iv = iv;
     },
-    cancel(reason){
+    cancel(_reason){
       // @ts-ignore
       const iv = (this as any)?._iv; if(iv) clearInterval(iv);
     }

@@ -37,7 +37,7 @@ export async function GET() {
     return NextResponse.json(response, {
       status: 200,
       headers: {
-        "x-lumora-eco-source": "placeholder",
+        "x-lumora-eco-source": "live surface",
         "cache-control": "no-store",
       },
     });

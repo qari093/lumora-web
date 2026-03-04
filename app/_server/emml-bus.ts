@@ -19,9 +19,9 @@ export function subscribe(): ReadableStream<string> {
 
   // Return a stream that removes writer on cancel
   return new ReadableStream<string>({
-    start(controller) {
+    start(_controller) {
       // initial comment
-      controller.enqueue(`: connected ${Date.now()}\n\n`);
+      _controller.enqueue(`: connected ${Date.now()}\n\n`);
     },
     cancel() {
       clearInterval(iv);
@@ -29,9 +29,9 @@ export function subscribe(): ReadableStream<string> {
       writer.releaseLock();
     },
   }, { highWaterMark: 1 }).pipeThrough(new TransformStream({
-    start(controller) {
-      // Bridge: mirror anything we write on writer into this controller
-      // We actually push via writer directly in broadcast(); controller is used for headers only.
+    start(_controller) {
+      // Bridge: mirror anything we write on writer into this _controller
+      // We actually push via writer directly in broadcast(); _controller is used for headers only.
     }
   }));
 }

@@ -19,7 +19,7 @@ export default function ZENPreview({ email }: Props) {
     try {
       setLoading(true);
       setErr(null);
-      const u = `/api/lumaspace/zen/preview?email=${encodeURIComponent(email)}`;
+      const _u = `/api/lumaspace/zen/preview?email=${encodeURIComponent(email)}`;
       const r = await fetch(u, { cache: "no-store" });
       const j = await r.json();
       if (!j.ok) throw new Error(j.error || "failed");
@@ -33,7 +33,7 @@ export default function ZENPreview({ email }: Props) {
 
   React.useEffect(() => {
     load();
-  }, [email]);
+  }, [email, load]);
 
   const wrap: React.CSSProperties = {
     border: "1px solid #ddd",

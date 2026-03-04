@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 type BenchIn = {
   ts?: number;
   results?: {
@@ -19,7 +17,7 @@ export async function POST(req: Request) {
     const cacheEntries = typeof r.cache_entries === "number" ? r.cache_entries : null;
     const ratio = typeof r.compress_ratio === "number" ? r.compress_ratio : null;
     const q = r.queues || {};
-    const ua = typeof r.user_agent === "string" ? r.user_agent : null;
+    const _ua = typeof r.user_agent === "string" ? r.user_agent : null;
 
     let score = 100;
     if (latency != null) score -= Math.min(60, Math.max(0, (latency - 80) * 0.25));

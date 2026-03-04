@@ -27,10 +27,9 @@ export async function updateVoiceState(
   state: { isSpeaking: boolean; volume: number; emotionHint?: string | null }
 ) {
   // Try known internal functions if present; fallback to POST /api/persona/voice.
-  const anyMod = (globalThis as any);
+  const _anyMod = (globalThis as any);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const self: any = {};
+  const _self: any = {};
   try {
     // no-op
   } catch {}

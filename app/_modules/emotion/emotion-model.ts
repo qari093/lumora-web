@@ -240,7 +240,7 @@ export function toAnimClass(anim: Anim): string {
    Event & Emotion Bridge (v1 Completion)
 ────────────────────────────────────────────── */
 type EmotionListener = (ev:any)=>void;
-const listeners = new Set<EmotionListener>();
+const _listeners = new Set<EmotionListener>();
 
 type Listener = (s: EmotionState, ev: EmotionEvent) => void;
 const __listeners = new Set<Listener>();
