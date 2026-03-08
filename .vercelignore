@@ -15,3 +15,20 @@ prisma/**/*.tmp
 tmp/
 .next/cache/*
 !.next/cache/images # keep image cache if ever used
+
+# oversized local/dev artifacts
+.pnpm-store
+.quarantine
+ops/_backups
+.data/render/cache
+docs/launch
+branding/_rollback
+tsconfig.monitor.tsbuildinfo
+prisma/prisma/dev.db
+
+# oversized demo media not needed for private beta deploy
+public/videos
+public/audio
+public/brands/cineverse
+public/persona/avatars
+public/persona/emojis

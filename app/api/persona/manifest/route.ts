@@ -1,85 +1,27 @@
-import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 
-type ManifestEmoji = {
-  id: string;
-  url: string; // public URL
-  kind: "svg" | "png" | "webp" | "jpg" | "jpeg" | "gif";
-};
-
-type PersonaManifest = {
-  ok: true;
-  version: number;
-  generatedAt: string;
-  emojis: ManifestEmoji[];
-  // Future-proof fields (safe defaults):
-  reactions: Array<{ id: string; emojiId: string }>;
-  personas: Array<{ id: string; label: string }>;
-};
-
-const EMOJI_DIRS = [
-  "public/persona/emojis",
-  "public/emojis",
-  "public/assets/emojis",
-  "public/assets/persona/emojis",
-];
-
-function kindOf(file: string): ManifestEmoji["kind"] | null {
-  const ext = path.extname(file).toLowerCase().replace(".", "");
-  if (!ext) return null;
-  if (ext === "svg" || ext === "png" || ext === "webp" || ext === "jpg" || ext === "jpeg" || ext === "gif") return ext;
-  return null;
-}
-
-async function listEmojiFiles(): Promise<Array<{ abs: string; relPublic: string }>> {
-  const cwd = process.cwd();
-  for (const rel of EMOJI_DIRS) {
-    const absDir = path.join(cwd, rel);
-    try {
-      const st = await fs.stat(absDir);
-      if (!st.isDirectory()) continue;
-      const names = await fs.readdir(absDir);
-      const files = names
-        .filter((n) => kindOf(n))
-        .map((n) => ({
-          abs: path.join(absDir, n),
-          relPublic: "/" + path.posix.join(rel.replace(/^public\//, ""), n).replace(/\\/g, "/"),
-        }));
-      if (files.length) return files;
-    } catch {
-      // ignore missing dirs
-    }
-  }
-  return [];
-}
+export const runtime = "nodejs";
+export const dynamic = "force-static";
+export const revalidate = 3600;
 
 export async function GET() {
-  const files = await listEmojiFiles();
+  try {
+    const manifestPath = path.join(process.cwd(), "public", "persona", "manifest.json");
+    const raw = await fs.readFile(manifestPath, "utf8");
+    const json = JSON.parse(raw);
 
-  const emojis: ManifestEmoji[] = files
-    .map((f) => {
-      const base = path.basename(f.abs);
-      const ext = kindOf(base);
-      if (!ext) return null;
-      const id = base.replace(path.extname(base), "");
-      return { id, url: f.relPublic, kind: ext };
-    })
-    .filter((x): x is ManifestEmoji => Boolean(x))
-    .sort((a, b) => a.id.localeCompare(b.id));
-
-  const body: PersonaManifest = {
-    ok: true,
-    version: 1,
-    generatedAt: new Date().toISOString(),
-    emojis,
-    reactions: [],
-    personas: [],
-  };
-
-  return NextResponse.json(body, {
-    headers: {
-      "cache-control": "no-store",
-    },
-  });
+    return Response.json(json, {
+      status: 200,
+      headers: {
+        "cache-control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "persona_manifest_unavailable";
+    return Response.json(
+      { ok: false, error: message },
+      { status: 500, headers: { "cache-control": "no-store" } }
+    );
+  }
 }
