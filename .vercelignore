@@ -1,7 +1,6 @@
 # node
 node_modules
 npm-debug.log
-pnpm-lock.yaml
 yarn.lock
 
 # prisma local dbs and backups
