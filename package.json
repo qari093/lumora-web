@@ -246,8 +246,7 @@
   },
   "type": "module",
   "engines": {
-    "node": "20.x",
-    "pnpm": "10.x"
+    "node": "20.x"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.53.1"
