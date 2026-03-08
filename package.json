@@ -246,7 +246,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=20 <23",
+    "node": "20.x",
     "pnpm": "10.x"
   },
   "optionalDependencies": {
