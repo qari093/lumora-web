@@ -1,16 +1,31 @@
 import { NextResponse } from "next/server";
-import { getWalletBalance } from "@/lib/wallet";
+import { prisma } from "@/lib/prisma";
+
+function bad(message: string, status = 400) {
+  return NextResponse.json({ ok: false, error: message }, { status });
+}
 
 export async function GET(req: Request) {
   try {
-    const url = new URL(req.url);
-    const userId = (url.searchParams.get("userId") || "").trim();
-    if (!userId) return NextResponse.json({ ok: false, error: "userId_required" }, { status: 400 });
+    const { searchParams } = new URL(req.url);
+    const userId = (searchParams.get("userId") || "").trim();
+    if (!userId) return bad("Missing userId", 400);
 
-    const out = await getWalletBalance(userId);
-    return NextResponse.json(out, { status: 200 });
-  } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    return NextResponse.json({ ok: false, error: msg, ts: Date.now() }, { status: 500 });
+    const wallet = await prisma.wallet.findUnique({
+      where: { ownerId: userId },
+      select: { balance: true, ownerId: true, updatedAt: true },
+    });
+
+    return NextResponse.json({
+      ok: true,
+      userId,
+      balance: wallet?.balance ?? 0,
+      updatedAt: wallet?.updatedAt ?? null,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { ok: false, error: error?.message || "wallet_balance_failed", ts: Date.now() },
+      { status: 500 }
+    );
   }
 }

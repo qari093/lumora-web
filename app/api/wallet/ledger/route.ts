@@ -1,28 +1,33 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { prisma } from "@/lib/prisma";
 
-type Entry = { id: string; ownerId: string; delta: number; reason?: string; meta?: any; ts: number; };
-const DATA_FILE = path.join(process.cwd(), ".data", "ledger.json");
-
-async function readAll(): Promise<Entry[]> {
-  try {
-    const buf = await fs.readFile(DATA_FILE, "utf8");
-    const parsed = JSON.parse(buf);
-    return Array.isArray(parsed?.entries) ? parsed.entries as Entry[] : [];
-  } catch { return []; }
+function bad(message: string, status = 400) {
+  return NextResponse.json({ ok: false, error: message }, { status });
 }
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const ownerId = searchParams.get("ownerId") || "";
-    const limit = Math.max(1, Math.min(100, parseInt(searchParams.get("limit") || "20", 10) || 20));
-    const after = parseInt(searchParams.get("after") || "0", 10) || 0;
-    if (!ownerId) return NextResponse.json({ ok: false, error: "ownerId is required" }, { status: 400 });
-    const items = (await readAll()).filter(e => e.ownerId === ownerId && e.ts > after).sort((a,b)=>b.ts-a.ts).slice(0, limit);
-    return NextResponse.json({ ok: true, ownerId, items });
-  } catch (e:any) {
-    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
+    const userId = (searchParams.get("userId") || "").trim();
+    const limit = Math.min(Math.max(Number(searchParams.get("limit") || "20"), 1), 100);
+    if (!userId) return bad("Missing userId", 400);
+
+    const items = await prisma.ledgerEntry.findMany({
+      where: { ownerId: userId },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+
+    return NextResponse.json({
+      ok: true,
+      userId,
+      count: items.length,
+      items,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { ok: false, error: error?.message || "wallet_ledger_failed", ts: Date.now() },
+      { status: 500 }
+    );
   }
 }

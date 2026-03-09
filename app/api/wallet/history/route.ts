@@ -1,20 +1,42 @@
 import { NextResponse } from "next/server";
-import { getWalletHistory } from "@/lib/wallet";
+import { prisma } from "@/lib/prisma";
+
+function bad(message: string, status = 400) {
+  return NextResponse.json({ ok: false, error: message }, { status });
+}
 
 export async function GET(req: Request) {
   try {
-    const url = new URL(req.url);
-    const userId = (url.searchParams.get("userId") || "").trim();
-    if (!userId) return NextResponse.json({ ok: false, error: "userId_required" }, { status: 400 });
+    const { searchParams } = new URL(req.url);
+    const userId = (searchParams.get("userId") || "").trim();
+    const limit = Math.min(Math.max(Number(searchParams.get("limit") || "20"), 1), 100);
+    if (!userId) return bad("Missing userId", 400);
 
-    const limitStr = url.searchParams.get("limit");
-    const cursor = (url.searchParams.get("cursor") || "").trim() || null;
+    const wallet = await prisma.wallet.findUnique({
+      where: { ownerId: userId },
+      select: { id: true },
+    });
 
-    const limit = limitStr ? Number(limitStr) : undefined;
-    const out = await getWalletHistory({ userId, limit, cursor });
-    return NextResponse.json(out, { status: 200 });
-  } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    return NextResponse.json({ ok: false, error: msg, ts: Date.now() }, { status: 500 });
+    if (!wallet) {
+      return NextResponse.json({ ok: true, userId, count: 0, items: [] });
+    }
+
+    const items = await prisma.walletEntry.findMany({
+      where: { walletId: wallet.id },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+
+    return NextResponse.json({
+      ok: true,
+      userId,
+      count: items.length,
+      items,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { ok: false, error: error?.message || "wallet_history_failed", ts: Date.now() },
+      { status: 500 }
+    );
   }
 }
