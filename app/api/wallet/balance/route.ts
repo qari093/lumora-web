@@ -11,9 +11,9 @@ export async function GET(req: Request) {
     const userId = (searchParams.get("userId") || "").trim();
     if (!userId) return bad("Missing userId", 400);
 
-    const wallet = await prisma.wallet.findUnique({
-      where: { ownerId: userId },
-      select: { balance: true, ownerId: true, updatedAt: true },
+    const wallet = await prisma.wallet.findFirst({
+      where: { userId: userId },
+      select: { balance: true, userId: true, updatedAt: true },
     });
 
     return NextResponse.json({

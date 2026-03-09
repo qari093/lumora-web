@@ -10,10 +10,11 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userId = (searchParams.get("userId") || "").trim();
     const limit = Math.min(Math.max(Number(searchParams.get("limit") || "20"), 1), 100);
+
     if (!userId) return bad("Missing userId", 400);
 
-    const wallet = await prisma.wallet.findUnique({
-      where: { ownerId: userId },
+    const wallet = await prisma.wallet.findFirst({
+      where: { userId },
       select: { id: true },
     });
 
