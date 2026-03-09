@@ -12,15 +12,22 @@ export async function GET(req: Request) {
     if (!userId) return bad("Missing userId", 400);
 
     const wallet = await prisma.wallet.findFirst({
-      where: { userId: userId },
-      select: { balance: true, userId: true, updatedAt: true },
+      where: { userId },
+      select: {
+        id: true,
+        userId: true,
+        credits: true,
+        createdAt: true,
+      },
     });
 
     return NextResponse.json({
       ok: true,
       userId,
-      balance: wallet?.balance ?? 0,
-      updatedAt: wallet?.updatedAt ?? null,
+      walletId: wallet?.id ?? null,
+      balance: wallet?.credits ?? 0,
+      credits: wallet?.credits ?? 0,
+      updatedAt: wallet?.createdAt ?? null,
     });
   } catch (error: any) {
     return NextResponse.json(
