@@ -1,57 +1,37 @@
-import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs";
+import { NextRequest, NextResponse } from "next/server";
+import fs from "node:fs";
+import path from "node:path";
 
-export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
-function safeReadDir(dir: string): string[] {
-  try {
-    return fs.readdirSync(dir);
-  } catch {
-    return [];
-  }
-}
+const ROOT = process.cwd();
+const PUBLIC_DIR = path.join(ROOT, "public");
+const AVATAR_ROOT = path.join(PUBLIC_DIR, "persona", "avatars");
+const ALLOWED_EXT = new Set([".svg", ".png", ".webp"]);
 
-function isAssetFile(name: string) {
-  const n = name.toLowerCase();
-  return n.endsWith(".png") || n.endsWith(".jpg") || n.endsWith(".jpeg") || n.endsWith(".webp") || n.endsWith(".svg");
-}
-
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const type = (searchParams.get("type") || "avatar").toLowerCase(); // avatar|emoji
-  const emotion = (searchParams.get("emotion") || "neutral").toLowerCase(); // for avatars
-  const reaction = (searchParams.get("reaction") || "love").toLowerCase(); // for emojis
-
-  const root = process.cwd();
-  let diskDir = "";
-  let webBase = "";
-
-  if (type === "emoji") {
-    diskDir = path.join(root, "public", "persona", "emojis", reaction);
-    webBase = `/persona/emojis/${reaction}`;
-  } else {
-    diskDir = path.join(root, "public", "persona", "avatars", emotion);
-    webBase = `/persona/avatars/${emotion}`;
-  }
-
-  const files = safeReadDir(diskDir)
-    .filter(isAssetFile)
+function listEmotionFiles(emotion: string) {
+  const dir = path.join(AVATAR_ROOT, emotion);
+  if (!fs.existsSync(dir)) return { dir, items: [] as Array<{ file: string; url: string }> };
+  const items = fs.readdirSync(dir)
+    .filter((file) => ALLOWED_EXT.has(path.extname(file).toLowerCase()))
     .sort((a, b) => a.localeCompare(b))
-    .slice(0, 600);
+    .map((file) => ({ file, url: `/persona/avatars/${emotion}/${file}` }));
+  return { dir, items };
+}
 
-  const items = files.map((f) => ({
-    file: f,
-    url: `${webBase}/${encodeURIComponent(f)}`,
-  }));
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const emotion = (searchParams.get("emotion") || "neutral").trim().toLowerCase();
+  const reaction = (searchParams.get("reaction") || "love").trim().toLowerCase();
+  const { dir, items } = listEmotionFiles(emotion);
 
   return NextResponse.json({
     ok: true,
-    type,
+    type: "avatar",
     emotion,
     reaction,
     count: items.length,
-    dir: diskDir,
-    items,
+    dir,
+    items
   });
 }

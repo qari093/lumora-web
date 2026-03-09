@@ -1,13 +1,36 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import fs from "node:fs";
+import path from "node:path";
 
-export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
-export async function GET(req: Request) {
+const ROOT = process.cwd();
+const PUBLIC_DIR = path.join(ROOT, "public");
+const EMOJI_ROOT = path.join(PUBLIC_DIR, "persona", "emojis");
+const ALLOWED_EXT = new Set([".svg", ".png", ".webp"]);
+
+function listEmojiFiles() {
+  if (!fs.existsSync(EMOJI_ROOT)) return { dir: EMOJI_ROOT, items: [] as Array<{ file: string; url: string }> };
+  const items = fs.readdirSync(EMOJI_ROOT)
+    .filter((file) => ALLOWED_EXT.has(path.extname(file).toLowerCase()))
+    .sort((a, b) => a.localeCompare(b))
+    .map((file) => ({ file, url: `/persona/emojis/${file}` }));
+  return { dir: EMOJI_ROOT, items };
+}
+
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const reaction = (searchParams.get("reaction") || "love").toLowerCase();
-  const r = await fetch(new URL(`/api/persona/assets?type=emoji&reaction=${encodeURIComponent(reaction)}`, req.url), {
-    cache: "no-store",
+  const emotion = (searchParams.get("emotion") || "neutral").trim().toLowerCase();
+  const reaction = (searchParams.get("reaction") || "love").trim().toLowerCase();
+  const { dir, items } = listEmojiFiles();
+
+  return NextResponse.json({
+    ok: true,
+    type: "emoji",
+    emotion,
+    reaction,
+    count: items.length,
+    dir,
+    items
   });
-  const j = await r.json();
-  return NextResponse.json(j);
 }
