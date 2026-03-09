@@ -6,56 +6,39 @@ export const runtime = "nodejs";
 
 const ROOT = process.cwd();
 const EMOJI_ROOT = path.join(ROOT, "public", "persona", "emojis");
-const ALLOWED_EXT = new Set([".svg", ".png", ".webp"]);
+const EXT_OK = new Set([".svg", ".png", ".webp"]);
 
-function looksLikeReaction(file: string, reaction: string): boolean {
-  const base = file.toLowerCase();
-  const r = reaction.toLowerCase();
-  if (r === "all") return true;
-  if (base.includes(r)) return true;
-
-  const aliases: Record<string, string[]> = {
-    love: ["love", "heart", "kiss", "hug", "aura"],
-    happy: ["happy", "smile", "joy", "grin"],
-    sad: ["sad", "cry", "tear"],
-    angry: ["angry", "mad", "rage"],
-    surprised: ["surprised", "shock", "astonished", "wow"],
-    wink: ["wink"],
-    calm: ["calm"],
-  };
-
-  return (aliases[r] || []).some((token) => base.includes(token));
+function allEmojiFiles(): string[] {
+  if (!fs.existsSync(EMOJI_ROOT)) return [];
+  return fs.readdirSync(EMOJI_ROOT)
+    .filter((file) => EXT_OK.has(path.extname(file).toLowerCase()))
+    .sort((a, b) => a.localeCompare(b));
 }
 
-function listEmojiFiles(reaction: string) {
-  if (!fs.existsSync(EMOJI_ROOT)) {
-    return { dir: EMOJI_ROOT, items: [] as Array<{ file: string; url: string }> };
-  }
-
-  const all = fs.readdirSync(EMOJI_ROOT)
-    .filter((file) => ALLOWED_EXT.has(path.extname(file).toLowerCase()))
-    .sort((a, b) => a.localeCompare(b));
-
-  let filtered = all.filter((file) => looksLikeReaction(file, reaction));
-
-  if (filtered.length === 0) {
-    filtered = all;
-  }
-
-  return {
-    dir: EMOJI_ROOT,
-    items: filtered.map((file) => ({
-      file,
-      url: `/persona/emojis/${file}`
-    }))
-  };
+function matchReaction(file: string, reaction: string): boolean {
+  const f = file.toLowerCase();
+  const r = reaction.toLowerCase();
+  if (!r || r === "all") return true;
+  if (f.includes(r)) return true;
+  if (r === "love" && (f.includes("heart") || f.includes("kiss") || f.includes("hug") || f.includes("aura"))) return true;
+  if (r === "happy" && (f.includes("smile") || f.includes("joy") || f.includes("grin"))) return true;
+  if (r === "surprised" && (f.includes("astonished") || f.includes("shock") || f.includes("wow"))) return true;
+  return false;
 }
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const emotion = (searchParams.get("emotion") || "neutral").trim().toLowerCase();
   const reaction = (searchParams.get("reaction") || "love").trim().toLowerCase();
-  const { dir, items } = listEmojiFiles(reaction);
+
+  const files = allEmojiFiles();
+  let picked = files.filter((file) => matchReaction(file, reaction));
+  if (picked.length === 0) picked = files;
+
+  const items = picked.map((file) => ({
+    file,
+    url: `/persona/emojis/${file}`,
+  }));
 
   return NextResponse.json({
     ok: true,
@@ -63,7 +46,7 @@ export async function GET(req: NextRequest) {
     emotion,
     reaction,
     count: items.length,
-    dir,
-    items
+    dir: EMOJI_ROOT,
+    items,
   });
 }
