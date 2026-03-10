@@ -1,21 +1,18 @@
-import { applySecurityHeaders } from "@/lib/security/headers";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-
-// IMPORTANT: this middleware MUST NOT run for /api/live/* (live contract tests).
-export const config = {
-  matcher: ["/api/nexa/:path*"],
-};
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
 export function middleware(req: NextRequest) {
-  try {
-    // guard: only nexa paths ever reach here due to matcher
-    const res = NextResponse.next();
-      applySecurityHeaders(res.headers);
-// keep any existing nexa-specific headers minimal and safe
-    res.headers.set("x-lumora-mw", "nexa-only");
-    return res;
-  } catch {
-    return NextResponse.next();
-  }
+  const res = NextResponse.next()
+
+  res.headers.set("X-Lumora-Sec", "1")
+  res.headers.set("X-Frame-Options", "SAMEORIGIN")
+  res.headers.set("X-Content-Type-Options", "nosniff")
+  res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
+  res.headers.set("X-XSS-Protection", "1; mode=block")
+
+  return res
+}
+
+export const config = {
+  matcher: "/:path*",
 }
