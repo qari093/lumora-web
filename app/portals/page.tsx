@@ -6,6 +6,8 @@ const _portals = PORTALS;
 export default function PortalsHubPage() {
   return (
     <main className="p-6 space-y-6">
+      {/* LumaSpace canonical portal label */}
+      <span data-portal-key="lumaspace">LumaSpace</span>
       <h1 className="text-2xl font-semibold">Portals</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
