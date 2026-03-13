@@ -4,40 +4,58 @@ import path from "node:path";
 
 export const runtime = "nodejs";
 
-const ROOT = process.cwd();
-const PUBLIC_DIR = path.join(ROOT, "public");
-const AVATAR_ROOT = path.join(PUBLIC_DIR, "persona", "avatars");
-const EMOTIONS = ["neutral", "happy", "sad", "angry", "surprised", "focused"];
-const EXTS = [".svg", ".png", ".webp"];
+const EMOTIONS = ["neutral", "happy", "sad", "angry", "surprised", "focused", "calm"] as const;
+const DEFAULT_CODE = "avatar_001";
+const VALID_RE = /^avatar_(0\d\d|1[0-1]\d|120)$/;
 
-function resolveVariant(emotion: string, code: string): string | null {
-  for (const ext of EXTS) {
-    const full = path.join(AVATAR_ROOT, emotion, `${code}${ext}`);
-    if (fs.existsSync(full)) return `/persona/avatars/${emotion}/${code}${ext}`;
-  }
-  return null;
+function json(data: unknown, status = 200) {
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Lumora-Sec": "1",
+    },
+  });
+}
+
+function resolveCode(raw: string | null): string {
+  const value = (raw ?? "").trim();
+  return VALID_RE.test(value) ? value : DEFAULT_CODE;
+}
+
+function publicVariantPath(emotion: string, code: string) {
+  return `/persona/avatars/${emotion}/${code}.png`;
+}
+
+function diskVariantPath(emotion: string, code: string) {
+  return path.join(process.cwd(), "public", "persona", "avatars", emotion, `${code}.png`);
 }
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const code = (searchParams.get("code") || "").trim();
+  try {
+    const code = resolveCode(req.nextUrl.searchParams.get("code"));
 
-  if (!/^avatar_\d{3}$/.test(code)) {
-    return NextResponse.json(
-      { ok: false, error: "BAD_CODE", message: "code must be avatar_001..avatar_120" },
-      { status: 400 }
-    );
+    const variants = EMOTIONS.map((emotion) => {
+      const file = diskVariantPath(emotion, code);
+      return {
+        emotion,
+        code,
+        path: publicVariantPath(emotion, code),
+        exists: fs.existsSync(file),
+      };
+    });
+
+    return json({
+      ok: true,
+      code,
+      fallbackApplied: code === DEFAULT_CODE && !VALID_RE.test((req.nextUrl.searchParams.get("code") ?? "").trim()),
+      variants,
+      count: variants.length,
+      emotions: [...EMOTIONS],
+      ts: new Date().toISOString(),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "internal_error";
+    return json({ ok: false, error: message }, 500);
   }
-
-  const variants: Record<string, string> = {};
-  for (const emotion of EMOTIONS) {
-    const found = resolveVariant(emotion, code);
-    if (found) variants[emotion] = found;
-  }
-
-  return NextResponse.json({
-    ok: true,
-    code,
-    variants
-  });
 }
