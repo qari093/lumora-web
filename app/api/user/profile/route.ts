@@ -6,9 +6,11 @@ export async function GET() {
   return NextResponse.json(
     {
       ok: true,
-      authenticated: false,
-      user: null,
-      source: "launch-auth-session-stub",
+      profile: {
+        id: "launch-user",
+        displayName: "Lumora User",
+      },
+      source: "launch-user-profile-stub",
       ts: new Date().toISOString(),
     },
     {
