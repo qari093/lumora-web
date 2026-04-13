@@ -1,0 +1,6 @@
+[
+  { "entityType": "post", "entityId": "post_001", "slug": "launch-post", "href": "/share/post/post_001", "internal": true },
+  { "entityType": "video", "entityId": "video_001", "slug": "launch-video", "href": "/share/video/video_001", "internal": true },
+  { "entityType": "portal", "entityId": "fyp", "slug": "fyp", "href": "/share/portal/fyp", "internal": true },
+  { "entityType": "room", "entityId": "room_001", "slug": "founders-room", "href": "/share/room/room_001", "internal": true }
+]

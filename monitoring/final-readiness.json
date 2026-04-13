@@ -1,0 +1,14 @@
+{
+  "status": "READY",
+  "timestamp": "2026-03-22T21:33:21.809Z",
+  "system": {
+    "health": "ok",
+    "portals": "ok",
+    "apis": "ok"
+  },
+  "notes": {
+    "guardedEndpoints": true,
+    "authRequiredHandled": true,
+    "productionValidated": true
+  }
+}

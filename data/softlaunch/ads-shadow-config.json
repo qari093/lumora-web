@@ -1,0 +1,7 @@
+{
+  "mode": "shadow",
+  "internalOnly": true,
+  "maxSponsoredPerFeed": 1,
+  "impressionsCap": 500,
+  "adsEnabled": true
+}

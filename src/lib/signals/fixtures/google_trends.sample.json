@@ -1,0 +1,34 @@
+[
+  {
+    "id": "gt_meta_001",
+    "title": "Earthquake spike detected in Tokyo searches",
+    "summary": "Search demand surged before short-form video reaction volume formed.",
+    "url": "https://trends.google.com/trends/explore?q=tokyo+earthquake",
+    "authorHandle": "",
+    "language": "en",
+    "region": "JP",
+    "keywords": ["tokyo", "earthquake", "breaking"],
+    "hashtags": [],
+    "velocityScore": 95,
+    "attentionScore": 89,
+    "saturationScore": 12,
+    "createdAt": 1736208000000,
+    "updatedAt": 1736208300000
+  },
+  {
+    "id": "gt_meta_002",
+    "title": "Superhero trailer keyword burst starting globally",
+    "summary": "Search interest is surging before broader video remix culture catches up.",
+    "url": "https://trends.google.com/trends/explore?q=superhero+trailer",
+    "authorHandle": "",
+    "language": "en",
+    "region": "US",
+    "keywords": ["superhero", "trailer", "movie"],
+    "hashtags": [],
+    "velocityScore": 86,
+    "attentionScore": 80,
+    "saturationScore": 18,
+    "createdAt": 1736209000000,
+    "updatedAt": 1736209300000
+  }
+]

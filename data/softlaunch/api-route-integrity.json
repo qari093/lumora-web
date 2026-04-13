@@ -1,0 +1,6 @@
+[
+  { "path": "/api/health", "method": "GET", "exists": true, "healthy": true },
+  { "path": "/api/fyp", "method": "GET", "exists": true, "healthy": true },
+  { "path": "/api/private-beta/gate", "method": "POST", "exists": true, "healthy": true },
+  { "path": "/api/share", "method": "POST", "exists": true, "healthy": true }
+]

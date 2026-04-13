@@ -1,0 +1,5 @@
+[
+  { "snapshotId": "snap_001", "entity": "wallet-ledger", "checksum": "a1b2c3d4e5f60718", "restorable": true, "retentionDays": 30 },
+  { "snapshotId": "snap_002", "entity": "notifications", "checksum": "b1c2d3e4f5a60718", "restorable": true, "retentionDays": 14 },
+  { "snapshotId": "snap_003", "entity": "fyp-seed", "checksum": "c1d2e3f4a5b60718", "restorable": true, "retentionDays": 7 }
+]

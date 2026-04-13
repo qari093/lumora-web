@@ -1,0 +1,34 @@
+[
+  {
+    "id": "tt_meta_001",
+    "title": "Tokyo street reaction clip gaining traction",
+    "summary": "Street-level reactions accelerating around a breaking event.",
+    "url": "https://www.tiktok.com/@lumora/sample-001",
+    "authorHandle": "@sample_creator",
+    "language": "en",
+    "region": "JP",
+    "keywords": ["tokyo", "reaction", "breaking"],
+    "hashtags": ["#tokyo", "#breaking", "#reaction"],
+    "velocityScore": 88,
+    "attentionScore": 82,
+    "saturationScore": 31,
+    "createdAt": 1736200000000,
+    "updatedAt": 1736200300000
+  },
+  {
+    "id": "tt_meta_002",
+    "title": "Creator remix format spreading across regions",
+    "summary": "A remix trend is crossing into multiple language clusters.",
+    "url": "https://www.tiktok.com/@lumora/sample-002",
+    "authorHandle": "@sample_remixer",
+    "language": "en",
+    "region": "US",
+    "keywords": ["remix", "trend", "creator"],
+    "hashtags": ["#remix", "#trend", "#viral"],
+    "velocityScore": 79,
+    "attentionScore": 76,
+    "saturationScore": 42,
+    "createdAt": 1736201000000,
+    "updatedAt": 1736201300000
+  }
+]

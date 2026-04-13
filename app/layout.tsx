@@ -1,21 +1,21 @@
-import ClientLayout from "@/components/ClientLayout";
-import PrimaryNav from "@/components/nav/PrimaryNav";
-import ServiceWorkerRegister from "components/pwa/ServiceWorkerRegister";
-import SplashGate from "@/components/splash/SplashGate";
-import BootMark from "@/components/splash/BootMark";
+import type { Metadata } from "next";
+import GlobalPortalNav from "@/components/navigation/GlobalPortalNav";
 
-export const runtime = "nodejs";
+export const metadata: Metadata = {
+  title: "Lumora",
+  description: "Lumora launch shell",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html>
-      <body>
-        <PrimaryNav />
-        <ServiceWorkerRegister />
-        
-        <SplashGate durationMs={1400} fadeOutMs={220} />
-        <BootMark />
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en">
+      <body style={{ margin: 0 }}>
+        <GlobalPortalNav />
+        {children}
       </body>
     </html>
   );

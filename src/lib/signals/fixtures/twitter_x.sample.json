@@ -1,0 +1,34 @@
+[
+  {
+    "id": "x_meta_001",
+    "title": "Keyword burst detected around AI chip export policy",
+    "summary": "Conversation is accelerating across finance, policy, and startup clusters.",
+    "url": "https://x.com/lumora/status/sample-001",
+    "authorHandle": "@sample_policy",
+    "language": "en",
+    "region": "US",
+    "keywords": ["ai", "chips", "policy"],
+    "hashtags": ["#ai", "#chips", "#policy"],
+    "velocityScore": 91,
+    "attentionScore": 87,
+    "saturationScore": 28,
+    "createdAt": 1736204000000,
+    "updatedAt": 1736204300000
+  },
+  {
+    "id": "x_meta_002",
+    "title": "Entertainment feud narrative crossing into mainstream sports chatter",
+    "summary": "A celebrity storyline is bleeding into adjacent communities and accelerating fast.",
+    "url": "https://x.com/lumora/status/sample-002",
+    "authorHandle": "@sample_culture",
+    "language": "en",
+    "region": "GB",
+    "keywords": ["entertainment", "feud", "sports"],
+    "hashtags": ["#culture", "#sports", "#viral"],
+    "velocityScore": 84,
+    "attentionScore": 81,
+    "saturationScore": 39,
+    "createdAt": 1736205000000,
+    "updatedAt": 1736205300000
+  }
+]

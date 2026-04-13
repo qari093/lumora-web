@@ -1,0 +1,5 @@
+[
+  { "walletId": "wallet_001", "ownerId": "tester_001", "currency": "ZC", "balance": 120, "ledgerHealthy": true, "transfersEnabled": true },
+  { "walletId": "wallet_002", "ownerId": "tester_002", "currency": "ZC", "balance": 80, "ledgerHealthy": true, "transfersEnabled": true },
+  { "walletId": "wallet_003", "ownerId": "tester_003", "currency": "ZC", "balance": 40, "ledgerHealthy": true, "transfersEnabled": true }
+]

@@ -1,0 +1,5 @@
+[
+  { "userId": "tester_001", "rewardEngineReady": true, "notificationReady": true, "unreadCount": 2, "rewardBalance": 25 },
+  { "userId": "tester_002", "rewardEngineReady": true, "notificationReady": true, "unreadCount": 0, "rewardBalance": 40 },
+  { "userId": "tester_003", "rewardEngineReady": true, "notificationReady": true, "unreadCount": 1, "rewardBalance": 15 }
+]

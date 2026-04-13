@@ -1,0 +1,14 @@
+{
+  "endpoints": [
+    "/api/health",
+    "/api/launch/readiness",
+    "/api/fyp/health",
+    "/api/gmar/health",
+    "/api/nexa/health",
+    "/api/live/health",
+    "/api/movies/health",
+    "/api/music/health"
+  ],
+  "interval_seconds": 60,
+  "timeout_ms": 5000
+}

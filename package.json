@@ -161,7 +161,8 @@
     "ci:gate": "bash scripts/guard/ci_gate.sh",
     "guard:noheredoc": "sh scripts/guard/no_heredoc_mode.sh </dev/null || true",
     "guard:scan-noheredoc": "sh scripts/guard/scan_no_heredoc_artifacts.sh .",
-    "guard:eslint-warn": "node --loader ts-node/esm scripts/guard/eslint_warning_budget.ts"
+    "guard:eslint-warn": "node --loader ts-node/esm scripts/guard/eslint_warning_budget.ts",
+    "monitor": "node monitoring/monitor.cjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",

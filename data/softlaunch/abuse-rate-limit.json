@@ -1,0 +1,6 @@
+[
+  { "route": "/api/fyp", "rateLimitEnabled": true, "abuseGuardEnabled": true, "requestLimit": 120, "burstLimit": 20 },
+  { "route": "/api/live/rooms", "rateLimitEnabled": true, "abuseGuardEnabled": true, "requestLimit": 60, "burstLimit": 10 },
+  { "route": "/api/share", "rateLimitEnabled": true, "abuseGuardEnabled": true, "requestLimit": 80, "burstLimit": 15 },
+  { "route": "/api/wallet", "rateLimitEnabled": true, "abuseGuardEnabled": true, "requestLimit": 40, "burstLimit": 5 }
+]

@@ -1,0 +1,51 @@
+{
+  "version": "v7.5",
+  "status": "locked",
+  "ai_video_generation": false,
+  "personalized_mix": {
+    "personalized_percent_min": 70,
+    "personalized_percent_max": 80,
+    "discovery_percent_min": 20,
+    "discovery_percent_max": 30
+  },
+  "required_engines": [
+    "signal",
+    "intelligence",
+    "trust",
+    "hygiene",
+    "format",
+    "motion",
+    "video_perception",
+    "reaction_echo",
+    "personalization",
+    "fyp",
+    "social",
+    "fomo",
+    "interaction",
+    "cultural",
+    "cineverse",
+    "content_supply",
+    "feedback",
+    "ethical",
+    "infra",
+    "security",
+    "monetization"
+  ],
+  "required_sources": [
+    "tiktok",
+    "instagram",
+    "twitter_x",
+    "reddit",
+    "google_trends",
+    "news_rss",
+    "twitch"
+  ],
+  "required_safety": [
+    "fake_virality_filter",
+    "scam_filter",
+    "misinformation_filter",
+    "nsfw_image_filter",
+    "explicit_audio_filter",
+    "manual_review_queue"
+  ]
+}

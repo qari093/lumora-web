@@ -1,0 +1,5 @@
+[
+  { "id": "err_001", "level": "error", "message": "feed failure captured", "source": "fyp", "captured": true },
+  { "id": "err_002", "level": "error", "message": "wallet failure captured", "source": "wallet", "captured": true },
+  { "id": "err_003", "level": "error", "message": "live failure captured", "source": "live", "captured": true }
+]

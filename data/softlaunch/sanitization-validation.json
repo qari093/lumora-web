@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sample_001",
+    "field": "comment",
+    "input": "<script>alert(1)</script>Hello",
+    "sanitized": "Hello",
+    "valid": true
+  },
+  {
+    "id": "sample_002",
+    "field": "title",
+    "input": "  Launch   Day  ",
+    "sanitized": "Launch Day",
+    "valid": true
+  },
+  {
+    "id": "sample_003",
+    "field": "shareText",
+    "input": "<b>Welcome</b>",
+    "sanitized": "Welcome",
+    "valid": true
+  }
+]

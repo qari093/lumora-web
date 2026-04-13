@@ -1,0 +1,6 @@
+[
+  { "path": "/fyp", "cacheMode": "private", "personalized": true, "valid": true },
+  { "path": "/live", "cacheMode": "private", "personalized": true, "valid": true },
+  { "path": "/manifest.webmanifest", "cacheMode": "edge", "personalized": false, "valid": true },
+  { "path": "/api/health", "cacheMode": "no-store", "personalized": false, "valid": true }
+]

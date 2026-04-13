@@ -1,0 +1,67 @@
+[
+  {
+    "id": "seed_gmar_astro_001",
+    "creatorId": "creator_gmar_alpha",
+    "title": "Astro Shooter — Peak Run",
+    "category": "GMAR",
+    "text": "High intensity gameplay reaching critical phase.",
+    "baseScore": 0.90,
+    "engagement": 0.95,
+    "completion": 0.84,
+    "shareVelocity": 0.76,
+    "creatorAffinity": 0.82,
+    "ageMinutes": 5
+  },
+  {
+    "id": "seed_nexa_focus_001",
+    "creatorId": "creator_nexa_mira",
+    "title": "Deep Focus Protocol",
+    "category": "NEXA",
+    "text": "Calm state with high cognitive clarity.",
+    "baseScore": 0.85,
+    "engagement": 0.70,
+    "completion": 0.91,
+    "shareVelocity": 0.42,
+    "creatorAffinity": 0.74,
+    "ageMinutes": 180
+  },
+  {
+    "id": "seed_live_trending_001",
+    "creatorId": "creator_live_orbit",
+    "title": "Live Session Trending",
+    "category": "LIVE",
+    "text": "Audience engagement rising rapidly.",
+    "baseScore": 0.88,
+    "engagement": 0.90,
+    "completion": 0.73,
+    "shareVelocity": 0.88,
+    "creatorAffinity": 0.79,
+    "ageMinutes": 20
+  },
+  {
+    "id": "seed_movies_drop_001",
+    "creatorId": "creator_movies_cineverse",
+    "title": "CineVerse Trailer Drop",
+    "category": "MOVIES",
+    "text": "New trailer gaining traction.",
+    "baseScore": 0.87,
+    "engagement": 0.80,
+    "completion": 0.77,
+    "shareVelocity": 0.69,
+    "creatorAffinity": 0.71,
+    "ageMinutes": 360
+  },
+  {
+    "id": "seed_social_viral_001",
+    "creatorId": "creator_social_echo",
+    "title": "Viral Creator Moment",
+    "category": "SOCIAL",
+    "text": "Rapid share velocity detected.",
+    "baseScore": 0.86,
+    "engagement": 0.92,
+    "completion": 0.81,
+    "shareVelocity": 0.94,
+    "creatorAffinity": 0.90,
+    "ageMinutes": 45
+  }
+]

@@ -1,12 +1,27 @@
 import { NextResponse } from "next/server";
+import { validateEnv } from "@/lib/env/validateEnv";
 
-export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  // "ready" is intentionally softer than "health" (but still must be 200).
+  const env = validateEnv();
+  const ready = env.ok;
+
   return NextResponse.json(
-    { ok: true, ready: true, ts: Date.now() },
-    { status: 200, headers: { "cache-control": "no-store" } }
+    {
+      ok: ready,
+      service: "lumora-web",
+      status: ready ? "ready" : "not_ready",
+      checks: {
+        env,
+      },
+      ts: Date.now(),
+    },
+    {
+      status: ready ? 200 : 503,
+      headers: {
+        "Cache-Control": "no-store, must-revalidate",
+      },
+    }
   );
 }

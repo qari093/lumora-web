@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-03-22T20:52:04.122Z",
+  "base_url": "https://lumoraverse.io",
+  "headers_checked": 5,
+  "surfaces_checked": 4,
+  "missing_headers": [],
+  "bad_surfaces": [],
+  "rows": [
+    {
+      "kind": "headers",
+      "path": "/",
+      "has_x_frame_options": true,
+      "has_x_content_type_options": true,
+      "has_referrer_policy": true,
+      "has_cache_control": true,
+      "has_content_security_policy": false,
+      "ts": "2026-03-22T20:51:56.797Z"
+    },
+    {
+      "kind": "headers",
+      "path": "/launch",
+      "has_x_frame_options": true,
+      "has_x_content_type_options": true,
+      "has_referrer_policy": true,
+      "has_cache_control": true,
+      "has_content_security_policy": false,
+      "ts": "2026-03-22T20:51:57.687Z"
+    },
+    {
+      "kind": "headers",
+      "path": "/status",
+      "has_x_frame_options": true,
+      "has_x_content_type_options": true,
+      "has_referrer_policy": true,
+      "has_cache_control": true,
+      "has_content_security_policy": false,
+      "ts": "2026-03-22T20:51:58.587Z"
+    },
+    {
+      "kind": "headers",
+      "path": "/dashboard",
+      "has_x_frame_options": true,
+      "has_x_content_type_options": true,
+      "has_referrer_policy": true,
+      "has_cache_control": true,
+      "has_content_security_policy": false,
+      "ts": "2026-03-22T20:51:59.232Z"
+    },
+    {
+      "kind": "headers",
+      "path": "/api/health",
+      "has_x_frame_options": true,
+      "has_x_content_type_options": true,
+      "has_referrer_policy": true,
+      "has_cache_control": true,
+      "has_content_security_policy": false,
+      "ts": "2026-03-22T20:52:00.578Z"
+    },
+    {
+      "kind": "surface",
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "ts": "2026-03-22T20:52:01.242Z"
+    },
+    {
+      "kind": "surface",
+      "path": "/api/launch/readiness",
+      "status": 200,
+      "ok": true,
+      "ts": "2026-03-22T20:52:02.064Z"
+    },
+    {
+      "kind": "surface",
+      "path": "/api/fyp/summary",
+      "status": 200,
+      "ok": true,
+      "ts": "2026-03-22T20:52:03.009Z"
+    },
+    {
+      "kind": "surface",
+      "path": "/api/wallet/summary",
+      "status": 200,
+      "ok": true,
+      "ts": "2026-03-22T20:52:03.695Z"
+    }
+  ]
+}

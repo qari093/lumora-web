@@ -870,3 +870,22 @@ model CineVerseMovie {
   @@map("CineverseMovie")
 }
 
+
+model WalletEntry {
+  id        String   @id @default(cuid())
+  walletId  String
+  type      String
+  amount    Float
+  createdAt DateTime @default(now())
+}
+
+
+model LedgerEntry {
+  id        String   @id @default(cuid())
+  ownerId   String
+  refType   String
+  refId     String
+  amount    Float
+  createdAt DateTime @default(now())
+}
+

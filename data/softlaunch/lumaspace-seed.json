@@ -1,0 +1,6 @@
+[
+  { "id": "lumaspace_seed_001", "portal": "LUMASPACE", "title": "Reflection Starter", "spaceType": "reflection", "active": true, "usable": true, "score": 0.86 },
+  { "id": "lumaspace_seed_002", "portal": "LUMASPACE", "title": "Journal Starter", "spaceType": "journal", "active": true, "usable": true, "score": 0.82 },
+  { "id": "lumaspace_seed_003", "portal": "LUMASPACE", "title": "Mirror Starter", "spaceType": "mirror", "active": true, "usable": true, "score": 0.78 },
+  { "id": "lumaspace_seed_004", "portal": "LUMASPACE", "title": "Zen Starter", "spaceType": "zen", "active": true, "usable": true, "score": 0.75 }
+]

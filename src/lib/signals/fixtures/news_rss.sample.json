@@ -1,0 +1,34 @@
+[
+  {
+    "id": "news_rss_001",
+    "title": "Emergency updates accelerate after major transit disruption",
+    "summary": "Regional news coverage is surging ahead of short-form remix activity.",
+    "url": "https://news.example.com/story/sample-001",
+    "authorHandle": "newswire",
+    "language": "en",
+    "region": "DE",
+    "keywords": ["transit", "disruption", "breaking"],
+    "hashtags": [],
+    "velocityScore": 89,
+    "attentionScore": 84,
+    "saturationScore": 16,
+    "createdAt": 1736210000000,
+    "updatedAt": 1736210300000
+  },
+  {
+    "id": "news_rss_002",
+    "title": "Festival announcement drives sudden search and discussion spike",
+    "summary": "Cultural news is taking off across public feeds and search demand.",
+    "url": "https://news.example.com/story/sample-002",
+    "authorHandle": "artsdesk",
+    "language": "en",
+    "region": "IN",
+    "keywords": ["festival", "culture", "announcement"],
+    "hashtags": [],
+    "velocityScore": 76,
+    "attentionScore": 79,
+    "saturationScore": 21,
+    "createdAt": 1736211000000,
+    "updatedAt": 1736211300000
+  }
+]

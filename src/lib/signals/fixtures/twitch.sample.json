@@ -1,0 +1,34 @@
+[
+  {
+    "id": "twitch_meta_001",
+    "title": "Unexpected viewer spike in strategy game category",
+    "summary": "Live attention surged in a niche category before clips spread to short-form platforms.",
+    "url": "https://www.twitch.tv/directory/category/sample-001",
+    "authorHandle": "twitch_directory",
+    "language": "en",
+    "region": "US",
+    "keywords": ["twitch", "gaming", "strategy", "spike"],
+    "hashtags": [],
+    "velocityScore": 82,
+    "attentionScore": 79,
+    "saturationScore": 22,
+    "createdAt": 1736212000000,
+    "updatedAt": 1736212300000
+  },
+  {
+    "id": "twitch_meta_002",
+    "title": "Esports finals chatter pushing category beyond usual audience",
+    "summary": "Category watch-time is accelerating into mainstream culture discussion.",
+    "url": "https://www.twitch.tv/directory/category/sample-002",
+    "authorHandle": "twitch_directory",
+    "language": "en",
+    "region": "KR",
+    "keywords": ["esports", "finals", "live", "category"],
+    "hashtags": [],
+    "velocityScore": 88,
+    "attentionScore": 84,
+    "saturationScore": 31,
+    "createdAt": 1736213000000,
+    "updatedAt": 1736213300000
+  }
+]

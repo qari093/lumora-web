@@ -1,0 +1,6 @@
+[
+  { "id": "feed_seed_001", "portal": "FYP", "title": "Launch Feed Hero", "category": "featured", "active": true, "score": 0.91 },
+  { "id": "feed_seed_002", "portal": "FYP", "title": "GMAR Cross Promo", "category": "gaming", "active": true, "score": 0.82 },
+  { "id": "feed_seed_003", "portal": "FYP", "title": "NEXA Focus Story", "category": "wellness", "active": true, "score": 0.78 },
+  { "id": "feed_seed_004", "portal": "FYP", "title": "CineVerse Clip", "category": "movies", "active": true, "score": 0.73 }
+]

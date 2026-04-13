@@ -1,68 +1,80 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-type AnyProps = Record<string, any>;
+export default function LumoraSplash() {
+  const router = useRouter();
+  const [visible, setVisible] = useState(false);
+  const [exit, setExit] = useState(false);
 
-/**
- * Build-safe splash component.
- * - Accepts any props to remain compatible with existing callers (e.g., SplashGate).
- * - Provides reduced-motion respect and a short auto-complete fallback.
- * - Avoids any complex logic that could be corrupted by automated hook-deps patching.
- */
-export default function LumoraSplash(props: AnyProps) {
-  const onDone =
-    typeof props?.onDone === 'function'
-      ? (props.onDone as () => void)
-      : typeof props?.onComplete === 'function'
-      ? (props.onComplete as () => void)
-      : null;
+  useEffect(() => {
+    const t1 = setTimeout(() => setVisible(true), 60);
 
-  const prefersReduced = React.useMemo(() => {
-    if (typeof window === 'undefined') return true;
-    try {
-      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    } catch {
-      return true;
-    }
-  }, []);
+    const t2 = setTimeout(() => {
+      setExit(true);
+    }, 1800);
 
-  React.useEffect(() => {
-    // If reduced motion, or if no explicit completion handler, finish quickly to avoid blocking app.
-    const ms = prefersReduced ? 10 : 700;
-    const t = window.setTimeout(() => {
-      try {
-        onDone?.();
-      } catch {
-        // ignore
-      }
-    }, ms);
-    return () => window.clearTimeout(t);
-  }, [prefersReduced, onDone]);
+    const t3 = setTimeout(() => {
+      router.replace("/fyp");
+    }, 2400);
 
-  // Keep render minimal; SplashGate (or layout) controls visibility/overlay styling elsewhere.
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [router]);
+
   return (
-    <div
-      aria-label="Lumora Splash"
-      role="img"
+    <main
       style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        display: 'grid',
-        placeItems: 'center',
-        pointerEvents: 'none',
+        minHeight: "100dvh",
+        display: "grid",
+        placeItems: "center",
+        background: "radial-gradient(circle at center, #020617 0%, #000814 100%)",
+        padding: 24,
+        opacity: exit ? 0 : 1,
+        transition: "opacity 600ms ease",
       }}
     >
-      <div
+      <section
         style={{
-          width: 64,
-          height: 64,
-          borderRadius: 16,
-          opacity: prefersReduced ? 0.85 : 0.95,
-          transform: prefersReduced ? 'none' : 'translateZ(0)',
+          textAlign: "center",
+          transform: visible ? "scale(1)" : "scale(0.97)",
+          opacity: visible ? 1 : 0,
+          transition: "transform 800ms ease, opacity 800ms ease",
         }}
-      />
-    </div>
+      >
+        <div
+          style={{
+            padding: 20,
+            borderRadius: 24,
+            background: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            boxShadow:
+              "0 10px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03)",
+          }}
+        >
+          <Image
+            src="/brand/lumora-brand-v2.png"
+            alt="Lumora"
+            width={560}
+            height={280}
+            priority
+            unoptimized
+            style={{
+              width: "min(460px, 88vw)",
+              height: "auto",
+              display: "block",
+              margin: "0 auto",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+      </section>
+    </main>
   );
 }

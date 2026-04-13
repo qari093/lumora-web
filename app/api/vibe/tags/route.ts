@@ -1,47 +1,26 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { vibeTagsLiteEnabled } from "@/lib/flags/vibeTags";
 
-function json(data: any, status = 200) {
-  return new NextResponse(JSON.stringify(data), {
-    status,
-    headers: { "content-type": "application/json; charset=utf-8" },
-  });
-}
+export const runtime = "nodejs";
 
-function isEnabled(): boolean {
-  try {
-    const v: any = vibeTagsLiteEnabled as any;
-    return typeof v === "function" ? !!v() : !!v;
-  } catch {
-    return false;
-  }
-}
+export async function GET() {
+  const enabled =
+    process.env.VIBE_TAGS_LITE_ENABLED === "true" ||
+    process.env.NEXT_PUBLIC_VIBE_TAGS_LITE_ENABLED === "true";
 
-export async function GET(req: Request) {
-  try {
-    if (!isEnabled()) return json({ ok: false, error: "vibe_tags_lite_disabled" }, 403);
-
-    const url = new URL(req.url);
-    const limitRaw = url.searchParams.get("limit") || "80";
-    const limit = Math.max(1, Math.min(200, Number(limitRaw) || 80));
-
-    // Schema in this repo does NOT include isActive (observed in tests); we return all tags.
-    const tags = await prisma.vibeTag.findMany({
-      take: limit,
-      orderBy: [{ category: "asc" }, { intensity: "desc" }, { createdAt: "asc" }],
-      select: {
-        slug: true,
-        label: true,
-        category: true,
-        intensity: true,
-        rarity: true,
-      },
+  if (!enabled) {
+    return NextResponse.json({
+      ok: true,
+      enabled: false,
+      source: "flags:vibeTagsLiteEnabled",
+      items: [],
+      ts: Date.now()
     });
-
-    return json({ ok: true, items: tags, ts: Date.now() }, 200);
-  } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    return json({ ok: false, error: msg, ts: Date.now() }, 500);
   }
+
+  return NextResponse.json({
+    ok: true,
+    enabled: true,
+    items: [],
+    ts: Date.now()
+  });
 }

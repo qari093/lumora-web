@@ -1,0 +1,34 @@
+[
+  {
+    "id": "reddit_meta_001",
+    "title": "Discussion spike around surprise movie cameo",
+    "summary": "Subreddit chatter is accelerating before short-form edits appear elsewhere.",
+    "url": "https://www.reddit.com/r/movies/comments/sample001",
+    "authorHandle": "u/sample_moviefan",
+    "language": "en",
+    "region": "US",
+    "keywords": ["movie", "cameo", "discussion"],
+    "hashtags": [],
+    "velocityScore": 77,
+    "attentionScore": 83,
+    "saturationScore": 24,
+    "createdAt": 1736206000000,
+    "updatedAt": 1736206300000
+  },
+  {
+    "id": "reddit_meta_002",
+    "title": "Gaming meme breaks out of niche community",
+    "summary": "A joke format is crossing from niche subreddit culture into broader gaming discourse.",
+    "url": "https://www.reddit.com/r/gaming/comments/sample002",
+    "authorHandle": "u/sample_gamer",
+    "language": "en",
+    "region": "CA",
+    "keywords": ["gaming", "meme", "community"],
+    "hashtags": [],
+    "velocityScore": 72,
+    "attentionScore": 79,
+    "saturationScore": 33,
+    "createdAt": 1736207000000,
+    "updatedAt": 1736207300000
+  }
+]

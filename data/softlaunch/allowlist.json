@@ -1,0 +1,7 @@
+[
+  { "email": "tester1@lumora.app", "code": "LUMA001", "status": "pending" },
+  { "email": "tester2@lumora.app", "code": "LUMA002", "status": "pending" },
+  { "email": "tester3@lumora.app", "code": "LUMA003", "status": "accepted" },
+  { "email": "tester4@lumora.app", "code": "LUMA004", "status": "pending" },
+  { "email": "tester5@lumora.app", "code": "LUMA005", "status": "accepted" }
+]

@@ -1,0 +1,6 @@
+[
+  { "from": "/", "to": "/fyp", "enabled": true, "valid": true },
+  { "from": "/fyp", "to": "/live", "enabled": true, "valid": true },
+  { "from": "/fyp", "to": "/gmar", "enabled": true, "valid": true },
+  { "from": "/fyp", "to": "/lumaspace", "enabled": true, "valid": true }
+]

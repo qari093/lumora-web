@@ -1,95 +1,70 @@
-import React from "react";
-
-export type PortalShellProps = {
+type PortalShellProps = {
   title: string;
-  subtitle?: string;
-  icon?: string;
-  accent?: string; // CSS color
-  children?: React.ReactNode;
+  subtitle: string;
+  portalKey: string;
 };
 
-export default function PortalShell(props: PortalShellProps) {
-  const { title, subtitle, icon, accent, children } = props;
+export default function PortalShell({ title, subtitle, portalKey }: PortalShellProps) {
+  const routePath = `/${portalKey}`;
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        padding: "24px 16px 40px",
-        background:
-          "radial-gradient(1200px 600px at 15% 10%, rgba(56,189,248,0.10), transparent 60%)," +
-          "radial-gradient(900px 480px at 85% 20%, rgba(168,85,247,0.10), transparent 60%)," +
-          "linear-gradient(180deg, rgba(2,6,23,1) 0%, rgba(3,7,18,1) 100%)",
-        color: "rgba(255,255,255,0.92)",
-      }}
-    >
-      <header
-        style={{
-          maxWidth: 980,
-          margin: "0 auto 18px",
-          borderRadius: 16,
-          padding: "14px 14px",
-          border: "1px solid rgba(255,255,255,0.10)",
-          background: "rgba(255,255,255,0.04)",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          {icon ? (
-            <div
-              aria-hidden="true"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 12,
-                display: "grid",
-                placeItems: "center",
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.10)",
-              }}
-            >
-              <span style={{ fontSize: 20, lineHeight: "20px" }}>{icon}</span>
-            </div>
-          ) : null}
+    <main style={{ minHeight: "100vh", padding: 24 }}>
+      <section style={{ maxWidth: 960, margin: "0 auto" }}>
+        <p style={{ opacity: 0.7, marginBottom: 8 }}>Lumora Portal</p>
+        <h1 style={{ fontSize: 32, marginBottom: 12 }}>{title}</h1>
+        <p style={{ fontSize: 16, opacity: 0.85, marginBottom: 24 }}>{subtitle}</p>
 
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  letterSpacing: 0.2,
-                  fontWeight: 700,
-                }}
-              >
-                {title}
-              </h1>
-
-              {accent ? (
-                <span
-                  aria-hidden="true"
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: accent,
-                    boxShadow: `0 0 18px ${accent}`,
-                    display: "inline-block",
-                  }}
-                />
-              ) : null}
-            </div>
-
-            {subtitle ? (
-              <p style={{ margin: "6px 0 0", opacity: 0.78, fontSize: 13, lineHeight: "18px" }}>
-                {subtitle}
-              </p>
-            ) : null}
-          </div>
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            flexWrap: "wrap",
+            marginBottom: 18,
+          }}
+        >
+          <span
+            data-portal-badge="status"
+            style={{
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: 999,
+              padding: "8px 12px",
+            }}
+          >
+            Status: Active
+          </span>
+          <span
+            data-portal-badge="route"
+            style={{
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: 999,
+              padding: "8px 12px",
+            }}
+          >
+            Route: {routePath}
+          </span>
+          <span
+            data-portal-badge="key"
+            style={{
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: 999,
+              padding: "8px 12px",
+            }}
+          >
+            Key: {portalKey}
+          </span>
         </div>
-      </header>
 
-      <section style={{ maxWidth: 980, margin: "0 auto" }}>{children}</section>
+        <div
+          data-portal-key={portalKey}
+          style={{
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 16,
+            padding: 20,
+          }}
+        >
+          <strong>Status:</strong> Active shell loaded for <code>{portalKey}</code>
+        </div>
+      </section>
     </main>
   );
 }

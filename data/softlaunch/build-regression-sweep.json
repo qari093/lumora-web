@@ -1,0 +1,7 @@
+[
+  { "name": "typecheck", "passed": true },
+  { "name": "softlaunch_contract_tests", "passed": true },
+  { "name": "portal_health_checks", "passed": true },
+  { "name": "security_header_checks", "passed": true },
+  { "name": "cache_strategy_checks", "passed": true }
+]

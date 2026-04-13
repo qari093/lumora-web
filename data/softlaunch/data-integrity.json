@@ -1,0 +1,5 @@
+[
+  { "id": "1", "type": "wallet", "checksum": "a1b2c3d4", "valid": true },
+  { "id": "2", "type": "feed", "checksum": "b1c2d3e4", "valid": true },
+  { "id": "3", "type": "ads", "checksum": "c1d2e3f4", "valid": true }
+]

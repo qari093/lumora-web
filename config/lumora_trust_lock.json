@@ -1,0 +1,17 @@
+{
+  "trust_engine_locked": true,
+  "version": "v7.5",
+  "locked_at": 1775984639700,
+  "components": [
+    "fake_engagement",
+    "bot_patterns",
+    "anomaly_detection",
+    "semantic_validation",
+    "toxic_velocity",
+    "scam_detection",
+    "misinformation_tagging",
+    "trust_score",
+    "low_trust_filter",
+    "audit_logs"
+  ]
+}

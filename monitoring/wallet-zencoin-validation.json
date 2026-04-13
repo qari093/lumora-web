@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-03-22T21:30:48.420Z",
+  "base_url": "https://lumoraverse.io",
+  "pages": {
+    "wallet": true,
+    "walletsOptional": true
+  },
+  "apis": {
+    "walletSummaryReachable": true,
+    "walletBalanceReachable": true,
+    "coinBalanceReachable": true,
+    "walletLedgerReachable": true
+  },
+  "notes": {
+    "authRequiredEndpointsHandled": true,
+    "guarded400Accepted": true,
+    "methodGuard405Accepted": true
+  }
+}

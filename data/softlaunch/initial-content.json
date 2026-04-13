@@ -1,0 +1,9 @@
+[
+  { "id": "seed_fyp_001", "portal": "FYP", "title": "Astro Shooter — Launch Clip", "kind": "video", "active": true },
+  { "id": "seed_fyp_002", "portal": "FYP", "title": "Creator Moment — Beta Feed", "kind": "post", "active": true },
+  { "id": "seed_gmar_001", "portal": "GMAR", "title": "GMAR Featured Challenge", "kind": "drop", "active": true },
+  { "id": "seed_nexa_001", "portal": "NEXA", "title": "Deep Focus Protocol", "kind": "post", "active": true },
+  { "id": "seed_live_001", "portal": "LIVE", "title": "Founders Room Beta", "kind": "room", "active": true },
+  { "id": "seed_movies_001", "portal": "MOVIES", "title": "CineVerse Spotlight", "kind": "video", "active": true },
+  { "id": "seed_music_001", "portal": "MUSIC", "title": "Echo Track Preview", "kind": "track", "active": true }
+]

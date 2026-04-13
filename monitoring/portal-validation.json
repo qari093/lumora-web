@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-03-22T20:56:44.275Z",
+  "base_url": "https://lumoraverse.io",
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "rows": [
+    {
+      "portal": "fyp",
+      "page_path": "/fyp",
+      "api_path": "/api/fyp/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "For You",
+      "ts": "2026-03-22T20:56:36.228Z"
+    },
+    {
+      "portal": "gmar",
+      "page_path": "/gmar",
+      "api_path": "/api/gmar/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "GMAR",
+      "ts": "2026-03-22T20:56:37.608Z"
+    },
+    {
+      "portal": "nexa",
+      "page_path": "/nexa",
+      "api_path": "/api/nexa/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "NEXA",
+      "ts": "2026-03-22T20:56:39.031Z"
+    },
+    {
+      "portal": "cineverse",
+      "page_path": "/cineverse",
+      "api_path": "/api/cineverse/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "CineVerse",
+      "ts": "2026-03-22T20:56:40.388Z"
+    },
+    {
+      "portal": "live",
+      "page_path": "/live",
+      "api_path": "/api/live/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "Live",
+      "ts": "2026-03-22T20:56:41.617Z"
+    },
+    {
+      "portal": "wallet",
+      "page_path": "/wallet",
+      "api_path": "/api/wallet/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "Wallet",
+      "ts": "2026-03-22T20:56:42.868Z"
+    },
+    {
+      "portal": "profile",
+      "page_path": "/profile",
+      "api_path": "/api/profile/summary",
+      "page_ok": true,
+      "api_ok": true,
+      "marker": "Profile",
+      "ts": "2026-03-22T20:56:43.997Z"
+    }
+  ]
+}

@@ -1,18 +1,18 @@
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
-  const res = NextResponse.next()
+function applyLumoraSecurityHeaders(headers: Headers): void {
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-frame-options", "DENY");
+  headers.set("referrer-policy", "no-referrer");
+  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
+}
 
-  res.headers.set("X-Lumora-Sec", "1")
-  res.headers.set("X-Frame-Options", "SAMEORIGIN")
-  res.headers.set("X-Content-Type-Options", "nosniff")
-  res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
-  res.headers.set("X-XSS-Protection", "1; mode=block")
-
-  return res
+export function middleware(_req: NextRequest) {
+  const res = NextResponse.next();
+  applyLumoraSecurityHeaders(res.headers);
+  return res;
 }
 
 export const config = {
   matcher: "/:path*",
-}
+};

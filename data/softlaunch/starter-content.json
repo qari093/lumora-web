@@ -1,0 +1,8 @@
+[
+  { "id": "starter_fyp_001", "portal": "FYP", "title": "Launch Feed Hero", "category": "feed", "active": true },
+  { "id": "starter_gmar_001", "portal": "GMAR", "title": "GMAR Beta Challenge", "category": "game", "active": true },
+  { "id": "starter_nexa_001", "portal": "NEXA", "title": "Deep Focus Starter", "category": "wellness", "active": true },
+  { "id": "starter_live_001", "portal": "LIVE", "title": "Founders Room", "category": "live", "active": true },
+  { "id": "starter_movies_001", "portal": "MOVIES", "title": "CineVerse Starter", "category": "movie", "active": true },
+  { "id": "starter_music_001", "portal": "MUSIC", "title": "Echo Starter Track", "category": "music", "active": true }
+]

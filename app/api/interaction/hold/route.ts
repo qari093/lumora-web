@@ -1,0 +1,9 @@
+import { holdAction } from "@/lib/interaction/hold/engine";
+export const dynamic = "force-dynamic";
+export async function GET() {
+  return new Response(JSON.stringify({
+    ok: true,
+    data: holdAction(),
+    ts: Date.now()
+  }), { headers: { "content-type": "application/json" } });
+}

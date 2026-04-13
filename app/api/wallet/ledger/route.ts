@@ -1,32 +1,31 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
+import { createLedgerTransaction } from "@/lib/wallet/ledger";
 
-function bad(message: string, status = 400) {
-  return NextResponse.json({ ok: false, error: message }, { status });
-}
-
-export async function GET(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const userId = (searchParams.get("userId") || "").trim();
-    const limit = Math.min(Math.max(Number(searchParams.get("limit") || "20"), 1), 100);
-    if (!userId) return bad("Missing userId", 400);
+    const body = await req.json();
 
-    const items = await prisma.ledgerEntry.findMany({
-      where: { ownerId: userId },
-      orderBy: { createdAt: "desc" },
-      take: limit,
+    if (!body?.userId || typeof body?.amount !== "number" || !body?.reference) {
+      return NextResponse.json(
+        { ok: false, error: "missing_ledger_fields" },
+        { status: 400 }
+      );
+    }
+
+    const transaction = createLedgerTransaction({
+      userId: String(body.userId),
+      amount: body.amount,
+      reference: String(body.reference),
     });
 
     return NextResponse.json({
       ok: true,
-      userId,
-      count: items.length,
-      items,
+      source: "lumora_ledger_v1",
+      transaction,
     });
-  } catch (error: any) {
+  } catch {
     return NextResponse.json(
-      { ok: false, error: error?.message || "wallet_ledger_failed", ts: Date.now() },
+      { ok: false, error: "ledger_transaction_failed" },
       { status: 500 }
     );
   }

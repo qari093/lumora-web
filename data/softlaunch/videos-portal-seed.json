@@ -1,0 +1,6 @@
+[
+  { "id": "video_seed_001", "portal": "MOVIES", "title": "CineVerse Launch Trailer", "mediaType": "trailer", "active": true, "durationSec": 95, "score": 0.88 },
+  { "id": "video_seed_002", "portal": "MOVIES", "title": "Spotlight Movie Clip", "mediaType": "video", "active": true, "durationSec": 121, "score": 0.81 },
+  { "id": "video_seed_003", "portal": "MUSIC", "title": "Echo Starter Track", "mediaType": "track", "active": true, "durationSec": 184, "score": 0.79 },
+  { "id": "video_seed_004", "portal": "MUSIC", "title": "Mood Lift Session", "mediaType": "track", "active": true, "durationSec": 206, "score": 0.76 }
+]

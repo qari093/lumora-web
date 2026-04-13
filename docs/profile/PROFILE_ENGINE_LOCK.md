@@ -1,0 +1,10 @@
+Profile Engine locked:
+- Watch Time
+- Replay Signal
+- Skip Signal
+- Attention Trace
+- Interest Graph
+- Emotional Profile
+- Pacing Engine
+- Locale Mapping
+- Profile Merge

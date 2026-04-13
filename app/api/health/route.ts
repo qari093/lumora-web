@@ -1,16 +1,21 @@
-import { withTelemetry } from "@/lib/http/api";
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   return NextResponse.json(
     {
       ok: true,
+      service: "lumora-web",
+      status: "healthy",
       ts: Date.now(),
+      env: process.env.NEXT_PUBLIC_APP_ENV || "development",
       node: process.version,
     },
-    { status: 200 }
+    {
+      headers: {
+        "Cache-Control": "no-store, must-revalidate",
+      },
+    }
   );
 }

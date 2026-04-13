@@ -1,31 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
-import { recordHit, metricsSnapshot } from "@/src/lib/ads/track";
-import { getCreativeById } from "@/src/lib/ads/fixtures";
-import { charge } from "@/src/lib/ads/spend";
-import { reqId } from "@/src/lib/reqid";
+import { trackAdClick } from "@/lib/ads/clickTracker";
 
-function ip(req: NextRequest){ const xf=req.headers.get("x-forwarded-for"); if(xf) return xf.split(",")[0].trim(); return req.headers.get("x-real-ip")?.trim() || "0.0.0.0"; }
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
 
-export async function GET(req: NextRequest){
-  const id = reqId();
-  const u = new URL(req.url);
-  const cid = u.searchParams.get("cid") || "";
-  const rid = u.searchParams.get("rid") || "";
-  const cmp = u.searchParams.get("cmp") || "";
-  const userAgent = req.headers.get("user-agent") || "";
+    const type = searchParams.get("type");
+    const value = searchParams.get("value");
 
-  if (!cid || !rid) {
-    return NextResponse.json({ ok:false, error:"MISSING_PARAMS", need:[!cid?"cid":null,!rid?"rid":null].filter(Boolean), requestId:id }, { status:200, headers:{ "x-request-id": id } });
+    if (!type || !value) {
+      return NextResponse.json(
+        { ok: false, error: "missing_click_params" },
+        { status: 400 }
+      );
+    }
+
+    const event = trackAdClick({ type, value });
+
+    return NextResponse.json({
+      ok: true,
+      source: "lumora_ad_click_v1",
+      event,
+    });
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "click_tracking_failed" },
+      { status: 500 }
+    );
   }
-
-  const { deduped, rec } = recordHit({ type:"click", cid, rid, ip: ip(req), ua: userAgent });
-  let spend:any = null;
-  const creative = getCreativeById(cid);
-  if (creative && !deduped) {
-    spend = { kind:"click", ...(charge(creative.ownerId, "click", id, cmp || undefined, cid)) };
-  }
-
-  const snap = metricsSnapshot();
-  return NextResponse.json({ ok:true, type:"click", deduped, record: rec, spend, totals: snap, requestId:id }, { status:200, headers:{ "x-request-id": id } });
 }
-export const dynamic = "force-dynamic";

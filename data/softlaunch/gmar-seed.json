@@ -1,0 +1,6 @@
+[
+  { "id": "gmar_seed_001", "portal": "GMAR", "title": "Launch Challenge", "gameType": "challenge", "active": true, "playerReady": true, "score": 0.89 },
+  { "id": "gmar_seed_002", "portal": "GMAR", "title": "Night Event", "gameType": "event", "active": true, "playerReady": true, "score": 0.83 },
+  { "id": "gmar_seed_003", "portal": "GMAR", "title": "Starter Match", "gameType": "match", "active": true, "playerReady": true, "score": 0.79 },
+  { "id": "gmar_seed_004", "portal": "GMAR", "title": "Welcome Reward", "gameType": "reward", "active": true, "playerReady": true, "score": 0.74 }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ig_meta_001",
+    "title": "Reels remix pattern spreading through fashion creators",
+    "summary": "A visual remix format is accelerating across short-form creator clusters.",
+    "url": "https://www.instagram.com/reel/sample-001",
+    "authorHandle": "@sample_fashion",
+    "language": "en",
+    "region": "US",
+    "keywords": ["reels", "fashion", "remix"],
+    "hashtags": ["#reels", "#fashion", "#remix"],
+    "velocityScore": 74,
+    "attentionScore": 78,
+    "saturationScore": 29,
+    "createdAt": 1736202000000,
+    "updatedAt": 1736202300000
+  },
+  {
+    "id": "ig_meta_002",
+    "title": "Comedy reaction sound crossing language boundaries",
+    "summary": "A reaction-audio pattern is migrating into multilingual creator edits.",
+    "url": "https://www.instagram.com/reel/sample-002",
+    "authorHandle": "@sample_comedy",
+    "language": "es",
+    "region": "ES",
+    "keywords": ["comedy", "reaction", "audio"],
+    "hashtags": ["#comedy", "#reaction", "#audio"],
+    "velocityScore": 81,
+    "attentionScore": 84,
+    "saturationScore": 37,
+    "createdAt": 1736203000000,
+    "updatedAt": 1736203300000
+  }
+]

@@ -1,5 +1,7 @@
 {
-  "installCommand": "corepack enable && corepack prepare pnpm@10.28.1 --activate && PNPM_STORE_DIR=/tmp/pnpm-store pnpm install --frozen-lockfile",
-  "buildCommand": "corepack enable && corepack prepare pnpm@10.28.1 --activate && PNPM_STORE_DIR=/tmp/pnpm-store pnpm -s build",
-  "framework": "nextjs"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "outputDirectory": ".next"
 }

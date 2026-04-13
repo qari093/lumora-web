@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/",
+    "csp": "default-src 'self'; frame-ancestors 'none'; object-src 'none'",
+    "frameOptions": "DENY",
+    "contentTypeOptions": "nosniff",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "valid": true
+  },
+  {
+    "path": "/fyp",
+    "csp": "default-src 'self'; frame-ancestors 'none'; object-src 'none'",
+    "frameOptions": "DENY",
+    "contentTypeOptions": "nosniff",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "valid": true
+  },
+  {
+    "path": "/api/health",
+    "csp": "default-src 'self'; frame-ancestors 'none'; object-src 'none'",
+    "frameOptions": "DENY",
+    "contentTypeOptions": "nosniff",
+    "referrerPolicy": "no-referrer",
+    "valid": true
+  }
+]

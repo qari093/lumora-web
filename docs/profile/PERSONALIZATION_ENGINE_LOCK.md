@@ -1,0 +1,15 @@
+Personalization Engine locked:
+- User Profile Schema
+- Watch Time
+- Replay Signal
+- Skip Signal
+- Attention Trace
+- Interest Graph
+- Emotional Profile
+- Pacing Preference
+- Locale Mapping
+- Profile Merge
+- Feed Mix Logic
+- Taste Expansion
+- Personalization Cache
+- Personalization Accuracy Validation

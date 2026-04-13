@@ -1,0 +1,6 @@
+[
+  { "id": "live_seed_001", "portal": "LIVE", "title": "Open Audio Lounge", "roomType": "audio", "active": true, "joinable": true, "hostReady": true, "score": 0.88 },
+  { "id": "live_seed_002", "portal": "LIVE", "title": "Creator Video Room", "roomType": "video", "active": true, "joinable": true, "hostReady": true, "score": 0.84 },
+  { "id": "live_seed_003", "portal": "LIVE", "title": "Community Hangout", "roomType": "community", "active": true, "joinable": true, "hostReady": true, "score": 0.79 },
+  { "id": "live_seed_004", "portal": "LIVE", "title": "Launch Event Room", "roomType": "event", "active": true, "joinable": true, "hostReady": true, "score": 0.75 }
+]

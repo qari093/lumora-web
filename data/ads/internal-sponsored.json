@@ -1,0 +1,38 @@
+[
+  {
+    "id": "promo_gmar_001",
+    "kind": "sponsored",
+    "title": "Enter GMAR Arena",
+    "text": "Jump into GMAR and explore active challenges.",
+    "target": { "type": "portal", "value": "gmar" },
+    "portal": "GMAR",
+    "score": 0.35
+  },
+  {
+    "id": "promo_nexa_001",
+    "kind": "sponsored",
+    "title": "Boost with NEXA",
+    "text": "Open NEXA and continue your wellness flow.",
+    "target": { "type": "portal", "value": "nexa" },
+    "portal": "NEXA",
+    "score": 0.34
+  },
+  {
+    "id": "promo_movies_001",
+    "kind": "sponsored",
+    "title": "Watch CineVerse Picks",
+    "text": "Open Movies portal and discover featured drops.",
+    "target": { "type": "portal", "value": "movies" },
+    "portal": "MOVIES",
+    "score": 0.33
+  },
+  {
+    "id": "promo_live_001",
+    "kind": "sponsored",
+    "title": "Join Live Rooms",
+    "text": "Open Live and join active creator sessions.",
+    "target": { "type": "portal", "value": "live" },
+    "portal": "LIVE",
+    "score": 0.36
+  }
+]

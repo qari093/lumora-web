@@ -1,0 +1,23 @@
+[
+  {
+    "id": "fb_001",
+    "route": "/fyp",
+    "fallbackShown": true,
+    "recoveryAvailable": true,
+    "safeMessage": "Something went wrong. Please try again."
+  },
+  {
+    "id": "fb_002",
+    "route": "/live",
+    "fallbackShown": true,
+    "recoveryAvailable": true,
+    "safeMessage": "Live room unavailable. Retry shortly."
+  },
+  {
+    "id": "fb_003",
+    "route": "/lumaspace",
+    "fallbackShown": true,
+    "recoveryAvailable": true,
+    "safeMessage": "Temporary issue. Return to your space."
+  }
+]
