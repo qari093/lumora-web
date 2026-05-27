@@ -1,5 +1,5 @@
-import HomePortalHub from "@/components/home/HomePortalHub";
+import LumoraConsumerHome from "@/components/consumer/LumoraConsumerHome";
 
 export default function HomePage() {
-  return <HomePortalHub />;
+  return <LumoraConsumerHome />;
 }

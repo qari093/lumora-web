@@ -1,0 +1,14 @@
+{
+  "fixedAt": "2026-05-24T16:48:47.091Z",
+  "navCandidates": [
+    "app/_components/user/UserNav.tsx"
+  ],
+  "gmarFiles": [
+    "src/core/gmar/final-completion/database/databasePersistence.ts",
+    "tests/gmar/final-completion/gmar_final_completion_01_database_persistence.test.ts"
+  ],
+  "fixes": {
+    "primaryNavAccessibleNames": true,
+    "gmarDatabaseRecordIdUsesPlayerId": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "fixedAt": "2026-05-24T17:06:16.319Z",
+  "inspected": [
+    "src/core/gmar/final-completion/database/databasePersistence.ts",
+    "app/api/gmar/final/database/restore/route.ts",
+    "tests/gmar/final-completion/gmar_final_completion_01_database_persistence.test.ts"
+  ],
+  "changed": []
+}

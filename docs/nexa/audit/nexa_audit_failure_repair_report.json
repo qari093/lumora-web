@@ -1,0 +1,15 @@
+{
+  "system": "Lumora NEXA Audit Failure Repair",
+  "repairedAt": "2026-05-24T16:38:25.394Z",
+  "repaired": {
+    "navAccessibleLabels": true,
+    "middlewareMatcherArray": true,
+    "nexaMetricsNextResponseImport": true,
+    "nexaCheckinLink": true,
+    "portalLoadingFiles": true,
+    "portalMarkers": true,
+    "portalTitleAttributes": true,
+    "portalItemsMapGuards": true,
+    "gmarDatabaseIdPatternAttempted": true
+  }
+}

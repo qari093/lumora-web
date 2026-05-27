@@ -1,0 +1,14 @@
+{
+  "fixedAt": "2026-05-24T16:53:03.495Z",
+  "changed": [],
+  "navFiles": [
+    "components/nav/PrimaryNav.tsx"
+  ],
+  "gmarRuntimeFiles": [
+    "src/core/gmar/final-completion/database/databasePersistence.ts"
+  ],
+  "guards": {
+    "navOk": false,
+    "gmarOk": true
+  }
+}

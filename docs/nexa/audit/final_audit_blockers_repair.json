@@ -1,0 +1,12 @@
+{
+  "repairedAt": "2026-05-24T17:13:56.772Z",
+  "files": {
+    "primaryNav": "components/nav/PrimaryNav.tsx",
+    "gmarPersistence": "src/core/gmar/final-completion/database/databasePersistence.ts"
+  },
+  "checks": {
+    "primaryNavHasReactImport": true,
+    "primaryNavHasAccessibleFyp": true,
+    "gmarUsesPlayerIdRecordId": true
+  }
+}

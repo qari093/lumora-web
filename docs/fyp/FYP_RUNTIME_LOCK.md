@@ -1,0 +1,20 @@
+FYP Runtime locked:
+- Ingestion → Intelligence → Feed
+- Feed Assembler
+- Ranking Integration
+- Personalization Injection
+- Discovery Layer
+- FOMO Layer
+- CineVerse Hooks
+- Trailer Override
+- Infinite Scroll
+- Edge Caching
+- Prefetching
+- Deduplication
+- Diversity Control
+- Cold Start Logic
+- Fallback Injection
+- Regional Variation
+- Language Variation
+- Observability
+- Latency Tracking
