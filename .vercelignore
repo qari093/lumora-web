@@ -45,3 +45,9 @@ public/persona/emojis
 # Preserve all runtime lib source required by Next/Vercel builds
 !lib/
 !lib/**
+
+# Preserve music + config modules required at runtime
+!components/music/
+!components/music/TrackList.tsx
+!config/
+!config/lumoraEnv.ts
