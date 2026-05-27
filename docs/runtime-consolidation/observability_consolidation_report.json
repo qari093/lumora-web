@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-05-26T19:38:36.485Z",
+  "status": "critical",
+  "routeCount": 1161,
+  "apiRouteCount": 980,
+  "pageRouteCount": 181,
+  "unknownDomainRoutes": 740,
+  "duplicateFindings": 333,
+  "highRiskDuplicates": 189,
+  "deprecatedAliases": 9,
+  "orchestratorCount": 16,
+  "eventBusReady": true,
+  "persistenceBoundaryReady": true,
+  "activationReady": true,
+  "metrics": [
+    {
+      "key": "unknown_domain_routes",
+      "value": 740,
+      "status": "critical",
+      "threshold": 250
+    },
+    {
+      "key": "high_risk_duplicate_findings",
+      "value": 189,
+      "status": "critical",
+      "threshold": 50
+    },
+    {
+      "key": "deprecated_aliases",
+      "value": 9,
+      "status": "healthy",
+      "threshold": 10
+    },
+    {
+      "key": "orchestrator_count",
+      "value": 16,
+      "status": "healthy",
+      "threshold": 16
+    },
+    {
+      "key": "event_bus_ready",
+      "value": 1,
+      "status": "healthy",
+      "threshold": 1
+    },
+    {
+      "key": "persistence_boundary_ready",
+      "value": 1,
+      "status": "healthy",
+      "threshold": 1
+    },
+    {
+      "key": "activation_ready",
+      "value": 1,
+      "status": "healthy",
+      "threshold": 1
+    }
+  ]
+}

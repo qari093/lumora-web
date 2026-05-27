@@ -1,0 +1,18 @@
+{
+  "auditedAt": "2026-05-22T11:12:05.957Z",
+  "system": "GMAR Ω∞ 40-Pack Final Audit",
+  "expectedPacks": 40,
+  "completionTarget": "full production civilization runtime",
+  "status": "FAILED",
+  "lockStatus": 0,
+  "missingLockCount": 0,
+  "missingLocks": [],
+  "testStatus": 1,
+  "typecheckStatus": 0,
+  "buildStatus": 0,
+  "files": {
+    "tests": "gmar_40_pack_final_audit_20260522_130619/gmar_tests.log",
+    "typecheck": "gmar_40_pack_final_audit_20260522_130619/typecheck.log",
+    "build": "gmar_40_pack_final_audit_20260522_130619/build.log"
+  }
+}

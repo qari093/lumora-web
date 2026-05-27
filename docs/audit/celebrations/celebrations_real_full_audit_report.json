@@ -1,0 +1,82 @@
+{
+  "auditedAt": "2026-05-25T09:35:37.144Z",
+  "status": "PASS",
+  "integrationPercent": 100,
+  "leftPercent": 0,
+  "counts": {
+    "coreFilesActual": 26,
+    "testFilesActual": 9,
+    "docsActual": 3,
+    "lockFilesActual": 11
+  },
+  "categories": {
+    "coreFiles": {
+      "passed": 17,
+      "total": 17,
+      "percent": 100,
+      "missing": []
+    },
+    "tests": {
+      "passed": 9,
+      "total": 9,
+      "percent": 100,
+      "missing": []
+    },
+    "locks": {
+      "passed": 10,
+      "total": 10,
+      "percent": 100,
+      "missing": []
+    },
+    "docs": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "concepts": {
+      "passed": 15,
+      "total": 15,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "coreFiles",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "tests",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "locks",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "docs",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "concepts",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "validation": {
+    "typecheck": "PASS",
+    "celebrationsTests": "PASS",
+    "logs": "/tmp/celebrations_real_audit_logs_1779701736"
+  },
+  "finalStatus": "PASS"
+}

@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-05-26T19:38:16.596Z",
+  "status": "PASS",
+  "totalLocks": 11,
+  "presentLocks": 11,
+  "missingLocks": [],
+  "totalReports": 11,
+  "features": {
+    "routeInventory": true,
+    "domainOwnership": true,
+    "duplicateAudit": true,
+    "orchestrators": true,
+    "apiContract": true,
+    "deprecations": true,
+    "eventBus": true,
+    "persistenceBoundary": true,
+    "activationHierarchy": true,
+    "observability": true,
+    "buildDebtControl": true
+  },
+  "finalLock": ".lumora_runtime_consolidation_final_seal_lock"
+}

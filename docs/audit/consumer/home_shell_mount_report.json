@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "homeShell": "LumoraConsumerHome",
+  "productionEntrypoint": "app/page.tsx",
+  "portalHubFallbackReplaced": true
+}

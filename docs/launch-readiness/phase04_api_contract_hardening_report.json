@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-05-24T08:39:45.630Z",
+  "status": "FAILED",
+  "totalRoutes": 4,
+  "passedRoutes": 2,
+  "warningRoutes": 1,
+  "failedRoutes": 1,
+  "inspections": [
+    {
+      "route": "/api/wallet/credit",
+      "domain": "wallet",
+      "hasRequestId": true,
+      "hasStableEnvelope": true,
+      "hasSafeErrors": true,
+      "hasVersioning": true,
+      "hasTypedMeta": true,
+      "severity": "low",
+      "status": "PASS",
+      "missing": []
+    },
+    {
+      "route": "/api/feed/final",
+      "domain": "fyp",
+      "hasRequestId": true,
+      "hasStableEnvelope": true,
+      "hasSafeErrors": true,
+      "hasVersioning": true,
+      "hasTypedMeta": true,
+      "severity": "low",
+      "status": "PASS",
+      "missing": []
+    },
+    {
+      "route": "/api/legacy/raw-wallet",
+      "domain": "wallet",
+      "hasRequestId": false,
+      "hasStableEnvelope": false,
+      "hasSafeErrors": true,
+      "hasVersioning": false,
+      "hasTypedMeta": false,
+      "severity": "critical",
+      "status": "FAILED",
+      "missing": [
+        "request_id",
+        "stable_envelope",
+        "versioning",
+        "typed_meta"
+      ]
+    },
+    {
+      "route": "/api/live/room",
+      "domain": "live",
+      "hasRequestId": true,
+      "hasStableEnvelope": true,
+      "hasSafeErrors": true,
+      "hasVersioning": true,
+      "hasTypedMeta": false,
+      "severity": "medium",
+      "status": "WARNING",
+      "missing": [
+        "typed_meta"
+      ]
+    }
+  ]
+}

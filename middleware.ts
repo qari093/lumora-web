@@ -14,5 +14,5 @@ export function middleware(_req: NextRequest) {
 }
 
 export const config = {
-  matcher: "/:path*",
+  matcher: ["/api/nexa/:path*", "/:path*"],
 };

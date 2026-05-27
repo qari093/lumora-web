@@ -45,7 +45,7 @@ export async function GET() {
   return NextResponse.json(
     {
       ok: true,
-      source: "live",
+      source: "fallback",
       items,
       ts: new Date().toISOString(),
     },

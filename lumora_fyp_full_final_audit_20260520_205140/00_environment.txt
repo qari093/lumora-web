@@ -1,0 +1,4 @@
+node=v24.7.0
+pnpm=10.28.1
+cwd=/Users/waqarahmad/lumora-web
+timestamp=20260520_205140

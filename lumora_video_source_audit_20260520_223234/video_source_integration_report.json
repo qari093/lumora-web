@@ -1,0 +1,465 @@
+{
+  "auditedAt": "2026-05-20T20:33:34.612Z",
+  "totalRequestedSources": 51,
+  "integratedCount": 44,
+  "docsOnlyOrWeakCount": 0,
+  "missingCount": 7,
+  "results": [
+    {
+      "source": "NASA",
+      "status": "integrated",
+      "matchCount": 15,
+      "evidence": [
+        "src/lib/content/ingestion/nasa_esa.ts:6:    title: \"NASA Space Clip\",",
+        "src/lib/content/ingestion/nasa_esa.ts:10:    source: \"NASA\"",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:7:    name: \"NASA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:13:        title: \"NASA Launch Moment\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:14:        source: \"NASA\",",
+        "src/lib/content/sources/fetchAll.ts:2:import { fetchNASA } from \"./nasa\";",
+        "src/lib/content/sources/fetchAll.ts:8:    fetchNASA(),",
+        "src/lib/content/sources/registry.ts:5:  { id:\"nasa\", name:\"NASA\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:10 },"
+      ]
+    },
+    {
+      "source": "ESA",
+      "status": "integrated",
+      "matchCount": 13,
+      "evidence": [
+        "src/lib/content/ingestion/nasa_esa.ts:17:    title: \"ESA Space Clip\",",
+        "src/lib/content/ingestion/nasa_esa.ts:20:    attribution: \"ESA\",",
+        "src/lib/content/ingestion/nasa_esa.ts:22:    source: \"ESA\"",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:26:    name: \"ESA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:32:        title: \"ESA Earth Observation\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:33:        source: \"ESA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:64:    name: \"ESA/Hubble\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:71:        source: \"ESA/Hubble\","
+      ]
+    },
+    {
+      "source": "ESO",
+      "status": "integrated",
+      "matchCount": 28,
+      "evidence": [
+        "app/api/live/ranking/route.ts.bak_fix273_1776510668:170:// __NON_YT_RESOLVER_PROOF__",
+        "app/api/live/ranking/route.ts.bak_fix274_1776511189:46:    // RESOLVER",
+        "src/lib/activation/mediaResolver.ts.bak_step275_1776513067:53:  // __RESOLVER_PROOF__",
+        "src/lib/activation/mediaResolver.ts:53:  // __RESOLVER_PROOF__",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:45:    name: \"ESO\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:51:        title: \"ESO Observatory\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:52:        source: \"ESO\",",
+        "src/lib/content/sources/registry.ts:7:  { id:\"eso\", name:\"ESO\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:10 },"
+      ]
+    },
+    {
+      "source": "ESA/Hubble",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/adapters/spaceScienceAdapters.ts:64:    name: \"ESA/Hubble\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:71:        source: \"ESA/Hubble\",",
+        "src/lib/content/sources/registry.ts:8:  { id:\"hubble\", name:\"ESA/Hubble\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:10 },"
+      ]
+    },
+    {
+      "source": "Internet Archive",
+      "status": "integrated",
+      "matchCount": 5,
+      "evidence": [
+        "src/cineverse/federation/providers.ts:2:  \"Internet Archive\",",
+        "src/lib/fyp_movie_clips/legal_sources.ts:19:    name: \"Internet Archive Public Domain Films\",",
+        "src/lib/content/sources/internetArchive.ts:10:      source: \"Internet Archive\",",
+        "src/lib/content/sources/registry.ts:10:  { id:\"internet-archive\", name:\"Internet Archive\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },",
+        "docs/fyp_archive/SOURCE_FOUNDATION.md:3:- Internet Archive enabled"
+      ]
+    },
+    {
+      "source": "Prelinger Archives",
+      "status": "integrated",
+      "matchCount": 2,
+      "evidence": [
+        "src/lib/fyp_movie_clips/legal_sources.ts:27:    name: \"Prelinger Archives\",",
+        "src/lib/content/sources/registry.ts:11:  { id:\"prelinger\", name:\"Prelinger Archives\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "FedFlix",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:12:  { id:\"fedflix\", name:\"FedFlix\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "Library of Congress",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:14:  { id:\"loc\", name:\"Library of Congress\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "Smithsonian Open Access",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "Europeana",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:16:  { id:\"europeana\", name:\"Europeana\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Open Images",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:18:  { id:\"open-images\", name:\"Open Images\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Wikimedia Commons",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:19:  { id:\"wikimedia\", name:\"Wikimedia Commons\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Dareful",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:26:  { id:\"dareful\", name:\"Dareful\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Distill",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:27:  { id:\"distill\", name:\"Distill\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Life of Vids",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:28:  { id:\"life-of-vids\", name:\"Life of Vids\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "SplitShire",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:29:  { id:\"splitshire\", name:\"SplitShire\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Pexels Videos",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "Pixabay Videos",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "Coverr",
+      "status": "integrated",
+      "matchCount": 5,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:23:  { id:\"coverr\", name:\"Coverr\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },",
+        "src/lib/fyp94/supply/sources.ts:39:    displayName: \"Coverr\",",
+        "tests/fyp94/coverr_vertical_fix.test.ts:10:describe(\"FYP94 Coverr vertical ingestion fix\", () => {",
+        "tests/fyp94/coverr_vertical_fix.test.ts:58:  it(\"Coverr client returns vertical MP4-safe clips\", async () => {",
+        "docs/fyp94/SUPPLY_ENGINE.md:7:- Coverr"
+      ]
+    },
+    {
+      "source": "Mixkit",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:24:  { id:\"mixkit\", name:\"Mixkit\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },",
+        "src/lib/fyp94/supply/sources.ts:31:    displayName: \"Mixkit\",",
+        "docs/fyp94/SUPPLY_ENGINE.md:6:- Mixkit"
+      ]
+    },
+    {
+      "source": "Official Movie Trailers",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "YouTube",
+      "status": "integrated",
+      "matchCount": 30,
+      "evidence": [
+        "app/api/feed/route.ts:2:import { normalizeYouTubeItems } from \"../../../src/lib/fyp/youtube/normalize\";",
+        "app/api/feed/route.ts:56:    const normalized = normalizeYouTubeItems(embeddableItems, { type: \"viral\" });",
+        "app/api/live/feed/route.ts.bak_fix284f_1776516098:3:  if(!hasYouTube && out.length > 2){",
+        "app/api/live/feed/route.ts.bak_fix284e_1776515306:6:  let hasYouTube = items.some(x => x.media_type === \"youtube\");",
+        "app/api/live/feed/route.ts.bak_fix284e_1776515306:19:  if(!hasYouTube && out.length > 2){",
+        "src/lib/ingestion/youtubeScaler.ts:1:export function scaleYouTube(items:any[]){",
+        "src/lib/fyp/youtube/normalize.ts:12:export function normalizeYouTubeItems(",
+        "src/lib/content/sources/registry.ts:64:  { id:\"youtube\", name:\"YouTube Official\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "Vimeo",
+      "status": "integrated",
+      "matchCount": 30,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:65:  { id:\"vimeo\", name:\"Vimeo CC\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },",
+        "src/lib/fyp94/vimeo/gate.ts:1:export type Fyp94VimeoCandidate = {",
+        "src/lib/fyp94/vimeo/gate.ts:15:export function isFyp94AllowedVimeoLicense(license?: string): boolean {",
+        "src/lib/fyp94/vimeo/gate.ts:19:export function getFyp94VimeoDirectMp4(candidate: Fyp94VimeoCandidate): string | null {",
+        "src/lib/fyp94/vimeo/gate.ts:31:export function validateFyp94VimeoCandidate(candidate: Fyp94VimeoCandidate) {",
+        "src/lib/fyp94/vimeo/gate.ts:32:  const licenseOk = isFyp94AllowedVimeoLicense(candidate.license);",
+        "src/lib/fyp94/vimeo/gate.ts:33:  const mp4Url = getFyp94VimeoDirectMp4(candidate);",
+        "src/lib/fyp94/vimeo/gate.ts:48:export function normalizeFyp94VimeoCandidate(candidate: Fyp94VimeoCandidate) {"
+      ]
+    },
+    {
+      "source": "Prasar Bharati",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:62:  { id:\"prasar\", name:\"Prasar Bharati\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },"
+      ]
+    },
+    {
+      "source": "PB-SHABD",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "Zendoro",
+      "status": "integrated",
+      "matchCount": 30,
+      "evidence": [
+        "app/admin/zendoro/page.tsx:1:import { getZendoroAdminRuntime } from \"@/src/lib/zendoro/admin/adminRuntime\";",
+        "app/admin/zendoro/page.tsx:3:export default function ZendoroAdminPage() {",
+        "app/admin/zendoro/page.tsx:4:  const runtime = getZendoroAdminRuntime();",
+        "app/admin/zendoro/page.tsx:8:      <h1>Zendoro Admin</h1>",
+        "app/api/admin/zendoro/route.ts:1:import { getAdminZendoroSummary } from \"@/src/core/zendoro/api/store\";",
+        "app/api/admin/zendoro/route.ts:5:  return okJson(getAdminZendoroSummary());",
+        "app/zendoro/product/[id]/page.tsx:7:export default function ZendoroProductPage({ params }: Props) {",
+        "app/zendoro/product/[id]/page.tsx:10:      <h1>Zendoro Product</h1>"
+      ]
+    },
+    {
+      "source": "Lumora Owned",
+      "status": "integrated",
+      "matchCount": 2,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:67:  { id:\"lumora\", name:\"Lumora Owned\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:10 }",
+        "src/lib/fyp94/supply/sources.ts:63:    displayName: \"Lumora Owned\","
+      ]
+    },
+    {
+      "source": "Pond5",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:31:  { id:\"pond5\", name:\"Pond5 PD\", license:\"public-domain\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Mazwai",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:32:  { id:\"mazwai\", name:\"Mazwai\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Free Stock Footage Archive",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:33:  { id:\"free-stock-footage\", name:\"Free Stock Footage Archive\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Beachfront B-Roll",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:34:  { id:\"beachfront\", name:\"Beachfront B-Roll\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "CuteStockFootage",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:35:  { id:\"cutestock\", name:\"CuteStockFootage\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Al Jazeera Creative Commons",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "GongU Madang",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:38:  { id:\"gongu\", name:\"GongU Madang\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "DigitalNZ",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:39:  { id:\"digitalnz\", name:\"DigitalNZ\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "NOAA",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/adapters/spaceScienceAdapters.ts:83:    name: \"NOAA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:89:        title: \"NOAA Ocean Storm\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:90:        source: \"NOAA\",",
+        "src/lib/content/sources/registry.ts:41:  { id:\"noaa\", name:\"NOAA\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "USGS",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/adapters/spaceScienceAdapters.ts:102:    name: \"USGS\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:108:        title: \"USGS Earth Footage\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:109:        source: \"USGS\",",
+        "src/lib/content/sources/registry.ts:42:  { id:\"usgs\", name:\"USGS\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "The Public Domain Review",
+      "status": "missing",
+      "matchCount": 0,
+      "evidence": []
+    },
+    {
+      "source": "Free Nature Stock",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:45:  { id:\"free-nature\", name:\"Free Nature Stock\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "NatureClip",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:46:  { id:\"natureclip\", name:\"NatureClip\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Wellcome Collection",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:47:  { id:\"wellcome\", name:\"Wellcome Collection\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "EUscreen",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:49:  { id:\"euscreen\", name:\"EUscreen\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },"
+      ]
+    },
+    {
+      "source": "Pad.ma",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:50:  { id:\"padma\", name:\"Pad.ma\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },"
+      ]
+    },
+    {
+      "source": "Vidsplay",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:52:  { id:\"vidsplay\", name:\"Vidsplay\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Videvo",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:53:  { id:\"videvo\", name:\"Videvo\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "CLACSO TV",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:55:  { id:\"clacso\", name:\"CLACSO TV\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "Africa Online Digital Library",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:56:  { id:\"aodl\", name:\"Africa Online Digital Library\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "Libreflix",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:58:  { id:\"libreflix\", name:\"Libreflix\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "NHK Creative Library",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:59:  { id:\"nhk\", name:\"NHK Creative Library\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "Film Australia",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:60:  { id:\"nfsa\", name:\"NFSA Film Australia\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "NFSA",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:60:  { id:\"nfsa\", name:\"NFSA Film Australia\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    }
+  ]
+}

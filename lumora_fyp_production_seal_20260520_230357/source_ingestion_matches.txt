@@ -1,0 +1,77 @@
+src/ads/internal/brandResolver.ts:1:import { BRAND_REGISTRY } from "@/brands/registry";
+src/cineverse/content/runtime.ts:2:  "global-source-registry",
+src/cineverse/open-canon/library.ts:17:    sourceUrl: "https://youtube.com",
+src/cineverse/open-canon/library.ts:26:    sourceUrl: "https://youtube.com",
+src/cineverse/federation/types.ts:2:  | "youtube"
+src/core/syndication/platforms.ts:4:  "youtube",
+src/core/nexa/foundation/registry.ts:10:export function registryHealthy(): boolean {
+src/core/cineverse/content/runtime.ts:2:  "global-source-registry",
+src/lib/pipeline/sourceWeight.ts:5:    youtube: 1.2,
+src/lib/video/preview/provider.ts:3:  provider: "internal" | "giphy" | "tenor" | "youtube_embed";
+src/lib/ingestion/mediaClassifier.ts:2:  if(x.media_url?.includes("youtube")) return "youtube";
+src/lib/ingestion/loader.ts:1:import { getSources } from "./registry";
+src/lib/ingestion/failover.ts:4:  if(src === "youtube") return "crawler";
+src/lib/ingestion/sourceTrust.ts:4:  youtube: 0.9,
+src/lib/ingestion/registry.ts:2:  "rss","reddit","youtube","crawler","newsapi","twitter","tiktok","blogs"
+src/lib/learning/contextAdjust.ts:4:    if (ctx.hour >= 18 && x.topic === "youtube") boost += 1;
+src/lib/learning/itemVector.ts:5:    item?.media_type === "youtube" ? 1 : 0,
+src/lib/learning/clusterBoost.ts:4:    if (cluster === "engaged" && x.media_type === "youtube") boost = 1;
+src/lib/learning/topicRegistry.ts:1:const registry:Record<string,string> = {
+src/lib/learning/topicRegistry.ts:8:  return registry[t] || t;
+src/lib/learning/profileToFeed.ts:5:    youtube: profile?.interests?.youtube || 0,
+src/lib/activation/mediaResolver.ts:38:  if (!media_url && url.includes("youtube.com")) {
+src/lib/activation/mediaResolver.ts:41:      media_url = `https://www.youtube.com/embed/${idMatch[1]}`;
+src/lib/activation/mediaResolver.ts:42:      media_type = "youtube";
+src/lib/activation/mediaResolver.ts:54:  if (!media_url && x && x.id && x.source !== "youtube") {
+src/lib/activation/mediaResolver.ts:55:    // force first eligible non-youtube item into embed for validation
+src/lib/activation/mediaResolver.ts:56:    media_url = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+src/lib/fyp/schema.ts:6:  platform: "youtube";
+src/lib/fyp/youtube/normalize.ts:53:        platform: "youtube",
+src/lib/fyp/youtube/normalize.ts:58:        embedUrl: `https://www.youtube.com/embed/${id}`,
+src/lib/fyp/youtube/normalize.ts:59:        watchUrl: `https://www.youtube.com/watch?v=${id}`,
+src/lib/content/types/source.ts:24:  | "youtube" | "vimeo"
+src/lib/content/sources/validateRegistry.ts:1:import { SOURCE_REGISTRY } from "./registry";
+src/lib/content/sources/validateRegistry.ts:5:    throw new Error("Source registry incomplete");
+src/lib/content/sources/fetchAll.ts:1:import { fetchInternetArchive } from "./internetArchive";
+src/lib/content/sources/fetchAll.ts:2:import { fetchNASA } from "./nasa";
+src/lib/content/sources/fetchAll.ts:3:import { fetchPexels } from "./pexels";
+src/lib/content/sources/fetchAll.ts:8:    fetchNASA(),
+src/lib/content/sources/fetchAll.ts:9:    fetchPexels()
+src/lib/content/sources/registry.ts:64:  { id:"youtube", name:"YouTube Official", license:"platform-safe", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },
+src/lib/content/sources/registry.ts:65:  { id:"vimeo", name:"Vimeo CC", license:"cc-by", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },
+src/lib/content/sources/pexels.ts:1:export async function fetchPexels() {
+src/lib/content/sources/nasa.ts:1:export async function fetchNASA() {
+src/lib/native-fyp/schema.ts:25:  const prohibited = new Set(["youtube_iframe", "youtube", "yt", "unknown_rights", "unknown", ""]);
+src/lib/native-fyp/policy.ts:18:  "youtube_iframe",
+src/lib/native-fyp/policy.ts:19:  "youtube_download",
+src/lib/fyp_archive/source_foundation.ts:2:  internetArchive: {
+src/lib/fyp94/core/policy.ts:5:  youtubeCoreFypAllowed: false,
+src/lib/fyp94/core/policy.ts:6:  youtubeTrendMetadataAllowed: true,
+src/lib/fyp94/core/policy.ts:32:  "youtube_download",
+src/lib/fyp94/core/policy.ts:33:  "youtube_rehost",
+src/lib/fyp94/core/policy.ts:34:  "youtube_crop",
+src/lib/fyp94/core/policy.ts:35:  "youtube_iframe_core_fyp",
+src/lib/fyp94/core/policy.ts:52:  if (sourceType.toLowerCase().includes("youtube")) {
+src/lib/fyp94/quality/mixQualityGate.ts:43:  if (source.includes("pexels") || source.includes("pixabay") || source.includes("vimeo")) return "stock";
+src/lib/fyp94/trend/youtubeMetadata.ts:11:    source: "youtube_metadata",
+src/lib/fyp94/trend/types.ts:3:  source: "google_trends" | "youtube_metadata" | "internal_heat";
+src/lib/fyp94/vimeo/gate.ts:52:    throw new Error(validation.reason || "invalid_vimeo_candidate");
+src/lib/fyp94/vimeo/gate.ts:56:    source: "vimeo",
+src/lib/fyp94/vimeo/gate.ts:60:    query: "vimeo cc",
+src/lib/fyp94/final/seal.ts:5:  youtubeCoreBlocked: true;
+src/lib/fyp94/final/seal.ts:17:    youtubeCoreBlocked: true,
+src/lib/fyp94/final/seal.ts:49:    seal.youtubeCoreBlocked === true &&
+src/lib/fyp94/legal/blocklist.ts:2:  "youtube",
+src/lib/media-ingestion/youtube.ts:6:  source: "youtube";
+src/lib/media-ingestion/youtube.ts:11:  media_type: "youtube";
+src/lib/media-ingestion/youtube.ts:47:  return t || "youtube";
+src/lib/media-ingestion/youtube.ts:69:    const url = attrValue(linkTag, "href") || `https://www.youtube.com/watch?v=${videoId}`;
+src/lib/media-ingestion/youtube.ts:71:      attrValue(thumbTag, "url") || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+src/lib/media-ingestion/youtube.ts:75:      id: `youtube:${videoId}`,
+src/lib/media-ingestion/youtube.ts:76:      source: "youtube",
+src/lib/media-ingestion/youtube.ts:79:      media_url: `https://www.youtube.com/embed/${videoId}`,
+src/lib/media-ingestion/youtube.ts:81:      media_type: "youtube",
+src/lib/media-ingestion/youtube.ts:105:    throw new Error(`youtube_fetch_failed:${res.status}`);
+src/lib/media-ingestion/youtube.ts:114:    throw new Error("youtube_feed_urls_missing");
+src/lib/media-ingestion/youtube.ts:117:  const rawDir = path.join(process.cwd(), "data", "live_ingestion_raw", "youtube");
+src/lib/media-ingestion/youtube.ts:118:  const sigDir = path.join(process.cwd(), "data", "live_signals", "youtube");

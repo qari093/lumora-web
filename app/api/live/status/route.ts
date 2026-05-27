@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { getLivePortalConfig } from "@/src/live/activation/livePortalConfig";
 
-export const runtime = "nodejs";
-
-export async function GET() {
-  return NextResponse.json(
-    { ok: true, service: "lumora-live", status: "up", ts: new Date().toISOString() },
-    { status: 200 }
-  );
+export function GET() {
+  return NextResponse.json({
+    ok: true,
+    service: "lumora-live",
+    route: "/api/live/status",
+    live: getLivePortalConfig(),
+  });
 }

@@ -1,0 +1,5 @@
+export const MONETIZATION_FLAGS = {
+  ENABLE_MONETIZATION: false,
+  ENABLE_REWARD_ADS: false,
+  ENABLE_EXIT_INTERACTION: false,
+};

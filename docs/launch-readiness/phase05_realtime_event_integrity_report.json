@@ -1,0 +1,102 @@
+{
+  "generatedAt": "2026-05-24T08:39:43.569Z",
+  "status": "FAILED",
+  "totalContracts": 7,
+  "failedContracts": 1,
+  "warningContracts": 1,
+  "findings": [
+    {
+      "domain": "fyp",
+      "eventName": "fyp.watch",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    },
+    {
+      "domain": "live",
+      "eventName": "live.room.event",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    },
+    {
+      "domain": "creator_alchemy",
+      "eventName": "creator.quiet_gift",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    },
+    {
+      "domain": "gmar",
+      "eventName": "gmar.match.event",
+      "status": "FAILED",
+      "missing": [
+        "replaySafeId"
+      ],
+      "message": "Realtime event contract missing: replaySafeId."
+    },
+    {
+      "domain": "wallet",
+      "eventName": "wallet.ledger.entry",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    },
+    {
+      "domain": "share",
+      "eventName": "share.link.created",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    },
+    {
+      "domain": "trust_safety",
+      "eventName": "trust.review.queued",
+      "status": "PASS",
+      "missing": [],
+      "message": "Realtime event contract satisfies launch integrity requirements."
+    }
+  ],
+  "synchronization": [
+    {
+      "domain": "fyp",
+      "supportsEventReplay": true,
+      "supportsDeduplication": true,
+      "supportsBackpressure": true,
+      "supportsRecovery": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "live",
+      "supportsEventReplay": true,
+      "supportsDeduplication": true,
+      "supportsBackpressure": true,
+      "supportsRecovery": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "creator_alchemy",
+      "supportsEventReplay": true,
+      "supportsDeduplication": true,
+      "supportsBackpressure": true,
+      "supportsRecovery": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "gmar",
+      "supportsEventReplay": true,
+      "supportsDeduplication": true,
+      "supportsBackpressure": false,
+      "supportsRecovery": true,
+      "status": "WARNING"
+    },
+    {
+      "domain": "wallet",
+      "supportsEventReplay": true,
+      "supportsDeduplication": true,
+      "supportsBackpressure": true,
+      "supportsRecovery": true,
+      "status": "PASS"
+    }
+  ]
+}

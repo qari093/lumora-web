@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-05-24T16:24:19.280Z",
+  "status": "WARNING",
+  "missingLocks": [],
+  "totalInfrastructureChecks": 10,
+  "failedFindings": 0,
+  "warningFindings": 2,
+  "findings": [
+    {
+      "area": "edge_cache_behavior",
+      "status": "PASS",
+      "severity": "high",
+      "message": "edge_cache_behavior satisfies final launch readiness."
+    },
+    {
+      "area": "queue_stability",
+      "status": "PASS",
+      "severity": "high",
+      "message": "queue_stability satisfies final launch readiness."
+    },
+    {
+      "area": "retry_systems",
+      "status": "PASS",
+      "severity": "high",
+      "message": "retry_systems satisfies final launch readiness."
+    },
+    {
+      "area": "failover_systems",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "failover_systems satisfies final launch readiness."
+    },
+    {
+      "area": "telemetry_aggregation",
+      "status": "PASS",
+      "severity": "high",
+      "message": "telemetry_aggregation satisfies final launch readiness."
+    },
+    {
+      "area": "build_stability",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "build_stability satisfies final launch readiness."
+    },
+    {
+      "area": "chaos_recovery",
+      "status": "WARNING",
+      "severity": "medium",
+      "message": "Chaos recovery needs real-user/private-beta pressure validation.",
+      "requiredFix": "Keep this capability private-beta gated until real operational validation passes."
+    },
+    {
+      "area": "production_load_behavior",
+      "status": "WARNING",
+      "severity": "medium",
+      "message": "Production load behavior needs private-beta pressure validation.",
+      "requiredFix": "Keep this capability private-beta gated until real operational validation passes."
+    },
+    {
+      "area": "rollout_safety",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "rollout_safety satisfies final launch readiness."
+    },
+    {
+      "area": "rollback_safety",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "rollback_safety satisfies final launch readiness."
+    }
+  ],
+  "certification": {
+    "sealed": true,
+    "launchReady": false,
+    "mode": "private_beta"
+  }
+}

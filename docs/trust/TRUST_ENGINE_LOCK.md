@@ -1,21 +1,20 @@
-# Trust Engine — FINAL LOCK
-
-## Components
-- Fake Engagement Detection
-- Bot Pattern Filtering
+Trust Engine locked:
+- Bot Detection
+- Fake Engagement Filters
 - Anomaly Detection
-- Semantic Validation (LLM Pass)
-- Toxic Velocity Flagging
+- Toxicity Detection
 - Scam Detection
 - Misinformation Tagging
-- Trust Score Engine
-- Low Trust Signal Blocking
+- Trust Scoring
+- Filtering Threshold
+- Quarantine Pipeline
+- Moderation Queue
+- Alerts
 - Audit Logs
-
-## Guarantee
-- All signals must pass Trust Layer before feed entry
-- Low/blocked trust signals never reach FYP
-- All decisions logged for audit traceability
-
-## Status
-LOCKED — No modifications allowed without version upgrade
+- Escalation Rules
+- Takedown Logic
+- Trust Decay
+- Repeat Offender Tracking
+- Safe Fallback Injection
+- Compliance Rules
+- Moderation Metrics

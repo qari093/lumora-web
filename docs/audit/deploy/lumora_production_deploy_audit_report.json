@@ -1,0 +1,8 @@
+{
+  "auditedAt": "2026-05-26T15:42:20.890Z",
+  "status": "PASS",
+  "missing": [],
+  "logs": "/tmp/lumora_production_deploy_audit_1779809750",
+  "deploymentReady": true,
+  "nextAction": "Run Vercel deployment after replacing local DATABASE_URL with managed production PostgreSQL URL."
+}

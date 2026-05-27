@@ -1,0 +1,623 @@
+[
+  {
+    "id": "Z29vZ2xlX3RyZW5kczplbGVu",
+    "source": "google_trends",
+    "title": "elena rybakina",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776353226253,
+    "topic": "rybakina"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpyYW1z",
+    "source": "google_trends",
+    "title": "rams new uniforms",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776353226253,
+    "topic": "uniforms"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczptZW1v",
+    "source": "google_trends",
+    "title": "memorial day weekend 2026",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776353226253,
+    "topic": "memorial"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczppbnRl",
+    "source": "google_trends",
+    "title": "interland",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776353226253,
+    "topic": "interland"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpib2Vp",
+    "source": "google_trends",
+    "title": "boeing",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776353226253,
+    "topic": "boeing"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczptYXJ0",
+    "source": "google_trends",
+    "title": "martin lawrence",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776353226253,
+    "topic": "martin"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpoLTFi",
+    "source": "google_trends",
+    "title": "h-1b visa",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776353226253,
+    "topic": "h"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpzdXJ5",
+    "source": "google_trends",
+    "title": "suryakumar yadav",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776353226253,
+    "topic": "suryakumar"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpsb3Jl",
+    "source": "google_trends",
+    "title": "lorenzo musetti",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776353226253,
+    "topic": "lorenzo"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczp0aWdl",
+    "source": "google_trends",
+    "title": "tiger",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776353226253,
+    "topic": "tiger"
+  },
+  {
+    "id": "cnNzOk5ZVCAmZ3Q7IFRvcCBT",
+    "source": "rss",
+    "title": "NYT &gt; Top Stories",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776353226254,
+    "topic": "stories"
+  },
+  {
+    "id": "cnNzOldoaXRlIEhvdXNlIFNo",
+    "source": "rss",
+    "title": "White House Shrugs Off Shaky Economy as War Exceeds Trump’s Timeline",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776353226254,
+    "topic": "shrugs"
+  },
+  {
+    "id": "cnNzOldoeSBDaGluYSBJc27i",
+    "source": "rss",
+    "title": "Why China Isn’t Pushing Iran to Accept U.S. Demands to End War",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776353226254,
+    "topic": "pushing"
+  },
+  {
+    "id": "cnNzOlRydW1w4oCZcyBTY2F0",
+    "source": "rss",
+    "title": "Trump’s Scattershot Week, and a Stock Market Record",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776353226254,
+    "topic": "scattershot"
+  },
+  {
+    "id": "cnNzOkluIHRoZSBIb3VzZSwg",
+    "source": "rss",
+    "title": "In the House, Republican Plans Go Awry Amid Party Divides",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776353226254,
+    "topic": "republican"
+  },
+  {
+    "id": "cnNzOlRydW1wIEFkbWluaXN0",
+    "source": "rss",
+    "title": "Trump Administration Live Updates: Democrats Assail Kennedy on Vaccines and Fraud in Budget Hearing",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776353226254,
+    "topic": "administration"
+  },
+  {
+    "id": "cnNzOkxhYm9yIERlcGFydG1l",
+    "source": "rss",
+    "title": "Labor Department Investigates Texts Sent Among Staff, Secretary and Her Family",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776353226254,
+    "topic": "department"
+  },
+  {
+    "id": "cnNzOllhbGUgUmVwb3J0IEZp",
+    "source": "rss",
+    "title": "Yale Report Finds Colleges Deserve Blame for Higher Education’s Problems",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776353226254,
+    "topic": "report"
+  },
+  {
+    "id": "cnNzOk1vdW50aW5nIFRyb3Vi",
+    "source": "rss",
+    "title": "Mounting Troubles at Ohio State University Lead to Frustration",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776353226254,
+    "topic": "mounting"
+  },
+  {
+    "id": "cnNzOkNoaW5h4oCZcyBHLkQu",
+    "source": "rss",
+    "title": "China’s G.D.P. Stronger Than Expected, Led by Infrastructure Spending",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776353226254,
+    "topic": "stronger"
+  },
+  {
+    "id": "cnNzOlhpIEFsbHVkZXMgdG8g",
+    "source": "rss",
+    "title": "Xi Alludes to Trump’s Policies to Make a Case for Closer Ties to Vietnam",
+    "url": "",
+    "score_hint": 989,
+    "ts": 1776353226254,
+    "topic": "alludes"
+  },
+  {
+    "id": "cnNzOkluc2lkZSB0aGUgU3Rv",
+    "source": "rss",
+    "title": "Inside the Storage Units of Six New Yorkers",
+    "url": "",
+    "score_hint": 988,
+    "ts": 1776353226254,
+    "topic": "inside"
+  },
+  {
+    "id": "cnNzOlZpcmdpbmlhIEV4LUx0",
+    "source": "rss",
+    "title": "Virginia Ex-Lt. Gov. Justin Fairfax Kills Wife and Self, Police Say",
+    "url": "",
+    "score_hint": 987,
+    "ts": 1776353226254,
+    "topic": "virginia"
+  },
+  {
+    "id": "cnNzOlRydW1w4oCZcyDigJhU",
+    "source": "rss",
+    "title": "Trump’s ‘Triumphal Arch’ Draws Backlash, Even From an Expert Who Proposed It",
+    "url": "",
+    "score_hint": 986,
+    "ts": 1776353226254,
+    "topic": "triumphal"
+  },
+  {
+    "id": "cnNzOkFoZWFkIG9mIDIwMjgs",
+    "source": "rss",
+    "title": "Ahead of 2028, Vance Collects Cash, Chits and Contacts",
+    "url": "",
+    "score_hint": 985,
+    "ts": 1776353226254,
+    "topic": "collects"
+  },
+  {
+    "id": "cnNzOlRhbGFyaWNvIExlYWRz",
+    "source": "rss",
+    "title": "Talarico Leads a Democratic Cash Surge: 7 Takeaways From 2026 Filings",
+    "url": "",
+    "score_hint": 984,
+    "ts": 1776353226254,
+    "topic": "talarico"
+  },
+  {
+    "id": "cnNzOldobKAmXMgV2lubmluZ",
+    "source": "rss",
+    "title": "Who’s Winning the Cash Race in 9 Top Senate Contests?",
+    "url": "",
+    "score_hint": 983,
+    "ts": 1776353226255,
+    "topic": "winning"
+  },
+  {
+    "id": "cnNzOlV0YWggQmVjb21lcyB0",
+    "source": "rss",
+    "title": "Utah Becomes the New Center of U.S. Measles Cases",
+    "url": "",
+    "score_hint": 982,
+    "ts": 1776353226255,
+    "topic": "becomes"
+  },
+  {
+    "id": "cnNzOkJhdGNoIG9mIEFudGkt",
+    "source": "rss",
+    "title": "Batch of Anti-Anxiety Drug Xanax Recalled, F.D.A. Says",
+    "url": "",
+    "score_hint": 981,
+    "ts": 1776353226255,
+    "topic": "anxiety"
+  },
+  {
+    "id": "cnNzOk5ZQyB0byBTcGVuZCAk",
+    "source": "rss",
+    "title": "NYC to Spend $4 Billion From Pension Funds on Affordable Homes",
+    "url": "",
+    "score_hint": 980,
+    "ts": 1776353226255,
+    "topic": "billion"
+  },
+  {
+    "id": "cnNzOlRoZSBTZWNvbmQgSG9t",
+    "source": "rss",
+    "title": "The Second Home Tax Has Failed Before. Could This Year Be Different?",
+    "url": "",
+    "score_hint": 979,
+    "ts": 1776353226255,
+    "topic": "second"
+  },
+  {
+    "id": "cnNzOldoYXQgSXMgdGhlIFBp",
+    "source": "rss",
+    "title": "What Is the Pied-à-Terre Tax? 5 Things to Know About Hochul’s Proposal.",
+    "url": "",
+    "score_hint": 978,
+    "ts": 1776353226255,
+    "topic": "things"
+  },
+  {
+    "id": "cnNzOk1hbWRhbmnigJlzIFdp",
+    "source": "rss",
+    "title": "Mamdani’s Wife Admits ‘Shame’ Over Social Media Posts From Her Teens",
+    "url": "",
+    "score_hint": 977,
+    "ts": 1776353226255,
+    "topic": "mamdani"
+  },
+  {
+    "id": "cnNzOk1vcmUgWW91bmcgTWVu",
+    "source": "rss",
+    "title": "More Young Men Say Religion Is ‘Very Important’ to Them, Poll Finds",
+    "url": "",
+    "score_hint": 976,
+    "ts": 1776353226255,
+    "topic": "religion"
+  },
+  {
+    "id": "cnNzOk9yYmFu4oCZcyBEZWZl",
+    "source": "rss",
+    "title": "Orban’s Defeat Punctures Europe’s Far Right, but Also Offers It a Road Map",
+    "url": "",
+    "score_hint": 975,
+    "ts": 1776353226255,
+    "topic": "defeat"
+  },
+  {
+    "id": "cnNzOldoYXQgTElWIEdvbGbi",
+    "source": "rss",
+    "title": "What LIV Golf’s Demise Means for Saudi Influence",
+    "url": "",
+    "score_hint": 974,
+    "ts": 1776353226255,
+    "topic": "demise"
+  },
+  {
+    "id": "cnNzOkkgQWxtb3N0IE5ldmVy",
+    "source": "rss",
+    "title": "I Almost Never Predict Supreme Court Outcomes. Trump Will Lose This Case.",
+    "url": "",
+    "score_hint": 973,
+    "ts": 1776353226255,
+    "topic": "almost"
+  },
+  {
+    "id": "cnNzOk9sZGVyIFdvbWVuIEFy",
+    "source": "rss",
+    "title": "Older Women Are in Demand by Younger Men",
+    "url": "",
+    "score_hint": 972,
+    "ts": 1776353226255,
+    "topic": "demand"
+  },
+  {
+    "id": "cnNzOk5hdGlvbmFsIFNlY3Vy",
+    "source": "rss",
+    "title": "National Security. Artificial Intelligence. And Your Dumb Dog.",
+    "url": "",
+    "score_hint": 971,
+    "ts": 1776353226255,
+    "topic": "national"
+  },
+  {
+    "id": "cnNzOlN0ZXBoZW4gQ29sYmVy",
+    "source": "rss",
+    "title": "Stephen Colbert Wants the Vice President to Lay Off the Pope",
+    "url": "",
+    "score_hint": 970,
+    "ts": 1776353226255,
+    "topic": "stephen"
+  },
+  {
+    "id": "cnNzOlJ1c3NpYW4gU3RyaWtl",
+    "source": "rss",
+    "title": "Russian Strikes Kill at Least 15 in Ukraine in Biggest Attack in Months",
+    "url": "",
+    "score_hint": 969,
+    "ts": 1776353226255,
+    "topic": "russian"
+  },
+  {
+    "id": "cnNzOlJvaGluZ3lhIFJlZnVn",
+    "source": "rss",
+    "title": "Rohingya Refugee Recounts Rescue From Capsizing Boat That Left Nearly 250 Others Missing",
+    "url": "",
+    "score_hint": 968,
+    "ts": 1776353226255,
+    "topic": "rohingya"
+  },
+  {
+    "id": "cnNzOkNhcmJvbiBSZW1vdmFs",
+    "source": "rss",
+    "title": "Carbon Removal Industry Reels as Microsoft Retreats",
+    "url": "",
+    "score_hint": 967,
+    "ts": 1776353226255,
+    "topic": "carbon"
+  },
+  {
+    "id": "cnNzOlBpbG90cyBXZW50IFZp",
+    "source": "rss",
+    "title": "Pilots Went Viral for Meowing on the Radio. The F.A.A. Was Not Amused.",
+    "url": "",
+    "score_hint": 966,
+    "ts": 1776353226255,
+    "topic": "pilots"
+  },
+  {
+    "id": "1smfoda",
+    "source": "reddit",
+    "title": "What game has a learning curve that puts you off?",
+    "url": "https://i.redd.it/5xeicuspkevg1.jpeg",
+    "score_hint": 19062,
+    "ts": 1776353226257,
+    "topic": "learning"
+  },
+  {
+    "id": "1sn3hhj",
+    "source": "reddit",
+    "title": "When filming Titanic, James Cameron didn't want actors pretending to panic, so he flooded the set.",
+    "url": "https://v.redd.it/qt5exiwi0kvg1",
+    "score_hint": 15329,
+    "ts": 1776353226257,
+    "topic": "filming"
+  },
+  {
+    "id": "1sn1h85",
+    "source": "reddit",
+    "title": "Pope: World is being ravaged by a handful of tyrants",
+    "url": "https://www.telegraph.co.uk/world-news/2026/04/16/pope-world-being-ravaged-by-handful-of-tyrants/?WT.mc_id=tmgoff_reddit_ravaged-by-handful-of-tyrants/&amp;accesscontrol=facebookchannel_open",
+    "score_hint": 37079,
+    "ts": 1776353226257,
+    "topic": "ravaged"
+  },
+  {
+    "id": "1sn0vhj",
+    "source": "reddit",
+    "title": "Trump Yanks Millions From Catholic Charities Amid Pope Feud",
+    "url": "https://www.thedailybeast.com/trump-yanks-millions-from-catholic-charities-amid-pope-feud/",
+    "score_hint": 14677,
+    "ts": 1776353226257,
+    "topic": "millions"
+  },
+  {
+    "id": "1sn1loa",
+    "source": "reddit",
+    "title": "Pete Hegseth quoted a fake Bible verse from Pulp Fiction during a Pentagon sermon.",
+    "url": "https://v.redd.it/99rfac9jmjvg1",
+    "score_hint": 11329,
+    "ts": 1776353226257,
+    "topic": "hegseth"
+  },
+  {
+    "id": "1smljnb",
+    "source": "reddit",
+    "title": "My wife just walks over the hangers and breaks them instead of picking them up off the floor",
+    "url": "https://i.redd.it/vabzx6eanfvg1.jpeg",
+    "score_hint": 18797,
+    "ts": 1776353226257,
+    "topic": "hangers"
+  },
+  {
+    "id": "1smhn4w",
+    "source": "reddit",
+    "title": "Mamdani introduces “pied-a-tierre tax” on tax day: “When I ran for mayor, I said I was going to tax the rich … Well, today we’re taxing the rich...”",
+    "url": "https://v.redd.it/fe6dvgn3xevg1",
+    "score_hint": 109082,
+    "ts": 1776353226257,
+    "topic": "mamdani"
+  },
+  {
+    "id": "1smzvey",
+    "source": "reddit",
+    "title": "What's a piece of tech everyone hyped up that quietly turned out to be useless?",
+    "url": "https://www.reddit.com/r/AskReddit/comments/1smzvey/whats_a_piece_of_tech_everyone_hyped_up_that/",
+    "score_hint": 1827,
+    "ts": 1776353226257,
+    "topic": "everyone"
+  },
+  {
+    "id": "1smlt60",
+    "source": "reddit",
+    "title": "Pentagon prepares for possible military operation in Cuba",
+    "url": "https://eu.usatoday.com/story/news/world/2026/04/15/pentagon-ramps-up-secret-cuba-planning-trump/89623722007/",
+    "score_hint": 18467,
+    "ts": 1776353226257,
+    "topic": "pentagon"
+  },
+  {
+    "id": "1smk97x",
+    "source": "reddit",
+    "title": "Police search you house &amp; you notice dents on your car",
+    "url": "https://v.redd.it/6xq5f076efvg1",
+    "score_hint": 66895,
+    "ts": 1776353226257,
+    "topic": "police"
+  },
+  {
+    "id": "1smo673",
+    "source": "reddit",
+    "title": "I’m convinced these are bullet holes in our garage but my roommate doesn’t think so",
+    "url": "https://www.reddit.com/gallery/1smo673",
+    "score_hint": 11326,
+    "ts": 1776353226257,
+    "topic": "convinced"
+  },
+  {
+    "id": "1sms99u",
+    "source": "reddit",
+    "title": "Billboard in my very red area",
+    "url": "https://i.redd.it/zwfblqru3hvg1.jpeg",
+    "score_hint": 124587,
+    "ts": 1776353226257,
+    "topic": "billboard"
+  },
+  {
+    "id": "1sn0elu",
+    "source": "reddit",
+    "title": "Bro took a selfie with Italian Prime Minister Meloni and immediately after said he would never vote for her party 😈\n\nShe calmly responded: \"This is democracy, perfectly normal.\" 💅🔥",
+    "url": "https://v.redd.it/9j5u9ikhcjvg1",
+    "score_hint": 15041,
+    "ts": 1776353226257,
+    "topic": "selfie"
+  },
+  {
+    "id": "1smii1u",
+    "source": "reddit",
+    "title": "(Rare trope) A death manages to be horrifying without any blood or gore",
+    "url": "https://www.reddit.com/gallery/1smii1u",
+    "score_hint": 16764,
+    "ts": 1776353226257,
+    "topic": "manages"
+  },
+  {
+    "id": "1smi5h2",
+    "source": "reddit",
+    "title": "What’s a good name for this fluffy little boy?",
+    "url": "https://www.reddit.com/gallery/1smi5h2",
+    "score_hint": 11566,
+    "ts": 1776353226257,
+    "topic": "fluffy"
+  },
+  {
+    "id": "1smeq75",
+    "source": "reddit",
+    "title": "My mom with her old flame in the mid 1970s",
+    "url": "https://www.reddit.com/gallery/1smeq75",
+    "score_hint": 64934,
+    "ts": 1776353226257,
+    "topic": "my"
+  },
+  {
+    "id": "1smfty4",
+    "source": "reddit",
+    "title": "Jury finds that Ticketmaster and Live Nation had an anticompetitive monopoly over big concert venues",
+    "url": "https://apnews.com/article/live-nation-ticketmaster-antitrust-trial-f0ffdd20dd4f64e8b4bb9d97134b826f",
+    "score_hint": 42907,
+    "ts": 1776353226257,
+    "topic": "ticketmaster"
+  },
+  {
+    "id": "1sn1r0t",
+    "source": "reddit",
+    "title": "me irl",
+    "url": "https://i.redd.it/63ic2oypnjvg1.png",
+    "score_hint": 9103,
+    "ts": 1776353226257,
+    "topic": "me"
+  },
+  {
+    "id": "1smyqy4",
+    "source": "reddit",
+    "title": "No, I dont want premium thanks",
+    "url": "https://i.redd.it/n6qqvr7jwivg1.jpeg",
+    "score_hint": 27175,
+    "ts": 1776353226257,
+    "topic": "premium"
+  },
+  {
+    "id": "1smm61y",
+    "source": "reddit",
+    "title": "petah..?",
+    "url": "https://i.redd.it/g0ert8ntrfvg1.png",
+    "score_hint": 12890,
+    "ts": 1776353226257,
+    "topic": "petah"
+  },
+  {
+    "id": "1smmzyt",
+    "source": "reddit",
+    "title": "Tom Steyer announces plan to jail ICE agents, calls agency a ‘violent extremist group’",
+    "url": "https://ktla.com/news/tom-steyer-announces-plan-to-jail-ice-agents-calls-agency-a-violent-extremist-group/",
+    "score_hint": 18928,
+    "ts": 1776353226257,
+    "topic": "steyer"
+  },
+  {
+    "id": "1smpthv",
+    "source": "reddit",
+    "title": "No officer, I didn’t see the stop sign",
+    "url": "https://v.redd.it/arw7pi79kgvg1",
+    "score_hint": 15175,
+    "ts": 1776353226257,
+    "topic": "officer"
+  },
+  {
+    "id": "1sn3cxg",
+    "source": "reddit",
+    "title": "Tropic Thunder (2008)",
+    "url": "https://i.redd.it/1243ypjmzjvg1.jpeg",
+    "score_hint": 5968,
+    "ts": 1776353226257,
+    "topic": "tropic"
+  },
+  {
+    "id": "1smhyzn",
+    "source": "reddit",
+    "title": "Looking for opinions on the inspo compared to what we got",
+    "url": "https://www.reddit.com/gallery/1smhyzn",
+    "score_hint": 14820,
+    "ts": 1776353226257,
+    "topic": "looking"
+  },
+  {
+    "id": "1smwhqj",
+    "source": "reddit",
+    "title": "This would be unacceptable in 95% of the world",
+    "url": "https://v.redd.it/6zb1m4gb8ivg1",
+    "score_hint": 3944,
+    "ts": 1776353226257,
+    "topic": "unacceptable"
+  }
+]

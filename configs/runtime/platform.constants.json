@@ -1,0 +1,7 @@
+{
+  "platform": "Lumora",
+  "mode": "creator-sovereignty",
+  "feed_policy": "chronological-first",
+  "memory_policy": "preserve",
+  "trust_policy": "transparent"
+}

@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-05-26T19:38:07.951Z",
+  "status": "PASS",
+  "totalFindings": 0,
+  "byCategory": {
+    "react_hooks": 0,
+    "unused_symbol": 0,
+    "unused_eslint_disable": 0,
+    "prerender": 0,
+    "import_export": 0,
+    "runtime_warning": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "budget": {
+    "maxCritical": 0,
+    "maxHigh": 25,
+    "maxMedium": 80,
+    "maxTotal": 250
+  },
+  "findings": []
+}

@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-23T22:15:08.367Z",
+  "scope": "runtime_consolidation_full_audit",
+  "typecheckStatus": "PASS",
+  "testStatus": "PASS",
+  "buildStatus": "PASS",
+  "logs": {
+    "typecheck": "docs/runtime-consolidation/audit-logs/typecheck.log",
+    "tests": "docs/runtime-consolidation/audit-logs/runtime_consolidation_tests.log",
+    "build": "docs/runtime-consolidation/audit-logs/next_build.log"
+  },
+  "requiredLocks": [
+    ".lumora_runtime_consolidation_pack01_lock",
+    ".lumora_runtime_consolidation_pack02_lock",
+    ".lumora_runtime_consolidation_pack03_lock",
+    ".lumora_runtime_consolidation_pack04_lock",
+    ".lumora_runtime_consolidation_pack05_lock",
+    ".lumora_runtime_consolidation_pack06_lock",
+    ".lumora_runtime_consolidation_pack07_lock",
+    ".lumora_runtime_consolidation_pack08_lock",
+    ".lumora_runtime_consolidation_pack09_lock",
+    ".lumora_runtime_consolidation_pack10_lock",
+    ".lumora_runtime_consolidation_pack11_lock",
+    ".lumora_runtime_consolidation_pack12_lock",
+    ".lumora_runtime_consolidation_final_seal_lock"
+  ],
+  "missingLocks": [],
+  "status": "PASS"
+}

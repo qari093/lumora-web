@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "step": "290/290",
+  "status": "FINAL LOCK",
+  "feed_count": 3,
+  "top10_media_types": [
+    "embed",
+    "video",
+    "youtube"
+  ],
+  "has_embed": true,
+  "has_video": true,
+  "has_youtube": true,
+  "diversity": 3,
+  "result": "Lumora media-first FYP pipeline locked"
+}

@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-05-24T16:24:15.553Z",
+  "status": "WARNING",
+  "fypStatus": "WARNING",
+  "liveStatus": "WARNING",
+  "failedFindings": 0,
+  "warningFindings": 2,
+  "findings": [
+    {
+      "system": "fyp",
+      "capability": "latencyCeilingMs",
+      "status": "WARNING",
+      "message": "FYP latency is acceptable but should be optimized."
+    },
+    {
+      "system": "live",
+      "capability": "recoveryReady",
+      "status": "WARNING",
+      "message": "Live recovery is not ready.",
+      "requiredFix": "Complete the missing Live runtime capability before public launch."
+    }
+  ]
+}

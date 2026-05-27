@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { getNexaRuntimeMetrics } from "@/lib/nexa/metrics";
 
 function json(body: any, status = 200) {

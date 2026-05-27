@@ -1,0 +1,959 @@
+src/types/lumora.feed.ts:22:  audioUrl?: string;
+src/echo/cache/audioCache.ts:1:export function audioCacheLayer() {
+src/echo/audio/audioSession.ts:1:export const audioSessionArchitecture = {
+src/echo/audio/audioPopulation.ts:8:export function audioPopulationReady() {
+src/cineverse/core/doctrine.ts:18:  "rights-safety",
+src/cineverse/launch/runtime.ts:2:  "silent-launch",
+src/cineverse/teasers/pipeline.ts:4:  "audio-emotion-analysis",
+src/core/post-launch/improvements.ts:7:  "trust-safety-workflows",
+src/core/nexa/fitness/fitnessRuntime.ts:9:  audioCuedTraining: true
+src/core/zencoin/testing/integrationTestingSeal.ts:5:  duplicateReceipts: true,
+src/core/echo/cache/audioCache.ts:1:export function audioCacheLayer() {
+src/core/echo/audio/audioSession.ts:1:export const audioSessionArchitecture = {
+src/core/echo/audio/audioPopulation.ts:8:export function audioPopulationReady() {
+src/core/security-production/headers.ts:4:  "referrer-policy": "strict-origin-when-cross-origin",
+src/core/fyp/recommendation/contracts/recommendationContract.ts:8:      Number.isFinite(candidate.qualityScore) &&
+src/core/fyp/recommendation/runtime/recommendationRanker.ts:16:    candidate.qualityScore * 0.35 +
+src/core/fyp/recommendation/types.ts:3:  qualityScore: number;
+src/core/fyp/ranking/rankScore.ts:13:    candidate.safetyScore * 0.12 +
+src/core/fyp/quality/contracts/feedQualityContract.ts:9:      Number.isFinite(input.safetyScore) &&
+src/core/fyp/quality/contracts/feedQualityContract.ts:11:      Number.isFinite(input.duplicateRisk)
+src/core/fyp/quality/runtime/feedQualityScore.ts:16:    throw new Error("invalid_feed_quality_input");
+src/core/fyp/quality/runtime/feedQualityScore.ts:21:      input.safetyScore * 0.3 +
+src/core/fyp/quality/runtime/feedQualityScore.ts:23:      input.duplicateRisk * 0.1
+src/core/fyp/quality/types.ts:10:  safetyScore: number;
+src/core/fyp/quality/types.ts:12:  duplicateRisk: number;
+src/core/fyp/real-feed/types.ts:17:  safetyScore: number;
+src/core/fyp/real-feed/candidatePipeline.ts:12:    safetyScore: Math.max(0, Math.min(100, candidate.safetyScore)),
+src/core/fyp/real-feed/candidatePipeline.ts:24:    .filter(candidate => candidate.safetyScore >= 70)
+src/core/fyp/composer/contracts/feedComposerContract.ts:10:    Number.isFinite(item.qualityScore)
+src/core/fyp/composer/runtime/feedComposerRanker.ts:11:    (item.qualityScore * 0.3);
+src/core/fyp/composer/types.ts:5:  qualityScore: number;
+src/core/fyp/native-video/runtime/nativeVideoPolicy.ts:20:      reason: "audio_required"
+src/core/fyp/feed-activation/activatedFeed.ts:40:    safe: ranked.every(item => item.safetyScore >= 70)
+src/core/fyp/safety/runtime/policyRules.ts:6:import { validateSafetyInput } from "../contracts/safetyPolicyContract";
+src/core/fyp/safety/runtime/policyRules.ts:26:    throw new Error("invalid_safety_input");
+src/core/fyp/safety/runtime/safetyRuntime.ts:6:import { evaluateSafetyPolicy } from "./policyRules";
+src/core/fyp/media-runtime/types.ts:3:  | "audio"
+src/core/fyp/media-runtime/mediaValidation.ts:17:      reason: "video_requires_audio_track",
+src/core/fyp/audio/contracts/audioContract.ts:11:      asset.codec &&
+src/core/fyp/audio/runtime/audioRuntime.ts:8:} from "./audioPolicy";
+src/core/fyp/audio/runtime/audioPolicy.ts:8:} from "../contracts/audioContract";
+src/core/fyp/audio/runtime/audioPolicy.ts:20:    throw new Error("invalid_audio_asset");
+src/core/fyp/audio/runtime/audioPolicy.ts:23:  if (!SUPPORTED_CODECS.includes(asset.codec)) {
+src/core/fyp/audio/runtime/audioPolicy.ts:27:      reason: "unsupported_codec",
+src/core/fyp/audio/runtime/audioPolicy.ts:35:    reason: "audio_ready",
+src/core/fyp/audio/types.ts:5:  codec: string;
+src/core/uploads/validation.ts:1:const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "video/mp4", "audio/mpeg", "application/pdf"];
+src/core/lcex/participationHabitStreakBridge.ts:5:  safetyBlocked: boolean;
+src/core/lcex/participationHabitStreakBridge.ts:14:    | "safety_blocked"
+src/core/lcex/participationHabitStreakBridge.ts:29:  if (input.safetyBlocked) {
+src/core/lcex/participationHabitStreakBridge.ts:33:      reason: "safety_blocked",
+src/core/lcex/identityOverrideReasonExplainer.ts:37:      reasons.push("Your identity layer is active with no active safety override.");
+src/core/lcex/predictionPickBoostRules.ts:7:  safetyOverrideActive: boolean;
+src/core/lcex/predictionPickBoostRules.ts:16:    | "safety_override_active"
+src/core/lcex/predictionPickBoostRules.ts:30:  if (input.safetyOverrideActive) {
+src/core/lcex/predictionPickBoostRules.ts:35:      reason: "safety_override_active",
+src/core/lcex/transformationPublishingQueue.ts:18:  qualityScore: number;
+src/core/lcex/transformationPublishingQueue.ts:37:      const qualityDelta = b.qualityScore - a.qualityScore;
+src/core/lcex/transformationPublishingQueue.ts:38:      if (qualityDelta !== 0) return qualityDelta;
+src/core/lcex/trustFeedbackResolutionRules.ts:6:  safetyLinked: boolean;
+src/core/lcex/trustFeedbackResolutionRules.ts:17:    | "safety_requires_resolution";
+src/core/lcex/trustFeedbackResolutionRules.ts:31:  if (input.safetyLinked && !input.actionTaken) {
+src/core/lcex/trustFeedbackResolutionRules.ts:35:      reason: "safety_requires_resolution",
+src/core/lcex/moodBoardGenerationRules.ts:7:  safetyBlocked: boolean;
+src/core/lcex/moodBoardGenerationRules.ts:18:    | "safety_blocked";
+src/core/lcex/moodBoardGenerationRules.ts:24:  if (input.safetyBlocked) {
+src/core/lcex/moodBoardGenerationRules.ts:25:    return { generatable: false, reason: "safety_blocked" };
+src/core/lcex/finalBlockerRules.ts:12:    | "critical_safety_incident"
+src/core/lcex/finalBlockerRules.ts:25:  if (input.criticalSafetyIncident) reasons.push("critical_safety_incident");
+src/core/lcex/sealRevocationRules.ts:15:    | "critical_safety_incident"
+src/core/lcex/sealRevocationRules.ts:37:      reason: "critical_safety_incident",
+src/core/lcex/participationHabitRewardRules.ts:5:  safetyBlocked: boolean;
+src/core/lcex/participationHabitRewardRules.ts:16:    | "safety_blocked"
+src/core/lcex/participationHabitRewardRules.ts:27:  if (input.safetyBlocked) {
+src/core/lcex/participationHabitRewardRules.ts:28:    return { canReward: false, reason: "safety_blocked" };
+src/core/lcex/trendBountyDuplicateDetection.ts:14:  duplicate: boolean;
+src/core/lcex/trendBountyDuplicateDetection.ts:15:  duplicateSubmissionId: string | null;
+src/core/lcex/trendBountyDuplicateDetection.ts:17:  reason: "ok" | "duplicate_title" | "duplicate_evidence" | "high_similarity";
+src/core/lcex/trendBountyDuplicateDetection.ts:58:        duplicate: true,
+src/core/lcex/trendBountyDuplicateDetection.ts:59:        duplicateSubmissionId: existing.submissionId,
+src/core/lcex/trendBountyDuplicateDetection.ts:61:        reason: "duplicate_title",
+src/core/lcex/trendBountyDuplicateDetection.ts:67:        duplicate: true,
+src/core/lcex/trendBountyDuplicateDetection.ts:68:        duplicateSubmissionId: existing.submissionId,
+src/core/lcex/trendBountyDuplicateDetection.ts:70:        reason: "duplicate_evidence",
+src/core/lcex/trendBountyDuplicateDetection.ts:76:        duplicate: true,
+src/core/lcex/trendBountyDuplicateDetection.ts:77:        duplicateSubmissionId: existing.submissionId,
+src/core/lcex/trendBountyDuplicateDetection.ts:85:    duplicate: false,
+src/core/lcex/trendBountyDuplicateDetection.ts:86:    duplicateSubmissionId: null,
+src/core/lcex/trendBountyDuplicateDetection.ts:95:  return !detectTrendBountyDuplicate(input).duplicate;
+src/core/lcex/transformationQualityScoring.ts:4:  safetyScore: number;
+src/core/lcex/transformationQualityScoring.ts:24:      input.safetyScore * 0.24 +
+src/core/lcex/liveReactionRoomResumeRules.ts:6:    | "safety_override"
+src/core/lcex/liveReactionRoomResumeRules.ts:12:  safetyOverrideActive: boolean;
+src/core/lcex/liveReactionRoomResumeRules.ts:25:    | "safety_override_active"
+src/core/lcex/liveReactionRoomResumeRules.ts:36:  if (input.safetyOverrideActive) {
+src/core/lcex/liveReactionRoomResumeRules.ts:37:    return { canResume: false, reason: "safety_override_active" };
+src/core/lcex/participationHabitProgressRules.ts:5:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/participationHabitProgressRules.ts:29:  if (input.safetyMode === "suppressed") {
+src/core/lcex/versusCardBoostRules.ts:7:  safetyOverrideActive: boolean;
+src/core/lcex/versusCardBoostRules.ts:16:    | "safety_override_active"
+src/core/lcex/versusCardBoostRules.ts:30:  if (input.safetyOverrideActive) {
+src/core/lcex/versusCardBoostRules.ts:35:      reason: "safety_override_active",
+src/core/lcex/systemHealthScoring.ts:6:  safetyRiskScore: number;
+src/core/lcex/systemHealthScoring.ts:26:      input.safetyRiskScore * 0.2
+src/core/lcex/rolloutGatePauseRules.ts:4:  safetyIncidentActive: boolean;
+src/core/lcex/rolloutGatePauseRules.ts:16:    | "safety_incident"
+src/core/lcex/rolloutGatePauseRules.ts:33:  if (input.safetyIncidentActive) {
+src/core/lcex/rolloutGatePauseRules.ts:37:      reason: "safety_incident",
+src/core/lcex/userControlUpdateRules.ts:4:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlUpdateRules.ts:37:  if (input.safetyMode === "suppressed") {
+src/core/lcex/userControlUpdateRules.ts:57:      input.safetyMode === "interactive-disabled" &&
+src/core/lcex/whyDidISeeThisExplainer.ts:73:    bullets.push("Cultural safety adjustments were applied before surfacing.");
+src/core/lcex/controlledStreakRewardRules.ts:5:  safetyBlocked: boolean;
+src/core/lcex/controlledStreakRewardRules.ts:16:    | "safety_blocked"
+src/core/lcex/controlledStreakRewardRules.ts:25:  if (input.safetyBlocked) {
+src/core/lcex/controlledStreakRewardRules.ts:30:      reason: "safety_blocked",
+src/core/lcex/predictionPickFairnessRules.ts:6:  safetyOverrideActive: boolean;
+src/core/lcex/predictionPickFairnessRules.ts:14:    | "safety_override_active"
+src/core/lcex/predictionPickFairnessRules.ts:28:  if (input.safetyOverrideActive) {
+src/core/lcex/predictionPickFairnessRules.ts:32:      reason: "safety_override_active",
+src/core/lcex/versusVoteIntegrityRules.ts:18:    | "duplicate_vote"
+src/core/lcex/versusVoteIntegrityRules.ts:41:    return { allowed: false, reason: "duplicate_vote" };
+src/core/lcex/identityPersonalizationSummary.ts:7:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/identityPersonalizationSummary.ts:32:    `Mode ${input.safetyMode}`,
+src/core/lcex/identityPersonalizationSummary.ts:41:      input.safetyMode !== "suppressed" &&
+src/core/lcex/trustFeedbackEscalationRules.ts:13:  safetyLinked: boolean;
+src/core/lcex/trustFeedbackEscalationRules.ts:18:  queue: "none" | "ops" | "trust-safety" | "product";
+src/core/lcex/trustFeedbackEscalationRules.ts:23:    | "safety_linked"
+src/core/lcex/trustFeedbackEscalationRules.ts:30:  if (input.safetyLinked) {
+src/core/lcex/trustFeedbackEscalationRules.ts:33:      queue: "trust-safety",
+src/core/lcex/trustFeedbackEscalationRules.ts:34:      reason: "safety_linked",
+src/core/lcex/versusCardPairingRules.ts:21:    | "low_cultural_safety";
+src/core/lcex/versusCardPairingRules.ts:61:      reason: "low_cultural_safety",
+src/core/lcex/systemHealthEscalationRules.ts:16:  safetyLinked: boolean;
+src/core/lcex/systemHealthEscalationRules.ts:22:  queue: "none" | "ops" | "trust-safety" | "product";
+src/core/lcex/systemHealthEscalationRules.ts:28:    | "safety_linked"
+src/core/lcex/systemHealthEscalationRules.ts:35:  if (input.safetyLinked) {
+src/core/lcex/systemHealthEscalationRules.ts:38:      queue: "trust-safety",
+src/core/lcex/systemHealthEscalationRules.ts:39:      reason: "safety_linked",
+src/core/lcex/systemHealthEscalationRules.ts:46:      queue: "trust-safety",
+src/core/lcex/userControlTelemetry.ts:15:  safetyMode?: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlTelemetry.ts:40:    record.safetyMode || "none",
+src/core/lcex/safeDerivativePromptTemplates.ts:13:  safetyNotes: string[];
+src/core/lcex/safeDerivativePromptTemplates.ts:24:    safetyNotes: [
+src/core/lcex/safeDerivativePromptTemplates.ts:37:    safetyNotes: [
+src/core/lcex/safeDerivativePromptTemplates.ts:50:    safetyNotes: [
+src/core/lcex/safeDerivativePromptTemplates.ts:63:    safetyNotes: [
+src/core/lcex/safeDerivativePromptTemplates.ts:76:    safetyNotes: [
+src/core/lcex/finalReadinessScoring.ts:3:  safetyScore: number;
+src/core/lcex/finalReadinessScoring.ts:23:      input.safetyScore * 0.2 +
+src/core/lcex/liveReactionRoomAutoPauseRules.ts:5:  safetyOverrideActive: boolean;
+src/core/lcex/liveReactionRoomAutoPauseRules.ts:16:    | "safety_override"
+src/core/lcex/liveReactionRoomAutoPauseRules.ts:24:  if (input.safetyOverrideActive) {
+src/core/lcex/liveReactionRoomAutoPauseRules.ts:25:    return { paused: true, reason: "safety_override" };
+src/core/lcex/identityShadowProfileRules.ts:5:  safetyBlocked: boolean;
+src/core/lcex/identityShadowProfileRules.ts:16:    | "safety_blocked";
+src/core/lcex/identityShadowProfileRules.ts:22:  if (input.safetyBlocked) {
+src/core/lcex/identityShadowProfileRules.ts:26:      reason: "safety_blocked",
+src/core/lcex/liveReactionRoomModerationFlags.ts:8:  | "age_safety"
+src/core/lcex/liveReactionRoomModerationFlags.ts:48:    flag.reason === "age_safety"
+src/core/lcex/streakDecayRules.ts:5:  safetyBlocked: boolean;
+src/core/lcex/streakDecayRules.ts:16:    | "safety_blocked";
+src/core/lcex/streakDecayRules.ts:22:  if (input.safetyBlocked) {
+src/core/lcex/streakDecayRules.ts:26:      reason: "safety_blocked",
+src/core/lcex/predictionPickOpenRules.ts:7:  safetyBlocked: boolean;
+src/core/lcex/predictionPickOpenRules.ts:19:    | "safety_blocked";
+src/core/lcex/predictionPickOpenRules.ts:40:  if (input.safetyBlocked) {
+src/core/lcex/predictionPickOpenRules.ts:41:    return { openable: false, reason: "safety_blocked" };
+src/core/lcex/trendBountyScoring.ts:7:  safetyScore: number;
+src/core/lcex/trendBountyScoring.ts:23:  if (input.safetyScore < 60) {
+src/core/lcex/predictionPickLockRules.ts:7:  safetyBlocked: boolean;
+src/core/lcex/predictionPickLockRules.ts:18:    | "safety_blocked";
+src/core/lcex/predictionPickLockRules.ts:28:  if (input.safetyBlocked) {
+src/core/lcex/predictionPickLockRules.ts:29:    return { lockable: false, reason: "safety_blocked" };
+src/core/lcex/moodBoardRefreshRules.ts:6:  safetyBlocked: boolean;
+src/core/lcex/moodBoardRefreshRules.ts:19:    | "safety_blocked";
+src/core/lcex/moodBoardRefreshRules.ts:29:  if (input.safetyBlocked) {
+src/core/lcex/moodBoardRefreshRules.ts:30:    return { refreshable: false, reason: "safety_blocked" };
+src/core/lcex/rankingSignalContract.ts:8:  qualityScore: number;
+src/core/lcex/rankingSignalContract.ts:28:      signal.qualityScore * 0.2 +
+src/core/lcex/liveReactionRoomBoostRules.ts:7:  safetyOverrideActive: boolean;
+src/core/lcex/liveReactionRoomBoostRules.ts:16:    | "safety_override_active"
+src/core/lcex/liveReactionRoomBoostRules.ts:29:  if (input.safetyOverrideActive) {
+src/core/lcex/liveReactionRoomBoostRules.ts:34:      reason: "safety_override_active",
+src/core/lcex/rolloutGateEvaluationRules.ts:3:  qualityScore: number;
+src/core/lcex/rolloutGateEvaluationRules.ts:4:  safetyScore: number;
+src/core/lcex/rolloutGateEvaluationRules.ts:17:    | "low_quality"
+src/core/lcex/rolloutGateEvaluationRules.ts:18:    | "low_safety"
+src/core/lcex/rolloutGateEvaluationRules.ts:42:  if (input.qualityScore < 70) {
+src/core/lcex/rolloutGateEvaluationRules.ts:46:      reason: "low_quality",
+src/core/lcex/rolloutGateEvaluationRules.ts:50:  if (input.safetyScore < 75) {
+src/core/lcex/rolloutGateEvaluationRules.ts:54:      reason: "low_safety",
+src/core/lcex/userControlExplainer.ts:5:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlExplainer.ts:34:  reasons.push(`Safety mode: ${input.safetyMode}`);
+src/core/lcex/userControlVisibilityRules.ts:8:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlVisibilityRules.ts:24:  const suppressed = input.safetyMode === "suppressed";
+src/core/lcex/userControlVisibilityRules.ts:25:  const interactiveDisabled = input.safetyMode === "interactive-disabled";
+src/core/lcex/userControlVisibilityRules.ts:26:  const safeFiltered = input.safetyMode === "safe-filtered";
+src/core/lcex/fandomBadgeAwardRules.ts:6:  safetyBlocked: boolean;
+src/core/lcex/fandomBadgeAwardRules.ts:17:    | "safety_blocked";
+src/core/lcex/fandomBadgeAwardRules.ts:27:  if (input.safetyBlocked) {
+src/core/lcex/fandomBadgeAwardRules.ts:28:    return { canAward: false, reason: "safety_blocked" };
+src/core/lcex/userControlResetRules.ts:3:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlResetRules.ts:33:  if (input.safetyMode === "suppressed") {
+src/core/lcex/trendBountyRewardReleaseRules.ts:5:  safetyBlocked: boolean;
+src/core/lcex/trendBountyRewardReleaseRules.ts:16:    | "safety_blocked"
+src/core/lcex/trendBountyRewardReleaseRules.ts:35:  if (input.safetyBlocked) {
+src/core/lcex/trendBountyRewardReleaseRules.ts:36:    return { releasable: false, reason: "safety_blocked" };
+src/core/lcex/rolloutGateResumeRules.ts:5:  safetyIncidentCleared: boolean;
+src/core/lcex/rolloutGateResumeRules.ts:17:    | "safety_not_cleared"
+src/core/lcex/rolloutGateResumeRules.ts:41:  if (!input.safetyIncidentCleared) {
+src/core/lcex/rolloutGateResumeRules.ts:45:      reason: "safety_not_cleared",
+src/core/lcex/userControlSummary.ts:6:  safetyMode: "normal" | "safe-filtered" | "interactive-disabled" | "suppressed";
+src/core/lcex/userControlSummary.ts:25:    summaryLine: `${enabled.length} enabled • ${blocked.length} blocked • mode ${input.safetyMode}`,
+src/core/lcex/userControlSummary.ts:28:      input.safetyMode !== "suppressed" &&
+src/core/lcex/teaserMediaNormalization.ts:14:  aspectRatio?: number;
+src/core/lcex/teaserMediaNormalization.ts:37:    aspectRatio: computeAspectRatio(asset.width, asset.height),
+src/core/lcex/systemHealthRecoveryRules.ts:6:  safetyLinked: boolean;
+src/core/lcex/systemHealthRecoveryRules.ts:17:    | "safety_hold";
+src/core/lcex/systemHealthRecoveryRules.ts:23:  if (input.safetyLinked) {
+src/core/lcex/systemHealthRecoveryRules.ts:27:      reason: "safety_hold",
+src/core/lcex/predictionPickVoteIntegrityRules.ts:19:    | "duplicate_vote"
+src/core/lcex/predictionPickVoteIntegrityRules.ts:46:    return { allowed: false, reason: "duplicate_vote" };
+src/core/safety/safety-circle.ts:1:export const safetyCircleEnabled = true;
+src/core/lumaspace/spark/social/sparkStitch.ts:17:    throw new Error("duplicate_spark_stitch");
+src/core/lumaspace-production/ai-emotion/runtime/aiEmotionRuntime.ts:3:import { evaluateAiEmotionSafety } from "../safety/aiEmotionSafety";
+src/core/lumaspace-production/media/contracts/mediaContract.ts:4:  return Boolean(asset.id && asset.type && asset.quality);
+src/core/lumaspace-production/media/storage/mediaStorage.ts:7:    quality: "hd",
+src/core/lumaspace-production/media/types.ts:3:  type: "image" | "video" | "audio";
+src/core/lumaspace-production/media/types.ts:4:  quality: "sd" | "hd";
+src/core/lumora/portal-catalog/portalCatalog.ts:43:    monetization: ["premium subscription", "atmosphere packs", "creator audio packs"]
+src/core/zendoro/trust/trustSafetyRuntime.ts:16:export function detectFakeReview(review: { velocity?: number; duplicateRatio?: number; verified?: boolean }): FraudSignal {
+src/core/zendoro/trust/trustSafetyRuntime.ts:17:  const score = (review.velocity ?? 0) * 20 + (review.duplicateRatio ?? 0) * 100 + (review.verified === false ? 25 : 0);
+src/core/gmar/economy-active/zencoin.ts:59:  const duplicate = input.state.rewards.some(
+src/core/gmar/economy-active/zencoin.ts:63:  if (duplicate) {
+src/core/gmar/final-completion/economy/economyHardening.ts:15:  duplicateProtected: true;
+src/core/gmar/final-completion/economy/economyHardening.ts:41:    throw new Error("GMAR economy duplicate transaction blocked.");
+src/core/gmar/final-completion/economy/economyHardening.ts:70:      duplicateProtected: true,
+src/core/gmar/final-completion/economy/economyHardening.ts:109:      duplicateProtected: true,
+src/core/gmar/final-completion/economy/economyHardening.ts:124:    result.transaction.duplicateProtected !== true ||
+src/core/media/types.ts:1:export type MediaType = "image" | "video" | "audio" | "file";
+src/app/studio/gallery/page.tsx:59:                  style={{width:"100%", aspectRatio:"9 / 16", background:"#000", borderRadius:8}}
+src/app/api/video/generate/route.ts:15:      aspect: body.aspect ?? "9:16",
+src/app/api/privacy/policy/route.ts:4:  const policy = {
+src/app/api/privacy/policy/route.ts:12:  return NextResponse.json({ ok:true, policy });
+src/app/media/[...slug]/route.ts:8:  if (p.endsWith(".mp3")) return "audio/mpeg";
+src/app/media/[...slug]/route.ts:9:  if (p.endsWith(".wav")) return "audio/wav";
+src/video-gen/ffmpeg-worker.ts:97:  return { filter: parts.join(";"), audioLabel: aOut, nextIdx: idx };
+src/video-gen/ffmpeg-worker.ts:147:  // audio inputs
+src/video-gen/ffmpeg-worker.ts:148:  let audioStart = clipInputIdx.length;
+src/video-gen/ffmpeg-worker.ts:153:  const af = buildAudioFilters(normPlan, audioStart);
+src/video-gen/ffmpeg-worker.ts:159:  args.push("-map", `[${vMap}]`, "-map", `[${af.audioLabel}]`);
+src/video-gen/engine.ts:141:        const aspect = job.req.aspect ?? "9:16";
+src/video-gen/engine.ts:142:        const { width, height } = pickSize(aspect);
+src/video-gen/engine.ts:148:          size: { width, height, aspect },
+src/video-gen/engine.ts:149:          audio: {
+src/video-gen/engine.ts:218:function pickSize(aspect: "9:16"|"1:1"|"16:9") {
+src/video-gen/engine.ts:219:  if (aspect === "9:16")  return { width: 1080, height: 1920 };
+src/video-gen/engine.ts:220:  if (aspect === "1:1")   return { width: 1080, height: 1080 };
+src/_app_disabled_20251226_110144/studio/gallery/page.tsx:59:                  style={{width:"100%", aspectRatio:"9 / 16", background:"#000", borderRadius:8}}
+src/_app_disabled_20251226_110144/api/video/generate/route.ts:15:      aspect: body.aspect ?? "9:16",
+src/_app_disabled_20251226_110144/api/privacy/policy/route.ts:4:  const policy = {
+src/_app_disabled_20251226_110144/api/privacy/policy/route.ts:12:  return NextResponse.json({ ok:true, policy });
+src/_app_disabled_20251226_110144/media/[...slug]/route.ts:8:  if (p.endsWith(".mp3")) return "audio/mpeg";
+src/_app_disabled_20251226_110144/media/[...slug]/route.ts:9:  if (p.endsWith(".wav")) return "audio/wav";
+src/components/lumasearch/Thumb.tsx:15:    <div style={{position:"relative",width:"100%",aspectRatio:ratio,overflow:"hidden",borderRadius:8,background:"#0a0d12",display:"flex",alignItems:"center",justifyContent:"center"}}>
+src/live/economy/economyPolicy.ts:10:export function validateLiveEconomyPolicy(policy: LiveEconomyPolicy = LIVE_ECONOMY_POLICY): boolean {
+src/live/economy/economyPolicy.ts:12:    policy.casinoLoopsAllowed === false &&
+src/live/economy/economyPolicy.ts:13:    policy.rageIncentivesAllowed === false &&
+src/live/economy/economyPolicy.ts:14:    policy.speculativeRelicsAllowed === false &&
+src/live/economy/economyPolicy.ts:15:    policy.whaleProtectionEnabled === true
+src/lib/ads/track.ts:29:  // Idempotent semantics: treat same key within TTL as duplicate; increment a soft counter but flag deduped
+src/lib/video/sync/audioMotionSync.ts:2:  audioStartMs: number;
+src/lib/video/sync/audioMotionSync.ts:9:  audioStartMs?: number;
+src/lib/video/sync/audioMotionSync.ts:13:  const audioStartMs = input?.audioStartMs ?? 0;
+src/lib/video/sync/audioMotionSync.ts:17:    audioStartMs,
+src/lib/video/sync/audioMotionSync.ts:19:    offsetMs: motionStartMs - audioStartMs,
+src/lib/video/masking/trailerMask.ts:4:  audioReactiveCorners: boolean;
+src/lib/video/masking/trailerMask.ts:17:    audioReactiveCorners: true,
+src/lib/ingestion/dedup.ts:1:export function deduplicate(items:any[]){
+src/lib/ingestion/enrich.ts:6:    quality: (x.title && x.title.length > 20) ? 1 : 0
+src/lib/fyp_movie_clips/movie_manifest.ts:18:  audioCodec: string;
+src/lib/fyp_movie_clips/ffprobe_contract.ts:2:  codec_type?: string;
+src/lib/fyp_movie_clips/ffprobe_contract.ts:3:  codec_name?: string;
+src/lib/fyp_movie_clips/ffprobe_contract.ts:17:  return probe.streams?.find((stream) => stream.codec_type === "audio") || null;
+src/lib/fyp_movie_clips/ffprobe_contract.ts:26:  const audio = extractAudioStream(probe);
+src/lib/fyp_movie_clips/ffprobe_contract.ts:27:  return Boolean(audio?.codec_name && Number(audio.channels || 0) > 0);
+src/lib/fyp_movie_clips/ffprobe_contract.ts:31:  const audio = extractAudioStream(probe);
+src/lib/fyp_movie_clips/ffprobe_contract.ts:35:    audioCodec: audio?.codec_name || "",
+src/lib/fyp_movie_clips/audio_guard.ts:3:  audioCodec?: string;
+src/lib/fyp_movie_clips/audio_guard.ts:9:  return probe.hasAudioTrack === true && Boolean(probe.audioCodec);
+src/lib/fyp_movie_clips/archive_files.ts:18:  return name.includes("silent") || name.includes("noaudio") || name.includes("no_audio");
+src/lib/fyp_movie_clips/live/audio_validation.ts:9:  const audio = buildAudioProbeFromFfprobe(probe);
+src/lib/fyp_movie_clips/live/audio_validation.ts:11:  if (!audio.hasAudioTrack) {
+src/lib/fyp_movie_clips/live/live_ingest_orchestrator.ts:7:import { validateDownloadedMovieAudio } from "./audio_validation";
+src/lib/fyp_movie_clips/live/live_ingest_orchestrator.ts:9:import { writeLiveMovieManifest } from "./live_manifest_writer";
+src/lib/fyp_movie_clips/live/live_ingest_orchestrator.ts:47:      const audioOk = validateDownloadedMovieAudio(plan.finalPath);
+src/lib/fyp_movie_clips/live/live_ingest_orchestrator.ts:48:      if (!audioOk) {
+src/lib/fyp_movie_clips/live/live_manifest_writer.ts:3:const MANIFEST_PATH = "public/native-fyp/movie-meta/manifest.json";
+src/lib/fyp_movie_clips/movie_clip_contract.ts:2:import { shouldRejectSilentMovieClip, isValidMovieClipDuration, type MovieAudioProbe } from "./audio_guard";
+src/lib/fyp_movie_clips/movie_clip_contract.ts:11:  audio: MovieAudioProbe;
+src/lib/fyp_movie_clips/movie_clip_contract.ts:21:  const audioOk = !shouldRejectSilentMovieClip(input.audio);
+src/lib/fyp_movie_clips/movie_clip_contract.ts:25:    ok: licenseProof.safe && audioOk && durationOk,
+src/lib/fyp_movie_clips/movie_clip_contract.ts:27:    audioOk,
+src/lib/fyp_movie_clips/movie_clip_contract.ts:31:      !audioOk ? "missing_or_silent_audio" : "",
+src/lib/fyp_movie_clips/movie_manifest_loader.ts:3:const MANIFEST_PATH = "public/native-fyp/movie-meta/manifest.json";
+src/lib/intelligence/culture.ts:15:  { tag: "news", keywords: ["breaking", "policy", "election", "crisis", "update", "report"] },
+src/lib/intelligence/coherence.ts:55:    reason: "text_quality + keyword_consistency + hashtag_noise",
+src/lib/security/headers.ts:4:  headers.set("referrer-policy", "no-referrer");
+src/lib/security/headers.ts:5:  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
+src/lib/integration/echo-layer/silentOvationOnly.ts:3:    ok: action === "silent-ovation",
+src/lib/integration/echo-layer/silentOvationOnly.ts:4:    reason: action === "silent-ovation" ? "allowed" : "echo_action_blocked",
+src/lib/integration/safety-moderation/index.ts:1:export function detectAbuse(input: { duplicateSignals: number; maxDuplicates?: number }) {
+src/lib/integration/safety-moderation/index.ts:4:    abusive: input.duplicateSignals > maxDuplicates,
+src/lib/integration/safety-moderation/index.ts:5:    reason: input.duplicateSignals > maxDuplicates ? "duplicate_signal_abuse" : "clean",
+src/lib/integration/your-moment-injection/runtimeStrongestMoment.ts:8:  silentOvation: number;
+src/lib/integration/your-moment-injection/runtimeStrongestMoment.ts:17:    moment.silentOvation * 6
+src/lib/integration/phantom-public/initialSignals.ts:3:  type: "present" | "hold" | "silent-ovation";
+src/lib/integration/growth-experimentation/index.ts:15:  return { trigger: input.trigger, enabled: input.safe, safetyChecked: true };
+src/lib/integration/growth-experimentation/index.ts:22:  trigger?: { enabled: boolean; safetyChecked: boolean };
+src/lib/integration/growth-experimentation/index.ts:30:      input.trigger?.safetyChecked === true,
+src/lib/integration/circle-runtime/signalCapture.ts:5:  allowedSignals: readonly ["present", "stillness", "hold", "rewatch", "silent-ovation"];
+src/lib/integration/circle-runtime/signalCapture.ts:16:    allowedSignals: ["present", "stillness", "hold", "rewatch", "silent-ovation"],
+src/lib/creator-system/echo-layer/interactions.ts:1:export type EchoInteraction = "silent-ovation";
+src/lib/creator-system/echo-layer/interactions.ts:4:  return type === "silent-ovation";
+src/lib/creator-system/echo-layer/footprint.ts:6:  silentOvation: number;
+src/lib/creator-system/echo-layer/footprint.ts:15:  silentOvation: number;
+src/lib/creator-system/echo-layer/footprint.ts:22:    input.silentOvation ? `${input.silentOvation} ovation` : "",
+src/lib/creator-system/echo-layer/footprint.ts:30:    silentOvation: input.silentOvation,
+src/lib/creator-system/after-witness/humanTraceSummary.ts:11:  silentOvation: number;
+src/lib/creator-system/after-witness/humanTraceSummary.ts:18:    input.silentOvation ? `${input.silentOvation} ovation` : "",
+src/lib/creator-system/after-witness/voiceEcho.ts:3:  audioUrl?: string;
+src/lib/creator-system/after-witness/voiceEcho.ts:6:export function buildVoiceEcho(input?: { audioUrl?: string }): VoiceEcho {
+src/lib/creator-system/after-witness/voiceEcho.ts:7:  if (!input?.audioUrl) return { enabled: false };
+src/lib/creator-system/after-witness/voiceEcho.ts:8:  return { enabled: true, audioUrl: input.audioUrl };
+src/lib/creator-system/identity/humanSignalTypes.ts:6:  | "silent-ovation";
+src/lib/creator-system/your-moment-card/timestampedBehavior.ts:16:    moment.silentOvation > 0 ? `${moment.silentOvation} silent ovation` : "",
+src/lib/creator-system/your-moment-card/strongestTrace.ts:8:  silentOvation: number;
+src/lib/creator-system/your-moment-card/strongestTrace.ts:17:    moment.silentOvation * 6
+src/lib/creator-system/signals/silentOvation.ts:3:    type: "silent-ovation",
+src/lib/creator-system/foundation/noFakeMetricsRule.ts:10:  | "silent-ovation"
+src/lib/creator-system/foundation/noFakeMetricsRule.ts:31:  "silent-ovation",
+src/lib/creator-system/phantom-circle/unlockPublicCircle.ts:5:  type: "present" | "stillness" | "hold" | "rewatch" | "silent-ovation";
+src/lib/signals/core/dedupe.ts:6:  duplicatesRemoved: number;
+src/lib/signals/core/dedupe.ts:60:    duplicatesRemoved: Math.max(0, input.length - deduped.length),
+src/lib/signals/fixtures/instagram.sample.json:21:    "summary": "A reaction-audio pattern is migrating into multilingual creator edits.",
+src/lib/signals/fixtures/instagram.sample.json:26:    "keywords": ["comedy", "reaction", "audio"],
+src/lib/signals/fixtures/instagram.sample.json:27:    "hashtags": ["#comedy", "#reaction", "#audio"],
+src/lib/signals/fixtures/twitter_x.sample.json:4:    "title": "Keyword burst detected around AI chip export policy",
+src/lib/signals/fixtures/twitter_x.sample.json:5:    "summary": "Conversation is accelerating across finance, policy, and startup clusters.",
+src/lib/signals/fixtures/twitter_x.sample.json:7:    "authorHandle": "@sample_policy",
+src/lib/signals/fixtures/twitter_x.sample.json:10:    "keywords": ["ai", "chips", "policy"],
+src/lib/signals/fixtures/twitter_x.sample.json:11:    "hashtags": ["#ai", "#chips", "#policy"],
+src/lib/activation/mediaResolver.ts:36:  // YOUTUBE FALLBACK (safety)
+src/lib/content/pipeline/runPipeline.ts:2:import { validateSourceClipQuality } from "@/src/lib/content/quality/sourceClipGate";
+src/lib/content/pipeline/runPipeline.ts:17:    const quality = validateSourceClipQuality({
+src/lib/content/pipeline/runPipeline.ts:27:    if (legal.ok && quality.ok) {
+src/lib/content/pipeline/runPipeline.ts:32:        reasons: [...legal.reasons, ...quality.reasons],
+src/lib/content/quality/sourceClipGate.ts:1:import { isAudioMeaningful, type AudioSignal } from "./audioContract";
+src/lib/content/quality/sourceClipGate.ts:13:  const audioOk = isAudioMeaningful(input);
+src/lib/content/quality/sourceClipGate.ts:17:    ok: audioOk && playback.ok,
+src/lib/content/quality/sourceClipGate.ts:18:    audioOk,
+src/lib/content/quality/sourceClipGate.ts:21:      !audioOk ? "missing_or_meaningless_audio" : "",
+src/lib/content/quality/audioContract.ts:3:  audioCodec?: string;
+src/lib/content/quality/audioContract.ts:11:  return signal.hasAudio === true || Boolean(signal.audioCodec);
+src/lib/content/scene/sceneTypes.ts:8:  audioEnergyDb?: number;
+src/lib/content/scene/sceneScoring.ts:12:  if (typeof scene.audioEnergyDb === "number") {
+src/lib/content/scene/sceneScoring.ts:13:    if (scene.audioEnergyDb > -35) score += 15;
+src/lib/content/scene/sceneScoring.ts:14:    if (scene.audioEnergyDb < -50) {
+src/lib/content/scene/sceneScoring.ts:16:      reasons.push("weak_audio_energy");
+src/lib/content/legal/assetClearance.ts:15:  const audioOk = input.hasAudio === true;
+src/lib/content/legal/assetClearance.ts:24:    audioOk &&
+src/lib/content/legal/assetClearance.ts:33:    audioOk,
+src/lib/content/legal/assetClearance.ts:40:      !audioOk ? "missing_audio" : "",
+src/lib/content/guaranteed/guaranteedPool.ts:17:const MANIFEST = "public/native-fyp/guaranteed-meta/manifest.json";
+src/lib/safety/quarantine/queue.ts:6:  | "explicit_audio"
+src/lib/safety/quarantine/queue.ts:29:const OUT_DIR = path.join(process.cwd(), "data", "safety");
+src/lib/safety/alerts/moderationAlerts.ts:3:import { readQuarantineStore } from "@/lib/safety/quarantine/queue";
+src/lib/safety/alerts/moderationAlerts.ts:4:import { readManualReviewItems } from "@/lib/safety/review/manualReviewQueue";
+src/lib/safety/alerts/moderationAlerts.ts:24:const OUT_DIR = path.join(process.cwd(), "data", "safety");
+src/lib/safety/alerts/moderationAlerts.ts:114:    (i) => i.reason === "nsfw" || i.reason === "violence" || i.reason === "explicit_audio"
+src/lib/safety/dashboard/moderationDashboard.ts:1:import { readQuarantineStore } from "@/lib/safety/quarantine/queue";
+src/lib/safety/dashboard/moderationDashboard.ts:2:import { readManualReviewItems } from "@/lib/safety/review/manualReviewQueue";
+src/lib/safety/audio/transcriptModeration.ts:46:    flags.push("long_audio_asset");
+src/lib/safety/audio/transcriptModeration.ts:52:    flags.push("risky_audio_transcript");
+src/lib/safety/review/manualReviewQueue.ts:7:  | "explicit_audio_flag"
+src/lib/safety/nsfw.ts:43:    reason: blocked ? "text_policy_violation" : undefined,
+src/lib/safety/keywords/blacklist.ts:19:const CONFIG_PATH = path.join(process.cwd(), "config", "safety", "explicit-keyword-blacklist.json");
+src/lib/safety/audioModeration.ts:49:    reason: blocked ? "explicit_audio_text_detected" : undefined,
+src/lib/safety/validation/zeroLeak.ts:1:import { readQuarantineStore } from "@/lib/safety/quarantine/queue";
+src/lib/native-fyp/content/library.ts:1:import type { NativeFypContentManifest } from "./manifest";
+src/lib/native-fyp/rights/guard.ts:2:import { isNativeFypSourceAllowed } from "../policy";
+src/lib/native-fyp/rights/types.ts:1:import type { NativeFypSourceType } from "../policy";
+src/lib/native-fyp/rights/declaration.ts:2:import type { NativeFypSourceType } from "../policy";
+src/lib/live/portalSpec.ts:5:    streaming: { latency: string; quality: string; multi_guest: string };
+src/lib/live/portalSpec.ts:17:  safety_moderation: {
+src/lib/live/portalSpec.ts:50:      quality: "4K/60fps adaptive",
+src/lib/live/portalSpec.ts:84:  safety_moderation: {
+src/lib/live/portalSpec.ts:119:    platform: "Engagement, safety flags, earnings metrics",
+src/lib/format/fallback/templates.ts:12:    { id: "proc_1", type: "processing", title: "Processing", body: "Scoring and safety checks running." }
+src/lib/format/audio/binding.ts:2:  audioId: string;
+src/lib/format/audio/binding.ts:10:  audioId: string;
+src/lib/format/audio/binding.ts:17:    audioId: input.audioId,
+src/lib/fyp_archive/sound_layer.ts:31:    silent: !detectNativeAudio(item),
+src/lib/fyp_archive/sound_layer.ts:37:  let silentCount = 0;
+src/lib/fyp_archive/sound_layer.ts:43:      silentCount++;
+src/lib/fyp_archive/sound_layer.ts:44:      if (silentCount > 2) continue;
+src/lib/fyp_archive/sound_layer.ts:46:      silentCount = 0;
+src/lib/fyp_archive/final_report.ts:4:  const audioCount = feed.filter((x) => x.hasAudio).length;
+src/lib/fyp_archive/final_report.ts:5:  const audioRatio = total ? audioCount / total : 0;
+src/lib/fyp_archive/final_report.ts:11:    audioRatio,
+src/lib/fyp_archive/final_report.ts:13:    ready: total > 300 && diversity > 5 && audioRatio >= 0.3,
+src/lib/fyp_archive/production_lock.ts:5:  audioRequiredRatio: 0.3,
+src/lib/fyp_archive/production_lock.ts:18:      report.audioRatio >= 0.3,
+src/lib/fyp94/quality/mixQualityGate.ts:97:      qualityScore: scoreFyp94Quality(item),
+src/lib/fyp94/quality/mixQualityGate.ts:99:    .sort((a, b) => Number(b.qualityScore) - Number(a.qualityScore));
+src/lib/fyp94/quality/mixQualityGate.ts:101:  const gated = scored.filter((item) => Number(item.qualityScore) >= minScore);
+src/lib/fyp94/quality/mixQualityGate.ts:111:      qualityScore: item.qualityScore ?? scoreFyp94Quality(item),
+src/lib/fyp94/quality/mixQualityGate.ts:113:    .sort((a, b) => Number(b.qualityScore) - Number(a.qualityScore));
+src/lib/fyp94/api-stability/manifest.ts:3:export function readFyp94Manifest(path = "public/native-fyp/real-meta/manifest.json") {
+src/lib/fyp94/production2/monitor.ts:7:export function readFyp94ProductionManifest(path = "public/native-fyp/real-meta/manifest.json") {
+src/lib/fyp94/production2/monitor.ts:19:  const manifest = readFyp94ProductionManifest();
+src/lib/fyp94/production2/monitor.ts:21:  const playable = manifest.filter((item: any) => {
+src/lib/fyp94/production2/monitor.ts:34:    manifestCount: manifest.length,
+src/lib/fyp94/supply/contracts.ts:1:import type { Fyp94ContentSource } from "../core/policy";
+src/lib/fyp94/supply/sources.ts:1:import type { Fyp94ContentSource } from "../core/policy";
+src/lib/fyp94/production/health.ts:4:  const manifestPath = "public/native-fyp/real-meta/manifest.json";
+src/lib/fyp94/production/health.ts:5:  const exists = fs.existsSync(manifestPath);
+src/lib/fyp94/production/health.ts:7:  const manifest = exists
+src/lib/fyp94/production/health.ts:8:    ? JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+src/lib/fyp94/production/health.ts:11:  const playable = manifest.filter((item: any) => {
+src/lib/fyp94/production/health.ts:18:    manifestCount: manifest.length,
+src/lib/fyp94/legal/validate.ts:1:import { assertFyp94SourceAllowed } from "../core/policy";
+src/lib/fyp94/legal/types.ts:1:import type { Fyp94ContentSource } from "../core/policy";
+src/lib/fyp94/media/types.ts:1:import type { Fyp94ContentSource } from "../core/policy";
+src/lib/fyp94/media/types.ts:15:  aspectRatio: "vertical" | "square" | "horizontal";
+src/lib/fyp94/media/register.ts:18:  if (!validateFyp94AspectRatio(input.width, input.height)) throw new Error("invalid_aspect_ratio");
+src/lib/fyp94/media/register.ts:31:    aspectRatio: detectFyp94AspectRatio(input.width, input.height),
+src/lib/zendoro/payments/paymentHardening.ts:6:  duplicateChargeProtection: true;
+src/lib/zendoro/payments/paymentHardening.ts:55:    duplicateChargeProtection: true,
+src/lib/zendoro/production/paymentsCheckout.ts:6:    duplicatePaymentPrevention: true,
+src/lib/zendoro/remaining28/stripePaymentFlow.ts:5:  duplicatePaymentPrevention: boolean;
+src/lib/zendoro/remaining28/stripePaymentFlow.ts:16:  duplicatePaymentPrevention: true,
+src/lib/zendoro/remaining28/technicalDebtCleanup.ts:6:  duplicateCompatibilityRemoval: true,
+src/lib/offline/videos/p2p_chunk_protocol.ts:534:  quality: string;
+src/lib/offline/videos/p2p_chunk_protocol.ts:542:  quality: string;
+src/lib/offline/videos/p2p_chunk_protocol.ts:553:  quality: string;
+src/lib/offline/videos/p2p_chunk_protocol.ts:726:/* removed duplicate _resolveSecretForToken (function) */
+src/lib/offline/videos/index.ts:10: * In-memory replay/duplicate detector.
+src/content-engine/ingestion/index.ts:8:  codec: string;
+src/content-engine/ingestion/index.ts:24:  if (!["h264", "avc1"].includes(file.codec.toLowerCase())) errors.push("unsupported_codec");
+src/content-engine/ingestion/index.ts:25:  if (!file.hasAudio) errors.push("audio_required");
+src/content-engine/processing/index.ts:17:  audioCodec?: string;
+src/content-engine/processing/index.ts:46:  if (!probe.hasAudio) errors.push("audio_missing");
+src/content-engine/processing/index.ts:49:  if (!["h264", "avc1"].includes(probe.videoCodec.toLowerCase())) errors.push("unsupported_video_codec");
+src/content-engine/pulse/index.ts:4:  safetyPassRate: number;
+src/content-engine/output/index.ts:13:  audioCodec: "aac";
+src/content-engine/output/index.ts:14:  audioBitrateKbps: 128;
+src/content-engine/output/index.ts:31:  audioFingerprint: string;
+src/content-engine/output/index.ts:33:  audioQualityScore: number;
+src/content-engine/output/index.ts:73:    audioCodec: "aac",
+src/content-engine/output/index.ts:74:    audioBitrateKbps: 128,
+src/content-engine/output/index.ts:97:  audioFingerprint?: string;
+src/content-engine/output/index.ts:99:  audioQualityScore?: number;
+src/content-engine/output/index.ts:107:    audioFingerprint: input.audioFingerprint || `afp_${input.contentId}`,
+src/content-engine/output/index.ts:109:    audioQualityScore: clamp01(input.audioQualityScore ?? 0.75),
+src/content-engine/output/index.ts:152:      output.hls.audioCodec === "aac" &&
+src/content-engine/output/index.ts:155:      output.metadata.audioFingerprint,
+src/content-engine/safety/index.ts:15:  audioFingerprint: string;
+src/content-engine/safety/index.ts:26:  if (!input.hasAudio) reasons.push("audio_missing");
+src/content-engine/safety/index.ts:38:  audioFingerprint: string;
+src/content-engine/safety/index.ts:46:      f.audioFingerprint === input.audioFingerprint,
+src/content-engine/safety/index.ts:116:    return { eventType: "content.safety.passed" as const };
+src/content-engine/safety/index.ts:120:    return { eventType: "content.safety.blocked" as const };
+src/content-engine/safety/index.ts:123:  return { eventType: "content.safety.review" as const };
+src/content-engine/signal/index.ts:6:  | "content.safety.passed"
+src/content-engine/signal/index.ts:7:  | "content.safety.blocked"
+src/monetization/reward-ads/payout.ts:4:  qualityMultiplier?: number;
+src/monetization/reward-ads/payout.ts:11:  const multiplier = input.qualityMultiplier ?? 1;
+src/monetization/presence-markers/preferences.ts:3:  audio: boolean;
+src/monetization/presence-markers/preferences.ts:8:  audio: false,
+src/monetization/user-control/validate.ts:4:import { buildSilentNotNowUx } from "./silentUx";
+tests/video/security/verifyToken_negative_contract.test.ts:23:    const t: any = (issueToken as any)({ userId: "u_test", scope: "manifest", ttlSec: 60 });
+tests/video/security/verifyToken_negative_contract.test.ts:33:    const t: any = (issueToken as any)({ userId: "u_exp", scope: "manifest", ttlSec: 1 });
+tests/video/security/verifyToken_negative_contract.test.ts:62:    const t: any = (issueToken as any)({ userId: "u_ok", scope: "manifest", ttlSec: 60 });
+tests/video/edge/manifest_only_auth.test.ts:7:} from "@/lib/video/edge/manifestAuth";
+tests/video/edge/manifest_only_auth.test.ts:9:describe("manifest-only auth + signed segments", () => {
+tests/video/edge/manifest_only_auth.test.ts:10:  it("mints and verifies a manifest token", () => {
+tests/video/edge/manifest_only_auth.test.ts:16:    const v = verifyManifestToken(out.manifestToken, now + 1000);
+tests/video/edge/manifest_only_auth.test.ts:25:  it("rejects expired manifest tokens", () => {
+tests/video/edge/manifest_only_auth.test.ts:30:    const v = verifyManifestToken(out.manifestToken, now + 2000);
+tests/video/edge/hot_aggregator_contract.test.ts:20:  it("enforces policy invariant: segment ttl < aggregator ttl", () => {
+tests/video/edge/hot_aggregator_contract.test.ts:28:    if (!d.ok) expect(d.error).toBe("policy_invalid");
+tests/video/edge/hot_aggregator_contract.test.ts:35:      expect(hot.policy.ttlSec).toBeGreaterThanOrEqual(900);
+tests/video/edge/hot_aggregator_contract.test.ts:36:      expect(hot.policy.segmentTtlSec).toBeLessThanOrEqual(120);
+tests/video/edge/hot_aggregator_contract.test.ts:37:      expect(hot.policy.segmentTtlSec).toBeLessThan(hot.policy.ttlSec);
+tests/video/edge/hot_aggregator_contract.test.ts:43:      expect(hotset.policy.ttlSec).toBeGreaterThanOrEqual(3600);
+tests/video/edge/hot_aggregator_contract.test.ts:44:      expect(hotset.policy.segmentTtlSec).toBeLessThan(hotset.policy.ttlSec);
+tests/video/edge/manifest_auth_headers_contract.test.ts:4:describe("manifest-only auth (headers + cache contract)", () => {
+tests/video/edge/manifest_auth_headers_contract.test.ts:6:    const h = buildEdgeHeaders({ mode: "manifest", ttlSec: 3600, tokenHeaderName: "authorization" });
+tests/video/edge/manifest_auth_headers_contract.test.ts:11:  it("manifest cache-control is private and <= 3600", () => {
+tests/video/edge/manifest_auth_headers_contract.test.ts:12:    const h = buildEdgeHeaders({ mode: "manifest", ttlSec: 999999 });
+tests/video/upload/upload_signing_stress_contract.test.ts:29:        t = (issueToken as any)({ uid, ttlSec: 60, scope: "manifest" });
+tests/video/upload/upload_signing_stress_contract.test.ts:32:          t = (issueToken as any)({ userId: uid, ttlSec: 60, scope: "manifest" });
+tests/video/upload/upload_signing_endpoint_contract.test.ts:25:  const keys = ["token", "accessToken", "manifestToken", "signedToken", "t"];
+tests/video/videoPlaybackOptimization.test.ts:19:  it("selects high quality on fast devices", () => {
+tests/nexa/nexa_pack02_movement_fitness.test.ts:15:    expect(fitnessRuntime.audioCuedTraining).toBe(true);
+tests/nexa/nexa_pack10_echo_integration.test.ts:8:  it("supports audio bridge", () => {
+tests/nexa/nexa_pack10_echo_integration.test.ts:14:  it("supports recovery audio fusion", () => {
+tests/nexa/nexa_pack08_hormonal_pelvic_health.test.ts:19:  it("supports safety", () => {
+tests/zencoin/zencoin_pack18_youth_parental_safety.test.ts:9:  it("supports youth safety systems", () => {
+tests/zencoin/zencoin_pack18_youth_parental_safety.test.ts:20:  it("supports youth safety health", () => {
+tests/zencoin/zencoin_pack15_financial_weather_safety.test.ts:18:  it("supports weather safety health", () => {
+tests/zencoin/zencoin_pack26_launch_final_seal.test.ts:10:  it("enables safety systems", () => {
+tests/echo/echo_pack12_safety_privacy.test.ts:2:import { localFirstPrivacy } from "../../src/echo/safety/privacy";
+tests/echo/echo_pack12_safety_privacy.test.ts:3:import { antiAddictionGuard } from "../../src/echo/safety/antiAddiction";
+tests/echo/echo_pack12_safety_privacy.test.ts:4:import { safeContentFilters } from "../../src/echo/safety/contentFilters";
+tests/echo/echo_pack12_safety_privacy.test.ts:5:import { emotionalRecoverySystems } from "../../src/echo/safety/recovery";
+tests/echo/echo_pack12_safety_privacy.test.ts:16:  it("supports safety and recovery", () => {
+tests/echo/echo_pack03_morph_engine.test.ts:3:import { morphSafetyGuardian } from "../../src/echo/morph/safetyGuardian";
+tests/echo/echo_pack03_morph_engine.test.ts:13:  it("supports morph safety", () => {
+tests/echo/echo_pack20_real_audio_population.test.ts:4:  audioPopulationReady,
+tests/echo/echo_pack20_real_audio_population.test.ts:7:} from "../../src/echo/audio/audioPopulation";
+tests/echo/echo_pack20_real_audio_population.test.ts:10:  it("supports real audio population", () => {
+tests/echo/echo_pack20_real_audio_population.test.ts:12:    expect(audioPopulationReady()).toBe(true);
+tests/echo/echo_pack01_core_foundations.test.ts:3:import { audioSessionArchitecture, sessionHealthy } from "../../src/echo/audio/audioSession";
+tests/echo/echo_pack01_core_foundations.test.ts:4:import { playbackLifecycle, supportsPlaybackLifecycle } from "../../src/echo/audio/playbackLifecycle";
+tests/echo/echo_pack01_core_foundations.test.ts:12:  it("supports audio sessions", () => {
+tests/echo/echo_pack01_core_foundations.test.ts:13:    expect(audioSessionArchitecture.playback).toBe(true);
+tests/cineverse/pack01_foundational_core.test.ts:15:    expect(cineverseCorePillars).toContain("rights-safety");
+tests/cineverse/pack09_civilizations_system.test.ts:13:  it("protects civilization quality", () => {
+tests/cineverse/pack17_launch_community_ignition.test.ts:11:    expect(launchPhases).toContain("silent-launch");
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:7:describe("Safe Movie Clips Pack 3 — audio + trim pipeline", () => {
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:10:      { codec_type: "video", codec_name: "h264", duration: "90" },
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:11:      { codec_type: "audio", codec_name: "aac", channels: 2, duration: "90" },
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:16:  it("extracts and validates audio stream", () => {
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:17:    expect(extractAudioStream(probe)?.codec_name).toBe("aac");
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:21:  it("builds audio probe contract", () => {
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:24:    expect(out.audioCodec).toBe("aac");
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:35:  it("builds ffmpeg command with audio mapping", () => {
+tests/fyp_movie_clips/pack3_audio_trim_pipeline.test.ts:46:    expect(fs.existsSync("scripts/fyp_movie_clips/ffprobe_movie_audio_hint.sh")).toBe(true);
+tests/fyp_movie_clips/pack1_safe_movie_foundation.test.ts:4:import { hasValidAudioTrack, shouldRejectSilentMovieClip, isValidMovieClipDuration } from "../../src/lib/fyp_movie_clips/audio_guard";
+tests/fyp_movie_clips/pack1_safe_movie_foundation.test.ts:29:  it("rejects clips without audio", () => {
+tests/fyp_movie_clips/pack1_safe_movie_foundation.test.ts:30:    expect(hasValidAudioTrack({ hasAudioTrack: true, audioCodec: "aac" })).toBe(true);
+tests/fyp_movie_clips/pack1_safe_movie_foundation.test.ts:42:      audio: { hasAudioTrack: true, audioCodec: "aac", volumeDb: -18 },
+tests/fyp_movie_clips/pack2_archive_ingestion_scaffold.test.ts:5:import { buildMovieClipManifestItem, mergeMovieClipManifest } from "../../src/lib/fyp_movie_clips/movie_manifest";
+tests/fyp_movie_clips/pack2_archive_ingestion_scaffold.test.ts:20:  it("selects usable mp4 candidates and rejects likely silent files", () => {
+tests/fyp_movie_clips/pack2_archive_ingestion_scaffold.test.ts:22:      { name: "silent_movie.mp4", format: "MPEG4", size: "500000" },
+tests/fyp_movie_clips/pack2_archive_ingestion_scaffold.test.ts:31:  it("builds and merges movie manifest items", () => {
+tests/fyp_movie_clips/pack2_archive_ingestion_scaffold.test.ts:42:      audioCodec: "aac",
+tests/fyp_movie_clips/live/pack2_live_execution_pipeline.test.ts:3:import { validateDownloadedMovieAudio } from "../../../src/lib/fyp_movie_clips/live/audio_validation";
+tests/fyp_movie_clips/live/pack2_live_execution_pipeline.test.ts:6:  it("audio validator rejects non-existing file", () => {
+tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts:6:} from "../../../src/lib/fyp_movie_clips/live/live_manifest_writer";
+tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts:12:describe("Movie ingestion live Pack 3 — manifest + FYP bridge", () => {
+tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts:13:  it("writes and reads movie manifest records", () => {
+tests/fyp_movie_clips/pack4_fyp_integration.test.ts:4:import { appendToMovieClipManifest, loadMovieClipManifest } from "../../src/lib/fyp_movie_clips/movie_manifest_loader";
+tests/fyp_movie_clips/pack4_fyp_integration.test.ts:19:  it("writes manifest safely", () => {
+tests/fyp_movie_clips/pack4_fyp_integration.test.ts:32:  it("manifest file exists", () => {
+tests/fyp_movie_clips/pack4_fyp_integration.test.ts:33:    expect(fs.existsSync("public/native-fyp/movie-meta/manifest.json")).toBe(true);
+tests/security/security_headers_contract.test.ts:16:    expect(getHeader(res, "referrer-policy")).toBe("strict-origin-when-cross-origin");
+tests/security/security_headers_contract.test.ts:17:    const pp = getHeader(res, "permissions-policy") || "";
+tests/security/csp_header_smoke.test.ts:57:        const csp = (r.headers["content-security-policy"] || "").toString();
+tests/security/csp_header_smoke.test.ts:69:      const csp = (r.headers["content-security-policy"] || "").toString();
+tests/video-gen/video_gen_engine_and_status.test.ts:23:    const res = await generateVideo({ prompt: "make a calm scene", durationSec: 5, aspect: "9:16" });
+tests/video-gen/video_gen_engine_and_status.test.ts:30:    const res = await generateVideo({ prompt: " ", durationSec: 5, aspect: "9:16" });
+tests/video-gen/video_gen_engine_and_status.test.ts:36:    const created = await generateVideo({ prompt: "a neon city", durationSec: 7, aspect: "16:9" });
+tests/launch/step54_headers_regression.sh:25:content-security-policy
+tests/launch/step54_headers_regression.sh:28:referrer-policy
+tests/launch/step54_headers_regression.sh:29:permissions-policy
+tests/launch/step57_api_headers_regression.sh:25:content-security-policy
+tests/launch/step57_api_headers_regression.sh:28:referrer-policy
+tests/launch/step57_api_headers_regression.sh:29:permissions-policy
+tests/launch/portal_link_integrity.test.ts:16:  it("global nav links rely on manifest paths", () => {
+tests/launch/portal_link_integrity.test.ts:18:    const manifest = fs.readFileSync("lib/portal/getPortalStatusManifest.ts", "utf8");
+tests/launch/portal_link_integrity.test.ts:24:      expect(manifest.includes(path)).toBe(true);
+tests/integration/deep_manifest_conflict_fix.test.ts:4:describe("deep manifest conflict fix", () => {
+tests/integration/deep_manifest_conflict_fix.test.ts:5:  it("keeps only app/manifest.ts as canonical manifest", () => {
+tests/integration/deep_manifest_conflict_fix.test.ts:6:    expect(fs.existsSync("app/manifest.ts")).toBe(true);
+tests/integration/deep_manifest_conflict_fix.test.ts:7:    expect(fs.existsSync("public/manifest.webmanifest")).toBe(false);
+tests/integration/deep_manifest_conflict_fix.test.ts:8:    expect(fs.existsSync("public/manifest.json")).toBe(false);
+tests/integration/deep_manifest_conflict_fix.test.ts:9:    expect(fs.existsSync("app/manifest.webmanifest")).toBe(false);
+tests/integration/deep_manifest_conflict_fix.test.ts:10:    expect(fs.existsSync("app/manifest.json")).toBe(false);
+tests/integration/pack10_your_moment_card_injection.test.ts:11:      { videoId: "v1", timestampMs: 1000, present: 1, stillness: 0, hold: 0, rewatch: 0, silentOvation: 0 },
+tests/integration/pack10_your_moment_card_injection.test.ts:12:      { videoId: "v2", timestampMs: 5000, present: 1, stillness: 1, hold: 1, rewatch: 1, silentOvation: 1 },
+tests/integration/pack10_your_moment_card_injection.test.ts:51:      { videoId: "v1", timestampMs: 4000, present: 1, stillness: 1, hold: 1, rewatch: 0, silentOvation: 1 },
+tests/integration/pack05_circle_runtime_engine.test.ts:48:    expect(capture.allowedSignals).toContain("silent-ovation");
+tests/integration/pack23_safety_moderation.test.ts:8:} from "@/src/lib/integration/safety-moderation";
+tests/integration/pack23_safety_moderation.test.ts:11:  it("passes safety flow", () => {
+tests/integration/pack23_safety_moderation.test.ts:12:    const abuse = detectAbuse({ duplicateSignals: 1 });
+tests/integration/pack23_safety_moderation.test.ts:27:    expect(detectAbuse({ duplicateSignals: 2 }).abusive).toBe(true);
+tests/integration/pack12_echo_layer.test.ts:5:import { allowEchoSilentOvationOnly } from "@/src/lib/integration/echo-layer/silentOvationOnly";
+tests/integration/pack12_echo_layer.test.ts:28:  it("allows silent ovation only", () => {
+tests/integration/pack12_echo_layer.test.ts:29:    expect(allowEchoSilentOvationOnly("silent-ovation").ok).toBe(true);
+tests/integration/manifest_conflict_fix.test.ts:4:describe("manifest conflict fix", () => {
+tests/integration/manifest_conflict_fix.test.ts:5:  it("does not keep duplicate public manifest when app route exists", () => {
+tests/integration/manifest_conflict_fix.test.ts:6:    const publicWebmanifest = fs.existsSync("public/manifest.webmanifest");
+tests/integration/manifest_conflict_fix.test.ts:7:    const routeWebmanifest = fs.existsSync("app/manifest.webmanifest/route.ts");
+tests/integration/manifest_conflict_fix.test.ts:9:    const publicJson = fs.existsSync("public/manifest.json");
+tests/integration/manifest_conflict_fix.test.ts:10:    const routeJson = fs.existsSync("app/manifest.json/route.ts");
+tests/integration/manifest_conflict_fix.test.ts:12:    expect(publicWebmanifest && routeWebmanifest).toBe(false);
+tests/creator-system/pack01_foundation_lock.test.ts:36:    expect(validateCreatorMetricForCircle("silent-ovation").ok).toBe(true);
+tests/creator-system/pack01_foundation_lock.test.ts:37:    expect(assertNoFakeMetrics(["present", "hold", "silent-ovation"]).ok).toBe(true);
+tests/creator-system/pack14_your_moment_card.test.ts:11:      { videoId: "v1", timestampMs: 1000, present: 1, stillness: 0, hold: 0, rewatch: 0, silentOvation: 0 },
+tests/creator-system/pack14_your_moment_card.test.ts:12:      { videoId: "v2", timestampMs: 5000, present: 1, stillness: 1, hold: 1, rewatch: 1, silentOvation: 1 },
+tests/creator-system/pack14_your_moment_card.test.ts:27:      silentOvation: 1,
+tests/creator-system/pack14_your_moment_card.test.ts:56:        { videoId: "v1", timestampMs: 4000, present: 1, stillness: 1, hold: 1, rewatch: 0, silentOvation: 1 },
+tests/creator-system/pack15_after_witness.test.ts:22:    const sum = buildHumanTraceSummary({ present:1, stillness:1, hold:0, rewatch:0, silentOvation:1 });
+tests/creator-system/pack15_after_witness.test.ts:29:    expect(buildVoiceEcho({ audioUrl: "/a.mp3" }).enabled).toBe(true);
+tests/creator-system/pack19_echo_layer.test.ts:16:    const f = buildEchoFootprint({ present:1, stillness:1, hold:0, rewatch:0, silentOvation:1 });
+tests/creator-system/pack19_echo_layer.test.ts:26:  it("allows silent ovation only", () => {
+tests/creator-system/pack19_echo_layer.test.ts:27:    expect(isAllowedEchoInteraction("silent-ovation")).toBe(true);
+tests/creator-system/pack04_phantom_circle.test.ts:51:      { userId: "u3", type: "silent-ovation" as const, createdAt: "t" },
+tests/creator-system/pack17_witness_thread.test.ts:59:    const policy = getWitnessThreadDisplayPolicy();
+tests/creator-system/pack17_witness_thread.test.ts:61:    expect(policy.numericProgressBarsAllowed).toBe(false);
+tests/creator-system/pack17_witness_thread.test.ts:62:    expect(policy.percentagesAllowed).toBe(false);
+tests/creator-system/pack17_witness_thread.test.ts:63:    expect(policy.toneLabelsAllowed).toBe(true);
+tests/creator-system/pack18_memory_shelf.test.ts:60:    const policy = getMemoryShelfPresentationPolicy();
+tests/creator-system/pack18_memory_shelf.test.ts:61:    expect(policy.contentLibraryPresentationAllowed).toBe(false);
+tests/creator-system/pack18_memory_shelf.test.ts:62:    expect(policy.gridRankingAllowed).toBe(false);
+tests/creator-system/pack18_memory_shelf.test.ts:63:    expect(policy.chronologicalMemoryFlow).toBe(true);
+tests/creator-system/pack16_witness_continuity.test.ts:51:    const policy = getWitnessProfileLinkPolicy();
+tests/creator-system/pack16_witness_continuity.test.ts:53:    expect(policy.profileLinksVisible).toBe(false);
+tests/creator-system/pack16_witness_continuity.test.ts:54:    expect(policy.socialLinksVisible).toBe(false);
+tests/creator-system/pack16_witness_continuity.test.ts:55:    expect(policy.directMessagingEnabled).toBe(false);
+tests/creator-system/pack09_signals.test.ts:6:import { createSilentOvationSignal } from "@/src/lib/creator-system/signals/silentOvation";
+tests/creator-system/pack09_signals.test.ts:14:    expect(createSilentOvationSignal("u1").type).toBe("silent-ovation");
+tests/rewards/distribution.test.ts:36:  it("rejects duplicate idempotency key", () => {
+tests/rewards/distribution.test.ts:55:    expect(out).toEqual({ ok: false, reason: "duplicate_distribution" });
+tests/fyp/recommendation/recommendation_runtime_activation.test.ts:10:    qualityScore: 95,
+tests/fyp/recommendation/recommendation_runtime_activation.test.ts:17:    qualityScore: 50,
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:3:import { validateFeedQualityInput } from "@/src/core/fyp/quality/contracts/feedQualityContract";
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:4:import { calculateFeedQuality } from "@/src/core/fyp/quality/runtime/feedQualityScore";
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:5:import { runFeedQualityRuntime } from "@/src/core/fyp/quality/runtime/feedQualityRuntime";
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:10:  safetyScore: 100,
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:12:  duplicateRisk: 0
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:16:  it("validates feed quality input", () => {
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:20:  it("calculates excellent feed quality", () => {
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:27:  it("rejects very weak feed quality", () => {
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:31:      safetyScore: 0,
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:33:      duplicateRisk: 100
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:40:  it("sorts quality decisions", () => {
+tests/fyp/quality/feed_quality_runtime_activation.test.ts:53:  it("runs feed quality runtime", () => {
+tests/fyp/real-feed/real_feed_activation_ranking_pipeline.test.ts:41:      safetyScore: 95,
+tests/fyp/real-feed/real_feed_activation_ranking_pipeline.test.ts:54:      safetyScore: 90,
+tests/fyp/real-feed/real_feed_activation_ranking_pipeline.test.ts:67:      safetyScore: 20,
+tests/fyp/composer/feed_composer_runtime_activation.test.ts:19:  qualityScore: 80
+tests/fyp/composer/feed_composer_runtime_activation.test.ts:37:      qualityScore: 95
+tests/fyp/composer/feed_composer_runtime_activation.test.ts:50:        qualityScore: 50
+tests/fyp/native-video/native_video_runtime_activation.test.ts:27:  it("blocks video without audio", () => {
+tests/fyp/native-video/native_video_runtime_activation.test.ts:34:    expect(state.reason).toBe("audio_required");
+tests/fyp/safety/safety_policy_runtime_activation.test.ts:3:import { validateSafetyInput } from "@/src/core/fyp/safety/contracts/safetyPolicyContract";
+tests/fyp/safety/safety_policy_runtime_activation.test.ts:4:import { evaluateSafetyPolicy } from "@/src/core/fyp/safety/runtime/policyRules";
+tests/fyp/safety/safety_policy_runtime_activation.test.ts:5:import { createFypSafetyRuntime } from "@/src/core/fyp/safety/runtime/safetyRuntime";
+tests/fyp/safety/safety_policy_runtime_activation.test.ts:18:    it("validates safety input", () => {
+tests/fyp/safety/safety_policy_runtime_activation.test.ts:53:    it("runs safety runtime", () => {
+tests/fyp/media-runtime/video_media_runtime_activation.test.ts:51:  it("rejects video without audio track", () => {
+tests/fyp/media-runtime/video_media_runtime_activation.test.ts:54:      assetId: "asset_no_audio",
+tests/fyp/media-runtime/video_media_runtime_activation.test.ts:59:    expect(decision.reason).toBe("video_requires_audio_track");
+tests/fyp/audio/audio_runtime_activation.test.ts:5:} from "@/src/core/fyp/audio/contracts/audioContract";
+tests/fyp/audio/audio_runtime_activation.test.ts:9:} from "@/src/core/fyp/audio/runtime/audioPolicy";
+tests/fyp/audio/audio_runtime_activation.test.ts:13:} from "@/src/core/fyp/audio/runtime/audioRuntime";
+tests/fyp/audio/audio_runtime_activation.test.ts:16:  id: "audio_001",
+tests/fyp/audio/audio_runtime_activation.test.ts:17:  src: "/audio/seed.aac",
+tests/fyp/audio/audio_runtime_activation.test.ts:19:  codec: "aac",
+tests/fyp/audio/audio_runtime_activation.test.ts:24:  it("validates audio asset", () => {
+tests/fyp/audio/audio_runtime_activation.test.ts:28:  it("accepts supported audio", () => {
+tests/fyp/audio/audio_runtime_activation.test.ts:32:    expect(decision.reason).toBe("audio_ready");
+tests/fyp/audio/audio_runtime_activation.test.ts:41:  it("blocks unsupported codec", () => {
+tests/fyp/audio/audio_runtime_activation.test.ts:44:      codec: "wav"
+tests/fyp/audio/audio_runtime_activation.test.ts:48:    expect(decision.reason).toBe("unsupported_codec");
+tests/fyp/audio/audio_runtime_activation.test.ts:51:  it("runs audio runtime", () => {
+tests/fyp/trust/trust_safety_privacy.test.ts:9:} from "@/src/core/fyp/safety/contentGuard";
+tests/fyp/trust/trust_safety_privacy.test.ts:13:} from "@/src/core/fyp/safety/burnoutProtection";
+tests/fyp/trust/trust_safety_privacy.test.ts:40:  it("evaluates safety decision", () => {
+tests/content/pack08_remaining_adapters.test.ts:28:  it("fetches normalized audio-positive clips", async () => {
+tests/content/pack09_clip_quality_scene_gate.test.ts:6:describe("Lumora Pack 09 — clip quality + scene intelligence gate", () => {
+tests/content/pack09_clip_quality_scene_gate.test.ts:18:      audioEnergyDb: -20,
+tests/content/pack09_clip_quality_scene_gate.test.ts:26:  it("rejects weak audio title-like scenes", () => {
+tests/content/pack09_clip_quality_scene_gate.test.ts:30:      audioEnergyDb: -60,
+tests/content/pack09_clip_quality_scene_gate.test.ts:38:  it("filters only high quality scenes", () => {
+tests/content/pack09_clip_quality_scene_gate.test.ts:45:        audioEnergyDb: -18,
+tests/content/pack09_clip_quality_scene_gate.test.ts:51:        audioEnergyDb: -60,
+tests/content/license_attribution_clearance.test.ts:54:  it("rejects silent assets even with valid license", () => {
+tests/content/license_attribution_clearance.test.ts:62:      playableUrl: "https://example.com/silent.mp4",
+tests/content/license_attribution_clearance.test.ts:68:    expect(out.reasons).toContain("missing_audio");
+tests/content/guaranteed_supply.test.ts:7:  it("has guaranteed manifest", () => {
+tests/content/guaranteed_supply.test.ts:8:    expect(fs.existsSync("public/native-fyp/guaranteed-meta/manifest.json")).toBe(true);
+tests/storage/signed_url_policy.test.ts:8:describe("signed url policy", () => {
+tests/storage/signed_url_policy.test.ts:9:  it("TTL hard policy is 1 hour", () => {
+tests/storage/archive_rules.test.ts:5:  it("policy validates", () => {
+tests/social/followSystem.test.ts:16:  it("prevents duplicate follows", () => {
+tests/system/edgeCaching.test.ts:15:      expect(out.policy.strategy).toBe("edge-cache");
+tests/system/edgeCaching.test.ts:16:      expect(out.policy.ttl).toBeGreaterThanOrEqual(3600);
+tests/system/edgeCaching.test.ts:30:      expect(out.policy.strategy).toBe("no-cache");
+tests/system/edgeCaching.test.ts:31:      expect(out.policy.cacheable).toBe(false);
+tests/system/edgeCaching.test.ts:45:      expect(out.policy.strategy).toBe("private-cache");
+tests/system/edgeCaching.test.ts:46:      expect(out.policy.ttl).toBe(120);
+tests/portals/routing.test.ts:43:  it("rejects duplicate route path", () => {
+tests/portals/routing.test.ts:52:    expect(out).toEqual({ ok: false, reason: "duplicate_route_path" });
+tests/portals/healthAggregation.test.ts:29:  it("rejects duplicate portal keys", () => {
+tests/portals/healthAggregation.test.ts:37:    expect(out).toEqual({ ok: false, reason: "duplicate_portal_key" });
+tests/lumaspace/governance/safety_and_governance_activation.test.ts:11:} from "@/src/core/lumaspace/governance/safety/safetyBoundary";
+tests/lumaspace/governance/safety_and_governance_activation.test.ts:22:  it("creates safety boundary", () => {
+tests/lumaspace/governance/safety_governance_activation.test.ts:11:} from "@/src/core/lumaspace/governance/safety/safetyBoundary";
+tests/lumaspace/governance/safety_governance_activation.test.ts:15:} from "@/src/core/lumaspace/governance/safety/consentLayer";
+tests/lumaspace/governance/safety_governance_activation.test.ts:22:  it("creates safety boundary", () => {
+tests/lumaspace-production/ai-emotion/ai_emotional_intelligence.test.ts:4:import { evaluateAiEmotionSafety } from "@/src/core/lumaspace-production/ai-emotion/safety/aiEmotionSafety";
+tests/feed/infiniteScroll.test.ts:31:  it("deduplicates merged pages", () => {
+tests/lumalink/translation.ui_controls.adapter.test.ts:8:    mode: "audio_replace",
+tests/lumalink/translation.flags.test.ts:16:      LUMALINK_TRANSLATE_MODE: "dual-audio",
+tests/lumalink/translation.flags.test.ts:20:    expect(f.mode).toBe("dual-audio");
+tests/lumalink/translation.pipeline.test.ts:16:    mode: "audio_replace",
+tests/lumalink/translation.pipeline.test.ts:31:  it("emits translated captions + audio chunks in mock mode", async () => {
+tests/lumalink/translation.pipeline.test.ts:34:    let audioBytes = 0;
+tests/lumalink/translation.pipeline.test.ts:37:    s.onAudio((pcm) => { audioBytes += pcm.byteLength; });
+tests/lumalink/translation.pipeline.test.ts:40:    // 20ms audio frame placeholder (PCM16 mono, 16kHz => 640 bytes for 20ms)
+tests/lumalink/translation.pipeline.test.ts:45:    expect(audioBytes).toBeGreaterThan(0);
+tests/lumalink/translation.pipeline.test.ts:52:    let audioBytes = 0;
+tests/lumalink/translation.pipeline.test.ts:55:    s.onAudio((pcm) => { audioBytes += pcm.byteLength; });
+tests/lumalink/translation.pipeline.test.ts:62:    expect(audioBytes).toBe(0);
+tests/native-fyp/pack_013_validation.test.ts:4:import { shouldUnmute } from "../../src/lib/native-fyp/runtime/audio";
+tests/native-fyp/pack_013_validation.test.ts:27:  it("audio unlock", () => {
+tests/native-fyp/content_pack_002_validation.test.ts:2:import { createContentManifest } from "../../src/lib/native-fyp/content/manifest";
+tests/native-fyp/content_pack_002_validation.test.ts:6:  it("creates content manifest", () => {
+tests/native-fyp/content_pack_002_validation.test.ts:32:    const duplicate = addToNativeLibrary(library, m);
+tests/native-fyp/content_pack_002_validation.test.ts:35:    expect(duplicate.length).toBe(1);
+tests/native-fyp/final/native_fyp_final_validation.test.ts:2:import { NATIVE_FYP_PROHIBITED_SOURCES } from "../../../src/lib/native-fyp/policy";
+tests/native-fyp/pack_001_validation.test.ts:6:} from "../../src/lib/native-fyp/policy";
+tests/echo_cineverse/echo_cineverse_list_api.test.ts:40:    expect(typeof t?.audioUrl).toBe("string");
+tests/live/live_packs_07_12.test.ts:14:  it("Pack 11 — monetization refinement", () => expect(evaluateLiveMonetization({ viewers: 30, consent: true, safetyOk: true }).enabled).toBe(true));
+tests/live/live_pack_9_economy.test.ts:7:  it("locks anti-casino economy policy", () => {
+tests/live/live_pack_11_trust_moderation.test.ts:4:import { createSilentAura } from "../../src/live/guardian/silentAuraCore";
+tests/live/live_activation_pack_4.test.ts:3:import { decideLiveSafety } from "../../src/live/safety/liveSafetyRuntime";
+tests/softlaunch/videosPortalSeedVerification.test.ts:19:  it("rejects duplicate id", () => {
+tests/softlaunch/videosPortalSeedVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/portalHealthSweep.test.ts:40:  it("rejects duplicate portal", () => {
+tests/softlaunch/portalHealthSweep.test.ts:48:    expect(out).toEqual({ ok: false, reason: "duplicate_portal" });
+tests/softlaunch/walletZencoinBaselineVerification.test.ts:19:  it("rejects duplicate wallet id", () => {
+tests/softlaunch/walletZencoinBaselineVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_wallet_id" });
+tests/softlaunch/fallbackBoundaryVerification.test.ts:19:  it("rejects duplicate id", () => {
+tests/softlaunch/fallbackBoundaryVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/feedSeedVerification.test.ts:18:  it("rejects duplicate id", () => {
+tests/softlaunch/feedSeedVerification.test.ts:26:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/gmarSeedVerification.test.ts:19:  it("rejects duplicate id", () => {
+tests/softlaunch/gmarSeedVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/backupRecoveryProductionVerification.test.ts:19:  it("rejects duplicate snapshot id", () => {
+tests/softlaunch/backupRecoveryProductionVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_snapshot_id" });
+tests/softlaunch/allowlistInviteContract.test.ts:22:  it("rejects duplicate email", () => {
+tests/softlaunch/allowlistInviteContract.test.ts:31:    expect(out).toEqual({ ok: false, reason: "duplicate_email" });
+tests/softlaunch/allowlistInviteContract.test.ts:34:  it("rejects duplicate code", () => {
+tests/softlaunch/allowlistInviteContract.test.ts:43:    expect(out).toEqual({ ok: false, reason: "duplicate_code" });
+tests/softlaunch/contentSeed.test.ts:26:  it("rejects duplicate ids", () => {
+tests/softlaunch/contentSeed.test.ts:34:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/lumaspaceSeedVerification.test.ts:19:  it("rejects duplicate id", () => {
+tests/softlaunch/lumaspaceSeedVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/authSessionProductionSweep.test.ts:40:  it("rejects duplicate probe", () => {
+tests/softlaunch/authSessionProductionSweep.test.ts:50:    expect(out).toEqual({ ok: false, reason: "duplicate_probe" });
+tests/softlaunch/sanitizationValidationVerification.test.ts:18:  it("rejects duplicate id", () => {
+tests/softlaunch/sanitizationValidationVerification.test.ts:26:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/liveSeedVerification.test.ts:20:  it("rejects duplicate id", () => {
+tests/softlaunch/liveSeedVerification.test.ts:23:        { id: "x", portal: "LIVE", title: "A", roomType: "audio", active: true, joinable: true, hostReady: true, score: 0.9 },
+tests/softlaunch/liveSeedVerification.test.ts:28:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/liveSeedVerification.test.ts:44:        { id: "x", portal: "LIVE", title: "A", roomType: "audio", active: true, joinable: true, hostReady: true, score: -1 }
+tests/softlaunch/rewardsNotificationsBaselineVerification.test.ts:19:  it("rejects duplicate user id", () => {
+tests/softlaunch/rewardsNotificationsBaselineVerification.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_user_id" });
+tests/softlaunch/buildRegressionSweep.test.ts:18:  it("rejects duplicate name", () => {
+tests/softlaunch/buildRegressionSweep.test.ts:26:    expect(out).toEqual({ ok: false, reason: "duplicate_name" });
+tests/softlaunch/dataIntegrityGlobalVerification.test.ts:18:  it("rejects duplicate id", () => {
+tests/softlaunch/dataIntegrityGlobalVerification.test.ts:26:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/errorLoggingVerification.test.ts:18:  it("rejects duplicate id", () => {
+tests/softlaunch/errorLoggingVerification.test.ts:26:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/softlaunch/starterContentSeed.test.ts:19:  it("rejects duplicate id", () => {
+tests/softlaunch/starterContentSeed.test.ts:27:    expect(out).toEqual({ ok: false, reason: "duplicate_id" });
+tests/fyp_archive/fyp_phase1_pack4.test.ts:29:  it("normalizes archive item to manifest shape", () => {
+tests/fyp_archive/fyp_phase1_pack4.test.ts:42:  it("merges archive items without duplicates", () => {
+tests/fyp_archive/fyp_phase1_pack5.test.ts:9:} from "../../src/lib/fyp_archive/quality_filter";
+tests/fyp_archive/fyp_phase1_pack5.test.ts:35:  it("passes full archive quality filter", () => {
+tests/fyp_archive/fyp_phase3_pack11.test.ts:15:  it("prevents duplicate archive ingestion", () => {
+tests/fyp_archive/fyp_phase8_pack24.test.ts:28:      audioRatio: 0.5,
+tests/fyp_archive/fyp_phase1_pack2.test.ts:9:} from "../../src/lib/fyp_archive/safety_filter";
+tests/fyp_archive/fyp_phase1_pack2.test.ts:35:  it("adds safety classification flag", () => {
+tests/fyp_archive/fyp_phase2_pack9.test.ts:12:    { id: "1", title: "silent archive footage" },
+tests/fyp_archive/fyp_phase2_pack9.test.ts:18:  it("detects native audio", () => {
+tests/fyp_archive/fyp_phase2_pack9.test.ts:20:    expect(detectNativeAudio({ title: "old silent film" })).toBe(false);
+tests/fyp_archive/fyp_phase2_pack9.test.ts:23:  it("prioritizes audio clips", () => {
+tests/fyp_archive/fyp_phase2_pack9.test.ts:28:  it("marks silent clips", () => {
+tests/fyp_archive/fyp_phase2_pack9.test.ts:30:    expect(out[0]).toHaveProperty("silent");
+tests/fyp_archive/fyp_phase2_pack9.test.ts:33:  it("prevents silent streaks", () => {
+tests/content-engine/pack03_chunked_upload_registry.test.ts:49:  it("deduplicates repeated chunk indices", () => {
+tests/content-engine/pack06_safety_gates.test.ts:9:} from "@/src/content-engine/safety";
+tests/content-engine/pack06_safety_gates.test.ts:20:    expect(gate.reasons).toContain("audio_missing");
+tests/content-engine/pack06_safety_gates.test.ts:26:      audioFingerprint: "xyz",
+tests/content-engine/pack06_safety_gates.test.ts:27:      knownFingerprints: [{ perceptualHash: "abc", audioFingerprint: "none" }],
+tests/content-engine/pack06_safety_gates.test.ts:33:  it("routes visual safety correctly", () => {
+tests/content-engine/pack06_safety_gates.test.ts:67:  it("creates correct safety signal event", () => {
+tests/content-engine/pack06_safety_gates.test.ts:72:    ).toBe("content.safety.passed");
+tests/content-engine/pack06_safety_gates.test.ts:78:    ).toBe("content.safety.blocked");
+tests/content-engine/pack04_processing_probe.test.ts:18:  audioCodec: "aac",
+tests/content-engine/pack04_processing_probe.test.ts:57:    expect(validation.errors).toContain("audio_missing");
+tests/content-engine/pack04_processing_probe.test.ts:59:    expect(validation.errors).toContain("unsupported_video_codec");
+tests/content-engine/pack02_ingestion_gate.test.ts:17:  codec: "h264",
+tests/content-engine/pack02_ingestion_gate.test.ts:35:      codec: "vp9",
+tests/content-engine/pack02_ingestion_gate.test.ts:39:    expect(result.errors).toContain("audio_required");
+tests/content-engine/pack02_ingestion_gate.test.ts:41:    expect(result.errors).toContain("unsupported_codec");
+tests/content-engine/pack02_ingestion_gate.test.ts:62:  it("calculates upload bond from creator quality signals", () => {
+tests/content-engine/pack05_hls_thumbnail_metadata.test.ts:19:    expect(hls.audioCodec).toBe("aac");
+tests/content-engine/pack05_hls_thumbnail_metadata.test.ts:43:  it("builds metadata with hashes and quality scores", () => {
+tests/content-engine/pack05_hls_thumbnail_metadata.test.ts:49:      audioQualityScore: 0.8,
+tests/content-engine/pack05_hls_thumbnail_metadata.test.ts:55:    expect(metadata.audioFingerprint).toBe("afp_content1");
+tests/content-engine/pack11_content_pulse.test.ts:15:  safetyPassRate: 0.95,
+tests/persona/manifest.test.ts:5:describe("persona manifest", () => {
+tests/persona/manifest.test.ts:7:    const p = path.join(process.cwd(), "public", "persona", "manifest.json");
+tests/persona/persona_manifest.contract.test.ts:37:describe("Persona manifest: /api/persona/manifest", () => {
+tests/persona/persona_manifest.contract.test.ts:40:    const url = `${base}/api/persona/manifest`;
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:5:  it("has expanded unique manifest and matching local files", () => {
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:6:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:8:    expect(manifest.length).toBeGreaterThanOrEqual(30);
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:9:    expect(new Set(manifest.map((x: any) => x.mp4Url)).size).toBe(manifest.length);
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:10:    expect(new Set(manifest.map((x: any) => String(x.pexelsId))).size).toBeGreaterThanOrEqual(20);
+tests/fyp94/fyp94_append_paginated_ingestion.test.ts:12:    for (const item of manifest.slice(-10)) {
+tests/fyp94/fyp_phase7_pack10.test.ts:10:  it("detects native audio flag", () => {
+tests/fyp94/fyp_phase7_pack10.test.ts:24:  it("enforces sound policy without blocking playback", () => {
+tests/fyp94/fyp94_pack3_feed_intelligence.test.ts:36:  it("page binds manifest feed intelligence and controls", () => {
+tests/fyp94/fyp94_pack14_production_ready.test.ts:29:    expect(health.manifestCount).toBeGreaterThan(0);
+tests/fyp94/fyp94_diversity_pack_001.test.ts:5:  it("library API uses manifest-only verified content and category mixer", () => {
+tests/fyp94/fyp94_diversity_pack_001.test.ts:8:    expect(route).toContain("manifest.json");
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:7:} from "../../src/lib/fyp94/api-stability/manifest";
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:10:  it("uses manifest-only serving and no filesystem directory scan", () => {
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:36:  it("validates manifest helpers and playable content", () => {
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:37:    const manifest = readFyp94Manifest();
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:38:    expect(Array.isArray(manifest)).toBe(true);
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:40:    const playable = filterFyp94PlayableManifest(manifest);
+tests/fyp94/fyp94_pack6_production_layer.test.ts:15:    expect(health.manifestCount).toBeGreaterThan(0);
+tests/fyp94/pack_004_steps_172_178.test.ts:8:  it("validates MP4, duration, and vertical aspect", () => {
+tests/fyp94/pack_004_steps_172_178.test.ts:49:    expect(asset.aspectRatio).toBe("vertical");
+tests/fyp94/fyp94_pool_sound_fix.test.ts:14:  it("has audio probe script", () => {
+tests/fyp94/fyp94_pool_sound_fix.test.ts:15:    expect(fs.existsSync("scripts/fyp94/audio_probe.sh")).toBe(true);
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:5:  it("manifest has playable local files", () => {
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:6:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:7:    const local = manifest.filter((x: any) => x.localUrl && fs.existsSync(`public${x.localUrl}`));
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:9:    expect(manifest.length).toBeGreaterThan(0);
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:20:  it("quality gate cannot return empty when local videos exist", async () => {
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:21:    const { buildFyp94QualityMixedFeed } = await import("../../src/lib/fyp94/quality/mixQualityGate");
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:23:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_black_screen_diagnostic.test.ts:24:    const mapped = manifest
+tests/fyp94/fyp_phase7_pack13.test.ts:10:  it("detects native audio capability", () => {
+tests/fyp94/fyp_phase7_pack13.test.ts:15:  it("marks audio availability on feed", () => {
+tests/fyp94/fyp_phase7_pack13.test.ts:17:    expect(out[0].audio.hasNativeAudio).toBe(true);
+tests/fyp94/fyp_phase7_pack13.test.ts:18:    expect(out[1].audio.fallbackSilent).toBe(true);
+tests/fyp94/fyp_phase7_pack13.test.ts:21:  it("prepares non-AI ambient audio hook", () => {
+tests/fyp94/fyp_phase7_pack13.test.ts:27:  it("builds final sound-ready feed policy", () => {
+tests/fyp94/fyp_phase7_pack13.test.ts:30:    expect(out.policy.aiAudioDisabled).toBe(true);
+tests/fyp94/fyp_phase7_pack13.test.ts:31:    expect(out.policy.ambientHookPrepared).toBe(true);
+tests/fyp94/fyp94_pack12_vimeo_cc_strict_gate.test.ts:59:  it("has Vimeo docs and manifest merge stub", () => {
+tests/fyp94/fyp94_pack11_quality_cost_control.test.ts:3:import { validateLimits } from "../../src/lib/fyp94/quality2/limits";
+tests/fyp94/fyp94_pack11_quality_cost_control.test.ts:4:import { dedupeManifest } from "../../src/lib/fyp94/quality2/dedupe";
+tests/fyp94/fyp94_pack11_quality_cost_control.test.ts:27:  it("dedupes manifest entries", () => {
+tests/fyp94/fyp94_pack11_quality_cost_control.test.ts:37:  it("has compression + quality scripts", () => {
+tests/fyp94/fyp94_pack11_quality_cost_control.test.ts:39:    expect(fs.existsSync("scripts/fyp94/quality_gate_v2.mjs")).toBe(true);
+tests/fyp94/pack_001_steps_153_158.test.ts:8:} from "../../src/lib/fyp94/core/policy";
+tests/fyp94/pack_001_steps_153_158.test.ts:15:  it("locks native-only and no-YouTube-core policy", () => {
+tests/fyp94/fyp94_broad_query_ingestion.test.ts:16:  it("manifest now contains broader query categories", () => {
+tests/fyp94/fyp94_broad_query_ingestion.test.ts:17:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_broad_query_ingestion.test.ts:18:    const queries = new Set(manifest.map((x: any) => x.query));
+tests/fyp94/fyp94_broad_query_ingestion.test.ts:20:    expect(manifest.length).toBeGreaterThanOrEqual(60);
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:8:} from "../../src/lib/fyp94/quality/mixQualityGate";
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:12:    { id: "stock-silent-1", source: "pexels", duration: 7, hasAudio: false, humanScore: 0, motionScore: 0.1, query: "mountain stock" },
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:13:    { id: "stock-silent-2", source: "pixabay", duration: 8, hasAudio: false, humanScore: 0, motionScore: 0.1, query: "sunset stock" },
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:14:    { id: "stock-audio-1", source: "pexels", duration: 18, hasAudio: true, humanScore: 0.2, motionScore: 0.5, query: "street crowd" },
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:26:  it("scores archive and human/audio content above silent stock", () => {
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:28:    const silentStockScore = scoreFyp94Quality(items[0]);
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:29:    expect(archiveScore).toBeGreaterThan(silentStockScore);
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:32:  it("removes low-quality silent stock", () => {
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:34:    expect(out.some((x) => x.id === "stock-silent-1")).toBe(false);
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:43:  it("builds final quality mixed feed", () => {
+tests/fyp94/fyp94_mix_quality_gate_fix.test.ts:47:    expect(out.some((x) => x.id === "stock-silent-1")).toBe(false);
+tests/fyp94/fyp94_pack1_validation.test.ts:19:  it("manifest contains balanced new category spread", () => {
+tests/fyp94/fyp94_pack1_validation.test.ts:20:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_pack1_validation.test.ts:21:    const balanced = manifest.filter((x: any) => String(x.mp4Url || "").startsWith("balanced://"));
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:7:} from "../../src/lib/fyp94/quality/limits";
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:11:} from "../../src/lib/fyp94/quality/duplicate";
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:12:import { validateFyp94PlaybackPerformance } from "../../src/lib/fyp94/quality/performance";
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:28:  it("dedupes manifest by source/sourceId or URL", () => {
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:44:  it("has compression path and quality gate", () => {
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:46:    expect(fs.existsSync("scripts/fyp94/quality_gate.mjs")).toBe(true);
+tests/fyp94/fyp94_pack5_quality_cost.test.ts:50:    expect(doc).toContain("duplicate guard");
+tests/fyp94/fyp_phase2_pack3.test.ts:9:} from "../../scripts/fyp94/content_quality_control.mjs";
+tests/fyp94/fyp_phase2_pack3.test.ts:42:  it("applies quality control end-to-end", () => {
+tests/fyp94/fyp94_pack10_auto_refresh_engine.test.ts:3:import { shouldRunFyp94Refresh } from "../../src/lib/fyp94/auto-refresh/policy";
+tests/fyp94/fyp_phase3_pack6.test.ts:10:  const manifest = Array.from({ length: 320 }).map((_, i) => ({
+tests/fyp94/fyp_phase3_pack6.test.ts:19:    const seen = createCrossRunSeenSet(manifest);
+tests/fyp94/fyp_phase3_pack6.test.ts:24:  it("prevents duplicate ingestion across runs", () => {
+tests/fyp94/fyp_phase3_pack6.test.ts:30:    const out = filterAlreadyIngested(candidates, manifest);
+tests/fyp94/fyp_phase3_pack6.test.ts:36:    const scale = validateScaleTargets(manifest);
+tests/fyp94/fyp_phase3_pack6.test.ts:43:    const report = buildScaleReport(manifest);
+tests/fyp94/fyp94_real_source_ingestion.test.ts:5:  it("has multiple real source videos and manifest", () => {
+tests/fyp94/fyp94_real_source_ingestion.test.ts:6:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_real_source_ingestion.test.ts:7:    expect(manifest.length).toBeGreaterThanOrEqual(8);
+tests/fyp94/fyp94_real_source_ingestion.test.ts:8:    expect(new Set(manifest.map((x: any) => x.mp4Url)).size).toBeGreaterThanOrEqual(8);
+tests/fyp94/fyp94_real_source_ingestion.test.ts:9:    expect(manifest.every((x: any) => ["pexels", "pixabay"].includes(x.source))).toBe(true);
+tests/fyp94/fyp_phase9_pack15.test.ts:25:      manifest: [{ localUrl: "/native-fyp/real/1.mp4" }],
+tests/fyp94/fyp_phase8_pack14.test.ts:31:      manifest: base,
+tests/fyp94/fyp94_pack2_multisource.test.ts:14:  it("manifest has normalized source metadata and unique URLs", () => {
+tests/fyp94/fyp94_pack2_multisource.test.ts:15:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_pack2_multisource.test.ts:17:    const withUrl = manifest.filter((x: any) => x.mp4Url);
+tests/fyp94/fyp94_pack2_multisource.test.ts:20:    const withSource = manifest.filter((x: any) => x.source && x.localUrl);
+tests/fyp94/fyp94_pack2_multisource.test.ts:26:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp94_pack2_multisource.test.ts:27:    expect(manifest.some((x: any) => x.source === "pixabay")).toBe(true);
+tests/fyp94/fyp94_ingest_check.test.ts:6:    const m=JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json","utf8"));
+tests/fyp94/fyp_phase3_pack5.test.ts:10:  const manifest = Array.from({ length: 320 }).map((_, i) => ({
+tests/fyp94/fyp_phase3_pack5.test.ts:17:  it("appends to manifest instead of overwriting", () => {
+tests/fyp94/fyp_phase3_pack5.test.ts:22:    const m = getPoolMetrics(manifest);
+tests/fyp94/fyp_phase3_pack5.test.ts:27:    expect(m.duplicateCount).toBe(0);
+tests/fyp94/fyp_phase3_pack5.test.ts:31:    const ready = validatePoolReadiness(manifest);
+tests/fyp94/fyp_phase3_pack5.test.ts:39:    const log = buildIngestionLog({ added: 120, skipped: 8, manifest });
+tests/fyp94/fyp94_pack9_time_machine.test.ts:8:    expect(getFyp94Decade({ title: "1950 safety film" })).toBe("1950s");
+tests/fyp94/fyp94_pack9_time_machine.test.ts:16:      { id: "1", title: "1950 safety film" },
+tests/fyp94/fyp94_quality_gate_api_wiring.test.ts:4:describe("FYP94 quality gate API wiring", () => {
+tests/fyp94/fyp94_quality_gate_api_wiring.test.ts:5:  it("wires quality mixed feed into library API", () => {
+tests/fyp94/fyp94_quality_gate_api_wiring.test.ts:9:    expect(route).toContain("qualityMixed");
+tests/fyp94/fyp_real_life_ingestion_upgrade.test.ts:16:  it("manifest contains real-life biased clips", () => {
+tests/fyp94/fyp_real_life_ingestion_upgrade.test.ts:17:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp_real_life_ingestion_upgrade.test.ts:19:    const realLife = manifest.filter((x: any) => x.contentMode === "real-life");
+tests/fyp94/fyp_real_life_ingestion_upgrade.test.ts:31:    const manifest = JSON.parse(fs.readFileSync("public/native-fyp/real-meta/manifest.json", "utf8"));
+tests/fyp94/fyp_real_life_ingestion_upgrade.test.ts:32:    const withUrls = manifest.filter((x: any) => x.mp4Url);
+tests/events/event_stream_contract.test.ts:5:  it("policy pins signed url ttl to 3600", () => {
+tests/events/events_stream_route_contract.test.ts:26:    expect(j.policy.signedUrlMaxTtlSec).toBe(3600);
+tests/events/events_stream_route_contract.test.ts:27:    expect(j.policy.ttlSec).toBe(3600);
+tests/vibe/vibe_apply_route.test.ts:31:  it("accepts valid apply OR duplicate_vibe (idempotent)", async () => {
+tests/vibe/vibe_apply_route.test.ts:36:    if (res.status === 409) expect(json.error).toBe("duplicate_vibe");
+tests/vibe/vibe_apply_integration_demo.test.ts:31:  // 1) ok=true and status in ["applied","duplicate_vibe"]
+tests/vibe/vibe_apply_integration_demo.test.ts:32:  // 2) ok=false and error === "duplicate_vibe" (older handler style)
+tests/vibe/vibe_apply_integration_demo.test.ts:34:    (ok && (status === "applied" || status === "duplicate_vibe")) ||
+tests/vibe/vibe_apply_integration_demo.test.ts:35:    (!ok && err === "duplicate_vibe");
+tests/vibe/vibe_apply_integration_demo.test.ts:43:  expect(["applied", "duplicate_vibe"]).toContain(normalized);
+tests/monetization/pack13_user_control.test.ts:5:import { buildSilentNotNowUx } from "@/src/monetization/user-control/silentUx";
+tests/monetization/pack13_user_control.test.ts:34:  it("uses silent UX without blocking flow", () => {
+tests/monetization/pack09_presence_markers.test.ts:4:import { buildPresenceAudioCue } from "@/src/monetization/presence-markers/audio";
+tests/monetization/pack09_presence_markers.test.ts:18:  it("audio", () => {
+tests/zendoro/zendoro_prod_pack05_trust_safety.test.ts:5:  it("validates trust/safety hardening contract", () => {
+tests/zendoro/zendoro_pack01b_export_warning_cleanup.test.ts:10:import { readManualReviewItems } from "@/lib/safety/review/manualReviewQueue";
+tests/zendoro/zendoro_pack01b_export_warning_cleanup.test.ts:24:  it("restores trust/geo/eco/safety exports", () => {
+tests/zendoro/zendoro_remaining28_pack02_stripe_payment.test.ts:8:    expect(zendoroStripePaymentFlow.duplicatePaymentPrevention).toBe(true);
+tests/zendoro/zendoro_pack08_trust_safety_hardening.test.ts:17:      detectFakeReview({ velocity: 4, duplicateRatio: 0.8, verified: false }),
+tests/zendoro/zendoro_pack08_trust_safety_hardening.test.ts:34:  it("tracks canonical Zendoro trust/safety coverage", () => {
+tests/zendoro/zendoro_pack04_stripe_payment_hardening.test.ts:16:    expect(runtime.duplicateChargeProtection).toBe(true);
+tests/gmar/activation/gmar_activation_phase08_zencoin_economy.test.ts:37:  it("rejects duplicate claim", () => {
+tests/gmar/activation/gmar_activation_phase07_inventory_items.test.ts:45:  it("rejects duplicate non-stackable item", () => {
+tests/gmar/activation/gmar_activation_phase06_core_gameplay_loop.test.ts:44:  it("rejects duplicate reward claim", () => {
+tests/gmar/activation/gmar_activation_phase10_social_multiplayer_foundation.test.ts:60:  it("rejects duplicate squad join", () => {
+tests/gmar/activation/gmar_activation_phase13_ai_assisted_systems.test.ts:10:  it("locks AI safety config", () => {
+tests/gmar/final-completion/gmar_final_completion_06_matchmaking_sessions.test.ts:57:  it("rejects duplicate queue player", () => {
+tests/gmar/final-completion/gmar_final_completion_05_realtime_multiplayer.test.ts:56:  it("rejects duplicate join", () => {
+tests/gmar/final-completion/gmar_final_completion_07_economy_hardening.test.ts:10:  it("spends Zencoin atomically with fraud and duplicate protection", () => {
+tests/gmar/final-completion/gmar_final_completion_07_economy_hardening.test.ts:32:    expect(result.transaction.duplicateProtected).toBe(true);
+tests/gmar/final-completion/gmar_final_completion_07_economy_hardening.test.ts:57:  it("blocks duplicate spend transaction", () => {
+tests/gmar/final-completion/gmar_final_completion_07_economy_hardening.test.ts:73:    ).toThrow("GMAR economy duplicate transaction blocked.");
+tests/guards/fairness_resolution_caps.test.ts:5:  it("free tier clamps 1080p down to <=720p with aspect preserved", () => {
+tests/guards/circuit_breaker_contract.test.ts:23:    const b = new CircuitBreaker({ name: "manifest-auth", failureThreshold: 1, openForMs: 500, halfOpenProbes: 2 });

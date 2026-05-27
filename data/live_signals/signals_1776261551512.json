@@ -1,0 +1,596 @@
+[
+  {
+    "id": "Z29vZ2xlX3RyZW5kczp1bml0",
+    "source": "google_trends",
+    "title": "united states federal judge",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776261551507,
+    "topic": "united"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpva2xv",
+    "source": "google_trends",
+    "title": "oklo stock",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776261551507,
+    "topic": "oklo"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczp0YXgg",
+    "source": "google_trends",
+    "title": "tax day food deals discounts",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776261551507,
+    "topic": "discounts"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczprZW50",
+    "source": "google_trends",
+    "title": "kent syverud",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776261551507,
+    "topic": "syverud"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpnb3Ag",
+    "source": "google_trends",
+    "title": "gop struggling highlight tax cuts",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776261551507,
+    "topic": "struggling"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpjaGFy",
+    "source": "google_trends",
+    "title": "charles melton",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776261551507,
+    "topic": "charles"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpyY2Ig",
+    "source": "google_trends",
+    "title": "rcb vs lsg",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776261551507,
+    "topic": "rcb"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczplbHNh",
+    "source": "google_trends",
+    "title": "elsa jacquemot",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776261551507,
+    "topic": "jacquemot"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczphbGxi",
+    "source": "google_trends",
+    "title": "allbirds",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776261551507,
+    "topic": "allbirds"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpkYW5h",
+    "source": "google_trends",
+    "title": "dana perino",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776261551507,
+    "topic": "perino"
+  },
+  {
+    "id": "cnNzOk5ZVCAmZ3Q7IFRvcCBT",
+    "source": "rss",
+    "title": "NYT &gt; Top Stories",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776261551508,
+    "topic": "stories"
+  },
+  {
+    "id": "cnNzOlNoaXAg4oCYU3Bvb2Zp",
+    "source": "rss",
+    "title": "Ship ‘Spoofing’ in Strait of Hormuz May Compound Confusion",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776261551508,
+    "topic": "spoofing"
+  },
+  {
+    "id": "cnNzOlRydW1w4oCZcyBCbG9j",
+    "source": "rss",
+    "title": "Trump’s Blockade Risks Upending an Emerging Détente With China",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776261551508,
+    "topic": "blockade"
+  },
+  {
+    "id": "cnNzOkhvdyBDaGluYeKAmXMg",
+    "source": "rss",
+    "title": "How China’s Weapons Transfers to Iran Have Evolved Over Decades",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776261551508,
+    "topic": "weapons"
+  },
+  {
+    "id": "cnNzOlRoZSBSZXB1YmxpY2Fu",
+    "source": "rss",
+    "title": "The Republicans Who Disapprove of the War, and a Wave of College Closures",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776261551508,
+    "topic": "republicans"
+  },
+  {
+    "id": "cnNzOlByb3NlY3V0b3JzIE1h",
+    "source": "rss",
+    "title": "Prosecutors Make Surprise Visit to Fed as Pirro Defends Investigation",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776261551508,
+    "topic": "prosecutors"
+  },
+  {
+    "id": "cnNzOlRydW1wIEluY3JlYXNl",
+    "source": "rss",
+    "title": "Trump Increased Tax Refunds, but a Political Challenge Still Looms",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776261551508,
+    "topic": "increased"
+  },
+  {
+    "id": "cnNzOktpbmcgQ2hhcmxlcyBJ",
+    "source": "rss",
+    "title": "King Charles III and Queen Camilla Will Visit D.C., New York and Virginia",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776261551508,
+    "topic": "charles"
+  },
+  {
+    "id": "cnNzOlZhbmNlIFNheXMgUG9w",
+    "source": "rss",
+    "title": "Vance Says Pope Leo Should Be More Careful When Talking About Theology",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776261551508,
+    "topic": "should"
+  },
+  {
+    "id": "cnNzOkpEIFZhbmNlIEhlY2ts",
+    "source": "rss",
+    "title": "JD Vance Heckled In Antiwar Protest at Turning Point USA Event",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776261551508,
+    "topic": "heckled"
+  },
+  {
+    "id": "cnNzOkNhdGhvbGljaXNtIFRo",
+    "source": "rss",
+    "title": "Catholicism Thrives in Africa, but Pope’s Cameroon Visit Highlights a Divide",
+    "url": "",
+    "score_hint": 989,
+    "ts": 1776261551508,
+    "topic": "catholicism"
+  },
+  {
+    "id": "cnNzOlN3YWx3ZWxs4oCZcyBF",
+    "source": "rss",
+    "title": "Swalwell’s Exit Injects ‘Chaos’ Into California Governor’s Race",
+    "url": "",
+    "score_hint": 988,
+    "ts": 1776261551508,
+    "topic": "swalwell"
+  },
+  {
+    "id": "cnNzOkdhbGxlZ28gRGlzbWlz",
+    "source": "rss",
+    "title": "Gallego Dismissed Rumors of a ‘Flirty’ Swalwell, Highlighting a Culture of Silence",
+    "url": "",
+    "score_hint": 987,
+    "ts": 1776261551508,
+    "topic": "gallego"
+  },
+  {
+    "id": "cnNzOlJlc2lnbmF0aW9ucyBv",
+    "source": "rss",
+    "title": "Resignations of Eric Swalwell and Tony Gonzales Set Up Special Election Fights in Texas and California",
+    "url": "",
+    "score_hint": 986,
+    "ts": 1776261551508,
+    "topic": "resignations"
+  },
+  {
+    "id": "cnNzOkhvdyBPbGRlciBBZHVs",
+    "source": "rss",
+    "title": "How Older Adults Are Using VR to Counter Social Isolation",
+    "url": "",
+    "score_hint": 985,
+    "ts": 1776261551508,
+    "topic": "adults"
+  },
+  {
+    "id": "cnNzOlZpdmVrIFJhbWFzd2Ft",
+    "source": "rss",
+    "title": "Vivek Ramaswamy’s Ohio Governor Bid: Can He Win Over Voters?",
+    "url": "",
+    "score_hint": 984,
+    "ts": 1776261551508,
+    "topic": "ramaswamy"
+  },
+  {
+    "id": "cnNzOkEgUHJvZ3Jlc3NpdmUg",
+    "source": "rss",
+    "title": "A Progressive Group Rolls Out a Campus Competitor to Turning Point",
+    "url": "",
+    "score_hint": 983,
+    "ts": 1776261551508,
+    "topic": "progressive"
+  },
+  {
+    "id": "cnNzOldoYXQgdGhlIE5ldyBM",
+    "source": "rss",
+    "title": "What the New Loan Caps Will Mean for Grad Students This Fall",
+    "url": "",
+    "score_hint": 982,
+    "ts": 1776261551508,
+    "topic": "students"
+  },
+  {
+    "id": "cnNzOldoeSBJdOKAmXMgQ3J1",
+    "source": "rss",
+    "title": "Why It’s Crucial We Understand How A.I. ‘Thinks’",
+    "url": "",
+    "score_hint": 981,
+    "ts": 1776261551508,
+    "topic": "crucial"
+  },
+  {
+    "id": "cnNzOkhvY2h1bCBQcm9wb3Nl",
+    "source": "rss",
+    "title": "Hochul Proposes Tax on N.Y.C. Second Homes That Are Worth $5 Million",
+    "url": "",
+    "score_hint": 980,
+    "ts": 1776261551508,
+    "topic": "hochul"
+  },
+  {
+    "id": "cnNzOlRob3VzYW5kcyBvZiBO",
+    "source": "rss",
+    "title": "Thousands of N.Y.C. Doormen Seeking Better Pay Are Set to Vote on Strike",
+    "url": "",
+    "score_hint": 979,
+    "ts": 1776261551508,
+    "topic": "thousands"
+  },
+  {
+    "id": "cnNzOkRvZGdpbmcgQm9tYnMg",
+    "source": "rss",
+    "title": "Dodging Bombs and Drones, This Postman in Ukraine Still Delivers",
+    "url": "",
+    "score_hint": 978,
+    "ts": 1776261551508,
+    "topic": "dodging"
+  },
+  {
+    "id": "cnNzOjExIEVsZWN0cmljIENh",
+    "source": "rss",
+    "title": "11 Electric Cars Worth a Look as Gas Prices Soar",
+    "url": "",
+    "score_hint": 977,
+    "ts": 1776261551508,
+    "topic": "electric"
+  },
+  {
+    "id": "cnNzOk9zY2FyIElzYWFjIGFu",
+    "source": "rss",
+    "title": "Oscar Isaac and Carey Mulligan Have a Generational ‘Beef’",
+    "url": "",
+    "score_hint": 976,
+    "ts": 1776261551508,
+    "topic": "mulligan"
+  },
+  {
+    "id": "cnNzOlRydW1wIElzIGluIE92",
+    "source": "rss",
+    "title": "Trump Is in Over His Head",
+    "url": "",
+    "score_hint": 975,
+    "ts": 1776261551508,
+    "topic": "trump"
+  },
+  {
+    "id": "cnNzOkl04oCZcyBUYXggRGF5",
+    "source": "rss",
+    "title": "It’s Tax Day",
+    "url": "",
+    "score_hint": 974,
+    "ts": 1776261551508,
+    "topic": "it"
+  },
+  {
+    "id": "cnNzOkxhdGUgTmlnaHQgTGF1",
+    "source": "rss",
+    "title": "Late Night Laughs at Explanations of Trump’s Jesus ‘Joke’",
+    "url": "",
+    "score_hint": 973,
+    "ts": 1776261551508,
+    "topic": "laughs"
+  },
+  {
+    "id": "cnNzOkJpbGx5IENyeXN0YWwg",
+    "source": "rss",
+    "title": "Billy Crystal to Return to Broadway With Solo Show ‘860’ About Losing His Home in L.A. Fires",
+    "url": "",
+    "score_hint": 972,
+    "ts": 1776261551508,
+    "topic": "crystal"
+  },
+  {
+    "id": "cnNzOkEgUG9saWNlIENoaWVm",
+    "source": "rss",
+    "title": "A Police Chief Had a $4.5 Million Gambling Problem. No One Knew.",
+    "url": "",
+    "score_hint": 971,
+    "ts": 1776261551508,
+    "topic": "police"
+  },
+  {
+    "id": "cnNzOk5ldyBZb3JrIENhbGxz",
+    "source": "rss",
+    "title": "New York Calls for Accountability for Firm Accused of Ignoring Assaults",
+    "url": "",
+    "score_hint": 970,
+    "ts": 1776261551508,
+    "topic": "accountability"
+  },
+  {
+    "id": "cnNzOlN1cmdlb24gV2hvIFJl",
+    "source": "rss",
+    "title": "Surgeon Who Removed Wrong Organ From Patient Is Charged in His Death",
+    "url": "",
+    "score_hint": 969,
+    "ts": 1776261551508,
+    "topic": "surgeon"
+  },
+  {
+    "id": "1slinz6",
+    "source": "reddit",
+    "title": "Many of them unfortunately",
+    "url": "https://i.redd.it/6136p3e7i7vg1.gif",
+    "score_hint": 69825,
+    "ts": 1776261551510,
+    "topic": "unfortunately"
+  },
+  {
+    "id": "1sloxx3",
+    "source": "reddit",
+    "title": "Having to write a check just to receive your UPS package because of tariffs",
+    "url": "https://v.redd.it/9kxpm14co8vg1",
+    "score_hint": 50609,
+    "ts": 1776261551510,
+    "topic": "having"
+  },
+  {
+    "id": "1sm2087",
+    "source": "reddit",
+    "title": "Boing boing",
+    "url": "https://i.redd.it/nvkt0qpyybvg1.jpeg",
+    "score_hint": 37168,
+    "ts": 1776261551510,
+    "topic": "boing"
+  },
+  {
+    "id": "1sm1gk8",
+    "source": "reddit",
+    "title": "Whatever he did wrong I hope she forgives him😂",
+    "url": "https://v.redd.it/t8nfvy5ktbvg1",
+    "score_hint": 15012,
+    "ts": 1776261551510,
+    "topic": "whatever"
+  },
+  {
+    "id": "1sm1tf6",
+    "source": "reddit",
+    "title": "‪Unique arched floodgates protect from typhoons and storm surges in Osaka, Japan‬",
+    "url": "https://v.redd.it/ogqnczg4xbvg1",
+    "score_hint": 14264,
+    "ts": 1776261551510,
+    "topic": "unique"
+  },
+  {
+    "id": "1slou4r",
+    "source": "reddit",
+    "title": "What is a job that you think is 100% safe from AI for the next 50 years, and why?",
+    "url": "https://www.reddit.com/r/AskReddit/comments/1slou4r/what_is_a_job_that_you_think_is_100_safe_from_ai/",
+    "score_hint": 4036,
+    "ts": 1776261551510,
+    "topic": "what"
+  },
+  {
+    "id": "1sln99b",
+    "source": "reddit",
+    "title": "I did it! Two days ago I asked and everyone said it was time. Presenting your newest War Boy!",
+    "url": "https://www.reddit.com/gallery/1sln99b",
+    "score_hint": 31838,
+    "ts": 1776261551510,
+    "topic": "everyone"
+  },
+  {
+    "id": "1sm0as4",
+    "source": "reddit",
+    "title": "Airbnb host cancels reservation because it’s a high demand weekend",
+    "url": "https://i.redd.it/41szuhpchbvg1.jpeg",
+    "score_hint": 24099,
+    "ts": 1776261551510,
+    "topic": "airbnb"
+  },
+  {
+    "id": "1sm1l4n",
+    "source": "reddit",
+    "title": "Zelenskyy: return of draft-age Ukrainian men from abroad is a matter of fairness",
+    "url": "https://www.pravda.com.ua/eng/news/2026/04/14/8030112/",
+    "score_hint": 8052,
+    "ts": 1776261551510,
+    "topic": "zelenskyy"
+  },
+  {
+    "id": "1slnqpk",
+    "source": "reddit",
+    "title": "Clav goes on a incel rant during 60 minutes interview",
+    "url": "https://v.redd.it/yy5xtsbmf8vg1",
+    "score_hint": 5730,
+    "ts": 1776261551510,
+    "topic": "during"
+  },
+  {
+    "id": "1slo5rt",
+    "source": "reddit",
+    "title": "Justice Department moves to toss seditious conspiracy convictions of Oath Keepers and Proud Boys",
+    "url": "https://apnews.com/article/proud-boys-oath-keepers-convictions-dropped-doj-ad679108ab84083694261efc101e60ea",
+    "score_hint": 21137,
+    "ts": 1776261551510,
+    "topic": "justice"
+  },
+  {
+    "id": "1sm3tvt",
+    "source": "reddit",
+    "title": "Trump has single-handedly “permanently opened the Strait of Hormuz”",
+    "url": "https://i.redd.it/d6gsqklyecvg1.jpeg",
+    "score_hint": 7528,
+    "ts": 1776261551510,
+    "topic": "single"
+  },
+  {
+    "id": "1sm1ows",
+    "source": "reddit",
+    "title": "A dream realized. 🏠",
+    "url": "https://i.redd.it/i2bzdqrwvbvg1.jpeg",
+    "score_hint": 11992,
+    "ts": 1776261551510,
+    "topic": "realized"
+  },
+  {
+    "id": "1slsn5j",
+    "source": "reddit",
+    "title": "Clavicular Suffers Suspected Overdose, Hospitalized",
+    "url": "https://www.reddit.com/gallery/1slsn5j",
+    "score_hint": 6753,
+    "ts": 1776261551510,
+    "topic": "clavicular"
+  },
+  {
+    "id": "1slg2yo",
+    "source": "reddit",
+    "title": "Why did we all collectively dislike Skyler?",
+    "url": "https://i.redd.it/htrggan327vg1.jpeg",
+    "score_hint": 11464,
+    "ts": 1776261551510,
+    "topic": "collectively"
+  },
+  {
+    "id": "1sldt5e",
+    "source": "reddit",
+    "title": "The full movie for ‘Avatar: Aang, The Last Airbender’ has been accidentally emailed to Twitter user who released the full movie on his account . The estimated budget is around $80 millions, and was supposed to be released on paramount+ in October this year.",
+    "url": "https://i.redd.it/xhcomclyn6vg1.png",
+    "score_hint": 25428,
+    "ts": 1776261551510,
+    "topic": "avatar"
+  },
+  {
+    "id": "1slrf4b",
+    "source": "reddit",
+    "title": "Far-right Polish lawmaker Konrad Berkowicz holding up a paper Israeli flag with a swastika",
+    "url": "https://i.redd.it/7io3xwnl79vg1.jpeg",
+    "score_hint": 47186,
+    "ts": 1776261551510,
+    "topic": "polish"
+  },
+  {
+    "id": "1slomf4",
+    "source": "reddit",
+    "title": "I work for the airlines and found this in the cargo pit in the plane… it’s hard as a rock",
+    "url": "https://www.reddit.com/gallery/1slomf4",
+    "score_hint": 5676,
+    "ts": 1776261551510,
+    "topic": "airlines"
+  },
+  {
+    "id": "1slm59c",
+    "source": "reddit",
+    "title": "Guy Fieri's is \"devastated\" after the backlash for greeting Andrew Tate at UFC.",
+    "url": "https://i.redd.it/hj9g1h0i48vg1.jpeg",
+    "score_hint": 30023,
+    "ts": 1776261551510,
+    "topic": "devastated"
+  },
+  {
+    "id": "1slwinp",
+    "source": "reddit",
+    "title": "Vance says pope should ‘be careful’ when talking about theology",
+    "url": "https://www.nbcnews.com/video/vance-says-pope-should-be-careful-when-talking-about-theology-261400645540",
+    "score_hint": 20354,
+    "ts": 1776261551510,
+    "topic": "should"
+  },
+  {
+    "id": "1sm4ivb",
+    "source": "reddit",
+    "title": "Meirl",
+    "url": "https://i.redd.it/6xhmyx1gkcvg1.jpeg",
+    "score_hint": 5644,
+    "ts": 1776261551510,
+    "topic": "meirl"
+  },
+  {
+    "id": "1slrnzk",
+    "source": "reddit",
+    "title": "Johnny Somali found guilty of all charges as South Korea sentences streamer to prison with labor - Dexerto",
+    "url": "https://www.dexerto.com/entertainment/johnny-somali-found-guilty-of-all-charges-as-south-korea-sentences-streamer-to-prison-with-labor-3351856/",
+    "score_hint": 32312,
+    "ts": 1776261551510,
+    "topic": "johnny"
+  },
+  {
+    "id": "1slflgo",
+    "source": "reddit",
+    "title": "I paid over a grand for this years ago...",
+    "url": "https://i.redd.it/xkztc143z6vg1.jpeg",
+    "score_hint": 15728,
+    "ts": 1776261551510,
+    "topic": "i"
+  },
+  {
+    "id": "1sllunf",
+    "source": "reddit",
+    "title": "Why are Warhammer right-wing memes always people inventing scenarios 24/7?",
+    "url": "https://i.redd.it/1ycljejo28vg1.png",
+    "score_hint": 6042,
+    "ts": 1776261551510,
+    "topic": "warhammer"
+  },
+  {
+    "id": "1sm08x8",
+    "source": "reddit",
+    "title": "Every fucking time",
+    "url": "https://i.redd.it/mh2q23csgbvg1.jpeg",
+    "score_hint": 10895,
+    "ts": 1776261551510,
+    "topic": "fucking"
+  }
+]

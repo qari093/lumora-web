@@ -1,0 +1,5 @@
+{
+  "status": "READY_FOR_MANAGED_POSTGRES",
+  "requiredAction": "Create managed PostgreSQL database and add DATABASE_URL to deployment provider",
+  "localDatabaseUrlMustNotBeUsedInProduction": true
+}

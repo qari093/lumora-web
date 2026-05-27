@@ -1,0 +1,15 @@
+Personalization Runtime locked:
+- User Interaction Signals
+- User Interest Graph
+- Emotional Profile
+- Pacing Model
+- Session-based Learning
+- Cross-session Memory
+- Personalization Cache
+- Exploration vs Exploitation
+- Diversity Injection
+- Cold-start Personalization
+- Short-term Intent Detection
+- Preference Decay Logic
+- Personalization Metrics
+- Personalization Monitoring

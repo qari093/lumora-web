@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-05-24T08:39:38.142Z",
+  "status": "FAILED",
+  "totalCapabilities": 14,
+  "failedFindings": 2,
+  "warningFindings": 1,
+  "gmarStatus": "WARNING",
+  "creatorStatus": "PASS",
+  "monetizationStatus": "FAILED",
+  "findings": [
+    {
+      "system": "gmar",
+      "capability": "persistent_game_state",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "persistent_game_state satisfies launch readiness."
+    },
+    {
+      "system": "gmar",
+      "capability": "matchmaking_runtime",
+      "status": "PASS",
+      "severity": "high",
+      "message": "matchmaking_runtime satisfies launch readiness."
+    },
+    {
+      "system": "gmar",
+      "capability": "economy_claim_guard",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "economy_claim_guard satisfies launch readiness."
+    },
+    {
+      "system": "gmar",
+      "capability": "realtime_presence",
+      "status": "WARNING",
+      "severity": "medium",
+      "message": "GMAR realtime presence needs final live pressure validation.",
+      "requiredFix": "Complete this capability or keep the related feature behind launch-safe activation gates."
+    },
+    {
+      "system": "creator",
+      "capability": "creator_onboarding",
+      "status": "PASS",
+      "severity": "high",
+      "message": "creator_onboarding satisfies launch readiness."
+    },
+    {
+      "system": "creator",
+      "capability": "creator_publishing",
+      "status": "PASS",
+      "severity": "high",
+      "message": "creator_publishing satisfies launch readiness."
+    },
+    {
+      "system": "creator",
+      "capability": "creator_analytics",
+      "status": "PASS",
+      "severity": "medium",
+      "message": "creator_analytics satisfies launch readiness."
+    },
+    {
+      "system": "creator",
+      "capability": "creator_safety_review",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "creator_safety_review satisfies launch readiness."
+    },
+    {
+      "system": "monetization",
+      "capability": "wallet_ledger_integrity",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "wallet_ledger_integrity satisfies launch readiness."
+    },
+    {
+      "system": "monetization",
+      "capability": "payment_safety",
+      "status": "FAILED",
+      "severity": "critical",
+      "message": "Payment safety must be fully real before public monetization.",
+      "requiredFix": "Complete this capability or keep the related feature behind launch-safe activation gates."
+    },
+    {
+      "system": "monetization",
+      "capability": "ad_boundary_guard",
+      "status": "PASS",
+      "severity": "high",
+      "message": "ad_boundary_guard satisfies launch readiness."
+    },
+    {
+      "system": "monetization",
+      "capability": "reward_fraud_detection",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "reward_fraud_detection satisfies launch readiness."
+    },
+    {
+      "system": "monetization",
+      "capability": "payout_safety",
+      "status": "FAILED",
+      "severity": "critical",
+      "message": "Payout safety remains blocked until full compliance and verification.",
+      "requiredFix": "Complete this capability or keep the related feature behind launch-safe activation gates."
+    },
+    {
+      "system": "monetization",
+      "capability": "transaction_replay_protection",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "transaction_replay_protection satisfies launch readiness."
+    }
+  ]
+}

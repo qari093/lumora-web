@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:nyt="http://www.nytimes.com/namespaces/rss/2.0" version="2.0">
+  <channel>
+    <title>NYT &gt; Top Stories</title>
+    <link>https://www.nytimes.com</link>
+    <atom:link href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" rel="self" type="application/rss+xml"></atom:link>
+    <description></description>
+    <language>en-us</language>
+    <copyright>Copyright 2026 The New York Times Company</copyright>
+    <lastBuildDate>Wed, 15 Apr 2026 15:01:12 +0000</lastBuildDate>
+    <pubDate>Wed, 15 Apr 2026 14:59:13 +0000</pubDate>
+    <image>
+      <title>NYT &gt; Top Stories</title>
+      <url>https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png</url>
+      <link>https://www.nytimes.com</link>
+    </image>
+    <item>
+      <title>Ship ‘Spoofing’ in Strait of Hormuz May Compound Confusion</title>
+      <link>https://www.nytimes.com/2026/04/14/world/middleeast/strait-of-hormuz-naval-blockade-ship-spoofing.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/world/middleeast/strait-of-hormuz-naval-blockade-ship-spoofing.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/world/middleeast/strait-of-hormuz-naval-blockade-ship-spoofing.html" rel="standout"></atom:link>
+      <description>A new pattern of deceptive activity by some vessels around the critical waterway suggests the new American blockade is changing how some ships linked to Iran are behaving.</description>
+      <dc:creator>Ephrat Livni</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:03:06 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Ships and Shipping</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">United States Navy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Strait of Hormuz</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Gulf of Oman</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14int-hormuz-spoofing1/14int-iran-ledeall-1-tglz-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Agence France-Presse — Getty Images</media:credit>
+      <media:description>A cargo ship off the coast of Ras al-Khaimah, United Arab Emirates, on Monday.</media:description>
+    </item>
+    <item>
+      <title>Trump’s Blockade Risks Upending an Emerging Détente With China</title>
+      <link>https://www.nytimes.com/2026/04/14/us/politics/trump-iran-blockade-china.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/politics/trump-iran-blockade-china.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/politics/trump-iran-blockade-china.html" rel="standout"></atom:link>
+      <description>In a thinly veiled critique of the war in Iran, China’s leader said the world could not risk reverting “to the law of the jungle.”</description>
+      <dc:creator>David E. Sanger and Tyler Pager</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:14:03 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Xi Jinping</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Defense and Military Forces</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">United States Navy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Strait of Hormuz</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Ships and Shipping</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Oil (Petroleum) and Gasoline</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Freight (Cargo)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Trade and World Market</category>
+      <media:content height="1799" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14dc-trump-china-qwcp/14dc-trump-china-qwcp-mediumSquareAt3X-v2.jpg" width="1800"></media:content>
+      <media:credit>Haiyun Jiang/The New York Times</media:credit>
+      <media:description>President Trump meeting with China’s leader, Xi Jinping, in South Korea last October. They will meet again next month.</media:description>
+    </item>
+    <item>
+      <title>How China’s Weapons Transfers to Iran Have Evolved Over Decades</title>
+      <link>https://www.nytimes.com/2026/04/15/world/asia/china-iran-weapons-sales.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/world/asia/china-iran-weapons-sales.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/world/asia/china-iran-weapons-sales.html" rel="standout"></atom:link>
+      <description>China has denied claims this month by U.S. intelligence that it might have shipped arms to Iran. In recent years, China has supported Iran with dual-use parts.</description>
+      <dc:creator>David Pierson</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:13:33 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Missiles and Missile Defense Systems</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">BeiDou Navigation Satellite System</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Stockholm International Peace Research Institute</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">United Nations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Persian Gulf</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Strait of Hormuz</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Defense and Military Forces</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Arms Trade</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Trade and World Market</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Satellites</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Espionage and Intelligence Services</category>
+      <category domain="">Iran-Iraq War</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15int-china-iran-weapons-01-vkfj/15int-china-iran-weapons-01-vkfj-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kevin Frayer/Getty Images</media:credit>
+      <media:description>Military delegates at an annual legislative session in Beijing last month.</media:description>
+    </item>
+    <item>
+      <title>The Republicans Who Disapprove of the War, and a Wave of College Closures</title>
+      <link>https://www.nytimes.com/2026/04/15/podcasts/the-headlines/republicans-disapprove-iran-war-college-closures.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/podcasts/the-headlines/republicans-disapprove-iran-war-college-closures.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/podcasts/the-headlines/republicans-disapprove-iran-war-college-closures.html" rel="standout"></atom:link>
+      <description>Plus, will the World Cup bring tourists back to the U.S.?</description>
+      <dc:creator>Tracy Mumford, Will Jarvis, Margaret Kadifa and Ian Stewart</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 10:00:12 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Shutdowns (Institutional)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Travel and Vacations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Hezbollah</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Iran-Israel War (2025- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Colleges and Universities</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">World Cup (Soccer)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">internal-open-access-audio</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15theheadlines-war-fcmw/15theheadlines-war-fcmw-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Michael Ciaglo for The New York Times</media:credit>
+      <media:description>Outside Fort Carson last week in Colorado Springs. An Ipsos/Reuters survey said that 44 percent of Republicans were unsure whether or did not believe that the cost of the war in Iran was justified.</media:description>
+    </item>
+    <item>
+      <title>Trump’s Go-To Justification for Contentious Decisions: National Security</title>
+      <link>https://www.nytimes.com/2026/04/15/us/white-house-ballroom-trump-national-security.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/white-house-ballroom-trump-national-security.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/white-house-ballroom-trump-national-security.html" rel="standout"></atom:link>
+      <description>The administration has invoked national security in a variety of matters, including the White House ballroom and offshore wind farms, drawing rebukes from some judges.</description>
+      <dc:creator>Maxine Joselow and Devlin Barrett</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:48:17 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">White House Building (Washington, DC)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Wind Power</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Offshore Drilling and Exploration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Endangered and Extinct Species</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Whales and Whaling</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Federal Courts (US)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Suits and Litigation (Civil)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Burgum, Douglas</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Hegseth, Pete</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Leon, Richard J</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/us/politics/dc-national-security-01/dc-national-security-01-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Eric Lee for The New York Times</media:credit>
+      <media:description>Construction of the White House ballroom project last month. An appeals court signaled that the Trump administration’s assertions about the national security implications of ballroom construction might be valid.</media:description>
+    </item>
+    <item>
+      <title>Trump Increased Tax Refunds, but a Political Challenge Still Looms</title>
+      <link>https://www.nytimes.com/2026/04/15/business/trump-tax-law-refunds-voters.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/business/trump-tax-law-refunds-voters.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/business/trump-tax-law-refunds-voters.html" rel="standout"></atom:link>
+      <description>While last year’s tax law has raised the average I.R.S. refund, the boost is less than the White House expected — and may not have much impact on voters.</description>
+      <dc:creator>Andrew Duehren</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 13:25:16 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Bisignano, Frank J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Taxation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Tax Cuts and Jobs Act (2017)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <media:content height="1802" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15DC-TAXDAY-sub-tcgv/15DC-TAXDAY-sub-tcgv-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Eric Lee/The New York Times</media:credit>
+      <media:description>Frank Bisignano, the leader of the Internal Revenue Service, is scheduled to testify about this year’s filing season in the Senate on Wednesday.</media:description>
+    </item>
+    <item>
+      <title>King Charles III and Queen Camilla Will Visit D.C., New York and Virginia</title>
+      <link>https://www.nytimes.com/2026/04/14/world/europe/king-charles-queen-camilla-us-visit.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/world/europe/king-charles-queen-camilla-us-visit.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/world/europe/king-charles-queen-camilla-us-visit.html" rel="standout"></atom:link>
+      <description>The planned four-day state visit comes at a fraught time in the U.S.-U.K. relationship, following President Trump’s frequent belittling of the British prime minister.</description>
+      <dc:creator>Michael D. Shear</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 21:00:25 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Great Britain</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Charles III, King of the United Kingdom</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Camilla, Queen Consort of the United Kingdom</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Royal Families</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Starmer, Keir</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Semiquincentennial (2026)</category>
+      <media:content height="1799" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14int-uk-royals-visit-1-mtfw/14int-uk-royals-visit-1-mtfw-mediumSquareAt3X-v2.jpg" width="1800"></media:content>
+      <media:credit>Pool photo by Alberto Pezzali</media:credit>
+      <media:description>Queen Camilla and King Charles III of Britain earlier this month.</media:description>
+    </item>
+    <item>
+      <title>Vance Says Pope Leo Should Be More Careful When Talking About Theology</title>
+      <link>https://www.nytimes.com/2026/04/14/us/politics/vance-pope-trump-georgia.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/politics/vance-pope-trump-georgia.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/politics/vance-pope-trump-georgia.html" rel="standout"></atom:link>
+      <description>The vice president, who is Catholic, took issue with Pope Leo XIV’s statement that disciples of Christ are “never on the side of those who once wielded the sword and today drop bombs.”</description>
+      <dc:creator>Anton Troianovski</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 08:48:14 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Leo XIV</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Roman Catholic Church</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Vance, J D</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14dc-vance-2-kmvg/14dc-vance-2-kmvg-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Alyssa Pointer/Reuters</media:credit>
+      <media:description>Vice President JD Vance spoke at a Turning Point USA event in Athens, Ga., on Tuesday.</media:description>
+    </item>
+    <item>
+      <title>JD Vance Heckled In Antiwar Protest at Turning Point USA Event</title>
+      <link>https://www.nytimes.com/2026/04/14/us/politics/jd-vance-turning-point-usa-protest.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/politics/jd-vance-turning-point-usa-protest.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/politics/jd-vance-turning-point-usa-protest.html" rel="standout"></atom:link>
+      <description>Vice President JD Vance appeared to express sympathy with critics of the war with Iran: “I recognize that young voters do not love the policy we have in the Middle East, OK. I understand.”</description>
+      <dc:creator>Chris Cameron</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 08:47:09 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Middle East</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Vance, J D</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Turning Point USA</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Conservatism (US Politics)</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14israel-iran-JD-lgzf/14israel-iran-JD-lgzf-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Pool photo by Chip Somodevilla</media:credit>
+      <media:description>Mr. Vance, right, addressed the audience outbursts Tuesday, agreeing that “Jesus Christ does not support genocide” and defending the Trump administration’s Middle East policies</media:description>
+    </item>
+    <item>
+      <title>Catholicism Thrives in Africa, but Pope’s Cameroon Visit Highlights a Divide</title>
+      <link>https://www.nytimes.com/2026/04/15/world/africa/pope-leo-cameroon-africa.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/world/africa/pope-leo-cameroon-africa.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/world/africa/pope-leo-cameroon-africa.html" rel="standout"></atom:link>
+      <description>Catholicism is growing fast on the continent, yet Africans play a comparatively small role in church leadership. Cameroon, where Leo XIV arrived on Wednesday, shows the disparity.</description>
+      <dc:creator>Motoko Rich</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:27:06 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Roman Catholic Church</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Leo XIV</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Biya, Paul</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Africa</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Cameroon</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">internal-open-access-from-nl</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Yaounde (Cameroon)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Polygamy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Popes</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14pope-cameroon-01-gwcp/14pope-cameroon-01-gwcp-mediumSquareAt3X-v2.jpg" width="1800"></media:content>
+      <media:credit>Patrick Meinhardt/Agence France-Presse — Getty Images</media:credit>
+      <media:description>Posing after Mass on Sunday at St. Joseph Metropolitan Cathedral in Bamenda, Cameroon. For some Catholics in the country, a visit by Pope Leo XIV on Wednesday will be a reminder of disparities in the church.</media:description>
+    </item>
+    <item>
+      <title>Swalwell’s Exit Injects ‘Chaos’ Into California Governor’s Race</title>
+      <link>https://www.nytimes.com/2026/04/14/us/california-governor-race-swalwell.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/california-governor-race-swalwell.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/california-governor-race-swalwell.html" rel="standout"></atom:link>
+      <description>Democratic candidates see sudden voter interest in the sleepy contest as a campaign opportunity. All are scrambling for support from former backers of Eric Swalwell.</description>
+      <dc:creator>Laurel Rosenhall and Theodore Schleifer</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 03:27:19 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">California</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, Governors</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Porter, Katie (1974- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Steyer, Thomas F</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mahan, Matt</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Becerra, Xavier</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Villaraigosa, Antonio</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Campaign Finance</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Political Advertising</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Endorsements</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Swalwell, Eric M</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Sex Crimes</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14nat-ca-governor-tkhf/14nat-ca-governor-tkhf-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kenny Holston/The New York Times</media:credit>
+      <media:description>Eric Swalwell’s departure seemed most likely to benefit the two Democrats who had been polling closest to him.</media:description>
+    </item>
+    <item>
+      <title>Gallego Dismissed Rumors of a ‘Flirty’ Swalwell, Highlighting a Culture of Silence</title>
+      <link>https://www.nytimes.com/2026/04/14/us/politics/gallego-swalwell-congress-culture.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/politics/gallego-swalwell-congress-culture.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/politics/gallego-swalwell-congress-culture.html" rel="standout"></atom:link>
+      <description>The admission by Senator Ruben Gallego that he had heard, but disbelieved, rumors about Eric Swalwell and women showed the attitude on Capitol Hill toward men accused of behaving badly.</description>
+      <dc:creator>Michael Gold</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 01:22:28 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Swalwell, Eric M</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gonzales, Tony (1980- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Sexual Harassment</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Sex Crimes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">House of Representatives</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Ethics and Official Misconduct</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gallego, Ruben (1979- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Speier, Jackie</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Women and Girls</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">House Committee on Ethics</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">House Committee on Oversight and Government Reform</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14DC-EXPULSION-top-bqtz/14DC-EXPULSION-top-bqtz-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Caroline Gutman for The New York Times</media:credit>
+      <media:description>Senator Ruben Gallego at the Capitol on Tuesday. He spent considerable time with Mr. Swalwell and chaired his short-lived 2020 presidential campaign.</media:description>
+    </item>
+    <item>
+      <title>Resignations of Eric Swalwell and Tony Gonzales Set Up Special Election Fights in Texas and California</title>
+      <link>https://www.nytimes.com/2026/04/14/us/swalwell-gonzales-resignations-texas-california-special-elections.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/swalwell-gonzales-resignations-texas-california-special-elections.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/swalwell-gonzales-resignations-texas-california-special-elections.html" rel="standout"></atom:link>
+      <description>Gov. Gavin Newsom of California called a special election to replace Mr. Swalwell, while Gov. Greg Abbott of Texas had yet to announce one for Mr. Gonzales’s successor.</description>
+      <dc:creator>J. David Goodman and Laurel Rosenhall</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 23:50:07 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Sexual Harassment</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, House of Representatives</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">House of Representatives</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gonzales, Tony (1980- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Swalwell, Eric M</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">California</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Texas</category>
+    </item>
+    <item>
+      <title>How Older Adults Are Using VR to Counter Social Isolation</title>
+      <link>https://www.nytimes.com/2026/04/15/technology/vr-technology-elderly-community-social-isolation.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/technology/vr-technology-elderly-community-social-isolation.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/technology/vr-technology-elderly-community-social-isolation.html" rel="standout"></atom:link>
+      <description>New tools tailored for use in senior living communities allow for shared experiences and social bonding.</description>
+      <dc:creator>Charley Locke</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:00:11 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Virtual Reality (Computers)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elderly</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Loneliness</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Retirement Communities and Assisted Living</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Veterans</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Therapy and Rehabilitation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Veterans Affairs Department</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Bailenson, Jeremy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">California</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/02/11/multimedia/00caregiving-VR-06-btcv/00caregiving-VR-06-btcv-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Morgan Lieberman for The New York Times</media:credit>
+    </item>
+    <item>
+      <title>Vivek Ramaswamy’s Ohio Governor Bid: Can He Win Over Voters?</title>
+      <link>https://www.nytimes.com/2026/04/15/us/politics/vivek-ramaswamy-governors-race-ohio.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/politics/vivek-ramaswamy-governors-race-ohio.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/politics/vivek-ramaswamy-governors-race-ohio.html" rel="standout"></atom:link>
+      <description>Vivek Ramaswamy has all but cleared the field ahead of the May primary for Ohio governor, but whether a finance and pharma billionaire is the man for the moment is another question.</description>
+      <dc:creator>Campbell Robertson</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:01:00 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Presidential Election of 2024</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, Governors</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Ramaswamy, Vivek (1985- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Ohio</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15nat-ohio-ramaswamy-1-cqph/15nat-ohio-ramaswamy-1-cqph-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Jessica Phelps for The New York Times</media:credit>
+      <media:description>“This idea of doing economic abundance is something that really animates me,” said Vivek Ramaswamy, the Republican candidate for Ohio governor.</media:description>
+    </item>
+    <item>
+      <title>A Progressive Group Rolls Out a Campus Competitor to Turning Point</title>
+      <link>https://www.nytimes.com/2026/04/15/us/politics/a-progressive-group-rolls-out-a-campus-competitor-to-turning-point.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/politics/a-progressive-group-rolls-out-a-campus-competitor-to-turning-point.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/politics/a-progressive-group-rolls-out-a-campus-competitor-to-turning-point.html" rel="standout"></atom:link>
+      <description>More Perfect Union, a left-wing media organization, hopes to win back young voters and build a new generation of college influencers with its More Perfect University program.</description>
+      <dc:creator>Kellen Browning and Shane Goldmacher</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:04:29 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Presidential Election of 2028</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Turning Point USA</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/14/us/politics/pol-campus-dems/pol-campus-dems-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Andrew Harrer/Bloomberg</media:credit>
+      <media:description>Faiz Shakir, the executive director of More Perfect Union and a senior adviser to Senator Bernie Sanders, has cast the organization as a progressive response along class lines to an elite world of universities still captured by great wealth.</media:description>
+    </item>
+    <item>
+      <title>What the New Loan Caps Will Mean for Grad Students This Fall</title>
+      <link>https://www.nytimes.com/2026/04/15/upshot/student-debt-graduate-school.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/upshot/student-debt-graduate-school.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/upshot/student-debt-graduate-school.html" rel="standout"></atom:link>
+      <description>With new limits on federal lending, many students will need private loans and some could be shut out. See the data, program by program.</description>
+      <dc:creator>Amy Fan</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 13:30:10 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Student Loans</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Graduate Schools and Students</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Credit and Debt</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Colleges and Universities</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">For-Profit Schools</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Banking and Financial Institutions</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Prices (Fares, Fees and Rates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Tuition</category>
+    </item>
+    <item>
+      <title>As Los Angeles Rebuilds, a Surge of Experimentation</title>
+      <link>https://www.nytimes.com/2026/04/15/arts/design/los-angeles-fires-rebuilding-architecture-design.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/arts/design/los-angeles-fires-rebuilding-architecture-design.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/arts/design/los-angeles-fires-rebuilding-architecture-design.html" rel="standout"></atom:link>
+      <description>Across the city’s fire zones, there’s a surge of experimentation — collective rebuilding, catalog homes and new technologies that are safe and reduce costs.</description>
+      <dc:creator>Sam Lubell and Carlos Jaramillo</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:49:58 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Architecture</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Southern California Wildfires (Jan 2025)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Prices (Fares, Fees and Rates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Building (Construction)</category>
+      <category domain=""></category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Sears Holdings Corporation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Altadena (Calif)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Los Angeles (Calif)</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/19/multimedia/19cul-Rebuild-Fire-LA-wqvl/19cul-Rebuild-Fire-LA-wqvl-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:description>An empty home lot overlooking the Pacific after the fires, one of 16,000 homes destroyed. Challenges to rebuilding are stiff: labor shortages, tariff-induced cost spikes, lower-than-expected insurance payouts, and slow-moving bureaucracies. Cue the innovators.</media:description>
+    </item>
+    <item>
+      <title>Billy Crystal to Return to Broadway With Solo Show ‘860’ About Losing His Home in L.A. Fires</title>
+      <link>https://www.nytimes.com/2026/04/15/theater/billy-crystal-broadway-860.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/theater/billy-crystal-broadway-860.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/theater/billy-crystal-broadway-860.html" rel="standout"></atom:link>
+      <description>The actor-comedian said he will return to Broadway this fall with a new solo show called “860,” named for the address of his destroyed family home.</description>
+      <dc:creator>Michael Paulson</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 05:10:34 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Theater (Broadway)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Theater</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Crystal, Billy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Ellis, Scott (1957- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">860 (Play)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Late Show with Stephen Colbert (TV Program)</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15cul-crystal-hkvq/15cul-crystal-hkvq-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kevin Winter/Getty Images</media:credit>
+      <media:description>Billy Crystal at this year’s Academy Awards ceremony in March. </media:description>
+    </item>
+    <item>
+      <title>Why It’s Crucial We Understand How A.I. ‘Thinks’</title>
+      <link>https://www.nytimes.com/2026/04/15/magazine/ai-black-box-interpretability-research.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/magazine/ai-black-box-interpretability-research.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/magazine/ai-black-box-interpretability-research.html" rel="standout"></atom:link>
+      <description>For us to trust it on certain subjects, researchers in the growing field of interpretability might need to learn how to open the black box of its brain.</description>
+      <dc:creator>Oliver Whang</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:03:00 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Artificial Intelligence</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Computers and the Internet</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Research</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Brain</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Innovation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Anthropic AI LLC</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">OpenAI Labs</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Amodei, Dario</category>
+    </item>
+    <item>
+      <title>I Feel So Sorry for My A.I. Sunglasses</title>
+      <link>https://www.nytimes.com/2026/04/14/magazine/ai-sunglasses-meta-zuckerberg.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/magazine/ai-sunglasses-meta-zuckerberg.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/magazine/ai-sunglasses-meta-zuckerberg.html" rel="standout"></atom:link>
+      <description>Plenty of people hate Mark Zuckerberg’s superintelligent, supercharged spectacles. I was ready to hate them, too.</description>
+      <dc:creator>Sam Anderson</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 17:02:45 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Social Media</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Artificial Intelligence</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Advertising and Marketing</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Shopping and Retail</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Meta Platforms Inc</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Bell, Kristen</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Zuckerberg, Mark E</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Cameras</category>
+    </item>
+    <item>
+      <title>Dodging Bombs and Drones, This Postman in Ukraine Still Delivers</title>
+      <link>https://www.nytimes.com/2026/04/15/world/europe/ukraine-russia-war-kharkiv-nova-poshta.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/world/europe/ukraine-russia-war-kharkiv-nova-poshta.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/world/europe/ukraine-russia-war-kharkiv-nova-poshta.html" rel="standout"></atom:link>
+      <description>Oleksiy Klochkovsky has driven mail and parcels around the front line in Ukraine for four years. He keeps one ear tuned for danger from above.</description>
+      <dc:creator>Cassandra Vinograd and Oleksandr Chubko</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:02:04 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Russian Invasion of Ukraine (2022)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Drones (Pilotless Planes)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Kharkiv (Ukraine)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Russia</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Ukraine</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15int-ukraine-postman-01-kmzw/15int-ukraine-postman-01-kmzw-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Brendan Hoffman for The New York Times</media:credit>
+      <media:description>Oleksiy Klochkovsky, a driver for Nova Poshta, a private postal service in Ukraine, in the back of his truck in the Kharkiv region in January.</media:description>
+    </item>
+    <item>
+      <title>11 Electric Cars Worth a Look as Gas Prices Soar</title>
+      <link>https://www.nytimes.com/2026/04/15/business/electric-cars-evs-used-gas-prices.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/business/electric-cars-evs-used-gas-prices.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/business/electric-cars-evs-used-gas-prices.html" rel="standout"></atom:link>
+      <description>The war in Iran has auto shoppers sizing up electrics. Many strong cars are on the market, and there are bargains to be had when buying used.</description>
+      <dc:creator>Tom Voelk</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 09:02:52 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Electric and Hybrid Vehicles</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Prices (Fares, Fees and Rates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Oil (Petroleum) and Gasoline</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Fuel Efficiency</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Audi Division of Volkswagen AG</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Bayerische Motorenwerke AG</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Cadillac Division of General Motors Corp</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Hyundai Motor Co</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Kia Motors Corp</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Lucid Motors Inc</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Nissan Motor Co</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Porsche AG</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Rivian Automotive LLC</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Tesla Motors Inc</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Volkswagen AG</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Volvo Car Corp</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15wheels-evs-top-lctw/15wheels-evs-top-lctw-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Lauren Justice for The New York Times</media:credit>
+      <media:description>A Tesla supercharger station in Barstow, Calif. High gas prices are pushing car buyers to consider switching to electrics.</media:description>
+    </item>
+    <item>
+      <title>Oscar Isaac and Carey Mulligan Have a Generational ‘Beef’</title>
+      <link>https://www.nytimes.com/2026/04/15/arts/television/beef-oscar-isaac-carey-mulligan-netflix.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/arts/television/beef-oscar-isaac-carey-mulligan-netflix.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/arts/television/beef-oscar-isaac-carey-mulligan-netflix.html" rel="standout"></atom:link>
+      <description>The actors play a married couple on the brink in the second season of the Netflix anthology series.</description>
+      <dc:creator>Ashley Spencer and Sela Shiloni</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:22:24 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Television</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Beef (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Isaac, Oscar</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mulligan, Carey</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Netflix Inc</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/19/multimedia/19cul-beef-jtcw-promo/19cul-beef-jtcw-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Sela Shiloni for The New York Times</media:credit>
+    </item>
+    <item>
+      <title>Trump Is in Over His Head</title>
+      <link>https://www.nytimes.com/2026/04/15/opinion/trump-iran-power-unitary-executive.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/opinion/trump-iran-power-unitary-executive.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/opinion/trump-iran-power-unitary-executive.html" rel="standout"></atom:link>
+      <description>Trump is in over his head.</description>
+      <dc:creator>Jamelle Bouie</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:53:19 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Presidential Power (US)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15bouie-gwhb/15bouie-gwhb-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Jason Hendardy for The New York Times</media:credit>
+    </item>
+    <item>
+      <title>It’s Tax Day</title>
+      <link>https://www.nytimes.com/2026/04/15/briefing/its-tax-day.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/briefing/its-tax-day.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/briefing/its-tax-day.html" rel="standout"></atom:link>
+      <description>We’re looking at who is filing and what they’re paying.</description>
+      <dc:creator>Sam Sifton</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 10:58:52 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">internal-storyline-no</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Taxation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Income Tax</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Federal Taxes (US)</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/13/multimedia/15themorning-nl-taxes/13nat-immigrants-taxes--01-lcwg-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Mark Abramson for The New York Times</media:credit>
+      <media:description>A tax preparation clinic in Los Angeles.</media:description>
+    </item>
+    <item>
+      <title>Late Night Laughs at Explanations of Trump’s Jesus ‘Joke’</title>
+      <link>https://www.nytimes.com/2026/04/15/arts/television/late-night-trump-jesus.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/arts/television/late-night-trump-jesus.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/arts/television/late-night-trump-jesus.html" rel="standout"></atom:link>
+      <description>Ronny Chieng poked fun at JD Vance’s defense of President Trump posting an image of himself as a Christlike figure.</description>
+      <dc:creator>Trish Bendix</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 11:31:20 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Television</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Colbert, Stephen</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Late Show with Stephen Colbert (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Kimmel, Jimmy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Jimmy Kimmel Live (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">The Daily Show with Jon Stewart (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Chieng, Ronny (Comedian)</category>
+    </item>
+    <item>
+      <title>Thousands of N.Y.C. Doormen Seeking Better Pay Are Set to Vote on Strike</title>
+      <link>https://www.nytimes.com/2026/04/15/nyregion/nyc-doorman-strike.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/nyregion/nyc-doorman-strike.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/nyregion/nyc-doorman-strike.html" rel="standout"></atom:link>
+      <description>It would be the first walkout by the apartment building workers in more than three decades.</description>
+      <dc:creator>Patrick McGeehan</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:05:50 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Organized Labor</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Wages and Salaries</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Labor and Jobs</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Doormen</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Strikes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Health Insurance and Managed Care</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Building Service Employees</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Local 32BJ</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New York City</category>
+      <media:content height="1728" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15met-doorman-strike-blvc/15met-doorman-strike-blvc-mediumSquareAt3X.jpg" width="1728"></media:content>
+      <media:credit>Maansi Srivastava/The New York Times</media:credit>
+      <media:description>About 34,000 residential building workers could go on strike in New York City next week.</media:description>
+    </item>
+    <item>
+      <title>A Police Chief Had a $4.5 Million Gambling Problem. No One Knew.</title>
+      <link>https://www.nytimes.com/2026/04/14/nyregion/police-chief-sports-gambling-new-haven.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/nyregion/police-chief-sports-gambling-new-haven.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/nyregion/police-chief-sports-gambling-new-haven.html" rel="standout"></atom:link>
+      <description>New Haven’s police chief, Karl Jacobson, resigned abruptly after his deputies saw red flags, including missing money. He has pleaded not guilty to embezzling city money to gamble on sports.</description>
+      <dc:creator>Hurubie Meko</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 19:18:24 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Elicker, Justin</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New Haven (Conn)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Council on Problem Gambling</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Police Department (New Haven, Conn)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Gambling</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Police</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Addiction (Psychology)</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/10/multimedia/00met-gambling-chief-01-wclb/00met-gambling-chief-01-wclb-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>City of New Haven, via Associated Press</media:credit>
+      <media:description>Karl Jacobson served as New Haven’s police chief for three years before his career unraveled.</media:description>
+    </item>
+    <item>
+      <title>New York Calls for Accountability for Firm Accused of Ignoring Assaults</title>
+      <link>https://www.nytimes.com/2026/04/15/nyregion/exp-abuse-lawsuit-shareholders.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/nyregion/exp-abuse-lawsuit-shareholders.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/nyregion/exp-abuse-lawsuit-shareholders.html" rel="standout"></atom:link>
+      <description>The state comptroller said the real estate brokerage eXp, two of whose former agents have been accused of sexual assault, should fix its company culture instead of moving to Texas.</description>
+      <dc:creator>Debra Kamin</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 13:53:09 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Suits and Litigation (Civil)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Ethics and Official Misconduct</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">eXp Realty LLC</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">New York State Common Retirement Fund</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Office of the Comptroller (NYS)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Delaware</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Texas</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">DiNapoli, Thomas P</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15met-eXp-jqvp/15met-eXp-jqvp-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Ariana Drehsler for The New York Times</media:credit>
+      <media:description>In lawsuits, women have accused top agents of eXp Realty of drugging and raping them at corporate events.</media:description>
+    </item>
+    <item>
+      <title>Surgeon Who Removed Wrong Organ From Patient Is Charged in His Death</title>
+      <link>https://www.nytimes.com/2026/04/14/us/florida-surgeon-manslaughter-organ-removal.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/14/us/florida-surgeon-manslaughter-organ-removal.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/14/us/florida-surgeon-manslaughter-organ-removal.html" rel="standout"></atom:link>
+      <description>Dr. Thomas Shaknovsky tried to persuade his colleagues in the operating room that the liver he removed from a 70-year-old patient was a spleen, according to Florida’s Health Department.</description>
+      <dc:creator>Vjosa Isai</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 00:22:41 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Malpractice</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Surgery and Surgeons</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Deaths (Fatalities)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Miramar (Fla)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Walton County (Fla)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Murders, Attempted Murders and Homicides</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/14/multimedia/14xp-florida-promo/14xp-florida-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>via the Bryan family</media:credit>
+      <media:description>William and Beverly Bryan.</media:description>
+    </item>
+  </channel>
+</rss>

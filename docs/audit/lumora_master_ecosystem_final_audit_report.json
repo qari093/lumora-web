@@ -1,0 +1,109 @@
+{
+  "auditedAt": "2026-05-25T14:42:33.631Z",
+  "status": "PASS",
+  "integrationPercent": 100,
+  "leftPercent": 0,
+  "validation": {
+    "prisma": "PASS",
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "logs": "/tmp/lumora_master_ecosystem_audit_logs_1779720044"
+  },
+  "counts": {
+    "appFiles": 2830,
+    "componentFiles": 159,
+    "coreFiles": 2682,
+    "testFiles": 1059,
+    "auditReports": 9,
+    "lockFiles": 3074
+  },
+  "categories": {
+    "lumexa": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "celebrations": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "zendoro": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "zencoinAdmin": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "activePortalRoutes": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "economyApis": {
+      "passed": 8,
+      "total": 8,
+      "percent": 100,
+      "missing": []
+    },
+    "commerceApis": {
+      "passed": 8,
+      "total": 8,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "lumexa",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "celebrations",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "zendoro",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "zencoinAdmin",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "activePortalRoutes",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "economyApis",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "commerceApis",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "finalStatus": "PASS"
+}

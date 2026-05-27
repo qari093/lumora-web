@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <link rel="self" href="http://www.youtube.com/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw"/>
+ <id>yt:channel:_x5XG1OV2P6uZZ5FSM9Ttw</id>
+ <yt:channelId>_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+ <title>Google for Developers</title>
+ <link rel="alternate" href="https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"/>
+ <author>
+  <name>Google for Developers</name>
+  <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+ </author>
+ <published>2007-08-23T00:34:43+00:00</published>
+ <entry>
+  <id>yt:video:BMFxtwk5jp4</id>
+  <yt:videoId>BMFxtwk5jp4</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Oh, did the #GoogleIO Livestream Schedule just drop?</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/BMFxtwk5jp4"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-16T19:00:19+00:00</published>
+  <updated>2026-04-17T00:38:54+00:00</updated>
+  <media:group>
+   <media:title>Oh, did the #GoogleIO Livestream Schedule just drop?</media:title>
+   <media:content url="https://www.youtube.com/v/BMFxtwk5jp4?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/BMFxtwk5jp4/hqdefault.jpg" width="480" height="360"/>
+   <media:description>See what’s in store for #GoogleIO and set your schedule! 
+
+Resources: 
+
+Register today! → https://goo.gle/io2026-3 
+
+Subscribe to Google for Developers → https://goo.gle/developers</media:description>
+   <media:community>
+    <media:starRating count="41" average="5.00" min="1" max="5"/>
+    <media:statistics views="2598"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:J716eJOAnqE</id>
+  <yt:videoId>J716eJOAnqE</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Build a Voice-Enabled Telegram Bot with the Gemini Interactions API</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=J716eJOAnqE"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-16T16:00:10+00:00</published>
+  <updated>2026-04-16T22:04:09+00:00</updated>
+  <media:group>
+   <media:title>Build a Voice-Enabled Telegram Bot with the Gemini Interactions API</media:title>
+   <media:content url="https://www.youtube.com/v/J716eJOAnqE?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/J716eJOAnqE/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Thor from Google DeepMind walks through how to build a Telegram bot that receives voice messages, reasons over them with Gemini 3.1 Flash, and responds with generated speech in a custom accent, all built with Antigravity and deployed to Cloud Run without writing the code manually.
+What's covered: Setting up a Telegram bot with BotFather, using Gemini Flash for reasoning and Gemini TTS for voice responses, handling OGG audio from Telegram and converting output with FFmpeg, building agent, transcription, and translation modes, deploying to Google Cloud Run with Docker and Secret Manager, and using the Gemini Interactions API coding skill to accelerate the build.
+
+Grab your Gemini API key at Google AI Studio and your bot token from BotFather on Telegram to get started. Full code and tutorial linked below.
+
+Resources:
+Find the tutorial → https://goo.gle/4cdOpJa 
+Find the code → https://goo.gle/3Q8prCo 
+
+What are you building with Gemini? Drop it in the comments.
+
+Chapters
+0:00 - Intro and Telegram voice bot demo
+1:17 - Technical Setup and Prerequisites
+1:48 - Deploying to Google Cloud Run
+2:27 - AI-Assisted Coding with Antigravity
+4:08 - Using Gemini 3.1 Flash Lite and TTS
+4:51 - Bot Modes: Agent, Transcription, and Translation
+6:32 - Voice Message Flow and Audio Conversion
+8:31 - GitHub Repo and Next Steps
+
+Subscribe to Google for Developers → https://goo.gle/developers
+
+Speaker: Thor Schaeff
+Products Mentioned:  Google AI, Gemini</media:description>
+   <media:community>
+    <media:starRating count="113" average="5.00" min="1" max="5"/>
+    <media:statistics views="2494"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:hPHo6u33csM</id>
+  <yt:videoId>hPHo6u33csM</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>It’s always back to Day 1 with no syntax errors.</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/hPHo6u33csM"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-16T04:00:44+00:00</published>
+  <updated>2026-04-16T10:38:57+00:00</updated>
+  <media:group>
+   <media:title>It’s always back to Day 1 with no syntax errors.</media:title>
+   <media:content url="https://www.youtube.com/v/hPHo6u33csM?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/hPHo6u33csM/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Sometimes, it’s like that. 
+
+Subscribe to Google for Developers → https://goo.gle/developers 
+
+Speaker: Anna Gonzalez</media:description>
+   <media:community>
+    <media:starRating count="101" average="5.00" min="1" max="5"/>
+    <media:statistics views="8869"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:1skEw28hsrw</id>
+  <yt:videoId>1skEw28hsrw</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>How to implement Google Pay merchant-initiated transactions</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=1skEw28hsrw"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-15T16:00:03+00:00</published>
+  <updated>2026-04-17T06:59:53+00:00</updated>
+  <media:group>
+   <media:title>How to implement Google Pay merchant-initiated transactions</media:title>
+   <media:content url="https://www.youtube.com/v/1skEw28hsrw?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/1skEw28hsrw/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Learn about the new merchant initiated transactions (MITs) available with Google Pay, designed to enhance your checkout experiences. We’ll dive into the mechanics of automatic reloads, deferred transactions, and recurring payments, highlighting API changes and lifecycle notifications. Developers will find clear explanations and an example of implementing a recurring transaction, ensuring seamless payment integration for their users.
+
+Resources: 
+Get started → https://goo.gle/4mupiFv
+
+Connect with us:
+Join the conversation in the #payments channel on Discord → https://goo.gle/payments-dev-community
+Watch more Live Google Pay integrations on Android → https://goo.gle/live-google-pay 
+Follow @GooglePayDevs on X for more content like this → https://goo.gle/GooglePayDevs  
+Subscribe to Google for Developers → https://goo.gle/developers  
+
+Get support: 
+
+For assistance with your implementation, create a support ticket from the Google Pay &amp; Wallet Console → https://goo.gle/4hSy658 
+
+Speaker: Jose Ugia
+Products Mentioned: Google Pay</media:description>
+   <media:community>
+    <media:starRating count="55" average="5.00" min="1" max="5"/>
+    <media:statistics views="1375"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:_UQixjbwUvE</id>
+  <yt:videoId>_UQixjbwUvE</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Why you should attend Build with AI</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/_UQixjbwUvE"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-15T04:00:42+00:00</published>
+  <updated>2026-04-16T23:19:35+00:00</updated>
+  <media:group>
+   <media:title>Why you should attend Build with AI</media:title>
+   <media:content url="https://www.youtube.com/v/_UQixjbwUvE?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i4.ytimg.com/vi/_UQixjbwUvE/hqdefault.jpg" width="480" height="360"/>
+   <media:description>The best way to learn is by doing. See what activities happen at a Build with AI event and get inspired to attend. 
+
+Resources: 
+Learn more → https://goo.gle/Build-With-AI
+
+Subscribe to Google for Developers → https://goo.gle/developers</media:description>
+   <media:community>
+    <media:starRating count="118" average="5.00" min="1" max="5"/>
+    <media:statistics views="5550"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:9Bz94emGtSc</id>
+  <yt:videoId>9Bz94emGtSc</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>4 things devs should know about Gemma 4</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/9Bz94emGtSc"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-14T19:00:07+00:00</published>
+  <updated>2026-04-17T13:59:07+00:00</updated>
+  <media:group>
+   <media:title>4 things devs should know about Gemma 4</media:title>
+   <media:content url="https://www.youtube.com/v/9Bz94emGtSc?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/9Bz94emGtSc/hqdefault.jpg" width="480" height="360"/>
+   <media:description>From four versatile sizes to multimodal edge processing, see how Gemma 4 can uplevel your dev projects and workflows. 
+
+Resources:
+
+Gemma 4: Byte for byte, the most capable open models → https://goo.gle/41C9uqv 
+
+Subscribe to Google for Developers → https://goo.gle/developers 
+
+#GoogleDeveloperNews
+
+Speaker: Ethan Hsu 
+Products Mentioned:  Google AI, Gemma</media:description>
+   <media:community>
+    <media:starRating count="384" average="5.00" min="1" max="5"/>
+    <media:statistics views="12501"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:jkdvMEvG8T8</id>
+  <yt:videoId>jkdvMEvG8T8</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Give your robot a Voice with Gemini Live</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=jkdvMEvG8T8"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-13T23:00:54+00:00</published>
+  <updated>2026-04-14T12:48:51+00:00</updated>
+  <media:group>
+   <media:title>Give your robot a Voice with Gemini Live</media:title>
+   <media:content url="https://www.youtube.com/v/jkdvMEvG8T8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/jkdvMEvG8T8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Run Gemini 3.1 Flash Live on an open source robot.
+
+Thor from Google DeepMind connects the Gemini Live API to Reachy Mini, an open source robot from Hugging Face and Pollen Robotics. Real-time conversation, vision, multilingual switching, music generation with Lyria 3, Google Search grounding, and body movement synced to speech, all running through the Gemini Live API.
+
+What's covered: Setting up the Reachy Mini SDK and environment, integrating the Gemini Live API using Antigravity, configuring voices and system prompt profiles, enabling real-time weather via Google Search grounding, generating music with Lyria 3, and wiring function calls to physical actuators for synchronized movement.
+
+You'll need a Reachy Mini, a Gemini API key, and the Pollen Robotics SDK to follow along. Full project linked below.
+
+Gemini API docs / Live API documentation / Pollen Robotics / Reachy Mini project / GitHub examples
+
+What are you building with Gemini Live? Drop it in the comments.
+
+Step-by-step tutorial →https://goo.gle/4cGkeKF 
+Find the code →https://goo.gle/4soUjM9 
+
+Chapters:
+0:00 - Intro 
+1:39 - Generating Moody Synth Music
+3:18 - Multilingual Modes: German, French &amp; Chinese
+4:40 - Intro to the Open-Source Hardware &amp; Gemini Live API
+5:46 - SDK &amp; Virtual Environment Setup
+7:37 - Exploring the Codebase: System Prompts &amp; Personalities
+8:56 - Under the Hood: Lyria 3 Music &amp; Search Grounding
+10:08 - How Reachy Moves: Head Wobbler &amp; Speech Sway
+10:58 - Final Thoughts &amp; Community Use Cases
+
+Subscribe to Google for Developers → https://goo.gle/developers 
+
+Speaker: Thor Schaeff 
+Products Mentioned:  Google AI, Gemini</media:description>
+   <media:community>
+    <media:starRating count="255" average="5.00" min="1" max="5"/>
+    <media:statistics views="6648"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:bXXCO7nspxU</id>
+  <yt:videoId>bXXCO7nspxU</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>A Git challenge: Which version ends up in the repo?</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/bXXCO7nspxU"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-13T13:01:10+00:00</published>
+  <updated>2026-04-14T12:35:46+00:00</updated>
+  <media:group>
+   <media:title>A Git challenge: Which version ends up in the repo?</media:title>
+   <media:content url="https://www.youtube.com/v/bXXCO7nspxU?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/bXXCO7nspxU/hqdefault.jpg" width="480" height="360"/>
+   <media:description>A quick Git developer challenge:
+
+We make a few changes to a file, make two adds, and then commit. Everything looks simple, but the final result might catch you off-guard. Which version ends up in the repo, and why? Check out the video and share your answer in the comments.
+Subscribe to Google for Developers → https://goo.gle/developers 
+
+Speakers: Rody Davis</media:description>
+   <media:community>
+    <media:starRating count="53" average="5.00" min="1" max="5"/>
+    <media:statistics views="3246"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:rRwigJWuS94</id>
+  <yt:videoId>rRwigJWuS94</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>When the warm-up routine is a little excessive.</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/rRwigJWuS94"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-10T23:00:57+00:00</published>
+  <updated>2026-04-12T20:51:55+00:00</updated>
+  <media:group>
+   <media:title>When the warm-up routine is a little excessive.</media:title>
+   <media:content url="https://www.youtube.com/v/rRwigJWuS94?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/rRwigJWuS94/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Are they getting ready for the work day or a work out? The world may never know. 
+
+Subscribe to Google for Developers → https://goo.gle/developers</media:description>
+   <media:community>
+    <media:starRating count="109" average="5.00" min="1" max="5"/>
+    <media:statistics views="11963"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:wIhkYnTpPs4</id>
+  <yt:videoId>wIhkYnTpPs4</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Google's ADK + MCP = The Future of AI Agents</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=wIhkYnTpPs4"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-10T21:23:19+00:00</published>
+  <updated>2026-04-13T08:04:29+00:00</updated>
+  <media:group>
+   <media:title>Google's ADK + MCP = The Future of AI Agents</media:title>
+   <media:content url="https://www.youtube.com/v/wIhkYnTpPs4?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i4.ytimg.com/vi/wIhkYnTpPs4/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Join Hemanth HM (Senior Engineering Manager at PayPal, leading AI Labs) as he sits down with Smitha Kolan (Senior Developer Relations at Google Cloud) to dive deep into the world of AI agents, Google's Agent Development Kit (ADK), and the future of software development. 
+
+We cover: 
+- What is an AI Agent? — A clear, concise definition breaking down reasoning, tasks, and tools
+- Google's ADK (Agent Development Kit) — An open-source, model-agnostic, cloud-agnostic framework for building and deploying AI agents 
+- MCP (Model Context Protocol) — How agents communicate with external environments and why it's a game-changer 
+- Agent-First Development — The paradigm shift where agents participate in every stage of the software development lifecycle, from brainstorming to production  
+- Advice for the Next Generation — Why learning to code matters MORE now than ever before 
+- Are We Losing Our Intuition to AI? — A thoughtful take on human-AI collaboration 
+- Is AGI Already Here? — Why AGI is a &quot;moving goalpost&quot; and what that really means 
+- Is AI a Bubble? — An honest discussion on whether the AI boom is sustainable 
+- 2025 Predictions — Models and agents coalescing, MCP's growing impact, and what's coming next 
+
+Key Takeaways: ADK makes it easy to build, deploy, and evaluate AI agents with one-step deployment to Google Cloud Run Purpose-built agents (not multipurpose) are the way forward AI doesn't replace developers — it lets them focus on what they love Models are increasingly behaving like agents with prebuilt tools 
+
+Chapters: 
+0:00 - Introduction 
+0:23 - What is an AI Agent? 
+1:00 - What is ADK (Agent Development Kit)? 
+1:57 - Top challenges ADK is solving 
+2:55 - Is ADK tied to Google Cloud? 
+3:47 - Agent-First Development paradigm 
+5:48 - Advice for the younger generation 
+8:04 - Are we losing our intuition to AI? 
+9:17 - Is AGI coming soon? 
+10:26 - Is AI a bubble? 
+12:54 - Predictions for the future of AI 
+14:45 - Closing thoughts 
+
+Resources: 
+Learn more about ADK →https://goo.gle/4cC9OM3 
+List of all Google MCPs →https://goo.gle/4c5IANW 
+
+Subscribe to Google for Developers → https://goo.gle/developers
+
+ #GoogleADK #AgentDevelopmentKit #MCP</media:description>
+   <media:community>
+    <media:starRating count="106" average="5.00" min="1" max="5"/>
+    <media:statistics views="3219"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:Igm94RIK1hY</id>
+  <yt:videoId>Igm94RIK1hY</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>What is the most underrated tool for developers?</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/Igm94RIK1hY"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-10T04:00:31+00:00</published>
+  <updated>2026-04-16T23:20:11+00:00</updated>
+  <media:group>
+   <media:title>What is the most underrated tool for developers?</media:title>
+   <media:content url="https://www.youtube.com/v/Igm94RIK1hY?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/Igm94RIK1hY/hqdefault.jpg" width="480" height="360"/>
+   <media:description>See what Google AI tools you’re missing out on at a Build with AI event near you!  
+
+Subscribe to Google for Developers → https://goo.gle/developers</media:description>
+   <media:community>
+    <media:starRating count="302" average="5.00" min="1" max="5"/>
+    <media:statistics views="14571"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:Y5zHHoLrvAE</id>
+  <yt:videoId>Y5zHHoLrvAE</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>How do AI video generation models work?</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=Y5zHHoLrvAE"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-09T19:00:36+00:00</published>
+  <updated>2026-04-14T17:38:20+00:00</updated>
+  <media:group>
+   <media:title>How do AI video generation models work?</media:title>
+   <media:content url="https://www.youtube.com/v/Y5zHHoLrvAE?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/Y5zHHoLrvAE/hqdefault.jpg" width="480" height="360"/>
+   <media:description>How do AI models actually turn a text prompt into a cohesive, high-resolution video? In this episode of Release Notes Explained, we take a look at the technical architecture behind AI video generation and how diffusion models work under the hood to create video clips.
+
+0:00 -  Intro and How AI video works
+1:05 - Diffusion vs. text models
+1:19 - The diffusion process (forward and reverse diffusion)
+3:56 - Using text prompts to guide output
+6:19 - Solving flickering
+9:12 - Saving compute with latent space
+10:36 - Reconstructing pixels for the final output
+
+Subscribe to Google for Developers → https://goo.gle/developers  
+
+Speaker: Nikita Namjoshi 
+Products Mentioned: Google AI</media:description>
+   <media:community>
+    <media:starRating count="342" average="5.00" min="1" max="5"/>
+    <media:statistics views="6671"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:tnP_Q5mS1I8</id>
+  <yt:videoId>tnP_Q5mS1I8</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>One Design Decision to Create Better Results in Stitch</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=tnP_Q5mS1I8"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-09T16:33:55+00:00</published>
+  <updated>2026-04-12T21:08:06+00:00</updated>
+  <media:group>
+   <media:title>One Design Decision to Create Better Results in Stitch</media:title>
+   <media:content url="https://www.youtube.com/v/tnP_Q5mS1I8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/tnP_Q5mS1I8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>You might have heard of Stitch, and it's ability to transform your creative idea to life for a mobile app or website. Now, in this video, learn how to leverage the Stitch design tool to elevate your web design process. Moving beyond basic prompts. Join David as he takes on the role of a creative director, transforming a generic site into a high-end digital experience.
+
+Subscribe to Google for Developers → https://goo.gle/developers
+
+Speaker: David East
+Products Mentioned: Google Stitch</media:description>
+   <media:community>
+    <media:starRating count="1539" average="5.00" min="1" max="5"/>
+    <media:statistics views="33789"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:HNf1DRE5NbU</id>
+  <yt:videoId>HNf1DRE5NbU</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Testing tip for devs: Test behaviors, not methods.</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/HNf1DRE5NbU"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-08T23:00:16+00:00</published>
+  <updated>2026-04-11T22:53:42+00:00</updated>
+  <media:group>
+   <media:title>Testing tip for devs: Test behaviors, not methods.</media:title>
+   <media:content url="https://www.youtube.com/v/HNf1DRE5NbU?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/HNf1DRE5NbU/hqdefault.jpg" width="480" height="360"/>
+   <media:description>The relationship between methods and tests aren’t always straightforward. That’s why you use separate tests to verify separate behaviors. 
+
+Subscribe to Google for Developers → https://goo.gle/developers 
+
+Speaker: Tushara Langulya Balabolu</media:description>
+   <media:community>
+    <media:starRating count="135" average="5.00" min="1" max="5"/>
+    <media:statistics views="7635"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:bc5X2iVyJc0</id>
+  <yt:videoId>bc5X2iVyJc0</yt:videoId>
+  <yt:channelId>UC_x5XG1OV2P6uZZ5FSM9Ttw</yt:channelId>
+  <title>Add Gemini Live agents to your video conferencing with Fishjam</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=bc5X2iVyJc0"/>
+  <author>
+   <name>Google for Developers</name>
+   <uri>https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw</uri>
+  </author>
+  <published>2026-04-08T16:01:05+00:00</published>
+  <updated>2026-04-16T22:05:54+00:00</updated>
+  <media:group>
+   <media:title>Add Gemini Live agents to your video conferencing with Fishjam</media:title>
+   <media:content url="https://www.youtube.com/v/bc5X2iVyJc0?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/bc5X2iVyJc0/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Add a Gemini 3 AI participant to a video conference with Fishjam.
+
+Adrian from Software Mansion walks through how to connect the Gemini 3.1 Flash Live audio model as a real participant in a Fishjam video conference. It can hear, see the camera feed, and talk back in real time, with Google Search, multilingual switching, and guardrails all built in.
+
+What's covered: Setting up Fishjam and Gemini Live API, creating rooms and peer tokens, building a React frontend with the Fishjam SDK, connecting an agent to the conference, streaming audio and video frames to Gemini, handling interruptions, enabling Google Search, and using system prompts to define and restrict agent behavior.
+
+You'll need a Fishjam sandbox account and a Gemini API key to get started. Full example code linked below.
+
+Resources:
+Live API docs →  https://goo.gle/4dtm7eF 
+Fishjam x Gemini docs → https://goo.gle/47LorKk 
+Full example from the video →https://goo.gle/4caHfDY 
+
+Speaker: Adrian
+Products Mentioned: Google AI, Gemini</media:description>
+   <media:community>
+    <media:starRating count="162" average="5.00" min="1" max="5"/>
+    <media:statistics views="4182"/>
+   </media:community>
+  </media:group>
+ </entry>
+</feed>

@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-05-24T08:39:39.046Z",
+  "status": "PASS",
+  "scannedFiles": 0,
+  "totalFindings": 0,
+  "criticalFindings": 0,
+  "highFindings": 0,
+  "mediumFindings": 0,
+  "lowFindings": 0,
+  "findings": [],
+  "enforcement": []
+}

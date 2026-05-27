@@ -1,3 +1,0 @@
-/** Minimal safe Next.js config to boot dev server */
-const nextConfig = { reactStrictMode: true };
-module.exports = nextConfig;

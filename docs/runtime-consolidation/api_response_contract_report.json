@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-05-26T19:38:07.950Z",
+  "contract": "LumoraApiResponse",
+  "status": "PASS",
+  "requiredFields": [
+    "ok",
+    "data|error",
+    "meta.domain",
+    "meta.version",
+    "meta.runtime",
+    "meta.requestId"
+  ]
+}

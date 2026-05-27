@@ -1,0 +1,76 @@
+import type { RuntimeDeprecationEntry } from "./types";
+
+export const RUNTIME_DEPRECATIONS: RuntimeDeprecationEntry[] = [
+  {
+    deprecatedPrefix: "/api/coin",
+    canonicalPrefix: "/api/wallet",
+    severity: "soft",
+    reason: "Coin routes duplicate wallet ownership.",
+    migrationNote: "Use /api/wallet/* for all balances, ledger, credit, debit and transfer flows.",
+    removalPhase: "post-private-beta"
+  },
+  {
+    deprecatedPrefix: "/api/wallets",
+    canonicalPrefix: "/api/wallet",
+    severity: "soft",
+    reason: "Plural wallet routes duplicate canonical wallet API.",
+    migrationNote: "Use /api/wallet/* as the single wallet adapter layer.",
+    removalPhase: "post-private-beta"
+  },
+  {
+    deprecatedPrefix: "/api/live/roomlist",
+    canonicalPrefix: "/api/live/rooms",
+    severity: "soft",
+    reason: "Room list naming drift.",
+    migrationNote: "Use /api/live/rooms for room listing.",
+    removalPhase: "post-runtime-consolidation"
+  },
+  {
+    deprecatedPrefix: "/api/live/roomslist",
+    canonicalPrefix: "/api/live/rooms",
+    severity: "soft",
+    reason: "Duplicate live room list spelling.",
+    migrationNote: "Use /api/live/rooms for canonical room list behavior.",
+    removalPhase: "post-runtime-consolidation"
+  },
+  {
+    deprecatedPrefix: "/api/content-engine",
+    canonicalPrefix: "/api/content",
+    severity: "strict",
+    reason: "Content engine routes must route through canonical content metadata/lifecycle domain.",
+    migrationNote: "Use /api/content/* and route engine internals behind ContentOrchestrator.",
+    removalPhase: "pre-public-beta"
+  },
+  {
+    deprecatedPrefix: "/api/fyp94",
+    canonicalPrefix: "/api/fyp",
+    severity: "strict",
+    reason: "Legacy FYP94 runtime duplicates canonical FYP runtime.",
+    migrationNote: "Use /api/fyp/* and keep FYP94 only as internal migration reference.",
+    removalPhase: "pre-public-beta"
+  },
+  {
+    deprecatedPrefix: "/api/shop",
+    canonicalPrefix: "/api/products",
+    severity: "soft",
+    reason: "Shop routes duplicate commerce/product boundary.",
+    migrationNote: "Use commerce orchestrator routes beginning with /api/products, /api/orders and /api/payments.",
+    removalPhase: "post-private-beta"
+  },
+  {
+    deprecatedPrefix: "/api/diag",
+    canonicalPrefix: "/api/infra",
+    severity: "soft",
+    reason: "Diagnostics should report into infra telemetry.",
+    migrationNote: "Keep /api/diag as an internal adapter and route production checks through /api/infra.",
+    removalPhase: "post-runtime-consolidation"
+  },
+  {
+    deprecatedPrefix: "/api/security/check",
+    canonicalPrefix: "/api/trust",
+    severity: "soft",
+    reason: "Security checks overlap with trust/safety runtime.",
+    migrationNote: "Use /api/trust/* and /api/safety/* for canonical enforcement.",
+    removalPhase: "post-private-beta"
+  }
+];

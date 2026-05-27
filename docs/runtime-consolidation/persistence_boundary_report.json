@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-05-26T19:38:07.966Z",
+  "status": "PASS",
+  "totalRules": 16,
+  "writeAuthorizedDomains": 13,
+  "aggregateOnlyDomains": 2,
+  "blockedDomains": 1,
+  "rules": [
+    {
+      "domain": "creator_alchemy",
+      "mode": "write_authorized",
+      "writeOwner": "CreatorAlchemyOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Creator events, quiet gifts and dashboard snapshots require controlled writes."
+    },
+    {
+      "domain": "fyp",
+      "mode": "write_authorized",
+      "writeOwner": "FypOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "FYP behavior events require canonical write ownership."
+    },
+    {
+      "domain": "feed",
+      "mode": "aggregate_only",
+      "writeOwner": null,
+      "allowedOperations": [
+        "read",
+        "aggregate"
+      ],
+      "reason": "Feed assembly should aggregate canonical sources and avoid independent writes."
+    },
+    {
+      "domain": "content",
+      "mode": "write_authorized",
+      "writeOwner": "ContentOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Content lifecycle and metadata writes belong to ContentOrchestrator."
+    },
+    {
+      "domain": "signals",
+      "mode": "write_authorized",
+      "writeOwner": "SignalsOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "External signal ingestion must normalize before persistence."
+    },
+    {
+      "domain": "intelligence",
+      "mode": "aggregate_only",
+      "writeOwner": null,
+      "allowedOperations": [
+        "read",
+        "aggregate"
+      ],
+      "reason": "Intelligence should compute and aggregate, not own raw behavior writes."
+    },
+    {
+      "domain": "personalization",
+      "mode": "write_authorized",
+      "writeOwner": "PersonalizationOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Preference graph and session learning require controlled persistence."
+    },
+    {
+      "domain": "live",
+      "mode": "write_authorized",
+      "writeOwner": "LiveOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Live room state and event writes must stay in one runtime boundary."
+    },
+    {
+      "domain": "wallet",
+      "mode": "write_authorized",
+      "writeOwner": "WalletOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Wallet and ledger writes must be centralized to prevent balance drift."
+    },
+    {
+      "domain": "trust_safety",
+      "mode": "write_authorized",
+      "writeOwner": "TrustOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Moderation and enforcement decisions need auditable writes."
+    },
+    {
+      "domain": "infra_telemetry",
+      "mode": "write_authorized",
+      "writeOwner": "InfraOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Runtime logs, traces and metrics require controlled telemetry writes."
+    },
+    {
+      "domain": "commerce",
+      "mode": "write_authorized",
+      "writeOwner": "CommerceOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Orders, products and payment state require transaction ownership."
+    },
+    {
+      "domain": "gmar",
+      "mode": "write_authorized",
+      "writeOwner": "GmarOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "GMAR game state and economy writes require canonical ownership."
+    },
+    {
+      "domain": "lumaspace",
+      "mode": "write_authorized",
+      "writeOwner": "LumaSpaceOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "LumaSpace state, shadow and reflection writes require boundary control."
+    },
+    {
+      "domain": "media",
+      "mode": "write_authorized",
+      "writeOwner": "MediaOrchestrator",
+      "allowedOperations": [
+        "read",
+        "write",
+        "aggregate"
+      ],
+      "reason": "Media upload, catalog and processing writes need canonical ownership."
+    },
+    {
+      "domain": "unknown",
+      "mode": "blocked",
+      "writeOwner": null,
+      "allowedOperations": [],
+      "reason": "Unknown routes must be classified before persistence access."
+    }
+  ]
+}

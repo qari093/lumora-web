@@ -1,0 +1,15 @@
+Feedback Loop locked:
+- Real Engagement Event Capture
+- Event Stream
+- Engagement Aggregation
+- CTR Computation
+- Watch-time Weighting
+- Replay Weighting
+- Skip Penalty
+- Feedback to Ranking
+- Auto-optimization Loop
+- Trigger-based Re-ranking
+- Feedback Anomaly Detection
+- Learning Rate Control
+- Feedback Dashboards
+- Feedback Alerts

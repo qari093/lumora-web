@@ -1,0 +1,45 @@
+{
+  "auditedAt": "2026-05-25T10:21:31.794Z",
+  "status": "PASS",
+  "integrationPercent": 100,
+  "leftPercent": 0,
+  "validation": {
+    "prisma": "PASS",
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "logs": "/tmp/zendoro_final_audit_logs_1779704400"
+  },
+  "categories": {
+    "routes": {
+      "passed": 3,
+      "total": 3,
+      "percent": 100,
+      "missing": []
+    },
+    "apis": {
+      "passed": 8,
+      "total": 8,
+      "percent": 100,
+      "missing": []
+    },
+    "components": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "docs": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "locks": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "finalStatus": "PASS"
+}

@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:nyt="http://www.nytimes.com/namespaces/rss/2.0" version="2.0">
+  <channel>
+    <title>NYT &gt; Top Stories</title>
+    <link>https://www.nytimes.com</link>
+    <atom:link href="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml?_cb=1776356178221" rel="self" type="application/rss+xml"></atom:link>
+    <description></description>
+    <language>en-us</language>
+    <copyright>Copyright 2026 The New York Times Company</copyright>
+    <lastBuildDate>Thu, 16 Apr 2026 16:16:18 +0000</lastBuildDate>
+    <pubDate>Thu, 16 Apr 2026 16:16:16 +0000</pubDate>
+    <image>
+      <title>NYT &gt; Top Stories</title>
+      <url>https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png</url>
+      <link>https://www.nytimes.com</link>
+    </image>
+    <item>
+      <title>White House Shrugs Off Shaky Economy as War Exceeds Trump’s Timeline</title>
+      <link>https://www.nytimes.com/2026/04/16/us/politics/trump-economy-iran-war.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/politics/trump-economy-iran-war.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/politics/trump-economy-iran-war.html" rel="standout"></atom:link>
+      <description>Stocks may be soaring again, but the war in Iran has started to pinch the finances of many Americans.</description>
+      <dc:creator>Tony Romm and Colby Smith</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 16:16:16 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Economy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Oil (Petroleum) and Gasoline</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Prices (Fares, Fees and Rates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">White House Council of Economic Advisers</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Inflation (Economics)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Consumer Behavior</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16dc-trump-econ-01-hfpb/16dc-trump-econ-01-hfpb-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Vincent Alban/The New York Times</media:credit>
+      <media:description>The energy surge has made groceries more expensive while also raising costs for farmers.</media:description>
+    </item>
+    <item>
+      <title>Why China Isn’t Pushing Iran to Accept U.S. Demands to End War</title>
+      <link>https://www.nytimes.com/2026/04/16/world/asia/china-iran-trump-diplomacy-hormuz.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/world/asia/china-iran-trump-diplomacy-hormuz.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/world/asia/china-iran-trump-diplomacy-hormuz.html" rel="standout"></atom:link>
+      <description>Despite the economic risks from the war, Beijing will likely stick to a hands-off approach. It is wary of being entangled in a conflict it opposed and has little sway over.</description>
+      <dc:creator>Lily Kuo and David Pierson</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 15:35:23 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Peace Process</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Wang Yi</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Xi Jinping</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Abu Dhabi (United Arab Emirates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Iran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Israel</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Pakistan</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Persian Gulf</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Strait of Hormuz</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Tehran (Iran)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Defense and Military Forces</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Territorial Disputes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Oil (Petroleum) and Gasoline</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">War and Armed Conflicts</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/00int-china-diplo-analysis-wqlg/00int-china-diplo-analysis-wqlg-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Arash Khamooshi for The New York Times</media:credit>
+      <media:description>A mural representing the Strait of Hormuz, on a building in Tehran this week. The strait is a critical passageway for China’s energy and goods.</media:description>
+    </item>
+    <item>
+      <title>In the House, Republican Plans Go Awry Amid Party Divides</title>
+      <link>https://www.nytimes.com/2026/04/15/us/politics/house-republican-divides.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/politics/house-republican-divides.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/politics/house-republican-divides.html" rel="standout"></atom:link>
+      <description>Fresh off a two-week break, lawmakers returned to turmoil in the House, where legislation to reopen the Department of Homeland Security is stalled and the G.O.P. is struggling to keep its agenda on track.</description>
+      <dc:creator>Michael Gold</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 21:30:25 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">House of Representatives</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Homeland Security Department</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Shutdowns (Institutional)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Law and Legislation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Surveillance of Citizens by Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">US and Israeli Attack on Iran (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Johnson, Mike (1972- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15DC-HOUSE-top-pbhl/15DC-HOUSE-top-pbhl-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kenny Holston/The New York Times</media:credit>
+      <media:description>Speaker Mike Johnson on the steps of the Capitol on Wednesday. </media:description>
+    </item>
+    <item>
+      <title>Labor Department Investigates Texts Sent Among Staff, Secretary and Her Family</title>
+      <link>https://www.nytimes.com/2026/04/15/us/politics/labor-secretary-text-messages.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/politics/labor-secretary-text-messages.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/politics/labor-secretary-text-messages.html" rel="standout"></atom:link>
+      <description>Secretary Lori Chavez-DeRemer asked staff members to bring wine to her hotel room, and to keep in touch with her husband and father.</description>
+      <dc:creator>Rebecca Davis O’Brien</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 22:42:42 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Labor and Jobs</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Ethics and Official Misconduct</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Inspectors General</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Labor Department (US)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Chavez-DeRemer, Lori</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">DeRemer, Shawn</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15biz-Labor-evidence-hftk/15biz-Labor-evidence-hftk-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kenny Holston/The New York Times</media:credit>
+      <media:description>Lori Chavez-DeRemer during her Senate hearing last year to be secretary of labor.</media:description>
+    </item>
+    <item>
+      <title>Yale Report Finds Colleges Deserve Blame for Higher Education’s Problems</title>
+      <link>https://www.nytimes.com/2026/04/15/us/yale-report-colleges-unversities-trust.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/yale-report-colleges-unversities-trust.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/yale-report-colleges-unversities-trust.html" rel="standout"></atom:link>
+      <description>A 10-member committee offered a brutal assessment of academia’s role in creating the forces challenging American colleges and universities.</description>
+      <dc:creator>Alan Blinder</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 20:04:38 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Yale University</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Colleges and Universities</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Polls and Public Opinion</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Tuition</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Prices (Fares, Fees and Rates)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Admissions Standards</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Academic Freedom</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Grading of Students</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Freedom of Speech and Expression</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">United States</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15nat-yale-cfmv/15nat-yale-cfmv-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Christopher Capozziello for The New York Times</media:credit>
+      <media:description>Yale has not been directly targeted in the Trump administration’s attacks on higher education, but its president commissioned a report to understand public mistrust of universities.</media:description>
+    </item>
+    <item>
+      <title>Mounting Troubles at Ohio State University Lead to Frustration</title>
+      <link>https://www.nytimes.com/2026/04/16/us/ohio-state-university.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/ohio-state-university.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/ohio-state-university.html" rel="standout"></atom:link>
+      <description>Ohio State isn’t the only university in turmoil, but few others have faced so many issues lately. One lawmaker called the school “a national embarrassment.”</description>
+      <dc:creator>Billy Witz</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:48:36 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Colleges and Universities</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Freedom of Speech and Expression</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Academic Freedom</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Wexner Center for the Arts</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Ohio State University</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Carter, Walter Edward (Ted) Jr</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Epstein, Jeffrey E (1953- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gee, E Gordon</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Wexner, Leslie H</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Columbus (Ohio)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New Albany (Ohio)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Ohio</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15nat-ohio-osu-1-blkc/15nat-ohio-osu-1-blkc-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Maddie McGarvey for The New York Times</media:credit>
+      <media:description>Ohio State University recently named Ravi Bellamkonda, middle, as president. He’s the fourth person to hold the post in six years.</media:description>
+    </item>
+    <item>
+      <title>China’s G.D.P. Stronger Than Expected, Led by Infrastructure Spending</title>
+      <link>https://www.nytimes.com/2026/04/15/business/china-economy-growth.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/business/china-economy-growth.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/business/china-economy-growth.html" rel="standout"></atom:link>
+      <description>A steep slide in housing prices has left consumers less prosperous and less willing to spend, but the government is pouring money into new rail lines and other projects.</description>
+      <dc:creator>Keith Bradsher</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:19:10 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Economic Conditions and Trends</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Gross Domestic Product</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Infrastructure (Public Works)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Consumer Behavior</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Trade and World Market</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16Biz-China-GDP-02-qlzw/16Biz-China-GDP-02-qlzw-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Jade Gao/Agence France-Presse — Getty Images</media:credit>
+      <media:description>An import and export trade show in southern China this week.</media:description>
+    </item>
+    <item>
+      <title>Xi Alludes to Trump’s Policies to Make a Case for Closer Ties to Vietnam</title>
+      <link>https://www.nytimes.com/2026/04/16/world/asia/xi-china-vietnam-security.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/world/asia/xi-china-vietnam-security.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/world/asia/xi-china-vietnam-security.html" rel="standout"></atom:link>
+      <description>China used a visit by the Vietnamese leader to show a deepening of security ties that analysts say far outpaces U.S. defense ties in the region.</description>
+      <dc:creator>David Pierson and Tung Ngo</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 12:05:46 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Communism (Theory and Philosophy)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Territorial Disputes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States International Relations</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Xi Jinping</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Lam, To</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Chen Yixin (1959- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Vietnam</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Far East, South and Southeast Asia and Pacific Areas</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Communist Party of China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Communist Party of Vietnam</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Ministry of Public Security of the People&#39;s Republic of China</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Paracel Islands</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">South China Sea</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16int-china-vietnam-security-bjpm/16int-china-vietnam-security-bjpm-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Shen Hong/Xinhua, via Associated Press</media:credit>
+      <media:description>China’s leader, Xi Jinping, welcomed President To Lam of Vietnam in Beijing on Wednesday. Mr. Xi said that defending Communist Party rule was a common strategic interest.</media:description>
+    </item>
+    <item>
+      <title>Inside the Storage Units of Six New Yorkers</title>
+      <link>https://www.nytimes.com/2026/04/16/realestate/storage-unit-photo-tour.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/realestate/storage-unit-photo-tour.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/realestate/storage-unit-photo-tour.html" rel="standout"></atom:link>
+      <description>In a city of notoriously small apartments, New Yorkers keep their meaningful mementos and quirky collections elsewhere.</description>
+      <dc:creator>Anna Kodé and Vincent Alban</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 13:25:11 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Storage</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Collectors and Collections</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16re-storageunits-promo/16re-storageunits-ctlg-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Vincent Alban/The New York Times</media:credit>
+    </item>
+    <item>
+      <title>Virginia Ex-Lt. Gov. Justin Fairfax Kills Wife and Self, Police Say</title>
+      <link>https://www.nytimes.com/2026/04/16/us/virginia-lt-governor-justin-fairfax-murder-wife-suicide.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/virginia-lt-governor-justin-fairfax-murder-wife-suicide.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/virginia-lt-governor-justin-fairfax-murder-wife-suicide.html" rel="standout"></atom:link>
+      <description>Mr. Fairfax, a Democrat, served as lieutenant governor from 2018 to 2022.</description>
+      <dc:creator>Jacey Fortin and Campbell Robertson</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:07:31 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Fairfax, Justin Edward</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Murders, Attempted Murders and Homicides</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Suicides and Suicide Attempts</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Domestic Violence</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Virginia</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <media:content height="1799" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16nat-virginia-suicide-fairfax-cjqv/16nat-virginia-suicide-fairfax-cjqv-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Parker Michels-Boyce for The New York Times</media:credit>
+      <media:description>Justin Fairfax in 2019. He served as Virginia’s lieutenant governor from 2018 to 2022.</media:description>
+    </item>
+    <item>
+      <title>Trump’s ‘Triumphal Arch’ Draws Backlash, Even From an Expert Who Proposed It</title>
+      <link>https://www.nytimes.com/2026/04/15/us/politics/trump-arch-dc.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/us/politics/trump-arch-dc.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/us/politics/trump-arch-dc.html" rel="standout"></atom:link>
+      <description>The story of how President Trump quadrupled the size of the original proposal for the arch follows a now-familiar pattern.</description>
+      <dc:creator>Luke Broadwater and Zachary Small</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 10:45:19 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">live-detached</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Monuments and Memorials (Structures)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Architecture</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Semiquincentennial (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Arlington National Cemetery</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Domestic Policy Council (US)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">National Endowment for the Humanities</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Haley, Vince</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15DC-ARCH-TOP-vtlm/15DC-ARCH-TOP-vtlm-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Anna Rose Layden for The New York Times</media:credit>
+      <media:description>Karoline Leavitt, the White House press secretary, showed the latest renderings for a proposed triumphal arch during a briefing on Wednesday. </media:description>
+    </item>
+    <item>
+      <title>Kendrick Lamar’s Protégé Baby Keem Tells the Whole Story, Warts and All</title>
+      <link>https://www.nytimes.com/2026/04/16/arts/music/baby-keem-casino.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/arts/music/baby-keem-casino.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/arts/music/baby-keem-casino.html" rel="standout"></atom:link>
+      <description>The 25-year-old rapper and producer knows he’s benefited from his cousin’s support. But the path to his autobiographical album, “Casino,” was his alone.</description>
+      <dc:creator>Ross Scarano and Clement Pascal</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 09:00:29 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Rap and Hip-Hop</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Content Type: Personal Profile</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">pgLang</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Baby Keem (Rapper)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Lamar, Kendrick</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Casino (Album)</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/19/multimedia/19cul-baby-keem-promo/19cul-baby-keem-01-hfvj-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Clement Pascal for The New York Times</media:credit>
+      <media:description>It has taken Baby Keem until now to feel open and skilled enough to pound his own tale of hardship, perseverance and extraordinary opportunity into a pointed piece of art.</media:description>
+    </item>
+    <item>
+      <title>Ahead of 2028, Vance Collects Cash, Chits and Contacts</title>
+      <link>https://www.nytimes.com/2026/04/16/us/politics/jd-vance-2028-fundraising.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/politics/jd-vance-2028-fundraising.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/politics/jd-vance-2028-fundraising.html" rel="standout"></atom:link>
+      <description>The vice president is also the finance chair of the Republican National Committee, allowing him to court donors who could prove helpful should he run for president.</description>
+      <dc:creator>Theodore Schleifer and Shane Goldmacher</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 09:01:07 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Political Action Committees</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Campaign Finance</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">High Net Worth Individuals</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Two Thousand Twenty Six</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Vice Presidents and Vice Presidency (US)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Rockbridge Network LLC</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Palantir Technologies</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">American Opportunity Alliance</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican National Committee</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Vance, J D</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Buskirk, Chris</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gruters, Joseph R (1977- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Lonsdale, Joe</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mercer, Rebekah A (1973- )</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Palihapitiya, Chamath</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/10/multimedia/pol-vance-money-tbml/pol-vance-money-tbml-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Elizabeth Frantz for The New York Times</media:credit>
+      <media:description>Vice President JD Vance has raised over $60 million to help the Republican Party in the midterms, and simultaneously forged relationships with major donors that could help him in his own presidential run.</media:description>
+    </item>
+    <item>
+      <title>Talarico Leads a Democratic Cash Surge: 7 Takeaways From 2026 Filings</title>
+      <link>https://www.nytimes.com/2026/04/16/us/politics/talarico-democrats-fundraising-republicans-takeaways.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/politics/talarico-democrats-fundraising-republicans-takeaways.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/politics/talarico-democrats-fundraising-republicans-takeaways.html" rel="standout"></atom:link>
+      <description>Democrats in key Senate races out-raised their Republican rivals, but super PACs on the right are poised to play a powerful role in the midterms, new campaign finance filings showed.</description>
+      <dc:creator>Theodore Schleifer</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 09:06:08 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Campaign Finance</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Political Action Committees</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Artificial Intelligence</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Talarico, James</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Adelson, Miriam</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/pol-money-takeaways-wkbq/pol-money-takeaways-wkbq-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Tamir Kalifa for The New York Times</media:credit>
+      <media:description>James Talarico, the Democratic nominee for Senate in Texas, raised $27 million in the first months of 2026, a remarkable haul. </media:description>
+    </item>
+    <item>
+      <title>Who’s Winning the Cash Race in 9 Top Senate Contests?</title>
+      <link>https://www.nytimes.com/2026/04/16/us/politics/which-senate-candidates-most-money-midterms.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/politics/which-senate-candidates-most-money-midterms.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/politics/which-senate-candidates-most-money-midterms.html" rel="standout"></atom:link>
+      <description>Money from Democratic donors has flowed into the coffers of the party’s top Senate candidates — especially its nominee in Texas.</description>
+      <dc:creator>Matt Zdun and Katherine Chui</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 09:06:12 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Midterm Elections (2026)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Campaign Finance</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, Senate</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Democratic Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Republican Party</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Talarico, James</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Ossoff, Jon</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Brown, Sherrod</category>
+    </item>
+    <item>
+      <title>Utah Becomes the New Center of U.S. Measles Cases</title>
+      <link>https://www.nytimes.com/2026/04/16/well/measles-cases-utah.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/well/measles-cases-utah.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/well/measles-cases-utah.html" rel="standout"></atom:link>
+      <description>Nearly 600 people have been sickened across the state, which has seen an increase in vaccine exemptions among children in recent years.</description>
+      <dc:creator>Teddy Rosenbluth</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 13:48:25 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Measles</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Epidemics</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Utah</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Vaccination and Immunization</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Disease Rates</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2026/04/14/well/WELL-MEASLES-UTAH/WELL-MEASLES-UTAH-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Getty Images</media:credit>
+    </item>
+    <item>
+      <title>Batch of Anti-Anxiety Drug Xanax Recalled, F.D.A. Says</title>
+      <link>https://www.nytimes.com/2026/04/16/well/xanax-recall-fda-anxiety.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/well/xanax-recall-fda-anxiety.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/well/xanax-recall-fda-anxiety.html" rel="standout"></atom:link>
+      <description>The affected pills were sold nationwide under the brand name Xanax XR.</description>
+      <dc:creator>Simar Bajaj</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:58:17 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Recalls and Bans of Products</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Xanax (Drug)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Drugs (Pharmaceuticals)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Food and Drug Administration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Viatris Inc</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/WELL-XANAX-RECALL1-ztmc/WELL-XANAX-RECALL1-ztmc-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Hiroko Masuike/The New York Times</media:credit>
+    </item>
+    <item>
+      <title>NYC to Spend $4 Billion From Pension Funds on Affordable Homes</title>
+      <link>https://www.nytimes.com/2026/04/16/nyregion/nyc-pension-funds-affordable-housing.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/nyregion/nyc-pension-funds-affordable-housing.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/nyregion/nyc-pension-funds-affordable-housing.html" rel="standout"></atom:link>
+      <description>The money could jump-start affordable housing projects across the metropolitan region.</description>
+      <dc:creator>Mihir Zaveri</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 09:04:31 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Pensions and Retirement Plans</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">New York City Employees&#39; Retirement System</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Levine, Mark D</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New York City</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16met-pension-housing-01-bgjm/16met-pension-housing-01-bgjm-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Vincent Alban/The New York Times</media:credit>
+      <media:description>The $4 billion would help pay for mixed-income projects, conversions of offices to apartments, renovations to aging buildings and new middle-income apartments built by union workers.</media:description>
+    </item>
+    <item>
+      <title>The Second Home Tax Has Failed Before. Could This Year Be Different?</title>
+      <link>https://www.nytimes.com/2026/04/15/nyregion/pied-a-terre-tax.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/nyregion/pied-a-terre-tax.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/nyregion/pied-a-terre-tax.html" rel="standout"></atom:link>
+      <description>Amid calls from the left to tax the rich, a tax proposal on multimillion-dollar second homes in New York City, backed by Gov. Kathy Hochul, seems to have better odds of passing than in years past.</description>
+      <dc:creator>Grace Ashford and Jeffery C. Mays</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 23:25:56 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Taxation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Property Taxes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Appraisals and Valuation (Property)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Land Use Policies</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Second Homes and Non-Primary Residences</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New York City</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Hochul, Kathleen C</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">High Net Worth Individuals</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Law and Legislation</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15met-pied-a-terre-01-ljfc/15met-pied-a-terre-01-ljfc-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Karsten Moran for The New York Times</media:credit>
+      <media:description>The proposed tax on second homes worth more than $5 million would yield “at least $500 million” in recurring revenue, the Hochul administration said.</media:description>
+    </item>
+    <item>
+      <title>What Is the Pied-à-Terre Tax? 5 Things to Know About Hochul’s Proposal.</title>
+      <link>https://www.nytimes.com/2026/04/15/realestate/pied-a-terre-tax-nyc-hochul-mamdani.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/realestate/pied-a-terre-tax-nyc-hochul-mamdani.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/realestate/pied-a-terre-tax-nyc-hochul-mamdani.html" rel="standout"></atom:link>
+      <description>Gov. Kathy Hochul wants to tax second homes in New York City that are worth $5 million or more. Here’s how the proposal might work.</description>
+      <dc:creator>Ronda Kaysen</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 10:56:56 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Income Inequality</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Real Estate and Housing (Residential)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Property Taxes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Taxation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Second Homes and Non-Primary Residences</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, Mayors</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">High Net Worth Individuals</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Real Estate Board of New York</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Hochul, Kathleen C</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mamdani, Zohran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New York City</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15re-piedaterre-explainer-01-bpwm/15re-piedaterre-explainer-01-bpwm-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Cindy Schultz for The New York Times</media:credit>
+      <media:description>Gov. Kathy Hochul’s proposal on taxing second homes would address the city budget gap by targeting the very wealthy.</media:description>
+    </item>
+    <item>
+      <title>Mamdani’s Wife Admits ‘Shame’ Over Social Media Posts From Her Teens</title>
+      <link>https://www.nytimes.com/2026/04/15/nyregion/duwaji-interview-mamdani-wife.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/15/nyregion/duwaji-interview-mamdani-wife.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/15/nyregion/duwaji-interview-mamdani-wife.html" rel="standout"></atom:link>
+      <description>Rama Duwaji apologized for using what she said was “harmful” language as a teenager, in her first interview since her husband, Zohran Mamdani, took office.</description>
+      <dc:creator>Katherine Rosman</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 12:19:51 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Duwaji, Rama</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mamdani, Zohran</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New York City</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Social Media</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Apologies</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Discrimination</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/15/multimedia/15met-duwaji-interview-01-kthm/15met-duwaji-interview-01-kthm-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Amir Hamja for The New York Times</media:credit>
+      <media:description>Rama Duwaji, the wife of Mayor Zohran Mamdani, said she was “truly sorry” for what she acknowledged was harmful language that she used as a teenager in social media posts.</media:description>
+    </item>
+    <item>
+      <title>More Young Men Say Religion Is ‘Very Important’ to Them, Poll Finds</title>
+      <link>https://www.nytimes.com/2026/04/16/us/politics/young-men-religion-importance-poll.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/politics/young-men-religion-importance-poll.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/politics/young-men-religion-importance-poll.html" rel="standout"></atom:link>
+      <description>“I wanted something new and something traditional and something that felt holy.”</description>
+      <dc:creator>Ruth Igielnik and Ruth Graham</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 13:53:25 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Polls and Public Opinion</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Men and Boys</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Religion and Belief</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Christians and Christianity</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Women and Girls</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Gallup Poll</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">United States</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16nat-us-religion-poll-qmhk/16nat-us-religion-poll-qmhk-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Cornell Watson for The New York Times</media:credit>
+      <media:description>Worshipers of the All Saints Orthodox Church before a morning service in Raleigh, N.C. </media:description>
+    </item>
+    <item>
+      <title>What LIV Golf’s Demise Means for Saudi Influence</title>
+      <link>https://www.nytimes.com/2026/04/16/business/dealbook/liv-golf-saudi-arabia.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/business/dealbook/liv-golf-saudi-arabia.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/business/dealbook/liv-golf-saudi-arabia.html" rel="standout"></atom:link>
+      <description>The upstart golf circuit couldn’t conquer the sport, despite big spending by Saudi Arabia. Its end signals limits to how much the country will spend.</description>
+      <dc:creator>Andrew Ross Sorkin, Bernhard Warner, Sarah Kessler, Michael J. de la Merced, Niko Gallogly, Brian O’Keefe and Ian Mount</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 11:46:51 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">internal-storyline-no</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">LIV Golf</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Saudi Arabia</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Golf</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mickelson, Phil</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Garcia, Sergio</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">PGA Tour Inc</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16db-liv-wgzk/16db-liv-wgzk-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Hector Vivas/Getty Images</media:credit>
+      <media:description>The sports world was stunned to learn that Saudi Arabia is close to pulling the plug on its LIV Golf venture.</media:description>
+    </item>
+    <item>
+      <title>Luke Tennie’s Journey From ‘Shrinking’ to ‘The Pitt’ and Beyond</title>
+      <link>https://www.nytimes.com/2026/04/16/arts/television/luke-tennie-shrinking-the-pitt.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/arts/television/luke-tennie-shrinking-the-pitt.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/arts/television/luke-tennie-shrinking-the-pitt.html" rel="standout"></atom:link>
+      <description>After a breakout performance on “Shrinking,” the actor can now be seen on “Abbott Elementary” and “The Pitt.”</description>
+      <dc:creator>Alexis Soloski and Victor Llorente</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 16:11:42 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Television</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Tennie, Luke</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Abbott Elementary (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Shrinking (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">The Pitt (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Content Type: Personal Profile</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16cul-luke-tennie-promo/16cul-luke-tennie-hptb-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Victor Llorente for The New York Times</media:credit>
+    </item>
+    <item>
+      <title>If You Love ‘The Pitt,’ You’ll Love These Memoirs by Real E.R. Doctors</title>
+      <link>https://www.nytimes.com/2026/04/09/books/review/the-pitt-emergency-room-memoirs.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/09/books/review/the-pitt-emergency-room-memoirs.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/09/books/review/the-pitt-emergency-room-memoirs.html" rel="standout"></atom:link>
+      <description>Memoirs from the front lines capture the high-octane pace, roller coaster stakes and unforgettable personalities of emergency medicine.</description>
+      <dc:creator>Tina Jordan and Elisabeth Egan</dc:creator>
+      <pubDate>Thu, 09 Apr 2026 11:13:50 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Books and Literature</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Emergency Medical Treatment</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">The Pitt (TV Program)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Fisher, Thomas (Doctor)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Harper, Michele (Author)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Content Type: Service</category>
+    </item>
+    <item>
+      <title>I Almost Never Predict Supreme Court Outcomes. Trump Will Lose This Case.</title>
+      <link>https://www.nytimes.com/2026/04/16/opinion/supreme-court-trump-immigration.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/opinion/supreme-court-trump-immigration.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/opinion/supreme-court-trump-immigration.html" rel="standout"></atom:link>
+      <description>This immigration case is really about procedure.</description>
+      <dc:creator>Linda Greenhouse</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 05:29:09 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Law and Legislation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Illegal Immigration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Deportation</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Citizenship and Naturalization</category>
+    </item>
+    <item>
+      <title>Older Women Are in Demand by Younger Men</title>
+      <link>https://www.nytimes.com/2026/04/16/opinion/younger-men-dating-older-women.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/opinion/younger-men-dating-older-women.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/opinion/younger-men-dating-older-women.html" rel="standout"></atom:link>
+      <description>What a shift in the dating preferences of younger men reveals about our changing norms.</description>
+      <dc:creator>Nadja Spiegelman, Emily Leibert, Jamieson Webster and Vishakha Darbha</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 13:31:32 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">audio-neutral-informative</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Age, Chronological</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Men and Boys</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Women and Girls</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Dating and Relationships</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Sex</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Youth</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Mobile Applications</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Discrimination</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Anxiety and Stress</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Social Media</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Homosexuality and Bisexuality</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Psychology and Psychologists</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Bars and Nightclubs</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Women&#39;s Rights</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Polyamory and Non-Monogamous Relationships</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Generation X</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Divorce, Separations and Annulments</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Marriages</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Same-Sex Marriage, Civil Unions and Domestic Partnerships</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Love (Emotion)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Pornhub</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Feeld Ltd</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Freud, Sigmund</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Griffin, Kathy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Leilani, Raven</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl">Luster (Book)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">internal-open-access-audio</category>
+      <media:content height="962" medium="image" url="https://static01.nyt.com/images/2026/04/16/opinion/16opinions-age-gaps-image/16opinions-age-gaps-image-mediumSquareAt3X.jpg" width="962"></media:content>
+      <media:credit>Illustration by The New York Times; photograph by Tony Garcia/Getty</media:credit>
+    </item>
+    <item>
+      <title>Russian Strikes Kill at Least 15 in Ukraine in Biggest Attack in Months</title>
+      <link>https://www.nytimes.com/2026/04/16/world/europe/russia-ukraine-missile-drone-attacks.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/world/europe/russia-ukraine-missile-drone-attacks.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/world/europe/russia-ukraine-missile-drone-attacks.html" rel="standout"></atom:link>
+      <description>Moscow is again ramping up missile and drone attacks on civilian targets, dispelling any notion that a temporary cease-fire for Orthodox Easter might become more lasting.</description>
+      <dc:creator>Kim Barker and Oleksandra Mykolyshyn</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:00:44 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Russian Invasion of Ukraine (2022)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Civilian Casualties</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Missiles and Missile Defense Systems</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Easter and Holy Week</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Deaths (Fatalities)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Defense and Military Forces</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Putin, Vladimir V</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Zelensky, Volodymyr</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Russia</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Ukraine</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16int-ukraine-strikes-zmtq/16int-ukraine-strikes-zmtq-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Valentyn Ogirenko/Reuters</media:credit>
+      <media:description>A warehouse hit by a Russian missile strike in Kyiv, Ukraine, on Thursday.</media:description>
+    </item>
+    <item>
+      <title>Rohingya Refugee Recounts Rescue From Capsizing Boat That Left Nearly 250 Others Missing</title>
+      <link>https://www.nytimes.com/2026/04/16/world/asia/rohingya-bangladesh-migrants-boat-capsizing.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/world/asia/rohingya-bangladesh-migrants-boat-capsizing.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/world/asia/rohingya-bangladesh-migrants-boat-capsizing.html" rel="standout"></atom:link>
+      <description>Hundreds of migrants from Bangladesh, including Rohingya refugees, are feared dead after a boat to Malaysia overturned.</description>
+      <dc:creator>Verena Hölzl</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:53:40 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">International Organization for Migration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Rescues</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Illegal Immigration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Drownings</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Foreign Aid</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Rohingya (Ethnic Group)</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Human Trafficking</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Bangladesh</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Myanmar</category>
+      <media:content height="1568" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16int-rohingya-boat-01-gwkm/16int-rohingya-boat-01-gwkm-mediumSquareAt3X.jpg" width="1568"></media:content>
+      <media:credit>Suzauddin Rubel/Associated Press</media:credit>
+      <media:description>A Rohingya survivor being carried on a bamboo stretcher to a hospital at a refugee camp in Cox’s Bazar, Bangladesh, after being rescued last week from a capsized boat.</media:description>
+    </item>
+    <item>
+      <title>Carbon Removal Industry Reels as Microsoft Retreats</title>
+      <link>https://www.nytimes.com/2026/04/16/climate/microsoft-carbon-removal.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/climate/microsoft-carbon-removal.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/climate/microsoft-carbon-removal.html" rel="standout"></atom:link>
+      <description>Once held up as a key solution to climate change, a field that aims to remove carbon from the atmosphere is struggling to catch on.</description>
+      <dc:creator>David Gelles</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 14:33:42 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Global Warming</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Greenhouse Gas Emissions</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Mergers, Acquisitions and Divestitures</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Computers and the Internet</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Carbon Dioxide</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Carbon Capture and Sequestration</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Corporate Social Responsibility</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Geoengineering</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Alternative and Renewable Energy</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Breakthrough Energy Coalition</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Climeworks AG</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Energy Department</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Microsoft Corp</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Gates, Bill</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">United States</category>
+      <media:content height="1801" medium="image" url="https://static01.nyt.com/images/2025/10/11/multimedia/16cli-carbon-removal-01/16cli-carbon-removal-01-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Ariana Gomez for The New York Times</media:credit>
+      <media:description>Workers at a direct air capture facility under construction in Texas in 2024. Hundreds of start-ups developing carbon removal technologies have raised more than $5 billion in recent years.</media:description>
+    </item>
+    <item>
+      <title>Pilots Went Viral for Meowing on the Radio. The F.A.A. Was Not Amused.</title>
+      <link>https://www.nytimes.com/2026/04/16/us/pilots-meow-bark-air-traffic-control-faa.html</link>
+      <guid isPermaLink="true">https://www.nytimes.com/2026/04/16/us/pilots-meow-bark-air-traffic-control-faa.html</guid>
+      <atom:link href="https://www.nytimes.com/2026/04/16/us/pilots-meow-bark-air-traffic-control-faa.html" rel="standout"></atom:link>
+      <description>The Federal Aviation Administration said that it was investigating the interaction, and that pilots were banned from “nonessential communication” below a certain altitude.</description>
+      <dc:creator>Isabella Kwai</dc:creator>
+      <pubDate>Thu, 16 Apr 2026 13:51:30 +0000</pubDate>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Airlines and Airplanes</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Pilots</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Air Traffic Control</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/des">Cats</category>
+      <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org">Federal Aviation Administration</category>
+      <media:content height="1800" medium="image" url="https://static01.nyt.com/images/2026/04/16/multimedia/16xp-pilot-meow-hlfv/16xp-pilot-meow-hlfv-mediumSquareAt3X.jpg" width="1800"></media:content>
+      <media:credit>Kent Nishimura for The New York Times</media:credit>
+      <media:description>“Conversations must be related to the safe operation of the aircraft,” the F.A.A. said.</media:description>
+    </item>
+  </channel>
+</rss>

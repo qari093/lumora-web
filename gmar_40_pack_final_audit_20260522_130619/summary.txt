@@ -1,0 +1,5 @@
+STATUS=FAILED
+REPORT=gmar_40_pack_final_audit_20260522_130619/gmar_40_pack_final_audit_report.json
+TEST_STATUS=1
+TYPECHECK_STATUS=0
+BUILD_STATUS=0

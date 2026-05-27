@@ -1,0 +1,101 @@
+{
+  "auditedAt": "2026-05-25T14:36:37.989Z",
+  "status": "PASS",
+  "integrationPercent": 100,
+  "leftPercent": 0,
+  "categories": {
+    "walletCore": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "walletApis": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "adminCore": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "adminApis": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "productionCore": {
+      "passed": 3,
+      "total": 3,
+      "percent": 100,
+      "missing": []
+    },
+    "tests": {
+      "passed": 3,
+      "total": 3,
+      "percent": 100,
+      "missing": []
+    },
+    "locks": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "walletCore",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "walletApis",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "adminCore",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "adminApis",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "productionCore",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "tests",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "locks",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "validation": {
+    "prisma": "PASS",
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "logs": "/tmp/zencoin_admin_final_audit_logs_1779719769"
+  },
+  "finalStatus": "PASS"
+}

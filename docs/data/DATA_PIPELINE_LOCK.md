@@ -1,0 +1,20 @@
+Data Pipeline locked:
+- Primary Signal Database
+- Redis Cache Layer
+- Ingestion-to-Storage Pipeline
+- Signal Indexing Strategy
+- Query Optimization Layer
+- Cache Invalidation Logic
+- TTL Cleanup Jobs
+- Data Validation Pipeline
+- Signal Enrichment Pipeline
+- Cross-Signal Linking
+- Analytics Aggregation Tables
+- DB Connection Pooling
+- DB Retry Logic
+- DB Failover Routing
+- DB Monitoring Metrics
+- DB Scaling Triggers
+- Backup + Restore System
+- Partitioning Strategy
+- Hot/Cold Storage Separation

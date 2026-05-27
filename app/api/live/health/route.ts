@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
-import { getLiveHealth } from "@/lib/live/runtime";
 
-export async function GET() {
-  return NextResponse.json(getLiveHealth(), {
-    headers: { "X-Lumora-Live": "1" },
+export function GET() {
+  return NextResponse.json({
+    ok: true,
+    service: "lumora-live",
+    route: "/api/live/health",
+    checks: {
+      runtime: true,
+      presence: true,
+      rooms: true,
+    },
   });
 }

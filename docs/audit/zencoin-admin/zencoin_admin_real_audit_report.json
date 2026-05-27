@@ -1,0 +1,227 @@
+{
+  "auditedAt": "2026-05-25T11:55:14.079Z",
+  "status": "PARTIAL",
+  "integrationPercent": 31,
+  "leftPercent": 69,
+  "counts": {
+    "zencoinFiles": 73,
+    "adminFiles": 14,
+    "governanceFiles": 38,
+    "economyFiles": 73
+  },
+  "categories": {
+    "walletRoutes": {
+      "passed": 0,
+      "total": 4,
+      "percent": 0,
+      "missing": [
+        "app/zencoin/page.tsx",
+        "app/zencoin/wallet/page.tsx",
+        "app/zencoin/history/page.tsx",
+        "app/zencoin/rewards/page.tsx"
+      ]
+    },
+    "adminRoutes": {
+      "passed": 1,
+      "total": 4,
+      "percent": 25,
+      "missing": [
+        "app/admin/zencoin/page.tsx",
+        "app/admin/governance/page.tsx",
+        "app/admin/economy/page.tsx"
+      ]
+    },
+    "apiRoutes": {
+      "passed": 0,
+      "total": 9,
+      "percent": 0,
+      "missing": [
+        "app/api/zencoin/wallet/route.ts",
+        "app/api/zencoin/ledger/route.ts",
+        "app/api/zencoin/rewards/route.ts",
+        "app/api/zencoin/transactions/route.ts",
+        "app/api/admin/governance/route.ts",
+        "app/api/admin/economy/route.ts",
+        "app/api/admin/fraud/route.ts",
+        "app/api/admin/moderation/route.ts",
+        "app/api/admin/audit/route.ts"
+      ]
+    },
+    "runtimeCore": {
+      "passed": 2,
+      "total": 4,
+      "percent": 50,
+      "missing": [
+        "src/core/economy",
+        "src/core/admin"
+      ]
+    },
+    "components": {
+      "passed": 1,
+      "total": 4,
+      "percent": 25,
+      "missing": [
+        "components/zencoin",
+        "components/governance",
+        "components/economy"
+      ]
+    },
+    "economySystems": {
+      "passed": 3,
+      "total": 5,
+      "percent": 60,
+      "missing": [
+        "src/core/zencoin/rewards",
+        "src/core/zencoin/stability"
+      ]
+    },
+    "governanceSystems": {
+      "passed": 0,
+      "total": 4,
+      "percent": 0,
+      "missing": [
+        "src/core/governance/council",
+        "src/core/governance/voting",
+        "src/core/governance/transparency",
+        "src/core/governance/enforcement"
+      ]
+    },
+    "adminSystems": {
+      "passed": 0,
+      "total": 4,
+      "percent": 0,
+      "missing": [
+        "src/core/admin/moderation",
+        "src/core/admin/operations",
+        "src/core/admin/audit",
+        "src/core/admin/alerts"
+      ]
+    },
+    "docs": {
+      "passed": 2,
+      "total": 4,
+      "percent": 50,
+      "missing": [
+        "docs/admin",
+        "docs/economy"
+      ]
+    },
+    "concepts": {
+      "passed": 18,
+      "total": 18,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "walletRoutes",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "app/zencoin/page.tsx",
+        "app/zencoin/wallet/page.tsx",
+        "app/zencoin/history/page.tsx",
+        "app/zencoin/rewards/page.tsx"
+      ]
+    },
+    {
+      "name": "apiRoutes",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "app/api/zencoin/wallet/route.ts",
+        "app/api/zencoin/ledger/route.ts",
+        "app/api/zencoin/rewards/route.ts",
+        "app/api/zencoin/transactions/route.ts",
+        "app/api/admin/governance/route.ts",
+        "app/api/admin/economy/route.ts",
+        "app/api/admin/fraud/route.ts",
+        "app/api/admin/moderation/route.ts",
+        "app/api/admin/audit/route.ts"
+      ]
+    },
+    {
+      "name": "governanceSystems",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "src/core/governance/council",
+        "src/core/governance/voting",
+        "src/core/governance/transparency",
+        "src/core/governance/enforcement"
+      ]
+    },
+    {
+      "name": "adminSystems",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "src/core/admin/moderation",
+        "src/core/admin/operations",
+        "src/core/admin/audit",
+        "src/core/admin/alerts"
+      ]
+    },
+    {
+      "name": "adminRoutes",
+      "score": 25,
+      "leftPercent": 75,
+      "missing": [
+        "app/admin/zencoin/page.tsx",
+        "app/admin/governance/page.tsx",
+        "app/admin/economy/page.tsx"
+      ]
+    },
+    {
+      "name": "components",
+      "score": 25,
+      "leftPercent": 75,
+      "missing": [
+        "components/zencoin",
+        "components/governance",
+        "components/economy"
+      ]
+    },
+    {
+      "name": "runtimeCore",
+      "score": 50,
+      "leftPercent": 50,
+      "missing": [
+        "src/core/economy",
+        "src/core/admin"
+      ]
+    },
+    {
+      "name": "docs",
+      "score": 50,
+      "leftPercent": 50,
+      "missing": [
+        "docs/admin",
+        "docs/economy"
+      ]
+    },
+    {
+      "name": "economySystems",
+      "score": 60,
+      "leftPercent": 40,
+      "missing": [
+        "src/core/zencoin/rewards",
+        "src/core/zencoin/stability"
+      ]
+    },
+    {
+      "name": "concepts",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "validation": {
+    "prisma": "PASS",
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "logs": "/tmp/zencoin_admin_audit_logs_1779710003"
+  },
+  "finalStatus": "PARTIAL_OR_FAILED"
+}

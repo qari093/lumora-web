@@ -1,0 +1,169 @@
+import type { RuntimeDomain } from "../domainRegistry";
+import type { CanonicalOrchestrator } from "./types";
+
+export const CANONICAL_ORCHESTRATORS: CanonicalOrchestrator[] = [
+  {
+    domain: "feed",
+    name: "FeedOrchestrator",
+    canonicalPrefix: "/api/feed",
+    status: "active",
+    ownsWrites: false,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["feed assembly", "freshness", "diversity", "guardrails"]
+  },
+  {
+    domain: "fyp",
+    name: "FypOrchestrator",
+    canonicalPrefix: "/api/fyp",
+    status: "active",
+    ownsWrites: false,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["native FYP", "runtime feed", "playback handoff", "ranking handoff"]
+  },
+  {
+    domain: "content",
+    name: "ContentOrchestrator",
+    canonicalPrefix: "/api/content",
+    status: "active",
+    ownsWrites: false,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["metadata", "origin", "lifecycle", "schema"]
+  },
+  {
+    domain: "signals",
+    name: "SignalsOrchestrator",
+    canonicalPrefix: "/api/signals",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["external signals", "normalization", "freshness", "signal scoring"]
+  },
+  {
+    domain: "intelligence",
+    name: "IntelligenceOrchestrator",
+    canonicalPrefix: "/api/intelligence",
+    status: "active",
+    ownsWrites: false,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["ranking compute", "emotion scoring", "weights", "trend clustering"]
+  },
+  {
+    domain: "personalization",
+    name: "PersonalizationOrchestrator",
+    canonicalPrefix: "/api/personalization",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["interest graph", "session learning", "pacing", "short-term intent"]
+  },
+  {
+    domain: "creator_alchemy",
+    name: "CreatorAlchemyOrchestrator",
+    canonicalPrefix: "/api/creator-alchemy",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["creator hub", "quiet gifts", "rituals", "creator economy"]
+  },
+  {
+    domain: "live",
+    name: "LiveOrchestrator",
+    canonicalPrefix: "/api/live",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["rooms", "room state", "events", "reactions", "publish"]
+  },
+  {
+    domain: "wallet",
+    name: "WalletOrchestrator",
+    canonicalPrefix: "/api/wallet",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["balances", "ledger", "credit", "debit", "withdrawals"]
+  },
+  {
+    domain: "trust_safety",
+    name: "TrustOrchestrator",
+    canonicalPrefix: "/api/trust",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["trust score", "moderation", "abuse", "enforcement"]
+  },
+  {
+    domain: "infra_telemetry",
+    name: "InfraOrchestrator",
+    canonicalPrefix: "/api/infra",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["monitoring", "cost", "tracing", "diagnostics"]
+  },
+  {
+    domain: "commerce",
+    name: "CommerceOrchestrator",
+    canonicalPrefix: "/api/products",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["products", "orders", "payments", "seller bridge"]
+  },
+  {
+    domain: "gmar",
+    name: "GmarOrchestrator",
+    canonicalPrefix: "/api/gmar",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["game state", "missions", "economy", "launch readiness"]
+  },
+  {
+    domain: "lumaspace",
+    name: "LumaSpaceOrchestrator",
+    canonicalPrefix: "/api/lumaspace",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["reflection", "shadow", "runtime", "civilization state"]
+  },
+  {
+    domain: "media",
+    name: "MediaOrchestrator",
+    canonicalPrefix: "/api/video",
+    status: "active",
+    ownsWrites: true,
+    ownsEvents: true,
+    ownsPublicAdapters: true,
+    responsibilities: ["video", "movies", "music", "catalog", "playback readiness"]
+  },
+  {
+    domain: "unknown",
+    name: "RuntimeConsolidationOrchestrator",
+    canonicalPrefix: "/api/runtime-consolidation",
+    status: "stub",
+    ownsWrites: false,
+    ownsEvents: false,
+    ownsPublicAdapters: false,
+    responsibilities: ["classification", "audit", "migration"]
+  }
+];
+
+export function getCanonicalOrchestrator(domain: RuntimeDomain): CanonicalOrchestrator {
+  return CANONICAL_ORCHESTRATORS.find((orchestrator) => orchestrator.domain === domain) ?? CANONICAL_ORCHESTRATORS[CANONICAL_ORCHESTRATORS.length - 1];
+}

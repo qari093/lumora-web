@@ -1,0 +1,28 @@
+=== Array.from({ length: 20 }) expectations ===
+tests/fyp94/fyp_phase2_pack4.test.ts:    const clips = Array.from({ length: 20 }).map((_, i) => ({
+tests/fyp94/fyp94_dynamic_pool_fix.test.ts:    expect(page).not.toContain("Array.from({ length: 20 })");
+tests/fyp94/visibility_pack_001_steps_261_265.test.ts:      layers: [Array.from({ length: 20 }).map((_, index) => item(String(index)))],
+tests/fyp94/fyp94_real_clip_rotation_fix.test.ts:    expect(page.includes("Array.from({ length: 20 })") || page.includes("Array.from({ length: Number(20) })")).toBe(true);
+tests/fyp94/fyp_phase2_pack3.test.ts:    const clips = Array.from({ length: 20 }).map((_, i) => ({
+tests/fyp94/fyp_phase4_pack7.test.ts:  const items = Array.from({ length: 20 }).map((_, i) => ({ id: String(i + 1) }));
+
+=== fetch( positive/negative expectations ===
+tests/fyp94/fyp94_page_hard_runtime_fix.test.ts:    expect(page).not.toContain("fetch(");
+tests/fyp94/fyp94_runtime_fix_internal_server_error.test.ts:    expect(page).not.toContain("fetch(`${base}/api/fyp94/feed`");
+
+=== readdirSync positive/negative expectations ===
+tests/fyp94/fyp94_diversity_pack_001.test.ts:    expect(route).not.toContain("readdirSync(dir)");
+tests/fyp94/fyp94_pack13_feed_api_stabilization.test.ts:    expect(route).not.toContain("readdirSync");
+tests/fyp94/fyp94_dynamic_pool_fix.test.ts:    expect(route).not.toContain("readdirSync");
+
+=== Fyp94VisiblePlayer exact src/poster expectations ===
+tests/fyp94/visibility_pack_001_steps_261_265.test.ts:      playbackUrl: `/v/${id}.mp4`,
+tests/fyp94/visibility_pack_002_steps_266_270.test.ts:    expect(s).toContain("poster={current.posterUrl}");
+tests/fyp94/visibility_pack_002_steps_266_270.test.ts:    expect(s).toContain("src={current.playbackUrl}");
+tests/fyp94/visibility_pack_003_steps_271_275.test.ts:      playbackUrl: `/native-fyp/fallback/${id}.mp4`,
+tests/fyp94/visibility_pack_003_steps_271_275.test.ts:    expect(response.items.every((x) => x.playbackUrl && x.posterUrl)).toBe(true);
+tests/fyp94/visibility_pack_001_steps_261_265.test.ts:      playbackUrl: `/v/${id}.mp4`,
+tests/fyp94/visibility_pack_002_steps_266_270.test.ts:    expect(s).toContain("poster={current.posterUrl}");
+tests/fyp94/visibility_pack_002_steps_266_270.test.ts:    expect(s).toContain("src={current.playbackUrl}");
+tests/fyp94/visibility_pack_003_steps_271_275.test.ts:      playbackUrl: `/native-fyp/fallback/${id}.mp4`,
+tests/fyp94/visibility_pack_003_steps_271_275.test.ts:    expect(response.items.every((x) => x.playbackUrl && x.posterUrl)).toBe(true);

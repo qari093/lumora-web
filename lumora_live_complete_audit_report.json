@@ -1,0 +1,15 @@
+{
+  "liveCompleteAudit": true,
+  "status": "FAILED",
+  "lockCount": 25,
+  "missingCount": 6,
+  "functionExportCount": 170,
+  "dashboardLayoutSignalCount": 273,
+  "typecheckStatus": 0,
+  "testStatus": 0,
+  "buildStatus": 0,
+  "buildIssueCount": 3,
+  "buildLog": "/tmp/lumora_live_complete_audit_build_1779143780.log",
+  "auditLog": "/tmp/lumora_live_complete_audit_1779143753.log",
+  "auditedAt": "2026-05-18T22:41:30Z"
+}

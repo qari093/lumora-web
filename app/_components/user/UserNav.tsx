@@ -21,7 +21,7 @@ export function UserNav() {
   return (
     <nav style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
       {/* Added by step: celebrations */}
-      <a href="/celebrations">Celebrations</a>
+      <a href="/celebrations" aria-label="Celebrations">Celebrations</a>
       <A href="/" label="Home" />
       <A href="/fyp" label="For You" />
       <A href="/videos" label="Videos" />

@@ -1,0 +1,108 @@
+{
+  "auditedAt": "2026-05-24T21:53:36.195Z",
+  "status": "PASS",
+  "integrationPercent": 100,
+  "leftPercent": 0,
+  "counts": {
+    "coreFiles": 30,
+    "testFiles": 14,
+    "lumexaUiFiles": 6,
+    "lumexaDocs": 4,
+    "lumexaLocks": 18
+  },
+  "categories": {
+    "coreFiles": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100,
+      "missing": []
+    },
+    "tests": {
+      "passed": 14,
+      "total": 14,
+      "percent": 100,
+      "missing": []
+    },
+    "locks": {
+      "passed": 15,
+      "total": 15,
+      "percent": 100,
+      "missing": []
+    },
+    "concepts": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100,
+      "missing": []
+    },
+    "uiDashboardLayout": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    },
+    "docs": {
+      "passed": 2,
+      "total": 2,
+      "percent": 100,
+      "missing": []
+    },
+    "runtimeExports": {
+      "passed": 4,
+      "total": 4,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "coreFiles",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "tests",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "locks",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "concepts",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "uiDashboardLayout",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "docs",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "runtimeExports",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "nextActions": [],
+  "validation": {
+    "typecheck": "PASS",
+    "lumexaTests": "PASS",
+    "logs": "/tmp/lumexa_real_audit_logs_1779659615"
+  },
+  "finalStatus": "PASS"
+}

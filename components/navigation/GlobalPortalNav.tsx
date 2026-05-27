@@ -49,7 +49,7 @@ export default function GlobalPortalNav() {
         </Link>
 
         <Link href="/system" data-global-nav-system-key="system" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>System</Link>
-        <Link href="/dashboard" data-global-nav-system-key="dashboard" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>Dashboard</Link>
+        <Link href="/creator/dashboard" data-global-nav-system-key="dashboard" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>Dashboard</Link>
         <Link href="/launch" data-global-nav-system-key="launch" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>Launch</Link>
         <Link href="/status" data-global-nav-system-key="status" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>Status</Link>
         <Link href="/progress" data-global-nav-system-key="progress" style={{ textDecoration: "none", padding: "8px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.10)" }}>Progress</Link>

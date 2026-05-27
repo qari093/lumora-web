@@ -1,0 +1,22 @@
+export const REAL_QUERIES = [
+  "people arguing",
+  "funny fail",
+  "street interview",
+  "crowd cheering",
+  "kids laughing",
+  "live performance",
+  "sports celebration",
+  "emotional moment",
+  "unexpected moment",
+  "public reaction",
+  "street fight crowd",
+  "festival dancing",
+  "wedding reaction",
+  "airport goodbye",
+  "surprise reaction",
+  "school kids playing",
+  "street musician",
+  "crowd panic",
+  "people running",
+  "night street chaos"
+];

@@ -1,0 +1,3 @@
+docs/launch-readiness/phase03_persistence_state_integrity_report.json
+docs/launch-readiness/phase01_route_reality_report.json
+docs/launch-readiness/phase02_reality_simulation_report.json

@@ -1,0 +1,560 @@
+[
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpzb3V0",
+    "source": "google_trends",
+    "title": "south korea secure crude oil",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776276235813,
+    "topic": "secure"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczptYXJr",
+    "source": "google_trends",
+    "title": "mark mobius",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776276235813,
+    "topic": "mobius"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczphcnRp",
+    "source": "google_trends",
+    "title": "artificial intelligence arms race",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776276235813,
+    "topic": "artificial"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpicmFk",
+    "source": "google_trends",
+    "title": "brad stevens",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776276235813,
+    "topic": "stevens"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpzYW0g",
+    "source": "google_trends",
+    "title": "sam huff",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776276235813,
+    "topic": "sam"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczphbC1u",
+    "source": "google_trends",
+    "title": "al-nassr vs al-ettifaq",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776276235813,
+    "topic": "ettifaq"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpyZXRp",
+    "source": "google_trends",
+    "title": "retirement",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776276235813,
+    "topic": "retirement"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpzcGVu",
+    "source": "google_trends",
+    "title": "spencer pratt",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776276235813,
+    "topic": "spencer"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczpzaGlv",
+    "source": "google_trends",
+    "title": "shiocton",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776276235813,
+    "topic": "shiocton"
+  },
+  {
+    "id": "Z29vZ2xlX3RyZW5kczp3ZWln",
+    "source": "google_trends",
+    "title": "weight loss",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776276235813,
+    "topic": "weight"
+  },
+  {
+    "id": "cnNzOk5ZVCAmZ3Q7IFRvcCBT",
+    "source": "rss",
+    "title": "NYT &gt; Top Stories",
+    "url": "",
+    "score_hint": 999,
+    "ts": 1776276235813,
+    "topic": "stories"
+  },
+  {
+    "id": "cnNzOkRlYnQgQWxhcm1zIFJp",
+    "source": "rss",
+    "title": "Debt Alarms Ring as Countries Rack Up More Emergency Spending",
+    "url": "",
+    "score_hint": 998,
+    "ts": 1776276235813,
+    "topic": "alarms"
+  },
+  {
+    "id": "cnNzOkFtaWQgSXJhbiBXYXIs",
+    "source": "rss",
+    "title": "Amid Iran War, Companies Look to Extend a Record Profit Run by Raising Prices",
+    "url": "",
+    "score_hint": 997,
+    "ts": 1776276235813,
+    "topic": "companies"
+  },
+  {
+    "id": "cnNzOlRydW1wIEJyZWFrcyBX",
+    "source": "rss",
+    "title": "Trump Breaks With Meloni, Italy’s Leader, Amid Dispute Over Pope and Iran",
+    "url": "",
+    "score_hint": 996,
+    "ts": 1776276235813,
+    "topic": "breaks"
+  },
+  {
+    "id": "cnNzOlZhbmNlIFNheXMgUG9w",
+    "source": "rss",
+    "title": "Vance Says Pope Leo Should Be More Careful When Talking About Theology",
+    "url": "",
+    "score_hint": 995,
+    "ts": 1776276235813,
+    "topic": "should"
+  },
+  {
+    "id": "cnNzOlRydW1w4oCZcyBHby1U",
+    "source": "rss",
+    "title": "Trump’s Go-To Justification for Contentious Decisions: National Security",
+    "url": "",
+    "score_hint": 994,
+    "ts": 1776276235813,
+    "topic": "justification"
+  },
+  {
+    "id": "cnNzOlRydW1wIEluY3JlYXNl",
+    "source": "rss",
+    "title": "Trump Increased Tax Refunds, but a Political Challenge Still Looms",
+    "url": "",
+    "score_hint": 993,
+    "ts": 1776276235813,
+    "topic": "increased"
+  },
+  {
+    "id": "cnNzOldoYXQgSXMg4oCYSmFn",
+    "source": "rss",
+    "title": "What Is ‘Jagged Intelligence’ and How Can It Reframe the AI Debate?",
+    "url": "",
+    "score_hint": 992,
+    "ts": 1776276235813,
+    "topic": "jagged"
+  },
+  {
+    "id": "cnNzOlRoYXQgTWVldGluZyBZ",
+    "source": "rss",
+    "title": "That Meeting You Hate May Keep A.I. From Stealing Your Job",
+    "url": "",
+    "score_hint": 991,
+    "ts": 1776276235813,
+    "topic": "meeting"
+  },
+  {
+    "id": "cnNzOldlIERvbuKAmXQgUmVh",
+    "source": "rss",
+    "title": "We Don’t Really Know How A.I. Works. That’s a Problem.",
+    "url": "",
+    "score_hint": 990,
+    "ts": 1776276235813,
+    "topic": "really"
+  },
+  {
+    "id": "cnNzOlNpc3RlciBNYXJ5IEth",
+    "source": "rss",
+    "title": "Sister Mary Kay and the Waning Days of the Sisters of Charity",
+    "url": "",
+    "score_hint": 989,
+    "ts": 1776276235813,
+    "topic": "sister"
+  },
+  {
+    "id": "cnNzOlN3YWx3ZWxs4oCZcyBF",
+    "source": "rss",
+    "title": "Swalwell’s Exit Injects ‘Chaos’ Into California Governor’s Race",
+    "url": "",
+    "score_hint": 988,
+    "ts": 1776276235813,
+    "topic": "swalwell"
+  },
+  {
+    "id": "cnNzOkdhbGxlZ28gRGlzbWlz",
+    "source": "rss",
+    "title": "Gallego Dismissed Rumors of a ‘Flirty’ Swalwell, Highlighting a Culture of Silence",
+    "url": "",
+    "score_hint": 987,
+    "ts": 1776276235813,
+    "topic": "gallego"
+  },
+  {
+    "id": "cnNzOlZpdmVrIFJhbWFzd2Ft",
+    "source": "rss",
+    "title": "Vivek Ramaswamy’s Ohio Governor Bid: Can He Win Over Voters?",
+    "url": "",
+    "score_hint": 986,
+    "ts": 1776276235813,
+    "topic": "ramaswamy"
+  },
+  {
+    "id": "cnNzOkEgUHJvZ3Jlc3NpdmUg",
+    "source": "rss",
+    "title": "A Progressive Group Rolls Out a Campus Competitor to Turning Point",
+    "url": "",
+    "score_hint": 985,
+    "ts": 1776276235813,
+    "topic": "progressive"
+  },
+  {
+    "id": "cnNzOldoYXQgdGhlIE5ldyBM",
+    "source": "rss",
+    "title": "What the New Loan Caps Will Mean for Grad Students This Fall",
+    "url": "",
+    "score_hint": 984,
+    "ts": 1776276235813,
+    "topic": "students"
+  },
+  {
+    "id": "cnNzOkFzIExvcyBBbmdlbGVz",
+    "source": "rss",
+    "title": "As Los Angeles Rebuilds, a Surge of Experimentation",
+    "url": "",
+    "score_hint": 983,
+    "ts": 1776276235813,
+    "topic": "angeles"
+  },
+  {
+    "id": "cnNzOlNhbnRhQ29uIExlYWRl",
+    "source": "rss",
+    "title": "SantaCon Leader Took More Than $1 Million for Own Luxuries, U.S. Says",
+    "url": "",
+    "score_hint": 982,
+    "ts": 1776276235813,
+    "topic": "santacon"
+  },
+  {
+    "id": "cnNzOuKAmEdpYW504oCZIFJl",
+    "source": "rss",
+    "title": "‘Giant’ Revisits Roald Dahl’s Antisemitic Comments: What to Know",
+    "url": "",
+    "score_hint": 981,
+    "ts": 1776276235813,
+    "topic": "revisits"
+  },
+  {
+    "id": "cnNzOkpvaG4gTGl0aGdvdyBh",
+    "source": "rss",
+    "title": "John Lithgow as Roald Dahl in ‘Giant’: A Study in Monstrosity",
+    "url": "",
+    "score_hint": 980,
+    "ts": 1776276235813,
+    "topic": "lithgow"
+  },
+  {
+    "id": "cnNzOkluIERlZmVuc2Ugb2Yg",
+    "source": "rss",
+    "title": "In Defense of Dumb Dogs",
+    "url": "",
+    "score_hint": 979,
+    "ts": 1776276235813,
+    "topic": "defense"
+  },
+  {
+    "id": "cnNzOlRydW1wIElzIGluIE92",
+    "source": "rss",
+    "title": "Trump Is in Over His Head",
+    "url": "",
+    "score_hint": 978,
+    "ts": 1776276235813,
+    "topic": "trump"
+  },
+  {
+    "id": "cnNzOkl04oCZcyBUYXggRGF5",
+    "source": "rss",
+    "title": "It’s Tax Day",
+    "url": "",
+    "score_hint": 977,
+    "ts": 1776276235813,
+    "topic": "it"
+  },
+  {
+    "id": "cnNzOkNoZWJveWdhbiBEYW0g",
+    "source": "rss",
+    "title": "Cheboygan Dam Failure Could Imperil Thousands in Northern Michigan",
+    "url": "",
+    "score_hint": 976,
+    "ts": 1776276235813,
+    "topic": "cheboygan"
+  },
+  {
+    "id": "cnNzOlBhcmlzIE1hbiBXaW5z",
+    "source": "rss",
+    "title": "Paris Man Wins $1.2 Million Picasso Painting in Charity Raffle",
+    "url": "",
+    "score_hint": 975,
+    "ts": 1776276235813,
+    "topic": "million"
+  },
+  {
+    "id": "cnNzOlRob3VzYW5kcyBvZiBO",
+    "source": "rss",
+    "title": "Thousands of N.Y.C. Doormen Seeking Better Pay Are Set to Vote on Strike",
+    "url": "",
+    "score_hint": 974,
+    "ts": 1776276235813,
+    "topic": "thousands"
+  },
+  {
+    "id": "cnNzOlN1cmdlb24gV2hvIFJl",
+    "source": "rss",
+    "title": "Surgeon Who Removed Wrong Organ From Patient Is Charged in His Death",
+    "url": "",
+    "score_hint": 973,
+    "ts": 1776276235813,
+    "topic": "surgeon"
+  },
+  {
+    "id": "1sloxx3",
+    "source": "reddit",
+    "title": "Having to write a check just to receive your UPS package because of tariffs",
+    "url": "https://v.redd.it/9kxpm14co8vg1",
+    "score_hint": 54134,
+    "ts": 1776276235816,
+    "topic": "having"
+  },
+  {
+    "id": "1sm87wv",
+    "source": "reddit",
+    "title": "2017 Chipotle menu boards, a chicken burrito was $6.50",
+    "url": "https://i.redd.it/o4ibf8l8advg1.jpeg",
+    "score_hint": 22808,
+    "ts": 1776276235816,
+    "topic": "chipotle"
+  },
+  {
+    "id": "1smanff",
+    "source": "reddit",
+    "title": "Israeli settler harasses a woman outside of Hebron",
+    "url": "https://i.redd.it/utbgj4jdpdvg1.jpeg",
+    "score_hint": 27191,
+    "ts": 1776276235816,
+    "topic": "israeli"
+  },
+  {
+    "id": "1smalhy",
+    "source": "reddit",
+    "title": "It would be awesome for consumers. So we can't have it",
+    "url": "https://i.redd.it/hgfwoig3pdvg1.jpeg",
+    "score_hint": 11273,
+    "ts": 1776276235816,
+    "topic": "awesome"
+  },
+  {
+    "id": "1sm1l4n",
+    "source": "reddit",
+    "title": "Zelenskyy: return of draft-age Ukrainian men from abroad is a matter of fairness",
+    "url": "https://www.pravda.com.ua/eng/news/2026/04/14/8030112/",
+    "score_hint": 14067,
+    "ts": 1776276235816,
+    "topic": "zelenskyy"
+  },
+  {
+    "id": "1sln99b",
+    "source": "reddit",
+    "title": "I did it! Two days ago I asked and everyone said it was time. Presenting your newest War Boy!",
+    "url": "https://www.reddit.com/gallery/1sln99b",
+    "score_hint": 33121,
+    "ts": 1776276235816,
+    "topic": "everyone"
+  },
+  {
+    "id": "1slsn5j",
+    "source": "reddit",
+    "title": "Clavicular Suffers Suspected Overdose, Hospitalized",
+    "url": "https://www.reddit.com/gallery/1slsn5j",
+    "score_hint": 7752,
+    "ts": 1776276235816,
+    "topic": "clavicular"
+  },
+  {
+    "id": "1sm6mez",
+    "source": "reddit",
+    "title": "Someone reported me to HR for having a “vape” at my desk",
+    "url": "https://i.redd.it/3wpjmqgizcvg1.jpeg",
+    "score_hint": 33247,
+    "ts": 1776276235816,
+    "topic": "someone"
+  },
+  {
+    "id": "1slo5rt",
+    "source": "reddit",
+    "title": "Justice Department moves to toss seditious conspiracy convictions of Oath Keepers and Proud Boys",
+    "url": "https://apnews.com/article/proud-boys-oath-keepers-convictions-dropped-doj-ad679108ab84083694261efc101e60ea",
+    "score_hint": 23142,
+    "ts": 1776276235816,
+    "topic": "justice"
+  },
+  {
+    "id": "1sm66tw",
+    "source": "reddit",
+    "title": "Class Daddy Act by Eminem",
+    "url": "https://i.redd.it/htqwh3bgwcvg1.jpeg",
+    "score_hint": 34613,
+    "ts": 1776276235816,
+    "topic": "eminem"
+  },
+  {
+    "id": "1sm8q9i",
+    "source": "reddit",
+    "title": "How THOTFUL?",
+    "url": "https://i.redd.it/bczwf1gcddvg1.jpeg",
+    "score_hint": 9026,
+    "ts": 1776276235816,
+    "topic": "thotful"
+  },
+  {
+    "id": "1slwinp",
+    "source": "reddit",
+    "title": "Vance says pope should ‘be careful’ when talking about theology",
+    "url": "https://www.nbcnews.com/video/vance-says-pope-should-be-careful-when-talking-about-theology-261400645540",
+    "score_hint": 27233,
+    "ts": 1776276235816,
+    "topic": "should"
+  },
+  {
+    "id": "1smbadf",
+    "source": "reddit",
+    "title": "Itsukushima Shinto Shrine appears on the dish when sauce is poured on it.",
+    "url": "https://i.redd.it/jsn03cuftdvg1.jpeg",
+    "score_hint": 8373,
+    "ts": 1776276235816,
+    "topic": "itsukushima"
+  },
+  {
+    "id": "1sm80u5",
+    "source": "reddit",
+    "title": "During nail trimming, one groundhog seems to have already accepted its fate, while the other panics with every snip",
+    "url": "https://v.redd.it/j1nz3rly8dvg1",
+    "score_hint": 10199,
+    "ts": 1776276235816,
+    "topic": "during"
+  },
+  {
+    "id": "1slrnzk",
+    "source": "reddit",
+    "title": "Johnny Somali found guilty of all charges as South Korea sentences streamer to prison with labor - Dexerto",
+    "url": "https://www.dexerto.com/entertainment/johnny-somali-found-guilty-of-all-charges-as-south-korea-sentences-streamer-to-prison-with-labor-3351856/",
+    "score_hint": 35093,
+    "ts": 1776276235816,
+    "topic": "johnny"
+  },
+  {
+    "id": "1sm6nnt",
+    "source": "reddit",
+    "title": "South Korea jails American YouTuber for public nuisance",
+    "url": "https://www.bbc.co.uk/news/articles/cj400lje9vxo",
+    "score_hint": 12184,
+    "ts": 1776276235816,
+    "topic": "american"
+  },
+  {
+    "id": "1sm7imh",
+    "source": "reddit",
+    "title": "Are they foreshadowing her death?",
+    "url": "https://www.reddit.com/gallery/1sm7imh",
+    "score_hint": 10987,
+    "ts": 1776276235816,
+    "topic": "foreshadowing"
+  },
+  {
+    "id": "1sm9qw8",
+    "source": "reddit",
+    "title": "TIL In 2000, Metallica hired a consulting firm to monitor Napster for people illegally sharing their music. The firm produced a 60,000-page list of 335,435 users, which Metallica delivered to Napster's office and demanded the users be banned.",
+    "url": "https://en.wikipedia.org/wiki/Metallica_v._Napster,_Inc.#Case",
+    "score_hint": 7510,
+    "ts": 1776276235816,
+    "topic": "metallica"
+  },
+  {
+    "id": "1sm8l5d",
+    "source": "reddit",
+    "title": "Waiting For Laugh",
+    "url": "https://v.redd.it/wiwk5p4kcdvg1",
+    "score_hint": 8970,
+    "ts": 1776276235816,
+    "topic": "waiting"
+  },
+  {
+    "id": "1sly8yp",
+    "source": "reddit",
+    "title": "Countries That Won't Participate In Eurovision 2026 due to Israel",
+    "url": "https://i.redd.it/btcvoejlvavg1.png",
+    "score_hint": 8578,
+    "ts": 1776276235816,
+    "topic": "countries"
+  },
+  {
+    "id": "1sm7jir",
+    "source": "reddit",
+    "title": "Trump posts a picture of Jesus hugging him days after his AI-deity image drew widespread anger",
+    "url": "https://www.independent.co.uk/news/world/americas/us-politics/trump-jesus-photo-backlash-ai-b2958240.html",
+    "score_hint": 9538,
+    "ts": 1776276235816,
+    "topic": "picture"
+  },
+  {
+    "id": "1sm57o3",
+    "source": "reddit",
+    "title": "Peter why does gen z leave the desk at 17:00?",
+    "url": "https://i.redd.it/l4a6yfhjpcvg1.jpeg",
+    "score_hint": 11717,
+    "ts": 1776276235816,
+    "topic": "peter"
+  },
+  {
+    "id": "1sma6gf",
+    "source": "reddit",
+    "title": "Dave Chappelle Says ‘I Resent the Republican Party’ Because They ‘Weaponized’ Transgender Jokes: ‘That’s Not What I Was Doing’",
+    "url": "https://variety.com/2026/tv/news/dave-chappelle-republicans-transgender-jokes-weaponized-1236722311/",
+    "score_hint": 6573,
+    "ts": 1776276235816,
+    "topic": "chappelle"
+  },
+  {
+    "id": "1sm6uvt",
+    "source": "reddit",
+    "title": "Allbirds announces stunning pivot from shoes to AI, stock explodes more than 300%",
+    "url": "https://www.cnbc.com/2026/04/15/allbirds-bird-stock-shoes-ai.html",
+    "score_hint": 8405,
+    "ts": 1776276235816,
+    "topic": "allbirds"
+  },
+  {
+    "id": "1sm8ztr",
+    "source": "reddit",
+    "title": "AITA for refusing to take off my engagement ring during a wedding?",
+    "url": "https://www.reddit.com/r/AmItheAsshole/comments/1sm8ztr/aita_for_refusing_to_take_off_my_engagement_ring/",
+    "score_hint": 3423,
+    "ts": 1776276235816,
+    "topic": "refusing"
+  }
+]

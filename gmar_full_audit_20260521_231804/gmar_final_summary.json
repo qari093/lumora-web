@@ -1,0 +1,22 @@
+{
+  "auditedAt": "2026-05-21T21:22:00.871Z",
+  "finalStatus": "PASS",
+  "lockStatus": 0,
+  "structureStatus": 0,
+  "semanticStatus": "0",
+  "testStatus": 0,
+  "typecheckStatus": 0,
+  "buildStatus": 0,
+  "semanticScorePercent": 100,
+  "totalSemanticChecks": 12,
+  "passedSemanticChecks": 12,
+  "failedSemanticChecks": 0,
+  "reportDir": "gmar_full_audit_20260521_231804",
+  "files": {
+    "semanticReport": "gmar_full_audit_20260521_231804/gmar_full_audit_report.json",
+    "raw": "gmar_full_audit_20260521_231804/gmar_full_audit_raw.txt",
+    "tests": "gmar_full_audit_20260521_231804/gmar_tests.log",
+    "typecheck": "gmar_full_audit_20260521_231804/typecheck.log",
+    "build": "gmar_full_audit_20260521_231804/build.log"
+  }
+}

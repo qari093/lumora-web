@@ -1,0 +1,3122 @@
+{
+  "generatedAt": "2026-05-26T19:38:18.638Z",
+  "clusterCount": 9,
+  "findingCount": 333,
+  "highRiskCount": 189,
+  "mediumRiskCount": 104,
+  "deprecatedAliasCount": 26,
+  "clusters": [
+    {
+      "responsibility": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "routePrefixes": [
+        "/api/fyp",
+        "/api/feed",
+        "/api/content/multi-source",
+        "/api/fyp94"
+      ],
+      "risk": "high",
+      "reason": "FYP, generic feed, content multi-source and FYP94 routes can compete for feed assembly."
+    },
+    {
+      "responsibility": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "routePrefixes": [
+        "/api/intelligence",
+        "/api/feed/ranking",
+        "/api/fyp/ranking",
+        "/api/profile",
+        "/api/feedback/scoring"
+      ],
+      "risk": "high",
+      "reason": "Ranking, scoring and profile-derived scoring must flow through intelligence orchestration."
+    },
+    {
+      "responsibility": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "routePrefixes": [
+        "/api/personalization",
+        "/api/profile",
+        "/api/context"
+      ],
+      "risk": "medium",
+      "reason": "Profile and personalization routes can duplicate user-state interpretation."
+    },
+    {
+      "responsibility": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "routePrefixes": [
+        "/api/signals",
+        "/api/ingest",
+        "/api/news",
+        "/api/live/google-trends"
+      ],
+      "risk": "medium",
+      "reason": "External trend/news/social signal ingestion needs a single normalization boundary."
+    },
+    {
+      "responsibility": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "routePrefixes": [
+        "/api/wallet",
+        "/api/wallets",
+        "/api/coin",
+        "/api/ledger"
+      ],
+      "risk": "high",
+      "reason": "Ledger write paths must be centralized to avoid balance drift."
+    },
+    {
+      "responsibility": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "routePrefixes": [
+        "/api/trust",
+        "/api/safety",
+        "/api/security",
+        "/api/moderation",
+        "/api/mod"
+      ],
+      "risk": "high",
+      "reason": "Safety, trust and moderation enforcement must share canonical policy."
+    },
+    {
+      "responsibility": "live_room_runtime",
+      "canonicalDomain": "live",
+      "routePrefixes": [
+        "/api/live/room",
+        "/api/live/rooms",
+        "/api/live/roomlist",
+        "/api/live/roomslist",
+        "/api/live/room-state"
+      ],
+      "risk": "medium",
+      "reason": "Live room naming drift can create duplicate room state paths."
+    },
+    {
+      "responsibility": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "routePrefixes": [
+        "/api/video",
+        "/api/videos",
+        "/api/movies",
+        "/api/music",
+        "/api/cineverse"
+      ],
+      "risk": "medium",
+      "reason": "Video, movies, music and CineVerse need clear media orchestration boundaries."
+    },
+    {
+      "responsibility": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "routePrefixes": [
+        "/api/products",
+        "/api/orders",
+        "/api/payments",
+        "/api/shop",
+        "/api/seller",
+        "/api/vendor"
+      ],
+      "risk": "medium",
+      "reason": "Commerce routes need one transaction ownership layer."
+    }
+  ],
+  "findings": [
+    {
+      "route": "/api/cineverse/evolution",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/federation/health",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/fyp",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/history",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/ingest",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/list",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/video",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/reactions",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/spoiler",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/summary",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/teasers",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/timeline",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/coin/balance",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/coin/ledger",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/coin/transfer",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/content/multi-source/debug",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/content/multi-source/feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/feed",
+      "risk": "high"
+    },
+    {
+      "route": "/api/content/multi-source/proof",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/context",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/ab",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/assemble",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/cache",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/cineverse",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/dedupe",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/discovery",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/diversity",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/final",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/fomo",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/freshness",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/guardrails",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/integrity",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/latency",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/metrics",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/mix",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/mock",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/override",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/personalize",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/ranking",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/ranking",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/scroll",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/sentiment",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feed/session",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/feedback/scoring",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/alive",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/assembler",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/cache-edge",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/cineverse",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/cold-start",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/connect",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/debug",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/dedup",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/discovery",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/diversity",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/fallback-feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/fomo",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/generate",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/health",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/healthz",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/interact",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/language",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/latency",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/native-events",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/native-feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/native-upload",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/observability",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/personalization",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/prefetch",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/ranking",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/ranking",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/recommend",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/regional",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/runtime",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/scroll",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/session",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/summary",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/track",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/trailer-override",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp94/feed",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/fyp",
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp94/health",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/fyp",
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp94/library",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/fyp",
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp94/production-health",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/fyp",
+      "risk": "high"
+    },
+    {
+      "route": "/api/ingest/credentials",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/dedup",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/fallback-provider",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/health",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/instagram",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/logging",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/metrics",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/normalize",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/queue",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/rate-limit",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/reddit",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/retry",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/rss",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/schema-validation",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/tiktok",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/timestamp-sync",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/trends",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/signals",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/twitch",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/ingest/x",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/intelligence/attention-score",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/clusters",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/coherence",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/consistency",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/cultural-tagging",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/culture",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/decay",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/decay-prediction",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/emotion",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/emotions",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/enriched-store",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/gravity",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/inference-cache",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/lifecycle",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/low-signal-suppression",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/narrative-score",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/priority-boost",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/ranking-cache",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/ranking-compute",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/ranking-precompute",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/recompute",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/recompute-scheduler",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/saturation",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/trailer-priority",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/trend-clustering",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/weighting",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/intelligence/weights",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/ledger/credit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/ledger/debit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/ledger/list/[ownerId]",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/ledger/refund",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/ledger/refunds/[ownerId]/[refType]/[refId]",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/live/google-trends",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/room",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/room-state",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/roomlist",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/live",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/[id]",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/[id]/end",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/[id]/events",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/[id]/react",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/[id]/reactions",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/list",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/rooms/public",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/live/roomslist",
+      "matchedCluster": "live_room_runtime",
+      "canonicalDomain": "live",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/live",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/mod/action",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/mod/queue",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/mod/report",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/appeal",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/audit",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/block",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/check",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/policy",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/report",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/review-queue",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/risk-mode",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/movies/alive",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/movies/catalog",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/movies/health",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/movies/healthz",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/movies/item",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/music/catalog",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/music/health",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/music/item",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/news",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/orders",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/orders/[id]",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/payments/checkout",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/payments/webhook",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/cache",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/cold-start",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/cross-session-memory",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/diversity",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/emotional-profile",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/explore-exploit",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/interaction-signals",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/interest-graph",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/metrics",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/monitoring",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/pacing-model",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/preference-decay",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/session-learning",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/short-term-intent",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/products",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/products/[id]",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/attention",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/attention",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/cache",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/cache",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/emotion",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/intelligence",
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/emotion",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/intelligence",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/expansion",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/expansion",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/interests",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/personalization",
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/interests",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/personalization",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/locale",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/locale",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/merge",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/merge",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/mix",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/mix",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/pacing",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/pacing",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/replay",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/replay",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/schema",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/schema",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/skip",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/skip",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/summary",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/summary",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/validation",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/validation",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/profile/watchtime",
+      "matchedCluster": "ranking_scoring",
+      "canonicalDomain": "intelligence",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/profile/watchtime",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/safety/abuse-check",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/alerts",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/audio",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/audio-transcript",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/bot-check",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/cooldown",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/dashboard",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/device-nsfw",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/fallback",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/fatigue",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/image",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/keywords",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/motion",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/nsfw",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/personal-limits",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/quarantine",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/rate-limit",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/rating",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/review",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/session-break",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/safety/validation",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/security/abuse",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/security/audit",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/security/check",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/trust",
+      "risk": "high"
+    },
+    {
+      "route": "/api/security/consent",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/seller",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/seller/orders",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/seller/products",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/shop/order",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/products",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/shop/webhook",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/products",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/cache",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/dedupe",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/fallback",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/freshness",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/google-trends",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/instagram",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/latency",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/news-rss",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/normalize",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/reddit",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/score",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/store",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/tiktok",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/twitch",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/signals/twitter-x",
+      "matchedCluster": "external_signal_ingestion",
+      "canonicalDomain": "signals",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/trust",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/anomalies",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/anomaly",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/audit",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/audit-logs",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/bot-detection",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/bot-patterns",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/compliance",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/creator-thresholds",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/decay",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/escalation-rules",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/fake-engagement",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/filter",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/gate",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/metrics",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/misinformation",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/moderation-alerts",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/repeat-offenders",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/anomaly",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/bot",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/enforcement",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/fake-engagement",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/misinformation",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/quarantine",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/scam",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/runtime/toxicity",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/safe-fallback",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/scam",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/score",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/semantic",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/takedown",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/toxic-velocity",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/trust/tq",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/vendor/campaigns",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/vendor/campaigns/[id]",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/vendor/campaigns/assign",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/vendor/campaigns/assigned",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/vendor/summary",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/vendor/timeseries",
+      "matchedCluster": "commerce_orders_payments",
+      "canonicalDomain": "commerce",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/alive",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/color",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/fallback",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/health",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/masking",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/performance",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/preview",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/skin",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/video/sync",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/videos/debug/list",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/videos/feed",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/videos/health",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/videos/healthz",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/videos/stream-webhook",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/wallet",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/balance",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/credit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/credit-ledger",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/debit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/history",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/ledger",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/summary",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/topup",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/txid-check",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallet/withdraw",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": true,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/[ownerId]",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/[ownerId]/balance",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/credit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/debit",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/ensure",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    },
+    {
+      "route": "/api/wallets/transfer",
+      "matchedCluster": "wallet_ledger",
+      "canonicalDomain": "wallet",
+      "canonical": false,
+      "deprecatedAlias": true,
+      "canonicalTarget": "/api/wallet",
+      "risk": "high"
+    }
+  ]
+}

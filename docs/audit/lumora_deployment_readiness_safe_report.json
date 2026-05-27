@@ -1,0 +1,11 @@
+{
+  "auditedAt": "2026-05-26T15:03:21.358Z",
+  "finalStatus": "PASS",
+  "validation": {
+    "prisma": "PASS",
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "build": "PASS",
+    "logs": "/tmp/lumora_deployment_readiness_safe_1779807439"
+  }
+}

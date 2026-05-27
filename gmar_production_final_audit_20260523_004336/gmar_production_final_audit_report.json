@@ -1,0 +1,17 @@
+{
+  "auditedAt": "2026-05-22T22:47:18.411Z",
+  "system": "GMAR Ω∞ Final Production Expansion Audit",
+  "expectedProductionPhases": 7,
+  "status": "FAILED",
+  "completionPercent": 0,
+  "missingLockCount": 0,
+  "missingLocks": [],
+  "testStatus": 0,
+  "typecheckStatus": 0,
+  "buildStatus": 1,
+  "files": {
+    "tests": "gmar_production_final_audit_20260523_004336/gmar_production_tests.log",
+    "typecheck": "gmar_production_final_audit_20260523_004336/typecheck.log",
+    "build": "gmar_production_final_audit_20260523_004336/build.log"
+  }
+}

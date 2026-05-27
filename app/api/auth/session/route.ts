@@ -1,22 +1,8 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
-
 export async function GET() {
-  return NextResponse.json(
-    {
-      ok: true,
-      authenticated: false,
-      user: null,
-      source: "launch-auth-session-stub",
-      ts: new Date().toISOString(),
-    },
-    {
-      status: 200,
-      headers: {
-        "Cache-Control": "no-store",
-        "X-Lumora-Sec": "1",
-      },
-    }
-  );
+  return NextResponse.json({
+    ok: true,
+    session: null,
+  });
 }

@@ -1,0 +1,686 @@
+{
+  "auditedAt": "2026-05-24T18:42:18.700Z",
+  "project": "Lumora complete ecosystem",
+  "overallIntegrationPercent": 89,
+  "overallLeftPercent": 11,
+  "signals": {
+    "areaAverage": 99,
+    "portalAverage": 74,
+    "testCoverageSignal": 90,
+    "structureSignal": 100,
+    "routeCount": 179,
+    "apiRouteCount": 964,
+    "testFileCount": 1034,
+    "lockMarkerCount": 3127,
+    "totalScannedFiles": 18763
+  },
+  "criticalFiles": {
+    "packageJson": true,
+    "appDir": true,
+    "pagesDir": true,
+    "componentsDir": true,
+    "testsDir": true,
+    "prismaSchema": true,
+    "envExample": true,
+    "primaryNav": true,
+    "rootLayout": true,
+    "homePage": true
+  },
+  "areas": {
+    "foundation": {
+      "score": 100,
+      "found": [
+        "package.json",
+        "tsconfig.json",
+        "next.config",
+        "app/layout.tsx",
+        "app/page.tsx",
+        "components/nav/PrimaryNav.tsx"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "layout_design": {
+      "score": 83,
+      "found": [
+        "app/layout.tsx",
+        "components/nav/PrimaryNav.tsx",
+        "components",
+        "app/globals.css",
+        "public"
+      ],
+      "missing": [
+        "tailwind.config"
+      ],
+      "leftPercent": 17
+    },
+    "dashboards": {
+      "score": 100,
+      "found": [
+        "dashboard",
+        "admin",
+        "seller",
+        "creator",
+        "analytics",
+        "wallet",
+        "nexa",
+        "gmar"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "pricing_monetization": {
+      "score": 100,
+      "found": [
+        "pricing",
+        "billing",
+        "stripe",
+        "checkout",
+        "subscription",
+        "monetization",
+        "ads",
+        "zencoin",
+        "wallet"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "commerce_zendoro": {
+      "score": 100,
+      "found": [
+        "zendoro",
+        "seller",
+        "product",
+        "cart",
+        "checkout",
+        "order",
+        "refund",
+        "return",
+        "payout",
+        "kyc",
+        "review",
+        "inventory"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "gmar_games": {
+      "score": 100,
+      "found": [
+        "gmar",
+        "game",
+        "wallet",
+        "zencoin",
+        "leaderboard",
+        "track",
+        "mission"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "fyp_video": {
+      "score": 100,
+      "found": [
+        "fyp",
+        "feed",
+        "video",
+        "videos",
+        "media",
+        "stream",
+        "ranking",
+        "recommendation"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "live_realtime": {
+      "score": 100,
+      "found": [
+        "live",
+        "socket",
+        "realtime",
+        "room",
+        "presence",
+        "moderation",
+        "guardian"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "nexa_health": {
+      "score": 100,
+      "found": [
+        "nexa",
+        "nutrition",
+        "workout",
+        "sleep",
+        "recovery",
+        "sanctuary"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "lumora_identity": {
+      "score": 100,
+      "found": [
+        "logo",
+        "splash",
+        "brand",
+        "onboarding",
+        "auth",
+        "profile",
+        "persona"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "trust_safety": {
+      "score": 100,
+      "found": [
+        "trust",
+        "moderation",
+        "guardian",
+        "fraud",
+        "abuse",
+        "privacy",
+        "consent",
+        "policy"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "data_persistence": {
+      "score": 100,
+      "found": [
+        "prisma",
+        "schema.prisma",
+        "database",
+        "db",
+        "persistence",
+        "migration",
+        "storage"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "api_runtime": {
+      "score": 100,
+      "found": [
+        "app/api",
+        "route.ts",
+        "server",
+        "runtime",
+        "health",
+        "ready"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "tests_validation": {
+      "score": 100,
+      "found": [
+        "tests",
+        "vitest",
+        "playwright",
+        "smoke",
+        "e2e",
+        "typecheck"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    },
+    "deployment_ops": {
+      "score": 100,
+      "found": [
+        "vercel",
+        "docker",
+        "deploy",
+        "env",
+        "ci",
+        "github",
+        "health",
+        "rollback"
+      ],
+      "missing": [],
+      "leftPercent": 0
+    }
+  },
+  "portals": [
+    {
+      "portal": "lumexa",
+      "integrationPercent": 14,
+      "leftPercent": 86,
+      "checks": {
+        "route": true,
+        "api": false,
+        "components": false,
+        "core": false,
+        "tests": false,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "celebrations",
+      "integrationPercent": 29,
+      "leftPercent": 71,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": false,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "seller",
+      "integrationPercent": 29,
+      "leftPercent": 71,
+      "checks": {
+        "route": false,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "zencoin",
+      "integrationPercent": 57,
+      "leftPercent": 43,
+      "checks": {
+        "route": false,
+        "api": false,
+        "components": false,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "admin",
+      "integrationPercent": 57,
+      "leftPercent": 43,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "movies",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "partial"
+    },
+    {
+      "portal": "music",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "partial"
+    },
+    {
+      "portal": "zendoro",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": false,
+        "components": false,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "partial"
+    },
+    {
+      "portal": "videos",
+      "integrationPercent": 86,
+      "leftPercent": 14,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "share",
+      "integrationPercent": 86,
+      "leftPercent": 14,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": false,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "wallet",
+      "integrationPercent": 86,
+      "leftPercent": 14,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "fyp",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "gmar",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "nexa",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "live",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "lumaspace",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    },
+    {
+      "portal": "creator",
+      "integrationPercent": 100,
+      "leftPercent": 0,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "strong"
+    }
+  ],
+  "weakestAreas": [
+    {
+      "name": "layout_design",
+      "score": 83,
+      "leftPercent": 17,
+      "missing": [
+        "tailwind.config"
+      ]
+    },
+    {
+      "name": "foundation",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "dashboards",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "pricing_monetization",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "commerce_zendoro",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "gmar_games",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "fyp_video",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "live_realtime",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "weakestPortals": [
+    {
+      "portal": "lumexa",
+      "integrationPercent": 14,
+      "leftPercent": 86,
+      "checks": {
+        "route": true,
+        "api": false,
+        "components": false,
+        "core": false,
+        "tests": false,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "celebrations",
+      "integrationPercent": 29,
+      "leftPercent": 71,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": false,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "seller",
+      "integrationPercent": 29,
+      "leftPercent": 71,
+      "checks": {
+        "route": false,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": false
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "zencoin",
+      "integrationPercent": 57,
+      "leftPercent": 43,
+      "checks": {
+        "route": false,
+        "api": false,
+        "components": false,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "admin",
+      "integrationPercent": 57,
+      "leftPercent": 43,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": false,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "weak"
+    },
+    {
+      "portal": "movies",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "partial"
+    },
+    {
+      "portal": "music",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": true,
+        "components": true,
+        "core": false,
+        "tests": true,
+        "docs": false,
+        "locks": true
+      },
+      "status": "partial"
+    },
+    {
+      "portal": "zendoro",
+      "integrationPercent": 71,
+      "leftPercent": 29,
+      "checks": {
+        "route": true,
+        "api": false,
+        "components": false,
+        "core": true,
+        "tests": true,
+        "docs": true,
+        "locks": true
+      },
+      "status": "partial"
+    }
+  ],
+  "nextActionPriority": [
+    "Fix weakest portal routes and dashboards first.",
+    "Connect weak portals to API/runtime/core modules.",
+    "Add pricing/billing/checkout validation where monetization exists.",
+    "Add browser E2E smoke tests for all visible portals.",
+    "Run full typecheck, targeted tests, and production build after audit."
+  ]
+}

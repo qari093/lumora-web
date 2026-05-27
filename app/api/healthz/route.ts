@@ -1,14 +1,22 @@
-import { getServiceName, getAppVersion, jsonResponse } from "@/lib/health/contract";
+import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-export async function GET(_req: Request) {
-  const body = {
-    ok: true,
-    service: getServiceName(),
-    route: "/api/healthz",
-    ts: Date.now(), // contract expects number here
-    version: getAppVersion(),
-  };
-  return jsonResponse(body, 200);
+export async function GET() {
+  return NextResponse.json(
+    {
+      ok: true,
+      status: "healthy",
+      service: "lumora",
+      route: "/api/healthz",
+      checkedAt: new Date().toISOString(),
+    },
+    {
+      status: 200,
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+      },
+    }
+  );
 }

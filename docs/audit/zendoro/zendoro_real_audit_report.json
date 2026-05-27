@@ -1,0 +1,222 @@
+{
+  "auditedAt": "2026-05-25T09:56:10.687Z",
+  "status": "PARTIAL",
+  "integrationPercent": 56,
+  "leftPercent": 44,
+  "counts": {
+    "zendoroNamedFiles": 105,
+    "commerceRelatedFiles": 323,
+    "testsZendoroFiles": 47,
+    "docsZendoroFiles": 0,
+    "prismaSchemaExists": true
+  },
+  "categories": {
+    "routes": {
+      "passed": 3,
+      "total": 6,
+      "percent": 50,
+      "missing": [
+        "app/zendoro/products/page.tsx",
+        "app/zendoro/seller/page.tsx",
+        "app/zendoro/admin/page.tsx"
+      ]
+    },
+    "apis": {
+      "passed": 0,
+      "total": 8,
+      "percent": 0,
+      "missing": [
+        "app/api/zendoro/products/route.ts",
+        "app/api/zendoro/cart/route.ts",
+        "app/api/zendoro/checkout/route.ts",
+        "app/api/zendoro/orders/route.ts",
+        "app/api/zendoro/reviews/route.ts",
+        "app/api/zendoro/seller/route.ts",
+        "app/api/zendoro/admin/route.ts",
+        "app/api/zendoro/webhook/route.ts"
+      ]
+    },
+    "core": {
+      "passed": 2,
+      "total": 3,
+      "percent": 67,
+      "missing": [
+        "lib/zendoro"
+      ]
+    },
+    "components": {
+      "passed": 0,
+      "total": 4,
+      "percent": 0,
+      "missing": [
+        "components/zendoro",
+        "components/commerce",
+        "components/seller",
+        "components/admin/zendoro"
+      ]
+    },
+    "tests": {
+      "passed": 1,
+      "total": 1,
+      "percent": 100,
+      "missing": []
+    },
+    "docs": {
+      "passed": 0,
+      "total": 2,
+      "percent": 0,
+      "missing": [
+        "docs/zendoro",
+        "docs/commerce/zendoro"
+      ]
+    },
+    "locks": {
+      "passed": 10,
+      "total": 10,
+      "percent": 100,
+      "missing": []
+    },
+    "prismaModels": {
+      "passed": 12,
+      "total": 12,
+      "percent": 100,
+      "missing": []
+    },
+    "concepts": {
+      "passed": 19,
+      "total": 19,
+      "percent": 100,
+      "missing": []
+    }
+  },
+  "weakestAreas": [
+    {
+      "name": "apis",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "app/api/zendoro/products/route.ts",
+        "app/api/zendoro/cart/route.ts",
+        "app/api/zendoro/checkout/route.ts",
+        "app/api/zendoro/orders/route.ts",
+        "app/api/zendoro/reviews/route.ts",
+        "app/api/zendoro/seller/route.ts",
+        "app/api/zendoro/admin/route.ts",
+        "app/api/zendoro/webhook/route.ts"
+      ]
+    },
+    {
+      "name": "components",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "components/zendoro",
+        "components/commerce",
+        "components/seller",
+        "components/admin/zendoro"
+      ]
+    },
+    {
+      "name": "docs",
+      "score": 0,
+      "leftPercent": 100,
+      "missing": [
+        "docs/zendoro",
+        "docs/commerce/zendoro"
+      ]
+    },
+    {
+      "name": "routes",
+      "score": 50,
+      "leftPercent": 50,
+      "missing": [
+        "app/zendoro/products/page.tsx",
+        "app/zendoro/seller/page.tsx",
+        "app/zendoro/admin/page.tsx"
+      ]
+    },
+    {
+      "name": "core",
+      "score": 67,
+      "leftPercent": 33,
+      "missing": [
+        "lib/zendoro"
+      ]
+    },
+    {
+      "name": "tests",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "locks",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "prismaModels",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    },
+    {
+      "name": "concepts",
+      "score": 100,
+      "leftPercent": 0,
+      "missing": []
+    }
+  ],
+  "nextActions": [
+    {
+      "area": "apis",
+      "missing": [
+        "app/api/zendoro/products/route.ts",
+        "app/api/zendoro/cart/route.ts",
+        "app/api/zendoro/checkout/route.ts",
+        "app/api/zendoro/orders/route.ts",
+        "app/api/zendoro/reviews/route.ts",
+        "app/api/zendoro/seller/route.ts",
+        "app/api/zendoro/admin/route.ts",
+        "app/api/zendoro/webhook/route.ts"
+      ]
+    },
+    {
+      "area": "components",
+      "missing": [
+        "components/zendoro",
+        "components/commerce",
+        "components/seller",
+        "components/admin/zendoro"
+      ]
+    },
+    {
+      "area": "docs",
+      "missing": [
+        "docs/zendoro",
+        "docs/commerce/zendoro"
+      ]
+    },
+    {
+      "area": "routes",
+      "missing": [
+        "app/zendoro/products/page.tsx",
+        "app/zendoro/seller/page.tsx",
+        "app/zendoro/admin/page.tsx"
+      ]
+    },
+    {
+      "area": "core",
+      "missing": [
+        "lib/zendoro"
+      ]
+    }
+  ],
+  "validation": {
+    "typecheck": "PASS",
+    "zendoroTests": "PASS",
+    "logs": "/tmp/zendoro_real_audit_logs_1779702965"
+  },
+  "finalStatus": "PARTIAL_OR_FAILED"
+}

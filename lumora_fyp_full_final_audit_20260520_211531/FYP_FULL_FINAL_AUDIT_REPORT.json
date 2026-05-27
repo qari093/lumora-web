@@ -1,0 +1,18 @@
+{
+  "fypFullFinalAudit": true,
+  "generatedAt": "2026-05-20T19:21:01.679Z",
+  "status": "FAILED",
+  "targetBlockerStatus": 0,
+  "fullFypTestStatus": 0,
+  "typecheckStatus": 0,
+  "buildStatus": 1,
+  "fypTestFileCount": 223,
+  "buildIssueCount": 6,
+  "logs": {
+    "targetBlockers": "lumora_fyp_full_final_audit_20260520_211531/01_target_blockers.log",
+    "fullFypTests": "lumora_fyp_full_final_audit_20260520_211531/02_full_fyp_tests.log",
+    "typecheck": "lumora_fyp_full_final_audit_20260520_211531/03_typecheck.log",
+    "build": "lumora_fyp_full_final_audit_20260520_211531/04_build.log",
+    "testFiles": "lumora_fyp_full_final_audit_20260520_211531/fyp_test_files.txt"
+  }
+}

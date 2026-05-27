@@ -1,0 +1,15 @@
+Social + FOMO locked:
+- Real-time Viewer Tracking
+- Ghost Room Presence
+- Shared Attention Overlay
+- Reaction Echo Live
+- FOMO Countdowns
+- Replay Window Logic
+- Exclusivity Logic
+- Redacted Content Logic
+- Push Notification System
+- Reminder Scheduling
+- Notification Throttling
+- FOMO Tuning Parameters
+- Social Analytics
+- Abuse Guards

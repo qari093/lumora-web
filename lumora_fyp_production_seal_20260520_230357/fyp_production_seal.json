@@ -1,0 +1,11 @@
+{
+  "sealedAt": "2026-05-20T21:06:43Z",
+  "system": "Lumora FYP",
+  "status": "FAILED",
+  "typecheckStatus": 0,
+  "testStatus": 0,
+  "buildStatus": 1,
+  "legacyFilesRemoved": 818,
+  "mediaSafetyMatches": 959,
+  "ingestionMatches": 77
+}

@@ -1,0 +1,7813 @@
+{
+  "generatedAt": "2026-05-23T20:50:41.222Z",
+  "routes": [
+    {
+      "path": "/__bak_step41_20260301_113444",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/__dbg_min",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/_retired_overlay-demo.retired.20251225T164806Z",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/emojis",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/gestures-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/glyphs",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/holo-playground",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/hybrid-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/lumaspace/reflection",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/nexmoji",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/overlay-sprite",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(demo)/vibe-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/(diag)/offline-diagnostics",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/account/kyc",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin/campaigns",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin/celebrations/moderation",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin/kyc",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin/testers",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/admin/zendoro",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads/[id]/edit",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads/admin",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads/new",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/ads/test",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/alive",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/analytics",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/api/_boom",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/_health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/_info",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/_ready",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/abuse/signal",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/account/upgrade",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/claims",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/dashboard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/env",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/live-status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/proof",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/activation/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/kyc/decision",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/kyc/pending",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/kyc/review",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/moderation/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/moderation/review",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/overview",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/testers/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/admin/zendoro",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics-snapshot",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics/brands",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics/channel",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics/rollup/run",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/analytics/timeseries",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/budget",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/budget-gate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/budget-guard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/campaigns",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/campaigns/[id]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/click",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/content",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/context",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/conversion",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/conversion-rate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/convert",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/ctr",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/eligibility",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/engagement",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/event",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/event/stats",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/events",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/exposure-summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/fatigue",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/fatigue-gate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/filter",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/fraud/stats",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/frequency",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/fyp-audit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/generate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/imp",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/impression",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/injection",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/intent",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/perf",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/performance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/performance-tier",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/policy",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/rank",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/ranking",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/redirect",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/resolve",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/rights/validate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/roi",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/rotation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/safety",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/select",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/select-budgeted",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/select-fatigue-safe",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/select-tiered",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/serve",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/session-rollup",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/stats",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ads/track",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ai/fault-healer/log",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/analytics/event",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/auth/session",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/auto/generate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/billing/checkout",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/billing/webhook",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/boom",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/brand/splash",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/brand/splash/guard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/brand/splash/memory",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/brand/splash/metrics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/brand/splash/profile",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/campaigns",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/campaigns/[id]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cart",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cart/clear",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cart/items",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/admin/audit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/admin/set-status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/demo",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/end",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/export",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/reset",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/shows",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/shows/[id]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/shows/[id]/ics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/shows/ics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/sse",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/[slug]/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/alive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/create",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/healthz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/celebrations/manifest",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cf/images",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/checkout",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/evolution",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/federation/health",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/fyp",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/history",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/ingest",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/list",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/reactions",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/spoiler",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/summary",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/teasers",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cineverse/timeline",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/coin/balance",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/coin/ledger",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/coin/transfer",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/comments",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/config",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/config/flags",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-engine/alive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-engine/feed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-engine/pulse",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-supply/fallback",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-supply/regeneration",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-supply/seed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-supply/trailer-priority",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content-supply/ugc",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/attention",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/emotions",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/graph",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/lifecycle",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/multi-source/debug",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/multi-source/feed",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/multi-source/proof",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/origin",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/query",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/saturation",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/schema",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/content/trust",
+      "kind": "api",
+      "domain": "content",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/context",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/conv/postback",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cpv/track",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives/[id]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives/create",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives/thumb",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creatives/update/[id]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/advanced-governance",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/civilization-stability",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/constellation-runtime",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/creator-commerce",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/dashboard",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/dream-chamber",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/events",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/final-readiness",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/health",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/human-reality",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/launch-readiness",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/live-integration",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/moderation",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/observability",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/private-beta",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/quiet-gifts",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/ritual-legacy",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/scale-optimization",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-alchemy/zeneconomy",
+      "kind": "api",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator-share/live-readiness",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/apply",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/hub",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/mock",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/profile",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/creator/update",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cultural/blending",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cultural/regions",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cultural/splicing",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/cultural/weighting",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/analytics-aggregation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/backup-restore",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/cache",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/cache-invalidation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/cross-signal-linking",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/db-failover",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/db-metrics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/db-pooling",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/db-retry",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/db-scaling",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/enrichment-pipeline",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/indexing",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/partitioning",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/pipeline",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/primary-db",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/query-optimization",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/storage-tiers",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/ttl-cleanup",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/data/validation-pipeline",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/debug/boot-metrics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/dev/routes",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/dev/testers/reset",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/diag",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/diag/apilogs",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/diag/rate-limit",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/diag/trace",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/diag/traffic",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/dist/embed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/dist/shorten",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/dist/stats",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/echo/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/eco/rollup/run",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/eco/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/eco/timeseries",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/email/digest",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/aggregate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/assets",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/chart",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/compute",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/heat",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/indices",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/ingest",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/sse",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/state",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emml/ticks",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/demo-add",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/export",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/heat",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/index-calc",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/ingest",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/emotion/stream",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/env/validate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/errors/report",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/events/stream",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fan/follow",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fan/inbox",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fan/unfollow",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/ab",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/assemble",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/cache",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/cineverse",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/dedupe",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/discovery",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/diversity",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/final",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/fomo",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/freshness",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/guardrails",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/integrity",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/latency",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/metrics",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/mix",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/mock",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/override",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/personalize",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/ranking",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/scroll",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/sentiment",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feed/session",
+      "kind": "api",
+      "domain": "feed",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/aggregate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/alerts",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/anomaly",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/auto-optimization",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/ctr",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/dashboard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/engagement-events",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/event-stream",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/events",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/learning-rate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/loop",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/ranking-integration",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/replay-weighting",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/scoring",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/skip-penalty",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/trigger-rerank",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/triggers",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/feedback/watch-time-weighting",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/finance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/calendar",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/cooldown",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/countdown",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/countdowns",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/decay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/exclusive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/exclusivity",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/push-notifications",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/redacted",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/reminders",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/replay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/replay-window",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/throttling",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/trailer",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fomo/tuning",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/audio",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/fallback",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/kinetic",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/language",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/overlay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/templates",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/trailer-template",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/translation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/format/validation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/alive",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/assembler",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/cache-edge",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/cineverse",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/cold-start",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/connect",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/debug",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/dedup",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/discovery",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/diversity",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/fallback-feed",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/feed",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/fomo",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/generate",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/health",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/healthz",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/interact",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/language",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/latency",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/native-events",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/native-feed",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/native-upload",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/observability",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/personalization",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/prefetch",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/ranking",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/recommend",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/regional",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/runtime",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/scroll",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/session",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/summary",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/track",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp/trailer-override",
+      "kind": "api",
+      "domain": "fyp",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp94/feed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp94/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp94/library",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/fyp94/production-health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/geo/consent",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/geo/whereami",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/ai/suggest-mission",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/alive",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/creator/profile",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/economy/claim",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/admin/action",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/auth/session",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/compliance/status",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/creator/publish",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/database/restore",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/database/save",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/economy/spend",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/gameplay/missions",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/infrastructure/status",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/live/events",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/matchmaking/session",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/observability/event",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/realtime/presence",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/release/status",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/final/security/check",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/fyp/activity",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/gameplay/complete-objective",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/health",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/healthz",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/home",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/inventory/grant",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/launch/soft",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/onboarding/start",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/persistence/save",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/player/init",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/playtest/session",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/public-ready",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/ready",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/social/squad/join",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/state/init",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/summary",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/tester/register",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/gmar/world/event/join",
+      "kind": "api",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/health-alias",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/health/portals",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/healthz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/avatar/gen",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/avatar/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/avatar/transform",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/avatar/upload",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/claim",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/credits",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/dev/reset",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/dev/state",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/emoji",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/emoji/gen",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/emoji/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/generate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/placeholder/avatar",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/placeholder/emoji",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/providers",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/hybrid/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/i18n/set",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/i18n/strings",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/inbox",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/info",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/alerting",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/api-gateway",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/autoscaling",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/cdn",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/circuit-breakers",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/cost",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/edge-cache",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/failover-routing",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/load-balancer",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/logging",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/monitoring",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/rate-limit",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/retry-strategies",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/infra/tracing",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/credentials",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/dedup",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/fallback-provider",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/instagram",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/logging",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/metrics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/normalize",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/queue",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/rate-limit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/reddit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/retry",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/rss",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/schema-validation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/tiktok",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/timestamp-sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/trends",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/twitch",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ingest/x",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/integration/engines",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/integration/feed-consistency",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/integration/personalization-flow",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/integration/sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/attention-score",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/clusters",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/coherence",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/consistency",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/cultural-tagging",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/culture",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/decay",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/decay-prediction",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/emotion",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/emotions",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/enriched-store",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/gravity",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/inference-cache",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/lifecycle",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/low-signal-suppression",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/narrative-score",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/priority-boost",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/ranking-cache",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/ranking-compute",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/ranking-precompute",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/recompute",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/recompute-scheduler",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/saturation",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/trailer-priority",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/trend-clustering",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/weighting",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/intelligence/weights",
+      "kind": "api",
+      "domain": "intelligence",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/haptic",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/hold",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/like",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/log",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/multitouch",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/not-interested",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/predict",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/save",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/scroll",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/share",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/swipe",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/tap",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/tilt",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/vibe",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/interaction/voice",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/kyc/request",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/kyc/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/kyc/upload",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/launch/readiness",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/learning/profile",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/learning/rank",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ledger/credit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ledger/debit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ledger/list/[ownerId]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ledger/refund",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ledger/refunds/[ownerId]/[refType]/[refId]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/links/create",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/links/resolve",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/alive",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/bookmark",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/click",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/events",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/feed",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/feed-variation",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/feedback",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/google-trends",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/health",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/health-badge",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/healthz",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/ingest/youtube",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/load",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/mic",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/persist",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/portal-hubs",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/portal-spec",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/proof",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/publish",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/ranking",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/raw-audit",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/reddit",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/room",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/room-list",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/room-state",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/roomlist",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms-list",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/[id]",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/[id]/end",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/[id]/events",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/[id]/react",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/[id]/reactions",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/list",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rooms/public",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/roomslist",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/rss",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/share",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/signals",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/skip",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/status",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/summary",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/validation",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/watch",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/live/youtube",
+      "kind": "api",
+      "domain": "live",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/alive",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/aura",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/civilization",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/init",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/mirror",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/ping",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/reflection",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/runtime",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/shadow",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/shadow/export",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/share",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/state",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/tree",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/lumaspace/zen/preview",
+      "kind": "api",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/media/complete",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/media/upload",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/memory/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/memory/save",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/metrics/ads",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/metrics/batch",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/mod/action",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/mod/queue",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/mod/report",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/mode",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/appeal",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/audit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/block",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/check",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/policy",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/report",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/review-queue",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moderation/risk-mode",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moments/list",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/moments/save",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/monetization/ad-hooks",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/monetization/engagement",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/monetization/rewards",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/monetization/validation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/audio-reactive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/fps",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/gpu",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/gradient",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/grain",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/performance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/smoothing",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/transitions",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/motion/vector",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/movies/alive",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/movies/catalog",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/movies/health",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/movies/healthz",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/movies/item",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/music/catalog",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/music/health",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/music/item",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/news",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/alive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/diag",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/healthz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/info",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/metrics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/ops",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexa/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/nexmoji/anim-check",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/notifications",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/notify/check-low-balance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/notify/emit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/notify/inbox",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/notify/subscribe",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/auto-recover",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/batch",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/batch/send",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/benchmark",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/delta/sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/hash-verify",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/predict",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/predict/merge",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/repair-log",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/reward-sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/offline/rewards/sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/orders",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/orders/[id]",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/payments/checkout",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/payments/webhook",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/assets",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/emojis",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/expansions",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/manifest",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/privacy",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/profile",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/reaction-map",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/select",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/variants",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/persona/voice",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/cache",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/cold-start",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/cross-session-memory",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/diversity",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/emotional-profile",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/explore-exploit",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/interaction-signals",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/interest-graph",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/metrics",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/monitoring",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/pacing-model",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/preference-decay",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/session-learning",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/personalization/short-term-intent",
+      "kind": "api",
+      "domain": "personalization",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portal-cards",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portal-health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portal-overview",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portal-status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portals",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portals/alive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portals/health",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/portals/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/posts",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private-access",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private-beta/access",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private-beta/allowlist",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private-beta/gate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private-beta/switch",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/private/access",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/products",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/products/[id]",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/attention",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/cache",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/emotion",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/expansion",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/interests",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/locale",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/merge",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/mix",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/pacing",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/replay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/schema",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/skip",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/summary",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/validation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/profile/watchtime",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/proximity/ping",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/pulse/action",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/pulse/event",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/pulse/state",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/pwa/diag",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/r/[slug]",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/rankings/feed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/aggregation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/capture",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/performance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/preroll",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/privacy",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/silhouette",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/timeline",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reaction/visual",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/ready",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/readyz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/resilience/fallback",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/resilience/heartbeat",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/resilience/recovery",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/resilience/retry",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/reviews",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/runtime-consolidation/route-inventory",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/runtime/events",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/runtime/signals",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/runtime/state",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety-circle/opt-in",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/abuse-check",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/alerts",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/audio",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/audio-transcript",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/bot-check",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/cooldown",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/dashboard",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/device-nsfw",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/fallback",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/fatigue",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/image",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/keywords",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/motion",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/nsfw",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/personal-limits",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/quarantine",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/rate-limit",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/rating",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/review",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/session-break",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/safety/validation",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/security/abuse",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/security/audit",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/security/check",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/security/consent",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/seller",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/seller/orders",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/seller/products",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share/alive",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share/healthz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share/link",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share/resolve",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/share/track",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/shop/order",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/shop/webhook",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/cache",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/dedupe",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/fallback",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/freshness",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/google-trends",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/instagram",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/latency",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/news-rss",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/normalize",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/reddit",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/score",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/store",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/tiktok",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/twitch",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/signals/twitter-x",
+      "kind": "api",
+      "domain": "signals",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/abuse-guards",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/analytics",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/attention-overlay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/ghost-room",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/reaction-echo",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/social/viewers",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/state/capture",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/state/persist",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/state/recover",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/state/sync",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stillness/toggle",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stream/mock-webhook",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stream/upload-token",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stream/video",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stream/webhook",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stripe/checkout",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stripe/create-checkout-session",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stripe/dev/simulate",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/stripe/webhook",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/subscriptions/cancel",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/subscriptions/create",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge/leaderboard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge/queue",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge/rewards",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge/state",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/challenge/submit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/competition/entry",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/anti-spam",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/momentum",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/resolve",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/start",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/vote",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/duel/vote-audit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/leaderboard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/leaderboard/reset",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/matchmaking",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/surge/timer",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/teasers/create",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry/event",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry/r2-egress",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry/resolution",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry/route-metrics",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/telemetry/track",
+      "kind": "api",
+      "domain": "infra_telemetry",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/track",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trend/decay",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trend/detect",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trend/score",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trend/velocity",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/anomalies",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/anomaly",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/audit",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/audit-logs",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/bot-detection",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/bot-patterns",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/compliance",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/creator-thresholds",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/decay",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/escalation-rules",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/fake-engagement",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/filter",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/gate",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/metrics",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/misinformation",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/moderation-alerts",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/repeat-offenders",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/anomaly",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/bot",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/enforcement",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/fake-engagement",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/misinformation",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/quarantine",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/scam",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/runtime/toxicity",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/safe-fallback",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/scam",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/score",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/semantic",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/takedown",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/toxic-velocity",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/trust/tq",
+      "kind": "api",
+      "domain": "trust_safety",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/uploads/presign",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/user/profile",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/crash-free",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/ingestion",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/latency-fps",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/multi-platform-ingestion",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/notifications",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/performance",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/personalization",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/personalization-accuracy",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/real-user",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/real-user-simulation",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/retention",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/retention-loops",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/safety",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/system-tests",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/validation/zero-explicit-leaks",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/campaigns",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/campaigns/[id]",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/campaigns/assign",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/campaigns/assigned",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/summary",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vendor/timeseries",
+      "kind": "api",
+      "domain": "commerce",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/version",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vibe/apply",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vibe/my-recent",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vibe/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vibe/tags",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/vibe/wall",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video-gen",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video-gen/guard",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video-gen/status",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video-gen/submit",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/alive",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/color",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/fallback",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/health",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/masking",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/performance",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/preview",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/skin",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/video/sync",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/videos/debug/list",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "demo",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/videos/feed",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/videos/health",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/videos/healthz",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/videos/stream-webhook",
+      "kind": "api",
+      "domain": "media",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/balance",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/credit",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/credit-ledger",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/debit",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/history",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/ledger",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/summary",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/topup",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/txid-check",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallet/withdraw",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/[ownerId]",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/[ownerId]/balance",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/credit",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/debit",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/ensure",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/wallets/transfer",
+      "kind": "api",
+      "domain": "wallet",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/weather",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/webhooks/zendoro",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/api/whereami",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/avatar-bridge",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/avatar-lab",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/beta",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/brand/eco",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/brand/insights",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/buy-credits",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/celebrations",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/celebrations/[slug]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/cf-upload",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/cineverse",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/cineverse/fyp",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/cineverse/open-canon",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/control-center",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/create",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/create/publish",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/create/record",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/create/upload",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator-hub",
+      "kind": "page",
+      "domain": "creator_alchemy",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator/dashboard",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator/first-breath",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator/review",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/creator/settings",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dash/coin",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dash/emml",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dash/emml/heat",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dashboard",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dbg-min",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/demo/gestures-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dev/routes",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/dev/testers",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "demo",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/distribute",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/echo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/echoes",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/echoes/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/embed",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/emml/chart",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/emoji-lab",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/fan",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/fan/settings",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/feed",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/fyp",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/fyp/raw",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/fyp94",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/gmar",
+      "kind": "page",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/gmar/games/[slug]",
+      "kind": "page",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/gmar/play",
+      "kind": "page",
+      "domain": "gmar",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/go",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/hybrid",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/inbox",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/l/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/launch",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/legal",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/legal/creator-agreement",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/legal/privacy",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/legal/terms",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/live",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/live/health",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/live/healthz",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/live/hubs",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/live/room",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/live/room/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/login",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/accessibility",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/airdrop",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/coach",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/converter",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/dashboard",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/debug",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "demo",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/forecast",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/journal",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/memory",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/recorder",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/shadow",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/shadow/analytics",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/sync",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumaspace/trading",
+      "kind": "page",
+      "domain": "lumaspace",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumen",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumexa",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumexa/chat",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumexa/search",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/lumexa/shop",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/me/space",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/media",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/memory/[memoryId]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/mission-control",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/moderation",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/movies",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/movies/portal",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/movies/watch",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/movies/watch/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/music",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/music/play",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/nexa",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/nexa/checkin",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/nexa/ops",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/notifications",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/offline",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/offline-video",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/onboarding",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/operator",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/overlay-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/overlay-feed",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/p.gif",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/page.tsx",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/payments",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/persona/emoji-lab",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/persona/lab",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/persona/live-preview",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/persona/select",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/portals",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/posts",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/private-access",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/profile",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/progress",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/pwa/diag",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "internal",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/r",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/safety-circle",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/settings",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/share",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/shop",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/signup",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/social",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/status",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/stillness",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/store",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/system",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/teasers",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/test",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/trending",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/trust",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/trust/creator",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/vendor",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/vendor/campaigns",
+      "kind": "api",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "dynamic"
+    },
+    {
+      "path": "/vendor/camps",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/vendor/creatives",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/vendor/metrics",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/video",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/video-gen",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/video-gen/demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/videos",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/videos/upload",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/wallet",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/wallet-demo",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/wallets",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/wallets/[ownerId]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/watch",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/watch/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro/cart",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro/checkout",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro/orders",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro/product/[id]",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    },
+    {
+      "path": "/zendoro/reviews",
+      "kind": "page",
+      "domain": "unknown",
+      "exposure": "public",
+      "runtime": "unknown"
+    }
+  ],
+  "summary": {
+    "total": 1112,
+    "apiRoutes": 934,
+    "pageRoutes": 178,
+    "unknownDomainRoutes": 700,
+    "byDomain": {
+      "creator_alchemy": 20,
+      "fyp": 35,
+      "feed": 23,
+      "content": 12,
+      "signals": 15,
+      "intelligence": 27,
+      "personalization": 14,
+      "live": 45,
+      "wallet": 21,
+      "trust_safety": 58,
+      "infra_telemetry": 25,
+      "commerce": 15,
+      "gmar": 40,
+      "lumaspace": 29,
+      "media": 33,
+      "unknown": 700
+    }
+  }
+}

@@ -1,0 +1,11 @@
+=== package manager ===
+/usr/local/bin/pnpm
+10.28.1
+
+=== package.json test deps ===
+@testing-library/react=MISSING
+@testing-library/jest-dom=MISSING
+jsdom=^27.4.0
+vitest=^1.6.0
+react=19.1.0
+react-dom=19.1.0

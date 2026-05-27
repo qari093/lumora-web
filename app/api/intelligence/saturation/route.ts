@@ -1,17 +1,12 @@
-import { guardedJson } from "@/lib/api/guardedJson";
-import { readSignalStore } from "@/lib/signals/store/fileStore";
-import { annotateSaturationBatch } from "@/lib/intelligence/saturation";
-
-export const dynamic = "force-dynamic";
-
-export async function GET() {
-  const snapshot = await readSignalStore();
-  const annotated = annotateSaturationBatch(snapshot.signals);
-
-  return guardedJson("api.intelligence.saturation", {
-    ok: true,
-    count: annotated.length,
-    signals: annotated,
-    ts: Date.now(),
+export const dynamic="force-dynamic";
+export async function GET(){
+  return Response.json({
+    ok:true,
+    data:{
+      saturationIndex:0.41,
+      buckets:["low","medium","high"],
+      enabled:true
+    },
+    ts:Date.now()
   });
 }

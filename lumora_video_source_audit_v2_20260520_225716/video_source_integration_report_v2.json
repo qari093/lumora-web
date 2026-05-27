@@ -1,0 +1,618 @@
+{
+  "auditedAt": "2026-05-20T20:58:39.329Z",
+  "totalRequestedSources": 48,
+  "integratedCount": 46,
+  "docsOnlyOrWeakCount": 2,
+  "missingCount": 0,
+  "missingSources": [],
+  "docsOnlyOrWeakSources": [
+    "ESA",
+    "ESO"
+  ],
+  "results": [
+    {
+      "source": "NASA",
+      "status": "integrated",
+      "matchCount": 20,
+      "evidence": [
+        "src/lib/content/ingestion/merge.ts:1:import { ingestNasa, ingestEsa } from \"./nasa_esa\";",
+        "src/lib/content/ingestion/merge.ts:6:  const [nasa, esa, stock] = await Promise.all([",
+        "src/lib/content/ingestion/merge.ts:7:    ingestNasa(),",
+        "src/lib/content/ingestion/merge.ts:12:  return [...nasa, ...esa, ...stock];",
+        "src/lib/content/ingestion/nasa_esa.ts:3:export async function ingestNasa(): Promise<SourceClip[]> {",
+        "src/lib/content/ingestion/nasa_esa.ts:5:    id: \"nasa_demo\",",
+        "src/lib/content/ingestion/nasa_esa.ts:6:    title: \"NASA Space Clip\",",
+        "src/lib/content/ingestion/nasa_esa.ts:7:    videoUrl: \"https://images-assets.nasa.gov/video/demo.mp4\",",
+        "src/lib/content/ingestion/nasa_esa.ts:10:    source: \"NASA\"",
+        "src/lib/content/types/source.ts:8:  | \"nasa\" | \"esa\" | \"eso\" | \"hubble\""
+      ]
+    },
+    {
+      "source": "ESA",
+      "status": "docs_or_tests_only",
+      "matchCount": 20,
+      "evidence": [
+        "src/echo/runtime/deviceRuntime.ts:18:    offlineSafe: true,",
+        "src/core/fyp/kill-switch/types.ts:13:  expiresAt: number;",
+        "src/core/fyp/kill-switch/killSwitch.ts:25:    expiresAt: input.now + 6 * 60 * 60 * 1000,",
+        "src/core/fyp/draft/types.ts:10:  closesAt: number;",
+        "src/core/fyp/draft/draftWindow.ts:7:  closesAt: number;",
+        "src/core/fyp/draft/draftWindow.ts:10:  if (input.closesAt <= input.opensAt) {",
+        "src/core/fyp/draft/draftWindow.ts:11:    throw new Error(\"Draft closesAt must be after opensAt.\");",
+        "src/core/fyp/draft/draftWindow.ts:17:    closesAt: input.closesAt,",
+        "src/core/fyp/vibe-tides/vibeTide.ts:11:  closesAt: number;",
+        "src/core/fyp/vibe-tides/vibeTide.ts:20:  closesAt: number;"
+      ]
+    },
+    {
+      "source": "ESO",
+      "status": "docs_or_tests_only",
+      "matchCount": 20,
+      "evidence": [
+        "src/ads/internal/brandResolver.ts:3:export function resolveBrand(key: string) {",
+        "src/echo/social/resonanceTrust.ts:1:export function resonanceTrustScore() {",
+        "src/echo/atlas/civilizations.ts:3:  \"resonance\",",
+        "src/echo/atlas/resonance.ts:1:export function resonanceSignals() {",
+        "src/echo/sonic/startupTone.ts:1:export function startupResonance() {",
+        "src/cineverse/federation/runtime.ts:7:export function resolvePlaybackMode(video: CineVerseFederatedVideo) {",
+        "src/cineverse/federation/types.ts:1:export type CineVerseSourceType =",
+        "src/cineverse/federation/types.ts:11:  sourceType: CineVerseSourceType;",
+        "src/cineverse/firehose/runtime.ts:9:export type FirehoseSource = (typeof monitoredSources)[number];",
+        "src/cineverse/firehose/runtime.ts:11:export function queueFilm(source: FirehoseSource | string) {"
+      ]
+    },
+    {
+      "source": "ESA/Hubble",
+      "status": "integrated",
+      "matchCount": 9,
+      "evidence": [
+        "src/lib/content/adapters/spaceScienceAdapters.ts:64:    name: \"ESA/Hubble\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:71:        source: \"ESA/Hubble\",",
+        "src/lib/content/sources/registry.ts:8:  { id:\"hubble\", name:\"ESA/Hubble\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:10 },",
+        "src/lib/content/types/source.ts:8:  | \"nasa\" | \"esa\" | \"eso\" | \"hubble\"",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:63:    id: \"hubble\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:69:        id: \"hubble-seed-1\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:70:        title: \"Hubble Deep Space\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:73:        sourceUrl: \"https://esahubble.org\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:74:        playableUrl: \"https://example.com/hubble.mp4\","
+      ]
+    },
+    {
+      "source": "Internet Archive",
+      "status": "integrated",
+      "matchCount": 22,
+      "evidence": [
+        "src/cineverse/federation/providers.ts:2:  \"Internet Archive\",",
+        "src/lib/fyp_movie_clips/legal_sources.ts:19:    name: \"Internet Archive Public Domain Films\",",
+        "src/lib/content/sources/internetArchive.ts:10:      source: \"Internet Archive\",",
+        "src/lib/content/sources/registry.ts:10:  { id:\"internet-archive\", name:\"Internet Archive\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },",
+        "docs/fyp_archive/SOURCE_FOUNDATION.md:3:- Internet Archive enabled",
+        "src/cineverse/firehose/runtime.ts:4:  \"internet-archive\",",
+        "src/lib/fyp_movie_clips/archive_search.ts:3:  sourceId: \"internet-archive-public-domain\" | \"prelinger-archives\";",
+        "src/lib/fyp_movie_clips/archive_search.ts:11:  { query: \"public domain movie drama dialogue\", sourceId: \"internet-archive-public-domain\", license: \"public domain\", mediaType: \"movies\", maxYear: 1964 },",
+        "src/lib/fyp_movie_clips/archive_search.ts:12:  { query: \"public domain comedy scene talking\", sourceId: \"internet-archive-public-domain\", license: \"public domain\", mediaType: \"movies\", maxYear: 1964 },",
+        "src/lib/fyp_movie_clips/archive_search.ts:14:  { query: \"public domain trailer voice\", sourceId: \"internet-archive-public-domain\", license: \"public domain\", mediaType: \"movies\", maxYear: 1964 },"
+      ]
+    },
+    {
+      "source": "Prelinger Archives",
+      "status": "integrated",
+      "matchCount": 16,
+      "evidence": [
+        "src/lib/fyp_movie_clips/archive_search.ts:3:  sourceId: \"internet-archive-public-domain\" | \"prelinger-archives\";",
+        "src/lib/fyp_movie_clips/archive_search.ts:13:  { query: \"prelinger crowd street sound\", sourceId: \"prelinger-archives\", license: \"public domain\", mediaType: \"movies\", maxYear: 1975 },",
+        "src/lib/fyp_movie_clips/legal_sources.ts:26:    id: \"prelinger-archives\",",
+        "src/lib/fyp_movie_clips/legal_sources.ts:27:    name: \"Prelinger Archives\",",
+        "src/lib/fyp_movie_clips/legal_sources.ts:29:    baseUrl: \"https://archive.org/details/prelinger\",",
+        "src/lib/content/types/source.ts:9:  | \"internet-archive\" | \"prelinger\" | \"fedflix\"",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:6:  \"prelinger\",",
+        "src/lib/content/sources/registry.ts:11:  { id:\"prelinger\", name:\"Prelinger Archives\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:9 },",
+        "src/lib/fyp_archive/source_foundation.ts:7:  prelinger: {",
+        "src/lib/fyp_archive/source_foundation.ts:9:    collection: \"prelinger\","
+      ]
+    },
+    {
+      "source": "FedFlix / U.S. National Archives",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:9:  | \"internet-archive\" | \"prelinger\" | \"fedflix\"",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:7:  \"fedflix\",",
+        "src/lib/content/sources/registry.ts:12:  { id:\"fedflix\", name:\"FedFlix\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "Library of Congress",
+      "status": "integrated",
+      "matchCount": 21,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:14:  { id:\"loc\", name:\"Library of Congress\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },",
+        "src/types/lumora.user.ts:10:  blockedTopics: string[];",
+        "src/types/content/lumora.content.ts:16:  trustLevel?: \"high\" | \"medium\" | \"low\" | \"blocked\";",
+        "src/types/content/lumora.content.ts:19:  velocityScore?: number;",
+        "src/types/lumora.signal.ts:13:export type LumoraSignalTrust = \"verified\" | \"low_trust\" | \"toxic_velocity\" | \"pending_review\";",
+        "src/types/lumora.signal.ts:41:  velocityScore: number;",
+        "src/echo/intelligence/localInference.ts:1:export function localInferenceEngine() {",
+        "src/echo/runtime/deviceRuntime.ts:11:export function lockscreenControls() {",
+        "src/echo/safety/privacy.ts:1:export function localFirstPrivacy() {",
+        "src/cineverse/rights/runtime.ts:22:  regionBlocked: boolean;"
+      ]
+    },
+    {
+      "source": "Smithsonian Open Access",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:10:  | \"loc\" | \"smithsonian\" | \"europeana\"",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:9:  \"smithsonian\",",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:23:      license: id === \"smithsonian\" ? \"CC0\" : \"public domain\",",
+        "src/lib/content/sources/registry.ts:15:  { id:\"smithsonian\", name:\"Smithsonian\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "Europeana",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:10:  | \"loc\" | \"smithsonian\" | \"europeana\"",
+        "src/lib/content/adapters/extraApprovedAdapters.ts:8:  \"europeana-extra\",",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:5:  \"europeana\",",
+        "src/lib/content/sources/registry.ts:16:  { id:\"europeana\", name:\"Europeana\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Open Images",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:18:  { id:\"open-images\", name:\"Open Images\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },",
+        "src/lib/content/types/source.ts:11:  | \"open-images\" | \"wikimedia\"",
+        "src/lib/content/adapters/extraApprovedAdapters.ts:9:  \"open-images-extra\",",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:6:  \"open-images\","
+      ]
+    },
+    {
+      "source": "Wikimedia Commons",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:11:  | \"open-images\" | \"wikimedia\"",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:7:  \"wikimedia\",",
+        "src/lib/content/sources/registry.ts:19:  { id:\"wikimedia\", name:\"Wikimedia Commons\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },",
+        "tests/content/pack07_source_adapters.test.ts:13:    expect(ids).toContain(\"wikimedia\");"
+      ]
+    },
+    {
+      "source": "Dareful",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:13:  | \"dareful\" | \"distill\" | \"life-of-vids\" | \"splitshire\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:9:  \"dareful\",",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:24:      license: id === \"dareful\" ? \"CC BY 4.0\" : \"CC0\",",
+        "src/lib/content/sources/registry.ts:26:  { id:\"dareful\", name:\"Dareful\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Distill",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:13:  | \"dareful\" | \"distill\" | \"life-of-vids\" | \"splitshire\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:10:  \"distill\",",
+        "src/lib/content/sources/registry.ts:27:  { id:\"distill\", name:\"Distill\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Life of Vids",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:28:  { id:\"life-of-vids\", name:\"Life of Vids\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },",
+        "src/lib/content/types/source.ts:13:  | \"dareful\" | \"distill\" | \"life-of-vids\" | \"splitshire\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:11:  \"life-of-vids\","
+      ]
+    },
+    {
+      "source": "SplitShire",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:13:  | \"dareful\" | \"distill\" | \"life-of-vids\" | \"splitshire\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:12:  \"splitshire\",",
+        "src/lib/content/sources/registry.ts:29:  { id:\"splitshire\", name:\"SplitShire\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Pexels Videos",
+      "status": "integrated",
+      "matchCount": 20,
+      "evidence": [
+        "src/lib/content/ingestion/stock.ts:5:    id: \"pexels_demo\",",
+        "src/lib/content/ingestion/stock.ts:7:    videoUrl: \"https://pexels.com/demo.mp4\",",
+        "src/lib/content/ingestion/stock.ts:10:    source: \"Pexels\"",
+        "src/lib/content/types/source.ts:12:  | \"pexels\" | \"pixabay\" | \"coverr\" | \"mixkit\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:5:  \"pexels\",",
+        "src/lib/content/sources/fetchAll.ts:3:import { fetchPexels } from \"./pexels\";",
+        "src/lib/content/sources/fetchAll.ts:6:  const [ia, nasa, pexels] = await Promise.all([",
+        "src/lib/content/sources/fetchAll.ts:9:    fetchPexels()",
+        "src/lib/content/sources/fetchAll.ts:12:  return [...ia, ...nasa, ...pexels];",
+        "src/lib/content/sources/registry.ts:21:  { id:\"pexels\", name:\"Pexels\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },"
+      ]
+    },
+    {
+      "source": "Pixabay Videos",
+      "status": "integrated",
+      "matchCount": 20,
+      "evidence": [
+        "src/lib/content/types/source.ts:12:  | \"pexels\" | \"pixabay\" | \"coverr\" | \"mixkit\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:6:  \"pixabay\",",
+        "src/lib/content/sources/registry.ts:22:  { id:\"pixabay\", name:\"Pixabay\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },",
+        "src/lib/content/legal/licenseNormalizer.ts:25:  if (value.includes(\"pexels\") || value.includes(\"pixabay\") || value.includes(\"mixkit\") || value.includes(\"coverr\") || value.includes(\"royalty-free\")) return \"platform-safe\";",
+        "src/lib/fyp94/core/policy.ts:14:  | \"pixabay\"",
+        "src/lib/fyp94/core/policy.ts:23:  \"pixabay\",",
+        "src/lib/fyp94/quality/mixQualityGate.ts:43:  if (source.includes(\"pexels\") || source.includes(\"pixabay\") || source.includes(\"vimeo\")) return \"stock\";",
+        "src/lib/fyp94/supply/sources.ts:21:  pixabay: {",
+        "src/lib/fyp94/supply/sources.ts:22:    id: \"pixabay\",",
+        "src/lib/fyp94/supply/sources.ts:23:    displayName: \"Pixabay\","
+      ]
+    },
+    {
+      "source": "Coverr",
+      "status": "integrated",
+      "matchCount": 20,
+      "evidence": [
+        "src/lib/content/types/source.ts:12:  | \"pexels\" | \"pixabay\" | \"coverr\" | \"mixkit\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:7:  \"coverr\",",
+        "src/lib/content/sources/registry.ts:23:  { id:\"coverr\", name:\"Coverr\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },",
+        "src/lib/content/legal/licenseNormalizer.ts:25:  if (value.includes(\"pexels\") || value.includes(\"pixabay\") || value.includes(\"mixkit\") || value.includes(\"coverr\") || value.includes(\"royalty-free\")) return \"platform-safe\";",
+        "src/lib/fyp94/core/policy.ts:16:  | \"coverr\"",
+        "src/lib/fyp94/core/policy.ts:25:  \"coverr\",",
+        "src/lib/fyp94/supply/clients.ts:28:      if (source === \"coverr\") {",
+        "src/lib/fyp94/supply/sources.ts:37:  coverr: {",
+        "src/lib/fyp94/supply/sources.ts:38:    id: \"coverr\",",
+        "src/lib/fyp94/supply/sources.ts:39:    displayName: \"Coverr\","
+      ]
+    },
+    {
+      "source": "Mixkit",
+      "status": "integrated",
+      "matchCount": 10,
+      "evidence": [
+        "src/lib/content/types/source.ts:12:  | \"pexels\" | \"pixabay\" | \"coverr\" | \"mixkit\"",
+        "src/lib/content/adapters/stockPlatformAdapters.ts:8:  \"mixkit\",",
+        "src/lib/content/sources/registry.ts:24:  { id:\"mixkit\", name:\"Mixkit\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:9 },",
+        "src/lib/content/legal/licenseNormalizer.ts:25:  if (value.includes(\"pexels\") || value.includes(\"pixabay\") || value.includes(\"mixkit\") || value.includes(\"coverr\") || value.includes(\"royalty-free\")) return \"platform-safe\";",
+        "src/lib/fyp94/core/policy.ts:15:  | \"mixkit\"",
+        "src/lib/fyp94/core/policy.ts:24:  \"mixkit\",",
+        "src/lib/fyp94/supply/sources.ts:29:  mixkit: {",
+        "src/lib/fyp94/supply/sources.ts:30:    id: \"mixkit\",",
+        "src/lib/fyp94/supply/sources.ts:31:    displayName: \"Mixkit\",",
+        "docs/fyp94/SUPPLY_ENGINE.md:6:- Mixkit"
+      ]
+    },
+    {
+      "source": "Official Movie Trailers",
+      "status": "integrated",
+      "matchCount": 7,
+      "evidence": [
+        "src/lib/intelligence/trailerPriority.ts:27:    \"official trailer\",",
+        "src/lib/trust/semanticValidation.ts:39:  if (containsAny(text, [\"official trailer\"]) && !containsAny(text, [\"trailer\", \"teaser\", \"clip\"])) {",
+        "app/api/safety/audio-transcript/route.ts:10:      transcript: \"This is an official trailer voiceover with cinematic narration.\",",
+        "app/api/format/trailer-template/route.ts:8:    title: \"Official Trailer Drop\",",
+        "docs/intelligence/TRAILER_EVENT_PRIORITY_SCORING.md:19:- GET /api/intelligence/trailer-priority",
+        "docs/content-supply/TRAILER_INGESTION_PRIORITY_FEED.md:2:Endpoint: /api/content-supply/trailer-priority",
+        "app/api/feed/route.ts:26:      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=official%20trailer&type=video&maxResults=15&key=${key}`"
+      ]
+    },
+    {
+      "source": "YouTube official embed only",
+      "status": "integrated",
+      "matchCount": 43,
+      "evidence": [
+        "src/cineverse/open-canon/library.ts:17:    sourceUrl: \"https://youtube.com\",",
+        "src/cineverse/open-canon/library.ts:26:    sourceUrl: \"https://youtube.com\",",
+        "src/cineverse/federation/types.ts:2:  | \"youtube\"",
+        "src/core/syndication/platforms.ts:4:  \"youtube\",",
+        "src/lib/pipeline/sourceWeight.ts:5:    youtube: 1.2,",
+        "src/lib/video/preview/provider.ts:3:  provider: \"internal\" | \"giphy\" | \"tenor\" | \"youtube_embed\";",
+        "src/lib/ingestion/mediaClassifier.ts:2:  if(x.media_url?.includes(\"youtube\")) return \"youtube\";",
+        "src/lib/ingestion/failover.ts:4:  if(src === \"youtube\") return \"crawler\";",
+        "src/lib/ingestion/sourceTrust.ts:4:  youtube: 0.9,",
+        "src/lib/ingestion/registry.ts:2:  \"rss\",\"reddit\",\"youtube\",\"crawler\",\"newsapi\",\"twitter\",\"tiktok\",\"blogs\""
+      ]
+    },
+    {
+      "source": "Vimeo CC embed allowed",
+      "status": "integrated",
+      "matchCount": 31,
+      "evidence": [
+        "src/lib/content/types/source.ts:24:  | \"youtube\" | \"vimeo\"",
+        "src/lib/content/sources/registry.ts:65:  { id:\"vimeo\", name:\"Vimeo CC\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },",
+        "src/lib/fyp94/quality/mixQualityGate.ts:43:  if (source.includes(\"pexels\") || source.includes(\"pixabay\") || source.includes(\"vimeo\")) return \"stock\";",
+        "src/lib/fyp94/vimeo/gate.ts:1:export type Fyp94VimeoCandidate = {",
+        "src/lib/fyp94/vimeo/gate.ts:15:export function isFyp94AllowedVimeoLicense(license?: string): boolean {",
+        "src/lib/fyp94/vimeo/gate.ts:19:export function getFyp94VimeoDirectMp4(candidate: Fyp94VimeoCandidate): string | null {",
+        "src/lib/fyp94/vimeo/gate.ts:31:export function validateFyp94VimeoCandidate(candidate: Fyp94VimeoCandidate) {",
+        "src/lib/fyp94/vimeo/gate.ts:32:  const licenseOk = isFyp94AllowedVimeoLicense(candidate.license);",
+        "src/lib/fyp94/vimeo/gate.ts:33:  const mp4Url = getFyp94VimeoDirectMp4(candidate);",
+        "src/lib/fyp94/vimeo/gate.ts:48:export function normalizeFyp94VimeoCandidate(candidate: Fyp94VimeoCandidate) {"
+      ]
+    },
+    {
+      "source": "Prasar Bharati / PB-SHABD",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:23:  | \"prasar\"",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:12:  \"prasar\",",
+        "src/lib/content/sources/registry.ts:62:  { id:\"prasar\", name:\"Prasar Bharati\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },"
+      ]
+    },
+    {
+      "source": "Zendoro / Lumora Owned",
+      "status": "integrated",
+      "matchCount": 22,
+      "evidence": [
+        "src/core/lumora/portal-catalog/portalCatalog.ts:112:    integrations: [\"FYP\", \"Zendoro\", \"Zencoin\", \"LumaCard\"],",
+        "src/core/lumora/portal-catalog/portalCatalog.ts:116:    id: \"zendoro\",",
+        "src/core/lumora/portal-catalog/portalCatalog.ts:117:    name: \"Zendoro\",",
+        "src/core/lumora/portal-catalog/portalCatalog.ts:118:    route: \"/zendoro\",",
+        "src/core/zendoro/foundation/doctrine.ts:1:export const zendoroDoctrine = {",
+        "src/core/zendoro/foundation/doctrine.ts:8:export function zendoroDoctrineHealthy(): boolean {",
+        "src/core/zendoro/foundation/doctrine.ts:10:    zendoroDoctrine.trustBeforeTransaction &&",
+        "src/core/zendoro/foundation/doctrine.ts:11:    zendoroDoctrine.contextBeforeClicks &&",
+        "src/core/zendoro/foundation/doctrine.ts:12:    zendoroDoctrine.resonanceBeforePressure &&",
+        "src/core/zendoro/foundation/doctrine.ts:13:    zendoroDoctrine.privacyBeforeOptimization"
+      ]
+    },
+    {
+      "source": "Pond5 Public Domain Project",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:14:  | \"pond5\" | \"mazwai\" | \"free-stock-footage\" | \"beachfront\"",
+        "src/lib/content/adapters/archiveGovernmentAdapters.ts:11:  \"pond5\",",
+        "src/lib/content/sources/registry.ts:31:  { id:\"pond5\", name:\"Pond5 PD\", license:\"public-domain\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Mazwai",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:14:  | \"pond5\" | \"mazwai\" | \"free-stock-footage\" | \"beachfront\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:5:  \"mazwai\",",
+        "src/lib/content/sources/registry.ts:32:  { id:\"mazwai\", name:\"Mazwai\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },",
+        "tests/content/pack08_remaining_adapters.test.ts:14:    expect(ids).toContain(\"mazwai\");"
+      ]
+    },
+    {
+      "source": "Free Stock Footage Archive",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:33:  { id:\"free-stock-footage\", name:\"Free Stock Footage Archive\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },",
+        "src/lib/content/types/source.ts:14:  | \"pond5\" | \"mazwai\" | \"free-stock-footage\" | \"beachfront\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:6:  \"free-stock-footage\","
+      ]
+    },
+    {
+      "source": "Beachfront B-Roll",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:14:  | \"pond5\" | \"mazwai\" | \"free-stock-footage\" | \"beachfront\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:7:  \"beachfront\",",
+        "src/lib/content/sources/registry.ts:34:  { id:\"beachfront\", name:\"Beachfront B-Roll\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "CuteStockFootage",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:15:  | \"cutestock\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:8:  \"cutestock\",",
+        "src/lib/content/sources/registry.ts:35:  { id:\"cutestock\", name:\"CuteStockFootage\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Al Jazeera Creative Commons",
+      "status": "integrated",
+      "matchCount": 2,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:37:  { id:\"aljazeera\", name:\"Al Jazeera CC\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },",
+        "scripts/video/news-auto.mjs:12:  { url:\"https://www.aljazeera.com/xml/rss/all.xml\", lang:\"en\", brand:\"Al Jazeera\" },"
+      ]
+    },
+    {
+      "source": "GongU Madang",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:16:  | \"aljazeera\" | \"gongu\" | \"digitalnz\"",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:6:  \"gongu\",",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:21:      license: id === \"gongu\" ? \"public domain\" : \"CC BY 4.0\",",
+        "src/lib/content/sources/registry.ts:38:  { id:\"gongu\", name:\"GongU Madang\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Archives New Zealand / DigitalNZ",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:16:  | \"aljazeera\" | \"gongu\" | \"digitalnz\"",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:11:  \"digitalnz\",",
+        "src/lib/content/sources/registry.ts:39:  { id:\"digitalnz\", name:\"DigitalNZ\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "NOAA",
+      "status": "integrated",
+      "matchCount": 10,
+      "evidence": [
+        "src/lib/content/types/source.ts:17:  | \"noaa\" | \"usgs\" | \"pdr\"",
+        "src/lib/content/adapters/extraApprovedAdapters.ts:5:  \"noaa\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:82:    id: \"noaa\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:83:    name: \"NOAA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:88:        id: \"noaa-seed-1\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:89:        title: \"NOAA Ocean Storm\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:90:        source: \"NOAA\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:92:        sourceUrl: \"https://noaa.gov\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:93:        playableUrl: \"https://example.com/noaa.mp4\",",
+        "src/lib/content/sources/registry.ts:41:  { id:\"noaa\", name:\"NOAA\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "USGS",
+      "status": "integrated",
+      "matchCount": 10,
+      "evidence": [
+        "src/lib/content/types/source.ts:17:  | \"noaa\" | \"usgs\" | \"pdr\"",
+        "src/lib/content/adapters/extraApprovedAdapters.ts:6:  \"usgs\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:101:    id: \"usgs\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:102:    name: \"USGS\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:107:        id: \"usgs-seed-1\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:108:        title: \"USGS Earth Footage\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:109:        source: \"USGS\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:111:        sourceUrl: \"https://usgs.gov\",",
+        "src/lib/content/adapters/spaceScienceAdapters.ts:112:        playableUrl: \"https://example.com/usgs.mp4\",",
+        "src/lib/content/sources/registry.ts:42:  { id:\"usgs\", name:\"USGS\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:9 },"
+      ]
+    },
+    {
+      "source": "The Public Domain Review",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:44:  { id:\"pdr\", name:\"Public Domain Review\", license:\"public-domain\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Free Nature Stock",
+      "status": "integrated",
+      "matchCount": 1,
+      "evidence": [
+        "src/lib/content/sources/registry.ts:45:  { id:\"free-nature\", name:\"Free Nature Stock\", license:\"cc0\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "NatureClip",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:18:  | \"free-nature\" | \"natureclip\" | \"wellcome\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:11:  \"natureclip\",",
+        "src/lib/content/sources/registry.ts:46:  { id:\"natureclip\", name:\"NatureClip\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:false, priority:8 },"
+      ]
+    },
+    {
+      "source": "Wellcome Collection",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:18:  | \"free-nature\" | \"natureclip\" | \"wellcome\"",
+        "src/lib/content/adapters/extraApprovedAdapters.ts:7:  \"wellcome\",",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:10:  \"wellcome\",",
+        "src/lib/content/sources/registry.ts:47:  { id:\"wellcome\", name:\"Wellcome Collection\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:false, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "EUscreen / Open Images",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:19:  | \"euscreen\" | \"padma\"",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:8:  \"euscreen\",",
+        "src/lib/content/sources/registry.ts:49:  { id:\"euscreen\", name:\"EUscreen\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },",
+        "src/lib/content/sources/registry.ts:18:  { id:\"open-images\", name:\"Open Images\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:8 },"
+      ]
+    },
+    {
+      "source": "Pad.ma",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:19:  | \"euscreen\" | \"padma\"",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:9:  \"padma\",",
+        "src/lib/content/sources/registry.ts:50:  { id:\"padma\", name:\"Pad.ma\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:true, priority:7 },",
+        "tests/content/pack07_source_adapters.test.ts:14:    expect(ids).toContain(\"padma\");"
+      ]
+    },
+    {
+      "source": "Vidsplay",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:20:  | \"vidsplay\" | \"videvo\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:9:  \"vidsplay\",",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:22:      license: id === \"vidsplay\" ? \"platform-safe\" : \"CC BY 4.0\",",
+        "src/lib/content/sources/registry.ts:52:  { id:\"vidsplay\", name:\"Vidsplay\", license:\"platform-safe\", attributionRequired:false, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },"
+      ]
+    },
+    {
+      "source": "Videvo",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:20:  | \"vidsplay\" | \"videvo\"",
+        "src/lib/content/adapters/mixedLicenseAdapters.ts:10:  \"videvo\",",
+        "src/lib/content/sources/registry.ts:53:  { id:\"videvo\", name:\"Videvo\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:7 },",
+        "tests/content/pack08_remaining_adapters.test.ts:15:    expect(ids).toContain(\"videvo\");"
+      ]
+    },
+    {
+      "source": "CLACSO TV",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:21:  | \"clacso\" | \"aodl\"",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:7:  \"clacso\",",
+        "src/lib/content/sources/registry.ts:55:  { id:\"clacso\", name:\"CLACSO TV\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "Africa Online Digital Library",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:21:  | \"clacso\" | \"aodl\"",
+        "src/lib/content/adapters/culturalLibraryAdapters.ts:12:  \"aodl\",",
+        "src/lib/content/sources/registry.ts:56:  { id:\"aodl\", name:\"Africa Online Digital Library\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "Libreflix",
+      "status": "integrated",
+      "matchCount": 3,
+      "evidence": [
+        "src/lib/content/types/source.ts:22:  | \"libreflix\" | \"nhk\" | \"nfsa\"",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:8:  \"libreflix\",",
+        "src/lib/content/sources/registry.ts:58:  { id:\"libreflix\", name:\"Libreflix\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },"
+      ]
+    },
+    {
+      "source": "NHK Creative Library",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:22:  | \"libreflix\" | \"nhk\" | \"nfsa\"",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:9:  \"nhk\",",
+        "src/lib/content/sources/registry.ts:59:  { id:\"nhk\", name:\"NHK Creative Library\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },",
+        "tests/content/pack08_remaining_adapters.test.ts:17:    expect(ids).toContain(\"nhk\");"
+      ]
+    },
+    {
+      "source": "Film Australia / NFSA",
+      "status": "integrated",
+      "matchCount": 4,
+      "evidence": [
+        "src/lib/content/types/source.ts:22:  | \"libreflix\" | \"nhk\" | \"nfsa\"",
+        "src/lib/content/adapters/regionalSpecializedAdapters.ts:10:  \"nfsa\",",
+        "src/lib/content/sources/registry.ts:60:  { id:\"nfsa\", name:\"NFSA Film Australia\", license:\"cc-by\", attributionRequired:true, commercialUse:true, requiresPerItemCheck:true, embedAllowed:false, priority:6 },",
+        "tests/content/pack08_remaining_adapters.test.ts:18:    expect(ids).toContain(\"nfsa\");"
+      ]
+    }
+  ]
+}

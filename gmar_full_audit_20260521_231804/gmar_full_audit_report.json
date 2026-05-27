@@ -1,0 +1,72 @@
+{
+  "auditedAt": "2026-05-21T21:18:04.663Z",
+  "system": "GMAR Full System Audit",
+  "totalChecks": 12,
+  "passedChecks": 12,
+  "failedChecks": 0,
+  "scorePercent": 100,
+  "status": "PASS",
+  "failed": [],
+  "checks": [
+    {
+      "name": "dashboard_layout_three_zones",
+      "ok": true,
+      "detail": "Central Canvas 60%, Personal Halo 20%, Social Orbit 20%"
+    },
+    {
+      "name": "dashboard_visual_design",
+      "ok": true,
+      "detail": "Holographic mood, Lo-Fi Soul fallback, reduced-motion safe tokens"
+    },
+    {
+      "name": "launch_surface_seed_scope",
+      "ok": true,
+      "detail": "One active game with dormant constellations and 5 founding echoes"
+    },
+    {
+      "name": "games_type_check",
+      "ok": true,
+      "detail": "Zen Flow is calm, non-score, Mirror-Hour-compatible, no power reward"
+    },
+    {
+      "name": "retention_system_check",
+      "ok": true,
+      "detail": "First Light, Daily Spark, Echo scoring, decay, revival"
+    },
+    {
+      "name": "adrenaline_system_check",
+      "ok": true,
+      "detail": "Pulse Sync, Final Breath, Glory Near-Miss without artificial tuning"
+    },
+    {
+      "name": "fomo_ethics_check",
+      "ok": true,
+      "detail": "Vanishing Echo capped, Civilization Scars permanent, no power reward"
+    },
+    {
+      "name": "zeneconomy_check",
+      "ok": true,
+      "detail": "Allowed expressive uses, blocked power/loot/progression shortcuts"
+    },
+    {
+      "name": "trust_privacy_check",
+      "ok": true,
+      "detail": "Emotional Contract, client-first resonance, deletion/export, no spending targeting"
+    },
+    {
+      "name": "lonely_world_check",
+      "ok": true,
+      "detail": "Lonely-world fallback turns emptiness into presence without manipulation"
+    },
+    {
+      "name": "mirror_hour_check",
+      "ok": true,
+      "detail": "Mirror Hour pauses competitive systems and activates atmosphere"
+    },
+    {
+      "name": "final_seal_check",
+      "ok": true,
+      "detail": "Final seal and 11-pack registry present"
+    }
+  ]
+}

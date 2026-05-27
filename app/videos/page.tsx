@@ -26,7 +26,7 @@ export default function Page() {
           </ul>
         </section>
 
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Videos</h1>
+      <h1 title="videos" style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Videos</h1>
       <p style={{ opacity: 0.8 }}>
         Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
       </p>

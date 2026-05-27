@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
-
-export const dynamic = "force-dynamic";
-
-export default function CreatorAliasPage() {
-  redirect("/create");
+export default function CreatorPage() {
+  return (
+    <main>
+      <h1>Lumora Creator Hub</h1>
+    </main>
+  );
 }

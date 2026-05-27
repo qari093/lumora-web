@@ -1,0 +1,15 @@
+[
+  {
+    "id": "youtube:seed1",
+    "source": "youtube",
+    "title": "Lumora Test Video",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "media_url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "thumb_url": "https://i3.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "media_type": "youtube",
+    "score_hint": 1000,
+    "final_score": 1000,
+    "ts": 1776508563897,
+    "topic": "test"
+  }
+]

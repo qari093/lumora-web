@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-05-26T15:33:11.558Z",
+  "vercelConfigExists": true,
+  "framework": "nextjs",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": ".next",
+  "region": "fra1",
+  "headersConfigured": true,
+  "status": "PASS"
+}

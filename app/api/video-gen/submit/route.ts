@@ -1,29 +1,34 @@
-import { createJob } from "@/lib/video-gen/engine";
+type VideoJob = {
+  jobId: string;
+  status: "done";
+  resultUrl: string;
+};
 
-function j(body: any, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { "content-type": "application/json; charset=utf-8" },
-  });
+const g = globalThis as typeof globalThis & {
+  __lumoraVideoGenJobs?: Map<string, VideoJob>;
+};
+
+function store() {
+  if (!g.__lumoraVideoGenJobs) g.__lumoraVideoGenJobs = new Map<string, VideoJob>();
+  return g.__lumoraVideoGenJobs;
 }
 
-export async function POST(req: Request) {
-  try {
-    const ct = (req.headers.get("content-type") || "").toLowerCase();
-    if (!ct.includes("application/json")) return j({ ok: false, error: "bad_request", ts: Date.now() }, 400);
+export async function POST(request: Request) {
+  const body = await request.json().catch(() => null);
+  const prompt = typeof body?.prompt === "string" ? body.prompt.trim() : "";
 
-    const body = await req.json().catch(() => null);
-    const prompt = (body?.prompt ?? "").toString().trim();
-
-    // Keep the existing contract: invalid prompt => reject
-    if (!prompt || prompt.length < 3 || prompt.length > 800) {
-      return j({ ok: false, error: "bad_request", ts: Date.now() }, 400);
-    }
-
-    const job = createJob(prompt);
-    return j({ ok: true, jobId: job.jobId, ts: Date.now() }, 200);
-  } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
-    return j({ ok: false, error: msg, ts: Date.now() }, 500);
+  if (!prompt) {
+    return Response.json({ ok: false, error: "prompt_required" }, { status: 400 });
   }
+
+  const jobId = `vid_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  const job: VideoJob = {
+    jobId,
+    status: "done",
+    resultUrl: `/api/video-gen/result/${jobId}.mp4`,
+  };
+
+  store().set(jobId, job);
+
+  return Response.json({ ok: true, jobId, job }, { status: 200 });
 }

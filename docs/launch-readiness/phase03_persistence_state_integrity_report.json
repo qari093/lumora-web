@@ -1,0 +1,172 @@
+{
+  "generatedAt": "2026-05-24T16:24:13.388Z",
+  "status": "FAILED",
+  "totalTargets": 10,
+  "failedTargets": 2,
+  "warningTargets": 1,
+  "recoveryChecks": [
+    {
+      "name": "creator_alchemy_events",
+      "domain": "creator_alchemy",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "creator_quiet_gifts",
+      "domain": "creator_alchemy",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": true,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "wallet_ledger",
+      "domain": "wallet",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": true,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "commerce_orders",
+      "domain": "commerce",
+      "supportsSnapshot": false,
+      "supportsReplay": false,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "FAILED"
+    },
+    {
+      "name": "media_uploads",
+      "domain": "media",
+      "supportsSnapshot": true,
+      "supportsReplay": false,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "WARNING"
+    },
+    {
+      "name": "fyp_events",
+      "domain": "fyp",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "live_room_state",
+      "domain": "live",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "gmar_game_state",
+      "domain": "gmar",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": true,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "trust_moderation_queue",
+      "domain": "trust_safety",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "PASS"
+    },
+    {
+      "name": "telemetry_events",
+      "domain": "infra_telemetry",
+      "supportsSnapshot": true,
+      "supportsReplay": true,
+      "supportsRollback": false,
+      "supportsFallback": true,
+      "status": "PASS"
+    }
+  ],
+  "findings": [
+    {
+      "target": "creator_alchemy_events",
+      "domain": "creator_alchemy",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "creator_quiet_gifts",
+      "domain": "creator_alchemy",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "wallet_ledger",
+      "domain": "wallet",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "commerce_orders",
+      "domain": "commerce",
+      "risk": "critical",
+      "status": "FAILED",
+      "message": "Missing persistence capabilities: persistentWrite, idempotency, rollback, recovery.",
+      "requiredFix": "Complete persistent write, idempotency, rollback, or recovery capability before launch."
+    },
+    {
+      "target": "media_uploads",
+      "domain": "media",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "fyp_events",
+      "domain": "fyp",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "live_room_state",
+      "domain": "live",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "gmar_game_state",
+      "domain": "gmar",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "trust_moderation_queue",
+      "domain": "trust_safety",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    },
+    {
+      "target": "telemetry_events",
+      "domain": "infra_telemetry",
+      "risk": "none",
+      "status": "PASS",
+      "message": "Persistence target satisfies launch integrity requirements."
+    }
+  ]
+}

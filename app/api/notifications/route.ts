@@ -1,23 +1,18 @@
 import { NextResponse } from "next/server";
-import { createNotification } from "@/lib/notifications/core";
+import { createNotification } from "@/src/core/notifications-production/create";
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const result = createNotification(body);
+  const body = await req.json().catch(() => null);
 
-    if (!result.ok) {
-      return NextResponse.json(
-        { ok: false, reason: result.reason },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json({ ok: true, notification: result.notification });
-  } catch {
+  if (!body?.userId || !body?.type || !body?.message) {
     return NextResponse.json(
-      { ok: false, reason: "invalid_json" },
+      { ok: false, error: "INVALID_NOTIFICATION_REQUEST" },
       { status: 400 }
     );
   }
+
+  return NextResponse.json({
+    ok: true,
+    notification: createNotification(body),
+  });
 }

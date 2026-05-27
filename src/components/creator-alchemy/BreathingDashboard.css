@@ -1,0 +1,135 @@
+[data-lumora="breathing-dashboard"] {
+  min-height: 100dvh;
+  padding: clamp(18px, 4vw, 42px);
+  color: rgba(255,255,255,0.94);
+  background:
+    radial-gradient(circle at 20% 12%, rgba(122,92,255,0.18), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(35,211,255,0.12), transparent 30%),
+    linear-gradient(180deg, #070914 0%, #0b1024 55%, #070914 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+  grid-template-areas:
+    "atmosphere atmosphere"
+    "seed whisper"
+    "river river"
+    "impact impact";
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-lumora="breathing-dashboard"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.035), transparent);
+  opacity: 0.55;
+}
+
+[data-lumora="breathing-dashboard"] section {
+  border: 1px solid rgba(255,255,255,0.11);
+  background: rgba(255,255,255,0.055);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: clamp(16px, 3vw, 26px);
+}
+
+[data-zone="atmosphere_bar"] {
+  grid-area: atmosphere;
+}
+
+[data-zone="living_seed"] {
+  grid-area: seed;
+  min-height: 220px;
+}
+
+[data-zone="whisper_panel"] {
+  grid-area: whisper;
+  min-height: 220px;
+}
+
+[data-zone="constellation_river"] {
+  grid-area: river;
+  min-height: 220px;
+}
+
+[data-zone="quiet_impact"] {
+  grid-area: impact;
+}
+
+[data-lumora="breathing-dashboard"] h2 {
+  margin: 0 0 10px;
+  font-size: clamp(17px, 2.4vw, 24px);
+  letter-spacing: -0.03em;
+}
+
+[data-lumora="breathing-dashboard"] p {
+  margin: 8px 0;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.55;
+}
+
+[data-lumora="breathing-dashboard"] button {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.94);
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+[data-zone="constellation_river"] div[role="list"] {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0 4px;
+}
+
+[data-zone="quiet_impact"] progress {
+  width: 100%;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+[data-zone="breath_button"] {
+  position: fixed;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  box-shadow: 0 18px 60px rgba(35,211,255,0.26);
+}
+
+@media (max-width: 760px) {
+  [data-lumora="breathing-dashboard"] {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "atmosphere"
+      "seed"
+      "whisper"
+      "river"
+      "impact";
+    padding-bottom: 110px;
+  }
+
+  [data-zone="living_seed"],
+  [data-zone="whisper_panel"],
+  [data-zone="constellation_river"] {
+    min-height: unset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-lumora="breathing-dashboard"] *,
+  [data-lumora="breathing-dashboard"]::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}

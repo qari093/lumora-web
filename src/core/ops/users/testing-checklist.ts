@@ -1,0 +1,18 @@
+export const realUsersActivationChecklist = {
+  alphaCreatorsInvited: true,
+  alphaFansInvited: true,
+  onboardingDocsReady: true,
+  creatorWalkthroughReady: true,
+  fanWalkthroughReady: true,
+  creatorPostingTestable: true,
+  uploadTestable: true,
+  checkoutTestable: true,
+  subscriptionsTestable: true,
+  inboxTestable: true,
+  saveMomentTestable: true,
+  ambientLinkSharingTestable: true,
+  frictionReportsReady: true,
+  satisfactionFeedbackReady: true,
+  retentionFeedbackReady: true,
+  blockerFixPathReady: true,
+};

@@ -1,0 +1,141 @@
+import type { RuntimeActivationRule } from "./types";
+
+export const ACTIVATION_LEVEL_LABELS = {
+  0: "disabled",
+  1: "mock_demo",
+  2: "internal_beta",
+  3: "private_beta",
+  4: "public",
+  5: "monetized"
+} as const;
+
+export const RUNTIME_ACTIVATION_RULES: RuntimeActivationRule[] = [
+  {
+    domain: "creator_alchemy",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Creator Alchemy is sealed and post-seal ready, but should remain private-beta until real user validation."
+  },
+  {
+    domain: "fyp",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "FYP can operate in private beta while runtime consolidation continues."
+  },
+  {
+    domain: "feed",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Feed orchestration needs duplicate responsibility consolidation."
+  },
+  {
+    domain: "content",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Content is structurally active but still needs canonical write boundary verification."
+  },
+  {
+    domain: "signals",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Signals need source validation and external ingestion controls."
+  },
+  {
+    domain: "intelligence",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Intelligence can compute internally before public ranking exposure."
+  },
+  {
+    domain: "personalization",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Personalization should stay internal until privacy and consent gates are complete."
+  },
+  {
+    domain: "live",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Live has route/runtime coverage but should remain private beta until room safety is complete."
+  },
+  {
+    domain: "wallet",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Wallet must not become monetized until fraud, KYC and payout readiness are confirmed."
+  },
+  {
+    domain: "trust_safety",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Trust/safety must be active before public launch."
+  },
+  {
+    domain: "infra_telemetry",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Infra telemetry must stay active for private beta."
+  },
+  {
+    domain: "commerce",
+    level: 1,
+    label: "mock_demo",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Commerce needs real transaction hardening before internal beta."
+  },
+  {
+    domain: "gmar",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "GMAR build compatibility is repaired, but game runtime still needs dedicated certification."
+  },
+  {
+    domain: "lumaspace",
+    level: 3,
+    label: "private_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "LumaSpace is mature enough for private beta but should not be public without final route health."
+  },
+  {
+    domain: "media",
+    level: 2,
+    label: "internal_beta",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Media routes exist, but catalog/source/legal readiness must be validated before public use."
+  },
+  {
+    domain: "unknown",
+    level: 0,
+    label: "disabled",
+    monetized: false,
+    publicEnabled: false,
+    reason: "Unknown routes are disabled until classified."
+  }
+];
