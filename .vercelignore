@@ -51,3 +51,7 @@ public/persona/emojis
 !components/music/TrackList.tsx
 !config/
 !config/lumoraEnv.ts
+
+# Preserve production styling shell
+!app/globals.css
+!app/layout.tsx
