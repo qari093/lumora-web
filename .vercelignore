@@ -41,3 +41,7 @@ public/persona/emojis
 !lib/content/
 !lib/content/schema.ts
 !lib/content/attention.ts
+
+# Preserve all runtime lib source required by Next/Vercel builds
+!lib/
+!lib/**

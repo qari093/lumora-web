@@ -1,17 +1,21 @@
-/* eslint-disable no-console */
 import { PrismaClient } from "@prisma/client";
 
-// Prevent hot-reload from creating new PrismaClient instances in dev.
 declare global {
   // eslint-disable-next-line no-var
-  var __prisma: PrismaClient | undefined;
+  var __lumora_prisma__: PrismaClient | undefined;
 }
 
-const prisma = globalThis.__prisma ?? new PrismaClient();
+export const prisma =
+  global.__lumora_prisma__ ||
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["query", "warn", "error"]
+        : ["error"]
+  });
 
 if (process.env.NODE_ENV !== "production") {
-  globalThis.__prisma = prisma;
+  global.__lumora_prisma__ = prisma;
 }
 
-export { prisma };
 export default prisma;

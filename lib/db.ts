@@ -1,3 +1,2 @@
-export const prisma = {} as any;
-
-export default prisma;
+export { prisma } from "./prisma";
+export { default } from "./prisma";
