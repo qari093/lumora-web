@@ -32,3 +32,12 @@ public/audio
 public/brands/cineverse
 public/persona/avatars
 public/persona/emojis
+
+# Lumora Vercel build-critical compatibility modules
+!lib/api/
+!lib/api/guardedJson.ts
+!lib/config/
+!lib/config/getLumoraFlags.ts
+!lib/content/
+!lib/content/schema.ts
+!lib/content/attention.ts
