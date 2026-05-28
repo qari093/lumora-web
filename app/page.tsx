@@ -9,7 +9,8 @@ const portals = [
   { name: "CineVerse", href: "/cineverse", desc: "Movie portal, open canon, trailers, and cinematic FYP.", signal: "Cinema" },
   { name: "Echo", href: "/echo", desc: "Music identity, sonic rituals, tracks, and emotional resonance.", signal: "Audio" },
   { name: "Zendoro", href: "/zendoro", desc: "Commerce layer, storefront, seller tools, and trust systems.", signal: "Commerce" },
-  { name: "Zenwallet", href: "/zenwallet", desc: "Wallet, Zencoin utility, ledger, rewards, and transparency.", signal: "Economy" }
+  { name: "Zenwallet", href: "/zenwallet", desc: "Wallet, Zencoin utility, ledger, rewards, and transparency.", signal: "Economy" },
+  { name: "Creator Hub", href: "/creator-hub", desc: "Creator dashboard, rituals, publishing, live sync, and community growth.", signal: "Creator" }
 ];
 
 export default function HomePage() {
