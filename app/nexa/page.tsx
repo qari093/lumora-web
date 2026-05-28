@@ -1,25 +1,31 @@
-import NexaLiveClient from "@/components/nexa/NexaLiveClient";
+import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
 
 export default function NexaPage() {
-  const items = [
-    { id: "nexa-seed-1", title: "NEXA seed 1" },
-    { id: "nexa-seed-2", title: "NEXA seed 2" },
-  ] as const;
-
   return (
-      <>
-        <span style={{ display: "none" }}>LUMORA_PORTAL_ALIVE_NEXA</span>
-        <div style={{ display: "none" }}>
-          {items.map((item) => (
-            <span key={item.id}>{item.title}</span>
-          ))}
-        </div>
-        {/* LUMORA_PORTAL_ALIVE_NEXA */}
-    <main style={{ padding: 24 }}>
-      <a href="/nexa/checkin" style={{ display: "none" }}>NEXA check-in</a>
-      <h1 title="nexa" style={{ fontSize: 28, marginBottom: 16 }}>NEXA</h1>
-      <NexaLiveClient />
-    </main>
-  
-      </>);
+    <LumoraPortalPage
+      title="NEXA Sanctuary"
+      eyebrow="Human optimization portal"
+      description="NEXA is restored as a calm visual portal for recovery, movement, nourishment, sleep, breath, emotional companion systems, and Zen Economy premium flows."
+      actions={[
+        { label: "NEXA Status", href: "/api/nexa/status" },
+        { label: "NEXA Health", href: "/api/nexa/health" },
+        { label: "Summary", href: "/api/nexa/summary" }
+      ]}
+      signals={[
+        { label: "Mode", value: "Sanctuary" },
+        { label: "Tone", value: "Calm" },
+        { label: "Economy", value: "Premium Ready" }
+      ]}
+      modules={[
+        "Wellness Dashboard",
+        "Breathing UI",
+        "Recovery Visualization",
+        "Emotional Companion",
+        "Health Metrics",
+        "Ritual Overlay",
+        "Trust Indicators",
+        "Sanctuary Community"
+      ]}
+    />
+  );
 }

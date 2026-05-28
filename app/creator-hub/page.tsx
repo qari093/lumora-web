@@ -1,17 +1,31 @@
-import BreathingDashboard from "@/src/components/creator-alchemy/BreathingDashboard";
-import { buildCreatorHubRuntimeSnapshot } from "@/src/core/creator-alchemy/runtime";
-
-export const metadata = {
-  title: "Lumora Creator Hub",
-  description: "A breathing creator dashboard powered by Lumora Creator Alchemy Ω∞."
-};
+import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
 
 export default function CreatorHubPage() {
-  const snapshot = buildCreatorHubRuntimeSnapshot();
-
   return (
-    <section aria-label="Lumora Creator Hub" data-lumora="creator-hub-runtime">
-      <BreathingDashboard model={snapshot.dashboard} />
-    </section>
+    <LumoraPortalPage
+      title="Creator Hub"
+      eyebrow="Creator civilization portal"
+      description="Creator Hub now mounts as a polished surface for dashboard state, quiet gifts, constellations, creator rituals, moderation, launch readiness, and live data wiring."
+      actions={[
+        { label: "Creator Dashboard", href: "/creator/dashboard" },
+        { label: "Creator Hub API", href: "/api/creator/hub" },
+        { label: "Alchemy Health", href: "/api/creator-alchemy/health" }
+      ]}
+      signals={[
+        { label: "Mode", value: "Creator OS" },
+        { label: "Economy", value: "Quiet Gifts" },
+        { label: "Safety", value: "Moderated" }
+      ]}
+      modules={[
+        "Dashboard",
+        "First Breath",
+        "Constellations",
+        "Quiet Gifts",
+        "Creator Identity",
+        "Live Sync",
+        "Moderation",
+        "Launch Gates"
+      ]}
+    />
   );
 }
