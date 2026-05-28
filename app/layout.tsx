@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0 }}>
+    <html suppressHydrationWarning lang="en">
+      <body style={{ margin: 0 }} className="bg-[#050816] text-white min-h-screen overflow-x-hidden">
         <GlobalPortalNav />
         {children}
       </body>
