@@ -1,0 +1,95 @@
+:root {
+  --lumora-bg: #030712;
+  --lumora-card: rgba(255, 255, 255, 0.065);
+  --lumora-border: rgba(255, 255, 255, 0.12);
+  --lumora-cyan: #22d3ee;
+  --lumora-violet: #8b5cf6;
+  --lumora-pink: #ec4899;
+}
+
+.lumora-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.18), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.22), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.12), transparent 35%),
+    linear-gradient(180deg, #020617 0%, #030712 52%, #02040f 100%);
+  color: white;
+}
+
+.lumora-glass {
+  border: 1px solid var(--lumora-border);
+  background: var(--lumora-card);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.lumora-glow-text {
+  background: linear-gradient(90deg, #fff, #a5f3fc, #c4b5fd, #fbcfe8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lumora-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(44px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.lumora-orb.cyan {
+  background: var(--lumora-cyan);
+}
+
+.lumora-orb.violet {
+  background: var(--lumora-violet);
+}
+
+.lumora-orb.pink {
+  background: var(--lumora-pink);
+}
+
+.lumora-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.lumora-portal-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+.lumora-portal-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(circle at top left, rgba(34,211,238,.25), transparent 35%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.lumora-portal-card:hover::before {
+  opacity: 1;
+}
+
+.lumora-nav-pill {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}

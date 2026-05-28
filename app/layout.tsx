@@ -1,4 +1,5 @@
 import "./globals.css";
+import "@/styles/system/lumora-visual-system.css";
 import type { Metadata } from "next";
 import GlobalPortalNav from "@/components/navigation/GlobalPortalNav";
 
