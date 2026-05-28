@@ -1,57 +1,33 @@
-# node
-node_modules
-npm-debug.log
-yarn.lock
+.data/
+branding/_rollback/
+docs/launch/backup-step008/
+*.log
+.DS_Store
+.next/cache/
+node_modules/
 
-# prisma local dbs and backups
-prisma/*.db
-prisma/*.db-*
-prisma/*.db.*
-prisma/**/*.bak*
-prisma/**/*.tmp
+gmar_40_pack_final_audit_*/
+gmar_full_audit_*/
+gmar_production_final_audit_*/
+lumora_fyp_final_audit_*/
+lumora_fyp_full_final_audit_*/
+lumora_fyp_production_seal_*/
+lumora_fyp_real_issue_sorter_*/
+lumora_video_source_audit_*/
 
-# dev logs
-*.local.log
-tmp/
-.next/cache/*
-!.next/cache/images # keep image cache if ever used
-
-# oversized local/dev artifacts
-.pnpm-store
-.quarantine
-ops/_backups
-.data/render/cache
-docs/launch
-branding/_rollback
-tsconfig.monitor.tsbuildinfo
-prisma/prisma/dev.db
-
-# oversized demo media not needed for private beta deploy
-public/videos
-public/audio
-public/brands/cineverse
-public/persona/avatars
-public/persona/emojis
-
-# Lumora Vercel build-critical compatibility modules
-!lib/api/
-!lib/api/guardedJson.ts
-!lib/config/
-!lib/config/getLumoraFlags.ts
-!lib/content/
-!lib/content/schema.ts
-!lib/content/attention.ts
-
-# Preserve all runtime lib source required by Next/Vercel builds
-!lib/
-!lib/**
-
-# Preserve music + config modules required at runtime
-!components/music/
-!components/music/TrackList.tsx
+!app/
+!components/
 !config/
-!config/lumoraEnv.ts
-
-# Preserve production styling shell
-!app/globals.css
-!app/layout.tsx
+!configs/
+!core/
+!lib/
+!src/
+!styles/
+!public/
+!prisma/
+!package.json
+!pnpm-lock.yaml
+!next.config.*
+!tsconfig.json
+!postcss.config.*
+!tailwind.config.*

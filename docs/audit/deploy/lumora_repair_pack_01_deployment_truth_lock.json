@@ -1,0 +1,20 @@
+{
+  "pack": "01/07",
+  "phase": "Deployment Truth Lock",
+  "branch": "lumora-launch-final",
+  "commit": "dcef196e",
+  "checkedAt": "2026-05-28T12:08:21.441Z",
+  "requiredPaths": [
+    "app",
+    "components",
+    "lib",
+    "src",
+    "styles",
+    "public",
+    "config",
+    "package.json",
+    "pnpm-lock.yaml",
+    "tsconfig.json"
+  ],
+  "status": "PASS"
+}
