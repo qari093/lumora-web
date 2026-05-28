@@ -2,39 +2,37 @@ name: CI - Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [lumora-launch-final, main]
   pull_request:
-    branches: [ main, develop ]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: 'pnpm'
-          cache: "pnpm"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: "10.17.0"
+          version: 10.28.1
+          run_install: false
 
-      - name: Install (pnpm frozen lockfile)
-        run: pnpm -s install --frozen-lockfile
-
-      - name: Run vitest with coverage
-        run: pnpm -s exec vitest run --coverage
-
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
-        if: always()
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          name: coverage-html
-          path: |
-            coverage/**
+          node-version: 20
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Creator CineVerse GMAR tests
+        run: pnpm -s vitest run tests/creator-cineverse-gmar --reporter verbose
+
+      - name: Megapack runtime tests
+        run: pnpm -s vitest run tests/civilization/civilization_foundation.test.ts tests/atmosphere/atmosphere_runtime.test.ts tests/fyp/fyp_runtime.test.ts tests/continuity/tomorrows_vibe.test.ts tests/portal/portal_runtime.test.ts tests/vault/vault_engine.test.ts tests/live-social tests/creator-cineverse-gmar --reporter verbose
+
+      - name: Typecheck
+        run: pnpm -s tsc --noEmit

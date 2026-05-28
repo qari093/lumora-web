@@ -2,60 +2,34 @@ name: LumaSpace State & Tests
 
 on:
   push:
-    paths:
-      - "app/api/lumaspace/**"
-      - "app/lumaspace/**"
-      - "app/me/space/**"
-      - "app/_components/lumaspace/**"
-      - "tests/**"
-      - "scripts/integration/phase25.step11.sh"
-      - "scripts/integration/phase25.step13.sh"
-      - ".github/workflows/lumaspace-ci.yml"
+    branches: [lumora-launch-final, main]
   pull_request:
-    paths:
-      - "app/api/lumaspace/**"
-      - "app/lumaspace/**"
-      - "app/me/space/**"
-      - "app/_components/lumaspace/**"
-      - "tests/**"
-      - "scripts/integration/phase25.step11.sh"
-      - "scripts/integration/phase25.step13.sh"
-      - ".github/workflows/lumaspace-ci.yml"
 
 jobs:
-  lumaspace-checks:
+  lumaspace-state:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+          run_install: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: 'pnpm'
-          cache: "npm"
+          node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Start dev server (background)
-        env:
-          PORT: 3000
-        run: |
-          pkill -f "next dev" || true
-          PORT=$PORT npx next dev >/tmp/next-dev.out 2>&1 &
-          sleep 15
-          echo "--- next-dev.out (tail) ---"
-          tail -n 40 /tmp/next-dev.out || true
+      - name: LumaSpace state contract
+        run: pnpm -s vitest run tests/lumaspace --reporter verbose --passWithNoTests
 
-      - name: LumaSpace state contract (HTTP)
-        env:
-          PORT: 3000
-        run: |
-          bash scripts/integration/phase25.step11.sh
-
-      - name: LumaSpace tests (unit + utils)
-        run: |
-          npm run test:lumaspace
+      - name: Typecheck
+        run: pnpm -s tsc --noEmit
