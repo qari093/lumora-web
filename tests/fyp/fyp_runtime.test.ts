@@ -1,12 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { getFypHealth } from "../../lib/fyp/runtime";
+import { buildFeed } from "@/lib/fyp/runtime/feedRuntime";
 
-describe("FYP runtime health", () => {
-  it("returns valid health object", () => {
-    const h = getFypHealth();
-    expect(h.ok).toBe(true);
-    expect(["seed", "live", "shadow"]).toContain(h.mode);
-    expect(typeof h.items).toBe("number");
-    expect(typeof h.ts).toBe("number");
+describe("fyp runtime", () => {
+  it("sorts feed by score", () => {
+    const result = buildFeed([
+      { id: "1", lane: "A", emotion: "wonder", score: 1 },
+      { id: "2", lane: "B", emotion: "calm", score: 9 }
+    ]);
+
+    expect(result[0].id).toBe("2");
   });
 });

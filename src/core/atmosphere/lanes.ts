@@ -1,0 +1,14 @@
+export const ATMOSPHERE_LANES = [
+  "COSMIC_DRIFT",
+  "MIDNIGHT_CINEMA",
+  "HUMAN_ENERGY",
+  "CALM_EARTH",
+  "SILENT_WONDER",
+  "ANALOG_MEMORY",
+  "EMOTIONAL_VELOCITY",
+  "DREAM_FRAGMENTS",
+  "LIVE_ECHOES",
+  "GMAR_PULSE"
+] as const;
+
+export type AtmosphereLane = typeof ATMOSPHERE_LANES[number];

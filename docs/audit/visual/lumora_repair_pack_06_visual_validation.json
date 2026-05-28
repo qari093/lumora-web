@@ -1,0 +1,14 @@
+{
+  "pack": "06/07",
+  "phase": "Production Visual Validation",
+  "status": "PASS",
+  "validates": [
+    "homepage shell",
+    "global CSS mount",
+    "visual system CSS",
+    "brand mark",
+    "top navigation",
+    "portal visible shells",
+    "runtime API visibility"
+  ]
+}
