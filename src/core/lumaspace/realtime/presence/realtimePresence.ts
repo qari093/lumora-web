@@ -1,6 +1,4 @@
 export {
-  createPresenceState,
-  validatePresenceState,
   createRealtimePresence,
   validateRealtimePresence
 } from "../contracts/realtimeContract";
