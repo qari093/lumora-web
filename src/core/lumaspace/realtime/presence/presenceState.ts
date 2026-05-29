@@ -4,3 +4,8 @@ export function createPresenceState() {
     users: 4
   };
 }
+
+export {
+  createRealtimePresence,
+  runRealtimeRuntime
+} from "@/core/lumaspace/compat/legacyContracts";

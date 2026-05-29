@@ -30,3 +30,11 @@ export function validateRitualRuntime(
     runtime.portalId
   );
 }
+
+export {
+  createDailyArrival,
+  createEchoSeed,
+  openMorningPortal,
+  runDailyRitualRuntime,
+  validateDailyArrival
+} from "@/core/lumaspace/compat/legacyContracts";

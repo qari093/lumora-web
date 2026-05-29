@@ -30,3 +30,8 @@ export function validateGovernanceRuntime(
     runtime.boundaryId
   );
 }
+
+export {
+  runGovernanceRuntime,
+  validateGovernanceSignal
+} from "@/core/lumaspace/compat/legacyContracts";

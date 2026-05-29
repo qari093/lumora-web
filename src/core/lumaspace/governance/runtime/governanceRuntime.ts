@@ -4,3 +4,7 @@ export function runGovernanceRuntime() {
     boundaryId: "boundary_001"
   };
 }
+
+export {
+  validateGovernanceSignal
+} from "@/core/lumaspace/compat/legacyContracts";

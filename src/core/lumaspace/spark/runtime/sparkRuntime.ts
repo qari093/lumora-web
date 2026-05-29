@@ -4,3 +4,8 @@ export function runSparkRuntime() {
     sparkId: "spark_001"
   };
 }
+
+export {
+  createSparkEcho,
+  validateLumaSpark
+} from "@/core/lumaspace/compat/legacyContracts";

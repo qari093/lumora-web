@@ -4,3 +4,8 @@ export function runLumaLensRuntime() {
     lensId: "lens_001"
   };
 }
+
+export {
+  createLensFrame,
+  validateRawLens
+} from "@/core/lumaspace/compat/legacyContracts";

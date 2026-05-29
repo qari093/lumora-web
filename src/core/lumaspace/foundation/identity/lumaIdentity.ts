@@ -4,3 +4,8 @@ export function createLumaIdentity() {
     aura: "soft-bloom"
   };
 }
+
+export {
+  createFoundationRuntime,
+  createIdentity
+} from "@/core/lumaspace/compat/legacyContracts";

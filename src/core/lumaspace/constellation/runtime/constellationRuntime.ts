@@ -4,3 +4,7 @@ export function runConstellationRuntime() {
     constellationId: "constellation_001"
   };
 }
+
+export {
+  validateConstellation
+} from "@/core/lumaspace/compat/legacyContracts";

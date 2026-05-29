@@ -4,3 +4,7 @@ export function runRealtimeRuntime() {
     roomId: "room_001"
   };
 }
+
+export {
+  createRealtimePresence
+} from "@/core/lumaspace/compat/legacyContracts";

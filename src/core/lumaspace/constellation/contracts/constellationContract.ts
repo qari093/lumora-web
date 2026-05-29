@@ -30,3 +30,7 @@ export function validateConstellationRuntime(
     runtime.constellationId
   );
 }
+
+export {
+  runConstellationRuntime
+} from "@/core/lumaspace/compat/legacyContracts";

@@ -31,3 +31,9 @@ export function validateSparkRuntime(
     runtime.sparkId
   );
 }
+
+export {
+  createSparkEcho,
+  runSparkRuntime,
+  validateLumaSpark
+} from "@/core/lumaspace/compat/legacyContracts";

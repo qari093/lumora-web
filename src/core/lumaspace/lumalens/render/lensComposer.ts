@@ -4,3 +4,9 @@ export function createLensComposer() {
     mode: "emotional-physics"
   };
 }
+
+export {
+  createLensFrame,
+  runLumaLensRuntime,
+  validateRawLens
+} from "@/core/lumaspace/compat/legacyContracts";

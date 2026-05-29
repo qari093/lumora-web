@@ -22,3 +22,10 @@ export function createEchoSeed(
 
   return seed;
 }
+
+export {
+  createDailyArrival,
+  openMorningPortal,
+  runDailyRitualRuntime,
+  validateDailyArrival
+} from "@/core/lumaspace/compat/legacyContracts";

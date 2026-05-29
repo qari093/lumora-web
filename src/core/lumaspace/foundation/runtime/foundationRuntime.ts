@@ -7,3 +7,8 @@ export function runFoundationRuntime() {
     identity: createLumaIdentity()
   };
 }
+
+export {
+  createFoundationRuntime,
+  createIdentity
+} from "@/core/lumaspace/compat/legacyContracts";
