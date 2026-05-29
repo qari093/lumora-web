@@ -1,106 +1,130 @@
-export function createFoundationRuntime() {
-  return { id: "foundation_runtime_001", initialized: true, active: true };
+export type AnyRecord = Record<string, any>;
+
+export function createFoundationRuntime(): AnyRecord {
+  return { initialized: true, atmosphere: "calm", mode: "solo" };
 }
 
-export function createIdentity(id = "user_001") {
-  return { id, sovereign: true, privateByDefault: true };
+export function createIdentity(id = "user_001"): AnyRecord {
+  return { id, mode: "solo", privacy: "local_first" };
 }
 
-export function validateLumaSpark(spark: any): boolean {
-  return Boolean(spark?.id);
+export function validateConstellation(v: AnyRecord): boolean {
+  return !!v && typeof v.id === "string";
 }
 
-export function validateSparkStorageRecord(record: any): boolean {
-  return Boolean(record?.id && record?.sparkId);
+export function runConstellationRuntime(): AnyRecord {
+  return {
+    active: true,
+    constellation: { id: "constellation_001", stars: 3, emotionalGravity: 0.8 },
+    auraBloom: { id: "aura_bloom_001" }
+  };
 }
 
-export function createSparkEcho(sparkId = "spark_001", resonance = 0.8) {
+export function createLensFrame(mode = "dream"): AnyRecord {
+  return { id: "frame_001", mode, valid: true };
+}
+
+export function validateLensFrame(v: AnyRecord): boolean {
+  return !!v && typeof v.id === "string";
+}
+
+export function validateRawLens(v: AnyRecord): boolean {
+  return !!v && (typeof v.id === "string" || typeof v.source === "string" || typeof v.mode === "string");
+}
+
+export function runLumaLensRuntime(): AnyRecord {
+  return {
+    active: true,
+    frame: createLensFrame("dream"),
+    rawLens: { id: "raw_lens_001", source: "camera", valid: true }
+  };
+}
+
+export function createRealtimePresence(): AnyRecord {
+  return { id: "presence_001", participants: 2, active: true };
+}
+
+export function validateRealtimePresence(v: AnyRecord): boolean {
+  return !!v && typeof v.id === "string" && typeof v.participants === "number";
+}
+
+export function runRealtimeRuntime(): AnyRecord {
+  return {
+    active: true,
+    presence: createRealtimePresence(),
+    sharedAtmosphere: { id: "shared_atmosphere_001", participants: 2, tone: "calm" }
+  };
+}
+
+export function validateGovernanceSignal(v: AnyRecord): boolean {
+  return !!v && (typeof v.id === "string" || typeof v.kind === "string" || typeof v.signal === "string");
+}
+
+export function runGovernanceRuntime(): AnyRecord {
+  return {
+    active: true,
+    boundary: { id: "boundary_001", safe: true },
+    signal: { id: "governance_signal_001", valid: true }
+  };
+}
+
+export function runPerformanceRuntime(): AnyRecord {
+  return {
+    active: true,
+    profile: { fpsTarget: 60, reducedMotion: false },
+    device: { tier: "standard" }
+  };
+}
+
+export function runSanctuaryRuntime(): AnyRecord {
+  return {
+    active: true,
+    tier: { id: "sanctuary_tier_001" },
+    enhancement: { id: "enhancement_001", safe: true }
+  };
+}
+
+export function validateLumaSpark(v: AnyRecord): boolean {
+  return !!v && typeof v.id === "string";
+}
+
+export function validateSparkStorageRecord(v: AnyRecord): boolean {
+  return !!v && (typeof v.id === "string" || typeof v.sparkId === "string");
+}
+
+export function createSparkEcho(sparkId = "spark_001", resonance = 0.8): AnyRecord {
   return { id: "spark_echo_001", sparkId, resonance };
 }
 
-export function runSparkRuntime(items: any[] = [{ id: "spark_001" }, { id: "spark_002" }]) {
-  return { active: true, count: items.length, sparks: items };
-}
-
-export function createLensFrame(mode = "dream") {
-  return { id: "frame_001", mode, safe: true };
-}
-
-export function validateRawLens(rawLens: any): boolean {
-  return Boolean(rawLens?.id);
-}
-
-export function runLumaLensRuntime() {
+export function runSparkRuntime(): AnyRecord {
   return {
     active: true,
-    frame: { id: "frame_001", mode: "dream" },
-    rawLens: { id: "raw_lens_001", safe: true },
+    count: 2,
+    sparks: [{ id: "spark_001" }, { id: "spark_002" }],
+    echo: createSparkEcho("spark_001", 0.8)
   };
 }
 
-export function validateConstellation(constellation: any): boolean {
-  return Boolean(constellation?.id);
+export function createEchoSeed(userId = "user_001"): AnyRecord {
+  return { id: "echo_seed_001", userId, type: "stardust_whisper", valid: true };
 }
 
-export function runConstellationRuntime() {
-  return {
-    active: true,
-    constellation: { id: "constellation_001", nodes: ["spark_001", "spark_002"] },
-  };
+export function validateEchoSeed(v: AnyRecord): boolean {
+  return !!v && v.type === "stardust_whisper";
 }
 
-export function runPerformanceRuntime() {
-  return { active: true, profile: { fpsTarget: 60, adaptive: true } };
+export function createDailyArrival(day = 1): AnyRecord {
+  return { id: "daily_arrival_001", day, type: "stardust_whisper", ephemeral: true };
 }
 
-export function createRealtimePresence() {
-  return { id: "presence_001", participants: 2, anonymous: true };
+export function validateDailyArrival(v: AnyRecord): boolean {
+  return !!v && v.type === "stardust_whisper" && v.ephemeral === true;
 }
 
-export function runRealtimeRuntime() {
-  return {
-    active: true,
-    sharedAtmosphere: { id: "shared_atmosphere_001", participants: 2 },
-  };
+export function openMorningPortal(day = 0): AnyRecord {
+  return { id: "morning_portal_001", day, opened: true, durationMs: 3000, arrival: createDailyArrival(day) };
 }
 
-export function validateGovernanceSignal(signal: any): boolean {
-  return Boolean(signal?.id);
-}
-
-export function runGovernanceRuntime() {
-  return { active: true, boundary: { id: "boundary_001", safe: true } };
-}
-
-export function runSanctuaryRuntime() {
-  return { active: true, enhancement: { id: "enhancement_001", safe: true } };
-}
-
-export function createEchoSeed(seedId = "echo_seed_001") {
-  return { id: String(seedId), tone: "morning", safe: true };
-}
-
-export function validateEchoSeed(seed: any): boolean {
-  return Boolean(seed?.id);
-}
-
-export function createDailyArrival(day = 1) {
-  return { id: "daily_arrival_001", day, arrived: true };
-}
-
-export function validateDailyArrival(arrival: any): boolean {
-  return Boolean(arrival?.arrived);
-}
-
-export function openMorningPortal(offset = 0) {
-  return { id: "morning_portal_001", offset, opened: true };
-}
-
-export function runDailyRitualRuntime(userId = "user_001") {
-  return {
-    active: true,
-    userId,
-    arrival: createDailyArrival(1),
-    portal: openMorningPortal(0),
-  };
+export function runDailyRitualRuntime(userId = "user_001"): AnyRecord {
+  return { active: true, userId, portal: openMorningPortal(0), seed: createEchoSeed(userId) };
 }

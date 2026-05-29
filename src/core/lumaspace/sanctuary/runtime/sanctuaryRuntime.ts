@@ -4,3 +4,4 @@ export function runSanctuaryRuntime() {
     tierId: "tier_001"
   };
 }
+export * from "@/core/lumaspace/compat/legacyContracts";

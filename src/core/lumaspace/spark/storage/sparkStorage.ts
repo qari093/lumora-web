@@ -22,3 +22,4 @@ export function createSparkStorageRecord(
 
   return record;
 }
+export * from "@/core/lumaspace/compat/legacyContracts";

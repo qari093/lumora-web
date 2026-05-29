@@ -4,3 +4,4 @@ export function runPerformanceRuntime() {
     renderProfileId: "render_001"
   };
 }
+export * from "@/core/lumaspace/compat/legacyContracts";
