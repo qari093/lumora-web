@@ -32,7 +32,7 @@ jobs:
         run: pnpm -s vitest run tests/creator-cineverse-gmar --reporter verbose --pool=threads
 
       - name: Megapack runtime tests
-        run: pnpm -s vitest run tests/civilization/civilization_foundation.test.ts tests/atmosphere/atmosphere_runtime.test.ts tests/fyp/fyp_runtime.test.ts tests/continuity/tomorrows_vibe.test.ts tests/portal/portal_runtime.test.ts tests/vault/vault_engine.test.ts tests/live-social tests/creator-cineverse-gmar --reporter verbose
+        run: pnpm -s vitest run tests/civilization/civilization_foundation.test.ts tests/atmosphere/atmosphere_runtime.test.ts tests/fyp/fyp_runtime.test.ts tests/continuity/tomorrows_vibe.test.ts tests/portal/portal_runtime.test.ts tests/vault/vault_engine.test.ts tests/live-social tests/creator-cineverse-gmar --reporter verbose --pool=threads
 
       - name: Typecheck
         run: pnpm -s tsc --noEmit
