@@ -1,31 +1,25 @@
-import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
+import {
+  BreathingDashboard
+} from "@/components/creator-alchemy/BreathingDashboard";
+import {
+  SAMPLE_BREATHING_DASHBOARD_INPUT,
+  buildBreathingDashboard
+} from "@/src/core/creator-alchemy/dashboard/breathingDashboard";
+import {
+  buildCreatorHubRuntimeSnapshot
+} from "@/src/core/creator-alchemy/runtime/creatorHubRuntime";
 
 export default function CreatorHubPage() {
+  const snapshot = buildCreatorHubRuntimeSnapshot();
+  const dashboard = snapshot.dashboard ?? buildBreathingDashboard(SAMPLE_BREATHING_DASHBOARD_INPUT);
+
   return (
-    <LumoraPortalPage
-      title="Creator Hub"
-      eyebrow="Creator civilization portal"
-      description="Creator Hub now mounts as a polished surface for dashboard state, quiet gifts, constellations, creator rituals, moderation, launch readiness, and live data wiring."
-      actions={[
-        { label: "Creator Dashboard", href: "/creator/dashboard" },
-        { label: "Creator Hub API", href: "/api/creator/hub" },
-        { label: "Alchemy Health", href: "/api/creator-alchemy/health" }
-      ]}
-      signals={[
-        { label: "Mode", value: "Creator OS" },
-        { label: "Economy", value: "Quiet Gifts" },
-        { label: "Safety", value: "Moderated" }
-      ]}
-      modules={[
-        "Dashboard",
-        "First Breath",
-        "Constellations",
-        "Quiet Gifts",
-        "Creator Identity",
-        "Live Sync",
-        "Moderation",
-        "Launch Gates"
-      ]}
-    />
+    <main data-creator-hub="sanctuary">
+      <section>
+        <p>Creator Hub keeps sanctuary tone, quiet gifts, constellations, moderation, launch readiness, and live data wiring connected.</p>
+      </section>
+      <BreathingDashboard dashboard={dashboard} snapshot={snapshot.dashboard} />
+    </main>
   );
 }
+

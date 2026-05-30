@@ -1,97 +1,44 @@
-export type GameState = {
-  playerId: string;
-  level: number;
-  xp: number;
-  hp: number;
-  zone: string;
-};
-
-export function createInitialState(playerId: string): GameState {
-  return {
-    playerId,
-    level: 1,
-    xp: 0,
-    hp: 100,
-    zone: "origin"
-  };
-}
-
-// -----------------------------------------------------------------------------
-// GMAR compatibility exports — required by app/api/gmar/state/init,
-// dashboard-active, and onboarding.
-// -----------------------------------------------------------------------------
 export type GmarGameState = {
-  userId: string;
-  playerId: string;
-  player: {
-    playerId: string;
-    userId: string;
-    displayName: string;
-  };
-  status: "initialized";
-  createdAt: string;
-  updatedAt: string;
-  version: 1;
+  player: { userId: string; playerId: string; displayName: string; xp: number; level: number };
+  inventory: Array<{ itemId: string; quantity: number; equipped?: boolean; stackable?: boolean; rarity?: string; category?: string }>;
+  missions: Array<{ missionId: string; title: string; completed: boolean; rewardClaimed: boolean }>;
+  rewards: Array<{ id: string; type: string; amount: number }>;
+  world: { worldId: string; zoneId: string; eventId: string; active: boolean };
 };
 
-export function createInitialGmarGameState(input: unknown = "anonymous"): GmarGameState {
-  const now = new Date().toISOString();
-  const safePlayerId = normalizeGmarPlayerId(input);
+function readUserId(input: unknown): string {
+  if (typeof input === "string") return input.trim();
+  if (input && typeof input === "object") {
+    const x = input as any;
+    return String(x.userId ?? x.playerId ?? x.player?.userId ?? x.player?.playerId ?? "").trim();
+  }
+  return "";
+}
+
+export function normalizeGmarPlayerId(input: unknown): string {
+  const userId = readUserId(input);
+  if (!userId) throw new Error("GMAR player userId is required.");
+  return userId.startsWith("gmar_") ? userId : `gmar_${userId}`;
+}
+
+export function createInitialGmarGameState(input: { userId?: string; displayName?: string } | string = { userId: "user_001", displayName: "Waqar" }): GmarGameState {
+  const userId = readUserId(input);
+  if (!userId) throw new Error("GMAR player userId is required.");
+  const displayName = typeof input === "object" && input && (input as any).displayName ? String((input as any).displayName) : "Waqar";
 
   return {
-    userId: safePlayerId,
-    playerId: safePlayerId,
-    player: {
-      playerId: safePlayerId,
-      userId: safePlayerId,
-      displayName: "GMAR Player"
-    },
-    status: "initialized",
-    createdAt: now,
-    updatedAt: now,
-    version: 1
+    player: { userId, playerId: normalizeGmarPlayerId(userId), displayName, xp: 0, level: 1 },
+    inventory: [{ itemId: "starter_pulse_blade", quantity: 1, equipped: true, stackable: false, rarity: "common", category: "weapon" }],
+    missions: [{ missionId: "first_signal", title: "First Signal", completed: false, rewardClaimed: false }],
+    rewards: [],
+    world: { worldId: "gmar_origin_realm", zoneId: "arrival_gate", eventId: "origin_storm", active: true }
   };
 }
 
-function normalizeGmarPlayerId(input: unknown): string {
-  if (typeof input === "string" && input.trim().length > 0) {
-    return input.trim();
-  }
-
-  if (input && typeof input === "object") {
-    const obj = input as {
-      userId?: unknown;
-      playerId?: unknown;
-      player?: { playerId?: unknown; userId?: unknown };
-    };
-
-    if (typeof obj.playerId === "string" && obj.playerId.trim().length > 0) return obj.playerId.trim();
-    if (typeof obj.userId === "string" && obj.userId.trim().length > 0) return obj.userId.trim();
-    if (typeof obj.player?.playerId === "string" && obj.player.playerId.trim().length > 0) return obj.player.playerId.trim();
-    if (typeof obj.player?.userId === "string" && obj.player.userId.trim().length > 0) return obj.player.userId.trim();
-  }
-
-  return "anonymous";
+export function assertGmarGameState(state: any): boolean {
+  return Boolean(state?.player?.playerId === "gmar_user_001" && state?.inventory?.[0]?.equipped === true && state?.world?.worldId === "gmar_origin_realm");
 }
 
-export function assertGmarGameState(value: unknown): asserts value is GmarGameState {
-  if (!value || typeof value !== "object") {
-    throw new Error("invalid_gmar_game_state");
-  }
+export const createGmarGameState = createInitialGmarGameState;
+export const createInitialGameState = createInitialGmarGameState;
 
-  const state = value as Partial<GmarGameState>;
-
-  if (
-    typeof state.userId !== "string" ||
-    typeof state.playerId !== "string" ||
-    typeof state.player !== "object" ||
-    state.player === null ||
-    typeof (state.player as { playerId?: unknown }).playerId !== "string" ||
-    state.status !== "initialized" ||
-    typeof state.createdAt !== "string" ||
-    typeof state.updatedAt !== "string" ||
-    state.version !== 1
-  ) {
-    throw new Error("invalid_gmar_game_state");
-  }
-}

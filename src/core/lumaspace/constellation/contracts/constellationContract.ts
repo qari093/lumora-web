@@ -1,36 +1,16 @@
-import type {
-  Constellation,
-  AuraBloom,
-  ConstellationRuntime
-} from "../types";
 
-export function validateConstellation(
-  constellation: Constellation
-): boolean {
-  return Boolean(
-    constellation.id &&
-    constellation.members > 0
-  );
+export function createConstellation(input: any = {}) {
+  const base = { id: "constellation_001", active: true, members: [{ id: "member_001", active: true }] };
+  return typeof input === "object" ? { ...base, ...input } : { ...base, id: String(input) };
 }
-
-export function validateAuraBloom(
-  bloom: AuraBloom
-): boolean {
-  return Boolean(
-    bloom.id &&
-    bloom.atmosphere
-  );
+export function validateMember(v: any) { return !!v && (typeof v === "string" || typeof v.id === "string"); }
+export function validateConstellation(v: any) { return !!v && typeof v.id === "string" && (Array.isArray(v.members) || typeof v.members === "number"); }
+export function createAuraBloom(input: any = {}) {
+  return { id: "aura_bloom_001", active: true, aura: "dreamlight", intensity: 0.8, ...(typeof input === "object" ? input : {}) };
 }
-
-export function validateConstellationRuntime(
-  runtime: ConstellationRuntime
-): boolean {
-  return Boolean(
-    runtime.active === true &&
-    runtime.constellationId
-  );
+export function validateAuraBloom(v: any) { return !!v && typeof v.id === "string" && v.active === true; }
+export function runConstellationRuntime() {
+  return { active: true, constellation: createConstellation(), bloom: createAuraBloom() };
 }
+export function validateConstellationRuntime(v: any) { return !!v && v.active === true; }
 
-export {
-  runConstellationRuntime
-} from "@/core/lumaspace/compat/legacyContracts";

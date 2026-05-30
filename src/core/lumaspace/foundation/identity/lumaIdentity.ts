@@ -1,11 +1,20 @@
-export function createLumaIdentity() {
+export type LumaIdentity = {
+  id: string;
+  mode: "solo";
+};
+
+export function createIdentity(id = "user_001"): LumaIdentity {
   return {
-    id: "identity_001",
-    aura: "soft-bloom"
+    id,
+    mode: "solo"
   };
 }
 
-export {
-  createFoundationRuntime,
-  createIdentity
-} from "@/core/lumaspace/compat/legacyContracts";
+export function createLumaIdentity(id = "user_001"): LumaIdentity {
+  return createIdentity(id);
+}
+
+export function validateIdentity(input: unknown): input is LumaIdentity {
+  const value = input as Partial<LumaIdentity>;
+  return Boolean(value && typeof value.id === "string" && value.mode === "solo");
+}

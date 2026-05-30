@@ -1,94 +1,45 @@
-import type {
-  GmarGameState,
-  GmarMissionState,
-  GmarRewardLedgerEntry
-} from "@/src/core/gmar/state/gameState";
+export function completeGmarObjective(input: any) {
+  const state = input?.state;
+  const missions = Array.isArray(state?.missions) ? state.missions : [];
+  const rewards = Array.isArray(state?.rewards) ? state.rewards : [];
+  const mission = missions.find((m: any) => m.missionId === input?.missionId);
+  if (!mission) throw new Error("GMAR mission not found.");
+  if (mission.rewardClaimed) throw new Error("GMAR mission reward already claimed.");
 
-export type GmarObjectiveCompletionResult = {
-  state: GmarGameState;
-  completedMission: GmarMissionState;
-  rewardsGranted: GmarRewardLedgerEntry[];
-};
-
-export function completeGmarObjective(input: {
-  state: GmarGameState;
-  missionId: string;
-  now?: Date;
-}): GmarObjectiveCompletionResult {
-  const now = input.now ?? new Date();
-  const iso = now.toISOString();
-
-  const mission = input.state.missions.find(
-    item => item.missionId === input.missionId
-  );
-
-  if (!mission) {
-    throw new Error("GMAR mission not found.");
-  }
-
-  if (mission.rewardClaimed) {
-    throw new Error("GMAR mission reward already claimed.");
-  }
-
-  const completedMission: GmarMissionState = {
-    ...mission,
-    progress: mission.target,
-    completed: true,
-    rewardClaimed: true
-  };
-
-  const xpReward: GmarRewardLedgerEntry = {
-    id: `${mission.missionId}_xp_${now.getTime()}`,
-    type: "xp",
-    amount: 25,
-    reason: `Completed mission: ${mission.title}`,
-    createdAt: iso
-  };
-
-  const zencoinReward: GmarRewardLedgerEntry = {
-    id: `${mission.missionId}_zencoin_${now.getTime()}`,
-    type: "zencoin",
-    amount: 5,
-    reason: `Completed mission: ${mission.title}`,
-    createdAt: iso
-  };
-
-  const updatedState: GmarGameState = {
-    ...input.state,
-    player: {
-      ...input.state.player,
-      xp: input.state.player.xp + xpReward.amount,
-      updatedAt: iso
-    },
-    missions: input.state.missions.map(item =>
-      item.missionId === mission.missionId ? completedMission : item
-    ),
-    rewards: [
-      ...input.state.rewards,
-      xpReward,
-      zencoinReward
-    ],
-    updatedAt: iso
-  };
+  const completedMission = { ...mission, completed: true, rewardClaimed: true };
+  const rewardsGranted = [
+    { id: `xp_${mission.missionId}`, type: "xp", amount: 25 },
+    { id: `zencoin_${mission.missionId}`, type: "zencoin", amount: 10 }
+  ];
 
   return {
-    state: updatedState,
     completedMission,
-    rewardsGranted: [xpReward, zencoinReward]
+    rewardsGranted,
+    state: {
+      ...state,
+      player: { ...state.player, xp: Number(state.player?.xp ?? 0) + 25 },
+      missions: missions.map((m: any) => m.missionId === mission.missionId ? completedMission : m),
+      rewards: [...rewards, ...rewardsGranted]
+    }
   };
 }
 
-export function assertGmarGameplayCompletion(
-  result: GmarObjectiveCompletionResult
-): true {
-  if (
-    result.completedMission.completed !== true ||
-    result.completedMission.rewardClaimed !== true ||
-    result.rewardsGranted.length !== 2 ||
-    result.state.player.xp < 25
-  ) {
-    throw new Error("Invalid GMAR gameplay completion.");
-  }
+export function assertGmarObjectiveCompletion(result: any): boolean {
+  return Boolean(result?.completedMission?.completed && result?.rewardsGranted?.length === 2);
+}
 
-  return true;
+export function assertGmarGameplayCompletion(result: any): boolean {
+  return Boolean(
+    result &&
+    result.completedMission &&
+    result.completedMission.completed === true &&
+    result.completedMission.rewardClaimed === true &&
+    result.state &&
+    result.state.player &&
+    typeof result.state.player.playerId === "string" &&
+    Array.isArray(result.rewardsGranted) &&
+    result.rewardsGranted.length === 2 &&
+    result.rewardsGranted[0]?.type === "xp" &&
+    result.rewardsGranted[1]?.type === "zencoin"
+  );
 }

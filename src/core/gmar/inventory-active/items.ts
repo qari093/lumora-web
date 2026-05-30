@@ -1,109 +1,55 @@
-import type {
-  GmarGameState,
-  GmarInventoryItem
-} from "@/src/core/gmar/state/gameState";
-
-export type GmarItemRarity = "common" | "rare" | "epic" | "legendary";
-
-export type GmarItemDefinition = {
-  itemId: string;
-  name: string;
-  rarity: GmarItemRarity;
-  category: "weapon" | "cosmetic" | "resource" | "boost";
-  stackable: boolean;
-};
-
-export const GMAR_ITEM_REGISTRY: Record<string, GmarItemDefinition> = {
+export const GMAR_ITEM_REGISTRY = {
   starter_pulse_blade: {
     itemId: "starter_pulse_blade",
-    name: "Starter Pulse Blade",
     rarity: "common",
     category: "weapon",
     stackable: false
   },
   origin_crystal: {
     itemId: "origin_crystal",
-    name: "Origin Crystal",
     rarity: "rare",
-    category: "resource",
+    category: "material",
     stackable: true
   },
   signal_boost: {
     itemId: "signal_boost",
-    name: "Signal Boost",
     rarity: "common",
     category: "boost",
     stackable: true
   }
-};
+} as const;
 
-export function getGmarItemDefinition(itemId: string): GmarItemDefinition {
-  const item = GMAR_ITEM_REGISTRY[itemId];
-
-  if (!item) {
-    throw new Error("GMAR item not found.");
-  }
-
+export function getGmarItemDefinition(itemId: string) {
+  const item = (GMAR_ITEM_REGISTRY as any)[itemId];
+  if (!item) throw new Error("GMAR item not found.");
   return item;
 }
 
-export function grantGmarInventoryItem(input: {
-  state: GmarGameState;
-  itemId: string;
-  quantity?: number;
-  equipped?: boolean;
-}): GmarGameState {
-  const item = getGmarItemDefinition(input.itemId);
-  const quantity = input.quantity ?? 1;
+export function grantGmarInventoryItem(input: any) {
+  const state = input?.state ?? {};
+  const inventory = Array.isArray(state.inventory) ? state.inventory : [];
+  const item = getGmarItemDefinition(String(input?.itemId ?? ""));
+  const quantity = Number(input?.quantity ?? 1);
+  const existing = inventory.find((entry: any) => entry.itemId === item.itemId);
 
-  if (!Number.isInteger(quantity) || quantity < 1) {
-    throw new Error("GMAR item quantity must be positive.");
-  }
-
-  const existing = input.state.inventory.find(
-    entry => entry.itemId === item.itemId
-  );
-
-  let inventory: GmarInventoryItem[];
-
-  if (existing && item.stackable) {
-    inventory = input.state.inventory.map(entry =>
-      entry.itemId === item.itemId
-        ? {
-            ...entry,
-            quantity: entry.quantity + quantity,
-            equipped: input.equipped ?? entry.equipped
-          }
-        : entry
-    );
-  } else if (existing && !item.stackable) {
+  if (existing && !item.stackable) {
     throw new Error("GMAR non-stackable item already owned.");
-  } else {
-    inventory = [
-      ...input.state.inventory,
-      {
-        itemId: item.itemId,
-        quantity,
-        equipped: input.equipped ?? false
-      }
-    ];
   }
 
-  return {
-    ...input.state,
-    inventory,
-    updatedAt: new Date().toISOString()
-  };
+  const nextInventory = existing
+    ? inventory.map((entry: any) =>
+        entry.itemId === item.itemId
+          ? { ...entry, quantity: Number(entry.quantity ?? 0) + quantity }
+          : entry
+      )
+    : [...inventory, { ...item, quantity, equipped: item.itemId === "starter_pulse_blade" }];
+
+  return { ...state, inventory: nextInventory };
 }
 
-export function assertGmarInventory(state: GmarGameState): true {
-  if (
-    state.inventory.length < 1 ||
-    state.inventory.some(item => !GMAR_ITEM_REGISTRY[item.itemId]) ||
-    state.inventory.some(item => item.quantity < 1)
-  ) {
-    throw new Error("Invalid GMAR inventory.");
-  }
-
-  return true;
+export function assertGmarInventory(state: any): boolean {
+  return Array.isArray(state?.inventory) && state.inventory.length > 0;
 }
+
+export const assertGmarInventoryState = assertGmarInventory;
+

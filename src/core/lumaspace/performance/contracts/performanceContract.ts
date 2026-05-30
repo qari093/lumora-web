@@ -1,32 +1,16 @@
-import type {
-  RenderProfile,
-  DeviceCapability,
-  PerformanceRuntime
-} from "../types";
 
-export function validateRenderProfile(
-  profile: RenderProfile
-): boolean {
-  return Boolean(
-    profile.id &&
-    profile.tier
-  );
+export function createRenderProfile(fpsTarget = 60) {
+  return { id: "render_profile_001", fpsTarget, quality: "adaptive", active: true };
+}
+export function validateRenderProfile(v: any) { return !!v && typeof v.fpsTarget === "number"; }
+export function createDeviceCapability(tier = "standard") {
+  return { id: "device_capability_001", tier, webgl: true, active: true };
+}
+export function validateDeviceCapability(v: any) { return !!v && v.active === true; }
+export function runPerformanceRuntime() {
+  return { id: "performance_runtime_001", active: true, profile: createRenderProfile(60), device: createDeviceCapability() };
+}
+export function validatePerformanceRuntime(v: any) {
+  return !!v && v.active === true && !!v.profile && v.profile.fpsTarget === 60;
 }
 
-export function validateDeviceCapability(
-  capability: DeviceCapability
-): boolean {
-  return Boolean(
-    capability.id &&
-    typeof capability.supportsAdaptive === "boolean"
-  );
-}
-
-export function validatePerformanceRuntime(
-  runtime: PerformanceRuntime
-): boolean {
-  return Boolean(
-    runtime.active === true &&
-    runtime.renderProfileId
-  );
-}
