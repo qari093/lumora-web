@@ -108,21 +108,8 @@ export default async function globalSetup() {
   // Reset log file
   try { fs.writeFileSync(LOG_FILE, "", "utf8"); } catch {}
 
-  // Prefer pnpm if available (more reliable than npx in some setups)
-  const usePnpm = (() => {
-    try {
-      const p = spawn(process.platform === "win32" ? "where" : "command", process.platform === "win32" ? ["pnpm"] : ["-v", "pnpm"]);
-      p.kill();
-      return true;
-    } catch {
-      return false;
-    }
-  })();
-
-  const cmd = usePnpm ? (process.platform === "win32" ? "pnpm.cmd" : "pnpm") : (process.platform === "win32" ? "npx.cmd" : "npx");
-  const args = usePnpm
-    ? ["-s", "next", "dev", "-p", String(PORT), "-H", HOST]
-    : ["next", "dev", "-p", String(PORT), "-H", HOST];
+  const cmd = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+  const args = ["-s", "next", "dev", "-p", String(PORT), "-H", HOST];
 
   const child = spawn(cmd, args, {
     cwd: ROOT,
