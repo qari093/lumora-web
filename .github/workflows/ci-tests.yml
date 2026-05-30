@@ -29,10 +29,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Creator CineVerse GMAR tests
-        run: node scripts/ci/vitest-ci-safe.mjs tests/creator-cineverse-gmar --reporter verbose --pool=forks --poolOptions.forks.singleFork=true
+        run: pnpm -s vitest run tests/creator-cineverse-gmar --reporter verbose
 
       - name: Megapack runtime tests
-        run: node scripts/ci/vitest-ci-safe.mjs tests/civilization/civilization_foundation.test.ts tests/atmosphere/atmosphere_runtime.test.ts tests/fyp/fyp_runtime.test.ts tests/continuity/tomorrows_vibe.test.ts tests/portal/portal_runtime.test.ts tests/vault/vault_engine.test.ts tests/live-social tests/creator-cineverse-gmar --reporter verbose --pool=forks --poolOptions.forks.singleFork=true
+        run: pnpm -s vitest run tests/civilization/civilization_foundation.test.ts tests/atmosphere/atmosphere_runtime.test.ts tests/fyp/fyp_runtime.test.ts tests/continuity/tomorrows_vibe.test.ts tests/portal/portal_runtime.test.ts tests/vault/vault_engine.test.ts tests/live-social tests/creator-cineverse-gmar --reporter verbose
 
       - name: Typecheck
         run: pnpm -s tsc --noEmit
