@@ -29,7 +29,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: LumaSpace state contract
-        run: node scripts/ci/vitest-ci-safe.mjs tests/lumaspace --reporter verbose --passWithNoTests --pool=forks --poolOptions.forks.singleFork=true
+        run: pnpm -s vitest run tests/lumaspace --reporter verbose --passWithNoTests --pool=forks --poolOptions.forks.singleFork=true
 
       - name: Typecheck
         run: pnpm -s tsc --noEmit
