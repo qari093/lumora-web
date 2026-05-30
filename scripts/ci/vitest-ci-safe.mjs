@@ -3,22 +3,23 @@ import { spawnSync } from "node:child_process";
 
 const args = process.argv.slice(2);
 
-function hasCommand(cmd) {
-  const result = spawnSync("sh", ["-lc", `command -v ${cmd}`], {
-    encoding: "utf8",
-    stdio: "pipe"
+function run(cmd, cmdArgs) {
+  return spawnSync(cmd, cmdArgs, {
+    stdio: "inherit",
+    env: process.env,
+    shell: false
   });
-  return result.status === 0 && result.stdout.trim().length > 0;
 }
 
-const runner = hasCommand("pnpm") ? "pnpm" : "npx";
-const runnerArgs = runner === "pnpm"
-  ? ["-s", "vitest", "run", ...args]
-  : ["-y", "vitest", "run", ...args];
+let result = run("pnpm", ["-s", "vitest", "run", ...args]);
 
-const result = spawnSync(runner, runnerArgs, {
-  stdio: "inherit",
-  env: process.env
-});
+if (result.error?.code === "ENOENT") {
+  result = run("npx", ["-y", "vitest", "run", ...args]);
+}
+
+if (result.error) {
+  console.error(result.error);
+  process.exit(1);
+}
 
 process.exit(result.status ?? 1);
