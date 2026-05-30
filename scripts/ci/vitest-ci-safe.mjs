@@ -3,19 +3,11 @@ import { spawnSync } from "node:child_process";
 
 const args = process.argv.slice(2);
 
-function run(cmd, cmdArgs) {
-  return spawnSync(cmd, cmdArgs, {
-    stdio: "inherit",
-    env: process.env,
-    shell: false
-  });
-}
-
-let result = run("pnpm", ["-s", "vitest", "run", ...args]);
-
-if (result.error?.code === "ENOENT") {
-  result = run("npx", ["-y", "vitest", "run", ...args]);
-}
+const result = spawnSync("pnpm", ["-s", "vitest", "run", ...args], {
+  stdio: "inherit",
+  env: process.env,
+  shell: false
+});
 
 if (result.error) {
   console.error(result.error);
