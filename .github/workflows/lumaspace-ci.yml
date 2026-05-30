@@ -29,7 +29,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: LumaSpace state contract
-        run: pnpm -s vitest run tests/lumaspace --reporter verbose --passWithNoTests
+        run: pnpm -s vitest run tests/lumaspace --reporter verbose --passWithNoTests --pool=threads
 
       - name: Typecheck
         run: pnpm -s tsc --noEmit
