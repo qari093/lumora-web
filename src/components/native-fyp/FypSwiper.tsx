@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSwipe } from "./useSwipe";
-import { useActiveVideo } from "./useActiveVideo";
-import { useVideoReady } from "./useVideoReady";
 import { usePreload } from "./usePreload";
 import { useNetworkMode } from "./useNetworkMode";
 import { handleVideoError } from "./useFailureSkip";
@@ -12,12 +10,10 @@ import { useDwellTracker } from "./useDwellTracker";
 import { useSwipeIntent } from "./useSwipeIntent";
 import { useNativeFypKeyboard } from "./useNativeFypKeyboard";
 import FypOverlay from "./FypOverlay";
+import FypVideoCard from "./FypVideoCard";
 import { usePlaybackRetry } from "./usePlaybackRetry";
 import { usePlaybackWarmup } from "./usePlaybackWarmup";
-import { usePlaybackHealth } from "./usePlaybackHealth";
-import { useVisibilityPause } from "./useVisibilityPause";
 import { useLowPowerMode } from "./useLowPowerMode";
-import { usePlaybackMetrics } from "./usePlaybackMetrics";
 
 type Item = {
   id: string;
@@ -89,12 +85,6 @@ export default function FypSwiper({ items }: { items: Item[] }) {
         const pos = i - 1;
         const isActive = pos === 0;
 
-        const ref = useActiveVideo(isActive);
-        const { ready, onLoadedData } = useVideoReady();
-        const { slow } = usePlaybackHealth(isActive, ready);
-        usePlaybackMetrics(isActive ? v.id : undefined, ready);
-        useVisibilityPause(isActive ? ref.current : null);
-
         return (
           <div
             key={v.id}
@@ -106,66 +96,13 @@ export default function FypSwiper({ items }: { items: Item[] }) {
               overflow: "hidden",
             }}
           >
-            <img
-              src={v.posterUrl}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                opacity: ready ? 0 : 1,
-                transition: "opacity 70ms ease",
-              }}
-            />
-
-            {slow && isActive && (
-              <div style={{
-                position: "absolute",
-                inset: 0,
-                zIndex: 5,
-                display: "grid",
-                placeItems: "center",
-                color: "#fff",
-                background: "rgba(0,0,0,0.25)",
-                fontSize: 13
-              }}>
-                Loading stream…
-              </div>
-            )}
-
-            <video
-              ref={ref}
-              src={isActive ? v.playbackUrl : undefined}
-              poster={v.posterUrl}
+            <FypVideoCard
+              item={v}
+              isActive={isActive}
               muted={muted}
-              playsInline
-              preload="metadata"
-              autoPlay={isActive && !lowPower}
-              loop
-              onLoadedData={() => {
-                retry.resetRetry();
-                onLoadedData();
-              }}
-              onError={(e) => {
-                if (!isActive) return;
-                if (retry.canRetry()) {
-                  retry.recordRetry();
-                  const el = e.currentTarget;
-                  el.load();
-                  void el.play().catch(() => {});
-                  return;
-                }
-                retry.resetRetry();
-                handleVideoError(index, items.length, setIndex);
-              }}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                opacity: ready ? 1 : 0,
-                transition: "opacity 70ms ease",
-              }}
+              lowPower={lowPower}
+              retry={retry}
+              onVideoError={() => handleVideoError(index, items.length, setIndex)}
             />
           </div>
         );

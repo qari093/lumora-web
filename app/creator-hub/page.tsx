@@ -1,6 +1,4 @@
-import {
-  BreathingDashboard
-} from "@/components/creator-alchemy/BreathingDashboard";
+import BreathingDashboard from "@/components/creator-alchemy/BreathingDashboard";
 import {
   SAMPLE_BREATHING_DASHBOARD_INPUT,
   buildBreathingDashboard
@@ -18,7 +16,7 @@ export default function CreatorHubPage() {
       <section>
         <p>Creator Hub keeps sanctuary tone, quiet gifts, constellations, moderation, launch readiness, and live data wiring connected.</p>
       </section>
-      <BreathingDashboard dashboard={dashboard} snapshot={snapshot.dashboard} />
+      <BreathingDashboard model={dashboard} />
     </main>
   );
 }
