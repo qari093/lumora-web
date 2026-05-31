@@ -1,0 +1,19 @@
+LUMORA ZENDORO PAYMENTS VALIDATION
+==================================
+
+Passed: 10/10
+
+PASS — app/api/zendoro/products/route.ts (142 bytes)
+PASS — app/api/zendoro/cart/route.ts (138 bytes)
+PASS — app/api/zendoro/checkout/route.ts (142 bytes)
+PASS — app/api/zendoro/orders/route.ts (140 bytes)
+PASS — app/api/zendoro/webhook/route.ts (141 bytes)
+PASS — app/api/stripe/checkout/route.ts (2637 bytes)
+PASS — app/api/stripe/webhook/route.ts (3178 bytes)
+PASS — app/api/payments/checkout/route.ts (632 bytes)
+PASS — app/api/payments/webhook/route.ts (475 bytes)
+PASS — app/zendoro/page.tsx (946 bytes)
+
+WARNING: This validates payment route presence, not live Stripe settlement.
+
+STATUS=PASS

@@ -1,0 +1,90 @@
+{
+  "auditedAt": "2026-05-31T16:30:52.663Z",
+  "step": "Main User Journey Validation",
+  "passed": 9,
+  "total": 9,
+  "pass": true,
+  "routes": [
+    {
+      "name": "home",
+      "ok": true,
+      "candidates": [
+        "app/page.tsx",
+        "app/page.jsx",
+        "pages/index.tsx"
+      ]
+    },
+    {
+      "name": "fyp",
+      "ok": true,
+      "candidates": [
+        "app/fyp/page.tsx",
+        "app/fyp/page.jsx",
+        "pages/fyp.tsx"
+      ]
+    },
+    {
+      "name": "live",
+      "ok": true,
+      "candidates": [
+        "app/live/page.tsx",
+        "app/live/page.jsx",
+        "pages/live.tsx"
+      ]
+    },
+    {
+      "name": "gmar",
+      "ok": true,
+      "candidates": [
+        "app/gmar/page.tsx",
+        "app/gmar/page.jsx",
+        "pages/gmar.tsx"
+      ]
+    },
+    {
+      "name": "lumaspace",
+      "ok": true,
+      "candidates": [
+        "app/lumaspace/page.tsx",
+        "app/lumaspace/page.jsx",
+        "pages/lumaspace.tsx"
+      ]
+    },
+    {
+      "name": "zendoro",
+      "ok": true,
+      "candidates": [
+        "app/zendoro/page.tsx",
+        "app/zendoro/page.jsx",
+        "pages/zendoro.tsx"
+      ]
+    },
+    {
+      "name": "movies",
+      "ok": true,
+      "candidates": [
+        "app/movies/page.tsx",
+        "app/cineverse/page.tsx",
+        "pages/movies.tsx"
+      ]
+    },
+    {
+      "name": "music",
+      "ok": true,
+      "candidates": [
+        "app/music/page.tsx",
+        "app/echo/page.tsx",
+        "pages/music.tsx"
+      ]
+    },
+    {
+      "name": "creator",
+      "ok": true,
+      "candidates": [
+        "app/creator/page.tsx",
+        "app/creator-hub/page.tsx",
+        "pages/creator.tsx"
+      ]
+    }
+  ]
+}

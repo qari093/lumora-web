@@ -1,0 +1,60 @@
+{
+  "auditedAt": "2026-05-31T16:40:05.767Z",
+  "step": "Zendoro Payments Validation",
+  "passed": 10,
+  "total": 10,
+  "pass": true,
+  "files": [
+    {
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "file": "app/api/zendoro/cart/route.ts",
+      "exists": true,
+      "bytes": 138
+    },
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "file": "app/api/zendoro/orders/route.ts",
+      "exists": true,
+      "bytes": 140
+    },
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 141
+    },
+    {
+      "file": "app/api/stripe/checkout/route.ts",
+      "exists": true,
+      "bytes": 2637
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "bytes": 3178
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "exists": true,
+      "bytes": 632
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "exists": true,
+      "bytes": 475
+    },
+    {
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946
+    }
+  ],
+  "warning": "This validates route/payment contract presence, not live Stripe settlement."
+}

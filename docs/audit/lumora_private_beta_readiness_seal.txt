@@ -1,0 +1,15 @@
+LUMORA PRIVATE BETA READINESS SEAL
+==================================
+
+STATUS=SEALED
+
+PASS — runtimeConsolidation
+PASS — mainUserJourney
+PASS — zendoroPaymentsContract
+PASS — liveFypRuntime
+PASS — browserSmoke
+
+Warnings:
+- Zendoro payment validation is contract/static only, not live Stripe settlement.
+- Wallet balance returned 400 in browser smoke, likely requiring owner/user input.
+- Private beta can start only with controlled testers and monitored feedback.

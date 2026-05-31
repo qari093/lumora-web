@@ -1,0 +1,65 @@
+{
+  "auditedAt": "2026-05-31T16:46:38.597Z",
+  "step": "Live + FYP Runtime Validation",
+  "passed": 11,
+  "total": 11,
+  "pass": true,
+  "files": [
+    {
+      "file": "app/fyp/page.tsx",
+      "exists": true,
+      "bytes": 1214
+    },
+    {
+      "file": "app/live/page.tsx",
+      "exists": true,
+      "bytes": 1020
+    },
+    {
+      "file": "app/api/fyp/health/route.ts",
+      "exists": true,
+      "bytes": 188
+    },
+    {
+      "file": "app/api/fyp/feed/route.ts",
+      "exists": true,
+      "bytes": 1214
+    },
+    {
+      "file": "app/api/fyp/native-feed/route.ts",
+      "exists": true,
+      "bytes": 843
+    },
+    {
+      "file": "app/api/fyp/interact/route.ts",
+      "exists": true,
+      "bytes": 714
+    },
+    {
+      "file": "app/api/live/health/route.ts",
+      "exists": true,
+      "bytes": 262
+    },
+    {
+      "file": "app/api/live/rooms/route.ts",
+      "exists": true,
+      "bytes": 266
+    },
+    {
+      "file": "app/api/live/room-state/route.ts",
+      "exists": true,
+      "bytes": 1849
+    },
+    {
+      "file": "app/api/live/events/route.ts",
+      "exists": true,
+      "bytes": 1551
+    },
+    {
+      "file": "app/api/live/publish/route.ts",
+      "exists": true,
+      "bytes": 1858
+    }
+  ],
+  "warning": "Static route/runtime validation only. Browser smoke validation still required before private beta."
+}

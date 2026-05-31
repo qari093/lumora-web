@@ -1,0 +1,27 @@
+{
+  "auditedAt": "2026-05-31T16:22:27.782Z",
+  "step": "Runtime Consolidation Audit",
+  "routeRoots": [
+    "app",
+    "pages"
+  ],
+  "totals": {
+    "apiRoutes": 1010,
+    "pageRoutes": 200,
+    "duplicateHints": 0
+  },
+  "domains": {
+    "fyp": 100,
+    "live": 76,
+    "lumaspace": 32,
+    "gmar": 42,
+    "zendoro": 48,
+    "wallet": 56,
+    "movies": 26,
+    "music": 10,
+    "nexa": 13,
+    "moderation": 74
+  },
+  "duplicateHints": [],
+  "recommendation": "No direct duplicate route hints found. Proceed to main journey validation."
+}

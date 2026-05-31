@@ -1,0 +1,23 @@
+LUMORA RUNTIME CONSOLIDATION AUDIT
+==================================
+
+AuditedAt: 2026-05-31T16:22:27.782Z
+API routes: 1010
+Page routes: 200
+Duplicate hints: 0
+
+Domain footprint:
+- fyp: 100
+- live: 76
+- lumaspace: 32
+- gmar: 42
+- zendoro: 48
+- wallet: 56
+- movies: 26
+- music: 10
+- nexa: 13
+- moderation: 74
+
+Top duplicate hints:
+
+Recommendation: No direct duplicate route hints found. Proceed to main journey validation.

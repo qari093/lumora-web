@@ -1,0 +1,26 @@
+LUMORA BROWSER SMOKE VALIDATION
+===============================
+
+Base: http://127.0.0.1:3040
+Passed: 18/18
+
+PASS — / (200)
+PASS — /fyp (200)
+PASS — /live (200)
+PASS — /gmar (200)
+PASS — /lumaspace (200)
+PASS — /zendoro (200)
+PASS — /cineverse (200)
+PASS — /echo (200)
+PASS — /creator (200)
+PASS — /api/health (200)
+PASS — /api/ready (200)
+PASS — /api/fyp/health (200)
+PASS — /api/live/health (200)
+PASS — /api/gmar/health (200)
+PASS — /api/lumaspace/runtime (200)
+PASS — /api/zendoro/products (200)
+PASS — /api/zendoro/checkout (200)
+PASS — /api/wallet/balance (400)
+
+STATUS=PASS

@@ -1,0 +1,16 @@
+LUMORA MAIN USER JOURNEY VALIDATION
+==================================
+
+Passed: 9/9
+
+PASS — home
+PASS — fyp
+PASS — live
+PASS — gmar
+PASS — lumaspace
+PASS — zendoro
+PASS — movies
+PASS — music
+PASS — creator
+
+STATUS=PASS

@@ -1,0 +1,101 @@
+{
+  "auditedAt": "2026-05-31T17:05:14.972Z",
+  "step": "Browser Smoke Validation",
+  "base": "http://127.0.0.1:3040",
+  "passed": 18,
+  "total": 18,
+  "pass": true,
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/fyp",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/live",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/gmar",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/lumaspace",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/zendoro",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/cineverse",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/echo",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/creator",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/ready",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/fyp/health",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/live/health",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/gmar/health",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/lumaspace/runtime",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/zendoro/products",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/zendoro/checkout",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/wallet/balance",
+      "status": 400,
+      "ok": true
+    }
+  ],
+  "warning": "HTTP smoke validates route availability only; it does not validate full user interaction."
+}
