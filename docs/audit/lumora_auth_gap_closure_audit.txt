@@ -1,0 +1,10 @@
+LUMORA AUTH GAP CLOSURE AUDIT
+=============================
+
+FAIL — passwordReset
+FAIL — emailVerification
+FAIL — sessionManagement
+FAIL — recoveryFlow
+
+PASSED: 0/4
+STATUS: ACTION_REQUIRED

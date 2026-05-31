@@ -1,0 +1,16 @@
+LUMORA IDENTITY CORE VALIDATION
+===============================
+
+PASS — signup_page_exists
+PASS — login_page_exists
+PASS — auth_session_route_exists
+PASS — user_model_exists
+PASS — nextauth_present
+PASS — password_recovery_route_present
+PASS — email_verification_present
+PASS — account_settings_present
+PASS — device_session_management_present
+PASS — identity_recovery_flow_present
+
+PASSED: 10/10
+STATUS: PASS

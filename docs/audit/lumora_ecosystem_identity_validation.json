@@ -1,0 +1,77 @@
+{
+  "auditedAt": "2026-05-31T18:41:02.874Z",
+  "pack": "AUTH_MEGA_PACK_3",
+  "passed": 8,
+  "total": 8,
+  "status": "PASS",
+  "results": {
+    "walletOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/wallet/balance/route.ts",
+        "app/api/wallet/ledger/route.ts"
+      ],
+      "missing": []
+    },
+    "zencoinOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/zencoin/wallet/route.ts",
+        "app/api/zencoin/balance/route.ts"
+      ],
+      "missing": []
+    },
+    "lumaspaceOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/lumaspace/runtime/route.ts",
+        "app/api/lumaspace/state/route.ts"
+      ],
+      "missing": []
+    },
+    "gmarOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/gmar/player/init/route.ts",
+        "app/api/gmar/creator/profile/route.ts"
+      ],
+      "missing": []
+    },
+    "creatorOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/creator/profile/route.ts"
+      ],
+      "missing": []
+    },
+    "zendoroOwnership": {
+      "pass": true,
+      "found": [
+        "app/api/zendoro/orders/route.ts"
+      ],
+      "missing": []
+    },
+    "profileIdentity": {
+      "pass": true,
+      "found": [
+        "app/api/user/profile/route.ts",
+        "app/api/profile/summary/route.ts",
+        "app/api/account/route.ts"
+      ],
+      "missing": []
+    },
+    "rolePermission": {
+      "pass": true,
+      "found": [
+        "src/lib/auth/requireRole.ts",
+        "src/core/identity/types.ts",
+        "app/_lib/admin/adminAuth.ts",
+        "lib/adminAuth.ts",
+        "lib/auth.ts",
+        "src/lib/auth.ts"
+      ],
+      "missing": []
+    }
+  },
+  "warning": "This validates cross-portal identity contract presence, not real authenticated ownership mutation."
+}

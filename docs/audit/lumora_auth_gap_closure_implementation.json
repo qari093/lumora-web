@@ -1,0 +1,11 @@
+{
+  "system": "Lumora Auth Gap Closure",
+  "status": "CONTRACTS_IMPLEMENTED",
+  "closedGaps": [
+    "password_recovery_route_present",
+    "email_verification_present",
+    "device_session_management_present",
+    "identity_recovery_flow_present"
+  ],
+  "warning": "Routes are contract-safe scaffolds. Production email, token persistence, and DB-backed session revocation still require provider wiring."
+}

@@ -1,0 +1,31 @@
+{
+  "sealedAt": "2026-05-31T18:47:14.477Z",
+  "system": "Lumora Identity Core",
+  "status": "SEALED_CONTRACT_READY",
+  "completedPacks": {
+    "authFoundation": "PASS",
+    "identityCore": "PASS",
+    "authGapClosure": "CONTRACTS_IMPLEMENTED",
+    "ecosystemIdentity": "PASS",
+    "productionSecuritySeal": "PASS"
+  },
+  "readiness": {
+    "authArchitecturePresent": true,
+    "identityCoreContractsPresent": true,
+    "crossPortalIdentityContractsPresent": true,
+    "privateBetaContractReady": true,
+    "productionProviderWiringRequired": true
+  },
+  "warnings": [
+    "Password reset, email verification, session revocation, and recovery routes are contract-safe scaffolds.",
+    "Production email delivery, token persistence, DB-backed mutation, and provider-backed session revocation still require final provider wiring.",
+    "Cross-portal ownership validation is contract-level, not full authenticated E2E mutation.",
+    "Private beta can proceed only as controlled beta with monitored identity behavior."
+  ],
+  "reports": [
+    "docs/audit/lumora_auth_foundation_audit.json",
+    "docs/audit/lumora_identity_core_validation.json",
+    "docs/audit/lumora_auth_gap_closure_implementation.json",
+    "docs/audit/lumora_ecosystem_identity_validation.json"
+  ]
+}

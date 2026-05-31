@@ -1,0 +1,35 @@
+LUMORA ECOSYSTEM IDENTITY VALIDATION
+===================================
+
+PASS — walletOwnership
+   • app/api/wallet/balance/route.ts
+   • app/api/wallet/ledger/route.ts
+PASS — zencoinOwnership
+   • app/api/zencoin/wallet/route.ts
+   • app/api/zencoin/balance/route.ts
+PASS — lumaspaceOwnership
+   • app/api/lumaspace/runtime/route.ts
+   • app/api/lumaspace/state/route.ts
+PASS — gmarOwnership
+   • app/api/gmar/player/init/route.ts
+   • app/api/gmar/creator/profile/route.ts
+PASS — creatorOwnership
+   • app/api/creator/profile/route.ts
+PASS — zendoroOwnership
+   • app/api/zendoro/orders/route.ts
+PASS — profileIdentity
+   • app/api/user/profile/route.ts
+   • app/api/profile/summary/route.ts
+   • app/api/account/route.ts
+PASS — rolePermission
+   • src/lib/auth/requireRole.ts
+   • src/core/identity/types.ts
+   • app/_lib/admin/adminAuth.ts
+   • lib/adminAuth.ts
+   • lib/auth.ts
+   • src/lib/auth.ts
+
+PASSED: 8/8
+STATUS: PASS
+
+WARNING: Cross-portal contract validation only; real authenticated ownership still needs E2E provider wiring.

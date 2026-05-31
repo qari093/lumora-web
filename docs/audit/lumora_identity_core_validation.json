@@ -1,0 +1,59 @@
+{
+  "auditedAt": "2026-05-31T18:02:40.625Z",
+  "pack": "AUTH_MEGA_PACK_2",
+  "passed": 10,
+  "total": 10,
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "signup_page_exists",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "login_page_exists",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "auth_session_route_exists",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "user_model_exists",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "nextauth_present",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "password_recovery_route_present",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "email_verification_present",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "account_settings_present",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "device_session_management_present",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "identity_recovery_flow_present",
+      "ok": true,
+      "note": ""
+    }
+  ]
+}

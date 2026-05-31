@@ -1,0 +1,59 @@
+{
+  "auditedAt": "2026-05-31T17:43:37.097Z",
+  "pack": "AUTH_MEGA_PACK_1",
+  "passed": 10,
+  "total": 10,
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "nextauth_dependency",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "prisma_auth_adapter",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "user_model",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "login_route",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "signup_route",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "auth_session_api",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "middleware",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "auth_library",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "protected_creator_area",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "identity_dependencies",
+      "ok": true,
+      "details": ""
+    }
+  ]
+}
