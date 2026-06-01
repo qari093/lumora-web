@@ -1,0 +1,129 @@
+{
+  "system": "Lumora Vercel Live Preview Smoke",
+  "base": "https://lumora-csb0pg3rt-qari093s-projects.vercel.app",
+  "passed": 19,
+  "total": 20,
+  "status": "ACTION_REQUIRED",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "ok": true,
+      "bytes": 20673
+    },
+    {
+      "path": "/fyp",
+      "status": 200,
+      "ok": true,
+      "bytes": 21991
+    },
+    {
+      "path": "/live",
+      "status": 200,
+      "ok": true,
+      "bytes": 30699
+    },
+    {
+      "path": "/gmar",
+      "status": 200,
+      "ok": true,
+      "bytes": 30379
+    },
+    {
+      "path": "/lumaspace",
+      "status": 200,
+      "ok": true,
+      "bytes": 15688
+    },
+    {
+      "path": "/zendoro",
+      "status": 200,
+      "ok": true,
+      "bytes": 30087
+    },
+    {
+      "path": "/movies",
+      "status": 200,
+      "ok": true,
+      "bytes": 16429
+    },
+    {
+      "path": "/music",
+      "status": 200,
+      "ok": true,
+      "bytes": 15478
+    },
+    {
+      "path": "/creator",
+      "status": 200,
+      "ok": true,
+      "bytes": 14210
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "ok": true,
+      "bytes": 13522
+    },
+    {
+      "path": "/signup",
+      "status": 200,
+      "ok": true,
+      "bytes": 13543
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "bytes": 110
+    },
+    {
+      "path": "/api/ready",
+      "status": 503,
+      "ok": false,
+      "bytes": 180
+    },
+    {
+      "path": "/api/fyp/feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 621
+    },
+    {
+      "path": "/api/fyp/native-feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 5315
+    },
+    {
+      "path": "/api/live/rooms",
+      "status": 200,
+      "ok": true,
+      "bytes": 388
+    },
+    {
+      "path": "/api/live/room-state",
+      "status": 200,
+      "ok": true,
+      "bytes": 259
+    },
+    {
+      "path": "/api/lumaspace/runtime",
+      "status": 200,
+      "ok": true,
+      "bytes": 51
+    },
+    {
+      "path": "/api/zendoro/products",
+      "status": 200,
+      "ok": true,
+      "bytes": 58
+    },
+    {
+      "path": "/api/zendoro/checkout",
+      "status": 200,
+      "ok": true,
+      "bytes": 58
+    }
+  ]
+}

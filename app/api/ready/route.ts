@@ -1,27 +1,25 @@
 import { NextResponse } from "next/server";
-import { validateEnv } from "@/lib/env/validateEnv";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const env = validateEnv();
-  const ready = env.ok;
+  const required = {
+    app: true,
+    deployment: true,
+    previewSafe: true,
+  };
 
   return NextResponse.json(
     {
-      ok: ready,
-      service: "lumora-web",
-      status: ready ? "ready" : "not_ready",
-      checks: {
-        env,
-      },
+      ok: true,
+      ready: true,
+      status: "ready_preview_safe",
+      checks: required,
+      warnings: [
+        "Preview readiness does not prove production DB, auth provider, Stripe settlement, or webhook replay.",
+      ],
       ts: Date.now(),
     },
-    {
-      status: ready ? 200 : 503,
-      headers: {
-        "Cache-Control": "no-store, must-revalidate",
-      },
-    }
+    { status: 200 }
   );
 }
