@@ -1,0 +1,79 @@
+LUMORA REAL VALIDATION MEGA PACK 2/3
+COMMERCE + ECONOMY VALIDATION
+================================
+
+STATUS: PASS_WITH_SANDBOX_AND_DB_REQUIRED
+Base: https://lumora-csb0pg3rt-qari093s-projects.vercel.app
+
+Routes:
+PASS — /zendoro (200)
+PASS — /zendoro/products (200)
+PASS — /zendoro/cart (200)
+PASS — /zendoro/checkout (200)
+PASS — /zendoro/orders (200)
+PASS — /wallet (200)
+PASS — /zenwallet (200)
+PASS — /api/zendoro/products (200)
+PASS — /api/zendoro/cart (200)
+PASS — /api/zendoro/checkout (200)
+PASS — /api/zendoro/orders (200)
+PASS — /api/zendoro/webhook (200)
+PASS — /api/stripe/checkout (405)
+PASS — /api/stripe/webhook (405)
+PASS — /api/payments/checkout (405)
+PASS — /api/payments/webhook (405)
+PASS — /api/wallet/balance (400)
+PASS — /api/wallet/ledger (405)
+PASS — /api/wallet/credit (405)
+PASS — /api/wallet/debit (405)
+PASS — /api/zencoin/wallet (200)
+PASS — /api/zencoin/balance (200)
+PASS — /api/zencoin/transfer (405)
+PASS — /api/zenwallet/runtime (200)
+PASS — /api/zenwallet/ledger (200)
+
+Files:
+PASS — app/zendoro/page.tsx (946 bytes)
+PASS — app/zendoro/products/page.tsx (93 bytes)
+PASS — app/zendoro/cart/page.tsx (113 bytes)
+PASS — app/zendoro/checkout/page.tsx (165 bytes)
+PASS — app/zendoro/orders/page.tsx (157 bytes)
+PASS — app/api/zendoro/products/route.ts (142 bytes)
+PASS — app/api/zendoro/cart/route.ts (138 bytes)
+PASS — app/api/zendoro/checkout/route.ts (235 bytes)
+PASS — app/api/zendoro/orders/route.ts (140 bytes)
+PASS — app/api/zendoro/webhook/route.ts (234 bytes)
+PASS — app/api/stripe/checkout/route.ts (2728 bytes)
+PASS — app/api/stripe/webhook/route.ts (3271 bytes)
+PASS — app/api/payments/checkout/route.ts (725 bytes)
+PASS — app/api/payments/webhook/route.ts (568 bytes)
+PASS — app/api/wallet/balance/route.ts (1014 bytes)
+PASS — app/api/wallet/ledger/route.ts (824 bytes)
+PASS — app/api/zencoin/wallet/route.ts (94 bytes)
+PASS — app/api/zencoin/balance/route.ts (94 bytes)
+PASS — app/api/zencoin/transfer/route.ts (100 bytes)
+
+Vocabulary:
+PASS — stripe
+PASS — checkout
+PASS — webhook
+PASS — order
+PASS — payment
+PASS — idempotency
+PASS — wallet
+PASS — ledger
+PASS — zencoin
+
+Environment:
+WARN — STRIPE_SECRET_KEY process=false code=true envExample=true
+WARN — STRIPE_WEBHOOK_SECRET process=false code=true envExample=true
+WARN — NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY process=false code=false envExample=false
+WARN — DATABASE_URL process=false code=false envExample=false
+WARN — NEXTAUTH_SECRET process=false code=false envExample=false
+
+Warnings:
+- Zendoro, Stripe, Wallet, Zencoin, and Zenwallet routes are reachable or protected as expected.
+- This validates commerce/economy contract reachability, not real Stripe settlement.
+- Stripe sandbox checkout requires STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, and publishable key in Vercel.
+- Order persistence and idempotency must be backed by DATABASE_URL before public commerce launch.
+- Wallet and Zencoin transfers remain controlled until DB-backed ledger mutation is manually verified.

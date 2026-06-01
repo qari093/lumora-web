@@ -1,0 +1,480 @@
+{
+  "system": "Lumora Real Validation Mega Pack 2/3 — Commerce + Economy",
+  "checkedAt": "2026-06-01T21:27:33.821Z",
+  "base": "https://lumora-csb0pg3rt-qari093s-projects.vercel.app",
+  "status": "PASS_WITH_SANDBOX_AND_DB_REQUIRED",
+  "routeSummary": {
+    "passed": 25,
+    "total": 25
+  },
+  "fileSummary": {
+    "passed": 19,
+    "total": 19
+  },
+  "routeResults": [
+    {
+      "path": "/zendoro",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 30087,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/zendoro/products",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 13824,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/zendoro/cart",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 13827,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/zendoro/checkout",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 14397,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/zendoro/orders",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 14145,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/wallet",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 13714,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/zenwallet",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 30168,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/api/zendoro/products",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 58,
+      "bodyHint": "{\"ok\":true,\"data\":{\"route\":\"products\",\"operational\":true}}"
+    },
+    {
+      "path": "/api/zendoro/cart",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 54,
+      "bodyHint": "{\"ok\":true,\"data\":{\"route\":\"cart\",\"operational\":true}}"
+    },
+    {
+      "path": "/api/zendoro/checkout",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 58,
+      "bodyHint": "{\"ok\":true,\"data\":{\"route\":\"checkout\",\"operational\":true}}"
+    },
+    {
+      "path": "/api/zendoro/orders",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 56,
+      "bodyHint": "{\"ok\":true,\"data\":{\"route\":\"orders\",\"operational\":true}}"
+    },
+    {
+      "path": "/api/zendoro/webhook",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 57,
+      "bodyHint": "{\"ok\":true,\"data\":{\"route\":\"webhook\",\"operational\":true}}"
+    },
+    {
+      "path": "/api/stripe/checkout",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405,
+        500
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/stripe/webhook",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/payments/checkout",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405,
+        500
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/payments/webhook",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/wallet/balance",
+      "status": 400,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 37,
+      "bodyHint": "{\"ok\":false,\"error\":\"Missing userId\"}"
+    },
+    {
+      "path": "/api/wallet/ledger",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/wallet/credit",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/wallet/debit",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/zencoin/wallet",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 25,
+      "bodyHint": "{\"ok\":true,\"wallet\":true}"
+    },
+    {
+      "path": "/api/zencoin/balance",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 25,
+      "bodyHint": "{\"ok\":true,\"balance\":100}"
+    },
+    {
+      "path": "/api/zencoin/transfer",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/zenwallet/runtime",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 194,
+      "bodyHint": "{\"ok\":true,\"telemetry\":{\"uptime\":166.406972502,\"memory\":{\"rss\":88502272,\"heapTotal\":26587136,\"heapUsed\":23930304,\"external\":3544977,\"arrayBuffers\":94298},\"timestamp\":\"2026-06-01T21:27:33.872Z\"}}"
+    },
+    {
+      "path": "/api/zenwallet/ledger",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 23,
+      "bodyHint": "{\"ok\":true,\"ledger\":[]}"
+    }
+  ],
+  "fileResults": [
+    {
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/zendoro/products/page.tsx",
+      "exists": true,
+      "bytes": 93,
+      "commerceVocabulary": false
+    },
+    {
+      "file": "app/zendoro/cart/page.tsx",
+      "exists": true,
+      "bytes": 113,
+      "commerceVocabulary": false
+    },
+    {
+      "file": "app/zendoro/checkout/page.tsx",
+      "exists": true,
+      "bytes": 165,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/zendoro/orders/page.tsx",
+      "exists": true,
+      "bytes": 157,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142,
+      "commerceVocabulary": false
+    },
+    {
+      "file": "app/api/zendoro/cart/route.ts",
+      "exists": true,
+      "bytes": 138,
+      "commerceVocabulary": false
+    },
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 235,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/zendoro/orders/route.ts",
+      "exists": true,
+      "bytes": 140,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 234,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/stripe/checkout/route.ts",
+      "exists": true,
+      "bytes": 2728,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "bytes": 3271,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "exists": true,
+      "bytes": 725,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "exists": true,
+      "bytes": 568,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/wallet/balance/route.ts",
+      "exists": true,
+      "bytes": 1014,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/wallet/ledger/route.ts",
+      "exists": true,
+      "bytes": 824,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/zencoin/wallet/route.ts",
+      "exists": true,
+      "bytes": 94,
+      "commerceVocabulary": true
+    },
+    {
+      "file": "app/api/zencoin/balance/route.ts",
+      "exists": true,
+      "bytes": 94,
+      "commerceVocabulary": false
+    },
+    {
+      "file": "app/api/zencoin/transfer/route.ts",
+      "exists": true,
+      "bytes": 100,
+      "commerceVocabulary": false
+    }
+  ],
+  "vocabularyChecks": {
+    "stripe": true,
+    "checkout": true,
+    "webhook": true,
+    "order": true,
+    "payment": true,
+    "idempotency": true,
+    "wallet": true,
+    "ledger": true,
+    "zencoin": true
+  },
+  "envResults": [
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "processPresent": false,
+      "codeMentioned": true,
+      "envExampleMentioned": true
+    },
+    {
+      "key": "STRIPE_WEBHOOK_SECRET",
+      "processPresent": false,
+      "codeMentioned": true,
+      "envExampleMentioned": true
+    },
+    {
+      "key": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "processPresent": false,
+      "codeMentioned": false,
+      "envExampleMentioned": false
+    },
+    {
+      "key": "DATABASE_URL",
+      "processPresent": false,
+      "codeMentioned": false,
+      "envExampleMentioned": false
+    },
+    {
+      "key": "NEXTAUTH_SECRET",
+      "processPresent": false,
+      "codeMentioned": false,
+      "envExampleMentioned": false
+    }
+  ],
+  "warnings": [
+    "Zendoro, Stripe, Wallet, Zencoin, and Zenwallet routes are reachable or protected as expected.",
+    "This validates commerce/economy contract reachability, not real Stripe settlement.",
+    "Stripe sandbox checkout requires STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, and publishable key in Vercel.",
+    "Order persistence and idempotency must be backed by DATABASE_URL before public commerce launch.",
+    "Wallet and Zencoin transfers remain controlled until DB-backed ledger mutation is manually verified."
+  ],
+  "next": "Run Mega Pack 3/3 — Runtime, Monitoring & Private Beta Seal after Stripe/env setup or controlled acceptance of sandbox-required status."
+}

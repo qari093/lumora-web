@@ -1,0 +1,415 @@
+{
+  "system": "Lumora Real Validation Mega Pack 3/3 — Runtime, Monitoring & Private Beta Final Seal",
+  "sealedAt": "2026-06-01T21:54:28.277Z",
+  "base": "https://lumora-csb0pg3rt-qari093s-projects.vercel.app",
+  "status": "ACTION_REQUIRED",
+  "betaDecision": "HOLD",
+  "routeSummary": {
+    "passed": 9,
+    "total": 23
+  },
+  "fileSummary": {
+    "passed": 18,
+    "total": 18
+  },
+  "previousPackChecks": {
+    "pack1Present": true,
+    "pack1Accepted": true,
+    "pack2Present": true,
+    "pack2Accepted": true
+  },
+  "runtimeChecks": {
+    "fypRuntimePresent": true,
+    "liveRuntimePresent": true,
+    "mediaHealthPresent": false,
+    "telemetryPresent": true,
+    "moderationPresent": true,
+    "privateBetaGatePresent": true
+  },
+  "manualRequirements": {
+    "databaseUrlRequired": true,
+    "nextAuthSecretRequired": true,
+    "stripeKeysRequired": true,
+    "liveAuthE2ERequired": true,
+    "stripeSandboxRequired": true,
+    "monitoringDashboardRequired": true
+  },
+  "routeResults": [
+    {
+      "path": "/fyp",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 21991,
+      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+    },
+    {
+      "path": "/api/fyp/feed",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 621,
+      "bodyHint": "{\"ok\":true,\"source\":\"fallback\",\"items\":[{\"id\":\"feed-1\",\"title\":\"Lumora Welcome Drop\",\"slug\":\"lumora-welcome-drop\",\"creator\":\"Lumora\",\"category\":\"Launch\",\"videoUrl\":\"https://interactive-examples.mdn.mozilla.net/media/cc0-"
+    },
+    {
+      "path": "/api/fyp/native-feed",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 5315,
+      "bodyHint": "{\"ok\":true,\"source\":\"native_fyp\",\"count\":20,\"items\":[{\"id\":\"seed_0\",\"title\":\"Seed Video 1\",\"sourceType\":\"lumora_generated\",\"rightsStatus\":\"verified\",\"licenseType\":\"lumora_generated\",\"playbackUrl\":\"/native-fyp/demo.mp4\",\""
+    },
+    {
+      "path": "/api/fyp/interact",
+      "status": 405,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/fyp/runtime",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": true,
+      "bytes": 56,
+      "bodyHint": "{\"ok\":true,\"runtime\":\"alive\",\"emotionalContinuity\":true}"
+    },
+    {
+      "path": "/api/fyp/health",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 55,
+      "bodyHint": "{\"ok\":true,\"mode\":\"seed\",\"items\":24,\"ts\":1780350561254}"
+    },
+    {
+      "path": "/api/live/rooms",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 388,
+      "bodyHint": "{\"ok\":true,\"service\":\"lumora-live\",\"route\":\"/api/live/rooms\",\"rooms\":[{\"id\":\"presence-calm\",\"title\":\"Calm Presence\",\"kind\":\"presence\",\"activeUsers\":0,\"emotionalState\":\"calm\"},{\"id\":\"watch-world\",\"title\":\"Watch World\",\"ki"
+    },
+    {
+      "path": "/api/live/room-state",
+      "status": 200,
+      "acceptable": [
+        200
+      ],
+      "ok": true,
+      "bytes": 259,
+      "bodyHint": "{\"ok\":true,\"requestId\":\"66d1b436-ecc3-4d93-ab12-68aeaa245e53\",\"roomId\":\"demo-room\",\"roomid\":\"demo-room\",\"title\":\"demo-room\",\"viewers\":0,\"createdAt\":1780350560462,\"updatedAt\":1780350560462,\"lastPublishAt\":1780350560462,\"l"
+    },
+    {
+      "path": "/api/live/events",
+      "status": 200,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": true,
+      "bytes": 0,
+      "bodyHint": ""
+    },
+    {
+      "path": "/api/live/publish",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/live/health",
+      "status": 0,
+      "acceptable": [
+        200
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/video/health",
+      "status": 0,
+      "acceptable": [
+        200
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/videos/health",
+      "status": 0,
+      "acceptable": [
+        200
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/media/upload",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/telemetry",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/telemetry/event",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/errors/report",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/moderation/check",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/safety/validation",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401,
+        405
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/private-beta/gate",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/private-beta/access",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/launch-readiness/final-seal",
+      "status": 0,
+      "acceptable": [
+        200,
+        400,
+        401
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/api/ready",
+      "status": 0,
+      "acceptable": [
+        200,
+        503
+      ],
+      "ok": false,
+      "bytes": 0,
+      "error": "fetch failed"
+    }
+  ],
+  "fileResults": [
+    {
+      "file": "docs/audit/lumora_real_validation_mega_pack_01_platform_runtime_auth.json",
+      "exists": true,
+      "bytes": 11202
+    },
+    {
+      "file": "docs/audit/lumora_real_validation_mega_pack_02_commerce_economy.json",
+      "exists": true,
+      "bytes": 11829
+    },
+    {
+      "file": "app/api/fyp/feed/route.ts",
+      "exists": true,
+      "bytes": 1214
+    },
+    {
+      "file": "app/api/fyp/native-feed/route.ts",
+      "exists": true,
+      "bytes": 843
+    },
+    {
+      "file": "app/api/fyp/interact/route.ts",
+      "exists": true,
+      "bytes": 714
+    },
+    {
+      "file": "app/api/live/rooms/route.ts",
+      "exists": true,
+      "bytes": 266
+    },
+    {
+      "file": "app/api/live/room-state/route.ts",
+      "exists": true,
+      "bytes": 1849
+    },
+    {
+      "file": "app/api/live/events/route.ts",
+      "exists": true,
+      "bytes": 1551
+    },
+    {
+      "file": "app/api/live/publish/route.ts",
+      "exists": true,
+      "bytes": 1858
+    },
+    {
+      "file": "app/api/video/health/route.ts",
+      "exists": true,
+      "bytes": 258
+    },
+    {
+      "file": "app/api/videos/health/route.ts",
+      "exists": true,
+      "bytes": 197
+    },
+    {
+      "file": "app/api/telemetry/route.ts",
+      "exists": true,
+      "bytes": 1037
+    },
+    {
+      "file": "app/api/errors/report/route.ts",
+      "exists": true,
+      "bytes": 1589
+    },
+    {
+      "file": "app/api/moderation/check/route.ts",
+      "exists": true,
+      "bytes": 758
+    },
+    {
+      "file": "app/api/safety/validation/route.ts",
+      "exists": true,
+      "bytes": 1876
+    },
+    {
+      "file": "app/api/private-beta/gate/route.ts",
+      "exists": true,
+      "bytes": 703
+    },
+    {
+      "file": "app/api/private-beta/access/route.ts",
+      "exists": true,
+      "bytes": 1651
+    },
+    {
+      "file": "app/api/launch-readiness/final-seal/route.ts",
+      "exists": true,
+      "bytes": 403
+    }
+  ],
+  "warnings": [
+    "Final seal confirms preview runtime reachability and contract readiness only.",
+    "DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL, Stripe keys, and email/token persistence remain mandatory before real public beta.",
+    "Stripe sandbox checkout and webhook replay must be executed manually with test keys.",
+    "Auth signup/login/logout/session persistence must be verified against the deployed URL.",
+    "Wallet and Zencoin ledger mutation must be DB-backed before real economy use.",
+    "Private beta may start only as controlled beta with monitoring, manual tester onboarding, and rollback readiness."
+  ],
+  "next": [
+    "Commit all real-validation reports, tests, and locks.",
+    "Push branch and verify GitHub Actions green.",
+    "Set Vercel env variables.",
+    "Redeploy.",
+    "Run live URL smoke again.",
+    "Run auth E2E.",
+    "Run Stripe sandbox checkout and webhook replay.",
+    "Start controlled private beta only after live E2E passes."
+  ]
+}

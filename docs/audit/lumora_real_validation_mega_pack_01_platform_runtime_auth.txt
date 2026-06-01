@@ -1,0 +1,36 @@
+LUMORA REAL VALIDATION MEGA PACK 1/3
+STATUS: PASS_WITH_PROVIDER_ENV_REQUIRED
+Base: https://lumora-csb0pg3rt-qari093s-projects.vercel.app
+
+PASS — / (200)
+PASS — /fyp (200)
+PASS — /live (200)
+PASS — /gmar (200)
+PASS — /lumaspace (200)
+PASS — /zendoro (200)
+PASS — /movies (200)
+PASS — /music (200)
+PASS — /creator (200)
+PASS — /login (200)
+PASS — /signup (200)
+PASS — /api/health (200)
+PASS — /api/ready (503)
+PASS — /api/fyp/feed (200)
+PASS — /api/fyp/native-feed (200)
+PASS — /api/live/rooms (200)
+PASS — /api/live/room-state (200)
+PASS — /api/lumaspace/runtime (200)
+PASS — /api/zendoro/products (200)
+PASS — /api/wallet/balance (400)
+PASS — /api/auth/session (200)
+PASS — /api/auth/sessions (200)
+PASS — /api/auth/forgot-password (405)
+PASS — /api/auth/verify-email (400)
+PASS — /api/auth/recovery (405)
+
+Warnings:
+- Preview routes are reachable.
+- Provider environment is still required for real auth/session/database behavior.
+- DATABASE_URL must be configured in Vercel before /api/ready can become strict production-ready.
+- NEXTAUTH_SECRET and NEXTAUTH_URL must be configured before real auth validation.
+- Private beta remains controlled until provider-backed auth E2E is manually verified.

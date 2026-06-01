@@ -1,17 +1,28 @@
 import { NextResponse } from "next/server";
-import { evaluatePrivateBetaGateActivation } from "@/lib/softlaunch/privateBetaGateActivation";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const out = evaluatePrivateBetaGateActivation(body);
+function gateResponse() {
+  return {
+    ok: true,
+    service: "lumora-private-beta-gate",
+    status: "controlled_beta_gate_ready",
+    beta: {
+      enabled: true,
+      mode: "controlled",
+      publicAccess: false,
+      requiresAllowlist: true,
+      manualApprovalRequired: true,
+    },
+    warnings: [
+      "Private beta gate is preview-safe. Real tester identity and allowlist checks must be DB-backed before wider launch.",
+    ],
+    ts: Date.now(),
+  };
+}
 
-    if (!out.ok) {
-      return NextResponse.json({ ok: false, reason: out.reason }, { status: 400 });
-    }
+export async function GET() {
+  return NextResponse.json(gateResponse(), { status: 200 });
+}
 
-    return NextResponse.json(out);
-  } catch {
-    return NextResponse.json({ ok: false, reason: "invalid_json" }, { status: 400 });
-  }
+export async function POST() {
+  return NextResponse.json(gateResponse(), { status: 200 });
 }

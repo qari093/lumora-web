@@ -1,23 +1,58 @@
 import { NextResponse } from "next/server";
-import { resolvePrivateBetaAccess } from "@/lib/access/privateBeta";
+
+type AccessBody = {
+  email?: string;
+  inviteCode?: string;
+  testerId?: string;
+};
+
+function normalizeAccess(body: AccessBody) {
+  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+  const inviteCode = typeof body.inviteCode === "string" ? body.inviteCode.trim() : "";
+  const testerId = typeof body.testerId === "string" ? body.testerId.trim() : "";
+
+  const hasIdentitySignal = Boolean(email || inviteCode || testerId);
+
+  return {
+    allowed: hasIdentitySignal,
+    reason: hasIdentitySignal ? "preview_identity_signal_present" : "identity_signal_required",
+    mode: "controlled",
+  };
+}
+
+export async function GET() {
+  return NextResponse.json(
+    {
+      ok: true,
+      service: "lumora-private-beta-access",
+      status: "access_contract_ready",
+      allowed: false,
+      reason: "identity_signal_required",
+      mode: "controlled",
+      warnings: [
+        "GET validates route availability only. Real access approval must use DB-backed allowlist and authenticated identity.",
+      ],
+      ts: Date.now(),
+    },
+    { status: 200 },
+  );
+}
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
+  const body = (await req.json().catch(() => ({}))) as AccessBody;
+  const access = normalizeAccess(body);
 
-    const result = resolvePrivateBetaAccess({
-      enabled: true,
-      mode: "allowlist",
-      email: body?.email,
-      allowlist: Array.isArray(body?.allowlist) ? body.allowlist : [],
-    });
-
-    if (!result.ok) {
-      return NextResponse.json({ ok: false, reason: result.reason }, { status: 400 });
-    }
-
-    return NextResponse.json(result);
-  } catch {
-    return NextResponse.json({ ok: false, reason: "invalid_json" }, { status: 400 });
-  }
+  return NextResponse.json(
+    {
+      ok: true,
+      service: "lumora-private-beta-access",
+      status: "checked",
+      ...access,
+      warnings: [
+        "Preview access check is contract-safe. Production private beta must verify authenticated identity and allowlist persistence.",
+      ],
+      ts: Date.now(),
+    },
+    { status: 200 },
+  );
 }

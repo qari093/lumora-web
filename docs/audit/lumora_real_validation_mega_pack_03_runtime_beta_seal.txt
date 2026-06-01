@@ -1,0 +1,72 @@
+LUMORA REAL VALIDATION MEGA PACK 3/3
+RUNTIME + MONITORING + PRIVATE BETA FINAL SEAL
+================================================
+
+STATUS: ACTION_REQUIRED
+BETA_DECISION: HOLD
+Base: https://lumora-csb0pg3rt-qari093s-projects.vercel.app
+
+Routes:
+PASS — /fyp (200)
+PASS — /api/fyp/feed (200)
+PASS — /api/fyp/native-feed (200)
+PASS — /api/fyp/interact (405)
+PASS — /api/fyp/runtime (200)
+PASS — /api/fyp/health (200)
+PASS — /api/live/rooms (200)
+PASS — /api/live/room-state (200)
+PASS — /api/live/events (200)
+FAIL — /api/live/publish (0)
+FAIL — /api/live/health (0)
+FAIL — /api/video/health (0)
+FAIL — /api/videos/health (0)
+FAIL — /api/media/upload (0)
+FAIL — /api/telemetry (0)
+FAIL — /api/telemetry/event (0)
+FAIL — /api/errors/report (0)
+FAIL — /api/moderation/check (0)
+FAIL — /api/safety/validation (0)
+FAIL — /api/private-beta/gate (0)
+FAIL — /api/private-beta/access (0)
+FAIL — /api/launch-readiness/final-seal (0)
+FAIL — /api/ready (0)
+
+Previous Packs:
+PASS — pack1Present
+PASS — pack1Accepted
+PASS — pack2Present
+PASS — pack2Accepted
+
+Runtime Checks:
+PASS — fypRuntimePresent
+PASS — liveRuntimePresent
+FAIL — mediaHealthPresent
+PASS — telemetryPresent
+PASS — moderationPresent
+PASS — privateBetaGatePresent
+
+Manual Requirements:
+REQUIRED — databaseUrlRequired
+REQUIRED — nextAuthSecretRequired
+REQUIRED — stripeKeysRequired
+REQUIRED — liveAuthE2ERequired
+REQUIRED — stripeSandboxRequired
+REQUIRED — monitoringDashboardRequired
+
+Warnings:
+- Final seal confirms preview runtime reachability and contract readiness only.
+- DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL, Stripe keys, and email/token persistence remain mandatory before real public beta.
+- Stripe sandbox checkout and webhook replay must be executed manually with test keys.
+- Auth signup/login/logout/session persistence must be verified against the deployed URL.
+- Wallet and Zencoin ledger mutation must be DB-backed before real economy use.
+- Private beta may start only as controlled beta with monitoring, manual tester onboarding, and rollback readiness.
+
+Next:
+- Commit all real-validation reports, tests, and locks.
+- Push branch and verify GitHub Actions green.
+- Set Vercel env variables.
+- Redeploy.
+- Run live URL smoke again.
+- Run auth E2E.
+- Run Stripe sandbox checkout and webhook replay.
+- Start controlled private beta only after live E2E passes.
