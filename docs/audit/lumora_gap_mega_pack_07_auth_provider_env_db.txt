@@ -1,0 +1,52 @@
+LUMORA GAP MEGA PACK 7/9 — AUTH PROVIDER + ENV + DB/SESSION READINESS
+======================================================================
+
+STATUS: PASS_WITH_PROVIDER_WIRING_REQUIRED
+AuditedAt: 2026-05-31T22:16:37.373Z
+
+Files:
+PASS — lib/auth.ts (151 bytes)
+PASS — src/lib/auth.ts (673 bytes)
+PASS — app/api/auth/session/route.ts (263 bytes)
+PASS — app/api/auth/forgot-password/route.ts (840 bytes)
+PASS — app/api/auth/reset-password/route.ts (936 bytes)
+PASS — app/api/auth/verify-email/route.ts (1042 bytes)
+PASS — app/api/auth/sessions/route.ts (839 bytes)
+PASS — app/api/auth/recovery/route.ts (945 bytes)
+PASS — app/login/page.tsx (229 bytes)
+PASS — app/signup/page.tsx (239 bytes)
+PASS — app/api/account/route.ts (773 bytes)
+PASS — middleware.ts (561 bytes)
+PASS — prisma/schema.prisma (12656 bytes)
+PASS — package.json (16742 bytes)
+
+Env keys:
+PASS — DATABASE_URL envExample=false code=true process=false
+PASS — NEXTAUTH_SECRET envExample=false code=true process=false
+PASS — NEXTAUTH_URL envExample=false code=true process=false
+PASS — STRIPE_SECRET_KEY envExample=true code=true process=false
+PASS — STRIPE_WEBHOOK_SECRET envExample=true code=true process=false
+
+Vocabulary:
+PASS — next-auth
+PASS — session
+PASS — user
+PASS — role
+PASS — unauthorized
+PASS — recovery
+PASS — verify
+PASS — reset
+PASS — token
+PASS — database
+
+Schema checks:
+PASS — User model
+PASS — Account model or auth adapter support
+PASS — Session model or session API support
+PASS — Verification token or verify route support
+
+Warnings:
+- Auth contracts exist, but production provider wiring still requires real secrets and database-backed token persistence.
+- Password reset and email verification must be connected to email delivery before public beta.
+- Session revocation must be provider-backed before handling real user accounts.
+- This mega pack validates readiness and integration shape, not real login mutation.

@@ -1,0 +1,32 @@
+LUMORA GAP CODE PACK 6/15 — BROWSER JOURNEY SMOKE
+==================================================
+
+STATUS: PASS
+Base: http://127.0.0.1:3040
+Passed: 20/20
+
+PASS — / (200) 40076 bytes
+PASS — /fyp (200) 42040 bytes
+PASS — /live (200) 67720 bytes
+PASS — /gmar (200) 66286 bytes
+PASS — /lumaspace (200) 30625 bytes
+PASS — /zendoro (200) 64735 bytes
+PASS — /movies (200) 33997 bytes
+PASS — /music (200) 32061 bytes
+PASS — /creator (200) 29469 bytes
+PASS — /login (200) 27552 bytes
+PASS — /signup (200) 27582 bytes
+PASS — /api/health (200) 110 bytes
+PASS — /api/ready (200) 160 bytes
+PASS — /api/fyp/feed (200) 621 bytes
+PASS — /api/fyp/native-feed (200) 5315 bytes
+PASS — /api/live/rooms (200) 388 bytes
+PASS — /api/live/room-state (200) 259 bytes
+PASS — /api/lumaspace/runtime (200) 51 bytes
+PASS — /api/zendoro/products (200) 58 bytes
+PASS — /api/zendoro/checkout (200) 58 bytes
+
+Warnings:
+- Browser smoke validates HTTP reachability only.
+- Deep interactive click, login, checkout, media playback, and websocket E2E are later packs.
+- Any 4xx response may still be acceptable for protected/user-scoped routes if intentional.

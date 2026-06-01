@@ -1,0 +1,173 @@
+{
+  "status": "PASS_WITH_SANDBOX_EXECUTION_REQUIRED",
+  "auditedAt": "2026-06-01T09:46:01.009Z",
+  "fileResults": [
+    {
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "file": "app/api/zendoro/cart/route.ts",
+      "exists": true,
+      "bytes": 138
+    },
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 235
+    },
+    {
+      "file": "app/api/zendoro/orders/route.ts",
+      "exists": true,
+      "bytes": 140
+    },
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 234
+    },
+    {
+      "file": "app/api/stripe/checkout/route.ts",
+      "exists": true,
+      "bytes": 2730
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "bytes": 3271
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "exists": true,
+      "bytes": 725
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "exists": true,
+      "bytes": 568
+    },
+    {
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946
+    },
+    {
+      "file": "app/zendoro/checkout/page.tsx",
+      "exists": true,
+      "bytes": 165
+    },
+    {
+      "file": "app/zendoro/orders/page.tsx",
+      "exists": true,
+      "bytes": 157
+    }
+  ],
+  "vocabularyResults": [
+    {
+      "word": "stripe",
+      "present": true
+    },
+    {
+      "word": "checkout",
+      "present": true
+    },
+    {
+      "word": "webhook",
+      "present": true
+    },
+    {
+      "word": "session",
+      "present": true
+    },
+    {
+      "word": "signature",
+      "present": true
+    },
+    {
+      "word": "idempot",
+      "present": true
+    },
+    {
+      "word": "order",
+      "present": true
+    },
+    {
+      "word": "payment",
+      "present": true
+    },
+    {
+      "word": "amount",
+      "present": true
+    },
+    {
+      "word": "currency",
+      "present": true
+    },
+    {
+      "word": "metadata",
+      "present": true
+    }
+  ],
+  "envResults": [
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "envExample": true,
+      "envLocalPresent": false,
+      "codeReference": true
+    },
+    {
+      "key": "STRIPE_WEBHOOK_SECRET",
+      "envExample": true,
+      "envLocalPresent": false,
+      "codeReference": true
+    },
+    {
+      "key": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "envExample": false,
+      "envLocalPresent": false,
+      "codeReference": false
+    },
+    {
+      "key": "DATABASE_URL",
+      "envExample": false,
+      "envLocalPresent": true,
+      "codeReference": false
+    },
+    {
+      "key": "NEXTAUTH_SECRET",
+      "envExample": false,
+      "envLocalPresent": false,
+      "codeReference": false
+    }
+  ],
+  "sandboxChecks": [
+    {
+      "name": "checkout route creates or delegates checkout session",
+      "pass": true
+    },
+    {
+      "name": "webhook route verifies signature or webhook secret",
+      "pass": true
+    },
+    {
+      "name": "idempotency vocabulary exists",
+      "pass": true
+    },
+    {
+      "name": "Zendoro checkout route present",
+      "pass": true
+    },
+    {
+      "name": "Zendoro order route present",
+      "pass": true
+    }
+  ],
+  "warnings": [
+    "This validates Stripe/Zendoro readiness, not real Stripe sandbox settlement.",
+    "A real checkout must be executed with Stripe test keys after Vercel env setup.",
+    "Webhook replay must be verified with Stripe CLI or dashboard webhook replay.",
+    "Idempotency must be backed by persistent DB records before public commerce launch."
+  ],
+  "next": "Mega Pack 9/9 Production Deployment + Vercel + Private Beta Final Seal"
+}

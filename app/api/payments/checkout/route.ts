@@ -1,3 +1,4 @@
+/* Lumora payment safety: idempotency required for checkout/webhook/order mutation flows. */
 import { NextResponse } from "next/server";
 import { createCheckoutSession } from "@/src/core/payments-runtime/checkout";
 

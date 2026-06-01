@@ -1,0 +1,135 @@
+{
+  "status": "PASS",
+  "auditedAt": "2026-05-31T21:22:32.441Z",
+  "base": "http://127.0.0.1:3040",
+  "passed": 20,
+  "total": 20,
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "ok": true,
+      "bytes": 40076
+    },
+    {
+      "path": "/fyp",
+      "status": 200,
+      "ok": true,
+      "bytes": 42040
+    },
+    {
+      "path": "/live",
+      "status": 200,
+      "ok": true,
+      "bytes": 67720
+    },
+    {
+      "path": "/gmar",
+      "status": 200,
+      "ok": true,
+      "bytes": 66286
+    },
+    {
+      "path": "/lumaspace",
+      "status": 200,
+      "ok": true,
+      "bytes": 30625
+    },
+    {
+      "path": "/zendoro",
+      "status": 200,
+      "ok": true,
+      "bytes": 64735
+    },
+    {
+      "path": "/movies",
+      "status": 200,
+      "ok": true,
+      "bytes": 33997
+    },
+    {
+      "path": "/music",
+      "status": 200,
+      "ok": true,
+      "bytes": 32061
+    },
+    {
+      "path": "/creator",
+      "status": 200,
+      "ok": true,
+      "bytes": 29469
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "ok": true,
+      "bytes": 27552
+    },
+    {
+      "path": "/signup",
+      "status": 200,
+      "ok": true,
+      "bytes": 27582
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "bytes": 110
+    },
+    {
+      "path": "/api/ready",
+      "status": 200,
+      "ok": true,
+      "bytes": 160
+    },
+    {
+      "path": "/api/fyp/feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 621
+    },
+    {
+      "path": "/api/fyp/native-feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 5315
+    },
+    {
+      "path": "/api/live/rooms",
+      "status": 200,
+      "ok": true,
+      "bytes": 388
+    },
+    {
+      "path": "/api/live/room-state",
+      "status": 200,
+      "ok": true,
+      "bytes": 259
+    },
+    {
+      "path": "/api/lumaspace/runtime",
+      "status": 200,
+      "ok": true,
+      "bytes": 51
+    },
+    {
+      "path": "/api/zendoro/products",
+      "status": 200,
+      "ok": true,
+      "bytes": 58
+    },
+    {
+      "path": "/api/zendoro/checkout",
+      "status": 200,
+      "ok": true,
+      "bytes": 58
+    }
+  ],
+  "warnings": [
+    "Browser smoke validates HTTP reachability only.",
+    "Deep interactive click, login, checkout, media playback, and websocket E2E are later packs.",
+    "Any 4xx response may still be acceptable for protected/user-scoped routes if intentional."
+  ],
+  "next": "Pack 7/15 Auth Provider Wiring Readiness"
+}

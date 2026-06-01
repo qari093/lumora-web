@@ -1,37 +1,61 @@
-import { NextRequest, NextResponse } from "next/server";
-import fs from "node:fs";
-import path from "node:path";
+import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-const ROOT = process.cwd();
-const PUBLIC_DIR = path.join(ROOT, "public");
-const AVATAR_ROOT = path.join(PUBLIC_DIR, "persona", "avatars");
-const ALLOWED_EXT = new Set([".svg", ".png", ".webp"]);
+type PersonaAsset = {
+  id: string;
+  type: "avatar" | "emoji" | "reaction" | "placeholder";
+  name: string;
+  src: string;
+  premium: boolean;
+};
 
-function listEmotionFiles(emotion: string) {
-  const dir = path.join(AVATAR_ROOT, emotion);
-  if (!fs.existsSync(dir)) return { dir, items: [] as Array<{ file: string; url: string }> };
-  const items = fs.readdirSync(dir)
-    .filter((file) => ALLOWED_EXT.has(path.extname(file).toLowerCase()))
-    .sort((a, b) => a.localeCompare(b))
-    .map((file) => ({ file, url: `/persona/avatars/${emotion}/${file}` }));
-  return { dir, items };
-}
-
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const emotion = (searchParams.get("emotion") || "neutral").trim().toLowerCase();
-  const reaction = (searchParams.get("reaction") || "love").trim().toLowerCase();
-  const { dir, items } = listEmotionFiles(emotion);
-
-  return NextResponse.json({
-    ok: true,
+const PERSONA_ASSETS: PersonaAsset[] = [
+  {
+    id: "neutral-avatar-001",
     type: "avatar",
-    emotion,
-    reaction,
-    count: items.length,
-    dir,
-    items
-  });
+    name: "Neutral Lumora Avatar",
+    src: "/persona/placeholders/avatar-neutral.svg",
+    premium: false,
+  },
+  {
+    id: "calm-avatar-001",
+    type: "avatar",
+    name: "Calm Lumora Avatar",
+    src: "/persona/placeholders/avatar-calm.svg",
+    premium: false,
+  },
+  {
+    id: "joy-emoji-001",
+    type: "emoji",
+    name: "Joy Pulse",
+    src: "/persona/placeholders/emoji-joy.svg",
+    premium: false,
+  },
+  {
+    id: "focus-reaction-001",
+    type: "reaction",
+    name: "Focus Glow",
+    src: "/persona/placeholders/reaction-focus.svg",
+    premium: false,
+  },
+];
+
+export async function GET() {
+  return NextResponse.json(
+    {
+      ok: true,
+      source: "persona_assets_manifest_v1",
+      assets: PERSONA_ASSETS,
+      count: PERSONA_ASSETS.length,
+      note: "Manifest-only route. Large public media directories are intentionally excluded from serverless tracing.",
+    },
+    {
+      status: 200,
+      headers: {
+        "cache-control": "public, max-age=3600, s-maxage=86400",
+      },
+    },
+  );
 }

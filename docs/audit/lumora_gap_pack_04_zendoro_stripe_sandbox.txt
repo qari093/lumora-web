@@ -1,0 +1,43 @@
+LUMORA GAP CODE PACK 4/15 — ZENDORO STRIPE SANDBOX CONTRACT
+=============================================================
+
+STATUS: PASS
+AuditedAt: 2026-05-31T21:00:25.384Z
+
+Files:
+PASS — app/api/zendoro/products/route.ts (142 bytes)
+PASS — app/api/zendoro/cart/route.ts (138 bytes)
+PASS — app/api/zendoro/checkout/route.ts (235 bytes)
+PASS — app/api/zendoro/orders/route.ts (140 bytes)
+PASS — app/api/zendoro/webhook/route.ts (234 bytes)
+PASS — app/api/stripe/checkout/route.ts (2730 bytes)
+PASS — app/api/stripe/webhook/route.ts (3271 bytes)
+PASS — app/api/payments/checkout/route.ts (725 bytes)
+PASS — app/api/payments/webhook/route.ts (568 bytes)
+PASS — app/zendoro/page.tsx (946 bytes)
+PASS — app/zendoro/checkout/page.tsx (165 bytes)
+PASS — app/zendoro/orders/page.tsx (157 bytes)
+
+Required vocabulary:
+PASS — stripe
+PASS — checkout
+PASS — webhook
+PASS — session
+PASS — idempot
+PASS — signature
+PASS — order
+PASS — payment
+
+Environment hints:
+- STRIPE_SECRET_KEY — envExample=true process=false
+- STRIPE_WEBHOOK_SECRET — envExample=true process=false
+- NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — envExample=false process=false
+- DATABASE_URL — envExample=false process=false
+- NEXTAUTH_SECRET — envExample=false process=false
+
+Warnings:
+- This pack validates Zendoro/Stripe contract readiness, not real Stripe settlement.
+- A real sandbox checkout must still be executed with Stripe test keys.
+- Webhook replay and idempotency must be verified against live Vercel deployment after env setup.
+
+NEXT: Run Pack 5/15 Live + FYP Browser Runtime Smoke

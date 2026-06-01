@@ -1,0 +1,152 @@
+LUMORA GAP CODE PACK 1/15 — REALITY AUDIT FINALIZATION
+======================================================
+
+STATUS: PASS_WITH_RUNTIME_WARNINGS
+AuditedAt: 2026-05-31T20:32:29.140Z
+
+Totals:
+- routes: 1202
+- apiRoutes: 1007
+- pageRoutes: 195
+- stubHints: 1030
+- largePublicHints: 80
+- requiredChecks: 34
+- missingChecks: 0
+
+Required checks:
+PASS — auth — app/login/page.tsx (229 bytes)
+PASS — auth — app/signup/page.tsx (239 bytes)
+PASS — auth — app/api/auth/session/route.ts (145 bytes)
+PASS — auth — app/api/auth/forgot-password/route.ts (722 bytes)
+PASS — auth — app/api/auth/reset-password/route.ts (818 bytes)
+PASS — auth — app/api/auth/verify-email/route.ts (924 bytes)
+PASS — auth — app/api/auth/sessions/route.ts (721 bytes)
+PASS — auth — app/api/auth/recovery/route.ts (827 bytes)
+PASS — mainJourney — app/page.tsx (4042 bytes)
+PASS — mainJourney — app/fyp/page.tsx (1214 bytes)
+PASS — mainJourney — app/live/page.tsx (1020 bytes)
+PASS — mainJourney — app/lumaspace/page.tsx (377 bytes)
+PASS — mainJourney — app/gmar/page.tsx (1191 bytes)
+PASS — mainJourney — app/zendoro/page.tsx (946 bytes)
+PASS — mainJourney — app/movies/page.tsx (1504 bytes)
+PASS — mainJourney — app/music/page.tsx (176 bytes)
+PASS — mainJourney — app/creator/page.tsx (115 bytes)
+PASS — zendoro — app/api/zendoro/products/route.ts (142 bytes)
+PASS — zendoro — app/api/zendoro/cart/route.ts (138 bytes)
+PASS — zendoro — app/api/zendoro/checkout/route.ts (142 bytes)
+PASS — zendoro — app/api/zendoro/orders/route.ts (140 bytes)
+PASS — zendoro — app/api/zendoro/webhook/route.ts (141 bytes)
+PASS — fypLive — app/api/fyp/feed/route.ts (1214 bytes)
+PASS — fypLive — app/api/fyp/native-feed/route.ts (843 bytes)
+PASS — fypLive — app/api/fyp/interact/route.ts (714 bytes)
+PASS — fypLive — app/api/live/rooms/route.ts (266 bytes)
+PASS — fypLive — app/api/live/room-state/route.ts (1849 bytes)
+PASS — fypLive — app/api/live/events/route.ts (1551 bytes)
+PASS — fypLive — app/api/live/publish/route.ts (1858 bytes)
+PASS — walletZencoin — app/api/wallet/balance/route.ts (1014 bytes)
+PASS — walletZencoin — app/api/wallet/ledger/route.ts (824 bytes)
+PASS — walletZencoin — app/api/zencoin/wallet/route.ts (94 bytes)
+PASS — walletZencoin — app/api/zencoin/balance/route.ts (94 bytes)
+PASS — walletZencoin — app/api/zencoin/transfer/route.ts (100 bytes)
+
+Top stub/mock/contract hints:
+- app/(demo)/gestures-demo/GesturesDemoClient.tsx — demo
+- app/(demo)/gestures-demo/page.tsx — demo
+- app/(demo)/hybrid-demo/HybridDemoClient.tsx — demo
+- app/(demo)/hybrid-demo/page.impl.tsx — demo, placeholder
+- app/(demo)/hybrid-demo/page.tsx — demo
+- app/(demo)/lumaspace/reflection/ReflectionClient.tsx — demo, placeholder
+- app/(demo)/lumaspace/shadow/page.demo.tsx — demo, placeholder
+- app/(demo)/nexmoji/NexmojiClient.tsx — demo
+- app/(demo)/nexmoji/page.impl.tsx — demo
+- app/(demo)/nexmoji/page.original.tsx — demo
+- app/(demo)/nexmoji/page.tsx — demo
+- app/(demo)/overlay-sprite/page.tsx — demo
+- app/(demo)/vibe-demo/VibeDemoClient.tsx — demo
+- app/(demo)/vibe-demo/page.tsx — demo
+- app/_client/emml-analyzer.ts — ok: true
+- app/_client/live/LiveSpecBadge.tsx — demo
+- app/_components/lumaspace/state-banner.tsx — demo
+- app/_lib/admin/adminAuth.ts — ok: true
+- app/_lib/demo/content.ts — demo, placeholder
+- app/_modules/emojis/holo-panel.tsx — placeholder
+- app/_modules/emotion/emotion-model.ts — demo
+- app/_modules/hybrid/client.ts — ok: true
+- app/_modules/hybrid/providers.ts — placeholder
+- app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/DemoOverlayDemoRetired20251225t164806zClient.tsx — demo
+- app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/page.tsx — demo
+- app/_server/emml-health.ts — ok: true
+- app/_server/liveBus.ts — demo
+- app/_server/videoGenCap.ts — ok: true
+- app/account/kyc/KycClient.tsx — demo, placeholder
+- app/admin/AdminClient.tsx — placeholder
+- app/admin/campaigns/page.tsx — placeholder
+- app/admin/celebrations/moderation/ShowsPanel.tsx — placeholder
+- app/ads/admin/page.tsx — demo
+- app/api/_health/route.ts — ok: true
+- app/api/_info/route.ts — ok: true
+- app/api/_ready/route.ts — ok: true
+- app/api/abuse/signal/route.ts — ok: true
+- app/api/account/route.ts — ok: true, demo, contract_ready
+- app/api/account/upgrade/route.ts — ok: true
+- app/api/activation/claims/route.ts — ok: true
+- app/api/activation/dashboard/route.ts — ok: true
+- app/api/activation/env/route.ts — ok: true
+- app/api/activation/health/route.ts — ok: true
+- app/api/activation/live-status/route.ts — ok: true
+- app/api/activation/proof/route.ts — ok: true
+- app/api/activation/status/route.ts — ok: true
+- app/api/admin/kyc/pending/route.ts — ok: true
+- app/api/admin/moderation/list/route.ts — ok: true
+- app/api/admin/moderation/review/route.ts — ok: true
+- app/api/admin/overview/route.ts — ok: true
+- app/api/admin/testers/summary/route.ts — ok: true
+- app/api/ads/analytics/rollup/run/route.ts — ok: true
+- app/api/ads/analytics/summary/route.ts — ok: true, placeholder
+- app/api/ads/analytics/timeseries/route.ts — ok: true, placeholder
+- app/api/ads/analytics-snapshot/route.ts — ok: true
+- app/api/ads/budget-gate/route.ts — ok: true
+- app/api/ads/budget-guard/route.ts — ok: true
+- app/api/ads/campaigns/[id]/route.ts — ok: true
+- app/api/ads/campaigns/route.ts — ok: true
+- app/api/ads/click/route.ts — ok: true
+
+Large public file hints:
+- public/native-fyp/movie-clips/1777640193433_0_ScenesOfCityLife-dushifengguang-1.mp4 — 576772018 bytes
+- public/native-fyp/movie-clips/1777640619505_0_ScenesOfCityLife-dushifengguang-1.mp4 — 576772018 bytes
+- public/native-fyp/movie-clips/1777640232746_0_the-valiant-1929-0.mp4 — 440529143 bytes
+- public/native-fyp/movie-clips/1777640263346_0_the-valiant-1929-1.mp4 — 440529143 bytes
+- public/native-fyp/movie-clips/1777640662468_0_the-valiant-1929-0.mp4 — 440529143 bytes
+- public/native-fyp/movie-clips/1777640703957_0_the-valiant-1929-1.mp4 — 440529143 bytes
+- public/native-fyp/movie-clips/1777640163997_0_ScenesOfCityLife-dushifengguang-0.mp4 — 402846715 bytes
+- public/native-fyp/movie-clips/1777640588566_0_ScenesOfCityLife-dushifengguang-0.mp4 — 402846715 bytes
+- public/native-fyp/movie-clips/1777642649548_0_ScenesOfCityLife-dushifengguang-0.mp4 — 402846715 bytes
+- public/native-fyp/movie-clips/1777640293155_0_coquette-1929_HQ-0.mp4 — 278177987 bytes
+- public/native-fyp/movie-clips/1777640320021_0_coquette-1929_HQ-1.mp4 — 278177987 bytes
+- public/native-fyp/movie-clips/1777640737913_0_coquette-1929_HQ-0.mp4 — 278177987 bytes
+- public/native-fyp/movie-clips/1777640759937_0_coquette-1929_HQ-1.mp4 — 278177987 bytes
+- public/native-fyp/real/15.mp4 — 120618186 bytes
+- public/native-fyp/real/55.mp4 — 120618186 bytes
+- public/native-fyp/real/20.mp4 — 100304139 bytes
+- public/native-fyp/real/60.mp4 — 100304139 bytes
+- public/native-fyp/real/13.mp4 — 62642758 bytes
+- public/native-fyp/real/53.mp4 — 62642758 bytes
+- public/native-fyp/real/204.mp4 — 55269811 bytes
+- public/native-fyp/real/147.mp4 — 50296948 bytes
+- public/native-fyp/real/216.mp4 — 47992401 bytes
+- public/native-fyp/real/46.mp4 — 43604497 bytes
+- public/native-fyp/real/6.mp4 — 43604497 bytes
+- public/native-fyp/real/18.mp4 — 41336647 bytes
+- public/native-fyp/real/58.mp4 — 41336647 bytes
+- public/native-fyp/real/17.mp4 — 40103562 bytes
+- public/native-fyp/real/57.mp4 — 40103562 bytes
+- public/native-fyp/real/385.mp4 — 37545766 bytes
+- public/native-fyp/real/16.mp4 — 35451437 bytes
+
+Warnings:
+- This pack proves structure and detects risk; it does not prove real provider-backed runtime behavior.
+- Stub hints must be reviewed before public beta.
+- Large files under public may be traced into serverless functions if imported or referenced from API code.
+- Real auth, DB persistence, Stripe sandbox, Live, FYP, wallet, and deployment E2E are validated in later packs.
+
+NEXT: Run Pack 2/15 Duplicate / Legacy Cleanup

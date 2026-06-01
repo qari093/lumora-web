@@ -1,0 +1,37 @@
+LUMORA GAP CODE PACK 3/15 — MAIN USER JOURNEY RUNTIME CONTRACT
+================================================================
+
+STATUS: PASS
+AuditedAt: 2026-05-31T20:48:44.615Z
+
+Journey pages:
+PASS — home / — app/page.tsx (4042 bytes)
+PASS — fyp /fyp — app/fyp/page.tsx (1214 bytes)
+PASS — live /live — app/live/page.tsx (1020 bytes)
+PASS — gmar /gmar — app/gmar/page.tsx (1191 bytes)
+PASS — lumaspace /lumaspace — app/lumaspace/page.tsx (1394 bytes)
+PASS — zendoro /zendoro — app/zendoro/page.tsx (946 bytes)
+PASS — movies /movies — app/movies/page.tsx (1504 bytes)
+PASS — music /music — app/music/page.tsx (176 bytes)
+PASS — creator /creator — app/creator/page.tsx (115 bytes)
+PASS — login /login — app/login/page.tsx (229 bytes)
+PASS — signup /signup — app/signup/page.tsx (239 bytes)
+
+API contracts:
+PASS — app/api/health/route.ts (439 bytes)
+PASS — app/api/ready/route.ts (547 bytes)
+PASS — app/api/fyp/feed/route.ts (1214 bytes)
+PASS — app/api/fyp/native-feed/route.ts (843 bytes)
+PASS — app/api/live/rooms/route.ts (266 bytes)
+PASS — app/api/live/room-state/route.ts (1849 bytes)
+PASS — app/api/lumaspace/runtime/route.ts (173 bytes)
+PASS — app/api/zendoro/products/route.ts (142 bytes)
+PASS — app/api/zendoro/checkout/route.ts (142 bytes)
+PASS — app/api/wallet/balance/route.ts (1014 bytes)
+PASS — app/api/auth/session/route.ts (145 bytes)
+
+Warnings:
+- This validates runtime route/page contract shape, not real browser interaction depth.
+- Pack 5 and later packs cover browser smoke and deployment behavior.
+
+NEXT: Run Pack 4/15 Zendoro Stripe Sandbox Contract

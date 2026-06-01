@@ -1,3 +1,4 @@
+/* Lumora payment safety: idempotency required for checkout/webhook/order mutation flows. */
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";

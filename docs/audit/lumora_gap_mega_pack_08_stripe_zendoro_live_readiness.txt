@@ -1,0 +1,52 @@
+LUMORA GAP MEGA PACK 8/9 — STRIPE SANDBOX + ZENDORO CHECKOUT/WEBHOOK READINESS
+================================================================================
+
+STATUS: PASS_WITH_SANDBOX_EXECUTION_REQUIRED
+AuditedAt: 2026-06-01T09:46:01.009Z
+
+Files:
+PASS — app/api/zendoro/products/route.ts (142 bytes)
+PASS — app/api/zendoro/cart/route.ts (138 bytes)
+PASS — app/api/zendoro/checkout/route.ts (235 bytes)
+PASS — app/api/zendoro/orders/route.ts (140 bytes)
+PASS — app/api/zendoro/webhook/route.ts (234 bytes)
+PASS — app/api/stripe/checkout/route.ts (2730 bytes)
+PASS — app/api/stripe/webhook/route.ts (3271 bytes)
+PASS — app/api/payments/checkout/route.ts (725 bytes)
+PASS — app/api/payments/webhook/route.ts (568 bytes)
+PASS — app/zendoro/page.tsx (946 bytes)
+PASS — app/zendoro/checkout/page.tsx (165 bytes)
+PASS — app/zendoro/orders/page.tsx (157 bytes)
+
+Vocabulary:
+PASS — stripe
+PASS — checkout
+PASS — webhook
+PASS — session
+PASS — signature
+PASS — idempot
+PASS — order
+PASS — payment
+PASS — amount
+PASS — currency
+PASS — metadata
+
+Environment:
+PASS — STRIPE_SECRET_KEY envExample=true envLocal=false code=true
+PASS — STRIPE_WEBHOOK_SECRET envExample=true envLocal=false code=true
+WARN — NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY envExample=false envLocal=false code=false
+PASS — DATABASE_URL envExample=false envLocal=true code=false
+WARN — NEXTAUTH_SECRET envExample=false envLocal=false code=false
+
+Sandbox checks:
+PASS — checkout route creates or delegates checkout session
+PASS — webhook route verifies signature or webhook secret
+PASS — idempotency vocabulary exists
+PASS — Zendoro checkout route present
+PASS — Zendoro order route present
+
+Warnings:
+- This validates Stripe/Zendoro readiness, not real Stripe sandbox settlement.
+- A real checkout must be executed with Stripe test keys after Vercel env setup.
+- Webhook replay must be verified with Stripe CLI or dashboard webhook replay.
+- Idempotency must be backed by persistent DB records before public commerce launch.

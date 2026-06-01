@@ -1,0 +1,40 @@
+LUMORA GAP CODE PACK 2/15 — DUPLICATE / LEGACY ROUTE CLEANUP AUDIT
+====================================================================
+
+STATUS: PASS
+AuditedAt: 2026-05-31T20:37:39.219Z
+
+Totals:
+- routeFiles: 1202
+- routeKeys: 1202
+- duplicateRoutes: 0
+- riskyPageApiOverlap: 0
+- legacyRouteFiles: 1
+
+Canonical route ownership:
+PASS — /
+   • app/page.tsx
+PASS — /fyp
+   • app/fyp/page.tsx
+PASS — /live
+   • app/live/page.tsx
+PASS — /gmar
+   • app/gmar/page.tsx
+PASS — /lumaspace
+   • app/lumaspace/page.tsx
+PASS — /zendoro
+   • app/zendoro/page.tsx
+PASS — /movies
+   • app/movies/page.tsx
+PASS — /music
+   • app/music/page.tsx
+PASS — /creator
+   • app/creator/page.tsx
+
+Duplicate routes:
+- none
+
+Legacy route files:
+- app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/page.tsx
+
+Recommendation: No direct duplicate route conflicts detected. Continue to runtime smoke and provider wiring.

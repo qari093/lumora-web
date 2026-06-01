@@ -1,0 +1,134 @@
+{
+  "system": "Lumora Gap Pack 04 — Zendoro Stripe Sandbox Contract",
+  "status": "PASS",
+  "auditedAt": "2026-05-31T21:00:25.384Z",
+  "fileResults": [
+    {
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "file": "app/api/zendoro/cart/route.ts",
+      "exists": true,
+      "bytes": 138
+    },
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 235
+    },
+    {
+      "file": "app/api/zendoro/orders/route.ts",
+      "exists": true,
+      "bytes": 140
+    },
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 234
+    },
+    {
+      "file": "app/api/stripe/checkout/route.ts",
+      "exists": true,
+      "bytes": 2730
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "bytes": 3271
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "exists": true,
+      "bytes": 725
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "exists": true,
+      "bytes": 568
+    },
+    {
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946
+    },
+    {
+      "file": "app/zendoro/checkout/page.tsx",
+      "exists": true,
+      "bytes": 165
+    },
+    {
+      "file": "app/zendoro/orders/page.tsx",
+      "exists": true,
+      "bytes": 157
+    }
+  ],
+  "termResults": [
+    {
+      "term": "stripe",
+      "found": true
+    },
+    {
+      "term": "checkout",
+      "found": true
+    },
+    {
+      "term": "webhook",
+      "found": true
+    },
+    {
+      "term": "session",
+      "found": true
+    },
+    {
+      "term": "idempot",
+      "found": true
+    },
+    {
+      "term": "signature",
+      "found": true
+    },
+    {
+      "term": "order",
+      "found": true
+    },
+    {
+      "term": "payment",
+      "found": true
+    }
+  ],
+  "envHints": [
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "presentInEnvExample": true,
+      "presentInProcess": false
+    },
+    {
+      "key": "STRIPE_WEBHOOK_SECRET",
+      "presentInEnvExample": true,
+      "presentInProcess": false
+    },
+    {
+      "key": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "presentInEnvExample": false,
+      "presentInProcess": false
+    },
+    {
+      "key": "DATABASE_URL",
+      "presentInEnvExample": false,
+      "presentInProcess": false
+    },
+    {
+      "key": "NEXTAUTH_SECRET",
+      "presentInEnvExample": false,
+      "presentInProcess": false
+    }
+  ],
+  "warnings": [
+    "This pack validates Zendoro/Stripe contract readiness, not real Stripe settlement.",
+    "A real sandbox checkout must still be executed with Stripe test keys.",
+    "Webhook replay and idempotency must be verified against live Vercel deployment after env setup."
+  ],
+  "next": "Run Pack 5/15 Live + FYP Browser Runtime Smoke"
+}

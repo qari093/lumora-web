@@ -1,0 +1,1417 @@
+{
+  "system": "Lumora Production Gap Pack 01",
+  "status": "PASS_WITH_RUNTIME_WARNINGS",
+  "auditedAt": "2026-05-31T20:32:29.140Z",
+  "totals": {
+    "routes": 1202,
+    "apiRoutes": 1007,
+    "pageRoutes": 195,
+    "stubHints": 1030,
+    "largePublicHints": 80,
+    "requiredChecks": 34,
+    "missingChecks": 0
+  },
+  "envHints": {
+    "hasEnvExample": true,
+    "hasVercelJson": true,
+    "hasPackageJson": true,
+    "hasPrismaSchema": true,
+    "hasMiddleware": true
+  },
+  "appPagesConflict": true,
+  "requiredChecks": [
+    {
+      "domain": "auth",
+      "file": "app/login/page.tsx",
+      "exists": true,
+      "bytes": 229
+    },
+    {
+      "domain": "auth",
+      "file": "app/signup/page.tsx",
+      "exists": true,
+      "bytes": 239
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/session/route.ts",
+      "exists": true,
+      "bytes": 145
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/forgot-password/route.ts",
+      "exists": true,
+      "bytes": 722
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/reset-password/route.ts",
+      "exists": true,
+      "bytes": 818
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/verify-email/route.ts",
+      "exists": true,
+      "bytes": 924
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/sessions/route.ts",
+      "exists": true,
+      "bytes": 721
+    },
+    {
+      "domain": "auth",
+      "file": "app/api/auth/recovery/route.ts",
+      "exists": true,
+      "bytes": 827
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/page.tsx",
+      "exists": true,
+      "bytes": 4042
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/fyp/page.tsx",
+      "exists": true,
+      "bytes": 1214
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/live/page.tsx",
+      "exists": true,
+      "bytes": 1020
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/lumaspace/page.tsx",
+      "exists": true,
+      "bytes": 377
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/gmar/page.tsx",
+      "exists": true,
+      "bytes": 1191
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/movies/page.tsx",
+      "exists": true,
+      "bytes": 1504
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/music/page.tsx",
+      "exists": true,
+      "bytes": 176
+    },
+    {
+      "domain": "mainJourney",
+      "file": "app/creator/page.tsx",
+      "exists": true,
+      "bytes": 115
+    },
+    {
+      "domain": "zendoro",
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "domain": "zendoro",
+      "file": "app/api/zendoro/cart/route.ts",
+      "exists": true,
+      "bytes": 138
+    },
+    {
+      "domain": "zendoro",
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 142
+    },
+    {
+      "domain": "zendoro",
+      "file": "app/api/zendoro/orders/route.ts",
+      "exists": true,
+      "bytes": 140
+    },
+    {
+      "domain": "zendoro",
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 141
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/fyp/feed/route.ts",
+      "exists": true,
+      "bytes": 1214
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/fyp/native-feed/route.ts",
+      "exists": true,
+      "bytes": 843
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/fyp/interact/route.ts",
+      "exists": true,
+      "bytes": 714
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/live/rooms/route.ts",
+      "exists": true,
+      "bytes": 266
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/live/room-state/route.ts",
+      "exists": true,
+      "bytes": 1849
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/live/events/route.ts",
+      "exists": true,
+      "bytes": 1551
+    },
+    {
+      "domain": "fypLive",
+      "file": "app/api/live/publish/route.ts",
+      "exists": true,
+      "bytes": 1858
+    },
+    {
+      "domain": "walletZencoin",
+      "file": "app/api/wallet/balance/route.ts",
+      "exists": true,
+      "bytes": 1014
+    },
+    {
+      "domain": "walletZencoin",
+      "file": "app/api/wallet/ledger/route.ts",
+      "exists": true,
+      "bytes": 824
+    },
+    {
+      "domain": "walletZencoin",
+      "file": "app/api/zencoin/wallet/route.ts",
+      "exists": true,
+      "bytes": 94
+    },
+    {
+      "domain": "walletZencoin",
+      "file": "app/api/zencoin/balance/route.ts",
+      "exists": true,
+      "bytes": 94
+    },
+    {
+      "domain": "walletZencoin",
+      "file": "app/api/zencoin/transfer/route.ts",
+      "exists": true,
+      "bytes": 100
+    }
+  ],
+  "missing": [],
+  "stubHints": [
+    {
+      "file": "app/(demo)/gestures-demo/GesturesDemoClient.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 3824
+    },
+    {
+      "file": "app/(demo)/gestures-demo/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 159
+    },
+    {
+      "file": "app/(demo)/hybrid-demo/HybridDemoClient.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 631
+    },
+    {
+      "file": "app/(demo)/hybrid-demo/page.impl.tsx",
+      "hits": [
+        "demo",
+        "placeholder"
+      ],
+      "bytes": 6890
+    },
+    {
+      "file": "app/(demo)/hybrid-demo/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 367
+    },
+    {
+      "file": "app/(demo)/lumaspace/reflection/ReflectionClient.tsx",
+      "hits": [
+        "demo",
+        "placeholder"
+      ],
+      "bytes": 6120
+    },
+    {
+      "file": "app/(demo)/lumaspace/shadow/page.demo.tsx",
+      "hits": [
+        "demo",
+        "placeholder"
+      ],
+      "bytes": 4943
+    },
+    {
+      "file": "app/(demo)/nexmoji/NexmojiClient.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 202
+    },
+    {
+      "file": "app/(demo)/nexmoji/page.impl.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 909
+    },
+    {
+      "file": "app/(demo)/nexmoji/page.original.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 800
+    },
+    {
+      "file": "app/(demo)/nexmoji/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 306
+    },
+    {
+      "file": "app/(demo)/overlay-sprite/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 2405
+    },
+    {
+      "file": "app/(demo)/vibe-demo/VibeDemoClient.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 3904
+    },
+    {
+      "file": "app/(demo)/vibe-demo/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 147
+    },
+    {
+      "file": "app/_client/emml-analyzer.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 2519
+    },
+    {
+      "file": "app/_client/live/LiveSpecBadge.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 3794
+    },
+    {
+      "file": "app/_components/lumaspace/state-banner.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 484
+    },
+    {
+      "file": "app/_lib/admin/adminAuth.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 2159
+    },
+    {
+      "file": "app/_lib/demo/content.ts",
+      "hits": [
+        "demo",
+        "placeholder"
+      ],
+      "bytes": 2153
+    },
+    {
+      "file": "app/_modules/emojis/holo-panel.tsx",
+      "hits": [
+        "placeholder"
+      ],
+      "bytes": 15488
+    },
+    {
+      "file": "app/_modules/emotion/emotion-model.ts",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 11592
+    },
+    {
+      "file": "app/_modules/hybrid/client.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1736
+    },
+    {
+      "file": "app/_modules/hybrid/providers.ts",
+      "hits": [
+        "placeholder"
+      ],
+      "bytes": 4480
+    },
+    {
+      "file": "app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/DemoOverlayDemoRetired20251225t164806zClient.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 1311
+    },
+    {
+      "file": "app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 237
+    },
+    {
+      "file": "app/_server/emml-health.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 254
+    },
+    {
+      "file": "app/_server/liveBus.ts",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 2461
+    },
+    {
+      "file": "app/_server/videoGenCap.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 3576
+    },
+    {
+      "file": "app/account/kyc/KycClient.tsx",
+      "hits": [
+        "demo",
+        "placeholder"
+      ],
+      "bytes": 4147
+    },
+    {
+      "file": "app/admin/AdminClient.tsx",
+      "hits": [
+        "placeholder"
+      ],
+      "bytes": 9002
+    },
+    {
+      "file": "app/admin/campaigns/page.tsx",
+      "hits": [
+        "placeholder"
+      ],
+      "bytes": 981
+    },
+    {
+      "file": "app/admin/celebrations/moderation/ShowsPanel.tsx",
+      "hits": [
+        "placeholder"
+      ],
+      "bytes": 7386
+    },
+    {
+      "file": "app/ads/admin/page.tsx",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 3968
+    },
+    {
+      "file": "app/api/_health/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 498
+    },
+    {
+      "file": "app/api/_info/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1631
+    },
+    {
+      "file": "app/api/_ready/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 432
+    },
+    {
+      "file": "app/api/abuse/signal/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1484
+    },
+    {
+      "file": "app/api/account/route.ts",
+      "hits": [
+        "ok: true",
+        "demo",
+        "contract_ready"
+      ],
+      "bytes": 773
+    },
+    {
+      "file": "app/api/account/upgrade/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1697
+    },
+    {
+      "file": "app/api/activation/claims/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 365
+    },
+    {
+      "file": "app/api/activation/dashboard/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 564
+    },
+    {
+      "file": "app/api/activation/env/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 388
+    },
+    {
+      "file": "app/api/activation/health/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 242
+    },
+    {
+      "file": "app/api/activation/live-status/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 528
+    },
+    {
+      "file": "app/api/activation/proof/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 398
+    },
+    {
+      "file": "app/api/activation/status/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 315
+    },
+    {
+      "file": "app/api/admin/kyc/pending/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 863
+    },
+    {
+      "file": "app/api/admin/moderation/list/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1585
+    },
+    {
+      "file": "app/api/admin/moderation/review/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 2470
+    },
+    {
+      "file": "app/api/admin/overview/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1967
+    },
+    {
+      "file": "app/api/admin/testers/summary/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1940
+    },
+    {
+      "file": "app/api/ads/analytics/rollup/run/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 3951
+    },
+    {
+      "file": "app/api/ads/analytics/summary/route.ts",
+      "hits": [
+        "ok: true",
+        "placeholder"
+      ],
+      "bytes": 1919
+    },
+    {
+      "file": "app/api/ads/analytics/timeseries/route.ts",
+      "hits": [
+        "ok: true",
+        "placeholder"
+      ],
+      "bytes": 1528
+    },
+    {
+      "file": "app/api/ads/analytics-snapshot/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1052
+    },
+    {
+      "file": "app/api/ads/budget-gate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 825
+    },
+    {
+      "file": "app/api/ads/budget-guard/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 773
+    },
+    {
+      "file": "app/api/ads/campaigns/[id]/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 3118
+    },
+    {
+      "file": "app/api/ads/campaigns/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 566
+    },
+    {
+      "file": "app/api/ads/click/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 741
+    },
+    {
+      "file": "app/api/ads/content/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 875
+    },
+    {
+      "file": "app/api/ads/conversion/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 863
+    },
+    {
+      "file": "app/api/ads/conversion-rate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 819
+    },
+    {
+      "file": "app/api/ads/convert/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 2714
+    },
+    {
+      "file": "app/api/ads/ctr/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 768
+    },
+    {
+      "file": "app/api/ads/eligibility/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1206
+    },
+    {
+      "file": "app/api/ads/event/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1694
+    },
+    {
+      "file": "app/api/ads/event/stats/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1169
+    },
+    {
+      "file": "app/api/ads/events/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 804
+    },
+    {
+      "file": "app/api/ads/exposure-summary/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 993
+    },
+    {
+      "file": "app/api/ads/fatigue/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 877
+    },
+    {
+      "file": "app/api/ads/fatigue-gate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 861
+    },
+    {
+      "file": "app/api/ads/filter/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 795
+    },
+    {
+      "file": "app/api/ads/fraud/stats/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1063
+    },
+    {
+      "file": "app/api/ads/fyp-audit/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 986
+    },
+    {
+      "file": "app/api/ads/generate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 822
+    },
+    {
+      "file": "app/api/ads/health/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 525
+    },
+    {
+      "file": "app/api/ads/impression/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 817
+    },
+    {
+      "file": "app/api/ads/perf/route.ts",
+      "hits": [
+        "ok: true",
+        "demo"
+      ],
+      "bytes": 1300
+    },
+    {
+      "file": "app/api/ads/performance/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 922
+    },
+    {
+      "file": "app/api/ads/performance-tier/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 883
+    },
+    {
+      "file": "app/api/ads/policy/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 395
+    },
+    {
+      "file": "app/api/ads/rank/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 634
+    },
+    {
+      "file": "app/api/ads/redirect/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 906
+    },
+    {
+      "file": "app/api/ads/resolve/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 831
+    },
+    {
+      "file": "app/api/ads/rights/validate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1857
+    },
+    {
+      "file": "app/api/ads/roi/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 752
+    },
+    {
+      "file": "app/api/ads/select/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 741
+    },
+    {
+      "file": "app/api/ads/select-budgeted/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 770
+    },
+    {
+      "file": "app/api/ads/select-fatigue-safe/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 791
+    },
+    {
+      "file": "app/api/ads/select-tiered/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 764
+    },
+    {
+      "file": "app/api/ads/serve/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1563
+    },
+    {
+      "file": "app/api/ads/session-rollup/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1119
+    },
+    {
+      "file": "app/api/ads/stats/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1533
+    },
+    {
+      "file": "app/api/ads/track/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 3228
+    },
+    {
+      "file": "app/api/ai/fault-healer/log/route.ts",
+      "hits": [
+        "ok: true",
+        "placeholder"
+      ],
+      "bytes": 535
+    },
+    {
+      "file": "app/api/analytics/event/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 585
+    },
+    {
+      "file": "app/api/auth/forgot-password/route.ts",
+      "hits": [
+        "ok: true",
+        "contract_ready"
+      ],
+      "bytes": 722
+    },
+    {
+      "file": "app/api/auth/recovery/route.ts",
+      "hits": [
+        "ok: true",
+        "contract_ready"
+      ],
+      "bytes": 827
+    },
+    {
+      "file": "app/api/auth/reset-password/route.ts",
+      "hits": [
+        "ok: true",
+        "contract_ready"
+      ],
+      "bytes": 818
+    },
+    {
+      "file": "app/api/auth/session/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 145
+    },
+    {
+      "file": "app/api/auth/sessions/route.ts",
+      "hits": [
+        "ok: true",
+        "contract_ready"
+      ],
+      "bytes": 721
+    },
+    {
+      "file": "app/api/auth/verify-email/route.ts",
+      "hits": [
+        "ok: true",
+        "contract_ready"
+      ],
+      "bytes": 924
+    },
+    {
+      "file": "app/api/auto/generate/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 2002
+    },
+    {
+      "file": "app/api/beta/keystone/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 246
+    },
+    {
+      "file": "app/api/billing/webhook/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 152
+    },
+    {
+      "file": "app/api/brand/splash/guard/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 458
+    },
+    {
+      "file": "app/api/brand/splash/memory/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1727
+    },
+    {
+      "file": "app/api/brand/splash/metrics/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1847
+    },
+    {
+      "file": "app/api/brand/splash/profile/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1901
+    },
+    {
+      "file": "app/api/brand/splash/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1227
+    },
+    {
+      "file": "app/api/celebrations/[slug]/admin/audit/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1250
+    },
+    {
+      "file": "app/api/celebrations/[slug]/demo/route.ts",
+      "hits": [
+        "demo"
+      ],
+      "bytes": 312
+    },
+    {
+      "file": "app/api/celebrations/[slug]/summary/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1470
+    },
+    {
+      "file": "app/api/celebrations/alive/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1413
+    },
+    {
+      "file": "app/api/celebrations/healthz/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 269
+    },
+    {
+      "file": "app/api/celebrations/list/route.ts",
+      "hits": [
+        "ok: true",
+        "demo"
+      ],
+      "bytes": 296
+    },
+    {
+      "file": "app/api/celebrations/manifest/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 256
+    },
+    {
+      "file": "app/api/cf/images/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 1705
+    },
+    {
+      "file": "app/api/cineverse/evolution/route.ts",
+      "hits": [
+        "ok: true"
+      ],
+      "bytes": 245
+    }
+  ],
+  "largePublicHints": [
+    {
+      "file": "public/native-fyp/movie-clips/1777640193433_0_ScenesOfCityLife-dushifengguang-1.mp4",
+      "bytes": 576772018
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640619505_0_ScenesOfCityLife-dushifengguang-1.mp4",
+      "bytes": 576772018
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640232746_0_the-valiant-1929-0.mp4",
+      "bytes": 440529143
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640263346_0_the-valiant-1929-1.mp4",
+      "bytes": 440529143
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640662468_0_the-valiant-1929-0.mp4",
+      "bytes": 440529143
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640703957_0_the-valiant-1929-1.mp4",
+      "bytes": 440529143
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640163997_0_ScenesOfCityLife-dushifengguang-0.mp4",
+      "bytes": 402846715
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640588566_0_ScenesOfCityLife-dushifengguang-0.mp4",
+      "bytes": 402846715
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777642649548_0_ScenesOfCityLife-dushifengguang-0.mp4",
+      "bytes": 402846715
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640293155_0_coquette-1929_HQ-0.mp4",
+      "bytes": 278177987
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640320021_0_coquette-1929_HQ-1.mp4",
+      "bytes": 278177987
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640737913_0_coquette-1929_HQ-0.mp4",
+      "bytes": 278177987
+    },
+    {
+      "file": "public/native-fyp/movie-clips/1777640759937_0_coquette-1929_HQ-1.mp4",
+      "bytes": 278177987
+    },
+    {
+      "file": "public/native-fyp/real/15.mp4",
+      "bytes": 120618186
+    },
+    {
+      "file": "public/native-fyp/real/55.mp4",
+      "bytes": 120618186
+    },
+    {
+      "file": "public/native-fyp/real/20.mp4",
+      "bytes": 100304139
+    },
+    {
+      "file": "public/native-fyp/real/60.mp4",
+      "bytes": 100304139
+    },
+    {
+      "file": "public/native-fyp/real/13.mp4",
+      "bytes": 62642758
+    },
+    {
+      "file": "public/native-fyp/real/53.mp4",
+      "bytes": 62642758
+    },
+    {
+      "file": "public/native-fyp/real/204.mp4",
+      "bytes": 55269811
+    },
+    {
+      "file": "public/native-fyp/real/147.mp4",
+      "bytes": 50296948
+    },
+    {
+      "file": "public/native-fyp/real/216.mp4",
+      "bytes": 47992401
+    },
+    {
+      "file": "public/native-fyp/real/46.mp4",
+      "bytes": 43604497
+    },
+    {
+      "file": "public/native-fyp/real/6.mp4",
+      "bytes": 43604497
+    },
+    {
+      "file": "public/native-fyp/real/18.mp4",
+      "bytes": 41336647
+    },
+    {
+      "file": "public/native-fyp/real/58.mp4",
+      "bytes": 41336647
+    },
+    {
+      "file": "public/native-fyp/real/17.mp4",
+      "bytes": 40103562
+    },
+    {
+      "file": "public/native-fyp/real/57.mp4",
+      "bytes": 40103562
+    },
+    {
+      "file": "public/native-fyp/real/385.mp4",
+      "bytes": 37545766
+    },
+    {
+      "file": "public/native-fyp/real/16.mp4",
+      "bytes": 35451437
+    },
+    {
+      "file": "public/native-fyp/real/56.mp4",
+      "bytes": 35451437
+    },
+    {
+      "file": "public/native-fyp/real/3.mp4",
+      "bytes": 32398599
+    },
+    {
+      "file": "public/native-fyp/real/43.mp4",
+      "bytes": 32398599
+    },
+    {
+      "file": "public/native-fyp/real/325.mp4",
+      "bytes": 32342472
+    },
+    {
+      "file": "public/native-fyp/real/421.mp4",
+      "bytes": 31559639
+    },
+    {
+      "file": "public/native-fyp/real/146.mp4",
+      "bytes": 29447255
+    },
+    {
+      "file": "public/native-fyp/real/48.mp4",
+      "bytes": 29323035
+    },
+    {
+      "file": "public/native-fyp/real/8.mp4",
+      "bytes": 29323035
+    },
+    {
+      "file": "public/native-fyp/real/337.mp4",
+      "bytes": 29051389
+    },
+    {
+      "file": "public/native-fyp/real/2.mp4",
+      "bytes": 28021416
+    },
+    {
+      "file": "public/native-fyp/real/42.mp4",
+      "bytes": 28021416
+    },
+    {
+      "file": "public/native-fyp/real/102.mp4",
+      "bytes": 27145719
+    },
+    {
+      "file": "public/native-fyp/real/155.mp4",
+      "bytes": 24640373
+    },
+    {
+      "file": "public/native-fyp/real/315.mp4",
+      "bytes": 24245511
+    },
+    {
+      "file": "public/native-fyp/real/49.mp4",
+      "bytes": 22889301
+    },
+    {
+      "file": "public/native-fyp/real/9.mp4",
+      "bytes": 22889301
+    },
+    {
+      "file": "public/native-fyp/real/419.mp4",
+      "bytes": 21986606
+    },
+    {
+      "file": "public/native-fyp/real/417.mp4",
+      "bytes": 21924084
+    },
+    {
+      "file": "public/native-fyp/real/477.mp4",
+      "bytes": 20407251
+    },
+    {
+      "file": "public/native-fyp/real/500.mp4",
+      "bytes": 18991918
+    },
+    {
+      "file": "public/native-fyp/real/295.mp4",
+      "bytes": 18079797
+    },
+    {
+      "file": "public/videos/gen-1760289868249.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/videos/gen-1760290134173.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/videos/gen-1760291273529.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/videos/gen-1760292215843.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/videos/test-2.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/videos/workout.mp4",
+      "bytes": 17520898
+    },
+    {
+      "file": "public/native-fyp/real/14.mp4",
+      "bytes": 16878540
+    },
+    {
+      "file": "public/native-fyp/real/54.mp4",
+      "bytes": 16878540
+    },
+    {
+      "file": "public/native-fyp/real/305.mp4",
+      "bytes": 16635048
+    },
+    {
+      "file": "public/native-fyp/real/461.mp4",
+      "bytes": 16619239
+    },
+    {
+      "file": "public/native-fyp/real/365.mp4",
+      "bytes": 16467683
+    },
+    {
+      "file": "public/native-fyp/real/387.mp4",
+      "bytes": 15483676
+    },
+    {
+      "file": "public/native-fyp/real/70.mp4",
+      "bytes": 15418620
+    },
+    {
+      "file": "public/native-fyp/real/88.mp4",
+      "bytes": 15265697
+    },
+    {
+      "file": "public/native-fyp/real/503.mp4",
+      "bytes": 14617003
+    },
+    {
+      "file": "public/native-fyp/real/333.mp4",
+      "bytes": 14557260
+    },
+    {
+      "file": "public/native-fyp/real/66.mp4",
+      "bytes": 14228096
+    },
+    {
+      "file": "public/native-fyp/real/338.mp4",
+      "bytes": 14206054
+    },
+    {
+      "file": "public/native-fyp/real/1.mp4",
+      "bytes": 13899264
+    },
+    {
+      "file": "public/native-fyp/real/41.mp4",
+      "bytes": 13899264
+    },
+    {
+      "file": "public/native-fyp/real/269.mp4",
+      "bytes": 13895462
+    },
+    {
+      "file": "public/native-fyp/real/426.mp4",
+      "bytes": 13746529
+    },
+    {
+      "file": "public/native-fyp/real/449.mp4",
+      "bytes": 13741756
+    },
+    {
+      "file": "public/native-fyp/real/303.mp4",
+      "bytes": 13575473
+    },
+    {
+      "file": "public/native-fyp/real/403.mp4",
+      "bytes": 13206571
+    },
+    {
+      "file": "public/native-fyp/real/130.mp4",
+      "bytes": 13185716
+    },
+    {
+      "file": "public/native-fyp/real/486.mp4",
+      "bytes": 12879232
+    },
+    {
+      "file": "public/native-fyp/real/386.mp4",
+      "bytes": 12794132
+    },
+    {
+      "file": "public/native-fyp/real/373.mp4",
+      "bytes": 12745819
+    }
+  ],
+  "warnings": [
+    "This pack proves structure and detects risk; it does not prove real provider-backed runtime behavior.",
+    "Stub hints must be reviewed before public beta.",
+    "Large files under public may be traced into serverless functions if imported or referenced from API code.",
+    "Real auth, DB persistence, Stripe sandbox, Live, FYP, wallet, and deployment E2E are validated in later packs."
+  ],
+  "next": "Run Pack 2/15 Duplicate / Legacy Cleanup"
+}

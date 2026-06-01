@@ -1,0 +1,175 @@
+{
+  "status": "PASS_WITH_PROVIDER_WIRING_REQUIRED",
+  "auditedAt": "2026-05-31T22:16:37.373Z",
+  "fileResults": [
+    {
+      "file": "lib/auth.ts",
+      "exists": true,
+      "bytes": 151
+    },
+    {
+      "file": "src/lib/auth.ts",
+      "exists": true,
+      "bytes": 673
+    },
+    {
+      "file": "app/api/auth/session/route.ts",
+      "exists": true,
+      "bytes": 263
+    },
+    {
+      "file": "app/api/auth/forgot-password/route.ts",
+      "exists": true,
+      "bytes": 840
+    },
+    {
+      "file": "app/api/auth/reset-password/route.ts",
+      "exists": true,
+      "bytes": 936
+    },
+    {
+      "file": "app/api/auth/verify-email/route.ts",
+      "exists": true,
+      "bytes": 1042
+    },
+    {
+      "file": "app/api/auth/sessions/route.ts",
+      "exists": true,
+      "bytes": 839
+    },
+    {
+      "file": "app/api/auth/recovery/route.ts",
+      "exists": true,
+      "bytes": 945
+    },
+    {
+      "file": "app/login/page.tsx",
+      "exists": true,
+      "bytes": 229
+    },
+    {
+      "file": "app/signup/page.tsx",
+      "exists": true,
+      "bytes": 239
+    },
+    {
+      "file": "app/api/account/route.ts",
+      "exists": true,
+      "bytes": 773
+    },
+    {
+      "file": "middleware.ts",
+      "exists": true,
+      "bytes": 561
+    },
+    {
+      "file": "prisma/schema.prisma",
+      "exists": true,
+      "bytes": 12656
+    },
+    {
+      "file": "package.json",
+      "exists": true,
+      "bytes": 16742
+    }
+  ],
+  "envResults": [
+    {
+      "key": "DATABASE_URL",
+      "inEnvExample": false,
+      "inCode": true,
+      "inProcessEnv": false
+    },
+    {
+      "key": "NEXTAUTH_SECRET",
+      "inEnvExample": false,
+      "inCode": true,
+      "inProcessEnv": false
+    },
+    {
+      "key": "NEXTAUTH_URL",
+      "inEnvExample": false,
+      "inCode": true,
+      "inProcessEnv": false
+    },
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "inEnvExample": true,
+      "inCode": true,
+      "inProcessEnv": false
+    },
+    {
+      "key": "STRIPE_WEBHOOK_SECRET",
+      "inEnvExample": true,
+      "inCode": true,
+      "inProcessEnv": false
+    }
+  ],
+  "vocabResults": [
+    {
+      "word": "next-auth",
+      "present": true
+    },
+    {
+      "word": "session",
+      "present": true
+    },
+    {
+      "word": "user",
+      "present": true
+    },
+    {
+      "word": "role",
+      "present": true
+    },
+    {
+      "word": "unauthorized",
+      "present": true
+    },
+    {
+      "word": "recovery",
+      "present": true
+    },
+    {
+      "word": "verify",
+      "present": true
+    },
+    {
+      "word": "reset",
+      "present": true
+    },
+    {
+      "word": "token",
+      "present": true
+    },
+    {
+      "word": "database",
+      "present": true
+    }
+  ],
+  "schemaChecks": [
+    {
+      "name": "User model",
+      "pass": true
+    },
+    {
+      "name": "Account model or auth adapter support",
+      "pass": true
+    },
+    {
+      "name": "Session model or session API support",
+      "pass": true
+    },
+    {
+      "name": "Verification token or verify route support",
+      "pass": true
+    }
+  ],
+  "warnings": [
+    "Auth contracts exist, but production provider wiring still requires real secrets and database-backed token persistence.",
+    "Password reset and email verification must be connected to email delivery before public beta.",
+    "Session revocation must be provider-backed before handling real user accounts.",
+    "This mega pack validates readiness and integration shape, not real login mutation."
+  ],
+  "next": "Mega Pack 8/9 Stripe Sandbox + Zendoro Checkout/Webhook"
+}

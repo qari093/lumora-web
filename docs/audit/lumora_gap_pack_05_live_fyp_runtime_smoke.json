@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "auditedAt": "2026-05-31T21:03:39.716Z",
+  "results": [
+    {
+      "name": "fypPage",
+      "file": "app/fyp/page.tsx",
+      "min": 500,
+      "exists": true,
+      "bytes": 1214,
+      "pass": true
+    },
+    {
+      "name": "livePage",
+      "file": "app/live/page.tsx",
+      "min": 500,
+      "exists": true,
+      "bytes": 1020,
+      "pass": true
+    },
+    {
+      "name": "fypFeed",
+      "file": "app/api/fyp/feed/route.ts",
+      "min": 500,
+      "exists": true,
+      "bytes": 1214,
+      "pass": true
+    },
+    {
+      "name": "fypInteract",
+      "file": "app/api/fyp/interact/route.ts",
+      "min": 300,
+      "exists": true,
+      "bytes": 714,
+      "pass": true
+    },
+    {
+      "name": "liveRooms",
+      "file": "app/api/live/rooms/route.ts",
+      "min": 100,
+      "exists": true,
+      "bytes": 266,
+      "pass": true
+    },
+    {
+      "name": "liveRoomState",
+      "file": "app/api/live/room-state/route.ts",
+      "min": 500,
+      "exists": true,
+      "bytes": 1849,
+      "pass": true
+    },
+    {
+      "name": "liveEvents",
+      "file": "app/api/live/events/route.ts",
+      "min": 500,
+      "exists": true,
+      "bytes": 1551,
+      "pass": true
+    },
+    {
+      "name": "livePublish",
+      "file": "app/api/live/publish/route.ts",
+      "min": 500,
+      "exists": true,
+      "bytes": 1858,
+      "pass": true
+    }
+  ],
+  "warnings": [
+    "Runtime smoke validates route presence and implementation weight.",
+    "Does not validate browser websocket behavior.",
+    "Does not validate production traffic."
+  ],
+  "next": "Pack 6/15 Browser Journey Smoke"
+}

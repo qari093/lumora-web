@@ -1,0 +1,200 @@
+{
+  "system": "Lumora Main User Journey Runtime Contract",
+  "status": "PASS",
+  "auditedAt": "2026-05-31T20:48:44.615Z",
+  "journeyResults": [
+    {
+      "name": "home",
+      "page": "app/page.tsx",
+      "path": "/",
+      "exists": true,
+      "bytes": 4042,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "fyp",
+      "page": "app/fyp/page.tsx",
+      "path": "/fyp",
+      "exists": true,
+      "bytes": 1214,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "live",
+      "page": "app/live/page.tsx",
+      "path": "/live",
+      "exists": true,
+      "bytes": 1020,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "gmar",
+      "page": "app/gmar/page.tsx",
+      "path": "/gmar",
+      "exists": true,
+      "bytes": 1191,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "lumaspace",
+      "page": "app/lumaspace/page.tsx",
+      "path": "/lumaspace",
+      "exists": true,
+      "bytes": 1394,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "zendoro",
+      "page": "app/zendoro/page.tsx",
+      "path": "/zendoro",
+      "exists": true,
+      "bytes": 946,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "movies",
+      "page": "app/movies/page.tsx",
+      "path": "/movies",
+      "exists": true,
+      "bytes": 1504,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "music",
+      "page": "app/music/page.tsx",
+      "path": "/music",
+      "exists": true,
+      "bytes": 176,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "creator",
+      "page": "app/creator/page.tsx",
+      "path": "/creator",
+      "exists": true,
+      "bytes": 115,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "login",
+      "page": "app/login/page.tsx",
+      "path": "/login",
+      "exists": true,
+      "bytes": 229,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    },
+    {
+      "name": "signup",
+      "page": "app/signup/page.tsx",
+      "path": "/signup",
+      "exists": true,
+      "bytes": 239,
+      "hasExport": true,
+      "hasUiSignal": true,
+      "ok": true
+    }
+  ],
+  "apiResults": [
+    {
+      "file": "app/api/health/route.ts",
+      "exists": true,
+      "bytes": 439,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/ready/route.ts",
+      "exists": true,
+      "bytes": 547,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/fyp/feed/route.ts",
+      "exists": true,
+      "bytes": 1214,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/fyp/native-feed/route.ts",
+      "exists": true,
+      "bytes": 843,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/live/rooms/route.ts",
+      "exists": true,
+      "bytes": 266,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/live/room-state/route.ts",
+      "exists": true,
+      "bytes": 1849,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/lumaspace/runtime/route.ts",
+      "exists": true,
+      "bytes": 173,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/zendoro/products/route.ts",
+      "exists": true,
+      "bytes": 142,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 142,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/wallet/balance/route.ts",
+      "exists": true,
+      "bytes": 1014,
+      "hasHandler": true,
+      "ok": true
+    },
+    {
+      "file": "app/api/auth/session/route.ts",
+      "exists": true,
+      "bytes": 145,
+      "hasHandler": true,
+      "ok": true
+    }
+  ],
+  "warnings": [
+    "This validates runtime route/page contract shape, not real browser interaction depth.",
+    "Pack 5 and later packs cover browser smoke and deployment behavior."
+  ]
+}

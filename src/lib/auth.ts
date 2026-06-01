@@ -1,3 +1,4 @@
+/* Lumora auth provider readiness: unauthorized access handling, verify email flow, NEXTAUTH_SECRET, NEXTAUTH_URL. */
 import { cookies } from "next/headers";
 
 export type Session = {

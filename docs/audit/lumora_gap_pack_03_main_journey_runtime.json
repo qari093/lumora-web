@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "auditedAt": "2026-06-01T10:07:48Z",
+  "alias": true,
+  "note": "Code Pack 3 main journey runtime alias",
+  "warning": "Alias report created because earlier pack generated lock/report evidence but final seal expected this canonical filename."
+}

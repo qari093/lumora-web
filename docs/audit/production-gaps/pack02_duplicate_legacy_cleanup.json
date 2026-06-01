@@ -1,0 +1,83 @@
+{
+  "system": "Lumora Duplicate / Legacy Route Cleanup Audit",
+  "status": "PASS",
+  "auditedAt": "2026-05-31T20:37:39.219Z",
+  "totals": {
+    "routeFiles": 1202,
+    "routeKeys": 1202,
+    "duplicateRoutes": 0,
+    "riskyPageApiOverlap": 0,
+    "legacyRouteFiles": 1
+  },
+  "duplicates": [],
+  "riskyPageApiOverlap": [],
+  "legacyFiles": [
+    "app/_retired/(demo)_overlay-demo.retired.20251225T164806Z/page.tsx"
+  ],
+  "protectedRouteStatus": [
+    {
+      "route": "/",
+      "files": [
+        "app/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/fyp",
+      "files": [
+        "app/fyp/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/live",
+      "files": [
+        "app/live/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/gmar",
+      "files": [
+        "app/gmar/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/lumaspace",
+      "files": [
+        "app/lumaspace/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/zendoro",
+      "files": [
+        "app/zendoro/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/movies",
+      "files": [
+        "app/movies/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/music",
+      "files": [
+        "app/music/page.tsx"
+      ],
+      "ok": true
+    },
+    {
+      "route": "/creator",
+      "files": [
+        "app/creator/page.tsx"
+      ],
+      "ok": true
+    }
+  ],
+  "recommendation": "No direct duplicate route conflicts detected. Continue to runtime smoke and provider wiring."
+}
