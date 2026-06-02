@@ -1,0 +1,19 @@
+{
+  "system": "Lumora Gravity Core",
+  "megaPack": "1/5",
+  "status": "SHADOW_FOUNDATION_READY",
+  "scope": [
+    "Foundation Core",
+    "Scroll Intelligence",
+    "Intent Engine",
+    "FYP Runtime Mount"
+  ],
+  "navigationEnabled": false,
+  "shadowMode": true,
+  "warnings": [
+    "Gravity Core is shadow-only in this pack.",
+    "No real navigation is enabled.",
+    "Home button fallback must remain visible.",
+    "Assisted mode requires later telemetry proof."
+  ]
+}
