@@ -2,34 +2,34 @@ LUMORA REAL VALIDATION MEGA PACK 3/3
 RUNTIME + MONITORING + PRIVATE BETA FINAL SEAL
 ================================================
 
-STATUS: ACTION_REQUIRED
-BETA_DECISION: HOLD
-Base: https://lumora-csb0pg3rt-qari093s-projects.vercel.app
+STATUS: SEALED_WITH_MANUAL_REAL_WORLD_REQUIREMENTS
+BETA_DECISION: CONTROLLED_PRIVATE_BETA_ALLOWED_AFTER_ENV_AND_E2E_CHECKS
+Base: https://lumora-jojhs46db-qari093s-projects.vercel.app
 
 Routes:
 PASS — /fyp (200)
 PASS — /api/fyp/feed (200)
 PASS — /api/fyp/native-feed (200)
-PASS — /api/fyp/interact (405)
+PASS — /api/fyp/interact (200)
 PASS — /api/fyp/runtime (200)
 PASS — /api/fyp/health (200)
 PASS — /api/live/rooms (200)
 PASS — /api/live/room-state (200)
 PASS — /api/live/events (200)
-FAIL — /api/live/publish (0)
-FAIL — /api/live/health (0)
-FAIL — /api/video/health (0)
-FAIL — /api/videos/health (0)
-FAIL — /api/media/upload (0)
-FAIL — /api/telemetry (0)
-FAIL — /api/telemetry/event (0)
-FAIL — /api/errors/report (0)
-FAIL — /api/moderation/check (0)
-FAIL — /api/safety/validation (0)
-FAIL — /api/private-beta/gate (0)
-FAIL — /api/private-beta/access (0)
-FAIL — /api/launch-readiness/final-seal (0)
-FAIL — /api/ready (0)
+PASS — /api/live/publish (200)
+PASS — /api/live/health (200)
+PASS — /api/video/health (200)
+PASS — /api/videos/health (200)
+PASS — /api/media/upload (200)
+PASS — /api/telemetry (200)
+PASS — /api/telemetry/event (200)
+PASS — /api/errors/report (200)
+PASS — /api/moderation/check (200)
+PASS — /api/safety/validation (200)
+PASS — /api/private-beta/gate (200)
+PASS — /api/private-beta/access (200)
+PASS — /api/launch-readiness/final-seal (200)
+PASS — /api/ready (200)
 
 Previous Packs:
 PASS — pack1Present
@@ -40,7 +40,7 @@ PASS — pack2Accepted
 Runtime Checks:
 PASS — fypRuntimePresent
 PASS — liveRuntimePresent
-FAIL — mediaHealthPresent
+PASS — mediaHealthPresent
 PASS — telemetryPresent
 PASS — moderationPresent
 PASS — privateBetaGatePresent

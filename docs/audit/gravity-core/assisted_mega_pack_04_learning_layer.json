@@ -1,0 +1,17 @@
+{
+  "system": "Lumora Gravity Core Assisted Mode",
+  "megaPack": "4/5",
+  "status": "ASSISTED_LEARNING_LAYER_INTEGRATED_DISABLED",
+  "learningEnabled": false,
+  "assistedUnlockRequires": {
+    "accuracy": ">=0.95",
+    "falsePositiveRate": "<=0.03",
+    "frustrationRate": "<=0.08",
+    "minimumExposures": 50
+  },
+  "warnings": [
+    "Learning layer is integrated but not auto-mutating production thresholds.",
+    "Threshold adaptation is computed as patch recommendation only.",
+    "Assisted unlock remains disabled until final activation framework."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "system": "Lumora Gravity Core Assisted Mode",
+  "megaPack": "2/5",
+  "status": "ASSISTED_PORTAL_REVEAL_INTEGRATED_DISABLED",
+  "activeRuntime": "shadow",
+  "assistedPortalRevealIntegrated": true,
+  "navigationEnabled": false,
+  "warnings": [
+    "Assisted portal reveal is integrated but disabled by feature flag.",
+    "Return affordance is preview-only.",
+    "No automatic navigation is enabled.",
+    "Activation requires assisted flag and later rollout approval."
+  ]
+}

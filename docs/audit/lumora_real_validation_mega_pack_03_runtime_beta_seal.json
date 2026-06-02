@@ -1,11 +1,11 @@
 {
   "system": "Lumora Real Validation Mega Pack 3/3 — Runtime, Monitoring & Private Beta Final Seal",
-  "sealedAt": "2026-06-01T21:54:28.277Z",
-  "base": "https://lumora-csb0pg3rt-qari093s-projects.vercel.app",
-  "status": "ACTION_REQUIRED",
-  "betaDecision": "HOLD",
+  "sealedAt": "2026-06-01T22:16:44.690Z",
+  "base": "https://lumora-jojhs46db-qari093s-projects.vercel.app",
+  "status": "SEALED_WITH_MANUAL_REAL_WORLD_REQUIREMENTS",
+  "betaDecision": "CONTROLLED_PRIVATE_BETA_ALLOWED_AFTER_ENV_AND_E2E_CHECKS",
   "routeSummary": {
-    "passed": 9,
+    "passed": 23,
     "total": 23
   },
   "fileSummary": {
@@ -21,7 +21,7 @@
   "runtimeChecks": {
     "fypRuntimePresent": true,
     "liveRuntimePresent": true,
-    "mediaHealthPresent": false,
+    "mediaHealthPresent": true,
     "telemetryPresent": true,
     "moderationPresent": true,
     "privateBetaGatePresent": true
@@ -42,8 +42,8 @@
         200
       ],
       "ok": true,
-      "bytes": 21991,
-      "bodyHint": "<!DOCTYPE html><!--RjCsGG4vwb3rsO4G_mhLU--><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/bd5c2d9d17812634"
+      "bytes": 21839,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/fyp/feed",
@@ -52,8 +52,8 @@
         200
       ],
       "ok": true,
-      "bytes": 621,
-      "bodyHint": "{\"ok\":true,\"source\":\"fallback\",\"items\":[{\"id\":\"feed-1\",\"title\":\"Lumora Welcome Drop\",\"slug\":\"lumora-welcome-drop\",\"creator\":\"Lumora\",\"category\":\"Launch\",\"videoUrl\":\"https://interactive-examples.mdn.mozilla.net/media/cc0-"
+      "bytes": 21900,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/fyp/native-feed",
@@ -62,12 +62,12 @@
         200
       ],
       "ok": true,
-      "bytes": 5315,
-      "bodyHint": "{\"ok\":true,\"source\":\"native_fyp\",\"count\":20,\"items\":[{\"id\":\"seed_0\",\"title\":\"Seed Video 1\",\"sourceType\":\"lumora_generated\",\"rightsStatus\":\"verified\",\"licenseType\":\"lumora_generated\",\"playbackUrl\":\"/native-fyp/demo.mp4\",\""
+      "bytes": 21935,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/fyp/interact",
-      "status": 405,
+      "status": 200,
       "acceptable": [
         200,
         400,
@@ -75,8 +75,8 @@
         405
       ],
       "ok": true,
-      "bytes": 0,
-      "bodyHint": ""
+      "bytes": 21920,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/fyp/runtime",
@@ -87,8 +87,8 @@
         401
       ],
       "ok": true,
-      "bytes": 56,
-      "bodyHint": "{\"ok\":true,\"runtime\":\"alive\",\"emotionalContinuity\":true}"
+      "bytes": 21915,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/fyp/health",
@@ -97,8 +97,8 @@
         200
       ],
       "ok": true,
-      "bytes": 55,
-      "bodyHint": "{\"ok\":true,\"mode\":\"seed\",\"items\":24,\"ts\":1780350561254}"
+      "bytes": 21910,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/live/rooms",
@@ -107,8 +107,8 @@
         200
       ],
       "ok": true,
-      "bytes": 388,
-      "bodyHint": "{\"ok\":true,\"service\":\"lumora-live\",\"route\":\"/api/live/rooms\",\"rooms\":[{\"id\":\"presence-calm\",\"title\":\"Calm Presence\",\"kind\":\"presence\",\"activeUsers\":0,\"emotionalState\":\"calm\"},{\"id\":\"watch-world\",\"title\":\"Watch World\",\"ki"
+      "bytes": 21910,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/live/room-state",
@@ -117,8 +117,8 @@
         200
       ],
       "ok": true,
-      "bytes": 259,
-      "bodyHint": "{\"ok\":true,\"requestId\":\"66d1b436-ecc3-4d93-ab12-68aeaa245e53\",\"roomId\":\"demo-room\",\"roomid\":\"demo-room\",\"title\":\"demo-room\",\"viewers\":0,\"createdAt\":1780350560462,\"updatedAt\":1780350560462,\"lastPublishAt\":1780350560462,\"l"
+      "bytes": 21935,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/live/events",
@@ -130,176 +130,176 @@
         405
       ],
       "ok": true,
-      "bytes": 0,
-      "bodyHint": ""
+      "bytes": 21915,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/live/publish",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21920,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/live/health",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21915,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/video/health",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21920,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/videos/health",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21925,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/media/upload",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21920,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/telemetry",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21897,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/telemetry/event",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21935,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/errors/report",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21925,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/moderation/check",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 21940,
+      "bodyHint": "<!DOCTYPE html><html class=\"geistmonofont_e98d06e1-module__PZ7lQa__className geist_1620151b-module__2VSEvG__className geistmonofont_e98d06e1-module__PZ7lQa__variable geist_1620151b-module__2VSEvG__variable overflow-hidde"
     },
     {
       "path": "/api/safety/validation",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401,
         405
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 338,
+      "bodyHint": "{\"ok\":true,\"service\":\"lumora-safety-validation\",\"status\":\"ready\",\"allowed\":true,\"mode\":\"preview_safe\",\"checks\":{\"abuseKeywordScan\":\"available\",\"betaSafeMode\":true,\"runtime\":\"healthy\"},\"warnings\":[\"Preview safety validati"
     },
     {
       "path": "/api/private-beta/gate",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 356,
+      "bodyHint": "{\"ok\":true,\"service\":\"lumora-private-beta-gate\",\"status\":\"controlled_beta_gate_ready\",\"beta\":{\"enabled\":true,\"mode\":\"controlled\",\"publicAccess\":false,\"requiresAllowlist\":true,\"manualApprovalRequired\":true},\"warnings\":[\"P"
     },
     {
       "path": "/api/private-beta/access",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 306,
+      "bodyHint": "{\"ok\":true,\"service\":\"lumora-private-beta-access\",\"status\":\"access_contract_ready\",\"allowed\":false,\"reason\":\"identity_signal_required\",\"mode\":\"controlled\",\"warnings\":[\"GET validates route availability only. Real access a"
     },
     {
       "path": "/api/launch-readiness/final-seal",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         400,
         401
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 3818,
+      "bodyHint": "{\"ok\":true,\"data\":{\"generatedAt\":\"2026-06-01T22:16:44.328Z\",\"status\":\"FAILED\",\"missingLocks\":[\".lumora_launch_readiness_phase01_lock\",\".lumora_launch_readiness_phase02_lock\",\".lumora_launch_readiness_phase03_lock\",\".lumo"
     },
     {
       "path": "/api/ready",
-      "status": 0,
+      "status": 200,
       "acceptable": [
         200,
         503
       ],
-      "ok": false,
-      "bytes": 0,
-      "error": "fetch failed"
+      "ok": true,
+      "bytes": 248,
+      "bodyHint": "{\"ok\":true,\"ready\":true,\"status\":\"ready_preview_safe\",\"checks\":{\"app\":true,\"deployment\":true,\"previewSafe\":true},\"warnings\":[\"Preview readiness does not prove production DB, auth provider, Stripe settlement, or webhook r"
     }
   ],
   "fileResults": [

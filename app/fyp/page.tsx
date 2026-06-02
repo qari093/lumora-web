@@ -1,9 +1,13 @@
+import GravityCoreGhostHand from "@/components/fyp/GravityCoreGhostHand";
 import React from "react";
 import FypFlow from "@/components/fyp/FypFlow";
 import FypContentEngineFeed from "@/components/fyp/FypContentEngineFeed";
 import FypFullPlayer from "@/components/fyp/FypFullPlayer";
 import ImmersiveFypViewport from "@/components/fyp/immersive/ImmersiveFypViewport";
 
+import GravityCoreShadow from "@/components/fyp/GravityCoreShadow";
+import GravityCoreShadowExperience from "@/components/fyp/GravityCoreShadowExperience";
+import GravityAssistedPortalReveal from "@/components/fyp/GravityAssistedPortalReveal";
 export default function FypPage() {
   const items = [
     { id: "fyp-seed-1", title: "FYP seed 1" },
@@ -11,6 +15,11 @@ export default function FypPage() {
   ] as const;
 
   return (
+    <>
+      <GravityCoreShadow enabled />
+      <GravityCoreShadowExperience enabled />
+      <GravityCoreGhostHand />
+      <GravityAssistedPortalReveal />
       <>
         <span style={{ display: "none" }}>LUMORA_PORTAL_ALIVE_FYP</span>
         <div style={{ display: "none" }}>
@@ -32,5 +41,6 @@ export default function FypPage() {
       <ImmersiveFypViewport mode="drift" title="Emotional Spectrum Feed" creator="@lumora" />
     </>
   
-      </>);
+      </>    </>
+);
 }

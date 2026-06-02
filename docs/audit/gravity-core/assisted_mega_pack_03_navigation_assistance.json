@@ -1,0 +1,14 @@
+{
+  "system": "Lumora Gravity Core Assisted Mode",
+  "megaPack": "3/5",
+  "status": "ASSISTED_NAVIGATION_ASSISTANCE_INTEGRATED_DISABLED",
+  "softNavigationPrepared": true,
+  "navigationEnabled": false,
+  "confirmationRequired": true,
+  "warnings": [
+    "Assisted navigation assistance is integrated but disabled.",
+    "No automatic route change is allowed.",
+    "All return behavior requires explicit confirmation.",
+    "Activation remains gated by feature flag, rollout, telemetry, fallback, and confirmation."
+  ]
+}

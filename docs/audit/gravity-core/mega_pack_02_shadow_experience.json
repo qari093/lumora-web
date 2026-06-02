@@ -1,0 +1,19 @@
+{
+  "system": "Lumora Gravity Core",
+  "megaPack": "2/5",
+  "status": "SHADOW_EXPERIENCE_READY",
+  "scope": [
+    "Shadow Telemetry",
+    "Visual Gravity Field",
+    "Portal Ring Engine",
+    "Feedback Engine"
+  ],
+  "navigationEnabled": false,
+  "shadowMode": true,
+  "warnings": [
+    "Gravity Core remains shadow-only.",
+    "Portal ring is visual feedback only.",
+    "Haptics are preview/confirmation signals only.",
+    "No automatic navigation is enabled."
+  ]
+}

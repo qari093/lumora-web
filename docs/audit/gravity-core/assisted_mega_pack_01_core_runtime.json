@@ -1,0 +1,15 @@
+{
+  "system": "Lumora Gravity Core Assisted Mode",
+  "megaPack": "1/5",
+  "status": "ASSISTED_CORE_RUNTIME_INTEGRATED_DISABLED",
+  "activeRuntime": "shadow",
+  "assistedModeIntegrated": true,
+  "assistedModeEnabled": false,
+  "navigationEnabled": false,
+  "warnings": [
+    "Assisted Mode runtime is integrated but disabled by feature flag.",
+    "No assisted navigation is enabled in this pack.",
+    "Home fallback remains mandatory.",
+    "Assisted activation requires later rollout configuration and telemetry proof."
+  ]
+}
