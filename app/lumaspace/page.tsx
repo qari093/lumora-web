@@ -1,3 +1,4 @@
+import LumaSpaceInteractionPanel from "@/components/lumaspace/interactions/LumaSpaceInteractionPanel";
 import Link from "next/link";
 
 export default function LumaSpacePage() {
@@ -34,6 +35,7 @@ export default function LumaSpacePage() {
           </Link>
         </div>
       </section>
+          <LumaSpaceInteractionPanel />
     </main>
   );
 }
