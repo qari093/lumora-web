@@ -1,10 +1,10 @@
-import HomeBeaconDashboard from "./HomeBeaconDashboard";
-import HomeBeaconPortalArc from "./HomeBeaconPortalArc";
 "use client";
 
+import HomeBeaconDashboard from "./HomeBeaconDashboard";
+import HomeBeaconPortalArc from "./HomeBeaconPortalArc";
 import { useEffect, useState } from "react";
 import {
-  DEFAULT_HOME_BEACON_CONFIG,
+DEFAULT_HOME_BEACON_CONFIG,
   computeHomeBeaconBreath,
   createHomeBeaconTelemetry,
   isHomeBeaconEnabled,
