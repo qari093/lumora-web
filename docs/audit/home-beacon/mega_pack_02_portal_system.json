@@ -1,0 +1,13 @@
+{
+  "system": "Lumora Home Beacon Ω∞",
+  "megaPack": "2/5",
+  "status": "PORTAL_SYSTEM_READY",
+  "features": [
+    "Portal Registry",
+    "Portal Arc",
+    "Portal Navigation",
+    "Portal Return Flow",
+    "Gravity Core Bridge",
+    "Emergency Return Contract"
+  ]
+}

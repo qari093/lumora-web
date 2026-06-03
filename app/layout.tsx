@@ -3,6 +3,7 @@ import "@/styles/system/lumora-visual-system.css";
 import type { Metadata } from "next";
 import GlobalPortalNav from "@/components/navigation/GlobalPortalNav";
 
+import HomeBeacon from "@/components/home-beacon/HomeBeacon";
 export const metadata: Metadata = {
   title: "Lumora",
   description: "Lumora launch shell",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body style={{ margin: 0 }} className="bg-[#050816] text-white min-h-screen overflow-x-hidden">
         <GlobalPortalNav />
         {children}
+        <HomeBeacon />
       </body>
     </html>
   );

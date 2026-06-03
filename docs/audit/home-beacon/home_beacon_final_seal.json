@@ -1,0 +1,15 @@
+{
+  "system": "Lumora Home Beacon Ω∞",
+  "status": "HOME_BEACON_SEALED",
+  "megaPacksCompleted": 5,
+  "privateBetaReady": true,
+  "homeBeaconActive": true,
+  "portalArcActive": true,
+  "dashboardActive": true,
+  "gravityBridgeActive": true,
+  "interactionBridgeActive": true,
+  "notificationLayerActive": true,
+  "economyLayerActive": true,
+  "lumenCoreEvolutionPrepared": true,
+  "lumenCoreActiveNow": false
+}

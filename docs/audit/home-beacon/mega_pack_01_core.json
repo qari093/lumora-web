@@ -1,0 +1,13 @@
+{
+  "system": "Lumora Home Beacon Ω∞",
+  "megaPack": "1/5",
+  "status": "CORE_BEACON_READY",
+  "features": [
+    "Foundation",
+    "Core Beacon UI",
+    "Blue Blade Core",
+    "Home Shell",
+    "Breathing Engine",
+    "Telemetry Contract"
+  ]
+}
