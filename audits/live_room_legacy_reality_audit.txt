@@ -1,0 +1,19 @@
+==================================================
+LUMORA PACK 1 — AUDIT E
+LEGACY LIVE ROOM ROUTE REALITY CHECK
+BASE=http://127.0.0.1:3000
+==================================================
+CANONICAL — /api/live/rooms — status=200 — bytes=388 — deprecated=false
+DEPRECATED_WRAPPER — /api/live/room-list — status=410 — bytes=177 — deprecated=true
+DEPRECATED_WRAPPER — /api/live/roomlist — status=410 — bytes=132 — deprecated=true
+DEPRECATED_WRAPPER — /api/live/rooms/list — status=410 — bytes=178 — deprecated=true
+DEPRECATED_WRAPPER — /api/live/roomslist — status=410 — bytes=132 — deprecated=true
+DEPRECATED_WRAPPER — /api/live/rooms/public — status=410 — bytes=180 — deprecated=true
+DEPRECATED_WRAPPER — /api/live/rooms-list — status=410 — bytes=132 — deprecated=true
+
+JSON_REPORT=audits/live_room_legacy_reality_audit.json
+==================================================
+OUTPUT FILES
+audits/live_room_legacy_reality_audit.txt
+audits/live_room_legacy_reality_audit.json
+PACK 1 AUDIT E COMPLETE

@@ -1,0 +1,37 @@
+==================================================
+LUMORA PACK 1 — AUDIT C
+LIVE ROOM ROUTE OWNERSHIP + CLASSIFICATION
+==================================================
+
+LIVE ROOM ROUTE OWNERSHIP SUMMARY
+=================================
+AMBIGUOUS_SINGULAR — /api/live/room — owner=Live Runtime — action=REVIEW — refs=26
+LEGACY_ALIAS — /api/live/room-list — owner=Legacy Compatibility — action=KEEP_FOR_NOW — refs=2
+SPECIALIZED — /api/live/room-state — owner=Live Runtime — action=KEEP — refs=6
+LEGACY_ALIAS — /api/live/roomlist — owner=Legacy Compatibility — action=KEEP_FOR_NOW — refs=6
+CANONICAL — /api/live/rooms — owner=Live Runtime — action=KEEP — refs=22
+DELETE_CANDIDATE — /api/live/rooms-list — owner=Legacy Compatibility — action=DELETE_AFTER_SAFETY_CHECK — refs=0
+COMPATIBILITY_LIST — /api/live/rooms/list — owner=Live Runtime — action=KEEP_FOR_NOW — refs=2
+LEGACY_ALIAS — /api/live/roomslist — owner=Legacy Compatibility — action=KEEP_FOR_NOW — refs=4
+PUBLIC_LIST — /api/live/rooms/public — owner=Live Runtime — action=KEEP — refs=3
+
+CANONICAL:
+/api/live/rooms
+
+LEGACY ALIASES:
+/api/live/room-list
+/api/live/roomlist
+/api/live/roomslist
+
+DELETE CANDIDATES:
+/api/live/rooms-list
+
+REVIEW REQUIRED:
+/api/live/room
+
+JSON_REPORT=audits/live_room_route_ownership_audit.json
+==================================================
+OUTPUT FILES
+audits/live_room_route_ownership_audit.txt
+audits/live_room_route_ownership_audit.json
+PACK 1 AUDIT C COMPLETE

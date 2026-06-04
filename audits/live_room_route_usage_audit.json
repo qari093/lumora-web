@@ -1,0 +1,170 @@
+{
+  "auditedAt": "2026-06-04T10:00:13.181Z",
+  "system": "Lumora Pack 1 Audit B — Live Room Route Usage",
+  "totalRoutes": 9,
+  "usedRoutes": 8,
+  "unusedRoutes": 1,
+  "results": [
+    {
+      "route": "/api/live/room",
+      "routeFile": "app/api/live/room/route.ts",
+      "routeFileExists": true,
+      "usageCount": 26,
+      "matches": [
+        "app/api/live/rooms/list/route.ts",
+        "app/api/live/rooms/public/route.ts",
+        "app/api/live/rooms/route.ts",
+        "app/live/LiveClient.tsx",
+        "app/live/health/HealthClient.tsx",
+        "app/live/page.tsx",
+        "app/live/room/[id]/LiveRoomClient.tsx",
+        "app/live/room/[id]/RoomClient.tsx",
+        "src/core/launch-readiness/api-contracts/fixtures.ts",
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "components/live/RoomList.tsx",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/live_identification_surface.test.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts",
+        "tests/live/room_state.contract.test.ts",
+        "tests/live/room_state.publish.contract.test.ts",
+        "tests/live/rooms.contract.test.ts",
+        "tests/route-ownership/runtime_route_ownership.test.ts",
+        "tests/runtime-consolidation/pack01_route_inventory.test.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack04_canonical_orchestrator_layer.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "USED"
+    },
+    {
+      "route": "/api/live/room-list",
+      "routeFile": "app/api/live/room-list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 2,
+      "matches": [
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "USED"
+    },
+    {
+      "route": "/api/live/room-state",
+      "routeFile": "app/api/live/room-state/route.ts",
+      "routeFileExists": true,
+      "usageCount": 6,
+      "matches": [
+        "app/live/room/[id]/LiveRoomClient.tsx",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/room_state.contract.test.ts",
+        "tests/live/room_state.publish.contract.test.ts"
+      ],
+      "classification": "SPECIALIZED_STATE_ROUTE"
+    },
+    {
+      "route": "/api/live/roomlist",
+      "routeFile": "app/api/live/roomlist/route.ts",
+      "routeFileExists": true,
+      "usageCount": 6,
+      "matches": [
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "USED"
+    },
+    {
+      "route": "/api/live/rooms",
+      "routeFile": "app/api/live/rooms/route.ts",
+      "routeFileExists": true,
+      "usageCount": 22,
+      "matches": [
+        "app/api/live/rooms/list/route.ts",
+        "app/api/live/rooms/public/route.ts",
+        "app/api/live/rooms/route.ts",
+        "app/live/LiveClient.tsx",
+        "app/live/health/HealthClient.tsx",
+        "app/live/page.tsx",
+        "app/live/room/[id]/RoomClient.tsx",
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "components/live/RoomList.tsx",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/live_identification_surface.test.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts",
+        "tests/live/rooms.contract.test.ts",
+        "tests/route-ownership/runtime_route_ownership.test.ts",
+        "tests/runtime-consolidation/pack01_route_inventory.test.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack04_canonical_orchestrator_layer.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "CANONICAL_CANDIDATE"
+    },
+    {
+      "route": "/api/live/rooms-list",
+      "routeFile": "app/api/live/rooms-list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 0,
+      "matches": [],
+      "classification": "UNUSED_OR_INTERNAL_ONLY"
+    },
+    {
+      "route": "/api/live/rooms/list",
+      "routeFile": "app/api/live/rooms/list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 2,
+      "matches": [
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "USED"
+    },
+    {
+      "route": "/api/live/roomslist",
+      "routeFile": "app/api/live/roomslist/route.ts",
+      "routeFileExists": true,
+      "usageCount": 4,
+      "matches": [
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts"
+      ],
+      "classification": "USED"
+    },
+    {
+      "route": "/api/live/rooms/public",
+      "routeFile": "app/api/live/rooms/public/route.ts",
+      "routeFileExists": true,
+      "usageCount": 3,
+      "matches": [
+        "app/live/page.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "USED"
+    }
+  ],
+  "recommendation": {
+    "preferredCanonical": "/api/live/rooms",
+    "preserveSpecialized": [
+      "/api/live/room-state",
+      "/api/live/rooms/[id]"
+    ],
+    "reviewLegacyCandidates": [
+      "/api/live/rooms-list"
+    ]
+  }
+}

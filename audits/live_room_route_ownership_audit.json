@@ -1,0 +1,225 @@
+{
+  "auditedAt": "2026-06-04T10:18:04.168Z",
+  "system": "Lumora Pack 1 Audit C — Live Room Route Ownership",
+  "canonicalRoutes": [
+    "/api/live/rooms"
+  ],
+  "specializedRoutes": [
+    "/api/live/room-state"
+  ],
+  "legacyAliases": [
+    "/api/live/room-list",
+    "/api/live/roomlist",
+    "/api/live/roomslist"
+  ],
+  "deleteCandidates": [
+    "/api/live/rooms-list"
+  ],
+  "reviewRequired": [
+    "/api/live/room"
+  ],
+  "results": [
+    {
+      "route": "/api/live/room",
+      "routeFile": "app/api/live/room/route.ts",
+      "routeFileExists": true,
+      "usageCount": 26,
+      "matches": [
+        "app/api/live/rooms/list/route.ts",
+        "app/api/live/rooms/public/route.ts",
+        "app/api/live/rooms/route.ts",
+        "app/live/LiveClient.tsx",
+        "app/live/health/HealthClient.tsx",
+        "app/live/page.tsx",
+        "app/live/room/[id]/LiveRoomClient.tsx",
+        "app/live/room/[id]/RoomClient.tsx",
+        "src/core/launch-readiness/api-contracts/fixtures.ts",
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "components/live/RoomList.tsx",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/live_identification_surface.test.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts",
+        "tests/live/room_state.contract.test.ts",
+        "tests/live/room_state.publish.contract.test.ts",
+        "tests/live/rooms.contract.test.ts",
+        "tests/route-ownership/runtime_route_ownership.test.ts",
+        "tests/runtime-consolidation/pack01_route_inventory.test.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack04_canonical_orchestrator_layer.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "AMBIGUOUS_SINGULAR",
+      "owner": "Live Runtime",
+      "recommendedAction": "REVIEW",
+      "reason": "Singular route is heavily referenced and may be a real route or substring match risk; requires exact reference audit before migration."
+    },
+    {
+      "route": "/api/live/room-list",
+      "routeFile": "app/api/live/room-list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 2,
+      "matches": [
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "LEGACY_ALIAS",
+      "owner": "Legacy Compatibility",
+      "recommendedAction": "KEEP_FOR_NOW",
+      "reason": "Still referenced by tests; migrate tests/callers before deprecation."
+    },
+    {
+      "route": "/api/live/room-state",
+      "routeFile": "app/api/live/room-state/route.ts",
+      "routeFileExists": true,
+      "usageCount": 6,
+      "matches": [
+        "app/live/room/[id]/LiveRoomClient.tsx",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/room_state.contract.test.ts",
+        "tests/live/room_state.publish.contract.test.ts"
+      ],
+      "classification": "SPECIALIZED",
+      "owner": "Live Runtime",
+      "recommendedAction": "KEEP",
+      "reason": "Room state route used by live room clients and room-state tests."
+    },
+    {
+      "route": "/api/live/roomlist",
+      "routeFile": "app/api/live/roomlist/route.ts",
+      "routeFileExists": true,
+      "usageCount": 6,
+      "matches": [
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "LEGACY_ALIAS",
+      "owner": "Legacy Compatibility",
+      "recommendedAction": "KEEP_FOR_NOW",
+      "reason": "Referenced by runtime consolidation and deprecation registries."
+    },
+    {
+      "route": "/api/live/rooms",
+      "routeFile": "app/api/live/rooms/route.ts",
+      "routeFileExists": true,
+      "usageCount": 22,
+      "matches": [
+        "app/api/live/rooms/list/route.ts",
+        "app/api/live/rooms/public/route.ts",
+        "app/api/live/rooms/route.ts",
+        "app/live/LiveClient.tsx",
+        "app/live/health/HealthClient.tsx",
+        "app/live/page.tsx",
+        "app/live/room/[id]/RoomClient.tsx",
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts",
+        "components/live/RoomList.tsx",
+        "tests/launch/live_fyp_runtime_static.test.ts",
+        "tests/live/live_identification_surface.test.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts",
+        "tests/live/rooms.contract.test.ts",
+        "tests/route-ownership/runtime_route_ownership.test.ts",
+        "tests/runtime-consolidation/pack01_route_inventory.test.ts",
+        "tests/runtime-consolidation/pack02_domain_ownership.test.ts",
+        "tests/runtime-consolidation/pack04_canonical_orchestrator_layer.test.ts",
+        "tests/runtime-consolidation/pack06_deprecation_layer.test.ts"
+      ],
+      "classification": "CANONICAL",
+      "owner": "Live Runtime",
+      "recommendedAction": "KEEP",
+      "reason": "Primary live room collection route with broad UI and test usage."
+    },
+    {
+      "route": "/api/live/rooms-list",
+      "routeFile": "app/api/live/rooms-list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 0,
+      "matches": [],
+      "classification": "DELETE_CANDIDATE",
+      "owner": "Legacy Compatibility",
+      "recommendedAction": "DELETE_AFTER_SAFETY_CHECK",
+      "reason": "Route file exists but Audit B found zero references."
+    },
+    {
+      "route": "/api/live/rooms/list",
+      "routeFile": "app/api/live/rooms/list/route.ts",
+      "routeFileExists": true,
+      "usageCount": 2,
+      "matches": [
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "COMPATIBILITY_LIST",
+      "owner": "Live Runtime",
+      "recommendedAction": "KEEP_FOR_NOW",
+      "reason": "Used by live rooms list contract and rate-limit tests; migrate later if canonical route covers same contract."
+    },
+    {
+      "route": "/api/live/roomslist",
+      "routeFile": "app/api/live/roomslist/route.ts",
+      "routeFileExists": true,
+      "usageCount": 4,
+      "matches": [
+        "src/core/launch-readiness/route-reality/classifier.ts",
+        "src/core/runtime-consolidation/deprecation/registry.ts",
+        "src/core/runtime-consolidation/domainOwnership.ts",
+        "src/core/runtime-consolidation/duplicateResponsibilityAudit.ts"
+      ],
+      "classification": "LEGACY_ALIAS",
+      "owner": "Legacy Compatibility",
+      "recommendedAction": "KEEP_FOR_NOW",
+      "reason": "Referenced by runtime consolidation and deprecation registries."
+    },
+    {
+      "route": "/api/live/rooms/public",
+      "routeFile": "app/api/live/rooms/public/route.ts",
+      "routeFileExists": true,
+      "usageCount": 3,
+      "matches": [
+        "app/live/page.tsx",
+        "tests/live/live_rooms_list.contract.test.ts",
+        "tests/live/rate_limit.contract.test.ts"
+      ],
+      "classification": "PUBLIC_LIST",
+      "owner": "Live Runtime",
+      "recommendedAction": "KEEP",
+      "reason": "Public room list route used by live page and contract tests."
+    }
+  ],
+  "recommendation": {
+    "keepNow": [
+      "/api/live/room-list",
+      "/api/live/room-state",
+      "/api/live/roomlist",
+      "/api/live/rooms",
+      "/api/live/rooms/list",
+      "/api/live/roomslist",
+      "/api/live/rooms/public"
+    ],
+    "deleteAfterSafetyCheck": [
+      "/api/live/rooms-list"
+    ],
+    "doNotDeleteYet": [
+      "/api/live/room",
+      "/api/live/room-list",
+      "/api/live/room-state",
+      "/api/live/roomlist",
+      "/api/live/rooms",
+      "/api/live/rooms/list",
+      "/api/live/roomslist",
+      "/api/live/rooms/public"
+    ]
+  }
+}

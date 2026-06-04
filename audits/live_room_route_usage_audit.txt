@@ -1,0 +1,64 @@
+==================================================
+LUMORA PACK 1 — AUDIT B
+LIVE ROOM ROUTE USAGE AUDIT
+==================================================
+
+LIVE ROOM ROUTE USAGE SUMMARY
+=============================
+USED — /api/live/room — refs=26 — file=yes — USED
+  - app/api/live/rooms/list/route.ts
+  - app/api/live/rooms/public/route.ts
+  - app/api/live/rooms/route.ts
+  - app/live/LiveClient.tsx
+  - app/live/health/HealthClient.tsx
+  - app/live/page.tsx
+  - app/live/room/[id]/LiveRoomClient.tsx
+  - app/live/room/[id]/RoomClient.tsx
+  ... +18 more
+USED — /api/live/room-list — refs=2 — file=yes — USED
+  - tests/live/live_rooms_list.contract.test.ts
+  - tests/live/rate_limit.contract.test.ts
+USED — /api/live/room-state — refs=6 — file=yes — SPECIALIZED_STATE_ROUTE
+  - app/live/room/[id]/LiveRoomClient.tsx
+  - src/core/runtime-consolidation/domainOwnership.ts
+  - src/core/runtime-consolidation/duplicateResponsibilityAudit.ts
+  - tests/launch/live_fyp_runtime_static.test.ts
+  - tests/live/room_state.contract.test.ts
+  - tests/live/room_state.publish.contract.test.ts
+USED — /api/live/roomlist — refs=6 — file=yes — USED
+  - src/core/launch-readiness/route-reality/classifier.ts
+  - src/core/runtime-consolidation/deprecation/registry.ts
+  - src/core/runtime-consolidation/domainOwnership.ts
+  - src/core/runtime-consolidation/duplicateResponsibilityAudit.ts
+  - tests/runtime-consolidation/pack02_domain_ownership.test.ts
+  - tests/runtime-consolidation/pack06_deprecation_layer.test.ts
+USED — /api/live/rooms — refs=22 — file=yes — CANONICAL_CANDIDATE
+  - app/api/live/rooms/list/route.ts
+  - app/api/live/rooms/public/route.ts
+  - app/api/live/rooms/route.ts
+  - app/live/LiveClient.tsx
+  - app/live/health/HealthClient.tsx
+  - app/live/page.tsx
+  - app/live/room/[id]/RoomClient.tsx
+  - src/core/launch-readiness/route-reality/classifier.ts
+  ... +14 more
+UNUSED — /api/live/rooms-list — refs=0 — file=yes — UNUSED_OR_INTERNAL_ONLY
+USED — /api/live/rooms/list — refs=2 — file=yes — USED
+  - tests/live/live_rooms_list.contract.test.ts
+  - tests/live/rate_limit.contract.test.ts
+USED — /api/live/roomslist — refs=4 — file=yes — USED
+  - src/core/launch-readiness/route-reality/classifier.ts
+  - src/core/runtime-consolidation/deprecation/registry.ts
+  - src/core/runtime-consolidation/domainOwnership.ts
+  - src/core/runtime-consolidation/duplicateResponsibilityAudit.ts
+USED — /api/live/rooms/public — refs=3 — file=yes — USED
+  - app/live/page.tsx
+  - tests/live/live_rooms_list.contract.test.ts
+  - tests/live/rate_limit.contract.test.ts
+
+JSON_REPORT=audits/live_room_route_usage_audit.json
+==================================================
+OUTPUT FILES
+audits/live_room_route_usage_audit.txt
+audits/live_room_route_usage_audit.json
+PACK 1 AUDIT B COMPLETE

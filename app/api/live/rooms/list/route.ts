@@ -1,26 +1,28 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
-import { rateLimitHeaders } from "@/lib/live/rateLimitHeaders";
-import { makeRequestId } from "@/lib/live/requestId";
+import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export const GET = withSafeLive(async () => {
-  const requestId = makeRequestId();
-  return new Response(
-    JSON.stringify({
+export async function GET() {
+  return NextResponse.json(
+    {
       ok: false,
-      error: { code: "ROUTE_DEPRECATED", message: "Use /api/live/rooms" },
-      requestId,
-      ts: new Date().toISOString(),
-    }),
+      deprecated: true,
+      error: {
+        code: "ROUTE_DEPRECATED",
+        message: "Use /api/live/rooms",
+      },
+      canonical: "/api/live/rooms",
+      route: "/api/live/rooms/list",
+      ts: Date.now(),
+    },
     {
       status: 410,
       headers: {
-        "Content-Type": "application/json",
-        "x-request-id": requestId,
-        ...rateLimitHeaders(),
+        "x-lumora-deprecated-route": "/api/live/rooms/list",
+        "x-lumora-canonical-route": "/api/live/rooms",
+        "cache-control": "no-store",
       },
-    }
+    },
   );
-});
+}

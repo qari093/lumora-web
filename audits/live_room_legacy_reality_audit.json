@@ -1,0 +1,100 @@
+{
+  "auditedAt": "2026-06-04T11:23:13.139Z",
+  "system": "Lumora Pack 1 Audit E — Legacy Live Room Route Reality",
+  "base": "http://127.0.0.1:3000",
+  "results": [
+    {
+      "route": "/api/live/rooms",
+      "ok": true,
+      "status": 200,
+      "bytes": 388,
+      "contentType": "application/json",
+      "deprecated": false,
+      "canonicalHint": true,
+      "bodyHead": "{\"ok\":true,\"service\":\"lumora-live\",\"route\":\"/api/live/rooms\",\"rooms\":[{\"id\":\"presence-calm\",\"title\":\"Calm Presence\",\"kind\":\"presence\",\"activeUsers\":0,\"emotionalState\":\"calm\"},{\"id\":\"watch-world\",\"title\":\"Watch World\",\"kind\":\"watch_world\",\"activeUsers\":0,\"emotionalState\":\"warm\"},{",
+      "classification": "CANONICAL"
+    },
+    {
+      "route": "/api/live/room-list",
+      "ok": false,
+      "status": 410,
+      "bytes": 177,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": true,
+      "bodyHead": "{\"ok\":false,\"deprecated\":true,\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Use /api/live/rooms\"},\"canonical\":\"/api/live/rooms\",\"route\":\"/api/live/room-list\",\"ts\":1780572186543}",
+      "classification": "DEPRECATED_WRAPPER"
+    },
+    {
+      "route": "/api/live/roomlist",
+      "ok": false,
+      "status": 410,
+      "bytes": 132,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": false,
+      "bodyHead": "{\"ok\":false,\"ts\":1780572187968,\"requestId\":\"req_mpzeph6o_93156232\",\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Route deprecated\"}}",
+      "classification": "DEPRECATED_WRAPPER"
+    },
+    {
+      "route": "/api/live/rooms/list",
+      "ok": false,
+      "status": 410,
+      "bytes": 178,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": true,
+      "bodyHead": "{\"ok\":false,\"deprecated\":true,\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Use /api/live/rooms\"},\"canonical\":\"/api/live/rooms\",\"route\":\"/api/live/rooms/list\",\"ts\":1780572189514}",
+      "classification": "DEPRECATED_WRAPPER"
+    },
+    {
+      "route": "/api/live/roomslist",
+      "ok": false,
+      "status": 410,
+      "bytes": 132,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": false,
+      "bodyHead": "{\"ok\":false,\"ts\":1780572190729,\"requestId\":\"req_mpzepjbd_071e2dd5\",\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Route deprecated\"}}",
+      "classification": "DEPRECATED_WRAPPER"
+    },
+    {
+      "route": "/api/live/rooms/public",
+      "ok": false,
+      "status": 410,
+      "bytes": 180,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": true,
+      "bodyHead": "{\"ok\":false,\"deprecated\":true,\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Use /api/live/rooms\"},\"canonical\":\"/api/live/rooms\",\"route\":\"/api/live/rooms/public\",\"ts\":1780572191962}",
+      "classification": "DEPRECATED_WRAPPER"
+    },
+    {
+      "route": "/api/live/rooms-list",
+      "ok": false,
+      "status": 410,
+      "bytes": 132,
+      "contentType": "application/json",
+      "deprecated": true,
+      "canonicalHint": false,
+      "bodyHead": "{\"ok\":false,\"ts\":1780572193132,\"requestId\":\"req_mpzepl64_133ab0f0\",\"error\":{\"code\":\"ROUTE_DEPRECATED\",\"message\":\"Route deprecated\"}}",
+      "classification": "DEPRECATED_WRAPPER"
+    }
+  ],
+  "recommendation": {
+    "canonical": "/api/live/rooms",
+    "keep": [
+      "/api/live/rooms"
+    ],
+    "deprecatedWrappers": [
+      "/api/live/room-list",
+      "/api/live/roomlist",
+      "/api/live/rooms/list",
+      "/api/live/roomslist",
+      "/api/live/rooms/public",
+      "/api/live/rooms-list"
+    ],
+    "review": [],
+    "missingOrDeleted": []
+  }
+}
