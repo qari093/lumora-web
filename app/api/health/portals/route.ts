@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PORTALS, type PortalId } from "@/core/portals";
+import { PORTALS } from "@/core/portals";
 import { getPortalRuntimeConfig } from "@/core/portalRuntime";
 
 function json(body: unknown, status = 200) {
@@ -35,9 +35,13 @@ export async function GET() {
       }
     }
 
-    // Ensure cfg has no extra keys (strictness for operators)
-    for (const k of Object.keys(cfg as Record<string, boolean>)) {
-      if (!uniq.has(k as PortalId)) {
+    // Allow runtime metadata keys
+    const allowedMetaKeys = new Set(["env", "buildId"]);
+
+    for (const k of Object.keys(cfg as Record<string, unknown>)) {
+      if (allowedMetaKeys.has(k)) continue;
+
+      if (!uniq.has(k)) {
         return json({ ok: false, error: "unknown_runtime_key", key: k }, 500);
       }
     }
@@ -48,7 +52,7 @@ export async function GET() {
       route: p.route,
       status: p.status,
       enabled: cfg[p.id],
-      routeExpected: getAppRoutePresence(p.route).expected
+      routeExpected: getAppRoutePresence(String(p.route || '/')).expected
     }));
 
     return json({

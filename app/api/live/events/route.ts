@@ -8,8 +8,16 @@ function uuid(): string {
   return crypto.randomBytes(16).toString("hex");
 }
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
   const requestId = uuid();
+  const url = new URL(req.url);
+  if (url.searchParams.get("probe") === "1") {
+    return Response.json(
+      { ok: true, mode: "probe", route: "/api/live/events", ts: Date.now() },
+      { status: 200, headers: { "cache-control": "no-store" } },
+    );
+  }
+
 
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
