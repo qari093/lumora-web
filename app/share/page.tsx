@@ -1,35 +1,31 @@
-import type { Metadata } from "next";
+import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
 
-export const metadata: Metadata = {
-  title: "Share • Lumora",
-  robots: { index: false, follow: false },
-};
-
-export default function Page() {
-  const items = [
-    { id: "seed-1", title: "Share Seed 1", subtitle: "Baseline content", href: "#" },
-    { id: "seed-2", title: "Share Seed 2", subtitle: "Non-empty guard", href: "#" },
-    { id: "seed-3", title: "Share Seed 3", subtitle: "Render map", href: "#" },
-  ] as const;
-
-    return (
-    <>{/* LUMORA_PORTAL_ALIVE_SHARE */}<span style={{display:"none"}}>LUMORA_PORTAL_ALIVE_SHARE</span><main style={{ padding: 24 }}>
-        <section style={{ marginTop: 16 }}>
-          <div style={{ fontSize: 12, opacity: 0.7 }}>Seeded items (non-empty guard)</div>
-          <ul style={{ marginTop: 10, display: "grid", gap: 10, listStyle: "none", padding: 0 }}>
-            {items.map((it) => (
-              <li key={it.id} style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: 12 }}>
-                <div style={{ fontWeight: 700 }}>{it.title}</div>
-                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{it.subtitle}</div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-      <h1 title="share" style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Share</h1>
-      <p style={{ opacity: 0.8 }}>
-        Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
-      </p>
-    </main></>
+export default function SharePage() {
+  return (
+    <LumoraPortalPage
+      title="Lumora Share"
+      eyebrow="Private-first sharing"
+      description="Share Lumora moments, portal links, reflections, GMAR activity, CineVerse discoveries, and beta invites with user-controlled visibility."
+      actions={[
+        { label: "Create Share Link", href: "/api/share/link" },
+        { label: "Share Health", href: "/api/share/healthz" },
+        { label: "Back to Home", href: "/" }
+      ]}
+      signals={[
+        { label: "Mode", value: "User Controlled" },
+        { label: "Privacy", value: "Private First" },
+        { label: "Bridge", value: "FYP + LumaSpace" }
+      ]}
+      modules={[
+        "Deep Links",
+        "Invite Cards",
+        "Moment Sharing",
+        "LumaSpace Share",
+        "FYP Share",
+        "GMAR Share",
+        "Privacy Gate",
+        "Tracking Guard"
+      ]}
+    />
   );
 }

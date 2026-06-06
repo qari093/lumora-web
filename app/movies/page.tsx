@@ -1,35 +1,31 @@
-import type { Metadata } from "next";
+import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
 
-export const metadata: Metadata = {
-  title: "Movies • Lumora",
-  robots: { index: false, follow: false },
-};
-
-export default function Page() {
-  const items = [
-    { id: "seed-1", title: "Movies Seed 1", subtitle: "Baseline content", href: "#" },
-    { id: "seed-2", title: "Movies Seed 2", subtitle: "Non-empty guard", href: "#" },
-    { id: "seed-3", title: "Movies Seed 3", subtitle: "Render map", href: "#" },
-  ] as const;
-
-    return (
-    <>{/* LUMORA_PORTAL_ALIVE_MOVIES */}<span style={{display:"none"}}>LUMORA_PORTAL_ALIVE_MOVIES</span><main style={{ padding: 24 }}>
-        <section style={{ marginTop: 16 }}>
-          <div style={{ fontSize: 12, opacity: 0.7 }}>Seeded items (non-empty guard)</div>
-          <ul style={{ marginTop: 10, display: "grid", gap: 10, listStyle: "none", padding: 0 }}>
-            {items.map((it) => (
-              <li key={it.id} style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: 12 }}>
-                <div style={{ fontWeight: 700 }}>{it.title}</div>
-                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{it.subtitle}</div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-      <h1 title="movies" style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Movies</h1>
-      <p style={{ opacity: 0.8 }}>
-        Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
-      </p>
-    </main></>
+export default function MoviesPage() {
+  return (
+    <LumoraPortalPage
+      title="CineVerse"
+      eyebrow="Movies and emotional discovery"
+      description="Explore film-inspired discovery, trailer-style moments, watch paths, emotional reactions, and safe CineVerse content inside Lumora."
+      actions={[
+        { label: "Open Movie Catalog", href: "/api/movies/catalog" },
+        { label: "Movies Health", href: "/api/movies/health" },
+        { label: "Back to FYP", href: "/fyp" }
+      ]}
+      signals={[
+        { label: "Mode", value: "Discovery" },
+        { label: "Content", value: "Safe Seeds" },
+        { label: "Bridge", value: "FYP + Reactions" }
+      ]}
+      modules={[
+        "Movie Discovery",
+        "Trailer Moments",
+        "Emotional Tags",
+        "Watchlist",
+        "CineVerse FYP",
+        "Reaction Rooms",
+        "Safe Content Gate",
+        "Share Cards"
+      ]}
+    />
   );
 }

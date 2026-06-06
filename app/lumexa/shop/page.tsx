@@ -1,14 +1,34 @@
+import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
+
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+export default function ZendoroShopPage() {
   return (
-    <main style={{ padding: 24, maxWidth: 980, margin: "0 auto" }}>
-      <h1 style={{ fontSize: 26, margin: "0 0 12px" }}>Lumexa — Shopping Helper</h1>
-      <p style={{ opacity: 0.85, margin: 0 }}>
-        Placeholder route (wired next step).
-      </p>
-      <div style={{ height: 14 }} />
-      <a href="/lumexa" style={{ textDecoration: "underline" }}>← Back to Lumexa</a>
-    </main>
+    <LumoraPortalPage
+      title="Zendoro"
+      eyebrow="Commerce and checkout portal"
+      description="Browse beta products, test cart behavior, verify checkout readiness, inspect seller flow, and validate wallet/Zencoin commerce paths before external testers arrive."
+      actions={[
+        { label: "Products API", href: "/api/zendoro/products" },
+        { label: "Cart API", href: "/api/zendoro/cart" },
+        { label: "Checkout API", href: "/api/zendoro/checkout" },
+        { label: "Wallet Summary", href: "/api/wallet/summary" }
+      ]}
+      signals={[
+        { label: "Mode", value: "Commerce Beta" },
+        { label: "Checkout", value: "Validated" },
+        { label: "Wallet", value: "Zencoin Linked" }
+      ]}
+      modules={[
+        "Product Discovery",
+        "Cart Flow",
+        "Checkout Flow",
+        "Order History",
+        "Seller Panel",
+        "Reviews",
+        "Wallet Bridge",
+        "Payment Safety"
+      ]}
+    />
   );
 }

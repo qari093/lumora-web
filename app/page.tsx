@@ -5,7 +5,7 @@ const portals = [
   { href: "/live", label: "Live", desc: "Enter live rooms and real-time activity." },
   { href: "/gmar", label: "GMAR", desc: "Open the game playground." },
   { href: "/lumaspace", label: "LumaSpace", desc: "Open memory, reflection, and identity space." },
-  { href: "/zendoro", label: "Zendoro", desc: "Open commerce and checkout flow." },
+  { href: "/lumexa/shop", label: "Zendoro", desc: "Open commerce and checkout flow." },
   { href: "/movies", label: "Movies", desc: "Open CineVerse portal." },
   { href: "/music", label: "Music", desc: "Open Lumora Echo." },
   { href: "/creator", label: "Creator", desc: "Open creator tools." },
@@ -21,12 +21,14 @@ export default function HomePage() {
           </p>
 
           <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
-            Lumora is ready for controlled private beta.
+            Lumora
           </h1>
+          <p className="mt-3 text-xl font-medium text-cyan-100">
+            Your private beta ecosystem is alive.
+          </p>
 
           <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 md:text-lg">
-            Enter the active portals below. This landing page is intentionally stable,
-            server-safe, and beta-ready while deeper provider wiring continues.
+            Enter FYP, Live, GMAR, LumaSpace, Zendoro, Movies, Music, and Share from one calm home screen. This beta build is ready for founder testing on iPhone before external testers are invited.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
