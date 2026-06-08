@@ -1,0 +1,15 @@
+{
+  "status": "SEALED",
+  "stage": "PRE_INVITE",
+  "wave": 1,
+  "lafsLive": true,
+  "lafsSafeMode": true,
+  "productionHealthy": true,
+  "gitClean": true,
+  "publicSignupEnabled": false,
+  "allowlistOnly": true,
+  "paymentLiveMode": false,
+  "humanApprovalRequired": true,
+  "expansionAllowed": false,
+  "nextAction": "MANUAL_TESTER_SELECTION"
+}
