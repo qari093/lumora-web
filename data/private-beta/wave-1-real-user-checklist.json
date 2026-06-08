@@ -1,0 +1,25 @@
+{
+  "status": "WAVE_1_REAL_USER_CHECKLIST_READY",
+  "mode": "manual_observation_only",
+  "maxInvites": 25,
+  "paymentLiveMode": false,
+  "publicSignupDisabled": true,
+  "allowlistOnly": true,
+  "dailyChecks": [
+    "critical_5xx_count",
+    "unauthorized_access_events",
+    "tester_login_success",
+    "fyp_page_load",
+    "live_page_load",
+    "lafs_dashboard_read_only",
+    "zendoro_checkout_safe_mode",
+    "feedback_received",
+    "critical_issue_count"
+  ],
+  "doNotProceedUnless": {
+    "realUsersObserved": true,
+    "criticalIssues": 0,
+    "unauthorizedAccessEvents": 0,
+    "manualReviewCompleted": true
+  }
+}
