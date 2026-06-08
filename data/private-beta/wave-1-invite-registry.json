@@ -1,0 +1,11 @@
+{
+  "status": "READY_FOR_INVITES",
+  "wave": 1,
+  "maxInvites": 25,
+  "invitesIssued": 0,
+  "invitesAccepted": 0,
+  "activeTesters": 0,
+  "criticalIssues": 0,
+  "expansionAllowed": false,
+  "testers": []
+}
