@@ -1,0 +1,23 @@
+{
+  "status": "TESTER_SELECTION_TEMPLATE_READY",
+  "wave": 1,
+  "recommendedFirstBatch": 3,
+  "maxFirstBatch": 5,
+  "selectionCriteria": [
+    "trusted_person_known_to_founder",
+    "can_report_bugs_clearly",
+    "uses_mobile_browser",
+    "willing_to_test_fyp_live_gmar_nexa_zendoro",
+    "understands_private_beta_no_public_sharing"
+  ],
+  "requiredTesterFields": [
+    "name",
+    "email",
+    "device",
+    "country",
+    "language",
+    "consentConfirmed",
+    "notes"
+  ],
+  "doNotInviteYet": true
+}
