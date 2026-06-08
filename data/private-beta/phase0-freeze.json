@@ -1,0 +1,17 @@
+{
+  "status": "FROZEN",
+  "phase": "PHASE_0_PRIVATE_BETA",
+  "tag": "PRE_INVITE_READY_v1",
+  "rule": "No new features before real-user observation",
+  "allowedChanges": [
+    "critical_bug_fix",
+    "security_fix",
+    "availability_fix"
+  ],
+  "blockedChanges": [
+    "new_features",
+    "major_refactors",
+    "new_portals",
+    "economy_expansion"
+  ]
+}
