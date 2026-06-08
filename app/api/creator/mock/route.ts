@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 // app/api/creator/mock/route.ts
 import { NextResponse } from "next/server";
 
@@ -20,6 +21,8 @@ const mock: CreatorApp[] = [
 ];
 
 export async function GET(request: Request) {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   const url = new URL(request.url);
   const limit = Math.max(1, Math.min(20, Number(url.searchParams.get("limit") ?? "5")));
   const rows = mock.slice(0, limit);

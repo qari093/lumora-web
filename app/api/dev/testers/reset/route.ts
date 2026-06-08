@@ -1,48 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 
-export const dynamic = "force-dynamic";
+function devOnlyResponse() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
 
-/**
- * DEV-ONLY: resets anonymous tester identity and clears any in-memory
- * event stores if present. This must not be usable in production.
- */
-export async function POST(_req: NextRequest) {
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
-  }
+  return NextResponse.json({
+    ok: true,
+    devOnly: true,
+    message: "Development-only endpoint."
+  });
+}
 
-  // Best-effort: clear any global in-memory stores if your app uses them.
-  // (Does nothing if not present.)
-  try {
-    const g = globalThis as any;
-    if (g.__LUMORA_TESTER_EVENTS && typeof g.__LUMORA_TESTER_EVENTS.clear === "function") {
-      g.__LUMORA_TESTER_EVENTS.clear();
-    }
-    if (g.__LUMORA_TESTER_AGG && typeof g.__LUMORA_TESTER_AGG.clear === "function") {
-      g.__LUMORA_TESTER_AGG.clear();
-    }
-  } catch {
-    // ignore
-  }
+export async function GET() {
+  return devOnlyResponse();
+}
 
-  const res = NextResponse.json({ ok: true });
-
-  // Wipe common tester id cookie names (covers current + future renames safely).
-  // Keep in sync with app/_lib/testers/testerId.ts if it changes.
-  const candidates = ["lumora_tester_id", "tester_id", "anon_tester_id"];
-
-  for (const name of candidates) {
-    res.cookies.set({
-      name,
-      value: "",
-      path: "/",
-      httpOnly: true,
-      sameSite: "lax",
-      expires: new Date(0),
-    });
-  }
-
-  // If the client stores an id in non-httpOnly cookie or localStorage, this server
-  // can't clear it; use an incognito window or clear site data if needed.
-  return res;
+export async function POST() {
+  return devOnlyResponse();
 }

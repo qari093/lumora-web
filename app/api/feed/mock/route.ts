@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
@@ -5,6 +6,8 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET(req: Request) {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   try {
     const { searchParams } = new URL(req.url);
     const limit = Math.min(Math.max(parseInt(searchParams.get("limit") || "5", 10), 1), 25);

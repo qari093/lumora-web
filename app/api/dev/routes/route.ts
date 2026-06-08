@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
@@ -55,6 +56,8 @@ function walkAppPages(appRoot: string): RouteInfo[] {
 }
 
 export async function GET() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   // Hard dev-only gate
   if (process.env.NODE_ENV === "production") {
     return new NextResponse("Not Found", { status: 404 });

@@ -1,16 +1,5 @@
-/* Lumora payment safety: idempotency required for checkout/webhook/order mutation flows. */
-import { NextResponse } from "next/server";
-import { handlePaymentWebhook, type PaymentWebhookEvent } from "@/src/core/payments-runtime/webhook";
+import { compatibilityJson } from "@/src/lib/runtime-guards/compatibilityResponse";
 
-export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
-
-  if (!body?.type) {
-    return NextResponse.json({ ok: false, error: "INVALID_WEBHOOK" }, { status: 400 });
-  }
-
-  return NextResponse.json({
-    ok: true,
-    result: handlePaymentWebhook(body.type as PaymentWebhookEvent),
-  });
+export async function POST() {
+  return compatibilityJson("/api/payments/webhook", "/api/zendoro/webhook");
 }

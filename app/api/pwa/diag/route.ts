@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextRequest, NextResponse } from "next/server";
 
 function boolParam(v: string | null): boolean | null {
@@ -8,6 +9,8 @@ function boolParam(v: string | null): boolean | null {
 }
 
 export async function GET(req: NextRequest) {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   try {
     const url = new URL(req.url);
 

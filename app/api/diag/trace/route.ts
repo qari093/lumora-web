@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextResponse } from "next/server";
 import { logger } from "@/lib/observability/logger";
 import { startTrace, finishTrace } from "@/lib/observability/trace";
@@ -5,6 +6,8 @@ import { startTrace, finishTrace } from "@/lib/observability/trace";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   const trace = startTrace("api.diag.trace");
   logger.info("api.diag.trace", "trace_started", undefined, trace.requestId);
   const summary = finishTrace(trace);

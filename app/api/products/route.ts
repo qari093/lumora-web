@@ -1,29 +1,8 @@
-import { NextResponse } from "next/server";
-import { createProductRuntime } from "@/src/core/products-runtime/create";
+import { compatibilityJson } from "@/src/lib/runtime-guards/compatibilityResponse";
 
 export async function GET() {
-  return NextResponse.json({ ok: true, products: [] });
+  return compatibilityJson("/api/products", "/api/zendoro/products");
 }
-
-export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
-
-  if (!body?.id || !body?.creatorId || !body?.title || typeof body?.priceCents !== "number") {
-    return NextResponse.json({ ok: false, error: "INVALID_PRODUCT_REQUEST" }, { status: 400 });
-  }
-
-  try {
-    return NextResponse.json({
-      ok: true,
-      product: createProductRuntime({
-        id: body.id,
-        creatorId: body.creatorId,
-        title: body.title,
-        priceCents: body.priceCents,
-        visible: Boolean(body.visible),
-      }),
-    });
-  } catch {
-    return NextResponse.json({ ok: false, error: "PRODUCT_CREATE_FAILED" }, { status: 400 });
-  }
+export async function POST() {
+  return compatibilityJson("/api/products", "/api/zendoro/products");
 }

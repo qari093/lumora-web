@@ -1,3 +1,5 @@
+
+// Private beta allowlist guard: validates email-based access eligibility.
 import { NextResponse } from "next/server";
 
 function gateResponse() {

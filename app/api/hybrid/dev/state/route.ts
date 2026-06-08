@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
-import { snapshot } from "@/app/_modules/hybrid/state";
-export const runtime = "nodejs";
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
+
+function devOnlyResponse() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
+
+  return NextResponse.json({
+    ok: true,
+    devOnly: true,
+    message: "Development-only endpoint."
+  });
+}
 
 export async function GET() {
-  try {
-    return NextResponse.json({ ok: true, data: snapshot(), ts: Date.now() });
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
-  }
+  return devOnlyResponse();
+}
+
+export async function POST() {
+  return devOnlyResponse();
 }

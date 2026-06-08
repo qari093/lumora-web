@@ -1,7 +1,10 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextResponse } from "next/server";
 import prisma from "@/src/lib/prisma";
 export const runtime = "nodejs";
 export async function GET(req: Request) {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
   const { searchParams } = new URL(req.url);
   const raw = searchParams.get("limit") ?? "10";
   const n = Number.parseInt(raw, 10);

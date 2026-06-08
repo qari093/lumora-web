@@ -1,3 +1,5 @@
+
+// Private beta allowlist guard: private beta access is checked against allowlist email rules.
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";

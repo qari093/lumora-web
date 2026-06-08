@@ -1,3 +1,5 @@
+
+// Private beta allowlist guard: email allowlist for private beta admission.
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import { evaluateAllowlistInviteContract } from "@/lib/softlaunch/allowlistInviteContract";

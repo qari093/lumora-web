@@ -1,26 +1,21 @@
-import { withSafeLive } from "@/lib/live/withSafeLive";
-import { makeRequestId } from "@/lib/live/requestId";
-import { rateLimitHeaders } from "@/lib/live/rateLimitHeaders";
+import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export const GET = withSafeLive(async () => {
-  const requestId = makeRequestId();
-
-  return new Response(
-    JSON.stringify({
+export async function GET() {
+  return NextResponse.json(
+    {
       ok: true,
-      marker: "live-healthz",
-      requestId,
-      ts: Date.now(),
-    }),
+      service: "live",
+      route: "/api/live/healthz",
+      status: "healthy",
+      checkedAt: new Date().toISOString()
+    },
     {
       status: 200,
       headers: {
-        "Content-Type": "application/json",
-        ...rateLimitHeaders(),
-      },
+        "cache-control": "no-store"
+      }
     }
   );
-});
+}

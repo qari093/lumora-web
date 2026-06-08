@@ -1,18 +1,23 @@
+import { NextResponse } from "next/server";
+
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const res = await fetch("https://www.reddit.com/r/popular.json");
-  const json = await res.json();
-
-  return Response.json({
-    ok: true,
-    live_status: "candidate_live",
-    proof_status: res.ok ? "pending" : "failed",
-    source_of_truth: "external_source",
-    data: {
-      fetched: res.ok,
-      posts: json?.data?.children?.length || 0
+  return NextResponse.json(
+    {
+      ok: true,
+      service: "live",
+      provider: "reddit",
+      mode: "safe_stub",
+      route: "/api/live/reddit",
+      status: "guarded",
+      items: []
     },
-    ts: Date.now()
-  });
+    {
+      status: 200,
+      headers: {
+        "cache-control": "no-store"
+      }
+    }
+  );
 }

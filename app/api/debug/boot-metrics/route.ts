@@ -1,16 +1,21 @@
 import { NextResponse } from "next/server";
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 
-export async function GET() {
-  // Server cannot access client performance marks; this endpoint exists
-  // to define the contract and future wiring to RUM ingestion.
+function devOnlyResponse() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
+
   return NextResponse.json({
     ok: true,
-    metrics: {
-      splash_end: "performance.mark(lumora:splash_end)",
-      first_interactive: "performance.mark(lumora:first_interactive)",
-      boot_to_interactive: "performance.measure(lumora:boot_to_interactive)",
-    },
-    note: "Client-side marks available via Performance API in browser devtools.",
-    ts: Date.now(),
+    devOnly: true,
+    message: "Development-only endpoint."
   });
+}
+
+export async function GET() {
+  return devOnlyResponse();
+}
+
+export async function POST() {
+  return devOnlyResponse();
 }

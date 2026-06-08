@@ -1,3 +1,4 @@
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
 import { NextResponse } from "next/server";
 import { getNexaDiag } from "@/lib/nexa/diag";
 import { rateLimitHeaders } from "@/lib/nexa/rl";

@@ -1,5 +1,21 @@
-export const runtime = "nodejs";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-export const dynamic = "force-dynamic"; export const revalidate = 0;
-export async function GET(){ const rows = await prisma.video.findMany({ orderBy:{ createdAt:"desc" }, take:10 }); return NextResponse.json({ ok:true, rows }); }
+import { productionDebugGate } from "@/src/lib/runtime-guards/productionDebugGate";
+
+function devOnlyResponse() {
+  const blocked = productionDebugGate();
+  if (blocked) return blocked;
+
+  return NextResponse.json({
+    ok: true,
+    devOnly: true,
+    message: "Development-only endpoint."
+  });
+}
+
+export async function GET() {
+  return devOnlyResponse();
+}
+
+export async function POST() {
+  return devOnlyResponse();
+}
