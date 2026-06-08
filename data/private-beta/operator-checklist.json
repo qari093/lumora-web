@@ -1,0 +1,19 @@
+{
+  "status": "PRIVATE_BETA_OPERATOR_CHECKLIST_READY",
+  "checklist": {
+    "confirmProductionDomain": true,
+    "confirmAllowlistOnly": true,
+    "confirmPublicSignupDisabled": true,
+    "confirmPaymentLiveModeDisabled": true,
+    "confirmInviteCap": true,
+    "confirmManualFeedbackReview": true,
+    "confirmPauseRules": true
+  },
+  "guards": {
+    "maxWaveOneInvites": 25,
+    "manualExpansionOnly": true,
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true
+  },
+  "nextCanonicalPhase": "Private beta first invite dispatch seal"
+}

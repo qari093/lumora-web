@@ -1,0 +1,22 @@
+{
+  "status": "PRIVATE_BETA_FIRST_WAVE_OBSERVATION_READY",
+  "wave": 1,
+  "maxInvites": 25,
+  "observationWindowDays": 7,
+  "paymentLiveMode": false,
+  "publicSignupDisabled": true,
+  "allowlistOnly": true,
+  "requiredDailyChecks": [
+    "route_5xx_review",
+    "unauthorized_access_review",
+    "feedback_review",
+    "fyp_live_smoke_review",
+    "zendoro_safe_mode_review"
+  ],
+  "pauseRules": {
+    "anyCritical5xx": true,
+    "anyUnauthorizedAccess": true,
+    "paymentLiveModeEnabled": true,
+    "publicSignupEnabled": true
+  }
+}

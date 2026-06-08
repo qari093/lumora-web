@@ -1,0 +1,19 @@
+{
+  "status": "PRIVATE_BETA_STABILITY_SEAL_READY",
+  "wave": 1,
+  "checks": {
+    "monitorLoop": "PASS",
+    "dailyHealthSnapshot": "PASS",
+    "realUserObservation": "PASS",
+    "expansionDecisionGate": "PASS"
+  },
+  "guards": {
+    "critical5xx": 0,
+    "unauthorizedAccessEvents": 0,
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true
+  },
+  "nextCanonicalPhase": "Private beta launch communication pack"
+}

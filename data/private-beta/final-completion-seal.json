@@ -1,0 +1,21 @@
+{
+  "status": "PRIVATE_BETA_EXECUTION_CHAIN_COMPLETE",
+  "completedThroughStep": 30,
+  "checks": {
+    "readinessGate": "PASS",
+    "controlledInviteRollout": "PASS",
+    "monitorLoop": "PASS",
+    "launchReadinessFinalSeal": "PASS",
+    "wave1Live": "PASS",
+    "liveOperationsSeal": "PASS",
+    "runtimeObservationSeal": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "waveOneMaxInvites": 25
+  },
+  "nextCanonicalPhase": "Hold Wave 1 and observe real users"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PRIVATE_BETA_MONITOR_LOOP_READY",
+  "cadence": "daily_manual_review",
+  "metrics": {
+    "accessErrors": 0,
+    "api5xxBudget": 0,
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true,
+    "allowlistOnly": true
+  },
+  "guards": {
+    "pauseOnAny5xxSpike": true,
+    "pauseOnUnauthorizedAccess": true,
+    "pauseOnPaymentLiveMode": true,
+    "pauseOnPublicSignupEnabled": true
+  }
+}

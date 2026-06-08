@@ -1,0 +1,13 @@
+{
+  "status": "PRIVATE_BETA_ISSUE_TRIAGE_READY",
+  "mode": "manual_priority_board",
+  "queues": ["critical", "high", "medium", "low"],
+  "rules": {
+    "criticalBlocksNextWave": true,
+    "highRequiresReviewBeforeExpansion": true,
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true,
+    "allowlistOnly": true
+  },
+  "issues": []
+}

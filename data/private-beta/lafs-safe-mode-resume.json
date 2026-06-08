@@ -1,0 +1,22 @@
+{
+  "status": "PRIVATE_BETA_RESUME_WITH_LAFS_SAFE_MODE_READY",
+  "generatedAt": "2026-06-07T20:38:46.861Z",
+  "mode": "controlled_private_beta",
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "lafsSafeModeSealed": true,
+    "noAutonomousMoneyMovement": true,
+    "dashboardReadOnly": true,
+    "humanApprovalRequired": true
+  },
+  "activeRoutes": {
+    "betaEntry": "/go",
+    "privateAccess": "/private-access",
+    "betaPage": "/beta",
+    "lafsDashboard": "/lafs"
+  },
+  "nextCanonicalPhase": "Private beta wave 1 hold and observe real users"
+}

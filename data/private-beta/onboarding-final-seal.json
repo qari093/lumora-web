@@ -1,0 +1,15 @@
+{
+  "status": "PRIVATE_BETA_ONBOARDING_SEALED",
+  "wave": 1,
+  "checks": {
+    "inviteDispatchAudit": "PASS",
+    "onboardingSmoke": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true
+  },
+  "nextCanonicalPhase": "Private beta wave 1 active observation seal"
+}

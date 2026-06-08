@@ -1,0 +1,20 @@
+{
+  "status": "PRIVATE_BETA_WAVE_1_LIVE_READY",
+  "wave": 1,
+  "mode": "controlled_live_observation",
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "maxInvites": 25,
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true
+  },
+  "checks": {
+    "launchReadinessFinalSeal": "PASS",
+    "onboardingFinalSeal": "PASS",
+    "monitorLoop": "PASS"
+  },
+  "nextCanonicalPhase": "Private beta live operations seal"
+}

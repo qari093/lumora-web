@@ -1,0 +1,18 @@
+{
+  "status": "PRIVATE_BETA_LAUNCH_READINESS_FINAL_SEALED",
+  "checks": {
+    "finalBetaSeal": "PASS",
+    "finalRolloutSeal": "PASS",
+    "finalMonitoringSeal": "PASS",
+    "onboardingFinalSeal": "PASS",
+    "wave1ActiveObservationSeal": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "waveOneMaxInvites": 25
+  },
+  "nextCanonicalPhase": "Private beta wave 1 live"
+}

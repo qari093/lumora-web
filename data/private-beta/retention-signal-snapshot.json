@@ -1,0 +1,19 @@
+{
+  "status": "PRIVATE_BETA_RETENTION_SIGNAL_READY",
+  "wave": 1,
+  "sampleSize": 0,
+  "signals": {
+    "dayOneReturnRate": null,
+    "daySevenReturnRate": null,
+    "coreActionCompletionRate": null,
+    "rageClickReports": 0,
+    "criticalDropoffReports": 0
+  },
+  "guards": {
+    "doNotExpandWithoutSignal": true,
+    "manualReviewRequired": true,
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true,
+    "allowlistOnly": true
+  }
+}

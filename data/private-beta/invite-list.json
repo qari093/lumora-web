@@ -1,0 +1,12 @@
+{
+  "status": "INVITE_LIST_READY",
+  "phase": "private_beta_wave_1",
+  "maxInvites": 25,
+  "invites": [],
+  "rules": {
+    "emailRequired": true,
+    "manualApprovalRequired": true,
+    "publicSignupDisabled": true,
+    "allowlistOnly": true
+  }
+}

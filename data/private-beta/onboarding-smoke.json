@@ -1,0 +1,19 @@
+{
+  "status": "PRIVATE_BETA_ONBOARDING_SMOKE_READY",
+  "wave": 1,
+  "routes": {
+    "go": "/go",
+    "beta": "/beta",
+    "privateAccess": "/private-access",
+    "gateApi": "/api/private-beta/gate",
+    "accessApi": "/api/private-beta/access"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualApprovalRequired": true,
+    "inviteDispatchAudit": "PASS"
+  },
+  "nextCanonicalPhase": "Private beta onboarding final seal"
+}

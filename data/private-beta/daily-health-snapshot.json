@@ -1,0 +1,12 @@
+{
+  "status": "PRIVATE_BETA_DAILY_HEALTH_READY",
+  "day": 1,
+  "metrics": {
+    "critical5xx": 0,
+    "unauthorizedAccessEvents": 0,
+    "paymentLiveMode": false,
+    "publicSignupEnabled": false,
+    "allowlistOnly": true
+  },
+  "health": "GREEN"
+}

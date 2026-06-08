@@ -1,0 +1,18 @@
+{
+  "status": "PRIVATE_BETA_LAUNCH_COMMUNICATION_PACK_READY",
+  "audience": "allowlist_only",
+  "wave": 1,
+  "maxRecipients": 25,
+  "messages": {
+    "invite": "Lumora private beta access is ready for your manual invite wave.",
+    "rules": "Access is allowlist-only. Public signup and live payments remain disabled.",
+    "feedback": "Feedback is collected manually and reviewed before any expansion."
+  },
+  "guards": {
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualReviewRequired": true,
+    "noPublicMarketing": true
+  },
+  "nextCanonicalPhase": "Private beta operator checklist"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PRIVATE_BETA_FEEDBACK_COLLECTION_READY",
+  "collectionMode": "manual_review",
+  "channels": ["in_app_feedback", "direct_tester_notes"],
+  "rules": {
+    "noPublicReviews": true,
+    "manualTriageRequired": true,
+    "criticalIssuesPauseRollout": true,
+    "paymentFeedbackLiveMode": false
+  }
+}
