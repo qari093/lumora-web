@@ -1,0 +1,16 @@
+{
+  "capturedAt": "PRE_WAVE_1",
+  "gitClean": true,
+  "lafsProductionRoute": "/lafs",
+  "lafsStatus": "200_OK",
+  "paymentLiveMode": false,
+  "humanApprovalRequired": true,
+  "publicSignupEnabled": false,
+  "allowlistOnly": true,
+  "maxWave1Invites": 25,
+  "expansionAllowed": false,
+  "notes": [
+    "Baseline captured before first external tester",
+    "Any regression must be compared against this state"
+  ]
+}
