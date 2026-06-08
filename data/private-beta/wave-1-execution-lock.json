@@ -1,0 +1,13 @@
+{
+  "status": "WAVE_1_LOCKED",
+  "wave": 1,
+  "maxInvites": 25,
+  "recommendedFirstBatch": 3,
+  "currentInvitesIssued": 0,
+  "currentActiveTesters": 0,
+  "expansionAllowed": false,
+  "phase0FreezeActive": true,
+  "paymentLiveMode": false,
+  "allowlistOnly": true,
+  "nextGate": "FIRST_TESTER_SELECTION"
+}
