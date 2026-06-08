@@ -1,0 +1,17 @@
+{
+  "phase": "PRIVATE_BETA_PRE_INVITE",
+  "lafs": {
+    "status": "LIVE_SAFE_MODE",
+    "paymentLiveMode": false
+  },
+  "beta": {
+    "allowlistOnly": true,
+    "publicSignup": false,
+    "wave": 1,
+    "maxInvites": 25
+  },
+  "deployment": {
+    "productionHealthy": true,
+    "lafsRouteHealthy": true
+  }
+}
