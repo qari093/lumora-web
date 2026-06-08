@@ -1,0 +1,31 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "DASHBOARD_COMMAND_HEARTH_READY",
+  "pack": "07/08",
+  "generatedAt": "2026-06-07T20:30:11.972Z",
+  "route": "/lafs",
+  "layout": {
+    "title": "LAFS Ω∞ Command Hearth",
+    "grid": "2x4",
+    "lensDefault": "OFF",
+    "panels": [
+      "Treasury Pulse",
+      "Risk & Freeze Control",
+      "Ledger Flow",
+      "Payment Channels",
+      "Approval Queue",
+      "Operator Audit Trail",
+      "Financial Tensions",
+      "Constitution Explorer"
+    ]
+  },
+  "guards": {
+    "paymentLiveMode": false,
+    "readOnlyDashboard": true,
+    "noMoneyMovementFromDashboard": true,
+    "humanApprovalRequired": true,
+    "lumoraLensDefaultOff": true,
+    "criticalPanelsNoPoetry": true
+  },
+  "nextPack": "LAFS Pack 08/08 — Final Pre-Beta Seal"
+}

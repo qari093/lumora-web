@@ -1,0 +1,23 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "STRIPE_WEBHOOK_SAFE_INGESTION_READY",
+  "pack": "03/08",
+  "generatedAt": "2026-06-07T20:01:54.377Z",
+  "guards": {
+    "paymentLiveMode": false,
+    "requiresRawBody": true,
+    "requiresStripeSignatureVerification": true,
+    "requiresIdempotency": true,
+    "duplicateEventsAckSafely": true,
+    "ledgerCreatedPendingApprovalOnly": true
+  },
+  "sampleWebhook": {
+    "eventId": "evt_lafs_pack03_sample",
+    "eventType": "payment_intent.succeeded",
+    "signatureHeaderShape": "t=1780862514,v1=b9ab31ced4c0...",
+    "amountMinor": 12500,
+    "currency": "EUR",
+    "idempotencyKey": "stripe:evt_lafs_pack03_sample"
+  },
+  "nextPack": "LAFS Pack 04/08 — Approval Workflow + RBAC"
+}

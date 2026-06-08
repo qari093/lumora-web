@@ -1,0 +1,21 @@
+{
+  "status": "PRIVATE_BETA_CONTROLLED_ROLLOUT_READY",
+  "rollout": {
+    "phase": "private_beta",
+    "entryUrl": "https://lumoraverse.io/go",
+    "accessModel": "allowlist_only",
+    "initialBatchSize": 25,
+    "maxFirstWave": 100,
+    "inviteCadence": "manual_controlled_batches",
+    "publicLaunchAllowed": false
+  },
+  "guards": {
+    "privateBetaFinalSeal": "PASS",
+    "allowlistRequired": true,
+    "paymentLiveMode": false,
+    "debugRoutesBlocked": true,
+    "liveFypValidated": true,
+    "zendoroPaymentsSafeMode": true
+  },
+  "nextCanonicalPhase": "Private beta invite list creation"
+}

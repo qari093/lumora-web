@@ -1,0 +1,9 @@
+{
+  "status": "PRIVATE_BETA_READY",
+  "checks": {
+    "readinessGate": "PASS",
+    "productionAccessSmoke": "PASS",
+    "allowlistGuardAudit": "PASS"
+  },
+  "nextCanonicalPhase": "Private beta controlled invite rollout"
+}

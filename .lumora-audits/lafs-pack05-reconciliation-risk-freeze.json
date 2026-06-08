@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-06-07T20:18:15.448Z",
+  "status": "PASS",
+  "previousLock": {
+    "file": ".lumora_lafs_pack04_approval_rbac_lock",
+    "exists": true
+  },
+  "manifest": {
+    "system": "LAFS_PRE_BETA",
+    "status": "RECONCILIATION_RISK_FREEZE_READY",
+    "pack": "05/08",
+    "generatedAt": "2026-06-07T20:18:15.446Z",
+    "guards": {
+      "paymentLiveMode": false,
+      "reconciliationRequiredBeforePayouts": true,
+      "highRiskFreezesAffectedSource": true,
+      "criticalRiskFreezesTreasurySegment": true,
+      "unfreezeRequiresEvidence": true,
+      "unfreezeRequiresHumanApproval": true
+    },
+    "reconciliationMatrix": [
+      {
+        "source": "stripe_vs_ledger",
+        "frequency": "15m",
+        "toleranceMinor": 0,
+        "failAction": "HIGH risk flag + freeze Stripe payout source"
+      },
+      {
+        "source": "payout_vs_bank",
+        "frequency": "daily",
+        "toleranceMinor": 1,
+        "failAction": "HIGH risk flag + freeze payout queue"
+      },
+      {
+        "source": "zencoin_vs_chain",
+        "frequency": "30m",
+        "toleranceMinor": 0,
+        "failAction": "HIGH risk flag + freeze bridge movement"
+      },
+      {
+        "source": "ledger_vs_custody",
+        "frequency": "hourly",
+        "toleranceMinor": 100,
+        "failAction": "CRITICAL risk flag if material imbalance"
+      }
+    ],
+    "escalation": [
+      {
+        "riskLevel": "LOW",
+        "freezeState": "SAFE",
+        "autoFreeze": false
+      },
+      {
+        "riskLevel": "MEDIUM",
+        "freezeState": "WATCH",
+        "autoFreeze": false
+      },
+      {
+        "riskLevel": "HIGH",
+        "freezeState": "REVIEW",
+        "autoFreeze": true
+      },
+      {
+        "riskLevel": "CRITICAL",
+        "freezeState": "FROZEN",
+        "autoFreeze": true
+      }
+    ],
+    "nextPack": "LAFS Pack 06/08 — Treasury Constitution + Allocation Rules"
+  },
+  "checks": [
+    {
+      "file": "src/core/lafs/reconciliationRisk.ts",
+      "exists": true,
+      "bytes": 4209
+    },
+    {
+      "file": "prisma/migrations/lafs-prebeta/005_lafs_reconciliation_risk_freeze.sql",
+      "exists": true,
+      "bytes": 2651
+    }
+  ],
+  "nextRequiredAction": "LAFS Pack 06/08 — Treasury Constitution + Allocation Rules"
+}

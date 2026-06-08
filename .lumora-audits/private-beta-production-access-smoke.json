@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-06-07T15:55:10.030Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "name": "go",
+      "method": "GET",
+      "path": "/go",
+      "expected": [
+        200
+      ],
+      "minBytes": 100,
+      "url": "https://lumoraverse.io/go",
+      "status": 200,
+      "bytes": 24568,
+      "ms": 637,
+      "ok": true
+    },
+    {
+      "name": "beta",
+      "method": "GET",
+      "path": "/beta",
+      "expected": [
+        200,
+        307,
+        308,
+        401,
+        403,
+        404
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/beta",
+      "status": 200,
+      "bytes": 20250,
+      "ms": 252,
+      "ok": true
+    },
+    {
+      "name": "privateAccessPage",
+      "method": "GET",
+      "path": "/private-access",
+      "expected": [
+        200,
+        307,
+        308,
+        401,
+        403,
+        404
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/private-access",
+      "status": 200,
+      "bytes": 21274,
+      "ms": 368,
+      "ok": true
+    },
+    {
+      "name": "privateAccessApi",
+      "method": "GET",
+      "path": "/api/private-access",
+      "expected": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/api/private-access",
+      "status": 401,
+      "bytes": 35,
+      "ms": 1510,
+      "ok": true
+    },
+    {
+      "name": "privateBetaAccessApi",
+      "method": "GET",
+      "path": "/api/private-beta/access",
+      "expected": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/api/private-beta/access",
+      "status": 200,
+      "bytes": 306,
+      "ms": 336,
+      "ok": true
+    },
+    {
+      "name": "privateBetaGateApi",
+      "method": "GET",
+      "path": "/api/private-beta/gate",
+      "expected": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/api/private-beta/gate",
+      "status": 200,
+      "bytes": 356,
+      "ms": 270,
+      "ok": true
+    },
+    {
+      "name": "privateBetaAllowlistApi",
+      "method": "GET",
+      "path": "/api/private-beta/allowlist",
+      "expected": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "minBytes": 0,
+      "url": "https://lumoraverse.io/api/private-beta/allowlist",
+      "status": 200,
+      "bytes": 112,
+      "ms": 367,
+      "ok": true
+    }
+  ]
+}

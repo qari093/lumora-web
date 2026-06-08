@@ -1,0 +1,38 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "LEDGER_CORE_READY",
+  "pack": "02/08",
+  "generatedAt": "2026-06-07T19:30:29.482Z",
+  "guards": {
+    "paymentLiveMode": false,
+    "humanApprovalRequired": true,
+    "doubleEntryRequired": true,
+    "idempotencyRequired": true,
+    "minorUnitsOnly": true
+  },
+  "sampleTransaction": {
+    "idempotencyKey": "stripe:evt_lafs_pack02_sample",
+    "sourceReference": "pi_lafs_pack02_sample",
+    "description": "Zendoro Stripe payment clearing pi_lafs_pack02_sample",
+    "createdAt": "2026-06-07T19:30:29.481Z",
+    "entries": [
+      {
+        "accountCode": "stripe_clearing_eur",
+        "amountMinor": 5000,
+        "entryType": "debit"
+      },
+      {
+        "accountCode": "zendoro_revenue_eur",
+        "amountMinor": 5000,
+        "entryType": "credit"
+      }
+    ]
+  },
+  "validation": {
+    "debitMinor": 5000,
+    "creditMinor": 5000,
+    "balanced": true,
+    "amountUnit": "minor"
+  },
+  "nextPack": "LAFS Pack 03/08 — Stripe Webhook Safe Ingestion"
+}

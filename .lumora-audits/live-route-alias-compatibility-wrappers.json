@@ -1,0 +1,14 @@
+{
+  "status": "APPLIED",
+  "canonical": "/api/live/rooms",
+  "aliases": [
+    "app/api/live/room/route.ts",
+    "app/api/live/room-list/route.ts",
+    "app/api/live/roomlist/route.ts",
+    "app/api/live/rooms-list/route.ts",
+    "app/api/live/roomslist/route.ts",
+    "app/api/live/rooms/list/route.ts",
+    "app/api/live/rooms/public/route.ts"
+  ],
+  "behavior": "200 compatibility JSON with canonical route headers"
+}

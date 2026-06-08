@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-06-07T16:00:13.613Z",
+  "status": "PASS",
+  "requiredTerms": [
+    "allow",
+    "beta",
+    "private",
+    "email"
+  ],
+  "routes": [
+    {
+      "file": "app/api/private-beta/access/route.ts",
+      "exists": true,
+      "bytes": 1651,
+      "hasGet": true,
+      "hasPost": true,
+      "mentionsAllowlist": true,
+      "mentionsPrivateBeta": true,
+      "mentionsEmail": true,
+      "unsafeOpenAccess": false
+    },
+    {
+      "file": "app/api/private-beta/gate/route.ts",
+      "exists": true,
+      "bytes": 779,
+      "hasGet": true,
+      "hasPost": true,
+      "mentionsAllowlist": true,
+      "mentionsPrivateBeta": true,
+      "mentionsEmail": true,
+      "unsafeOpenAccess": false
+    },
+    {
+      "file": "app/api/private-beta/allowlist/route.ts",
+      "exists": true,
+      "bytes": 739,
+      "hasGet": true,
+      "hasPost": false,
+      "mentionsAllowlist": true,
+      "mentionsPrivateBeta": true,
+      "mentionsEmail": true,
+      "unsafeOpenAccess": false
+    },
+    {
+      "file": "app/api/private-access/route.ts",
+      "exists": true,
+      "bytes": 2209,
+      "hasGet": true,
+      "hasPost": true,
+      "mentionsAllowlist": true,
+      "mentionsPrivateBeta": true,
+      "mentionsEmail": true,
+      "unsafeOpenAccess": false
+    }
+  ],
+  "nextRequiredAction": "private beta final seal"
+}

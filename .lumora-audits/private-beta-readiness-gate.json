@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-06-07T15:51:38.326Z",
+  "status": "PASS",
+  "requiredLocks": [
+    {
+      "file": ".lumora_runtime_consolidation_phase1_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_fix_duplicate_legacy_routes_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_main_user_journey_validated_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_zendoro_payments_validated_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_live_fyp_validated_lock",
+      "exists": true
+    }
+  ],
+  "privateBetaRoutes": [
+    {
+      "file": "app/api/private-beta/access/route.ts",
+      "exists": true,
+      "bytes": 1651
+    },
+    {
+      "file": "app/api/private-beta/gate/route.ts",
+      "exists": true,
+      "bytes": 703
+    },
+    {
+      "file": "app/api/private-beta/allowlist/route.ts",
+      "exists": true,
+      "bytes": 661
+    },
+    {
+      "file": "app/api/private-access/route.ts",
+      "exists": true,
+      "bytes": 2113
+    },
+    {
+      "file": "app/private-access/page.tsx",
+      "exists": true,
+      "bytes": 162
+    },
+    {
+      "file": "app/beta/page.tsx",
+      "exists": true,
+      "bytes": 198
+    },
+    {
+      "file": "app/go/page.tsx",
+      "exists": true,
+      "bytes": 4832
+    }
+  ],
+  "nextRequiredAction": "private beta production access smoke"
+}

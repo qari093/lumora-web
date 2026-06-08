@@ -1,0 +1,23 @@
+{
+  "status": "PRIVATE_BETA_EXPANSION_DECISION_GATE_READY",
+  "decision": "HOLD_WAVE_1",
+  "wave": 1,
+  "currentSampleSize": 0,
+  "maxCurrentWaveInvites": 25,
+  "requiredBeforeExpansion": {
+    "realUserUsageObserved": false,
+    "criticalIssues": 0,
+    "unauthorizedAccessEvents": 0,
+    "manualReviewCompleted": false,
+    "retentionSignalAvailable": false
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "blockExpansionWithoutRetentionSignal": true,
+    "blockExpansionWithoutManualReview": true
+  },
+  "nextCanonicalPhase": "Private beta stability seal"
+}

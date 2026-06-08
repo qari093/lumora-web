@@ -1,0 +1,163 @@
+{
+  "checkedAt": "2026-06-07T20:34:41.022Z",
+  "status": "PASS",
+  "manifest": {
+    "system": "LAFS_PRE_BETA",
+    "status": "LAFS_PRE_BETA_EXECUTION_CHAIN_COMPLETE",
+    "pack": "08/08",
+    "completedPacks": 8,
+    "generatedAt": "2026-06-07T20:34:41.011Z",
+    "integrationMode": "pre_beta_safe_mode",
+    "guards": {
+      "paymentLiveMode": false,
+      "publicSignupDisabled": true,
+      "allowlistOnly": true,
+      "manualExpansionOnly": true,
+      "humanApprovalRequired": true,
+      "noAutonomousMoneyMovement": true,
+      "dashboardReadOnly": true,
+      "stripeWebhookSignatureRequired": true,
+      "doubleEntryRequired": true,
+      "reconciliationBeforePayouts": true,
+      "unfreezeRequiresHumanApproval": true,
+      "treasuryRulesGoverned": true,
+      "lumoraLensDefaultOff": true
+    },
+    "completedScope": [
+      "Foundation manifest + account taxonomy",
+      "Minor-unit double-entry ledger core",
+      "Stripe webhook safe ingestion scaffold",
+      "Approval workflow + RBAC",
+      "Reconciliation + risk freeze model",
+      "Treasury constitution + allocation rules",
+      "Read-only LAFS Command Hearth dashboard",
+      "Final pre-beta seal"
+    ],
+    "deferredPostBetaScope": [
+      "Live Stripe money movement",
+      "Bank/open-banking feeds",
+      "Production Zencoin bridge broadcast",
+      "Merkle anchoring / Proof of Treasury",
+      "Treasury Digital Twin simulations",
+      "Financial Chronicle public narrative mode",
+      "Advanced AI financial co-pilot",
+      "Council live amendment workflow"
+    ],
+    "nextCanonicalPhase": "Resume private beta with LAFS pre-beta safe mode sealed"
+  },
+  "requiredLocks": [
+    {
+      "file": ".lumora_lafs_pack01_foundation_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack02_ledger_core_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack03_stripe_webhook_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack04_approval_rbac_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack05_reconciliation_risk_freeze_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack06_treasury_constitution_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack07_dashboard_command_hearth_lock",
+      "exists": true
+    }
+  ],
+  "requiredAudits": [
+    {
+      "file": ".lumora-audits/lafs-pack01-foundation.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack02-ledger-core.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack03-stripe-webhook-safe-ingestion.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack04-approval-workflow-rbac.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack05-reconciliation-risk-freeze.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack06-treasury-constitution-allocation.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/lafs-pack07-dashboard-command-hearth.json",
+      "exists": true,
+      "status": "PASS"
+    }
+  ],
+  "requiredFiles": [
+    {
+      "file": "src/core/lafs/types.ts",
+      "exists": true,
+      "bytes": 865
+    },
+    {
+      "file": "src/core/lafs/foundation.ts",
+      "exists": true,
+      "bytes": 2086
+    },
+    {
+      "file": "src/core/lafs/ledger.ts",
+      "exists": true,
+      "bytes": 3038
+    },
+    {
+      "file": "src/core/lafs/stripeWebhook.ts",
+      "exists": true,
+      "bytes": 4338
+    },
+    {
+      "file": "src/core/lafs/approvals.ts",
+      "exists": true,
+      "bytes": 4135
+    },
+    {
+      "file": "src/core/lafs/reconciliationRisk.ts",
+      "exists": true,
+      "bytes": 4209
+    },
+    {
+      "file": "src/core/lafs/treasuryConstitution.ts",
+      "exists": true,
+      "bytes": 4497
+    },
+    {
+      "file": "src/core/lafs/dashboard.ts",
+      "exists": true,
+      "bytes": 1616
+    },
+    {
+      "file": "app/lafs/page.tsx",
+      "exists": true,
+      "bytes": 2020
+    }
+  ],
+  "nextRequiredAction": "Resume private beta with LAFS pre-beta safe mode sealed"
+}

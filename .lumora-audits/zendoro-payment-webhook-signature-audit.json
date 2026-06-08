@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-06-07T10:26:48.613Z",
+  "status": "PASS",
+  "routes": [
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "hasPost": true,
+      "readsStripeSignature": true,
+      "usesConstructEvent": true,
+      "hasWebhookSecretGate": true,
+      "bytes": 1189
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "hasPost": true,
+      "readsStripeSignature": true,
+      "usesConstructEvent": true,
+      "hasWebhookSecretGate": true,
+      "bytes": 3271
+    }
+  ],
+  "note": "Canonical Zendoro webhook is safe-gated. Existing Stripe webhook contains constructEvent verification and should be migrated into Zendoro before live fulfillment."
+}

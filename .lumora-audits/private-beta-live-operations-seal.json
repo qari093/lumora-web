@@ -1,0 +1,16 @@
+{
+  "status": "PRIVATE_BETA_LIVE_OPERATIONS_SEALED",
+  "checks": {
+    "wave1Live": "PASS",
+    "launchReadiness": "PASS",
+    "operatorChecklist": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "maxInvites": 25
+  },
+  "nextCanonicalPhase": "Private beta runtime observation seal"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PRIVATE_BETA_DAILY_HEALTH_READY",
+  "checks": {
+    "critical5xx": "PASS",
+    "unauthorizedAccess": "PASS",
+    "paymentLiveModeDisabled": "PASS",
+    "publicSignupDisabled": "PASS"
+  },
+  "nextCanonicalPhase": "Private beta feedback collection loop"
+}

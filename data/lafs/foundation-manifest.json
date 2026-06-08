@@ -1,0 +1,81 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "FOUNDATION_READY",
+  "pack": "01/08",
+  "generatedAt": "2026-06-07T18:48:35.827Z",
+  "guards": {
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true,
+    "allowlistOnly": true,
+    "manualExpansionOnly": true,
+    "humanApprovalRequired": true
+  },
+  "accounts": [
+    {
+      "code": "cash_eur",
+      "name": "Cash EUR",
+      "currency": "EUR",
+      "type": "asset"
+    },
+    {
+      "code": "stripe_clearing_eur",
+      "name": "Stripe Clearing EUR",
+      "currency": "EUR",
+      "type": "asset"
+    },
+    {
+      "code": "zendoro_revenue_eur",
+      "name": "Zendoro Revenue EUR",
+      "currency": "EUR",
+      "type": "revenue"
+    },
+    {
+      "code": "refund_reserve_eur",
+      "name": "Refund Reserve EUR",
+      "currency": "EUR",
+      "type": "liability"
+    },
+    {
+      "code": "creator_rewards_eur",
+      "name": "Creator Rewards EUR",
+      "currency": "EUR",
+      "type": "liability"
+    },
+    {
+      "code": "operations_expense_eur",
+      "name": "Operations Expense EUR",
+      "currency": "EUR",
+      "type": "expense"
+    },
+    {
+      "code": "treasury_reserve_eur",
+      "name": "Treasury Reserve EUR",
+      "currency": "EUR",
+      "type": "equity"
+    },
+    {
+      "code": "zencoin_internal_zc",
+      "name": "Zencoin Internal",
+      "currency": "ZC",
+      "type": "liability"
+    }
+  ],
+  "checks": [
+    {
+      "file": "src/core/lafs/types.ts",
+      "exists": true,
+      "bytes": 865
+    },
+    {
+      "file": "src/core/lafs/foundation.ts",
+      "exists": true,
+      "bytes": 2086
+    },
+    {
+      "file": "prisma/migrations/lafs-prebeta/001_lafs_foundation.sql",
+      "exists": true,
+      "bytes": 1018
+    }
+  ],
+  "nextPack": "LAFS Pack 02/08 — Ledger Core + Double Entry"
+}

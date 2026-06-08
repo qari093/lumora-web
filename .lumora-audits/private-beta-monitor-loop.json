@@ -1,0 +1,10 @@
+{
+  "status": "PRIVATE_BETA_MONITOR_LOOP_READY",
+  "checks": {
+    "controlledRolloutSeal": "PASS",
+    "allowlistOnly": true,
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true
+  },
+  "nextCanonicalPhase": "Private beta first wave observation"
+}

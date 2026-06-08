@@ -1,0 +1,204 @@
+{
+  "checkedAt": "2026-06-07T15:47:25.251Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "group": "fypLegacy",
+      "name": "fyp94Feed",
+      "path": "/api/fyp94/feed",
+      "expected": [
+        200,
+        301,
+        302,
+        307,
+        308,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/fyp94/feed",
+      "status": 200,
+      "bytes": 163,
+      "ms": 918,
+      "ok": true
+    },
+    {
+      "group": "fypLegacy",
+      "name": "fyp94Health",
+      "path": "/api/fyp94/health",
+      "expected": [
+        200,
+        301,
+        302,
+        307,
+        308,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/fyp94/health",
+      "status": 200,
+      "bytes": 167,
+      "ms": 267,
+      "ok": true
+    },
+    {
+      "group": "fypLegacy",
+      "name": "feedRoot",
+      "path": "/api/feed",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/feed",
+      "status": 200,
+      "bytes": 43739,
+      "ms": 941,
+      "ok": true
+    },
+    {
+      "group": "fypLegacy",
+      "name": "feedMix",
+      "path": "/api/feed/mix",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/feed/mix",
+      "status": 200,
+      "bytes": 140,
+      "ms": 3337,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoom",
+      "path": "/api/live/room",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/live/room",
+      "status": 200,
+      "bytes": 164,
+      "ms": 298,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoomList",
+      "path": "/api/live/room-list",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/live/room-list",
+      "status": 200,
+      "bytes": 169,
+      "ms": 345,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoomlist",
+      "path": "/api/live/roomlist",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/live/roomlist",
+      "status": 200,
+      "bytes": 168,
+      "ms": 343,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoomsList",
+      "path": "/api/live/rooms-list",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/live/rooms-list",
+      "status": 200,
+      "bytes": 170,
+      "ms": 266,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoomsNestedList",
+      "path": "/api/live/rooms/list",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404
+      ],
+      "url": "https://lumoraverse.io/api/live/rooms/list",
+      "status": 200,
+      "bytes": 170,
+      "ms": 318,
+      "ok": true
+    },
+    {
+      "group": "liveAlias",
+      "name": "liveRoomsPublic",
+      "path": "/api/live/rooms/public",
+      "expected": [
+        200,
+        204,
+        301,
+        302,
+        307,
+        308,
+        400,
+        404,
+        410
+      ],
+      "url": "https://lumoraverse.io/api/live/rooms/public",
+      "status": 200,
+      "bytes": 172,
+      "ms": 101,
+      "ok": true
+    }
+  ]
+}

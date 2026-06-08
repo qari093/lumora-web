@@ -1,0 +1,20 @@
+{
+  "status": "PRIVATE_BETA_INVITE_DISPATCH_AUDIT_READY",
+  "wave": 1,
+  "dispatch": {
+    "sentCount": 0,
+    "maxRecipients": 25,
+    "mode": "manual_invite_only",
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false
+  },
+  "guards": {
+    "firstInviteDispatchSeal": "PASS",
+    "overDispatchRisk": false,
+    "manualApprovalRequired": true,
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true
+  },
+  "nextCanonicalPhase": "Private beta onboarding smoke"
+}

@@ -1,0 +1,50 @@
+{
+  "status": "APPLIED",
+  "canonicalNamespace": "/api/zenwallet",
+  "aliases": [
+    {
+      "file": "app/api/wallet/route.ts",
+      "canonical": "/api/zenwallet/runtime",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "app/api/wallet/balance/route.ts",
+      "canonical": "/api/zenwallet/runtime",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "app/api/wallet/history/route.ts",
+      "canonical": "/api/zenwallet/ledger",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "app/api/wallet/ledger/route.ts",
+      "canonical": "/api/zenwallet/ledger",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/wallets/route.ts",
+      "canonical": "/api/zenwallet/runtime",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/wallets/ensure/route.ts",
+      "canonical": "/api/zenwallet/runtime",
+      "methods": [
+        "POST"
+      ]
+    }
+  ],
+  "behavior": "200 compatibility JSON with canonical route headers"
+}

@@ -1,0 +1,7 @@
+{
+  "status": "PRIVATE_BETA_INVITE_LIST_READY",
+  "source": "data/private-beta/invite-list.json",
+  "maxInvites": 25,
+  "currentInvites": 0,
+  "nextCanonicalPhase": "Private beta invite issue audit"
+}

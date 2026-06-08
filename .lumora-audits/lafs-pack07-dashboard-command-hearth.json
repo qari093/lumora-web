@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-06-07T20:30:11.974Z",
+  "status": "PASS",
+  "previousLock": {
+    "file": ".lumora_lafs_pack06_treasury_constitution_lock",
+    "exists": true
+  },
+  "manifest": {
+    "system": "LAFS_PRE_BETA",
+    "status": "DASHBOARD_COMMAND_HEARTH_READY",
+    "pack": "07/08",
+    "generatedAt": "2026-06-07T20:30:11.972Z",
+    "route": "/lafs",
+    "layout": {
+      "title": "LAFS Ω∞ Command Hearth",
+      "grid": "2x4",
+      "lensDefault": "OFF",
+      "panels": [
+        "Treasury Pulse",
+        "Risk & Freeze Control",
+        "Ledger Flow",
+        "Payment Channels",
+        "Approval Queue",
+        "Operator Audit Trail",
+        "Financial Tensions",
+        "Constitution Explorer"
+      ]
+    },
+    "guards": {
+      "paymentLiveMode": false,
+      "readOnlyDashboard": true,
+      "noMoneyMovementFromDashboard": true,
+      "humanApprovalRequired": true,
+      "lumoraLensDefaultOff": true,
+      "criticalPanelsNoPoetry": true
+    },
+    "nextPack": "LAFS Pack 08/08 — Final Pre-Beta Seal"
+  },
+  "checks": [
+    {
+      "file": "src/core/lafs/dashboard.ts",
+      "exists": true,
+      "bytes": 1616
+    },
+    {
+      "file": "app/lafs/page.tsx",
+      "exists": true,
+      "bytes": 2020
+    },
+    {
+      "file": "prisma/migrations/lafs-prebeta/007_lafs_dashboard_command_hearth.sql",
+      "exists": true,
+      "bytes": 898
+    }
+  ],
+  "nextRequiredAction": "LAFS Pack 08/08 — Final Pre-Beta Seal"
+}

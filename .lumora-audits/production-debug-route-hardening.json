@@ -1,0 +1,25 @@
+{
+  "status": "APPLIED",
+  "protectedRoutes": [
+    "app/api/debug/boot-metrics/route.ts",
+    "app/api/dev/routes/route.ts",
+    "app/api/dev/testers/reset/route.ts",
+    "app/api/diag/route.ts",
+    "app/api/diag/apilogs/route.ts",
+    "app/api/diag/rate-limit/route.ts",
+    "app/api/diag/trace/route.ts",
+    "app/api/diag/traffic/route.ts",
+    "app/api/feed/mock/route.ts",
+    "app/api/fyp/debug/route.ts",
+    "app/api/hybrid/dev/reset/route.ts",
+    "app/api/hybrid/dev/state/route.ts",
+    "app/api/live/raw-audit/route.ts",
+    "app/api/nexa/diag/route.ts",
+    "app/api/pwa/diag/route.ts",
+    "app/api/stripe/dev/simulate/route.ts",
+    "app/api/videos/debug/list/route.ts",
+    "app/api/creator/mock/route.ts"
+  ],
+  "productionDefault": "404",
+  "overrideEnv": "LUMORA_ALLOW_PROD_DEBUG_ROUTES=true"
+}

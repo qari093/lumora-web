@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-06-07T20:01:54.379Z",
+  "status": "PASS",
+  "previousLock": {
+    "file": ".lumora_lafs_pack02_ledger_core_lock",
+    "exists": true
+  },
+  "manifest": {
+    "system": "LAFS_PRE_BETA",
+    "status": "STRIPE_WEBHOOK_SAFE_INGESTION_READY",
+    "pack": "03/08",
+    "generatedAt": "2026-06-07T20:01:54.377Z",
+    "guards": {
+      "paymentLiveMode": false,
+      "requiresRawBody": true,
+      "requiresStripeSignatureVerification": true,
+      "requiresIdempotency": true,
+      "duplicateEventsAckSafely": true,
+      "ledgerCreatedPendingApprovalOnly": true
+    },
+    "sampleWebhook": {
+      "eventId": "evt_lafs_pack03_sample",
+      "eventType": "payment_intent.succeeded",
+      "signatureHeaderShape": "t=1780862514,v1=b9ab31ced4c0...",
+      "amountMinor": 12500,
+      "currency": "EUR",
+      "idempotencyKey": "stripe:evt_lafs_pack03_sample"
+    },
+    "nextPack": "LAFS Pack 04/08 — Approval Workflow + RBAC"
+  },
+  "checks": [
+    {
+      "file": "src/core/lafs/stripeWebhook.ts",
+      "exists": true,
+      "bytes": 4338
+    },
+    {
+      "file": "prisma/migrations/lafs-prebeta/003_lafs_stripe_webhook_ingestion.sql",
+      "exists": true,
+      "bytes": 1142
+    }
+  ],
+  "nextRequiredAction": "LAFS Pack 04/08 — Approval Workflow + RBAC"
+}

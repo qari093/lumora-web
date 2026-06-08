@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-06-07T20:38:46.863Z",
+  "status": "PASS",
+  "resume": {
+    "status": "PRIVATE_BETA_RESUME_WITH_LAFS_SAFE_MODE_READY",
+    "generatedAt": "2026-06-07T20:38:46.861Z",
+    "mode": "controlled_private_beta",
+    "guards": {
+      "allowlistOnly": true,
+      "publicSignupDisabled": true,
+      "paymentLiveMode": false,
+      "manualExpansionOnly": true,
+      "lafsSafeModeSealed": true,
+      "noAutonomousMoneyMovement": true,
+      "dashboardReadOnly": true,
+      "humanApprovalRequired": true
+    },
+    "activeRoutes": {
+      "betaEntry": "/go",
+      "privateAccess": "/private-access",
+      "betaPage": "/beta",
+      "lafsDashboard": "/lafs"
+    },
+    "nextCanonicalPhase": "Private beta wave 1 hold and observe real users"
+  },
+  "requiredLocks": [
+    {
+      "file": ".lumora_private_beta_ready_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pre_beta_safe_mode_sealed_lock",
+      "exists": true
+    },
+    {
+      "file": ".lumora_lafs_pack08_final_pre_beta_seal_lock",
+      "exists": true
+    }
+  ],
+  "requiredFiles": [
+    {
+      "file": "data/lafs/final-pre-beta-seal.json",
+      "exists": true,
+      "bytes": 1485
+    },
+    {
+      "file": ".lumora-audits/lafs-pack08-final-pre-beta-seal.json",
+      "exists": true,
+      "bytes": 4278
+    },
+    {
+      "file": "app/lafs/page.tsx",
+      "exists": true,
+      "bytes": 2020
+    }
+  ],
+  "nextRequiredAction": "Private beta wave 1 hold and observe real users"
+}

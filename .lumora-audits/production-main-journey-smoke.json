@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-06-06T21:13:29.433Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "name": "home",
+      "path": "/",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/",
+      "status": 200,
+      "ok": true,
+      "bytes": 27647,
+      "ms": 1894
+    },
+    {
+      "name": "fyp",
+      "path": "/fyp",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/fyp",
+      "status": 200,
+      "ok": true,
+      "bytes": 32499,
+      "ms": 89
+    },
+    {
+      "name": "live",
+      "path": "/live",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/live",
+      "status": 200,
+      "ok": true,
+      "bytes": 29686,
+      "ms": 72
+    },
+    {
+      "name": "gmar",
+      "path": "/gmar",
+      "minBytes": 100,
+      "url": "https://lumoraverse.io/gmar",
+      "status": 200,
+      "ok": true,
+      "bytes": 29366,
+      "ms": 1068
+    },
+    {
+      "name": "creatorHub",
+      "path": "/creator-hub",
+      "minBytes": 100,
+      "url": "https://lumoraverse.io/creator-hub",
+      "status": 200,
+      "ok": true,
+      "bytes": 24750,
+      "ms": 63
+    },
+    {
+      "name": "health",
+      "path": "/api/health",
+      "minBytes": 10,
+      "url": "https://lumoraverse.io/api/health",
+      "status": 200,
+      "ok": true,
+      "bytes": 110,
+      "ms": 1175
+    },
+    {
+      "name": "ready",
+      "path": "/api/ready",
+      "minBytes": 10,
+      "url": "https://lumoraverse.io/api/ready",
+      "status": 200,
+      "ok": true,
+      "bytes": 248,
+      "ms": 99
+    }
+  ]
+}

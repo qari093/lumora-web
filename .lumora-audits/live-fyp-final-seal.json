@@ -1,0 +1,9 @@
+{
+  "status": "LIVE_FYP_VALIDATED",
+  "checks": {
+    "productionMatrix": "PASS",
+    "legacyAliasSafety": "PASS",
+    "productionGuards": "PASS"
+  },
+  "nextCanonicalPhase": "Start private beta"
+}

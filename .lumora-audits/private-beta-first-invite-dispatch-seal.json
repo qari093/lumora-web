@@ -1,0 +1,20 @@
+{
+  "status": "PRIVATE_BETA_FIRST_INVITE_DISPATCH_READY",
+  "dispatch": {
+    "wave": 1,
+    "mode": "manual_invite_only",
+    "maxRecipients": 25,
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "operatorChecklistRequired": true
+  },
+  "guards": {
+    "noBulkPublicSend": true,
+    "manualApprovalRequired": true,
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true,
+    "doNotExpandWithoutRetentionSignal": true
+  },
+  "nextCanonicalPhase": "Private beta invite dispatch audit"
+}

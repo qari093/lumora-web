@@ -1,0 +1,14 @@
+{
+  "status": "PRIVATE_BETA_INVITE_ISSUE_AUDIT_PASS",
+  "inviteSource": "data/private-beta/invite-list.json",
+  "guards": {
+    "inviteListExists": true,
+    "allowlistOnly": true,
+    "manualApprovalRequired": true,
+    "publicSignupDisabled": true,
+    "maxInvites": 25,
+    "overIssueRisk": false,
+    "paymentLiveMode": false
+  },
+  "nextCanonicalPhase": "Private beta final rollout seal"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PRIVATE_BETA_FIRST_WAVE_OBSERVATION_READY",
+  "checks": {
+    "monitorLoop": "PASS",
+    "maxInvites": 25,
+    "allowlistOnly": true,
+    "paymentLiveMode": false,
+    "publicSignupDisabled": true
+  },
+  "nextCanonicalPhase": "Private beta daily health snapshot"
+}

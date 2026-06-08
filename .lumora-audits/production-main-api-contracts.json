@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-06-06T21:40:49.885Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "name": "health",
+      "path": "/api/health",
+      "url": "https://lumoraverse.io/api/health",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 110,
+      "ms": 1834,
+      "ok": true
+    },
+    {
+      "name": "ready",
+      "path": "/api/ready",
+      "url": "https://lumoraverse.io/api/ready",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 248,
+      "ms": 538,
+      "ok": true
+    },
+    {
+      "name": "fypHealth",
+      "path": "/api/fyp/health",
+      "url": "https://lumoraverse.io/api/fyp/health",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 55,
+      "ms": 310,
+      "ok": true
+    },
+    {
+      "name": "liveHealth",
+      "path": "/api/live/health",
+      "url": "https://lumoraverse.io/api/live/health",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 117,
+      "ms": 292,
+      "ok": true
+    },
+    {
+      "name": "gmarHealth",
+      "path": "/api/gmar/health",
+      "url": "https://lumoraverse.io/api/gmar/health",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 54,
+      "ms": 295,
+      "ok": true
+    },
+    {
+      "name": "nexaHealth",
+      "path": "/api/nexa/health",
+      "url": "https://lumoraverse.io/api/nexa/health",
+      "status": 200,
+      "jsonValid": true,
+      "bytes": 68,
+      "ms": 258,
+      "ok": true
+    }
+  ]
+}

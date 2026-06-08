@@ -1,0 +1,311 @@
+LUMORA_RUNTIME_CONSOLIDATION_AUDIT
+createdAt=2026-06-06T20:48:43Z
+
+=== APP ROUTE COUNTS ===
+    1186
+
+=== API ROUTE COUNT ===
+     997
+
+=== PAGE ROUTE COUNT ===
+     184
+
+=== TOP API DOMAINS ===
+  57 ads
+  48 live
+  38 gmar
+  36 fyp
+  33 trust
+  27 intelligence
+  23 feed
+  21 safety
+  19 ingest
+  19 data
+  19 creator-alchemy
+  18 surge
+  18 feedback
+  17 hybrid
+  17 celebrations
+  15 validation
+  15 signals
+  15 profile
+  15 personalization
+  15 interaction
+  15 fomo
+  14 lumaspace
+  14 infra
+  12 runtime-consolidation
+  12 content
+  12 cineverse
+  11 zenwallet
+  11 wallet
+  11 persona
+  11 offline
+  11 emml
+  10 nexa
+   9 video
+   9 motion
+   9 format
+   9 admin
+   8 zendoro
+   8 zencoin
+   8 reaction
+   8 moderation
+   8 launch-readiness
+   7 wallets
+   7 creator
+   7 activation
+   6 vendor
+   6 telemetry
+   6 social
+   6 share
+   6 emotion
+   6 creatives
+   6 auth
+   5 videos
+   5 vibe
+   5 movies
+   5 ledger
+   5 diag
+   5 content-supply
+   5 brand
+   4 video-gen
+   4 trend
+
+=== POSSIBLE LIVE DUPLICATES ===
+app/api/live/afterglow/route.ts
+app/api/live/alive/route.ts
+app/api/live/bookmark/route.ts
+app/api/live/click/route.ts
+app/api/live/events/route.ts
+app/api/live/feed-variation/route.ts
+app/api/live/feed/route.ts
+app/api/live/feedback/route.ts
+app/api/live/google-trends/route.ts
+app/api/live/health-badge/route.ts
+app/api/live/health/route.ts
+app/api/live/healthz/route.ts
+app/api/live/ingest/youtube/route.ts
+app/api/live/load/route.ts
+app/api/live/mic/route.ts
+app/api/live/persist/route.ts
+app/api/live/portal-hubs/route.ts
+app/api/live/portal-spec/route.ts
+app/api/live/proof/route.ts
+app/api/live/publish/route.ts
+app/api/live/ranking/route.ts
+app/api/live/raw-audit/route.ts
+app/api/live/reddit/route.ts
+app/api/live/room-list/route.ts
+app/api/live/room-state/route.ts
+app/api/live/room/route.ts
+app/api/live/roomlist/route.ts
+app/api/live/rooms-list/route.ts
+app/api/live/rooms/[id]/end/route.ts
+app/api/live/rooms/[id]/events/route.ts
+app/api/live/rooms/[id]/react/route.ts
+app/api/live/rooms/[id]/reactions/route.ts
+app/api/live/rooms/[id]/route.ts
+app/api/live/rooms/list/route.ts
+app/api/live/rooms/public/route.ts
+app/api/live/rooms/route.ts
+app/api/live/roomslist/route.ts
+app/api/live/rss/route.ts
+app/api/live/runtime/route.ts
+app/api/live/share/route.ts
+app/api/live/signals/route.ts
+app/api/live/skip/route.ts
+app/api/live/status/route.ts
+app/api/live/summary/route.ts
+app/api/live/validation/route.ts
+app/api/live/watch/route.ts
+app/api/live/world-pulse/route.ts
+app/api/live/youtube/route.ts
+
+=== POSSIBLE FYP DUPLICATES ===
+app/api/ads/fyp-audit/route.ts
+app/api/cineverse/fyp/route.ts
+app/api/fyp/alive/route.ts
+app/api/fyp/assembler/route.ts
+app/api/fyp/cache-edge/route.ts
+app/api/fyp/cineverse/route.ts
+app/api/fyp/cold-start/route.ts
+app/api/fyp/connect/route.ts
+app/api/fyp/daily-drop/route.ts
+app/api/fyp/debug/route.ts
+app/api/fyp/dedup/route.ts
+app/api/fyp/discovery/route.ts
+app/api/fyp/diversity/route.ts
+app/api/fyp/fallback-feed/route.ts
+app/api/fyp/feed/route.ts
+app/api/fyp/fomo/route.ts
+app/api/fyp/generate/route.ts
+app/api/fyp/health/route.ts
+app/api/fyp/healthz/route.ts
+app/api/fyp/interact/route.ts
+app/api/fyp/language/route.ts
+app/api/fyp/latency/route.ts
+app/api/fyp/native-events/route.ts
+app/api/fyp/native-feed/route.ts
+app/api/fyp/native-upload/route.ts
+app/api/fyp/observability/route.ts
+app/api/fyp/personalization/route.ts
+app/api/fyp/prefetch/route.ts
+app/api/fyp/ranking/route.ts
+app/api/fyp/recommend/route.ts
+app/api/fyp/regional/route.ts
+app/api/fyp/route.ts
+app/api/fyp/runtime/route.ts
+app/api/fyp/scroll/route.ts
+app/api/fyp/session/route.ts
+app/api/fyp/summary/route.ts
+app/api/fyp/track/route.ts
+app/api/fyp/trailer-override/route.ts
+app/api/fyp94/feed/route.ts
+app/api/fyp94/health/route.ts
+app/api/fyp94/library/route.ts
+app/api/fyp94/production-health/route.ts
+app/api/gmar/fyp/activity/route.ts
+app/api/launch-readiness/fyp-live-production/route.ts
+
+=== POSSIBLE WALLET/ZENCOIN DUPLICATES ===
+app/api/coin/ledger/route.ts
+app/api/ledger/credit/route.ts
+app/api/ledger/debit/route.ts
+app/api/ledger/list/[ownerId]/route.ts
+app/api/ledger/refund/route.ts
+app/api/ledger/refunds/[ownerId]/[refType]/[refId]/route.ts
+app/api/wallet/balance/route.ts
+app/api/wallet/credit-ledger/route.ts
+app/api/wallet/credit/route.ts
+app/api/wallet/debit/route.ts
+app/api/wallet/history/route.ts
+app/api/wallet/ledger/route.ts
+app/api/wallet/route.ts
+app/api/wallet/summary/route.ts
+app/api/wallet/topup/route.ts
+app/api/wallet/txid-check/route.ts
+app/api/wallet/withdraw/route.ts
+app/api/wallets/[ownerId]/balance/route.ts
+app/api/wallets/[ownerId]/route.ts
+app/api/wallets/credit/route.ts
+app/api/wallets/debit/route.ts
+app/api/wallets/ensure/route.ts
+app/api/wallets/route.ts
+app/api/wallets/transfer/route.ts
+app/api/zencoin/admin/route.ts
+app/api/zencoin/balance/route.ts
+app/api/zencoin/fraud/route.ts
+app/api/zencoin/governance/route.ts
+app/api/zencoin/transactions/route.ts
+app/api/zencoin/transfer/route.ts
+app/api/zencoin/treasury/route.ts
+app/api/zencoin/wallet/route.ts
+app/api/zenwallet/creator/route.ts
+app/api/zenwallet/final-seal/route.ts
+app/api/zenwallet/ledger/route.ts
+app/api/zenwallet/offline/route.ts
+app/api/zenwallet/portals/route.ts
+app/api/zenwallet/refunds/route.ts
+app/api/zenwallet/runtime/route.ts
+app/api/zenwallet/security/route.ts
+app/api/zenwallet/subscriptions/route.ts
+app/api/zenwallet/support/route.ts
+app/api/zenwallet/transparency/route.ts
+
+=== POSSIBLE ZENDORO/SHOP/PAYMENT DUPLICATES ===
+app/api/admin/zendoro/route.ts
+app/api/orders/[id]/route.ts
+app/api/orders/route.ts
+app/api/payments/checkout/route.ts
+app/api/payments/webhook/route.ts
+app/api/products/[id]/route.ts
+app/api/products/route.ts
+app/api/seller/orders/route.ts
+app/api/seller/products/route.ts
+app/api/seller/route.ts
+app/api/shop/order/route.ts
+app/api/shop/webhook/route.ts
+app/api/stripe/checkout/route.ts
+app/api/stripe/create-checkout-session/route.ts
+app/api/stripe/dev/simulate/route.ts
+app/api/stripe/webhook/route.ts
+app/api/webhooks/zendoro/route.ts
+app/api/zendoro/admin/route.ts
+app/api/zendoro/cart/route.ts
+app/api/zendoro/checkout/route.ts
+app/api/zendoro/orders/route.ts
+app/api/zendoro/products/route.ts
+app/api/zendoro/reviews/route.ts
+app/api/zendoro/seller/route.ts
+app/api/zendoro/webhook/route.ts
+
+=== DEV/DEBUG/DIAG ROUTES IN PRODUCTION TREE ===
+app/admin/testers/page.tsx
+app/api/admin/testers/summary/route.ts
+app/api/content/multi-source/debug/route.ts
+app/api/creator/mock/route.ts
+app/api/debug/boot-metrics/route.ts
+app/api/dev/routes/route.ts
+app/api/dev/testers/reset/route.ts
+app/api/diag/apilogs/route.ts
+app/api/diag/rate-limit/route.ts
+app/api/diag/route.ts
+app/api/diag/trace/route.ts
+app/api/diag/traffic/route.ts
+app/api/feed/mock/route.ts
+app/api/fyp/debug/route.ts
+app/api/gmar/playtest/session/route.ts
+app/api/hybrid/dev/reset/route.ts
+app/api/hybrid/dev/state/route.ts
+app/api/live/raw-audit/route.ts
+app/api/nexa/diag/route.ts
+app/api/pwa/diag/route.ts
+app/api/stripe/dev/simulate/route.ts
+app/api/videos/debug/list/route.ts
+app/dev/routes/page.tsx
+app/dev/testers/page.tsx
+app/lumaspace/debug/page.tsx
+app/pwa/diag/page.tsx
+
+=== LARGE PUBLIC RESIDUALS ===
+158M	public
+102M	public/videos
+ 41M	public/audio
+ 17M	public/videos/workout.mp4
+ 17M	public/videos/test-2.mp4
+ 17M	public/videos/gen-1760292215843.mp4
+ 17M	public/videos/gen-1760291273529.mp4
+ 17M	public/videos/gen-1760290134173.mp4
+ 17M	public/videos/gen-1760289868249.mp4
+9.8M	public/audio/focus2.mp3
+8.5M	public/audio/focus1.mp3
+7.9M	public/audio/calm1.mp3
+6.9M	public/audio/hype2.mp3
+6.9M	public/audio/hype1.mp3
+5.5M	public/persona
+3.3M	public/persona/avatars
+2.5M	public/lumora-invite.png
+2.3M	public/ui
+2.0M	public/brands/cineverse
+2.0M	public/brands
+1.9M	public/persona/emojis
+1.5M	public/brand
+1.4M	public/brand/lumora-brand-v2.png
+1.2M	public/videos/index.json
+1.1M	public/ui/public:ui:home-holo.png
+1.1M	public/ui/home-holo.png
+1.0M	public/brands/cineverse/source.png
+1.0M	public/brands/cineverse/logo.png
+560K	public/videos/intro.mp4
+480K	public/persona/avatars/surprised
+480K	public/persona/avatars/sad
+480K	public/persona/avatars/neutral
+480K	public/persona/avatars/happy
+480K	public/persona/avatars/focused
+480K	public/persona/avatars/calm
+480K	public/persona/avatars/angry
+476K	public/audio/bgm_thrill.m4a
+304K	public/audio/bgm.m4a
+268K	public/persona/manifest.json
+120K	public/sprite.svg

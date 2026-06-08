@@ -1,0 +1,19 @@
+{
+  "status": "AUDIT_PASS_WITH_RISKS",
+  "productionLive": true,
+  "domain": "https://lumoraverse.io",
+  "routeCounts": {
+    "appRoutes": 1186,
+    "apiRoutes": 997,
+    "pageRoutes": 184
+  },
+  "primaryRisks": [
+    "duplicate runtime namespaces",
+    "dev/debug/diag routes present in production tree",
+    "wallet/zencoin namespace overlap",
+    "zendoro/payment namespace overlap",
+    "live room endpoint duplication",
+    "residual public media size"
+  ],
+  "nextRequiredAction": "production debug route hardening gate"
+}

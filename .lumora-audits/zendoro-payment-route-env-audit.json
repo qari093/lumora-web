@@ -1,0 +1,101 @@
+{
+  "checkedAt": "2026-06-06T22:19:15.789Z",
+  "status": "PASS",
+  "routes": [
+    {
+      "file": "app/api/zendoro/checkout/route.ts",
+      "exists": true,
+      "bytes": 1222,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "mentionsStripe": true,
+      "mentionsWebhookSignature": false,
+      "isCompatibilityWrapper": false,
+      "mentionsZendoroCanonical": true
+    },
+    {
+      "file": "app/api/zendoro/webhook/route.ts",
+      "exists": true,
+      "bytes": 1189,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "mentionsStripe": true,
+      "mentionsWebhookSignature": true,
+      "isCompatibilityWrapper": false,
+      "mentionsZendoroCanonical": true
+    },
+    {
+      "file": "app/api/stripe/webhook/route.ts",
+      "exists": true,
+      "bytes": 3271,
+      "methods": [
+        "POST"
+      ],
+      "mentionsStripe": true,
+      "mentionsWebhookSignature": true,
+      "isCompatibilityWrapper": false,
+      "mentionsZendoroCanonical": false
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "exists": true,
+      "bytes": 197,
+      "methods": [
+        "POST"
+      ],
+      "mentionsStripe": false,
+      "mentionsWebhookSignature": false,
+      "isCompatibilityWrapper": true,
+      "mentionsZendoroCanonical": true
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "exists": true,
+      "bytes": 195,
+      "methods": [
+        "POST"
+      ],
+      "mentionsStripe": false,
+      "mentionsWebhookSignature": false,
+      "isCompatibilityWrapper": true,
+      "mentionsZendoroCanonical": true
+    },
+    {
+      "file": "app/api/shop/webhook/route.ts",
+      "exists": true,
+      "bytes": 191,
+      "methods": [
+        "POST"
+      ],
+      "mentionsStripe": false,
+      "mentionsWebhookSignature": false,
+      "isCompatibilityWrapper": true,
+      "mentionsZendoroCanonical": true
+    }
+  ],
+  "env": [
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "present": false,
+      "length": 0,
+      "masked": null
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "present": false,
+      "length": 0,
+      "masked": null
+    },
+    {
+      "name": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "present": false,
+      "length": 0,
+      "masked": null
+    }
+  ],
+  "nextRequiredAction": "production zendoro payment endpoint smoke"
+}

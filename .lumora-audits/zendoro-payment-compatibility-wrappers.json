@@ -1,0 +1,50 @@
+{
+  "status": "APPLIED",
+  "canonicalNamespace": "/api/zendoro",
+  "aliases": [
+    {
+      "file": "app/api/products/route.ts",
+      "canonical": "/api/zendoro/products",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/payments/checkout/route.ts",
+      "canonical": "/api/zendoro/checkout",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/stripe/checkout/route.ts",
+      "canonical": "/api/zendoro/checkout",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/stripe/create-checkout-session/route.ts",
+      "canonical": "/api/zendoro/checkout",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/payments/webhook/route.ts",
+      "canonical": "/api/zendoro/webhook",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "app/api/shop/webhook/route.ts",
+      "canonical": "/api/zendoro/webhook",
+      "methods": [
+        "POST"
+      ]
+    }
+  ],
+  "behavior": "200 compatibility JSON with canonical route headers"
+}

@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-06-07T10:24:04.483Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "name": "checkoutInfo",
+      "method": "GET",
+      "path": "/api/zendoro/checkout",
+      "expected": [
+        200
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/checkout",
+      "status": 200,
+      "bytes": 87,
+      "jsonValid": true,
+      "ms": 1281,
+      "ok": true
+    },
+    {
+      "name": "webhookInfo",
+      "method": "GET",
+      "path": "/api/zendoro/webhook",
+      "expected": [
+        200
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/webhook",
+      "status": 200,
+      "bytes": 93,
+      "jsonValid": true,
+      "ms": 374,
+      "ok": true
+    },
+    {
+      "name": "checkoutPostSafe",
+      "method": "POST",
+      "path": "/api/zendoro/checkout",
+      "expected": [
+        501,
+        503
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/checkout",
+      "status": 503,
+      "bytes": 124,
+      "jsonValid": true,
+      "ms": 100,
+      "ok": true
+    },
+    {
+      "name": "webhookPostSafe",
+      "method": "POST",
+      "path": "/api/zendoro/webhook",
+      "expected": [
+        400,
+        501,
+        503
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/webhook",
+      "status": 503,
+      "bytes": 135,
+      "jsonValid": true,
+      "ms": 389,
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PRIVATE_BETA_RUNTIME_OBSERVATION_SEALED",
+  "checks": {
+    "liveOperationsSeal": "PASS",
+    "dailyHealthSnapshot": "PASS",
+    "productionAccessSmoke": "PASS"
+  },
+  "runtime": {
+    "critical5xx": 0,
+    "unauthorizedAccessEvents": 0,
+    "paymentLiveMode": false,
+    "publicSignupEnabled": false,
+    "allowlistOnly": true
+  },
+  "guards": {
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true,
+    "manualExpansionOnly": true
+  },
+  "nextCanonicalPhase": "Private beta final completion seal"
+}

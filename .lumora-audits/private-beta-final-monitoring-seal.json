@@ -1,0 +1,19 @@
+{
+  "status": "PRIVATE_BETA_MONITORING_SEALED",
+  "checks": {
+    "monitorLoop": "PASS",
+    "firstWaveObservation": "PASS",
+    "dailyHealthSnapshot": "PASS",
+    "feedbackCollectionLoop": "PASS",
+    "issueTriageBoard": "PASS",
+    "retentionSignalSnapshot": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "pauseOnCriticalIssues": true
+  },
+  "nextCanonicalPhase": "Private beta real-user observation"
+}

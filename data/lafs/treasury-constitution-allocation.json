@@ -1,0 +1,31 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "TREASURY_CONSTITUTION_ALLOCATION_READY",
+  "pack": "06/08",
+  "generatedAt": "2026-06-07T20:24:21.472Z",
+  "guards": {
+    "paymentLiveMode": false,
+    "allocationRulesGoverned": true,
+    "allocationTotalMustEqual100": true,
+    "constitutionVersioned": true,
+    "constitutionDiffViewReady": true,
+    "councilApprovalRequiredForRuleChanges": true
+  },
+  "activeAllocationRule": {
+    "version": 1,
+    "operationsPct": 45,
+    "reservePct": 25,
+    "growthPct": 15,
+    "creatorRewardsPct": 10,
+    "emergencyBufferPct": 5,
+    "totalPct": 100
+  },
+  "constitutionSections": [
+    "treasury_allocation",
+    "approval_governance",
+    "risk_governance",
+    "beta_guards",
+    "constitution_diff_view"
+  ],
+  "nextPack": "LAFS Pack 07/08 — Dashboard Command Hearth"
+}

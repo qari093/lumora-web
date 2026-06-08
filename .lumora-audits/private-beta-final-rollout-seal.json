@@ -1,0 +1,16 @@
+{
+  "status": "PRIVATE_BETA_CONTROLLED_INVITE_ROLLOUT_SEALED",
+  "checks": {
+    "privateBetaFinalSeal": "PASS",
+    "controlledInviteRollout": "PASS",
+    "inviteListCreation": "PASS",
+    "inviteIssueAudit": "PASS"
+  },
+  "rollout": {
+    "accessModel": "allowlist_only",
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "maxWaveOneInvites": 25
+  },
+  "nextCanonicalPhase": "Private beta monitor loop"
+}

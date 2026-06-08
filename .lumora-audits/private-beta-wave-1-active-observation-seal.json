@@ -1,0 +1,18 @@
+{
+  "status": "PRIVATE_BETA_WAVE_1_ACTIVE_OBSERVATION_SEALED",
+  "wave": 1,
+  "checks": {
+    "onboardingFinalSeal": "PASS",
+    "monitoringSeal": "PASS",
+    "stabilitySeal": "PASS"
+  },
+  "guards": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "pauseOnCriticalIssue": true,
+    "pauseOnUnauthorizedAccess": true
+  },
+  "nextCanonicalPhase": "Private beta launch readiness final seal"
+}

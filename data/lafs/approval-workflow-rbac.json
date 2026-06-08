@@ -1,0 +1,43 @@
+{
+  "system": "LAFS_PRE_BETA",
+  "status": "APPROVAL_WORKFLOW_RBAC_READY",
+  "pack": "04/08",
+  "generatedAt": "2026-06-07T20:08:02.513Z",
+  "guards": {
+    "paymentLiveMode": false,
+    "humanApprovalRequired": true,
+    "selfApprovalBlocked": true,
+    "duplicateApprovalBlocked": true,
+    "approvalDeadlineHours": 72,
+    "expiredRequestsAutoReject": true
+  },
+  "approvalRules": [
+    {
+      "amountRange": "<500 EUR",
+      "requiredApprovals": 1,
+      "requiredCouncilApprovals": 0,
+      "allowedRoles": [
+        "operator",
+        "council"
+      ]
+    },
+    {
+      "amountRange": "500 EUR to 2000 EUR",
+      "requiredApprovals": 2,
+      "requiredCouncilApprovals": 1,
+      "allowedRoles": [
+        "operator",
+        "council"
+      ]
+    },
+    {
+      "amountRange": ">2000 EUR",
+      "requiredApprovals": 3,
+      "requiredCouncilApprovals": 3,
+      "allowedRoles": [
+        "council"
+      ]
+    }
+  ],
+  "nextPack": "LAFS Pack 05/08 — Reconciliation + Risk Freeze"
+}

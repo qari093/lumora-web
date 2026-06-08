@@ -1,0 +1,153 @@
+{
+  "checkedAt": "2026-06-07T15:47:27.653Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "group": "debug",
+      "path": "/api/fyp/debug",
+      "expected": [
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/fyp/debug",
+      "status": 404,
+      "bytes": 78,
+      "ms": 444,
+      "ok": true
+    },
+    {
+      "group": "debug",
+      "path": "/api/live/raw-audit",
+      "expected": [
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/live/raw-audit",
+      "status": 404,
+      "bytes": 78,
+      "ms": 156,
+      "ok": true
+    },
+    {
+      "group": "debug",
+      "path": "/api/live/google-trends",
+      "expected": [
+        200,
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/live/google-trends",
+      "status": 200,
+      "bytes": 157,
+      "ms": 574,
+      "ok": true
+    },
+    {
+      "group": "debug",
+      "path": "/api/live/reddit",
+      "expected": [
+        200,
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/live/reddit",
+      "status": 200,
+      "bytes": 124,
+      "ms": 119,
+      "ok": true
+    },
+    {
+      "group": "debug",
+      "path": "/api/live/youtube",
+      "expected": [
+        200,
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/live/youtube",
+      "status": 200,
+      "bytes": 126,
+      "ms": 167,
+      "ok": true
+    },
+    {
+      "group": "safeMethods",
+      "path": "/api/fyp/native-upload",
+      "method": "GET",
+      "expected": [
+        200,
+        400,
+        404,
+        405
+      ],
+      "url": "https://lumoraverse.io/api/fyp/native-upload",
+      "status": 405,
+      "bytes": 0,
+      "ms": 85,
+      "ok": true
+    },
+    {
+      "group": "safeMethods",
+      "path": "/api/live/publish",
+      "method": "GET",
+      "expected": [
+        200,
+        400,
+        404,
+        405
+      ],
+      "url": "https://lumoraverse.io/api/live/publish",
+      "status": 405,
+      "bytes": 0,
+      "ms": 242,
+      "ok": true
+    },
+    {
+      "group": "safeMethods",
+      "path": "/api/live/mic",
+      "method": "GET",
+      "expected": [
+        200,
+        400,
+        404,
+        405
+      ],
+      "url": "https://lumoraverse.io/api/live/mic",
+      "status": 200,
+      "bytes": 64,
+      "ms": 201,
+      "ok": true
+    },
+    {
+      "group": "safeRuntime",
+      "path": "/api/fyp/observability",
+      "expected": [
+        200,
+        400,
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/fyp/observability",
+      "status": 200,
+      "bytes": 132,
+      "ms": 183,
+      "ok": true
+    },
+    {
+      "group": "safeRuntime",
+      "path": "/api/live/validation",
+      "expected": [
+        200,
+        400,
+        404
+      ],
+      "method": "GET",
+      "url": "https://lumoraverse.io/api/live/validation",
+      "status": 200,
+      "bytes": 201,
+      "ms": 110,
+      "ok": true
+    }
+  ]
+}

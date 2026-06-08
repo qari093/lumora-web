@@ -1,0 +1,24 @@
+{
+  "status": "APPLIED",
+  "namespace": "/api/fyp94",
+  "canonicalNamespace": "/api/fyp",
+  "aliases": [
+    {
+      "file": "app/api/fyp94/feed/route.ts",
+      "canonical": "/api/fyp/feed"
+    },
+    {
+      "file": "app/api/fyp94/health/route.ts",
+      "canonical": "/api/fyp/health"
+    },
+    {
+      "file": "app/api/fyp94/library/route.ts",
+      "canonical": "/api/fyp/native-feed"
+    },
+    {
+      "file": "app/api/fyp94/production-health/route.ts",
+      "canonical": "/api/fyp/healthz"
+    }
+  ],
+  "behavior": "200 compatibility JSON with canonical route headers"
+}

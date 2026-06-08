@@ -1,0 +1,587 @@
+{
+  "generatedAt": "2026-06-06T21:03:38.884Z",
+  "canonical": [
+    "app/api/fyp/feed/route.ts",
+    "app/api/fyp/native-feed/route.ts",
+    "app/api/fyp/route.ts",
+    "app/api/live/rooms/[id]/route.ts",
+    "app/api/live/rooms/route.ts",
+    "app/api/stripe/webhook/route.ts",
+    "app/api/zendoro/checkout/route.ts",
+    "app/api/zendoro/orders/route.ts",
+    "app/api/zendoro/products/route.ts",
+    "app/api/zendoro/webhook/route.ts",
+    "app/api/zenwallet/ledger/route.ts",
+    "app/api/zenwallet/runtime/route.ts"
+  ],
+  "groups": {
+    "liveRoomAliases": [
+      {
+        "file": "app/api/live/room/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 182,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/room-list/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 187,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/roomlist/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 186,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/rooms-list/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 188,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/roomslist/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 187,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/rooms/list/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 188,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/rooms/public/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 190,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/live/rooms/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/src/live/runtime/liveRooms",
+          "next/server"
+        ],
+        "byteSize": 266,
+        "hasCompatibilitySignal": true
+      }
+    ],
+    "fypLegacy": [
+      {
+        "file": "app/api/fyp94/feed/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 181,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/fyp94/health/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 185,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/fyp94/library/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 191,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/fyp94/production-health/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 197,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/feed/route.ts",
+        "exists": true,
+        "classification": "active_implementation",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 3,
+        "imports": [
+          "../../../src/lib/fyp/feed/engine",
+          "../../../src/lib/fyp/youtube/normalize",
+          "next/server"
+        ],
+        "byteSize": 2622,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/feed/final/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/lib/feed/final/engine"
+        ],
+        "byteSize": 263,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/feed/mix/route.ts",
+        "exists": true,
+        "classification": "active_implementation",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/lib/feed/smartMix",
+          "next/server"
+        ],
+        "byteSize": 1119,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/fyp/feed/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "next/server"
+        ],
+        "byteSize": 1214,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/fyp/native-feed/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 3,
+        "imports": [
+          "@/src/lib/native-fyp/feed/fallback",
+          "@/src/lib/native-fyp/feed/seed",
+          "next/server"
+        ],
+        "byteSize": 843,
+        "hasCompatibilitySignal": false
+      }
+    ],
+    "walletZencoinOverlap": [
+      {
+        "file": "app/api/wallet/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 186,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/wallet/balance/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 194,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/wallet/history/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 193,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/wallet/ledger/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 193,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/wallets/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 290,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/wallets/ensure/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 195,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/zencoin/wallet/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 0,
+        "imports": [],
+        "byteSize": 94,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/zenwallet/runtime/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/src/core/zenwallet/telemetry/runtimeTelemetry",
+          "next/server"
+        ],
+        "byteSize": 269,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/zenwallet/ledger/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/src/core/zenwallet/ledger/ledger",
+          "next/server"
+        ],
+        "byteSize": 215,
+        "hasCompatibilitySignal": false
+      }
+    ],
+    "zendoroCommerceOverlap": [
+      {
+        "file": "app/api/zendoro/products/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/lib/zendoro/runtime"
+        ],
+        "byteSize": 142,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/products/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 290,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/zendoro/orders/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/lib/zendoro/runtime"
+        ],
+        "byteSize": 140,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/orders/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/src/core/zendoro/api/http",
+          "@/src/core/zendoro/api/store"
+        ],
+        "byteSize": 297,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/zendoro/checkout/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/lib/zendoro/runtime"
+        ],
+        "byteSize": 235,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/payments/checkout/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 197,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/stripe/checkout/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 195,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/stripe/create-checkout-session/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 210,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/zendoro/webhook/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "GET"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/lib/zendoro/runtime"
+        ],
+        "byteSize": 234,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/payments/webhook/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 195,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/stripe/webhook/route.ts",
+        "exists": true,
+        "classification": "canonical",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 4,
+        "imports": [
+          "@/lib/prisma",
+          "@/lib/walletLedger",
+          "next/server",
+          "stripe"
+        ],
+        "byteSize": 3271,
+        "hasCompatibilitySignal": false
+      },
+      {
+        "file": "app/api/shop/webhook/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 1,
+        "imports": [
+          "@/src/lib/runtime-guards/compatibilityResponse"
+        ],
+        "byteSize": 191,
+        "hasCompatibilitySignal": true
+      },
+      {
+        "file": "app/api/webhooks/zendoro/route.ts",
+        "exists": true,
+        "classification": "unknown",
+        "methods": [
+          "POST"
+        ],
+        "importCount": 2,
+        "imports": [
+          "@/src/core/zendoro/api/http",
+          "@/src/core/zendoro/api/store"
+        ],
+        "byteSize": 555,
+        "hasCompatibilitySignal": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "checkedAt": "2026-06-07T15:47:17.410Z",
+  "baseUrl": "https://lumoraverse.io",
+  "status": "PASS",
+  "results": [
+    {
+      "group": "page",
+      "name": "fypPage",
+      "method": "GET",
+      "path": "/fyp",
+      "expected": [
+        200
+      ],
+      "minBytes": 1000,
+      "json": false,
+      "url": "https://lumoraverse.io/fyp",
+      "status": 200,
+      "bytes": 32499,
+      "jsonValid": false,
+      "ms": 1321,
+      "ok": true
+    },
+    {
+      "group": "page",
+      "name": "livePage",
+      "method": "GET",
+      "path": "/live",
+      "expected": [
+        200
+      ],
+      "minBytes": 1000,
+      "json": false,
+      "url": "https://lumoraverse.io/live",
+      "status": 200,
+      "bytes": 29686,
+      "jsonValid": false,
+      "ms": 126,
+      "ok": true
+    },
+    {
+      "group": "fypApi",
+      "name": "fypHealth",
+      "method": "GET",
+      "path": "/api/fyp/health",
+      "expected": [
+        200
+      ],
+      "minBytes": 10,
+      "json": true,
+      "url": "https://lumoraverse.io/api/fyp/health",
+      "status": 200,
+      "bytes": 55,
+      "jsonValid": true,
+      "ms": 1360,
+      "ok": true
+    },
+    {
+      "group": "fypApi",
+      "name": "fypHealthz",
+      "method": "GET",
+      "path": "/api/fyp/healthz",
+      "expected": [
+        200
+      ],
+      "minBytes": 10,
+      "json": true,
+      "url": "https://lumoraverse.io/api/fyp/healthz",
+      "status": 200,
+      "bytes": 82,
+      "jsonValid": true,
+      "ms": 401,
+      "ok": true
+    },
+    {
+      "group": "fypApi",
+      "name": "fypFeed",
+      "method": "GET",
+      "path": "/api/fyp/feed",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/fyp/feed",
+      "status": 200,
+      "bytes": 621,
+      "jsonValid": true,
+      "ms": 330,
+      "ok": true
+    },
+    {
+      "group": "fypApi",
+      "name": "fypNativeFeed",
+      "method": "GET",
+      "path": "/api/fyp/native-feed",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/fyp/native-feed",
+      "status": 200,
+      "bytes": 5315,
+      "jsonValid": true,
+      "ms": 291,
+      "ok": true
+    },
+    {
+      "group": "fypApi",
+      "name": "fypRuntime",
+      "method": "GET",
+      "path": "/api/fyp/runtime",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/fyp/runtime",
+      "status": 200,
+      "bytes": 56,
+      "jsonValid": true,
+      "ms": 289,
+      "ok": true
+    },
+    {
+      "group": "liveApi",
+      "name": "liveHealth",
+      "method": "GET",
+      "path": "/api/live/health",
+      "expected": [
+        200
+      ],
+      "minBytes": 10,
+      "json": true,
+      "url": "https://lumoraverse.io/api/live/health",
+      "status": 200,
+      "bytes": 117,
+      "jsonValid": true,
+      "ms": 138,
+      "ok": true
+    },
+    {
+      "group": "liveApi",
+      "name": "liveHealthz",
+      "method": "GET",
+      "path": "/api/live/healthz",
+      "expected": [
+        200
+      ],
+      "minBytes": 10,
+      "json": true,
+      "url": "https://lumoraverse.io/api/live/healthz",
+      "status": 200,
+      "bytes": 114,
+      "jsonValid": true,
+      "ms": 331,
+      "ok": true
+    },
+    {
+      "group": "liveApi",
+      "name": "liveRooms",
+      "method": "GET",
+      "path": "/api/live/rooms",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/live/rooms",
+      "status": 200,
+      "bytes": 388,
+      "jsonValid": true,
+      "ms": 342,
+      "ok": true
+    },
+    {
+      "group": "liveApi",
+      "name": "liveRuntime",
+      "method": "GET",
+      "path": "/api/live/runtime",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/live/runtime",
+      "status": 200,
+      "bytes": 105,
+      "jsonValid": true,
+      "ms": 376,
+      "ok": true
+    },
+    {
+      "group": "liveApi",
+      "name": "liveStatus",
+      "method": "GET",
+      "path": "/api/live/status",
+      "expected": [
+        200,
+        204,
+        400,
+        404
+      ],
+      "minBytes": 0,
+      "json": false,
+      "url": "https://lumoraverse.io/api/live/status",
+      "status": 200,
+      "bytes": 224,
+      "jsonValid": true,
+      "ms": 356,
+      "ok": true
+    }
+  ]
+}

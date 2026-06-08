@@ -1,0 +1,31 @@
+{
+  "status": "MAIN_USER_JOURNEY_VALIDATED",
+  "sealedAt": "2026-06-06T22:08:46.412Z",
+  "productionDomain": "https://lumoraverse.io",
+  "checks": {
+    "routeMatrix": "PASS",
+    "apiContracts": "PASS",
+    "productionGuards": "PASS"
+  },
+  "verifiedJourneys": [
+    "/",
+    "/fyp",
+    "/live",
+    "/gmar",
+    "/creator-hub",
+    "/api/health",
+    "/api/ready"
+  ],
+  "protectedProductionRoutes": [
+    "/api/dev/routes",
+    "/api/dev/testers/reset",
+    "/api/debug/boot-metrics",
+    "/api/diag",
+    "/api/fyp/debug",
+    "/api/hybrid/dev/state",
+    "/api/live/raw-audit",
+    "/api/stripe/dev/simulate",
+    "/api/videos/debug/list"
+  ],
+  "nextCanonicalPhase": "Validate Zendoro payments"
+}

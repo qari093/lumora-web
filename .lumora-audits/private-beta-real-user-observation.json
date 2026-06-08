@@ -1,0 +1,21 @@
+{
+  "status": "PRIVATE_BETA_REAL_USER_OBSERVATION_READY",
+  "mode": "manual_real_user_observation",
+  "wave": 1,
+  "sampleSize": 0,
+  "rules": {
+    "allowlistOnly": true,
+    "publicSignupDisabled": true,
+    "paymentLiveMode": false,
+    "manualExpansionOnly": true,
+    "doNotExpandWithoutRealUsage": true,
+    "pauseOnCriticalIssue": true
+  },
+  "signals": {
+    "activation": 0,
+    "returningUsers": 0,
+    "criticalIssues": 0,
+    "unauthorizedAccessEvents": 0
+  },
+  "nextCanonicalPhase": "Private beta expansion decision gate"
+}
