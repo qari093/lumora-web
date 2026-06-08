@@ -31,3 +31,8 @@ lumora_video_source_audit_*/
 !tsconfig.json
 !postcss.config.*
 !tailwind.config.*
+public/native-fyp/movie-clips
+public/native-fyp/real
+public/native-fyp/fallback
+.lumora-local-media
+.next/cache
