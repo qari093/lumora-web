@@ -1,0 +1,17 @@
+{
+  "system": "LUMORA_ECOSYSTEM_APPROVAL",
+  "pack": "04/08",
+  "phase": "Navigation & User Journey Validation",
+  "status": "PASS",
+  "journeys": {
+    "homeToFyp": true,
+    "homeToLive": true,
+    "homeToGmar": true,
+    "homeToNexa": true,
+    "homeToZendoro": true,
+    "homeToWallet": true,
+    "betaEntryFlow": true,
+    "lafsAccessFlow": true
+  },
+  "approvalGateRequired": true
+}
