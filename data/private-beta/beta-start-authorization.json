@@ -1,0 +1,14 @@
+{
+  "status": "AUTHORIZED_FOR_WAVE_1_SELECTION",
+  "wave": 1,
+  "gitClean": true,
+  "productionHealthy": true,
+  "lafsHealthy": true,
+  "phase0FreezeActive": true,
+  "allowlistOnly": true,
+  "publicSignupEnabled": false,
+  "paymentLiveMode": false,
+  "expansionAllowed": false,
+  "authorizedAction": "MANUAL_SELECTION_OF_FIRST_3_TESTERS",
+  "nextGate": "FIRST_TESTERS_ADDED_TO_REGISTRY"
+}
