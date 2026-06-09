@@ -1,5 +1,5 @@
 {
-  "status": "AUTHORIZED_FOR_WAVE_1_SELECTION",
+  "status": "ECOSYSTEM_APPROVAL_REQUIRED_BEFORE_TESTERS",
   "wave": 1,
   "gitClean": true,
   "productionHealthy": true,
@@ -9,6 +9,9 @@
   "publicSignupEnabled": false,
   "paymentLiveMode": false,
   "expansionAllowed": false,
-  "authorizedAction": "MANUAL_SELECTION_OF_FIRST_3_TESTERS",
-  "nextGate": "FIRST_TESTERS_ADDED_TO_REGISTRY"
+  "testerSelectionAllowed": false,
+  "inviteIssuanceAllowed": false,
+  "requiredBeforeTesters": "FULL_ECOSYSTEM_APPROVAL_BY_WAQAR",
+  "authorizedAction": "CONTINUE_INTERNAL_ECOSYSTEM_VALIDATION_ONLY",
+  "nextGate": "FULL_ECOSYSTEM_APPROVAL"
 }
