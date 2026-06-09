@@ -1,0 +1,19 @@
+{
+  "system": "LUMORA_ECOSYSTEM_APPROVAL",
+  "pack": "02/08",
+  "phase": "Runtime & API Validation",
+  "status": "PASS",
+  "checks": {
+    "home": true,
+    "lafs": true,
+    "live": true,
+    "fyp": true,
+    "gmar": true,
+    "nexa": true,
+    "zendoro": true,
+    "privateAccess": true,
+    "paymentSafeMode": true,
+    "liveRuntime": true,
+    "fypRuntime": true
+  }
+}
