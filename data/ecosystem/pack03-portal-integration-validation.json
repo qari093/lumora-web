@@ -1,0 +1,18 @@
+{
+  "system": "LUMORA_ECOSYSTEM_APPROVAL",
+  "pack": "03/08",
+  "phase": "Portal Integration Validation",
+  "status": "PASS",
+  "portals": {
+    "fyp": true,
+    "live": true,
+    "gmar": true,
+    "nexa": true,
+    "zendoro": true,
+    "wallet": true,
+    "lumaspace": true,
+    "movies": true,
+    "music": true
+  },
+  "approvalGateRequired": true
+}
