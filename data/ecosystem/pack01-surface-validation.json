@@ -1,0 +1,219 @@
+{
+  "system": "LUMORA_ECOSYSTEM_APPROVAL",
+  "pack": "01/08",
+  "status": "ECOSYSTEM_SURFACE_VALIDATION_READY",
+  "generatedAt": "2026-06-09T14:07:29.914Z",
+  "phase": "Ecosystem Surface Validation",
+  "scope": [
+    "Ecosystem approval gate lock",
+    "Global portal surface audit",
+    "Primary route file audit",
+    "Beta entry surface audit",
+    "LAFS surface audit",
+    "Invite/tester block verification"
+  ],
+  "guards": {
+    "ecosystemApprovalRequired": true,
+    "testerSelectionBlocked": true,
+    "inviteIssuanceBlocked": true,
+    "internalValidationOnly": true
+  },
+  "summary": {
+    "requiredPagesTotal": 11,
+    "requiredPagesOk": true,
+    "optionalPagesPresent": 7,
+    "locksOk": true,
+    "guardsOk": true
+  },
+  "requiredLocks": [
+    {
+      "file": "data/private-beta/beta-start-authorization.json",
+      "exists": true,
+      "bytes": 532,
+      "jsonValid": true
+    },
+    {
+      "file": "data/private-beta/wave-1-execution-lock.json",
+      "exists": true,
+      "bytes": 305,
+      "jsonValid": true
+    },
+    {
+      "file": "data/private-beta/pre-invite-readiness-seal.json",
+      "exists": true,
+      "bytes": 346,
+      "jsonValid": true
+    },
+    {
+      "file": "data/private-beta/final-pre-tester-validation.json",
+      "exists": true,
+      "bytes": 485,
+      "jsonValid": true
+    }
+  ],
+  "pages": [
+    {
+      "key": "home",
+      "route": "/",
+      "file": "app/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 2729,
+      "ok": true
+    },
+    {
+      "key": "lafs",
+      "route": "/lafs",
+      "file": "app/lafs/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 2020,
+      "ok": true
+    },
+    {
+      "key": "go",
+      "route": "/go",
+      "file": "app/go/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 4832,
+      "ok": true
+    },
+    {
+      "key": "beta",
+      "route": "/beta",
+      "file": "app/beta/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 198,
+      "ok": true
+    },
+    {
+      "key": "privateAccess",
+      "route": "/private-access",
+      "file": "app/private-access/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 162,
+      "ok": true
+    },
+    {
+      "key": "fyp",
+      "route": "/fyp",
+      "file": "app/fyp/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 1698,
+      "ok": true
+    },
+    {
+      "key": "live",
+      "route": "/live",
+      "file": "app/live/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 1020,
+      "ok": true
+    },
+    {
+      "key": "gmar",
+      "route": "/gmar",
+      "file": "app/gmar/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 1191,
+      "ok": true
+    },
+    {
+      "key": "nexa",
+      "route": "/nexa",
+      "file": "app/nexa/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 1023,
+      "ok": true
+    },
+    {
+      "key": "zendoro",
+      "route": "/zendoro",
+      "file": "app/zendoro/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 946,
+      "ok": true
+    },
+    {
+      "key": "wallet",
+      "route": "/wallet",
+      "file": "app/wallet/page.tsx",
+      "required": true,
+      "exists": true,
+      "bytes": 266,
+      "ok": true
+    },
+    {
+      "key": "lumaspace",
+      "route": "/lumaspace",
+      "file": "app/lumaspace/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 1536,
+      "ok": true
+    },
+    {
+      "key": "movies",
+      "route": "/movies",
+      "file": "app/movies/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 993,
+      "ok": true
+    },
+    {
+      "key": "music",
+      "route": "/music",
+      "file": "app/music/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 996,
+      "ok": true
+    },
+    {
+      "key": "creator",
+      "route": "/creator",
+      "file": "app/creator/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 115,
+      "ok": true
+    },
+    {
+      "key": "share",
+      "route": "/share",
+      "file": "app/share/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 980,
+      "ok": true
+    },
+    {
+      "key": "profile",
+      "route": "/profile",
+      "file": "app/profile/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 272,
+      "ok": true
+    },
+    {
+      "key": "settings",
+      "route": "/settings",
+      "file": "app/settings/page.tsx",
+      "required": false,
+      "exists": true,
+      "bytes": 147,
+      "ok": true
+    }
+  ],
+  "nextPack": "Pack 02/08 — Runtime & API Validation"
+}
