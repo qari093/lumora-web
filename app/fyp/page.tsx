@@ -1,12 +1,15 @@
 import FypAutoplayFeed from "./FypAutoplayFeed";
-import { fypYoutubeVideos, getFypYoutubeFeedSummary } from "@/src/core/fyp/youtubeFeed";
+import {
+  fullscreenSourceFeed,
+  getFullscreenSourceFeedSummary
+} from "@/src/core/fyp/fullscreenSourceFeed";
 
 export default function FypPage() {
-  const summary = getFypYoutubeFeedSummary();
+  const summary = getFullscreenSourceFeedSummary();
 
   return (
     <FypAutoplayFeed
-      videos={fypYoutubeVideos}
+      videos={fullscreenSourceFeed}
       itemCount={summary.itemCount}
     />
   );

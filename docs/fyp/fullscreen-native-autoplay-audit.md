@@ -1,0 +1,5 @@
+# FYP Fullscreen Native Autoplay Audit
+
+Status: PASS
+
+Result: FYP_TIKTOK_STYLE_FULLSCREEN_NATIVE_AUTOPLAY_READY_FOR_IPHONE_REVIEW

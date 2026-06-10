@@ -1,0 +1,17 @@
+{
+  "system": "FYP_FULLSCREEN_NATIVE_AUTOPLAY_AUDIT",
+  "checkedAt": "2026-06-10T15:15:43.085Z",
+  "status": "PASS",
+  "checks": {
+    "routeUsesFullscreenFeed": true,
+    "nativeVideoTagUsed": true,
+    "iframeRemoved": true,
+    "autoplayPlayCallExists": true,
+    "intersectionObserverExists": true,
+    "fullViewportCssExists": true,
+    "rightRailExists": true,
+    "bottomNavExists": true,
+    "sourceCount48": true
+  },
+  "result": "FYP_TIKTOK_STYLE_FULLSCREEN_NATIVE_AUTOPLAY_READY_FOR_IPHONE_REVIEW"
+}
