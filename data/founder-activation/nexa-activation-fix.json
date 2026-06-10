@@ -1,0 +1,9 @@
+{
+  "status": "NEXA_ACTIVATION_FIX_READY",
+  "pack": "04/07",
+  "safeMode": true,
+  "aiAutonomyEnabled": false,
+  "medicalClaimsEnabled": false,
+  "testerInvitesBlocked": true,
+  "activatedSurface": "/nexa"
+}
