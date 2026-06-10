@@ -1,39 +1,65 @@
 import Link from "next/link";
-import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+import {
+  gmarActivationItems,
+  getGmarActivationSummary
+} from "@/src/core/founder-activation/gmarActivation";
 
 export default function GmarPage() {
+  const summary = getGmarActivationSummary();
+
   return (
-    <main>
-      <Link href="/gmar/play">Play GMAR</Link>
-      <LumoraPortalPage
-        title="GMAR Playground"
-        eyebrow="Games civilization portal"
-        description="GMAR now has a visible launch surface for game discovery, player identity, missions, Zencoin economy, live presence, and community rooms."
-        actions={[
-          { label: "Play", href: "/gmar/play" },
-          { label: "GMAR Health", href: "/api/gmar/health" },
-          { label: "Public Ready", href: "/api/gmar/public-ready" }
-        ]}
-        signals={[
-          { label: "Mode", value: "Playable Hub" },
-          { label: "Economy", value: "Zencoin Linked" },
-          { label: "Community", value: "Live Rooms" }
-        ]}
-        modules={[
-          "Game Launcher",
-          "Player State",
-          "Missions",
-          "Inventory",
-          "World Events",
-          "Squads",
-          "Creator Games",
-          "Anti-Cheat"
-        ]}
-      />
+    <main style={{
+      minHeight: "100vh",
+      background: "radial-gradient(circle at top,#1d2238,#080b14)",
+      color: "#fff",
+      padding: "24px"
+    }}>
+      <section style={{maxWidth:1120,margin:"0 auto"}}>
+        <h1>GMAR is now a visible mission and economy layer.</h1>
+
+        <p>
+          Founder gate active · Tester invites blocked · Live rewards disabled
+        </p>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",
+          gap:"12px",
+          margin:"24px 0"
+        }}>
+          <div><strong>{summary.itemCount}</strong><br/>runtime surfaces</div>
+          <div><strong>{summary.visiblePlayers}</strong><br/>preview players</div>
+          <div><strong>OFF</strong><br/>live rewards</div>
+          <div><strong>SAFE</strong><br/>founder mode</div>
+        </div>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
+          gap:"16px"
+        }}>
+          {gmarActivationItems.map(item => (
+            <article
+              key={item.id}
+              style={{
+                border:"1px solid rgba(255,255,255,.12)",
+                borderRadius:"20px",
+                padding:"20px"
+              }}
+            >
+              <p>{item.category.toUpperCase()}</p>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <p>Visible activity: {item.players}</p>
+              <Link href={item.href}>Open surface</Link>
+            </article>
+          ))}
+        </div>
+
+        <footer style={{marginTop:"24px"}}>
+          Mission Surface · Pulse Store · Game Runtime · Reward Engine
+        </footer>
+      </section>
     </main>
   );
 }
-
