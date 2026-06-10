@@ -1,0 +1,71 @@
+{
+  "system": "LUMORA_FULL_ECOSYSTEM_TEST_READINESS_AUDIT",
+  "checkedAt": "2026-06-09T19:31:30.958Z",
+  "status": "READY_FOR_FOUNDER_REVIEW",
+  "readinessPercent": 100,
+  "passed": 41,
+  "total": 41,
+  "checks": {
+    "git": {
+      "ecosystemPacksSealed": true
+    },
+    "portals": {
+      "home": true,
+      "fyp": true,
+      "live": true,
+      "gmar": true,
+      "nexa": true,
+      "zendoro": true,
+      "wallet": true,
+      "lafs": true,
+      "lumaspace": true,
+      "movies": true,
+      "music": true,
+      "creator": true,
+      "share": true,
+      "profile": true
+    },
+    "admin": {
+      "adminApi": true,
+      "moderationApi": true,
+      "trustApi": true,
+      "operatorSurface": true,
+      "missionControlSurface": true
+    },
+    "zeneconomy": {
+      "zencoinApi": true,
+      "walletApi": true,
+      "zenEconomyApi": true,
+      "lafsSafeMode": true,
+      "noLiveBridgeRequiredBeforeApproval": true
+    },
+    "logoPwa": {
+      "manifest": true,
+      "favicon": true,
+      "appleIcon": true,
+      "appNameLumora": true,
+      "iphoneInstallSurfaceReady": true
+    },
+    "videoSources": {
+      "fypFeedApi": true,
+      "videosFeedApi": true,
+      "cloudflareStream": true,
+      "mediaUpload": true,
+      "fallbackVideoApis": true,
+      "ingestionSources": 4
+    },
+    "safety": {
+      "privateApprovalGate": true,
+      "testerSelectionBlocked": true,
+      "inviteBlocked": true,
+      "paymentLiveModeFalse": true,
+      "publicSignupDisabled": true
+    }
+  },
+  "hardGate": {
+    "ecosystemApprovalRequiredBeforeInvites": true,
+    "betaInvitesAllowed": false,
+    "reason": "Founder approval required before any tester invitation."
+  },
+  "nextAction": "FOUNDER_VISUAL_AND_FUNCTIONAL_REVIEW"
+}
