@@ -1,0 +1,112 @@
+{
+  "system": "FOUNDER_VISUAL_FUNCTIONAL_AUDIT",
+  "pack": "04/05",
+  "phase": "Rendered Portal Experience Audit",
+  "checkedAt": "2026-06-10T08:42:02.308Z",
+  "summary": {
+    "totalRoutes": 10,
+    "healthyRoutes": 10
+  },
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 27647,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/fyp",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 32499,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": true,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/live",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 29686,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/gmar",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 29366,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": true,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/nexa",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 29558,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/zendoro",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 27928,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/lumaspace",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 23063,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": true,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/wallet",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 20441,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/movies",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 29459,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    },
+    {
+      "route": "/music",
+      "status": 200,
+      "ok": true,
+      "htmlBytes": 28048,
+      "hasLumora": true,
+      "hasButton": true,
+      "hasVideo": false,
+      "hasPortalContent": true
+    }
+  ]
+}
