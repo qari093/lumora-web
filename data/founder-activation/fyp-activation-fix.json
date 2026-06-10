@@ -1,0 +1,8 @@
+{
+  "status": "FYP_ACTIVATION_FIX_READY",
+  "pack": "01/07",
+  "safeMode": true,
+  "testerInvitesBlocked": true,
+  "paymentLiveMode": false,
+  "activatedSurface": "/fyp"
+}
