@@ -2,400 +2,97 @@
   min-height: 100svh;
   background: #000;
   color: #fff;
-  padding: 0 0 86px;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.topBar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  padding: 14px 14px 8px;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.titleRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.backButton,
-.moreButton,
-.followButton,
-.fab {
-  border: 0;
-  color: #fff;
-  background: rgba(255,255,255,0.12);
-  border-radius: 999px;
-  min-width: 44px;
-  height: 44px;
-  font-weight: 800;
-}
-
-.brandBlock {
-  min-width: 0;
-  flex: 1;
-}
-
-.brand {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  margin: 0;
-}
-
-.sub {
-  margin: 2px 0 0;
-  color: rgba(255,255,255,0.62);
-  font-size: 13px;
-}
-
-.followButton {
-  background: #fff;
-  color: #000;
-  padding: 0 20px;
-}
-
-.tabs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  margin-top: 12px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.48);
-  text-align: center;
-}
-
-.tabActive {
-  color: #fff;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.tabActive::after {
-  content: "";
-  position: absolute;
-  height: 4px;
-  border-radius: 10px;
-  background: #1d9bf0;
-  left: 12px;
-  right: 12px;
-  bottom: 0;
-}
-
-.feed {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.card {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 14px 14px 18px;
-}
-
-.authorRow {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #222;
-  flex: 0 0 auto;
-}
-
-.meta {
-  min-width: 0;
-  flex: 1;
-}
-
-.nameLine {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.name {
-  font-weight: 900;
-  font-size: 16px;
-}
-
-.handle {
-  color: rgba(255,255,255,0.56);
-  font-size: 14px;
-}
-
-.caption {
-  margin: 4px 0 10px;
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-.thumbWrap {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #080808;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.thumb {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.play {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-}
-
-.playIcon {
-  width: 72px;
-  height: 52px;
-  border-radius: 16px;
-  background: rgba(0,0,0,0.54);
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-}
-
-.duration {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  padding: 4px 7px;
-  background: rgba(0,0,0,0.74);
-  border-radius: 6px;
-  font-weight: 800;
-  font-size: 13px;
-}
-
-.youtube {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  color: rgba(255,255,255,0.82);
-  font-weight: 800;
-  font-size: 14px;
-}
-
-.youtubeBadge {
-  color: #ff0033;
-  font-size: 16px;
-}
-
-.actions {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-top: 12px;
-  color: rgba(255,255,255,0.72);
-}
-
-.action {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: center;
-  min-height: 38px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  font-weight: 700;
-}
-
-.bottomNav {
-  position: fixed;
-  z-index: 30;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 72px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  align-items: center;
-  background: rgba(0,0,0,0.94);
-  border-top: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(18px);
-}
-
-.navItem {
-  color: #fff;
-  text-decoration: none;
-  display: grid;
-  place-items: center;
-  gap: 3px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.navIcon {
-  font-size: 22px;
-}
-
-.fab {
-  position: fixed;
-  right: 18px;
-  bottom: 92px;
-  z-index: 31;
-  width: 58px;
-  height: 58px;
-  background: #1d9bf0;
-  font-size: 32px;
-  line-height: 1;
-}
-
-.safeNote {
-  padding: 14px;
-  color: rgba(255,255,255,0.58);
-  font-size: 12px;
-  text-align: center;
-}
-
-@media (min-width: 760px) {
-  .shell {
-    display: flex;
-    justify-content: center;
-  }
-
-  .appFrame {
-    width: 430px;
-    min-height: 100svh;
-    border-left: 1px solid rgba(255,255,255,0.08);
-    border-right: 1px solid rgba(255,255,255,0.08);
-  }
-}
-
-.cardActive {
-  background: rgba(29, 155, 240, 0.08);
-}
-
-.playerShell {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #050505;
-  border: 1px solid rgba(255,255,255,0.1);
-  aspect-ratio: 16 / 9;
-}
-
-.videoFrame {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #000;
-}
-
-.autoplayState {
-  margin-left: auto;
-  color: rgba(255,255,255,0.52);
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .fullScreenFypRoot {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  min-height: 100svh;
   background: #000;
-  color: #fff;
   overflow: hidden;
-  padding: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .tiktokFrame {
   position: relative;
-  width: 100%;
   height: 100svh;
+  width: 100vw;
+  max-width: 520px;
+  margin: 0 auto;
   overflow: hidden;
   background: #000;
 }
 
 .tiktokTop {
   position: fixed;
-  z-index: 30;
   top: 0;
-  left: 0;
-  right: 0;
-  padding: calc(env(safe-area-inset-top) + 10px) 12px 8px;
-  color: #fff;
-  text-shadow: 0 1px 16px rgba(0,0,0,0.7);
-  pointer-events: none;
+  left: 50%;
+  z-index: 30;
+  width: min(100vw, 520px);
+  transform: translateX(-50%);
+  padding: max(14px, env(safe-area-inset-top)) 14px 10px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.56), transparent);
 }
 
 .topTabs {
   display: flex;
   align-items: center;
   gap: 18px;
-  font-size: 17px;
-  font-weight: 800;
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(16px, 4vw, 21px);
+  font-weight: 900;
   white-space: nowrap;
-  overflow: hidden;
 }
 
-.topTabs span {
-  opacity: 0.78;
+.topTabs a,
+.topTabs span,
+.topTabs strong {
+  color: inherit;
+  text-decoration: none;
 }
 
 .topTabs strong {
+  color: #fff;
   position: relative;
-  font-weight: 950;
 }
 
 .topTabs strong::after {
   content: "";
   position: absolute;
-  height: 3px;
+  left: 16%;
+  right: 16%;
+  bottom: -10px;
+  height: 2px;
   border-radius: 999px;
   background: #fff;
-  left: 8px;
-  right: 8px;
-  bottom: -8px;
 }
 
-.liveMini {
-  color: #fff;
-  text-decoration: none;
-  pointer-events: auto;
-  font-size: 30px;
-  line-height: 1;
-}
-
+.liveMini,
 .searchIcon {
   font-size: 28px;
+  line-height: 1;
+  color: #fff !important;
 }
 
 .topMeta {
-  margin-top: 10px;
-  font-size: 12px;
-  opacity: 0.72;
-  font-weight: 700;
+  margin-top: 22px;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .fullscreenFeed {
   height: 100svh;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   background: #000;
+}
+
+.fullscreenFeed::-webkit-scrollbar {
+  display: none;
 }
 
 .fullscreenCard {
@@ -413,142 +110,143 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
   background: #000;
+  filter: none;
+  transform: translateZ(0);
 }
 
 .videoShade {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.35), transparent 28%, transparent 54%, rgba(0,0,0,0.74)),
-    linear-gradient(90deg, rgba(0,0,0,0.12), transparent 55%, rgba(0,0,0,0.26));
+    linear-gradient(180deg, rgba(0,0,0,0.42), transparent 25%, transparent 58%, rgba(0,0,0,0.78)),
+    linear-gradient(90deg, rgba(0,0,0,0.25), transparent 45%, rgba(0,0,0,0.18));
   pointer-events: none;
 }
 
 .rightRail {
   position: absolute;
-  right: 10px;
-  bottom: calc(env(safe-area-inset-bottom) + 92px);
-  z-index: 20;
-  display: grid;
-  gap: 14px;
-  justify-items: center;
+  z-index: 10;
+  right: 12px;
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
 }
 
 .rightRail button {
-  appearance: none;
+  width: 54px;
+  min-height: 54px;
   border: 0;
+  border-radius: 999px;
+  background: rgba(20,20,20,0.42);
   color: #fff;
-  background: transparent;
   display: grid;
   place-items: center;
-  gap: 3px;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 900;
-  text-shadow: 0 2px 14px rgba(0,0,0,0.65);
+  box-shadow: 0 10px 34px rgba(0,0,0,0.25);
+  backdrop-filter: blur(12px);
 }
 
 .rightRail small {
-  font-size: 12px;
+  display: block;
+  margin-top: -4px;
+  font-size: 13px;
   font-weight: 900;
 }
 
 .avatarRing {
   position: relative;
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
   border: 2px solid #fff !important;
   background: rgba(255,255,255,0.12) !important;
-  overflow: visible;
 }
 
 .avatarRing img {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
   object-fit: cover;
 }
 
 .avatarRing span {
   position: absolute;
-  right: 0;
-  bottom: -8px;
-  width: 22px;
-  height: 22px;
+  right: -3px;
+  bottom: -5px;
+  width: 23px;
+  height: 23px;
+  border-radius: 999px;
+  background: #ff2f5f;
+  color: #fff;
   display: grid;
   place-items: center;
-  border-radius: 999px;
-  background: #ff2d55;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
 }
 
 .disc {
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  background: radial-gradient(circle, #333, #000) !important;
-  font-size: 24px !important;
+  background: rgba(0,0,0,0.72) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
 }
 
 .videoInfo {
   position: absolute;
-  z-index: 18;
   left: 16px;
   right: 86px;
-  bottom: calc(env(safe-area-inset-bottom) + 92px);
-  color: #fff;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.78);
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  z-index: 10;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.72);
 }
 
 .sourceLine {
   display: flex;
+  gap: 9px;
   flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
   margin: 0 0 8px;
-  font-size: 15px;
+  color: rgba(255,255,255,0.72);
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .sourceLine strong {
-  font-size: 18px;
-  font-weight: 950;
-}
-
-.sourceLine span {
-  opacity: 0.78;
-  font-weight: 700;
-}
-
-.videoInfo h2 {
-  margin: 0 0 8px;
+  color: #fff;
   font-size: 20px;
-  line-height: 1.22;
-  font-weight: 850;
+}
+
+.videoInfo h1 {
+  margin: 0 0 10px;
+  font-size: clamp(23px, 7vw, 36px);
+  line-height: 1.04;
+  color: #fff;
 }
 
 .laneLine {
   margin: 0;
-  font-size: 13px;
-  opacity: 0.86;
-  font-weight: 800;
+  color: rgba(255,255,255,0.74);
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .tiktokBottom {
   position: fixed;
-  z-index: 28;
-  left: 0;
-  right: 0;
+  left: 50%;
   bottom: 0;
-  height: calc(env(safe-area-inset-bottom) + 76px);
-  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 40;
+  width: min(100vw, 520px);
+  transform: translateX(-50%);
+  min-height: calc(74px + env(safe-area-inset-bottom));
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: rgba(0,0,0,0.88);
+  border-top: 1px solid rgba(255,255,255,0.08);
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 1fr 78px 1fr 1fr;
   align-items: center;
-  background: rgba(0,0,0,0.82);
-  backdrop-filter: blur(16px);
+  gap: 8px;
 }
 
 .tiktokBottom a {
@@ -556,28 +254,31 @@
   text-decoration: none;
   display: grid;
   place-items: center;
-  gap: 2px;
-  font-size: 24px;
+  gap: 4px;
+  font-size: 13px;
   font-weight: 900;
 }
 
 .tiktokBottom span {
-  font-size: 11px;
+  font-size: 25px;
+  line-height: 1;
 }
 
-.centerPlus {
-  width: 58px;
-  height: 40px;
-  margin: 0 auto;
-  border-radius: 14px;
-  background: linear-gradient(90deg, #38d5ff, #fff, #ff2d55);
+.createButton {
+  width: 70px;
+  height: 46px;
+  border-radius: 16px;
+  justify-self: center;
+  background: linear-gradient(90deg, #5ee7ff, #fff, #ff2f5f);
   color: #000 !important;
-  font-size: 30px !important;
+  font-size: 34px !important;
+  font-weight: 1000 !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
 }
 
 @media (min-width: 760px) {
   .tiktokFrame {
-    max-width: 430px;
-    margin: 0 auto;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
   }
 }

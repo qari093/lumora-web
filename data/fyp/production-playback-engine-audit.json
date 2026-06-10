@@ -1,0 +1,17 @@
+{
+  "system": "FYP_PRODUCTION_PLAYBACK_ENGINE_AUDIT",
+  "checkedAt": "2026-06-10T18:39:52.193Z",
+  "status": "FAIL",
+  "checks": {
+    "activeController": true,
+    "nativeVideoOnly": true,
+    "fullscreenCss": true,
+    "noBlurFilter": false,
+    "rightRail": true,
+    "bottomNav": true,
+    "sourceCount48": true,
+    "directMp4Pool": true,
+    "highQualityPosterPool": true
+  },
+  "result": "FYP_PLAYBACK_ENGINE_NEEDS_FIX"
+}

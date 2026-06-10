@@ -1,144 +1,156 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { FypFullscreenSource } from "@/src/core/fyp/fullscreenSourceFeed";
 import styles from "./styles.module.css";
-import type { FypFullscreenSourceItem } from "@/src/core/fyp/fullscreenSourceFeed";
 
 type Props = {
-  videos: FypFullscreenSourceItem[];
-  itemCount: number;
+  items: FypFullscreenSource[];
 };
 
-export default function FypAutoplayFeed({ videos, itemCount }: Props) {
-  const [activeId, setActiveId] = useState(videos[0]?.id ?? "");
-  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
-  const cardRefs = useRef<Record<string, HTMLElement | null>>({});
+function safePlay(video: HTMLVideoElement) {
+  video.muted = true;
+  video.playsInline = true;
+  const promise = video.play();
+  if (promise && typeof promise.catch === "function") {
+    promise.catch(() => undefined);
+  }
+}
 
-  const activeIndex = useMemo(
-    () => Math.max(0, videos.findIndex((video) => video.id === activeId)),
-    [activeId, videos]
-  );
+function pauseVideo(video: HTMLVideoElement) {
+  video.pause();
+}
+
+export default function FypAutoplayFeed({ items }: Props) {
+  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+  const videoRefs = useRef(new Map<string, HTMLVideoElement>());
+  const itemIds = useMemo(() => items.map((item) => item.id), [items]);
+
+  const registerVideo = useCallback((id: string, node: HTMLVideoElement | null) => {
+    if (!node) {
+      videoRefs.current.delete(id);
+      return;
+    }
+
+    node.muted = true;
+    node.playsInline = true;
+    node.preload = "auto";
+    videoRefs.current.set(id, node);
+  }, []);
 
   useEffect(() => {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-fyp-fullscreen-card]"));
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
+        const winner = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        const id = visible?.target.getAttribute("data-fyp-video-id");
-        if (id) setActiveId(id);
+        const nextId = winner?.target.getAttribute("data-fyp-video-id");
+        if (nextId) setActiveId(nextId);
       },
       {
-        threshold: [0.62, 0.76, 0.9],
-        rootMargin: "-8% 0px -18% 0px"
+        threshold: [0.55, 0.65, 0.75, 0.9]
       }
     );
 
-    for (const video of videos) {
-      const node = cardRefs.current[video.id];
-      if (node) observer.observe(node);
-    }
-
+    cards.forEach((card) => observer.observe(card));
     return () => observer.disconnect();
-  }, [videos]);
+  }, [itemIds]);
 
   useEffect(() => {
-    for (const [id, node] of Object.entries(videoRefs.current)) {
-      if (!node) continue;
-
+    for (const [id, video] of videoRefs.current.entries()) {
       if (id === activeId) {
-        node.muted = true;
-        node.playsInline = true;
-        const playPromise = node.play();
-        if (playPromise) playPromise.catch(() => {});
+        safePlay(video);
       } else {
-        node.pause();
+        pauseVideo(video);
       }
     }
-  }, [activeId]);
+
+    const activeIndex = itemIds.indexOf(activeId);
+    const preloadIds = itemIds.slice(activeIndex + 1, activeIndex + 3);
+
+    preloadIds.forEach((id) => {
+      const video = videoRefs.current.get(id);
+      if (video) video.load();
+    });
+  }, [activeId, itemIds]);
 
   return (
-    <main className={`${styles.shell} ${styles.fullScreenFypRoot}`}>
+    <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay">
       <div className={styles.tiktokFrame}>
         <header className={styles.tiktokTop}>
-          <div className={styles.topTabs}>
-            <Link href="/" className={styles.liveMini}>‹</Link>
+          <nav className={styles.topTabs} aria-label="FYP discovery tabs">
+            <a className={styles.liveMini} href="/" aria-label="Back">‹</a>
             <span>Explore</span>
             <span>Hot</span>
             <span>Following</span>
             <span>Shop</span>
             <strong>For You</strong>
             <span className={styles.searchIcon}>⌕</span>
-          </div>
-          <div className={styles.topMeta}>{itemCount} sources · native muted autoplay</div>
+          </nav>
+          <div className={styles.topMeta}>{items.length} sources · native muted autoplay</div>
         </header>
 
         <section className={styles.fullscreenFeed} aria-label="Full-screen native autoplay FYP feed">
-          {videos.map((video, index) => {
-            const isActive = video.id === activeId;
-            const isNear = Math.abs(index - activeIndex) <= 1;
+          {items.map((item) => {
+            const active = item.id === activeId;
 
             return (
               <article
-                key={video.id}
-                ref={(node) => {
-                  cardRefs.current[video.id] = node;
-                }}
-                data-fyp-video-id={video.id}
+                key={item.id}
+                data-fyp-fullscreen-card="true"
+                data-fyp-video-id={item.id}
                 className={styles.fullscreenCard}
               >
                 <video
-                  ref={(node) => {
-                    videoRefs.current[video.id] = node;
-                  }}
+                  ref={(node) => registerVideo(item.id, node)}
                   className={styles.fullscreenVideo}
-                  src={video.videoUrl}
-                  poster={video.posterUrl}
+                  src={item.videoUrl}
+                  poster={item.posterUrl}
                   muted
                   playsInline
                   loop
-                  preload={isNear ? "auto" : "metadata"}
-                  controls={false}
+                  preload={active ? "auto" : "metadata"}
+                  aria-label={item.title}
                 />
 
                 <div className={styles.videoShade} />
 
-                <div className={styles.rightRail}>
-                  <button className={styles.avatarRing} aria-label={video.sourceName}>
-                    <img src={video.posterUrl} alt="" />
+                <aside className={styles.rightRail} aria-label="Video actions">
+                  <button className={styles.avatarRing} aria-label={`Follow ${item.sourceName}`}>
+                    <img src={item.posterUrl} alt="" />
                     <span>+</span>
                   </button>
-                  <button>♡<small>{video.likes}</small></button>
-                  <button>💬<small>{video.comments}</small></button>
-                  <button>▣<small>{video.saves}</small></button>
-                  <button>↗️<small>{video.shares}</small></button>
-                  <button className={styles.disc}>◉</button>
-                </div>
+                  <button aria-label="Like">♡<small>{item.likes}</small></button>
+                  <button aria-label="Comment">💬<small>{item.comments}</small></button>
+                  <button aria-label="Save">▣<small>{item.saves}</small></button>
+                  <button aria-label="Share">↗️<small>{item.shares}</small></button>
+                  <button className={styles.disc} aria-label="Audio">◉</button>
+                </aside>
 
-                <div className={styles.videoInfo}>
+                <section className={styles.videoInfo} aria-label="Video information">
                   <p className={styles.sourceLine}>
-                    <strong>{video.sourceName}</strong>
-                    <span>{video.handle}</span>
-                    <span>{video.safety.replaceAll("_", " ")}</span>
+                    <strong>{item.sourceName}</strong>
+                    <span>{item.handle}</span>
+                    <span>{item.policy}</span>
                   </p>
-                  <h2>{video.title}</h2>
+                  <h1>{item.title}</h1>
                   <p className={styles.laneLine}>
-                    {video.lane} · {isActive ? "Auto-playing muted" : "Ready"}
+                    {item.lane} · {active ? "Auto-playing muted" : "Ready"}
                   </p>
-                </div>
+                </section>
               </article>
             );
           })}
         </section>
 
-        <nav className={styles.tiktokBottom} aria-label="FYP mobile navigation">
-          <Link href="/">⌂<span>Home</span></Link>
-          <Link href="/fyp">⌕<span>FYP</span></Link>
-          <Link href="/gmar" className={styles.centerPlus}>+</Link>
-          <Link href="/live">▣<span>Live</span></Link>
-          <Link href="/profile">○<span>Profile</span></Link>
+        <nav className={styles.tiktokBottom} aria-label="Main navigation">
+          <a href="/"><span>⌂</span><strong>Home</strong></a>
+          <a href="/fyp"><span>⌕</span><strong>FYP</strong></a>
+          <a className={styles.createButton} href="/create" aria-label="Create">+</a>
+          <a href="/live"><span>▣</span><strong>Live</strong></a>
+          <a href="/profile"><span>○</span><strong>Profile</strong></a>
         </nav>
       </div>
     </main>
