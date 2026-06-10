@@ -1,0 +1,8 @@
+{
+  "status":"ZENDORO_ACTIVATION_FIX_READY",
+  "pack":"05/07",
+  "safeMode":true,
+  "checkoutLive":false,
+  "payoutsLive":false,
+  "testerInvitesBlocked":true
+}
