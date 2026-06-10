@@ -105,13 +105,14 @@ export default function FypAutoplayFeed({ items }: Props) {
               >
                 <video
                   ref={(node) => registerVideo(item.id, node)}
+                  autoPlay
                   className={styles.fullscreenVideo}
                   src={item.videoUrl}
                   poster={item.posterUrl}
                   muted
                   playsInline
                   loop
-                  preload={active ? "auto" : "metadata"}
+                  preload="auto"
                   aria-label={item.title}
                 />
 
@@ -128,18 +129,10 @@ export default function FypAutoplayFeed({ items }: Props) {
                   <button aria-label="Share">↗️<small>{item.shares}</small></button>
                   <button className={styles.disc} aria-label="Audio">◉</button>
                 </aside>
-
-                <section className={styles.videoInfo} aria-label="Video information">
-                  <p className={styles.sourceLine}>
-                    <strong>{item.sourceName}</strong>
-                    <span>{item.handle}</span>
-                    <span>{item.policy}</span>
-                  </p>
-                  <h1>{item.title}</h1>
-                  <p className={styles.laneLine}>
-                    {item.lane} · {active ? "Auto-playing muted" : "Ready"}
-                  </p>
-                </section>
+          <section className={styles.creatorStrip} aria-label="Creator and tags">
+            <strong>@{item.handle.replace(/^@/, "")}</strong>
+            <span>#{item.lane} #lumora</span>
+          </section>
               </article>
             );
           })}

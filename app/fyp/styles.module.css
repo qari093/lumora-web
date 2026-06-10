@@ -282,3 +282,85 @@
     border-right: 1px solid rgba(255,255,255,0.08);
   }
 }
+
+
+/* STEP 129 — TikTok-style visual playback polish */
+.fullscreenVideo {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  background: #000 !important;
+  filter: none !important;
+  transform: translateZ(0);
+}
+
+.videoInfo,
+.videoInfo h1,
+.videoInfo p,
+.sourceLine,
+.laneLine {
+  display: none !important;
+}
+
+.creatorStrip {
+  position: absolute;
+  left: max(18px, env(safe-area-inset-left));
+  right: 96px;
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9);
+  pointer-events: none;
+}
+
+.creatorStrip strong {
+  font-size: clamp(18px, 5vw, 24px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.creatorStrip span {
+  font-size: clamp(13px, 3.4vw, 16px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: rgba(255,255,255,0.84);
+}
+
+.videoShade {
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.08) 26%, rgba(0,0,0,0.16) 58%, rgba(0,0,0,0.76) 100%) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+
+.rightRail {
+  z-index: 9 !important;
+}
+
+.tiktokBottom {
+  z-index: 10 !important;
+}
+
+.tiktokTop {
+  z-index: 10 !important;
+  background: linear-gradient(180deg, rgba(0,0,0,0.86), rgba(0,0,0,0.42), transparent) !important;
+}
+
+.fullscreenCard {
+  background: #000 !important;
+  overflow: hidden !important;
+}
+
+.fullscreenCard::before,
+.fullscreenCard::after {
+  display: none !important;
+}
