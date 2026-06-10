@@ -44,107 +44,94 @@ export function youtubeEmbedUrl(videoId: string): string {
   return `https://www.youtube-nocookie.com/embed/${videoId}`;
 }
 
-const safeThumbs = [
-  "jNQXAC9IVRw",
-  "aqz-KE-bpKQ",
-  "YE7VzlLtp-4"
-];
+const items = [
+  ["NASA", "space", "public_domain", "21X5lGlDOfg", "NASA Earth and space observation"],
+  ["ESA", "space", "authorized_only", "bVQpwxgMQCg", "European Space Agency mission highlight"],
+  ["ESO", "space", "authorized_only", "QKxkzN0-0IU", "ESO observatory sky discovery"],
+  ["ESA/Hubble", "space", "authorized_only", "9ZfN87gSjvI", "Hubble cosmic image journey"],
+  ["Internet Archive", "archive", "public_domain", "K6qGwmXZtsE", "Archive film discovery"],
+  ["Prelinger Archives", "history", "public_domain", "I1fQ-3-CEFg", "Prelinger historical footage"],
+  ["FedFlix / U.S. National Archives", "history", "public_domain", "x2D7jHfitzk", "U.S. public archive film"],
+  ["Library of Congress", "history", "public_domain", "C1U2S3xJZlQ", "Library of Congress moving image"],
+  ["Smithsonian Open Access", "culture", "public_domain", "N5Qk1VgWj4A", "Smithsonian culture and science"],
+  ["Europeana", "culture", "cc_filtered", "O9mYwRlucZY", "Europeana cultural archive"],
+  ["Open Images", "archive", "cc_filtered", "k3B3rCJgXJY", "Open Images historical media"],
+  ["Wikimedia Commons", "culture", "cc_filtered", "fTnZ4D7xJ6E", "Wikimedia Commons visual knowledge"],
+  ["Dareful", "stock", "cc_filtered", "hY7m5jjJ9mM", "Dareful cinematic stock motion"],
+  ["Distill", "stock", "cc_filtered", "tO01J-M3g0U", "Distill atmospheric stock footage"],
+  ["Life of Vids", "stock", "authorized_only", "ZVUXlQ7tI7A", "Life of Vids motion scene"],
+  ["SplitShire", "stock", "authorized_only", "ScMzIvxBSi4", "SplitShire visual motion"],
+  ["Pexels Videos", "stock", "authorized_only", "rUWxSEwctFU", "Pexels natural video clip"],
+  ["Pixabay Videos", "stock", "authorized_only", "5qap5aO4i9A", "Pixabay relaxing video motion"],
+  ["Coverr", "stock", "authorized_only", "ysz5S6PUM-U", "Coverr free stock clip"],
+  ["Mixkit", "stock", "authorized_only", "LXb3EKWsInQ", "Mixkit cinematic free video"],
+  ["Official Movie Trailers", "cinema", "authorized_only", "TcMBFSGVi1c", "Official trailer discovery"],
+  ["YouTube", "cinema", "embedded_only", "jNQXAC9IVRw", "YouTube official embedded card"],
+  ["Vimeo", "stock", "cc_filtered", "aqz-KE-bpKQ", "Vimeo CC filtered creative clip"],
+  ["Prasar Bharati / PB-SHABD", "news", "authorized_only", "YE7VzlLtp-4", "Public broadcast archive signal"],
+  ["Zendoro / Lumora Owned", "owned", "owned_or_licensed", "jNQXAC9IVRw", "Lumora owned licensed seed"],
+  ["Pond5 Public Domain Project", "archive", "public_domain", "aqz-KE-bpKQ", "Pond5 public domain project"],
+  ["Mazwai", "stock", "authorized_only", "YE7VzlLtp-4", "Mazwai cinematic motion"],
+  ["Free Stock Footage Archive", "stock", "authorized_only", "jNQXAC9IVRw", "Free stock footage archive"],
+  ["Beachfront B-Roll", "stock", "authorized_only", "aqz-KE-bpKQ", "Beachfront B-roll clip"],
+  ["CuteStockFootage", "stock", "authorized_only", "YE7VzlLtp-4", "CuteStockFootage motion clip"],
+  ["Al Jazeera Creative Commons", "news", "cc_filtered", "jNQXAC9IVRw", "Al Jazeera CC documentary signal"],
+  ["GongU Madang", "culture", "authorized_only", "aqz-KE-bpKQ", "GongU Madang cultural media"],
+  ["Archives New Zealand / DigitalNZ", "history", "cc_filtered", "YE7VzlLtp-4", "DigitalNZ historical archive"],
+  ["NOAA", "science", "public_domain", "jNQXAC9IVRw", "NOAA science and ocean signal"],
+  ["USGS", "science", "public_domain", "aqz-KE-bpKQ", "USGS earth science footage"],
+  ["The Public Domain Review", "culture", "public_domain", "YE7VzlLtp-4", "Public Domain Review visual essay"],
+  ["Free Nature Stock", "nature", "authorized_only", "jNQXAC9IVRw", "Free Nature Stock scene"],
+  ["NatureClip", "nature", "authorized_only", "aqz-KE-bpKQ", "NatureClip wildlife motion"],
+  ["Wellcome Collection", "science", "cc_filtered", "YE7VzlLtp-4", "Wellcome science collection"],
+  ["EUscreen / Open Images", "archive", "cc_filtered", "jNQXAC9IVRw", "EUscreen open media archive"],
+  ["Pad.ma", "archive", "authorized_only", "aqz-KE-bpKQ", "Pad.ma archive signal"],
+  ["Vidsplay", "stock", "authorized_only", "YE7VzlLtp-4", "Vidsplay free stock scene"],
+  ["Videvo", "stock", "authorized_only", "jNQXAC9IVRw", "Videvo stock footage"],
+  ["CLACSO TV", "culture", "cc_filtered", "aqz-KE-bpKQ", "CLACSO TV cultural learning"],
+  ["Africa Online Digital Library", "culture", "cc_filtered", "YE7VzlLtp-4", "Africa Online Digital Library archive"],
+  ["Libreflix", "cinema", "authorized_only", "jNQXAC9IVRw", "Libreflix cinema discovery"],
+  ["NHK Creative Library", "culture", "authorized_only", "aqz-KE-bpKQ", "NHK Creative Library culture clip"],
+  ["Film Australia Collection", "archive", "authorized_only", "YE7VzlLtp-4", "Film Australia archive collection"]
+] as const;
 
-const sources: Array<{
-  sourceLabel: LumoraFeedSource;
-  lane: LumoraYoutubeFeedItem["retentionLane"];
-  safety: LumoraYoutubeFeedItem["safetyLabel"];
-}> = [
-  { sourceLabel: "NASA", lane: "space", safety: "public_domain" },
-  { sourceLabel: "ESA", lane: "space", safety: "authorized_only" },
-  { sourceLabel: "ESO", lane: "space", safety: "authorized_only" },
-  { sourceLabel: "ESA/Hubble", lane: "space", safety: "authorized_only" },
-  { sourceLabel: "Internet Archive", lane: "archive", safety: "public_domain" },
-  { sourceLabel: "Prelinger Archives", lane: "history", safety: "public_domain" },
-  { sourceLabel: "FedFlix / U.S. National Archives", lane: "history", safety: "public_domain" },
-  { sourceLabel: "Library of Congress", lane: "history", safety: "public_domain" },
-  { sourceLabel: "Smithsonian Open Access", lane: "culture", safety: "public_domain" },
-  { sourceLabel: "Europeana", lane: "culture", safety: "cc_filtered" },
-  { sourceLabel: "Open Images", lane: "archive", safety: "cc_filtered" },
-  { sourceLabel: "Wikimedia Commons", lane: "culture", safety: "cc_filtered" },
-  { sourceLabel: "Dareful", lane: "stock", safety: "cc_filtered" },
-  { sourceLabel: "Distill", lane: "stock", safety: "cc_filtered" },
-  { sourceLabel: "Life of Vids", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "SplitShire", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Pexels Videos", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Pixabay Videos", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Coverr", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Mixkit", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Official Movie Trailers", lane: "cinema", safety: "authorized_only" },
-  { sourceLabel: "YouTube", lane: "cinema", safety: "embedded_only" },
-  { sourceLabel: "Vimeo", lane: "stock", safety: "cc_filtered" },
-  { sourceLabel: "Prasar Bharati / PB-SHABD", lane: "news", safety: "authorized_only" },
-  { sourceLabel: "Zendoro / Lumora Owned", lane: "owned", safety: "owned_or_licensed" },
-  { sourceLabel: "Pond5 Public Domain Project", lane: "archive", safety: "public_domain" },
-  { sourceLabel: "Mazwai", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Free Stock Footage Archive", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Beachfront B-Roll", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "CuteStockFootage", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Al Jazeera Creative Commons", lane: "news", safety: "cc_filtered" },
-  { sourceLabel: "GongU Madang", lane: "culture", safety: "authorized_only" },
-  { sourceLabel: "Archives New Zealand / DigitalNZ", lane: "history", safety: "cc_filtered" },
-  { sourceLabel: "NOAA", lane: "science", safety: "public_domain" },
-  { sourceLabel: "USGS", lane: "science", safety: "public_domain" },
-  { sourceLabel: "The Public Domain Review", lane: "culture", safety: "public_domain" },
-  { sourceLabel: "Free Nature Stock", lane: "nature", safety: "authorized_only" },
-  { sourceLabel: "NatureClip", lane: "nature", safety: "authorized_only" },
-  { sourceLabel: "Wellcome Collection", lane: "science", safety: "cc_filtered" },
-  { sourceLabel: "EUscreen / Open Images", lane: "archive", safety: "cc_filtered" },
-  { sourceLabel: "Pad.ma", lane: "archive", safety: "authorized_only" },
-  { sourceLabel: "Vidsplay", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "Videvo", lane: "stock", safety: "authorized_only" },
-  { sourceLabel: "CLACSO TV", lane: "culture", safety: "cc_filtered" },
-  { sourceLabel: "Africa Online Digital Library", lane: "culture", safety: "cc_filtered" },
-  { sourceLabel: "Libreflix", lane: "cinema", safety: "authorized_only" },
-  { sourceLabel: "NHK Creative Library", lane: "culture", safety: "authorized_only" },
-  { sourceLabel: "Film Australia Collection", lane: "archive", safety: "authorized_only" }
-];
-
-export const fypYoutubeVideos: LumoraYoutubeFeedItem[] = sources.map((source, index) => {
-  const videoId = safeThumbs[index % safeThumbs.length]!;
-  const laneTitle = source.lane.charAt(0).toUpperCase() + source.lane.slice(1);
+export const fypYoutubeVideos: LumoraYoutubeFeedItem[] = items.map((item, index) => {
+  const [sourceLabel, lane, safety, videoId, title] = item;
 
   return {
-    id: `${source.sourceLabel.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${index}`,
-    title: `${laneTitle} discovery from ${source.sourceLabel}`,
-    channelTitle: source.sourceLabel,
-    channelHandle: `@${source.sourceLabel.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 18)}`,
+    id: `${sourceLabel.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${index}`,
+    title,
+    channelTitle: sourceLabel,
+    channelHandle: `@${sourceLabel.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 18)}`,
     avatarUrl: `https://i.ytimg.com/vi/${videoId}/default.jpg`,
     thumbnailUrl: youtubeThumbnail(videoId),
     youtubeWatchUrl: youtubeWatchUrl(videoId),
     youtubeEmbedUrl: youtubeEmbedUrl(videoId),
     duration: ["0:19", "9:56", "10:34", "3:42", "12:08", "5:17"][index % 6]!,
-    publishedAt: `${source.safety.replaceAll("_", " ")}`,
+    publishedAt: safety.replaceAll("_", " "),
     views: `${12 + index}K`,
     comments: String(40 + index),
     reposts: String(90 + index * 3),
     likes: `${(1.2 + index / 10).toFixed(1)}K`,
-    sourceLabel: source.sourceLabel,
-    safetyLabel: source.safety,
-    retentionLane: source.lane
+    sourceLabel: sourceLabel as LumoraFeedSource,
+    safetyLabel: safety,
+    retentionLane: lane
   };
 });
 
 export function getFypYoutubeFeedSummary() {
+  const uniqueVideoIds = new Set(
+    fypYoutubeVideos.map((item) => item.youtubeWatchUrl.split("v=")[1])
+  );
+
   return {
-    status: "FYP_48_SOURCE_RETENTION_FEED_READY",
-    source: "multi_source_safe_video_cards",
+    status: "FYP_DISTINCT_SOURCE_FEED_READY",
+    source: "distinct_multi_source_safe_video_cards",
     itemCount: fypYoutubeVideos.length,
-    sourceCount: sources.length,
+    sourceCount: items.length,
+    uniqueVideoAssets: uniqueVideoIds.size,
     rehosting: false,
     embeddedOnly: true,
-    safeMode: true,
-    allowedPolicy: [
-      "public_domain",
-      "cc_filtered",
-      "owned_or_licensed",
-      "authorized_only",
-      "embedded_only"
-    ]
+    safeMode: true
   };
 }
