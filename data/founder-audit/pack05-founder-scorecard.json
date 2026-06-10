@@ -1,0 +1,51 @@
+{
+  "system": "FOUNDER_VISUAL_FUNCTIONAL_AUDIT",
+  "pack": "05/05",
+  "phase": "Mobile Founder Approval Scorecard",
+  "checkedAt": "2026-06-10T08:46:32.372Z",
+  "status": "NEEDS_PORTAL_ACTIVATION_BEFORE_APPROVAL",
+  "weightedReadinessPercent": 65,
+  "score": {
+    "routeExistence": 100,
+    "renderedAvailability": 100,
+    "navigationContentDepth": 52,
+    "runtimeDepth": 30,
+    "founderVisualConfidence": 62
+  },
+  "confirmedReady": [
+    "All required portal route files exist",
+    "All audited public routes return rendered HTML",
+    "Ecosystem approval gate remains required",
+    "Tester invites remain blocked",
+    "Payment live mode remains off"
+  ],
+  "notYetFullyProven": [
+    "Every portal has deep interactive runtime",
+    "Every video source renders playable media",
+    "Zendoro has complete real product browsing depth",
+    "Wallet has complete user-visible transaction depth",
+    "NEXA has complete user-facing module depth",
+    "Admin and Mission Control have complete founder-grade UX",
+    "iPhone visual quality is founder-approved"
+  ],
+  "highestRiskFiles": {
+    "shellRisk": [
+      "app/fyp/page.tsx",
+      "app/live/page.tsx",
+      "app/gmar/page.tsx",
+      "app/nexa/page.tsx",
+      "app/zendoro/page.tsx",
+      "app/wallet/page.tsx"
+    ],
+    "lowRuntimeRisk": [
+      "app/fyp/page.tsx",
+      "app/live/page.tsx",
+      "app/gmar/page.tsx",
+      "app/nexa/page.tsx",
+      "app/zendoro/page.tsx",
+      "app/lumaspace/page.tsx",
+      "app/wallet/page.tsx"
+    ]
+  },
+  "recommendation": "Activate thin portals before Breathing Threshold V6"
+}
