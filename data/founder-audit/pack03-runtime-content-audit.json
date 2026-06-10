@@ -1,0 +1,57 @@
+{
+  "system": "FOUNDER_VISUAL_FUNCTIONAL_AUDIT",
+  "pack": "03/05",
+  "phase": "Runtime Content Validation",
+  "checkedAt": "2026-06-10T08:38:38.448Z",
+  "findings": [
+    {
+      "file": "app/fyp/page.tsx",
+      "bytes": 1698,
+      "runtimeSignals": 0,
+      "importsCount": 9,
+      "jsxDensity": 30
+    },
+    {
+      "file": "app/live/page.tsx",
+      "bytes": 1020,
+      "runtimeSignals": 1,
+      "importsCount": 1,
+      "jsxDensity": 1
+    },
+    {
+      "file": "app/gmar/page.tsx",
+      "bytes": 1191,
+      "runtimeSignals": 1,
+      "importsCount": 2,
+      "jsxDensity": 5
+    },
+    {
+      "file": "app/nexa/page.tsx",
+      "bytes": 1023,
+      "runtimeSignals": 1,
+      "importsCount": 1,
+      "jsxDensity": 1
+    },
+    {
+      "file": "app/zendoro/page.tsx",
+      "bytes": 946,
+      "runtimeSignals": 0,
+      "importsCount": 1,
+      "jsxDensity": 1
+    },
+    {
+      "file": "app/lumaspace/page.tsx",
+      "bytes": 1536,
+      "runtimeSignals": 0,
+      "importsCount": 2,
+      "jsxDensity": 21
+    },
+    {
+      "file": "app/wallet/page.tsx",
+      "bytes": 266,
+      "runtimeSignals": 0,
+      "importsCount": 1,
+      "jsxDensity": 5
+    }
+  ]
+}
