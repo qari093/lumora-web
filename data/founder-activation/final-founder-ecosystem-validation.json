@@ -1,0 +1,43 @@
+{
+  "system": "FINAL_FOUNDER_ECOSYSTEM_VALIDATION",
+  "checkedAt": "2026-06-10T12:49:16.499Z",
+  "status": "PASS",
+  "founderActivationPacksCompleted": 6,
+  "founderActivationPacksTotal": 6,
+  "audits": [
+    {
+      "file": ".lumora-audits/fyp-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/live-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/gmar-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/nexa-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/zendoro-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    },
+    {
+      "file": ".lumora-audits/wallet-activation-audit.json",
+      "exists": true,
+      "status": "PASS"
+    }
+  ],
+  "ecosystemApprovalStillRequired": true,
+  "testerInvitesAllowed": false,
+  "paymentLiveModeAllowed": false,
+  "result": "READY_FOR_FOUNDER_VISUAL_REVIEW"
+}
