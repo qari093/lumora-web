@@ -1,0 +1,22 @@
+{
+  "system": "FOUNDER_ACTIVATION_AUDIT",
+  "portal": "FYP",
+  "checkedAt": "2026-06-10T09:00:26.142Z",
+  "status": "FAIL",
+  "checks": {
+    "pageExists": true,
+    "coreExists": true,
+    "lockExists": true,
+    "dataExists": true,
+    "pageHasAllRequiredText": false,
+    "coreHasAllRequiredRuntime": true,
+    "dataSafeMode": true,
+    "testerInvitesBlocked": true,
+    "paymentLiveModeOff": true,
+    "backupLeftoverExists": true
+  },
+  "warnings": [
+    "backup file exists under app/fyp and should be removed or ignored before final seal"
+  ],
+  "result": "FYP_ACTIVATION_INCOMPLETE"
+}
