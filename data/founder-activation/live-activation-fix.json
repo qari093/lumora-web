@@ -1,0 +1,8 @@
+{
+  "status": "LIVE_ACTIVATION_FIX_READY",
+  "pack": "02/07",
+  "safeMode": true,
+  "publicBroadcastEnabled": false,
+  "testerInvitesBlocked": true,
+  "activatedSurface": "/live"
+}
