@@ -1,0 +1,19 @@
+{
+  "system": "FYP_PRODUCTION_FULLSCREEN_IPHONE_AUDIT",
+  "checkedAt": "2026-06-10T18:19:41.322Z",
+  "url": "https://lumoraverse.io/fyp?iphone_review=126",
+  "status": "PASS",
+  "checks": {
+    "productionReachable": true,
+    "hasFullscreenRoot": true,
+    "hasNativeVideoTags": true,
+    "hasFullscreenVideoClass": true,
+    "hasRightRail": true,
+    "hasBottomNav": true,
+    "hasNativeAutoplayCopy": true,
+    "has48SourcesCopy": true,
+    "noYoutubeIframe": true,
+    "noSmallCardFeed": true
+  },
+  "result": "FYP_FULLSCREEN_NATIVE_AUTOPLAY_CONFIRMED_ON_PRODUCTION"
+}
