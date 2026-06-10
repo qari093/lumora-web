@@ -308,13 +308,6 @@
   font-weight: 700;
 }
 
-:global(body:has(.fullScreenFypRoot) nav[aria-label="Global portal navigation"]),
-:global(body:has(.fullScreenFypRoot) [data-testid="lumora-home-beacon"]),
-:global(body:has(.fullScreenFypRoot) [data-testid="home-beacon-dashboard"]),
-:global(body:has(.fullScreenFypRoot) nav[aria-label="Lumora portal arc"]) {
-  display: none !important;
-}
-
 .fullScreenFypRoot {
   position: fixed;
   inset: 0;
