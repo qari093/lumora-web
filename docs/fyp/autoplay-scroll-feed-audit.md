@@ -1,0 +1,5 @@
+# FYP Autoplay Scroll Feed Audit
+
+Status: PASS
+
+Result: FYP_MUTED_AUTOPLAY_SCROLL_ENGINE_READY_FOR_IPHONE_REVIEW
