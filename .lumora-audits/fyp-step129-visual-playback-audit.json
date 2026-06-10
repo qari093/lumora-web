@@ -1,6 +1,6 @@
 {
   "system": "FYP_STEP129_VISUAL_PLAYBACK_COMPACT_OVERLAY_AUDIT",
-  "checkedAt": "2026-06-10T21:47:58.906041+00:00",
+  "checkedAt": "2026-06-10T21:57:03.545979+00:00",
   "status": "PASS",
   "checks": {
     "nativeVideo": true,
