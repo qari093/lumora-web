@@ -28,7 +28,7 @@ describe("FYP multi-source video feed", () => {
   it("keeps rehosting disabled", () => {
     const summary = getFypYoutubeFeedSummary();
 
-    expect(summary.status).toBe("FYP_48_SOURCE_RETENTION_FEED_READY");
+    expect(summary.status).toBe("FYP_DISTINCT_SOURCE_FEED_READY");
     expect(summary.rehosting).toBe(false);
     expect(summary.embeddedOnly).toBe(true);
     expect(summary.safeMode).toBe(true);

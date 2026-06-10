@@ -5,7 +5,7 @@ describe("FYP 48-source retention feed", () => {
   it("contains all 48 approved source lanes", () => {
     const summary = getFypYoutubeFeedSummary();
 
-    expect(summary.status).toBe("FYP_48_SOURCE_RETENTION_FEED_READY");
+    expect(summary.status).toBe("FYP_DISTINCT_SOURCE_FEED_READY");
     expect(summary.sourceCount).toBe(48);
     expect(summary.itemCount).toBe(48);
   });
