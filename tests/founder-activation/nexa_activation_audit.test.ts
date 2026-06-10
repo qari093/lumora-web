@@ -13,6 +13,7 @@ describe("NEXA activation audit", () => {
 
     expect(audit.status).toBe("PASS");
     expect(audit.checks.pageHasNexaSignals).toBe(true);
+    expect(audit.checks.coreHasSourceModuleSignals).toBe(true);
     expect(audit.checks.coreHasRuntimeSignals).toBe(true);
     expect(audit.checks.aiAutonomyOff).toBe(true);
     expect(audit.checks.medicalClaimsOff).toBe(true);

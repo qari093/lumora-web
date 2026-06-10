@@ -15,7 +15,11 @@ const pageSignals = [
   "AI autonomy off",
   "Medical claims off",
   "Tester invites blocked",
-  "Guidance Core",
+  "module.title"
+];
+
+const sourceModuleSignals = [
+  "NEXA Guidance Core",
   "Body Weather",
   "Creative Companion",
   "Trust Whisper"
@@ -41,6 +45,7 @@ const checks = {
   lockExists: fs.existsSync(lockFile),
   dataExists: fs.existsSync(dataFile),
   pageHasNexaSignals: pageSignals.every((item) => page.includes(item)),
+  coreHasSourceModuleSignals: sourceModuleSignals.every((item) => core.includes(item)),
   coreHasRuntimeSignals: coreSignals.every((item) => core.includes(item)),
   dataSafeMode: data?.safeMode === true,
   aiAutonomyOff: data?.aiAutonomyEnabled === false,
@@ -55,6 +60,7 @@ const status =
   checks.lockExists &&
   checks.dataExists &&
   checks.pageHasNexaSignals &&
+  checks.coreHasSourceModuleSignals &&
   checks.coreHasRuntimeSignals &&
   checks.dataSafeMode &&
   checks.aiAutonomyOff &&
