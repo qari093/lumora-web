@@ -1,17 +1,17 @@
 {
   "system": "FYP_STEP129_VISUAL_PLAYBACK_COMPACT_OVERLAY_AUDIT",
-  "checkedAt": "2026-06-10T21:38:54.741Z",
-  "status": "FAIL",
+  "checkedAt": "2026-06-10T21:47:58.906041+00:00",
+  "status": "PASS",
   "checks": {
     "nativeVideo": true,
     "runtimeMarker": true,
     "compactCreatorStrip": true,
     "oversizedCopyRemoved": true,
-    "activePreload": false,
+    "activePreload": true,
     "autoplayCall": true,
     "fullScreenCss": true,
     "rightRailExists": true,
     "bottomNavExists": true
   },
-  "result": "FYP_VISUAL_PLAYBACK_COMPACT_OVERLAY_BLOCKED"
+  "result": "FYP_VISUAL_PLAYBACK_COMPACT_OVERLAY_READY"
 }
