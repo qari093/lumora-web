@@ -1,0 +1,72 @@
+{
+  "system": "FOUNDER_VISUAL_FUNCTIONAL_AUDIT",
+  "pack": "02/05",
+  "phase": "Navigation & Content Activation Audit",
+  "checkedAt": "2026-06-10T08:36:46.415Z",
+  "findings": [
+    {
+      "file": "app/page.tsx",
+      "exists": true,
+      "bytes": 2729,
+      "hasLink": true,
+      "hasClientUI": true,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/fyp/page.tsx",
+      "exists": true,
+      "bytes": 1698,
+      "hasLink": false,
+      "hasClientUI": true,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/live/page.tsx",
+      "exists": true,
+      "bytes": 1020,
+      "hasLink": false,
+      "hasClientUI": true,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/gmar/page.tsx",
+      "exists": true,
+      "bytes": 1191,
+      "hasLink": true,
+      "hasClientUI": false,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/nexa/page.tsx",
+      "exists": true,
+      "bytes": 1023,
+      "hasLink": false,
+      "hasClientUI": false,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/zendoro/page.tsx",
+      "exists": true,
+      "bytes": 946,
+      "hasLink": false,
+      "hasClientUI": false,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/lumaspace/page.tsx",
+      "exists": true,
+      "bytes": 1536,
+      "hasLink": true,
+      "hasClientUI": true,
+      "hasPlaceholder": false
+    },
+    {
+      "file": "app/wallet/page.tsx",
+      "exists": true,
+      "bytes": 266,
+      "hasLink": false,
+      "hasClientUI": false,
+      "hasPlaceholder": false
+    }
+  ]
+}
