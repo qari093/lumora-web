@@ -1,0 +1,21 @@
+{
+  "system": "FOUNDER_ACTIVATION_AUDIT",
+  "portal": "NEXA",
+  "checkedAt": "2026-06-10T12:22:49.789Z",
+  "status": "FAIL",
+  "checks": {
+    "pageExists": true,
+    "coreExists": true,
+    "lockExists": true,
+    "dataExists": true,
+    "pageHasNexaSignals": false,
+    "coreHasRuntimeSignals": true,
+    "dataSafeMode": true,
+    "aiAutonomyOff": true,
+    "medicalClaimsOff": true,
+    "testerInvitesBlocked": true,
+    "backupLeftoverExists": false
+  },
+  "backups": [],
+  "result": "NEXA_ACTIVATION_INCOMPLETE"
+}
