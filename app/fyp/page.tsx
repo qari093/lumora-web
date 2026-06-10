@@ -13,7 +13,7 @@ export default function FypPage() {
             <Link href="/" className={styles.backButton} aria-label="Back">‹</Link>
             <div className={styles.brandBlock}>
               <h1 className={styles.brand}>Lumora FYP</h1>
-              <p className={styles.sub}>{summary.itemCount} safe YouTube-style cards · founder review</p>
+              <p className={styles.sub}>{summary.itemCount} safe multi-source video cards · founder review</p>
             </div>
             <button className={styles.followButton}>Follow</button>
             <button className={styles.moreButton} aria-label="More">•••</button>
@@ -27,7 +27,7 @@ export default function FypPage() {
           </nav>
         </header>
 
-        <section className={styles.feed} aria-label="YouTube-style FYP feed">
+        <section className={styles.feed} aria-label="Multi-source retention FYP feed">
           {fypYoutubeVideos.map((video) => (
             <article key={video.id} className={styles.card}>
               <div className={styles.authorRow}>
@@ -73,7 +73,7 @@ export default function FypPage() {
         </section>
 
         <p className={styles.safeNote}>
-          YouTube videos are embedded/linked only. Lumora does not download, rehost, or claim third-party videos.
+          Sources are public-domain, CC-filtered, owned/licensed, authorized, or embed-only. Lumora does not download, rehost, or claim third-party videos.
         </p>
 
         <button className={styles.fab} aria-label="Create">+</button>

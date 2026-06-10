@@ -1,6 +1,6 @@
 {
   "system": "FYP_YOUTUBE_STYLE_FEED_AUDIT",
-  "checkedAt": "2026-06-10T13:20:24.870Z",
+  "checkedAt": "2026-06-10T13:44:48.677Z",
   "status": "PASS",
   "checks": {
     "pageUsesYoutubeFeed": true,
