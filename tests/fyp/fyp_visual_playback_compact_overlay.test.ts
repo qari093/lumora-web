@@ -7,7 +7,7 @@ describe("FYP visual playback compact overlay", () => {
 
   it("uses native autoplay videos with eager preload", () => {
     expect(component).toContain("autoPlay");
-    expect(component).toContain('preload="auto"');
+    expect(component).toContain('preload={active ? "auto" : "metadata"}');
     expect(component).toContain('data-fyp-runtime="fullscreen-native-autoplay"');
   });
 

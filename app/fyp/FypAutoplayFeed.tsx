@@ -82,10 +82,6 @@ export default function FypAutoplayFeed({ items }: Props) {
         <header className={styles.tiktokTop}>
           <nav className={styles.topTabs} aria-label="FYP discovery tabs">
             <a className={styles.liveMini} href="/" aria-label="Back">‹</a>
-            <span>Explore</span>
-            <span>Hot</span>
-            <span>Following</span>
-            <span>Shop</span>
             <strong>For You</strong>
             <span className={styles.searchIcon}>⌕</span>
           </nav>
