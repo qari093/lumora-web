@@ -4,8 +4,36 @@ import {
   getFypActivationSummary
 } from "@/src/core/founder-activation/fypActivation";
 
-export default function FypPage() {
+type NativeFypItem = {
+  id: string;
+  title: string;
+  playbackUrl?: string;
+  videoUrl?: string;
+  posterUrl?: string;
+  creator?: string;
+  sourceType?: string;
+  rightsStatus?: string;
+};
+
+async function getNativeFypItems(): Promise<NativeFypItem[]> {
+  try {
+    const base = process.env.NEXT_PUBLIC_SITE_URL || "https://lumoraverse.io";
+    const res = await fetch(`${base}/api/fyp/native-feed`, {
+      cache: "no-store"
+    });
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+    return Array.isArray(data.items) ? data.items.slice(0, 6) : [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function FypPage() {
   const summary = getFypActivationSummary();
+  const videoItems = await getNativeFypItems();
 
   return (
     <main
@@ -26,11 +54,58 @@ export default function FypPage() {
             For You is now a living ecosystem gateway.
           </h1>
           <p style={{ maxWidth: 760, opacity: 0.82, fontSize: 17, lineHeight: 1.6 }}>
-            This page is no longer an empty shell. It presents real founder-review
-            pathways into video discovery, live rooms, GMAR missions, Zendoro commerce,
-            and NEXA guidance while keeping payments and tester access blocked.
+            This page renders real FYP video items from the native feed and provides
+            founder-review pathways into Live, GMAR, Zendoro, and NEXA while keeping
+            payments and tester access blocked.
           </p>
         </header>
+
+        <section
+          aria-label="Playable FYP video feed"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 16,
+            marginBottom: 24
+          }}
+        >
+          {videoItems.length > 0 ? (
+            videoItems.map((item) => {
+              const src = item.playbackUrl || item.videoUrl || "";
+              return (
+                <article key={item.id} style={portalCardStyle}>
+                  <video
+                    controls
+                    muted
+                    playsInline
+                    preload="metadata"
+                    poster={item.posterUrl}
+                    src={src}
+                    style={{
+                      width: "100%",
+                      borderRadius: 18,
+                      background: "#000",
+                      aspectRatio: "16 / 9",
+                      objectFit: "cover"
+                    }}
+                  />
+                  <h2 style={{ margin: "12px 0 6px", fontSize: 20 }}>{item.title}</h2>
+                  <p style={{ margin: 0, opacity: 0.7, fontSize: 13 }}>
+                    {item.sourceType || "native"} · {item.rightsStatus || "review"}
+                  </p>
+                </article>
+              );
+            })
+          ) : (
+            <article style={portalCardStyle}>
+              <h2 style={{ marginTop: 0 }}>FYP feed fallback active</h2>
+              <p style={{ opacity: 0.78 }}>
+                No playable video items were returned. Fallback content remains safe,
+                but founder approval requires playable media here.
+              </p>
+            </article>
+          )}
+        </section>
 
         <section
           aria-label="FYP activation summary"
@@ -42,16 +117,16 @@ export default function FypPage() {
           }}
         >
           <div style={cardStyle}>
+            <strong>{videoItems.length}</strong>
+            <span style={mutedStyle}>rendered videos</span>
+          </div>
+          <div style={cardStyle}>
             <strong>{summary.itemCount}</strong>
-            <span style={mutedStyle}>active cards</span>
+            <span style={mutedStyle}>activation cards</span>
           </div>
           <div style={cardStyle}>
             <strong>{summary.portalBridges}</strong>
             <span style={mutedStyle}>portal bridges</span>
-          </div>
-          <div style={cardStyle}>
-            <strong>{summary.videoSignals}</strong>
-            <span style={mutedStyle}>video signal</span>
           </div>
           <div style={cardStyle}>
             <strong>Safe</strong>

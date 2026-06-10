@@ -9,11 +9,25 @@ const page = fs.existsSync(pageFile) ? fs.readFileSync(pageFile, "utf8") : "";
 const core = fs.existsSync(coreFile) ? fs.readFileSync(coreFile, "utf8") : "";
 const data = fs.existsSync(dataFile) ? JSON.parse(fs.readFileSync(dataFile, "utf8")) : null;
 
-const requiredText = [
+const requiredPageSignals = [
   "For You is now a living ecosystem gateway",
   "Founder gate active",
   "Tester invites blocked",
   "Payment live mode off",
+  "Playable FYP video feed",
+  "rendered videos",
+  "/api/fyp/native-feed",
+  "<video"
+];
+
+const requiredCoreSignals = [
+  "FYP_ACTIVATED_FOR_FOUNDER_REVIEW",
+  "safeMode: true",
+  "fypActivationItems",
+  "getFypActivationSummary"
+];
+
+const portalBridgeSignals = [
   "Native Lumora Feed",
   "Live Pulse Rooms",
   "GMAR Mission Surface",
@@ -21,26 +35,22 @@ const requiredText = [
   "NEXA Guidance"
 ];
 
-const requiredCore = [
-  "FYP_ACTIVATED_FOR_FOUNDER_REVIEW",
-  "safeMode: true",
-  "fypActivationItems",
-  "getFypActivationSummary"
-];
+const backups = fs.existsSync("app/fyp")
+  ? fs.readdirSync("app/fyp").filter((name) => name.startsWith("page.tsx.backup-founder-activation-"))
+  : [];
 
 const checks = {
   pageExists: fs.existsSync(pageFile),
   coreExists: fs.existsSync(coreFile),
   lockExists: fs.existsSync(lockFile),
   dataExists: fs.existsSync(dataFile),
-  pageHasAllRequiredText: requiredText.every((item) => page.includes(item)),
-  coreHasAllRequiredRuntime: requiredCore.every((item) => core.includes(item)),
+  pageHasRequiredRenderedVideoSignals: requiredPageSignals.every((item) => page.includes(item)),
+  coreHasAllRequiredRuntime: requiredCoreSignals.every((item) => core.includes(item)),
+  coreHasAllPortalBridgeLabels: portalBridgeSignals.every((item) => core.includes(item)),
   dataSafeMode: data?.safeMode === true,
   testerInvitesBlocked: data?.testerInvitesBlocked === true,
   paymentLiveModeOff: data?.paymentLiveMode === false,
-  backupLeftoverExists: fs.readdirSync("app/fyp").some((name) =>
-    name.startsWith("page.tsx.backup-founder-activation-")
-  )
+  backupLeftoverExists: backups.length > 0
 };
 
 const status =
@@ -48,11 +58,13 @@ const status =
   checks.coreExists &&
   checks.lockExists &&
   checks.dataExists &&
-  checks.pageHasAllRequiredText &&
+  checks.pageHasRequiredRenderedVideoSignals &&
   checks.coreHasAllRequiredRuntime &&
+  checks.coreHasAllPortalBridgeLabels &&
   checks.dataSafeMode &&
   checks.testerInvitesBlocked &&
-  checks.paymentLiveModeOff
+  checks.paymentLiveModeOff &&
+  !checks.backupLeftoverExists
     ? "PASS"
     : "FAIL";
 
@@ -62,12 +74,10 @@ const report = {
   checkedAt: new Date().toISOString(),
   status,
   checks,
-  warnings: checks.backupLeftoverExists
-    ? ["backup file exists under app/fyp and should be removed or ignored before final seal"]
-    : [],
+  backups,
   result:
     status === "PASS"
-      ? "FYP_ACTIVATION_CONFIRMED_FOR_FOUNDER_REVIEW"
+      ? "FYP_VIDEO_UI_AND_PORTAL_BRIDGES_CONFIRMED_FOR_FOUNDER_REVIEW"
       : "FYP_ACTIVATION_INCOMPLETE"
 };
 
@@ -78,9 +88,6 @@ fs.writeFileSync("docs/founder-activation/fyp-activation-audit.md", `# FYP Activ
 Status: ${status}
 
 Result: ${report.result}
-
-Warnings:
-${report.warnings.length ? report.warnings.map((w) => `- ${w}`).join("\n") : "- None"}
 `);
 
 console.log(JSON.stringify(report, null, 2));

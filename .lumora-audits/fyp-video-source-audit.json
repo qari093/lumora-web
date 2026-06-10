@@ -1,0 +1,56 @@
+{
+  "system": "FYP_VIDEO_SOURCE_RENDERING_AUDIT",
+  "checkedAt": "2026-06-10T09:11:21.602Z",
+  "base": "https://lumoraverse.io",
+  "status": "PASS",
+  "playableSources": 3,
+  "totalSources": 5,
+  "results": [
+    {
+      "endpoint": "/api/fyp/native-feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 5315,
+      "hasVideoUrl": true,
+      "hasItems": true,
+      "sample": "{\"ok\":true,\"source\":\"native_fyp\",\"count\":20,\"items\":[{\"id\":\"seed_0\",\"title\":\"Seed Video 1\",\"sourceType\":\"lumora_generated\",\"rightsStatus\":\"verified\",\"licenseType\":\"lumora_generated\",\"playbackUrl\":\"/native-fyp/demo.mp4\",\"posterUrl\":\"/native-fyp/demo.jpg\",\"durationSeconds\":12,\"createdAt\":\"2026-06-10T0"
+    },
+    {
+      "endpoint": "/api/fyp/feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 621,
+      "hasVideoUrl": true,
+      "hasItems": true,
+      "sample": "{\"ok\":true,\"source\":\"fallback\",\"items\":[{\"id\":\"feed-1\",\"title\":\"Lumora Welcome Drop\",\"slug\":\"lumora-welcome-drop\",\"creator\":\"Lumora\",\"category\":\"Launch\",\"videoUrl\":\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\"},{\"id\":\"feed-2\",\"title\":\"GMAR Highlight Seed\",\"slug\":\"gmar-hi"
+    },
+    {
+      "endpoint": "/api/videos/feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 95,
+      "hasVideoUrl": true,
+      "hasItems": true,
+      "sample": "{\"ok\":true,\"marker\":\"videos-feed\",\"items\":[],\"nextCursor\":null,\"ts\":\"2026-06-10T09:11:21.446Z\"}"
+    },
+    {
+      "endpoint": "/api/fyp/fallback-feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 164,
+      "hasVideoUrl": false,
+      "hasItems": true,
+      "sample": "{\"ok\":true,\"data\":{\"fallbackFeed\":true,\"trigger\":\"empty-or-unsafe-feed\",\"sources\":[\"trusted-cache\",\"seed-pack\",\"editorial-safe\"],\"enabled\":true},\"ts\":1781082681579}"
+    },
+    {
+      "endpoint": "/api/fyp94/feed",
+      "status": 200,
+      "ok": true,
+      "bytes": 163,
+      "hasVideoUrl": false,
+      "hasItems": true,
+      "sample": "{\"ok\":true,\"deprecated\":true,\"alias\":\"/api/fyp94/feed\",\"canonical\":\"/api/fyp/feed\",\"message\":\"This endpoint is a compatibility alias. Use the canonical endpoint.\"}"
+    }
+  ],
+  "nextAction": "FIX_FYP_UI_TO_RENDER_VIDEO_ITEMS"
+}
