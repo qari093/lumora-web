@@ -1,0 +1,63 @@
+{
+  "system": "FOUNDER_VISUAL_FUNCTIONAL_AUDIT",
+  "pack": "01/05",
+  "phase": "Portal Reality Audit",
+  "checkedAt": "2026-06-10T08:33:26.033Z",
+  "portals": [
+    {
+      "portal": "home",
+      "exists": true,
+      "bytes": 2729
+    },
+    {
+      "portal": "fyp",
+      "exists": true,
+      "bytes": 1698
+    },
+    {
+      "portal": "live",
+      "exists": true,
+      "bytes": 1020
+    },
+    {
+      "portal": "gmar",
+      "exists": true,
+      "bytes": 1191
+    },
+    {
+      "portal": "nexa",
+      "exists": true,
+      "bytes": 1023
+    },
+    {
+      "portal": "zendoro",
+      "exists": true,
+      "bytes": 946
+    },
+    {
+      "portal": "lumaspace",
+      "exists": true,
+      "bytes": 1536
+    },
+    {
+      "portal": "wallet",
+      "exists": true,
+      "bytes": 266
+    },
+    {
+      "portal": "movies",
+      "exists": true,
+      "bytes": 993
+    },
+    {
+      "portal": "music",
+      "exists": true,
+      "bytes": 996
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "existing": 10
+  },
+  "status": "PASS"
+}
