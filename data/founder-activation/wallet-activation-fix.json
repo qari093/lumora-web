@@ -1,0 +1,9 @@
+{
+  "status":"WALLET_ZENECONOMY_ACTIVATION_FIX_READY",
+  "pack":"06/07",
+  "safeMode":true,
+  "walletLive":false,
+  "paymentsLive":false,
+  "zencoinBridgeLive":false,
+  "testerInvitesBlocked":true
+}
