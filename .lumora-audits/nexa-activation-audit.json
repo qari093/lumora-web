@@ -1,7 +1,7 @@
 {
   "system": "FOUNDER_ACTIVATION_AUDIT",
   "portal": "NEXA",
-  "checkedAt": "2026-06-10T12:22:49.789Z",
+  "checkedAt": "2026-06-10T12:26:05.856Z",
   "status": "FAIL",
   "checks": {
     "pageExists": true,

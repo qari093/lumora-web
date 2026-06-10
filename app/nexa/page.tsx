@@ -51,7 +51,7 @@ export default function NexaPage() {
               <p style={{ margin: 0, opacity: 0.72, fontSize: 12, letterSpacing: 1.4 }}>
                 {module.mode.toUpperCase()} · {module.status.toUpperCase()}
               </p>
-              <h2 style={{ margin: "10px 0", fontSize: 22 }}>{module.title}</h2>
+              <h2 style={{ margin: "10px 0", fontSize: 22 }}>{module.title.replace('NEXA Guidance Core', 'Guidance Core')}</h2>
               <p style={{ opacity: 0.8, lineHeight: 1.55 }}>{module.description}</p>
               <Link href={module.href} style={action}>
                 Open module
