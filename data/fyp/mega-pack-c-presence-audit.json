@@ -1,0 +1,12 @@
+{
+  "system": "LUMORA_FYP_MEGA_PACK_C_PRESENCE_AUDIT",
+  "checkedAt": "2026-06-11T08:36:09.657Z",
+  "status": "PASS",
+  "checks": {
+    "app/api/fyp/feed/route.ts": true,
+    "app/api/fyp/runtime/route.ts": true,
+    "app/api/fyp/personalization/route.ts": true,
+    "app/api/fyp/session/route.ts": true,
+    "app/api/fyp/interact/route.ts": true
+  }
+}
