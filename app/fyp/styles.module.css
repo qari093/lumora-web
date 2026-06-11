@@ -364,3 +364,230 @@
 .fullscreenCard::after {
   display: none !important;
 }
+
+
+.depthTop {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 20;
+  display: grid;
+  width: min(94vw, 440px);
+  transform: translateX(-50%);
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.laneSwitch {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(2,6,23,.36);
+  backdrop-filter: blur(18px);
+}
+
+.laneSwitch button {
+  min-height: 31px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 10px;
+  color: rgba(255,255,255,.72);
+  background: transparent;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.laneSwitch button[data-active="true"] {
+  color: white;
+  background: linear-gradient(135deg, rgba(34,211,238,.36), rgba(168,85,247,.34));
+  box-shadow: 0 0 22px rgba(34,211,238,.22);
+}
+
+.tracePromise {
+  justify-self: center;
+  width: fit-content;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: rgba(255,255,255,.74);
+  background: rgba(2,6,23,.28);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+}
+
+.retentionRing {
+  position: absolute;
+  right: max(10px, env(safe-area-inset-right));
+  top: 50%;
+  z-index: 10;
+  display: grid;
+  transform: translateY(-50%);
+  gap: 10px;
+  justify-items: center;
+}
+
+.retentionRing button,
+.ringProgress {
+  display: grid;
+  min-width: 54px;
+  min-height: 54px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  color: white;
+  background: radial-gradient(circle at 35% 20%, rgba(125,249,255,.28), rgba(2,6,23,.42));
+  box-shadow: 0 0 24px rgba(34,211,238,.13);
+  backdrop-filter: blur(16px);
+}
+
+.retentionRing button {
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.retentionRing button[data-active="true"] {
+  border-color: rgba(34,211,238,.45);
+  box-shadow: 0 0 28px rgba(34,211,238,.34);
+}
+
+.retentionRing small,
+.ringProgress span {
+  display: block;
+  margin-top: 1px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.ringProgress {
+  background:
+    conic-gradient(from 0deg, rgba(34,211,238,.88), rgba(168,85,247,.55), rgba(255,255,255,.12)),
+    rgba(2,6,23,.45);
+}
+
+.ringProgress[data-active="true"] {
+  animation: lumoraTraceRing 7s linear infinite;
+}
+
+@keyframes lumoraTraceRing {
+  to { transform: rotate(360deg); }
+}
+
+.deepDivePanel {
+  position: absolute;
+  left: 16px;
+  right: 86px;
+  bottom: 118px;
+  z-index: 13;
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(125,249,255,.22);
+  border-radius: 24px;
+  padding: 14px;
+  color: white;
+  background: rgba(2,6,23,.58);
+  box-shadow: 0 0 30px rgba(34,211,238,.16);
+  backdrop-filter: blur(20px);
+}
+
+.deepDivePanel strong {
+  font-size: 14px;
+}
+
+.deepDivePanel span {
+  color: rgba(255,255,255,.78);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.deepDivePanel button {
+  width: fit-content;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  padding: 7px 11px;
+  color: white;
+  background: rgba(255,255,255,.08);
+  font-weight: 800;
+}
+
+.traceDock {
+  position: fixed;
+  right: 12px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  left: 12px;
+  z-index: 18;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 24px;
+  padding: 10px;
+  background: rgba(2,6,23,.42);
+  box-shadow: 0 0 28px rgba(34,211,238,.12);
+  backdrop-filter: blur(18px);
+}
+
+.traceDock div {
+  display: grid;
+  gap: 2px;
+}
+
+.traceDock span {
+  color: rgba(255,255,255,.58);
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.traceDock strong {
+  color: white;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: capitalize;
+}
+
+.traceDock button {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 12px;
+  color: white;
+  background: linear-gradient(135deg, rgba(34,211,238,.36), rgba(168,85,247,.36));
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+@media (max-width: 430px) {
+  .traceDock {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .traceDock button {
+    grid-column: 1 / -1;
+  }
+
+  .retentionRing {
+    right: 8px;
+    gap: 8px;
+  }
+
+  .retentionRing button,
+  .ringProgress {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ringProgress[data-active="true"] {
+    animation: none;
+  }
+}
