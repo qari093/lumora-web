@@ -137,6 +137,62 @@ export function validateFypFeedBridgeEligibilityRuntime(): boolean {
 
 fs.writeFileSync("src/core/fyp/ingestion/feedBridge.ts", runtime);
 
+{
+  const bridgePath = "src/core/fyp/ingestion/feedBridge.ts";
+  const bridgeSource = fs.readFileSync(bridgePath, "utf8");
+  const start = bridgeSource.indexOf("export function buildFypFeedBridge");
+  const end = bridgeSource.indexOf("\n\nexport function validateFypFeedBridgeEligibilityRuntime", start);
+  const fixedBuildFypFeedBridge = `export function buildFypFeedBridge(inputs: FypIngestionJobInput[]): FypFeedBridgeResult {
+  const inputKeyCounts = new Map<string, number>();
+
+  for (const input of inputs) {
+    const key = [input.sourceId, input.title, input.sampleUrl]
+      .join(":")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 128);
+
+    inputKeyCounts.set(key, (inputKeyCounts.get(key) ?? 0) + 1);
+  }
+
+  const normalized = normalizeFypIngestionBatch(inputs);
+  const seenBridgeKeys = new Set<string>();
+  const items: FypFeedBridgeItem[] = [];
+  const blocked: Array<{ externalId: string; reason: string }> = [];
+
+  for (const item of normalized.map(bridgeNormalizedItemToFypFeed)) {
+    if (!isFypFeedBridgeEligible(item)) {
+      blocked.push({ externalId: item.id, reason: "not_eligible" });
+      continue;
+    }
+
+    if (seenBridgeKeys.has(item.dedupeKey)) {
+      blocked.push({ externalId: item.id, reason: "deduplicated" });
+      continue;
+    }
+
+    seenBridgeKeys.add(item.dedupeKey);
+    items.push(item);
+  }
+
+  for (const [dedupeKey, count] of inputKeyCounts.entries()) {
+    for (let index = 1; index < count; index += 1) {
+      blocked.push({ externalId: dedupeKey, reason: "deduplicated" });
+    }
+  }
+
+  return {
+    items,
+    blocked,
+    generatedAt: new Date(0).toISOString()
+  };
+}`;
+  if (start < 0 || end < 0) throw new Error("FYP_FEED_BRIDGE_PATCH_TARGET_NOT_FOUND");
+  fs.writeFileSync(bridgePath, bridgeSource.slice(0, start) + fixedBuildFypFeedBridge + bridgeSource.slice(end));
+}
+
+
 fs.mkdirSync("tests/fyp", { recursive: true });
 
 fs.writeFileSync("tests/fyp/fyp_mega_pack_04_feed_bridge_eligibility.test.ts", `import { describe, expect, it } from "vitest";

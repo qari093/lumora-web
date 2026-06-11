@@ -65,24 +65,44 @@ export function bridgeNormalizedItemToFypFeed(item: FypNormalizedFeedItem): FypF
 }
 
 export function buildFypFeedBridge(inputs: FypIngestionJobInput[]): FypFeedBridgeResult {
+  const inputKeyCounts = new Map<string, number>();
+
+  for (const input of inputs) {
+    const key = [input.sourceId, input.title, input.sampleUrl]
+      .join(":")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 128);
+
+    inputKeyCounts.set(key, (inputKeyCounts.get(key) ?? 0) + 1);
+  }
+
   const normalized = normalizeFypIngestionBatch(inputs);
-  const seen = new Set<string>();
+  const seenBridgeKeys = new Set<string>();
   const items: FypFeedBridgeItem[] = [];
+  const blocked: Array<{ externalId: string; reason: string }> = [];
 
   for (const item of normalized.map(bridgeNormalizedItemToFypFeed)) {
-    if (!isFypFeedBridgeEligible(item)) continue;
-    if (seen.has(item.dedupeKey)) continue;
+    if (!isFypFeedBridgeEligible(item)) {
+      blocked.push({ externalId: item.id, reason: "not_eligible" });
+      continue;
+    }
 
-    seen.add(item.dedupeKey);
+    if (seenBridgeKeys.has(item.dedupeKey)) {
+      blocked.push({ externalId: item.id, reason: "deduplicated" });
+      continue;
+    }
+
+    seenBridgeKeys.add(item.dedupeKey);
     items.push(item);
   }
 
-  const blocked = inputs
-    .filter((input) => !items.some((item) => item.sourceId === input.sourceId && item.id.includes(input.externalId.toLowerCase().replace(/[^a-z0-9]+/g, "-"))))
-    .map((input) => ({
-      externalId: input.externalId,
-      reason: "not_eligible_or_deduplicated"
-    }));
+  for (const [dedupeKey, count] of inputKeyCounts.entries()) {
+    for (let index = 1; index < count; index += 1) {
+      blocked.push({ externalId: dedupeKey, reason: "deduplicated" });
+    }
+  }
 
   return {
     items,
