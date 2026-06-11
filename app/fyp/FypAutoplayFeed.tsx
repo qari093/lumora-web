@@ -192,7 +192,7 @@ export default function FypAutoplayFeed({ items }: Props) {
   }, [activeId, itemIds, visibleItems, appendTrace]);
 
   return (
-    <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="lumora-depthfeed-trace">
+    <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay" data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore" data-fyp-runtime="lumora-depthfeed-trace">
       <div className={styles.tiktokFrame}>
         <header className={styles.depthTop}>
           <nav className={styles.laneSwitch} aria-label="Lumora emotional lanes">
