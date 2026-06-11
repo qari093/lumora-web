@@ -1,0 +1,940 @@
+export type FypSourceRightsClass =
+  | "public_domain"
+  | "official_terms"
+  | "mixed_license"
+  | "public_domain_or_mixed"
+  | "public_domain_or_rights_tagged"
+  | "open_access"
+  | "rights_tagged"
+  | "creative_commons_or_public_domain"
+  | "stock_license"
+  | "authorized_only"
+  | "authorized_embed_only"
+  | "creative_commons_embed_allowed"
+  | "owned_or_contract"
+  | "stock_or_public_domain"
+  | "creative_commons"
+  | "mixed_stock_license"
+  | "open_license_or_authorized"
+  | "zero_fee_license";
+
+export type FypSourceCategory =
+  | "science"
+  | "space"
+  | "archive"
+  | "culture"
+  | "stock"
+  | "film"
+  | "public_media"
+  | "owned"
+  | "news"
+  | "nature"
+  | "education";
+
+export type FypSourceRegistryItem = {
+  id: string;
+  index: number;
+  label: string;
+  rightsClass: FypSourceRightsClass;
+  ingestionMode: string;
+  category: FypSourceCategory;
+  enabled: boolean;
+  requiresLicenseProof: boolean;
+  hardRejectRules: string[];
+};
+
+export const FYP_SOURCE_REGISTRY = [
+  {
+    "id": "NASA",
+    "index": 1,
+    "label": "NASA",
+    "rightsClass": "public_domain",
+    "ingestionMode": "download_or_api",
+    "category": "science",
+    "enabled": false,
+    "requiresLicenseProof": false,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "ESA",
+    "index": 2,
+    "label": "ESA",
+    "rightsClass": "official_terms",
+    "ingestionMode": "download_or_embed",
+    "category": "space",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "ESO",
+    "index": 3,
+    "label": "ESO",
+    "rightsClass": "official_terms",
+    "ingestionMode": "download_or_embed",
+    "category": "space",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "ESA_HUBBLE",
+    "index": 4,
+    "label": "ESA HUBBLE",
+    "rightsClass": "official_terms",
+    "ingestionMode": "download_or_embed",
+    "category": "space",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "INTERNET_ARCHIVE",
+    "index": 5,
+    "label": "INTERNET ARCHIVE",
+    "rightsClass": "mixed_license",
+    "ingestionMode": "download_with_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PRELINGER",
+    "index": 6,
+    "label": "PRELINGER",
+    "rightsClass": "public_domain_or_mixed",
+    "ingestionMode": "download_with_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "FEDFLIX",
+    "index": 7,
+    "label": "FEDFLIX",
+    "rightsClass": "public_domain",
+    "ingestionMode": "download_or_api",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": false,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "LIBRARY_OF_CONGRESS",
+    "index": 8,
+    "label": "LIBRARY OF CONGRESS",
+    "rightsClass": "public_domain_or_rights_tagged",
+    "ingestionMode": "download_with_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "SMITHSONIAN",
+    "index": 9,
+    "label": "SMITHSONIAN",
+    "rightsClass": "open_access",
+    "ingestionMode": "download_with_license_check",
+    "category": "culture",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "EUROPEANA",
+    "index": 10,
+    "label": "EUROPEANA",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "api_with_rights_check",
+    "category": "culture",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "OPEN_IMAGES",
+    "index": 11,
+    "label": "OPEN IMAGES",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "api_or_embed",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "WIKIMEDIA",
+    "index": 12,
+    "label": "WIKIMEDIA",
+    "rightsClass": "creative_commons_or_public_domain",
+    "ingestionMode": "api_with_license_check",
+    "category": "culture",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "DAREFUL",
+    "index": 13,
+    "label": "DAREFUL",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "DISTILL",
+    "index": 14,
+    "label": "DISTILL",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "LIFE_OF_VIDS",
+    "index": 15,
+    "label": "LIFE OF VIDS",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "SPLITSHIRE",
+    "index": 16,
+    "label": "SPLITSHIRE",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PEXELS",
+    "index": 17,
+    "label": "PEXELS",
+    "rightsClass": "stock_license",
+    "ingestionMode": "api_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PIXABAY",
+    "index": 18,
+    "label": "PIXABAY",
+    "rightsClass": "stock_license",
+    "ingestionMode": "api_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "COVERR",
+    "index": 19,
+    "label": "COVERR",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "MIXKIT",
+    "index": 20,
+    "label": "MIXKIT",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "OFFICIAL_TRAILERS",
+    "index": 21,
+    "label": "OFFICIAL TRAILERS",
+    "rightsClass": "authorized_only",
+    "ingestionMode": "embed_or_link_only",
+    "category": "film",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "YOUTUBE_OFFICIAL",
+    "index": 22,
+    "label": "YOUTUBE OFFICIAL",
+    "rightsClass": "authorized_embed_only",
+    "ingestionMode": "embed_only",
+    "category": "film",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "VIMEO_CC",
+    "index": 23,
+    "label": "VIMEO CC",
+    "rightsClass": "creative_commons_embed_allowed",
+    "ingestionMode": "embed_or_api_with_license_check",
+    "category": "film",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PRASAR_BHARATI",
+    "index": 24,
+    "label": "PRASAR BHARATI",
+    "rightsClass": "official_terms",
+    "ingestionMode": "api_or_embed",
+    "category": "public_media",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "LUMORA_LICENSED",
+    "index": 25,
+    "label": "LUMORA LICENSED",
+    "rightsClass": "owned_or_contract",
+    "ingestionMode": "direct_ingest",
+    "category": "owned",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "POND5_PUBLIC_DOMAIN",
+    "index": 26,
+    "label": "POND5 PUBLIC DOMAIN",
+    "rightsClass": "public_domain",
+    "ingestionMode": "download_with_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": false,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "MAZWAI",
+    "index": 27,
+    "label": "MAZWAI",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "FREE_STOCK_FOOTAGE_ARCHIVE",
+    "index": 28,
+    "label": "FREE STOCK FOOTAGE ARCHIVE",
+    "rightsClass": "stock_or_public_domain",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "BEACHFRONT_BROLL",
+    "index": 29,
+    "label": "BEACHFRONT BROLL",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "CUTESTOCKFOOTAGE",
+    "index": 30,
+    "label": "CUTESTOCKFOOTAGE",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "ALJAZEERA_CC",
+    "index": 31,
+    "label": "ALJAZEERA CC",
+    "rightsClass": "creative_commons",
+    "ingestionMode": "embed_or_download_with_license_check",
+    "category": "news",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "GONGU_MADANG",
+    "index": 32,
+    "label": "GONGU MADANG",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "download_with_license_check",
+    "category": "culture",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "DIGITAL_NZ",
+    "index": 33,
+    "label": "DIGITAL NZ",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "api_with_rights_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "NOAA",
+    "index": 34,
+    "label": "NOAA",
+    "rightsClass": "public_domain",
+    "ingestionMode": "download_or_api",
+    "category": "science",
+    "enabled": false,
+    "requiresLicenseProof": false,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "USGS",
+    "index": 35,
+    "label": "USGS",
+    "rightsClass": "public_domain",
+    "ingestionMode": "download_or_api",
+    "category": "science",
+    "enabled": false,
+    "requiresLicenseProof": false,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PUBLIC_DOMAIN_REVIEW",
+    "index": 36,
+    "label": "PUBLIC DOMAIN REVIEW",
+    "rightsClass": "public_domain_or_rights_tagged",
+    "ingestionMode": "link_or_download_with_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "FREE_NATURE_STOCK",
+    "index": 37,
+    "label": "FREE NATURE STOCK",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "nature",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "NATURECLIP",
+    "index": 38,
+    "label": "NATURECLIP",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "nature",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "WELLCOME",
+    "index": 39,
+    "label": "WELLCOME",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "api_with_rights_check",
+    "category": "culture",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "EUSCREEN",
+    "index": 40,
+    "label": "EUSCREEN",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "api_or_embed",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "PADMA",
+    "index": 41,
+    "label": "PADMA",
+    "rightsClass": "mixed_license",
+    "ingestionMode": "embed_or_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "VIDSPLAY",
+    "index": 42,
+    "label": "VIDSPLAY",
+    "rightsClass": "stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "VIDEVO",
+    "index": 43,
+    "label": "VIDEVO",
+    "rightsClass": "mixed_stock_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "stock",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "CLACSO_TV",
+    "index": 44,
+    "label": "CLACSO TV",
+    "rightsClass": "official_terms",
+    "ingestionMode": "embed_or_link_only",
+    "category": "education",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "AFRICA_ONLINE_DIGITAL_LIBRARY",
+    "index": 45,
+    "label": "AFRICA ONLINE DIGITAL LIBRARY",
+    "rightsClass": "rights_tagged",
+    "ingestionMode": "link_or_license_check",
+    "category": "archive",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "LIBREFLIX",
+    "index": 46,
+    "label": "LIBREFLIX",
+    "rightsClass": "open_license_or_authorized",
+    "ingestionMode": "embed_or_download_with_license_check",
+    "category": "film",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "NHK_CREATIVE_LIBRARY",
+    "index": 47,
+    "label": "NHK CREATIVE LIBRARY",
+    "rightsClass": "official_terms",
+    "ingestionMode": "download_with_terms_check",
+    "category": "public_media",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  },
+  {
+    "id": "NFSA_FILM_AUSTRALIA",
+    "index": 48,
+    "label": "NFSA FILM AUSTRALIA",
+    "rightsClass": "zero_fee_license",
+    "ingestionMode": "download_with_terms_check",
+    "category": "film",
+    "enabled": false,
+    "requiresLicenseProof": true,
+    "hardRejectRules": [
+      "missing_license_or_rights_tag",
+      "unknown_commercial_reuse_status",
+      "missing_source_url",
+      "missing_attribution_when_required",
+      "non_official_trailer_source",
+      "youtube_download_attempt"
+    ]
+  }
+] satisfies FypSourceRegistryItem[];
+
+export function getFypSourceById(id: string): FypSourceRegistryItem | null {
+  return FYP_SOURCE_REGISTRY.find((source) => source.id === id) ?? null;
+}
+
+export function validateFypSourceRegistry(): boolean {
+  const ids = new Set(FYP_SOURCE_REGISTRY.map((source) => source.id));
+  return (
+    FYP_SOURCE_REGISTRY.length === 48 &&
+    ids.size === FYP_SOURCE_REGISTRY.length &&
+    FYP_SOURCE_REGISTRY.every((source) =>
+      Boolean(source.id) &&
+      Boolean(source.label) &&
+      Boolean(source.rightsClass) &&
+      Boolean(source.ingestionMode) &&
+      Boolean(source.category) &&
+      Array.isArray(source.hardRejectRules) &&
+      source.hardRejectRules.length >= 6
+    )
+  );
+}
+
+export function isFypSourceEligibleForDirectDownload(source: FypSourceRegistryItem): boolean {
+  return source.ingestionMode !== "embed_only" && source.ingestionMode !== "embed_or_link_only";
+}
+
+export function isFypSourceEmbedOnly(source: FypSourceRegistryItem): boolean {
+  return source.ingestionMode === "embed_only" || source.ingestionMode === "embed_or_link_only";
+}
