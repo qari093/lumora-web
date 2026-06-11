@@ -1,0 +1,22 @@
+# FYP Mega Pack 02 — Source Sampling & Ingestion Eligibility
+
+Status: PASS
+
+```json
+{
+  "system": "LUMORA_FYP_MEGA_PACK_02_SOURCE_SAMPLING_INGESTION",
+  "checkedAt": "2026-06-11T15:46:08.800Z",
+  "status": "PASS",
+  "checks": {
+    "registryPresent": true,
+    "validatorPresent": true,
+    "samplingRuntimePresent": true,
+    "samplingTestsPresent": true,
+    "all48Expected": true,
+    "youtubeEmbedOnlyChecked": true,
+    "officialTrailerChecked": true,
+    "directAndEmbedModesPresent": true
+  },
+  "result": "FYP_MEGA_PACK_02_SOURCE_SAMPLING_INGESTION_READY"
+}
+```
