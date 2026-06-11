@@ -1,0 +1,16 @@
+{
+  "system": "LUMORA_FYP_MEGA_PACK_02_VIDEO_SOURCES_RIGHTS",
+  "checkedAt": "2026-06-11T15:05:21.153Z",
+  "status": "PASS",
+  "sourceCount": 48,
+  "checks": {
+    "sourceRegistryCreated": true,
+    "rightsClassificationReady": true,
+    "publicDomainSourcesIncluded": true,
+    "creativeCommonsSourcesIncluded": true,
+    "officialTrailerSourcesIncluded": true,
+    "ownedLicensedSourcesIncluded": true,
+    "youtubeEmbedPolicyIncluded": true
+  },
+  "result": "FYP_MEGA_PACK_02_VIDEO_SOURCES_RIGHTS_READY"
+}
