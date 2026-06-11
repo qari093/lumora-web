@@ -1,109 +1,119 @@
-export type LumoraLane = "wonder" | "learn" | "laugh" | "build" | "explore";
+export type LumoraTraceLane = "wonder" | "learn" | "laugh" | "build" | "explore";
+
+export type LumoraTraceEvent = {
+  sourceId: string;
+  lane: LumoraTraceLane;
+  watchRatio: number;
+  saved: boolean;
+  replayed: boolean;
+  deepDiveOpened: boolean;
+  timestamp: string;
+};
+
+export type LumoraTraceSummary = {
+  dominantLane: LumoraTraceLane;
+  curiosityScore: number;
+  continuationEligible: boolean;
+  traceLabel: string;
+};
+
+const LANES: LumoraTraceLane[] = ["wonder", "learn", "laugh", "build", "explore"];
+
+export function normalizeTraceLane(value: string): LumoraTraceLane {
+  const clean = value.toLowerCase().trim();
+  return LANES.includes(clean as LumoraTraceLane) ? (clean as LumoraTraceLane) : "explore";
+}
+
+export function scoreCuriosity(event: LumoraTraceEvent): number {
+  const watch = Math.max(0, Math.min(1, event.watchRatio)) * 40;
+  const save = event.saved ? 20 : 0;
+  const replay = event.replayed ? 20 : 0;
+  const deepDive = event.deepDiveOpened ? 20 : 0;
+  return Math.round(watch + save + replay + deepDive);
+}
+
+export function summarizeLumoraTrace(events: LumoraTraceEvent[]): LumoraTraceSummary {
+  const safeEvents = events.length > 0 ? events : [{
+    sourceId: "empty",
+    lane: "explore" as LumoraTraceLane,
+    watchRatio: 0,
+    saved: false,
+    replayed: false,
+    deepDiveOpened: false,
+    timestamp: new Date(0).toISOString()
+  }];
+
+  const laneScores = new Map<LumoraTraceLane, number>();
+  for (const lane of LANES) laneScores.set(lane, 0);
+
+  let total = 0;
+  for (const event of safeEvents) {
+    const score = scoreCuriosity(event);
+    total += score;
+    laneScores.set(event.lane, (laneScores.get(event.lane) ?? 0) + score);
+  }
+
+  const dominantLane = [...laneScores.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "explore";
+  const curiosityScore = Math.round(total / safeEvents.length);
+  const continuationEligible = curiosityScore >= 55 || safeEvents.some((event) => event.deepDiveOpened);
+
+  return {
+    dominantLane,
+    curiosityScore,
+    continuationEligible,
+    traceLabel: `Lumora Trace · ${dominantLane} · ${curiosityScore}`
+  };
+}
+
+export const LUMORA_TRACE_ATTENTION_MEMORY_READY = true;
+
+export const LUMORA_LANES: LumoraTraceLane[] = ["wonder", "learn", "laugh", "build", "explore"];
 
 export type TraceSignal = {
-  videoId: string;
-  lane: LumoraLane;
-  watchedMs: number;
-  completed: boolean;
-  sparked: boolean;
-  saved: boolean;
-  deepDive: boolean;
-  replayed: boolean;
-  at: string;
-};
-
-export type TraceSummary = {
+  sourceId: string;
+  lane: LumoraTraceLane;
   curiosityScore: number;
-  dominantLane: LumoraLane;
-  laneCounts: Record<LumoraLane, number>;
-  completedCount: number;
-  sparkCount: number;
-  savedCount: number;
-  deepDiveCount: number;
+  saved: boolean;
+  replayed: boolean;
+  deepDiveOpened: boolean;
 };
 
-export const LUMORA_LANES: Array<{ key: LumoraLane; label: string; intent: string }> = [
-  { key: "wonder", label: "Wonder", intent: "Awe, mystery, beauty" },
-  { key: "learn", label: "Learn", intent: "Knowledge, clarity, insight" },
-  { key: "laugh", label: "Laugh", intent: "Lightness, humor, relief" },
-  { key: "build", label: "Build", intent: "Creation, skill, momentum" },
-  { key: "explore", label: "Explore", intent: "Discovery, culture, motion" }
-];
-
-export function normalizeLane(value: string | undefined): LumoraLane {
-  const raw = String(value || "").toLowerCase();
-  if (raw.includes("science") || raw.includes("learn") || raw.includes("news")) return "learn";
-  if (raw.includes("stock") || raw.includes("build") || raw.includes("owned")) return "build";
-  if (raw.includes("culture") || raw.includes("film") || raw.includes("archive")) return "explore";
-  if (raw.includes("laugh") || raw.includes("fun")) return "laugh";
-  return "wonder";
+export function normalizeLane(value: string): LumoraTraceLane {
+  return normalizeTraceLane(value);
 }
 
 export function createTraceSignal(input: {
-  videoId: string;
-  lane?: string;
-  watchedMs?: number;
-  completed?: boolean;
-  sparked?: boolean;
+  sourceId: string;
+  lane: string;
+  watchRatio?: number;
   saved?: boolean;
-  deepDive?: boolean;
   replayed?: boolean;
+  deepDiveOpened?: boolean;
 }): TraceSignal {
+  const event: LumoraTraceEvent = {
+    sourceId: input.sourceId,
+    lane: normalizeTraceLane(input.lane),
+    watchRatio: input.watchRatio ?? 0,
+    saved: input.saved ?? false,
+    replayed: input.replayed ?? false,
+    deepDiveOpened: input.deepDiveOpened ?? false,
+    timestamp: new Date().toISOString()
+  };
+
   return {
-    videoId: input.videoId,
-    lane: normalizeLane(input.lane),
-    watchedMs: Math.max(0, Math.floor(input.watchedMs || 0)),
-    completed: Boolean(input.completed),
-    sparked: Boolean(input.sparked),
-    saved: Boolean(input.saved),
-    deepDive: Boolean(input.deepDive),
-    replayed: Boolean(input.replayed),
-    at: new Date().toISOString()
+    sourceId: event.sourceId,
+    lane: event.lane,
+    curiosityScore: scoreCuriosity(event),
+    saved: event.saved,
+    replayed: event.replayed,
+    deepDiveOpened: event.deepDiveOpened
   };
 }
 
-export function summarizeTrace(signals: TraceSignal[]): TraceSummary {
-  const laneCounts: Record<LumoraLane, number> = {
-    wonder: 0,
-    learn: 0,
-    laugh: 0,
-    build: 0,
-    explore: 0
-  };
-
-  let completedCount = 0;
-  let sparkCount = 0;
-  let savedCount = 0;
-  let deepDiveCount = 0;
-  let replayCount = 0;
-
-  for (const signal of signals) {
-    laneCounts[signal.lane] += 1;
-    if (signal.completed) completedCount += 1;
-    if (signal.sparked) sparkCount += 1;
-    if (signal.saved) savedCount += 1;
-    if (signal.deepDive) deepDiveCount += 1;
-    if (signal.replayed) replayCount += 1;
-  }
-
-  const dominantLane = (Object.entries(laneCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "wonder") as LumoraLane;
-  const curiosityScore = Math.min(
-    100,
-    completedCount * 8 + sparkCount * 6 + savedCount * 12 + deepDiveCount * 18 + replayCount * 10
-  );
-
-  return {
-    curiosityScore,
-    dominantLane,
-    laneCounts,
-    completedCount,
-    sparkCount,
-    savedCount,
-    deepDiveCount
-  };
+export function summarizeTrace(events: LumoraTraceEvent[]): LumoraTraceSummary {
+  return summarizeLumoraTrace(events);
 }
 
-export function shouldOfferStoryContinuation(signals: TraceSignal[], currentLane: LumoraLane): boolean {
-  const recent = signals.slice(-5);
-  return recent.filter((signal) => signal.lane === currentLane && (signal.completed || signal.deepDive)).length >= 2;
+export function shouldOfferStoryContinuation(events: LumoraTraceEvent[]): boolean {
+  return summarizeLumoraTrace(events).continuationEligible;
 }

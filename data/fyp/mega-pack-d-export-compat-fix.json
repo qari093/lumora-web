@@ -1,0 +1,14 @@
+{
+  "system": "LUMORA_FYP_MEGA_PACK_D_EXPORT_COMPAT_FIX",
+  "checkedAt": "2026-06-11T09:14:04.291600+00:00",
+  "status": "PASS",
+  "checks": {
+    "normalizeLaneExported": true,
+    "summarizeTraceExported": true,
+    "shouldOfferStoryContinuationExported": true,
+    "createTraceSignalExported": true,
+    "LUMORA_LANESExported": true,
+    "buildPassed": true
+  },
+  "result": "MEGA_PACK_D_EXPORT_COMPAT_READY"
+}
