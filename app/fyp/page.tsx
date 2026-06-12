@@ -1,40 +1,27 @@
 import FypAutoplayFeed from "./FypAutoplayFeed";
+import { applyTraceAwareFeedRerank } from "@/src/core/fyp/runtime-learning/traceAwareRerank";
 
-async function getRuntimeFypItems() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+export const dynamic = "force-dynamic";
 
-  const response = await fetch(`${baseUrl}/api/fyp/feed`, {
-    cache: "no-store"
-  });
+export default function FypPage() {
+  const runtime = applyTraceAwareFeedRerank();
 
-  if (!response.ok) return [];
-
-  const json = await response.json();
-
-  return Array.isArray(json.items)
-    ? json.items.map((item: any) => ({
-        id: String(item.id),
-        sourceName: String(item.sourceId || item.creator || "Lumora"),
-        handle: `@${String(item.creator || "lumora").toLowerCase().replace(/[^a-z0-9]+/g, "")}`,
-        policy: "owned or licensed",
-        title: String(item.title || "Lumora Signal"),
-        lane: String(item.lane || item.category || "space"),
-        videoUrl: String(item.videoUrl || item.playbackUrl || ""),
-        posterUrl: "",
-        likes: "LIVE",
-        comments: "Trace",
-        saves: "Save",
-        shares: "Share"
-      }))
-    : [];
-}
-
-export default async function FypPage() {
-  const items = await getRuntimeFypItems();
+  const items = runtime.cards
+    .filter((card) => card.lane === "native_video" && card.autoplayEligible && card.playbackUrl)
+    .map((card) => ({
+      id: card.id,
+      sourceName: card.sourceId,
+      handle: `@${card.creator.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 18) || "lumora"}`,
+      policy: "owned or licensed" as const,
+      title: card.title,
+      lane: "space" as const,
+      videoUrl: card.playbackUrl,
+      posterUrl: "",
+      likes: `${Math.max(1, Math.round(card.rankScore * 100))}K`,
+      comments: "Trace",
+      saves: "Save",
+      shares: "Share"
+    }));
 
   return <FypAutoplayFeed items={items} />;
 }
