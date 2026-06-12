@@ -68,7 +68,15 @@ export default function FypAutoplayFeed({ items }: Props) {
 
   const itemIds = useMemo(() => visibleItems.map((item) => item.id), [visibleItems]);
   const activeItem = useMemo(() => visibleItems.find((item) => item.id === activeId) || visibleItems[0], [visibleItems, activeId]);
-  const traceSummary = useMemo(() => summarizeTrace(traceSignals), [traceSignals]);
+  const traceSummary = useMemo(() => {
+    const summary = summarizeTrace(traceSignals);
+    const curiosity = Number(summary.curiosityScore);
+    return {
+      ...summary,
+      curiosityScore: Number.isFinite(curiosity) ? curiosity : 0,
+      dominantLane: summary.dominantLane || selectedLane
+    };
+  }, [traceSignals, selectedLane]);
   const storyContinuation = useMemo(
     () => shouldOfferStoryContinuation(traceSignals, activeItem?.traceLane || selectedLane),
     [traceSignals, activeItem, selectedLane]
@@ -286,7 +294,7 @@ export default function FypAutoplayFeed({ items }: Props) {
         <section className={styles.traceDock} aria-label="Lumora Trace summary">
           <div>
             <span>Curiosity</span>
-            <strong>{traceSummary.curiosityScore}</strong>
+            <strong>{Number.isFinite(Number(traceSummary.curiosityScore)) ? traceSummary.curiosityScore : 0}</strong>
           </div>
           <div>
             <span>Active Pulse</span>
