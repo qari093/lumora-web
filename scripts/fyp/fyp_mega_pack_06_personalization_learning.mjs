@@ -1,0 +1,46 @@
+import fs from "node:fs";
+
+const checks = {
+  pack06AuditLockPresent: fs.existsSync(".lumora_fyp_mega_pack_06_ranking_learning_audit_lock"),
+  rankingContractLockPresent: fs.existsSync(".lumora_fyp_mega_pack_06_runtime_ranking_contract_lock"),
+  rankingRuntimePresent: fs.existsSync("src/core/fyp/runtime-ranking/rankingRuntime.ts"),
+  trackingRuntimePresent: fs.existsSync("src/core/fyp/runtime-tracking/fypRuntimeTracking.ts"),
+  learningRuntimePresent: fs.existsSync("src/core/fyp/runtime-learning/personalizationLearning.ts"),
+  learningTestsPresent: fs.existsSync("tests/fyp/fyp_mega_pack_06_personalization_learning.test.ts")
+};
+
+const status = Object.values(checks).every(Boolean) ? "PASS" : "FAIL";
+
+const report = {
+  system: "LUMORA_FYP_MEGA_PACK_06_PERSONALIZATION_LEARNING",
+  checkedAt: new Date().toISOString(),
+  status,
+  checks,
+  result: status === "PASS"
+    ? "FYP_MEGA_PACK_06_PERSONALIZATION_LEARNING_READY"
+    : "FYP_MEGA_PACK_06_PERSONALIZATION_LEARNING_BLOCKED"
+};
+
+fs.writeFileSync("data/fyp/mega-pack-06-personalization-learning.json", JSON.stringify(report, null, 2) + "\n");
+fs.writeFileSync(".lumora-audits/fyp-mega-pack-06-personalization-learning.json", JSON.stringify(report, null, 2) + "\n");
+fs.writeFileSync("docs/fyp/mega-pack-06-personalization-learning.md", [
+  "# FYP Mega Pack 06/07 — Personalization Memory + Learning Feedback",
+  "",
+  `Status: ${status}`,
+  "",
+  "```json",
+  JSON.stringify(report, null, 2),
+  "```",
+  ""
+].join("\n"));
+
+if (status === "PASS") {
+  fs.writeFileSync(".lumora_fyp_mega_pack_06_personalization_learning_lock", "FYP_MEGA_PACK_06_PERSONALIZATION_LEARNING=PASS\n");
+  try { fs.unlinkSync(".lumora_fyp_mega_pack_06_personalization_learning_failed_lock"); } catch {}
+} else {
+  fs.writeFileSync(".lumora_fyp_mega_pack_06_personalization_learning_failed_lock", "FYP_MEGA_PACK_06_PERSONALIZATION_LEARNING=FAIL\n");
+  try { fs.unlinkSync(".lumora_fyp_mega_pack_06_personalization_learning_lock"); } catch {}
+}
+
+console.log(JSON.stringify(report, null, 2));
+if (status !== "PASS") process.exit(1);
