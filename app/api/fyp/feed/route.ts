@@ -1,58 +1,45 @@
 import { NextResponse } from "next/server";
 
-type FeedItem = {
-  id: string;
-  title: string;
-  slug: string;
-  creator: string;
-  category: string;
-  thumbnailUrl?: string;
-  videoUrl?: string;
-};
+import { applyTraceAwareFeedRerank } from "@/src/core/fyp/runtime-learning/traceAwareRerank";
 
-function liveFeed(): FeedItem[] {
-  return [
-    {
-      id: "feed-1",
-      title: "Lumora Welcome Drop",
-      slug: "lumora-welcome-drop",
-      creator: "Lumora",
-      category: "Launch",
-      videoUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    },
-    {
-      id: "feed-2",
-      title: "GMAR Highlight Seed",
-      slug: "gmar-highlight-seed",
-      creator: "GMAR",
-      category: "Games",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-    },
-    {
-      id: "feed-3",
-      title: "CineVerse Discovery Seed",
-      slug: "cineverse-discovery-seed",
-      creator: "CineVerse",
-      category: "Movies",
-      videoUrl: "https://www.w3schools.com/html/movie.mp4",
-    },
-  ];
-}
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const items = liveFeed();
+  const runtime = applyTraceAwareFeedRerank();
+
+  const items = runtime.cards.map((card) => ({
+    id: card.id,
+    title: card.title,
+    slug: card.id,
+    creator: card.creator,
+    category: card.traceLane,
+    sourceId: card.sourceId,
+    videoUrl: card.playbackUrl,
+    playbackUrl: card.playbackUrl,
+    lane: card.traceLane,
+    deliveryLane: card.lane,
+    rankScore: card.rankScore,
+    rankReasons: card.rankReasons,
+    autoplayEligible: card.autoplayEligible
+  }));
 
   return NextResponse.json(
     {
       ok: true,
-      source: "fallback",
+      source: "lumora_runtime_chain",
+      runtime: {
+        megaPacks: "05-07",
+        coldStartApplied: runtime.coldStartApplied,
+        traceCoverage: runtime.traceCoverage
+      },
+      count: items.length,
       items,
-      ts: new Date().toISOString(),
+      ts: new Date().toISOString()
     },
     {
       headers: {
-        "cache-control": "no-store",
-      },
+        "cache-control": "no-store"
+      }
     }
   );
 }
