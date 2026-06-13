@@ -8,6 +8,10 @@ import {
   type FypRuntimeTrackingEvent
 } from "@/src/core/fyp/runtime-tracking/fypRuntimeTracking";
 
+import {
+  getFypLearningEventsWithFallback
+} from "@/src/core/fyp/runtime-learning/realEventLearningBridge";
+
 export type FypPersonalizationMemory = {
   userId: string;
   preferredTraceLanes: Record<string, number>;
@@ -32,7 +36,7 @@ function bump(map: Record<string, number>, key: string, value: number): Record<s
 
 export function buildFypPersonalizationMemory(
   userId = "local-user",
-  events: FypRuntimeTrackingEvent[] = buildFypRuntimeTrackingBatch()
+  events: FypRuntimeTrackingEvent[] = getFypLearningEventsWithFallback(buildFypRuntimeTrackingBatch())
 ): FypPersonalizationMemory {
   const ranked = buildFypRuntimeRanking();
   let preferredTraceLanes: Record<string, number> = {};
@@ -61,7 +65,7 @@ export function buildFypPersonalizationMemory(
 
 export function applyFypLearningFeedback(
   userId = "local-user",
-  events: FypRuntimeTrackingEvent[] = buildFypRuntimeTrackingBatch()
+  events: FypRuntimeTrackingEvent[] = getFypLearningEventsWithFallback(buildFypRuntimeTrackingBatch())
 ): FypLearningFeedback {
   const memory = buildFypPersonalizationMemory(userId, events);
 
