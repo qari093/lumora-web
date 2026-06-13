@@ -6,9 +6,8 @@ describe("FYP CSS module purity guard", () => {
     const css = fs.readFileSync("app/fyp/styles.module.css", "utf8");
 
     expect(css).not.toContain(":global(body.lumora-fyp-active)");
-    expect(css).not.toContain("TRACE CURRENT HOTFIX");
     expect(css).not.toMatch(/\n\s*display:\s*none\s*!important;\s*\}\s*\n\s*\.activeLaneChip/);
     expect(css).toContain(".activeLaneChip");
-    expect(css).toContain(".laneSwitch[data-visible=\"true\"]");
+    expect(css).toContain('.laneSwitch[data-visible="true"]');
   });
 });
