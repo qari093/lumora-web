@@ -1,0 +1,12 @@
+{
+  "pack": "MEGA_PACK_03_OF_04",
+  "name": "Minimal UI Transformation",
+  "includes": [
+    "DEFAULT_VIDEO_FIRST_VIEW",
+    "TOUCH_TO_REVEAL_ACTIONS",
+    "HIDDEN_TRACE_METRIC_BAR",
+    "COMPACT_ACTIVE_LANE_CHIP",
+    "LIGHTWEIGHT_BOTTOM_NAV"
+  ],
+  "status": "ACTIVE"
+}

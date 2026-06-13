@@ -49,10 +49,12 @@ export default function FypAutoplayFeed({ items }: Props) {
   const [sparkedIds, setSparkedIds] = useState<Set<string>>(() => new Set());
   const [savedIds, setSavedIds] = useState<Set<string>>(() => new Set());
   const [deepDiveId, setDeepDiveId] = useState("");
+  const [chromeVisible, setChromeVisible] = useState(false);
   const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const startedAtRef = useRef(new Map<string, number>());
   const sessionIdRef = useRef(`fyp_session_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
   const gestureStartRef = useRef<{ x: number; y: number; at: number } | null>(null);
+  const chromeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const enhancedItems = useMemo(
     () =>
@@ -107,6 +109,18 @@ export default function FypAutoplayFeed({ items }: Props) {
     }
   }, []);
 
+  const revealChrome = useCallback(() => {
+    setChromeVisible(true);
+
+    if (chromeTimerRef.current) {
+      clearTimeout(chromeTimerRef.current);
+    }
+
+    chromeTimerRef.current = setTimeout(() => {
+      setChromeVisible(false);
+    }, 3000);
+  }, []);
+
   const moveToRelativeCard = useCallback((direction: 1 | -1) => {
     const currentIndex = itemIds.indexOf(activeId);
     const nextIndex = Math.max(0, Math.min(itemIds.length - 1, currentIndex + direction));
@@ -146,6 +160,8 @@ export default function FypAutoplayFeed({ items }: Props) {
     const start = gestureStartRef.current;
     gestureStartRef.current = null;
 
+    revealChrome();
+
     if (!start) return;
 
     const dx = event.clientX - start.x;
@@ -168,7 +184,7 @@ export default function FypAutoplayFeed({ items }: Props) {
     }
 
     openContextPanel(activeId);
-  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, openDeepDive]);
+  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, openDeepDive, revealChrome]);
 
 
   const appendTrace = useCallback((signal: TraceSignal) => {
@@ -331,7 +347,7 @@ export default function FypAutoplayFeed({ items }: Props) {
               </button>
             ))}
           </nav>
-          <div className={styles.tracePromise}>Lumora Trace · attention becomes direction</div>
+          <div className={styles.tracePromise} aria-hidden="true">Trace Current</div>
         </header>
 
         <section className={styles.fullscreenFeed} aria-label="Lumora DepthFeed fullscreen native autoplay feed">
@@ -349,6 +365,7 @@ export default function FypAutoplayFeed({ items }: Props) {
                 data-fyp-video-id={item.id}
                 data-lumora-depth-card="true"
                 data-lumora-lane-card={item.traceLane}
+                data-chrome-visible={chromeVisible}
                 className={styles.fullscreenCard}
               >
                 <video
@@ -364,6 +381,7 @@ export default function FypAutoplayFeed({ items }: Props) {
                   aria-label={item.title}
                   onClick={(event) => {
                     const video = event.currentTarget;
+                    revealChrome();
                     if (video.paused) safePlay(video);
                     else video.pause();
                   }}

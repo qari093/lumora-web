@@ -830,3 +830,107 @@
     min-height: 48px;
   }
 }
+
+/* TRACE CURRENT MEGA PACK 03 — minimal launch UI reduction */
+.fullScreenFypRoot {
+  --trace-current-chrome-ease: 180ms ease;
+}
+
+.depthTop {
+  position: fixed !important;
+  top: calc(10px + env(safe-area-inset-top)) !important;
+  left: 50% !important;
+  z-index: 32 !important;
+  width: min(100vw, 520px) !important;
+  transform: translateX(-50%) !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  pointer-events: none !important;
+  background: transparent !important;
+}
+
+.tracePromise {
+  display: none !important;
+}
+
+.laneSwitch {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  max-width: 180px !important;
+  pointer-events: auto !important;
+}
+
+.laneSwitch button {
+  display: none !important;
+}
+
+.laneSwitch button[data-active="true"] {
+  display: inline-grid !important;
+  min-height: 31px !important;
+  padding: 7px 13px !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  border-radius: 999px !important;
+  background: rgba(0,0,0,0.34) !important;
+  color: rgba(255,255,255,0.92) !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.01em !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.22), inset 0 0 22px rgba(82,224,255,0.12) !important;
+}
+
+.retentionRing {
+  opacity: 0 !important;
+  transform: translateX(18px) scale(0.96) !important;
+  pointer-events: none !important;
+  transition: opacity var(--trace-current-chrome-ease), transform var(--trace-current-chrome-ease) !important;
+}
+
+.fullscreenCard[data-chrome-visible="true"] .retentionRing {
+  opacity: 1 !important;
+  transform: translateX(0) scale(1) !important;
+  pointer-events: auto !important;
+}
+
+.traceDock {
+  display: none !important;
+}
+
+.creatorStrip {
+  bottom: calc(82px + env(safe-area-inset-bottom)) !important;
+  right: 128px !important;
+}
+
+.creatorStrip span {
+  opacity: 0.82 !important;
+}
+
+.tiktokBottom {
+  min-height: calc(58px + env(safe-area-inset-bottom)) !important;
+  padding: 6px 14px calc(6px + env(safe-area-inset-bottom)) !important;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.72)) !important;
+  border-top: 0 !important;
+  backdrop-filter: none !important;
+}
+
+.tiktokBottom a {
+  font-size: 0 !important;
+  opacity: 0.76 !important;
+}
+
+.tiktokBottom a strong {
+  display: none !important;
+}
+
+.tiktokBottom a span {
+  font-size: 22px !important;
+}
+
+.createButton {
+  width: 54px !important;
+  height: 38px !important;
+  border-radius: 999px !important;
+  font-size: 28px !important;
+}
