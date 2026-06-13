@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+const FYP_BODY_CLASS = "lumora-fyp-active";
+
 export default function FypShellCleaner() {
   useEffect(() => {
     const hideSelectors = [
@@ -13,6 +15,10 @@ export default function FypShellCleaner() {
 
     const hidden: HTMLElement[] = [];
 
+    document.body.classList.add(FYP_BODY_CLASS);
+    document.body.style.setProperty("background", "#000", "important");
+    document.body.style.setProperty("overflow", "hidden", "important");
+
     for (const selector of hideSelectors) {
       document.querySelectorAll<HTMLElement>(selector).forEach((node) => {
         node.dataset.fypHiddenByTraceCurrent = "true";
@@ -21,14 +27,13 @@ export default function FypShellCleaner() {
       });
     }
 
-    document.body.style.background = "#000";
-    document.body.style.overflow = "hidden";
-
     return () => {
       hidden.forEach((node) => {
         node.style.removeProperty("display");
         delete node.dataset.fypHiddenByTraceCurrent;
       });
+
+      document.body.classList.remove(FYP_BODY_CLASS);
       document.body.style.removeProperty("background");
       document.body.style.removeProperty("overflow");
     };
