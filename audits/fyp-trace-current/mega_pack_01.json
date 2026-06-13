@@ -1,0 +1,10 @@
+{
+  "pack":"MEGA_PACK_01_OF_04",
+  "name":"Clean Trace Current Shell",
+  "includes":[
+    "UI_SIMPLIFICATION",
+    "EMOTIONAL_LANE_COMPASS",
+    "SOURCE_LANE_MAPPING"
+  ],
+  "status":"ACTIVE"
+}
