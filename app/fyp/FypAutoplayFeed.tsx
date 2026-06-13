@@ -179,12 +179,21 @@ export default function FypAutoplayFeed({ items }: Props) {
 
     if (dy < 0) {
       const item = visibleItems.find((candidate) => candidate.id === activeId);
-      if (item) openDeepDive(item);
+      if (item) {
+        setDeepDiveId(item.id);
+        postFypTrackEvent({
+          cardId: item.id,
+          event: "deep_dive",
+          watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+          lane: item.traceLane,
+          value: 0.8
+        });
+      }
       return;
     }
 
     openContextPanel(activeId);
-  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, openDeepDive, revealChrome]);
+  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, postFypTrackEvent, revealChrome]);
 
 
   const appendTrace = useCallback((signal: TraceSignal) => {
