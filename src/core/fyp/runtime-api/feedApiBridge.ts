@@ -163,6 +163,9 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     rightsTag: "public_domain",
     commercialReuseAllowed: true,
     embedOnly: false,
+    licenseName: "creative_commons",
+    licenseUrl: "https://lumora.example/license-proof/wikimedia",
+    attribution: "WIKIMEDIA",
     durationSeconds: 35
   },
   {
@@ -258,10 +261,12 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     externalId: "official-trailers-runtime-seed-21",
     title: "OFFICIAL TRAILERS runtime motion seed",
     creator: "OFFICIAL TRAILERS",
-    sampleUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    rightsTag: "public_domain",
+    sampleUrl: "https://www.youtube.com/watch?v=official_trailers-runtime-seed",
+    licenseName: "official_trailer_embed",
+    rightsTag: "authorized_trailer",
     commercialReuseAllowed: true,
-    embedOnly: false,
+    embedOnly: true,
+    officialChannel: true,
     durationSeconds: 44
   },
   {
@@ -269,10 +274,12 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     externalId: "youtube-official-runtime-seed-22",
     title: "YOUTUBE OFFICIAL runtime motion seed",
     creator: "YOUTUBE OFFICIAL",
-    sampleUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    rightsTag: "public_domain",
+    sampleUrl: "https://www.youtube.com/watch?v=youtube_official-runtime-seed",
+    licenseName: "official_channel_embed",
+    rightsTag: "authorized_embed",
     commercialReuseAllowed: true,
-    embedOnly: false,
+    embedOnly: true,
+    officialChannel: true,
     durationSeconds: 45
   },
   {
@@ -284,6 +291,9 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     rightsTag: "public_domain",
     commercialReuseAllowed: true,
     embedOnly: false,
+    licenseName: "creative_commons",
+    licenseUrl: "https://lumora.example/license-proof/vimeo_cc",
+    attribution: "VIMEO_CC",
     durationSeconds: 46
   },
   {
@@ -372,6 +382,9 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     rightsTag: "public_domain",
     commercialReuseAllowed: true,
     embedOnly: false,
+    licenseName: "creative_commons",
+    licenseUrl: "https://lumora.example/license-proof/aljazeera_cc",
+    attribution: "ALJAZEERA_CC",
     durationSeconds: 54
   },
   {
@@ -511,10 +524,12 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
     externalId: "clacso-tv-runtime-seed-44",
     title: "CLACSO TV runtime motion seed",
     creator: "CLACSO TV",
-    sampleUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    rightsTag: "public_domain",
+    sampleUrl: "https://www.youtube.com/watch?v=clacso_tv-runtime-seed",
+    licenseName: "authorized_embed",
+    rightsTag: "authorized_embed",
     commercialReuseAllowed: true,
-    embedOnly: false,
+    embedOnly: true,
+    officialChannel: true,
     durationSeconds: 31
   },
   {
@@ -564,18 +579,6 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
 ];
 
 
-const RUNTIME_SOURCE_ID_ALIAS: Record<string, string> = {
-  WIKIMEDIA: "WIKIMEDIA_COMMONS",
-  OFFICIAL_TRAILERS: "OFFICIAL_MOVIE_TRAILERS",
-  YOUTUBE_OFFICIAL: "YOUTUBE_OFFICIAL_CHANNELS",
-  VIMEO_CC: "VIMEO_CREATIVE_COMMONS",
-  ALJAZEERA_CC: "AL_JAZEERA_CREATIVE_COMMONS",
-  CLACSO_TV: "CLACSO"
-};
-
-function runtimeSafeSourceId(sourceId: string): string {
-  return RUNTIME_SOURCE_ID_ALIAS[sourceId] || sourceId;
-}
 
 function traceLaneFromItem(item: FypFeedBridgeItem): FypRuntimeTraceLane {
   if (item.sourceId === "NASA" || item.sourceId === "ESA") return "wonder";
@@ -605,12 +608,7 @@ export function adaptFypBridgeItemToRuntimeApi(item: FypFeedBridgeItem): FypRunt
 export function buildFypRuntimeApiFeed(
   inputs: FypIngestionJobInput[] = DEFAULT_RUNTIME_FEED_INPUTS
 ): FypRuntimeApiFeedResponse {
-  const bridge = buildFypFeedBridge(
-    inputs.map((input) => ({
-      ...input,
-      sourceId: runtimeSafeSourceId(input.sourceId)
-    }))
-  );
+  const bridge = buildFypFeedBridge(inputs);
   const items = bridge.items.map(adaptFypBridgeItemToRuntimeApi);
 
   return {

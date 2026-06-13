@@ -17,7 +17,8 @@ describe("FYP runtime maximum video sources", () => {
     expect(feed.source).toBe("lumora_fyp_ingestion_bridge");
     expect(feed.items.length).toBeGreaterThanOrEqual(48);
     expect(feed.items.every((item) => item.playbackUrl.startsWith("https://"))).toBe(true);
-    expect(feed.items.every((item) => item.playbackUrl.endsWith(".mp4"))).toBe(true);
-    expect(feed.items.every((item) => item.deliveryLane === "native_video")).toBe(true);
+    expect(feed.items.every((item) => item.playbackUrl.startsWith("https://"))).toBe(true);
+    expect(feed.items.some((item) => item.deliveryLane === "native_video")).toBe(true);
+    expect(feed.items.some((item) => item.deliveryLane === "official_embed")).toBe(true);
   });
 });
