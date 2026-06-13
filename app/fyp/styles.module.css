@@ -934,15 +934,6 @@
   border-radius: 999px !important;
   font-size: 28px !important;
 }
-
-  display: none !important;
-}
-
-:global(body.lumora-fyp-active) {
-  background: #000 !important;
-  overflow: hidden !important;
-}
-
 .activeLaneChip {
   position: fixed !important;
   top: calc(12px + env(safe-area-inset-top)) !important;
