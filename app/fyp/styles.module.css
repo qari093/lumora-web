@@ -593,3 +593,240 @@
 }
 
 /* Lumora Trace DepthFeed emotional lanes Wonder Learn Laugh Build Explore fullscreen-native-autoplay */
+
+/* LUMORA FYP FINAL MOBILE LAYOUT PATCH */
+.depthTop {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 50;
+  width: min(100vw, 520px);
+  transform: translateX(-50%);
+  padding: calc(env(safe-area-inset-top) + 10px) 14px 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.78), rgba(0,0,0,0.34), transparent);
+  pointer-events: none;
+}
+
+.laneSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  pointer-events: auto;
+}
+
+.laneSwitch::-webkit-scrollbar {
+  display: none;
+}
+
+.laneSwitch button {
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(8,8,14,0.34);
+  color: rgba(255,255,255,0.72);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(14px);
+  white-space: nowrap;
+}
+
+.laneSwitch button[data-active="true"] {
+  color: #fff;
+  border-color: rgba(135,240,255,0.62);
+  background: linear-gradient(135deg, rgba(83,232,255,0.22), rgba(176,93,255,0.18));
+  box-shadow: 0 0 22px rgba(89,225,255,0.22);
+}
+
+.tracePromise {
+  margin-top: 7px;
+  text-align: center;
+  color: rgba(255,255,255,0.52);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.retentionRing {
+  position: absolute;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(118px + env(safe-area-inset-bottom));
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
+.retentionRing button,
+.ringProgress {
+  width: 52px;
+  min-height: 52px;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: rgba(8,9,14,0.38);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 900;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.38);
+  backdrop-filter: blur(16px);
+}
+
+.retentionRing small {
+  display: block;
+  margin-top: -5px;
+  font-size: 9px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.76);
+}
+
+.ringProgress {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(135,240,255,0.95);
+}
+
+.ringProgress[data-active="true"] {
+  border-color: rgba(135,240,255,0.72);
+  box-shadow: 0 0 26px rgba(72,222,255,0.28);
+}
+
+.creatorStrip {
+  left: max(16px, env(safe-area-inset-left)) !important;
+  right: 92px !important;
+  bottom: calc(128px + env(safe-area-inset-bottom)) !important;
+  z-index: 18 !important;
+  gap: 8px !important;
+}
+
+.creatorStrip strong {
+  font-size: clamp(18px, 5vw, 24px) !important;
+  font-weight: 950 !important;
+}
+
+.creatorStrip span {
+  color: rgba(225,245,255,0.82) !important;
+  font-size: clamp(12px, 3.2vw, 15px) !important;
+}
+
+.traceDock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(74px + env(safe-area-inset-bottom));
+  z-index: 45;
+  width: min(calc(100vw - 26px), 494px);
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(7,8,13,0.66), rgba(30,20,48,0.46));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.38);
+}
+
+.traceDock div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.traceDock span {
+  color: rgba(255,255,255,0.52);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.traceDock strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.traceDock button {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: linear-gradient(135deg, rgba(93,232,255,0.92), rgba(185,113,255,0.9));
+  color: #02030a;
+  font-size: 10px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.tiktokBottom {
+  min-height: calc(66px + env(safe-area-inset-bottom)) !important;
+  padding: 7px 12px calc(7px + env(safe-area-inset-bottom)) !important;
+  background: rgba(0,0,0,0.78) !important;
+  backdrop-filter: blur(18px);
+}
+
+.tiktokBottom a {
+  font-size: 10px !important;
+  color: rgba(255,255,255,0.76) !important;
+}
+
+.tiktokBottom a[href="/fyp"] {
+  color: #fff !important;
+}
+
+.tiktokBottom span {
+  font-size: 21px !important;
+}
+
+.createButton {
+  width: 62px !important;
+  height: 42px !important;
+  border-radius: 15px !important;
+  background: linear-gradient(90deg, #5ee7ff, #ffffff, #b66dff) !important;
+  box-shadow: 0 0 28px rgba(96,228,255,0.34) !important;
+}
+
+.deepDivePanel {
+  position: absolute;
+  left: 16px;
+  right: 88px;
+  bottom: calc(210px + env(safe-area-inset-bottom));
+  z-index: 35;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px;
+  background: rgba(8,9,14,0.72);
+  backdrop-filter: blur(18px);
+  color: #fff;
+  box-shadow: 0 20px 70px rgba(0,0,0,0.42);
+}
+
+@media (max-width: 380px) {
+  .traceDock {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .traceDock button {
+    grid-column: 1 / -1;
+  }
+
+  .retentionRing {
+    gap: 9px;
+  }
+
+  .retentionRing button,
+  .ringProgress {
+    width: 48px;
+    min-height: 48px;
+  }
+}
