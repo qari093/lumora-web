@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { FypFullscreenSource } from "@/src/core/fyp/fullscreenSourceFeed";
 import { LUMORA_LANES, createTraceSignal, normalizeLane, shouldOfferStoryContinuation, summarizeTrace, type LumoraLane, type TraceSignal } from "@/src/core/fyp/lumoraTrace";
 import styles from "./styles.module.css";
+import FypShellCleaner from "./FypShellCleaner";
 
 type Props = {
   items: FypFullscreenSource[];
@@ -261,12 +262,7 @@ export default function FypAutoplayFeed({ items }: Props) {
   }, [appendTrace]);
 
   useEffect(() => {
-    document.body.classList.add("lumora-fyp-active");
     setTraceSignals(readTrace());
-
-    return () => {
-      document.body.classList.remove("lumora-fyp-active");
-    };
   }, []);
 
   useEffect(() => {
@@ -345,6 +341,7 @@ export default function FypAutoplayFeed({ items }: Props) {
 
   return (
     <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay" data-depthfeed-runtime="lumora-depthfeed-trace" data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore">
+      <FypShellCleaner />
       <div className={styles.tiktokFrame}>
         <header className={styles.depthTop}>
           <button

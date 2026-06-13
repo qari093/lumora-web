@@ -935,11 +935,6 @@
   font-size: 28px !important;
 }
 
-/* TRACE CURRENT HOTFIX — remove global shell clutter on FYP */
-:global(body.lumora-fyp-active) > nav[aria-label="Global portal navigation"],
-:global(body.lumora-fyp-active) > nav[aria-label="Lumora portal arc"],
-:global(body.lumora-fyp-active) > button[data-testid="lumora-home-beacon"],
-:global(body.lumora-fyp-active) > div[data-testid="home-beacon-dashboard"] {
   display: none !important;
 }
 
