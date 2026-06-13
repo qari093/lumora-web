@@ -261,7 +261,12 @@ export default function FypAutoplayFeed({ items }: Props) {
   }, [appendTrace]);
 
   useEffect(() => {
+    document.body.classList.add("lumora-fyp-active");
     setTraceSignals(readTrace());
+
+    return () => {
+      document.body.classList.remove("lumora-fyp-active");
+    };
   }, []);
 
   useEffect(() => {
@@ -342,14 +347,25 @@ export default function FypAutoplayFeed({ items }: Props) {
     <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay" data-depthfeed-runtime="lumora-depthfeed-trace" data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore">
       <div className={styles.tiktokFrame}>
         <header className={styles.depthTop}>
-          <nav className={styles.laneSwitch} aria-label="Lumora emotional lanes">
+          <button
+            type="button"
+            className={styles.activeLaneChip}
+            onClick={revealChrome}
+            aria-label={`Current lane: ${selectedLane}`}
+          >
+            {LUMORA_LANES.find((lane) => lane.key === selectedLane)?.label ?? "Flow"}
+          </button>
+          <nav className={styles.laneSwitch} data-visible={chromeVisible} aria-label="Lumora emotional lanes">
             {LUMORA_LANES.map((lane) => (
               <button
                 key={lane.key}
                 type="button"
                 data-lumora-lane={lane.key}
                 data-active={selectedLane === lane.key}
-                onClick={() => setSelectedLane(lane.key)}
+                onClick={() => {
+                  setSelectedLane(lane.key);
+                  revealChrome();
+                }}
                 title={lane.intent}
               >
                 {lane.label}
