@@ -563,6 +563,20 @@ export const DEFAULT_RUNTIME_FEED_INPUTS: FypIngestionJobInput[] = [
   }
 ];
 
+
+const RUNTIME_SOURCE_ID_ALIAS: Record<string, string> = {
+  WIKIMEDIA: "WIKIMEDIA_COMMONS",
+  OFFICIAL_TRAILERS: "OFFICIAL_MOVIE_TRAILERS",
+  YOUTUBE_OFFICIAL: "YOUTUBE_OFFICIAL_CHANNELS",
+  VIMEO_CC: "VIMEO_CREATIVE_COMMONS",
+  ALJAZEERA_CC: "AL_JAZEERA_CREATIVE_COMMONS",
+  CLACSO_TV: "CLACSO"
+};
+
+function runtimeSafeSourceId(sourceId: string): string {
+  return RUNTIME_SOURCE_ID_ALIAS[sourceId] || sourceId;
+}
+
 function traceLaneFromItem(item: FypFeedBridgeItem): FypRuntimeTraceLane {
   if (item.sourceId === "NASA" || item.sourceId === "ESA") return "wonder";
   if (item.deliveryLane === "official_embed") return "explore";
@@ -591,7 +605,12 @@ export function adaptFypBridgeItemToRuntimeApi(item: FypFeedBridgeItem): FypRunt
 export function buildFypRuntimeApiFeed(
   inputs: FypIngestionJobInput[] = DEFAULT_RUNTIME_FEED_INPUTS
 ): FypRuntimeApiFeedResponse {
-  const bridge = buildFypFeedBridge(inputs);
+  const bridge = buildFypFeedBridge(
+    inputs.map((input) => ({
+      ...input,
+      sourceId: runtimeSafeSourceId(input.sourceId)
+    }))
+  );
   const items = bridge.items.map(adaptFypBridgeItemToRuntimeApi);
 
   return {
