@@ -52,6 +52,7 @@ export default function FypAutoplayFeed({ items }: Props) {
   const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const startedAtRef = useRef(new Map<string, number>());
   const sessionIdRef = useRef(`fyp_session_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
+  const gestureStartRef = useRef<{ x: number; y: number; at: number } | null>(null);
 
   const enhancedItems = useMemo(
     () =>
@@ -105,6 +106,70 @@ export default function FypAutoplayFeed({ items }: Props) {
       return;
     }
   }, []);
+
+  const moveToRelativeCard = useCallback((direction: 1 | -1) => {
+    const currentIndex = itemIds.indexOf(activeId);
+    const nextIndex = Math.max(0, Math.min(itemIds.length - 1, currentIndex + direction));
+    const nextId = itemIds[nextIndex];
+
+    if (!nextId || nextId === activeId) return;
+
+    setActiveId(nextId);
+
+    const target = document.querySelector<HTMLElement>(`[data-fyp-video-id="${nextId}"]`);
+    target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+  }, [activeId, itemIds]);
+
+  const openContextPanel = useCallback((itemId: string) => {
+    const item = visibleItems.find((candidate) => candidate.id === itemId);
+    if (!item) return;
+
+    setDeepDiveId(item.id);
+    postFypTrackEvent({
+      cardId: item.id,
+      event: "deep_dive",
+      watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+      lane: item.traceLane,
+      value: 0.8
+    });
+  }, [visibleItems, postFypTrackEvent]);
+
+  const handleTraceGestureStart = useCallback((event: React.PointerEvent<HTMLElement>) => {
+    gestureStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      at: Date.now()
+    };
+  }, []);
+
+  const handleTraceGestureEnd = useCallback((event: React.PointerEvent<HTMLElement>) => {
+    const start = gestureStartRef.current;
+    gestureStartRef.current = null;
+
+    if (!start) return;
+
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    const elapsed = Date.now() - start.at;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+
+    if (elapsed > 900 || Math.max(absX, absY) < 46) return;
+
+    if (absX > absY) {
+      moveToRelativeCard(dx < 0 ? 1 : -1);
+      return;
+    }
+
+    if (dy < 0) {
+      const item = visibleItems.find((candidate) => candidate.id === activeId);
+      if (item) openDeepDive(item);
+      return;
+    }
+
+    openContextPanel(activeId);
+  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, openDeepDive]);
+
 
   const appendTrace = useCallback((signal: TraceSignal) => {
     setTraceSignals((current) => {
@@ -278,6 +343,8 @@ export default function FypAutoplayFeed({ items }: Props) {
             return (
               <article
                 key={item.id}
+                onPointerDown={handleTraceGestureStart}
+                onPointerUp={handleTraceGestureEnd}
                 data-fyp-fullscreen-card="true"
                 data-fyp-video-id={item.id}
                 data-lumora-depth-card="true"

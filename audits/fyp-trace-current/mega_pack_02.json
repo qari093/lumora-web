@@ -1,0 +1,11 @@
+{
+  "pack": "MEGA_PACK_02_OF_04",
+  "name": "Gesture Navigation Runtime",
+  "includes": [
+    "SWIPE_RIGHT_NEXT",
+    "SWIPE_LEFT_PREVIOUS",
+    "SWIPE_UP_DEEP_DIVE",
+    "SWIPE_DOWN_CONTEXT"
+  ],
+  "status": "ACTIVE"
+}
