@@ -51,6 +51,7 @@ export default function FypAutoplayFeed({ items }: Props) {
   const [deepDiveId, setDeepDiveId] = useState("");
   const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const startedAtRef = useRef(new Map<string, number>());
+  const sessionIdRef = useRef(`fyp_session_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
 
   const enhancedItems = useMemo(
     () =>
@@ -82,13 +83,44 @@ export default function FypAutoplayFeed({ items }: Props) {
     [traceSignals, activeItem, selectedLane]
   );
 
+  const postFypTrackEvent = useCallback((payload: {
+    cardId: string;
+    event: "impression" | "view" | "watch_progress" | "spark" | "save" | "deep_dive" | "complete" | "skip" | "share";
+    watchedMs?: number;
+    lane?: string;
+    value?: number;
+  }) => {
+    try {
+      void fetch("/api/fyp/track", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          ...payload,
+          sessionId: sessionIdRef.current,
+          userId: "anonymous-user"
+        }),
+        keepalive: true
+      });
+    } catch {
+      return;
+    }
+  }, []);
+
   const appendTrace = useCallback((signal: TraceSignal) => {
     setTraceSignals((current) => {
       const next = [...current, signal].slice(-120);
       writeTrace(next);
       return next;
     });
-  }, []);
+
+    postFypTrackEvent({
+      cardId: signal.videoId,
+      event: signal.saved ? "save" : signal.sparked ? "spark" : signal.deepDive ? "deep_dive" : signal.completed ? "complete" : "watch_progress",
+      watchedMs: signal.watchedMs,
+      lane: signal.lane,
+      value: signal.completed ? 1 : signal.saved || signal.sparked || signal.deepDive ? 0.85 : 0.5
+    });
+  }, [postFypTrackEvent]);
 
   const registerVideo = useCallback((id: string, node: HTMLVideoElement | null) => {
     if (!node) {
@@ -169,8 +201,25 @@ export default function FypAutoplayFeed({ items }: Props) {
   useEffect(() => {
     for (const [id, video] of videoRefs.current.entries()) {
       if (id === activeId) {
-        if (!startedAtRef.current.has(id)) startedAtRef.current.set(id, Date.now());
+        if (!startedAtRef.current.has(id)) {
+          startedAtRef.current.set(id, Date.now());
+          const item = visibleItems.find((candidate) => candidate.id === id);
+          postFypTrackEvent({
+            cardId: id,
+            event: "impression",
+            watchedMs: 0,
+            lane: item?.traceLane,
+            value: 0.25
+          });
+        }
         safePlay(video);
+        postFypTrackEvent({
+          cardId: id,
+          event: "view",
+          watchedMs: 0,
+          lane: visibleItems.find((candidate) => candidate.id === id)?.traceLane,
+          value: 0.5
+        });
       } else {
         pauseVideo(video);
       }
@@ -197,7 +246,7 @@ export default function FypAutoplayFeed({ items }: Props) {
         }
       }
     };
-  }, [activeId, itemIds, visibleItems, appendTrace]);
+  }, [activeId, itemIds, visibleItems, appendTrace, postFypTrackEvent]);
 
   return (
     <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay" data-depthfeed-runtime="lumora-depthfeed-trace" data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore">
