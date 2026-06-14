@@ -7,6 +7,8 @@ import { injectSelectedAds } from "@/lib/ads/injectSelectedAds";
 import { formatSponsoredSlots } from "@/lib/ads/formatSponsoredSlots";
 import { attachFeedTimers } from "@/lib/surge/attachFeedTimers";
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 import { getRemoteConfig } from "@/lib/config/getRemoteConfig";
 import { getModeFromRequest } from "@/lib/mode/getModeFromRequest";
 import { applyModeToFeed } from "@/lib/fyp/applyModeToFeed";
@@ -38,140 +40,65 @@ type FeedItem = {
   };
 };
 
-function attachMedia(feed: FeedItem[]): FeedItem[] {
-  const viralCatchPool = [
-    {
-      mediaId: "viral_global_001",
-      videoUrl: "/videos/test-2.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "viral" as const,
-      platform: "global-catch",
-      region: "global",
-      caughtAt: "2026-04-08T09:12:00.000Z",
-      velocityScore: 0.95,
-      freshnessScore: 0.94,
-    },
-    {
-      mediaId: "viral_global_002",
-      videoUrl: "/videos/intro.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "viral" as const,
-      platform: "global-catch",
-      region: "global",
-      caughtAt: "2026-04-08T09:07:00.000Z",
-      velocityScore: 0.89,
-      freshnessScore: 0.88,
-    },
-    {
-      mediaId: "viral_global_003",
-      videoUrl: "/stock/clip3.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "viral" as const,
-      platform: "global-catch",
-      region: "global",
-      caughtAt: "2026-04-08T09:03:00.000Z",
-      velocityScore: 0.84,
-      freshnessScore: 0.82,
-    },
-    {
-      mediaId: "viral_global_004",
-      videoUrl: "/stock/clip2.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "viral" as const,
-      platform: "global-catch",
-      region: "global",
-      caughtAt: "2026-04-08T08:58:00.000Z",
-      velocityScore: 0.79,
-      freshnessScore: 0.77,
-    },
-  ];
+function getDeploySafeMediaPool() {
+  const publicDir = path.join(process.cwd(), "public", "videos");
+  const allowed = new Set([".mp4", ".webm", ".mov"]);
 
-  const teaserPool = [
-    {
-      mediaId: "teaser_001",
-      videoUrl: "/videos/intro.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "teaser" as const,
-      platform: "movie-teaser",
-      region: "global",
-      caughtAt: "2026-04-08T08:50:00.000Z",
-      velocityScore: 0.71,
-      freshnessScore: 0.84,
-    },
-    {
-      mediaId: "teaser_002",
-      videoUrl: "https://archive.org/download/night_of_the_living_dead/night_of_the_living_dead_512kb.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "teaser" as const,
-      platform: "movie-teaser",
-      region: "global",
-      caughtAt: "2026-04-08T08:40:00.000Z",
-      velocityScore: 0.67,
-      freshnessScore: 0.80,
-    },
-    {
-      mediaId: "teaser_003",
-      videoUrl: "https://archive.org/download/TheGeneral1926/TheGeneral1926_512kb.mp4",
-      posterUrl: "/videos/poster.png",
-      source: "teaser" as const,
-      platform: "movie-teaser",
-      region: "global",
-      caughtAt: "2026-04-08T08:30:00.000Z",
-      velocityScore: 0.64,
-      freshnessScore: 0.78,
-    },
-  ];
+  let files: string[] = [];
+  try {
+    files = fs
+      .readdirSync(publicDir)
+      .filter((name) => allowed.has(path.extname(name).toLowerCase()))
+      .filter((name) => !name.toLowerCase().includes("poster"))
+      .sort();
+  } catch {
+    files = [];
+  }
 
-  const viralSorted = [...viralCatchPool].sort((a, b) => {
-    const af = Number(a.freshnessScore || 0);
-    const bf = Number(b.freshnessScore || 0);
-    if (bf !== af) return bf - af;
-    return String(b.caughtAt || "").localeCompare(String(a.caughtAt || ""));
-  });
+  const preferred = files.filter((name) =>
+    /^(gen-|test-|intro|lumora|teaser|workout)/i.test(name)
+  );
 
-  const teaserSorted = [...teaserPool].sort((a, b) => {
-    const af = Number(a.freshnessScore || 0);
-    const bf = Number(b.freshnessScore || 0);
-    if (bf !== af) return bf - af;
-    return String(b.caughtAt || "").localeCompare(String(a.caughtAt || ""));
-  });
-
-  let viralIndex = 0;
-  let teaserIndex = 0;
-  let lastViralMediaId = "";
-  let lastTeaserMediaId = "";
-
-  return (feed || []).map((item) => {
-    const category = String(item.category || item.portal || "").toUpperCase();
-
-    if (item.kind === "sponsored") return item;
-
-    const wantsTeaser = category === "MOVIES";
-
-    if (wantsTeaser) {
-      let media = teaserSorted[teaserIndex % teaserSorted.length];
-      if (teaserSorted.length > 1 && media.mediaId == lastTeaserMediaId) {
-        teaserIndex += 1;
-        media = teaserSorted[teaserIndex % teaserSorted.length];
-      }
-      teaserIndex += 1;
-      lastTeaserMediaId = media.mediaId;
-      return { ...item, media };
-    }
-
-    let media = viralSorted[viralIndex % viralSorted.length];
-    if (viralSorted.length > 1 && media.mediaId == lastViralMediaId) {
-      viralIndex += 1;
-      media = viralSorted[viralIndex % viralSorted.length];
-    }
-    viralIndex += 1;
-    lastViralMediaId = media.mediaId;
-
-    return { ...item, media };
-  });
+  return (preferred.length ? preferred : files).map((name, index) => ({
+    mediaId: `public_video_${index + 1}_${name.replace(/[^a-z0-9]/gi, "_")}`,
+    videoUrl: `/videos/${name}`,
+    posterUrl: "/videos/poster.png",
+    source: "viral" as const,
+    platform: "lumora-public-video",
+    region: "global",
+    caughtAt: new Date(Date.now() - index * 60000).toISOString(),
+    velocityScore: Math.max(0.55, 0.98 - index * 0.025),
+    freshnessScore: Math.max(0.55, 0.98 - index * 0.02),
+  }));
 }
 
+function attachMedia(feed: FeedItem[]): FeedItem[] {
+  const mediaPool = getDeploySafeMediaPool();
 
+  if (!mediaPool.length) {
+    return feed;
+  }
+
+  let index = 0;
+
+  return (feed || []).map((item) => {
+    if (item.kind === "sponsored") return item;
+
+    const media = mediaPool[index % mediaPool.length];
+    index += 1;
+
+    return {
+      ...item,
+      media: {
+        ...media,
+        source:
+          String(item.category || item.portal || "").toUpperCase() === "MOVIES"
+            ? "teaser"
+            : "viral",
+      },
+    };
+  });
+}
 
 function dedupeFeedByMedia(feed: FeedItem[]): FeedItem[] {
   const seenMediaIds = new Set<string>();
