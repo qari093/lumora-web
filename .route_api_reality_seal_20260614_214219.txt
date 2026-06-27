@@ -1,0 +1,69 @@
+--- required public/user routes ---
+OK app/page.tsx
+OK app/fyp/page.tsx
+OK app/live/room/[id]/page.tsx
+OK app/admin/testers/page.tsx
+OK app/zendoro/products/page.tsx
+OK app/zendoro/cart/page.tsx
+OK app/zendoro/seller/page.tsx
+
+--- required canonical APIs ---
+OK app/api/fyp/route.ts
+OK app/api/live/rooms/route.ts
+OK app/api/zendoro/products/route.ts
+OK app/api/zendoro/cart/route.ts
+OK app/api/zendoro/checkout/route.ts
+OK app/api/private-beta/gate/route.ts
+OK app/api/health/route.ts
+OK app/api/ready/route.ts
+
+--- route conflict scan ---
+ROUTE_CONFLICTS=0
+
+--- validation ---
+├ ○ /zendoro/cart                                    3.08 kB         105 kB
+├ ○ /zendoro/checkout                                  247 B         105 kB
+├ ○ /zendoro/orders                                    247 B         105 kB
+├ ƒ /zendoro/product/[id]                            3.08 kB         105 kB
+├ ○ /zendoro/products                                3.08 kB         105 kB
+├ ○ /zendoro/reviews                                   247 B         105 kB
+├ ○ /zendoro/seller                                  3.08 kB         105 kB
+└ ○ /zenwallet                                         247 B         105 kB
++ First Load JS shared by all                         102 kB
+  ├ chunks/5a444783-9b676881ac33fab1.js              54.2 kB
+  ├ chunks/6006-7f216d380614d973.js                  45.5 kB
+  └ other shared chunks (total)                      1.99 kB
+
+Route (pages)                                           Size  First Load JS
+┌ ○ /ads-test (613 ms)                               1.96 kB        97.8 kB
+├ ƒ /api/ad-server/click                                 0 B        95.9 kB
+├ ƒ /api/ad-server/next                                  0 B        95.9 kB
+├ ƒ /api/ad-server/view                                  0 B        95.9 kB
+├ ƒ /api/business                                        0 B        95.9 kB
+├ ƒ /api/campaigns/[id]/status                           0 B        95.9 kB
+├ ƒ /api/lumasearch                                      0 B        95.9 kB
+├ ƒ /api/ping                                            0 B        95.9 kB
+├ ƒ /api/redemptions                                     0 B        95.9 kB
+├ ƒ /api/stats/overview                                  0 B        95.9 kB
+├ ƒ /api/upstream                                        0 B        95.9 kB
+├ ○ /components/ads/AdBanner (540 ms)                  977 B        96.8 kB
+├ ○ /vendor/campaigns/[id]/stats (540 ms)            1.51 kB        97.4 kB
+├ ○ /vendor/campaigns/new (534 ms)                   1.29 kB        97.2 kB
+├ ○ /vendor/profile (535 ms)                         1.48 kB        97.3 kB
+└ ○ /vendor/wallet (535 ms)                          1.62 kB        97.5 kB
++ First Load JS shared by all                        95.9 kB
+  ├ chunks/framework-c3ac72a22c65e209.js             57.4 kB
+  ├ chunks/main-a6dbbd55baf79be2.js                  36.5 kB
+  └ other shared chunks (total)                      1.96 kB
+
+ƒ Middleware                                         34.4 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+--- status ---
+CONFLICT_STATUS=0
+TSC_STATUS=0
+BUILD_STATUS=0
+REPORT=.route_api_reality_seal_20260614_214219.txt

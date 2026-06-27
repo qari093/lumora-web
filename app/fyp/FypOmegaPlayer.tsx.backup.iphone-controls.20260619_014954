@@ -1,0 +1,272 @@
+"use client";
+
+import React from "react";
+import { useRouter } from "next/navigation";
+import TraceThread from "@/components/fyp/TraceThread";
+import { useTraceThread } from "@/hooks/useTraceThread";
+
+type FypItem = {
+  id: string;
+  title: string;
+  text?: string;
+  lane: string;
+  attribution?: string;
+  media: { videoUrl: string; posterUrl: string };
+};
+
+const ACTIONS = [
+  { key: "Deep", icon: "🔍", label: "Deep" },
+  { key: "Board", icon: "📌", label: "Board" },
+  { key: "Share", icon: "↗️", label: "Share" },
+  { key: "LumaSpace", icon: "🌌", label: "LumaSpace" },
+] as const;
+
+function laneLabel(lane: string) {
+  return lane.slice(0, 1).toUpperCase() + lane.slice(1);
+}
+
+export default function FypOmegaPlayer({
+  initialFeed,
+  source,
+}: {
+  initialFeed: FypItem[];
+  source: string;
+}) {
+  const router = useRouter();
+  const traceThread = useTraceThread();
+
+  const [index, setIndex] = React.useState(0);
+  const [toast, setToast] = React.useState("");
+  const [playing, setPlaying] = React.useState(false);
+  const [failed, setFailed] = React.useState(false);
+  const [curiosity, setCuriosity] = React.useState(0);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+
+  const feed = Array.isArray(initialFeed) ? initialFeed.filter(Boolean) : [];
+  const item = feed[index];
+
+  const showToast = React.useCallback((message: string) => {
+    setToast(message);
+    window.setTimeout(() => setToast(""), 1600);
+  }, []);
+
+  const reset = React.useCallback(() => {
+    setFailed(false);
+    setPlaying(false);
+    setCuriosity(0);
+  }, []);
+
+  const next = React.useCallback(() => {
+    if (!feed.length) return;
+    reset();
+    setIndex((v) => (v + 1) % feed.length);
+  }, [feed.length, reset]);
+
+  const previous = React.useCallback(() => {
+    if (!feed.length) return;
+    reset();
+    setIndex((v) => (v - 1 + feed.length) % feed.length);
+  }, [feed.length, reset]);
+
+  React.useEffect(() => {
+    reset();
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+    window.setTimeout(() => video.play().catch(() => undefined), 120);
+  }, [index, reset]);
+
+  function handleTimeUpdate() {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return;
+    setCuriosity(Math.min(100, Math.max(0, (video.currentTime / video.duration) * 100)));
+  }
+
+  function handleAction(key: string) {
+    if (key === "LumaSpace") {
+      showToast("Opening LumaSpace bridge…");
+      window.setTimeout(() => router.push("/lumaspace"), 250);
+      return;
+    }
+    if (key === "Share") return showToast("Share trace requested");
+    if (key === "Board") return showToast("Saved to Board");
+    showToast("Deep Dive requested");
+  }
+
+  function navigateTo(route: "/" | "/fyp" | "/live" | "/lumaspace" | "trace") {
+    if (route === "trace") return showToast("Trace coming soon");
+    if (route === "/fyp") return;
+    router.push(route);
+  }
+
+  if (!item) {
+    return (
+      <main className="fixed inset-0 z-[2147483647] flex items-center justify-center bg-black text-white">
+        No playable traces.
+      </main>
+    );
+  }
+
+  const ringRadius = 24;
+  const ringCircumference = 2 * Math.PI * ringRadius;
+  const ringOffset = ringCircumference * (1 - curiosity / 100);
+
+  return (
+    <main
+      data-testid="fyp-omega-depthcanvas"
+      data-source={source}
+      className="fixed inset-0 z-[2147483647] h-[100dvh] w-[100vw] overflow-hidden bg-black text-white"
+    >
+      <style jsx global>{`
+        html,
+        body {
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          background: #000 !important;
+        }
+
+        nav[aria-label="Global portal navigation"],
+        nav[aria-label="Lumora portal arc"],
+        button[data-testid="lumora-home-beacon"],
+        div[data-testid="home-beacon-dashboard"] {
+          display: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+        }
+      `}</style>
+
+      <video
+        key={item.id}
+        ref={videoRef}
+        data-testid="fyp-omega-video"
+        className="absolute inset-0 z-0 h-[100dvh] w-[100vw] object-cover object-center"
+        src={item.media.videoUrl}
+        poster={item.media.posterUrl}
+        muted
+        playsInline
+        autoPlay
+        loop
+        preload="auto"
+        controls={false}
+        onPlaying={() => {
+          setPlaying(true);
+          setFailed(false);
+        }}
+        onWaiting={() => setPlaying(false)}
+        onPause={() => setPlaying(false)}
+        onTimeUpdate={handleTimeUpdate}
+        onError={() => {
+          setFailed(true);
+          window.setTimeout(next, 900);
+        }}
+        onClick={() => {
+          const video = videoRef.current;
+          if (!video) return;
+          if (video.paused) video.play().catch(() => undefined);
+          else video.pause();
+        }}
+      />
+
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(0,0,0,.38)_0%,rgba(0,0,0,.04)_38%,rgba(0,0,0,.78)_74%,rgba(0,0,0,.95)_100%)]" />
+
+      {failed ? (
+        <div data-testid="fyp-beautiful-failure" className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 px-8 text-center">
+          <div className="rounded-[2rem] border border-cyan-200/20 bg-black/60 p-6 backdrop-blur-xl">
+            <h2 className="text-2xl font-semibold">This Trace is still forming.</h2>
+            <p className="mt-3 text-sm text-white/70">Another wonder is waiting.</p>
+          </div>
+        </div>
+      ) : null}
+
+      <button aria-label="Previous Trace" className="absolute left-0 top-0 z-20 h-full w-1/3" onClick={previous} />
+      <button aria-label="Next Trace" className="absolute right-0 top-0 z-20 h-full w-1/3" onClick={next} />
+
+      <div className="absolute left-5 top-[calc(env(safe-area-inset-top)+1rem)] z-30 flex items-center gap-2.5">
+        <span className="inline-block h-8 w-[4px] rounded-full bg-cyan-400 shadow-[0_0_16px_#22d3ee]" />
+        <span className="text-[11px] tracking-[0.42em] text-cyan-100/80">LUMORA</span>
+        <span className="rounded-full border border-cyan-300/35 bg-black/45 px-4 py-2 text-sm font-semibold text-white backdrop-blur-xl">
+          ✦ {laneLabel(item.lane)}
+        </span>
+        <span className="rounded-full border border-white/10 bg-black/35 px-3 py-2 text-xs text-white/70 backdrop-blur-xl">
+          {index + 1}/{feed.length}
+        </span>
+      </div>
+
+      <aside data-testid="fyp-right-rail" className="absolute right-4 top-[calc(env(safe-area-inset-top)+5.8rem)] z-30 flex flex-col items-center gap-3">
+        <div data-testid="fyp-curiosity-ring" className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-black/50 backdrop-blur-xl">
+          <svg className="h-14 w-14 -rotate-90" viewBox="0 0 60 60" width="56" height="56">
+            <circle cx="30" cy="30" r={ringRadius} fill="none" stroke="rgba(255,255,255,.13)" strokeWidth="4" />
+            <circle cx="30" cy="30" r={ringRadius} fill="none" stroke="#22d3ee" strokeWidth="4" strokeLinecap="round" strokeDasharray={ringCircumference} strokeDashoffset={ringOffset} />
+          </svg>
+          <span className="absolute text-[13px] font-bold text-cyan-100">{Math.round(curiosity)}%</span>
+        </div>
+
+        {ACTIONS.map((action) => (
+          <button
+            key={action.key}
+            type="button"
+            onClick={() => handleAction(action.key)}
+            className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full border border-white/15 bg-black/55 text-white shadow-[0_0_22px_rgba(34,211,238,.18)] backdrop-blur-xl active:scale-95"
+            aria-label={action.label}
+          >
+            <span className="text-lg leading-4">{action.icon}</span>
+            <span className="mt-1 text-[8px] text-white/65">{action.label}</span>
+          </button>
+        ))}
+      </aside>
+
+      <section data-testid="fyp-hero-info" className="absolute bottom-[calc(env(safe-area-inset-bottom)+7.8rem)] left-5 right-24 z-30">
+        <h1 className="text-5xl font-bold tracking-tight drop-shadow-[0_0_24px_rgba(0,0,0,.9)]">
+          {item.title}
+        </h1>
+        <button
+          type="button"
+          onClick={traceThread.openThread}
+          className="mt-4 rounded-full border border-cyan-300/45 bg-black/45 px-4 py-2 text-sm font-medium text-cyan-50/90 shadow-[0_0_18px_rgba(34,211,238,.20)] backdrop-blur-xl"
+        >
+          Genesis Collection · {index + 1} of {feed.length} ›
+        </button>
+      </section>
+
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+6.7rem)] right-5 z-30 text-[9px] text-white/20">
+        Lumora Genesis · CC0 · 4K
+      </div>
+
+      <TraceThread
+        open={traceThread.open}
+        items={feed}
+        currentIndex={index}
+        onClose={traceThread.closeThread}
+        onSelect={(nextIndex) => {
+          reset();
+          setIndex(nextIndex);
+        }}
+      />
+
+      {toast ? (
+        <div data-testid="fyp-visible-toast" className="absolute left-1/2 top-20 z-50 -translate-x-1/2 rounded-full border border-cyan-200/25 bg-black/70 px-5 py-3 text-xs font-semibold text-cyan-50 backdrop-blur-xl">
+          {toast}
+        </div>
+      ) : null}
+
+      <nav data-testid="fyp-bottom-nav" className="absolute bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-5 right-5 z-40 flex h-20 items-center justify-around rounded-[2rem] border border-white/10 bg-black/65 px-4 shadow-[0_8px_32px_rgba(0,0,0,.8)] backdrop-blur-2xl">
+        <button onClick={() => navigateTo("/")} className="flex flex-col items-center gap-1 text-white/70">
+          <span className="text-2xl">⌂</span><span className="text-xs">Home</span>
+        </button>
+        <button onClick={() => navigateTo("/fyp")} className="flex flex-col items-center gap-1 text-cyan-200">
+          <span className="text-3xl drop-shadow-[0_0_14px_rgba(34,211,238,.75)]">🌊</span><span className="text-xs font-semibold">Flow</span>
+        </button>
+        <button onClick={() => navigateTo("/live")} className="flex flex-col items-center gap-1 text-white/70">
+          <span className="text-2xl">🔴</span><span className="text-xs">Live</span>
+        </button>
+        <button onClick={() => navigateTo("trace")} className="flex flex-col items-center gap-1 text-white/70">
+          <span className="text-2xl">🧭</span><span className="text-xs">Trace</span>
+        </button>
+        <button onClick={() => navigateTo("/lumaspace")} className="flex flex-col items-center gap-1 text-white/70">
+          <span className="text-2xl">🌌</span><span className="text-xs">Space</span>
+        </button>
+      </nav>
+    </main>
+  );
+}

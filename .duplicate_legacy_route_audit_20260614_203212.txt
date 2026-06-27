@@ -1,0 +1,1166 @@
+DUPLICATE_LEGACY_ROUTE_AUDIT
+timestamp=2026-06-14T18:32:12Z
+
+--- route conflicts: app vs pages ---
+
+--- duplicate api-like route names ---
+app/api/_boom/route.ts
+app/api/_health/route.ts
+app/api/_info/route.ts
+app/api/_ready/route.ts
+app/api/abuse/signal/route.ts
+app/api/account/route.ts
+app/api/account/upgrade/route.ts
+app/api/activation/claims/route.ts
+app/api/activation/dashboard/route.ts
+app/api/activation/env/route.ts
+app/api/activation/health/route.ts
+app/api/activation/live-status/route.ts
+app/api/activation/proof/route.ts
+app/api/activation/status/route.ts
+app/api/admin/health/route.ts
+app/api/admin/kyc/decision/route.ts
+app/api/admin/kyc/pending/route.ts
+app/api/admin/kyc/review/route.ts
+app/api/admin/moderation/list/route.ts
+app/api/admin/moderation/review/route.ts
+app/api/admin/overview/route.ts
+app/api/admin/testers/summary/route.ts
+app/api/admin/zendoro/route.ts
+app/api/ads/_utils/log.ts
+app/api/ads/analytics-snapshot/route.ts
+app/api/ads/analytics/brands/route.ts
+app/api/ads/analytics/channel/route.ts
+app/api/ads/analytics/rollup/run/route.ts
+app/api/ads/analytics/summary/route.ts
+app/api/ads/analytics/timeseries/route.ts
+app/api/ads/budget-gate/route.ts
+app/api/ads/budget-guard/route.ts
+app/api/ads/budget/route.ts
+app/api/ads/campaigns/[id]/route.ts
+app/api/ads/campaigns/route.ts
+app/api/ads/click/route.ts
+app/api/ads/content/route.ts
+app/api/ads/context/route.ts
+app/api/ads/conversion-rate/route.ts
+app/api/ads/conversion/route.ts
+app/api/ads/convert/route.ts
+app/api/ads/ctr/route.ts
+app/api/ads/eligibility/route.ts
+app/api/ads/engagement/route.ts
+app/api/ads/event/route.ts
+app/api/ads/event/stats/route.ts
+app/api/ads/events/route.ts
+app/api/ads/exposure-summary/route.ts
+app/api/ads/fatigue-gate/route.ts
+app/api/ads/fatigue/route.ts
+app/api/ads/filter/route.ts
+app/api/ads/fraud/stats/route.ts
+app/api/ads/frequency/route.ts
+app/api/ads/fyp-audit/route.ts
+app/api/ads/generate/route.ts
+app/api/ads/health/route.ts
+app/api/ads/imp/route.ts
+app/api/ads/impression/route.ts
+app/api/ads/injection/route.ts
+app/api/ads/intent/route.ts
+app/api/ads/perf/route.ts
+app/api/ads/performance-tier/route.ts
+app/api/ads/performance/route.ts
+app/api/ads/policy/route.ts
+app/api/ads/rank/route.ts
+app/api/ads/ranking/route.ts
+app/api/ads/redirect/route.ts
+app/api/ads/resolve/route.ts
+app/api/ads/rights/validate/route.ts
+app/api/ads/roi/route.ts
+app/api/ads/rotation/route.ts
+app/api/ads/route.ts
+app/api/ads/safety/route.ts
+app/api/ads/select-budgeted/route.ts
+app/api/ads/select-fatigue-safe/route.ts
+app/api/ads/select-tiered/route.ts
+app/api/ads/select/route.ts
+app/api/ads/serve/route.ts
+app/api/ads/session-rollup/route.ts
+app/api/ads/stats/route.ts
+app/api/ads/track/route.ts
+app/api/ai/fault-healer/log/route.ts
+app/api/analytics/event/route.ts
+app/api/auth/forgot-password/route.ts
+app/api/auth/recovery/route.ts
+app/api/auth/reset-password/route.ts
+app/api/auth/session/route.ts
+app/api/auth/sessions/route.ts
+app/api/auth/verify-email/route.ts
+app/api/auto/generate/route.ts
+app/api/beta/keystone/route.ts
+app/api/billing/checkout/route.ts
+app/api/billing/webhook/route.ts
+app/api/boom/route.ts
+app/api/brand/splash/guard/route.ts
+app/api/brand/splash/memory/route.ts
+app/api/brand/splash/metrics/route.ts
+app/api/brand/splash/profile/route.ts
+app/api/brand/splash/route.ts
+app/api/campaigns/[id]/route.ts
+app/api/campaigns/route.ts
+app/api/cart/clear/route.ts
+app/api/cart/items/route.ts
+app/api/cart/route.ts
+app/api/celebrations/[slug]/admin/audit/route.ts
+app/api/celebrations/[slug]/admin/set-status/route.ts
+app/api/celebrations/[slug]/demo/route.ts
+app/api/celebrations/[slug]/end/route.ts
+app/api/celebrations/[slug]/export/route.ts
+app/api/celebrations/[slug]/reset/route.ts
+app/api/celebrations/[slug]/shows/[id]/ics/route.ts
+app/api/celebrations/[slug]/shows/[id]/route.ts
+app/api/celebrations/[slug]/shows/ics/route.ts
+app/api/celebrations/[slug]/shows/route.ts
+app/api/celebrations/[slug]/sse/route.ts
+app/api/celebrations/[slug]/summary/route.ts
+app/api/celebrations/alive/route.ts
+app/api/celebrations/create/route.ts
+app/api/celebrations/healthz/route.ts
+app/api/celebrations/list/route.ts
+app/api/celebrations/manifest/route.ts
+app/api/cf/images/route.ts
+app/api/checkout/route.ts
+app/api/cineverse/evolution/route.ts
+app/api/cineverse/federation/health/route.ts
+app/api/cineverse/fyp/route.ts
+app/api/cineverse/history/route.ts
+app/api/cineverse/ingest/route.ts
+app/api/cineverse/list/route.ts
+app/api/cineverse/mood-rail/route.ts
+app/api/cineverse/reactions/route.ts
+app/api/cineverse/spoiler/route.ts
+app/api/cineverse/summary/route.ts
+app/api/cineverse/teasers/route.ts
+app/api/cineverse/timeline/route.ts
+app/api/coin/balance/route.ts
+app/api/coin/ledger/route.ts
+app/api/coin/transfer/route.ts
+app/api/comments/route.ts
+app/api/config/flags/route.ts
+app/api/config/route.ts
+app/api/content-engine/alive/route.ts
+app/api/content-engine/feed/route.ts
+app/api/content-engine/pulse/route.ts
+app/api/content-supply/fallback/route.ts
+app/api/content-supply/regeneration/route.ts
+app/api/content-supply/seed/route.ts
+app/api/content-supply/trailer-priority/route.ts
+app/api/content-supply/ugc/route.ts
+app/api/content/attention/route.ts
+app/api/content/emotions/route.ts
+app/api/content/graph/route.ts
+app/api/content/lifecycle/route.ts
+app/api/content/multi-source/debug/route.ts
+app/api/content/multi-source/feed/route.ts
+app/api/content/multi-source/proof/route.ts
+app/api/content/origin/route.ts
+app/api/content/query/route.ts
+app/api/content/saturation/route.ts
+app/api/content/schema/route.ts
+app/api/content/trust/route.ts
+app/api/context/route.ts
+app/api/conv/postback/route.ts
+app/api/cpv/track/route.ts
+app/api/creatives/[id]/route.ts
+app/api/creatives/create/route.ts
+app/api/creatives/list/route.ts
+app/api/creatives/route.ts
+app/api/creatives/thumb/route.ts
+app/api/creatives/update/[id]/route.ts
+app/api/creator-alchemy/advanced-governance/route.ts
+app/api/creator-alchemy/civilization-stability/route.ts
+app/api/creator-alchemy/constellation-runtime/route.ts
+app/api/creator-alchemy/creator-commerce/route.ts
+app/api/creator-alchemy/dashboard/route.ts
+app/api/creator-alchemy/dream-chamber/route.ts
+app/api/creator-alchemy/events/route.ts
+app/api/creator-alchemy/final-readiness/route.ts
+app/api/creator-alchemy/health/route.ts
+app/api/creator-alchemy/human-reality/route.ts
+app/api/creator-alchemy/launch-readiness/route.ts
+app/api/creator-alchemy/live-integration/route.ts
+app/api/creator-alchemy/moderation/route.ts
+app/api/creator-alchemy/observability/route.ts
+app/api/creator-alchemy/private-beta/route.ts
+app/api/creator-alchemy/quiet-gifts/route.ts
+app/api/creator-alchemy/ritual-legacy/route.ts
+app/api/creator-alchemy/scale-optimization/route.ts
+app/api/creator-alchemy/zeneconomy/route.ts
+app/api/creator-share/live-readiness/route.ts
+app/api/creator/apply/route.ts
+app/api/creator/hub/route.ts
+app/api/creator/list/route.ts
+app/api/creator/mock/route.ts
+app/api/creator/profile/route.ts
+app/api/creator/resonance/route.ts
+app/api/creator/update/route.ts
+app/api/cultural/blending/route.ts
+app/api/cultural/regions/route.ts
+app/api/cultural/splicing/route.ts
+app/api/cultural/weighting/route.ts
+app/api/data/analytics-aggregation/route.ts
+app/api/data/backup-restore/route.ts
+app/api/data/cache-invalidation/route.ts
+app/api/data/cache/route.ts
+app/api/data/cross-signal-linking/route.ts
+app/api/data/db-failover/route.ts
+app/api/data/db-metrics/route.ts
+app/api/data/db-pooling/route.ts
+app/api/data/db-retry/route.ts
+app/api/data/db-scaling/route.ts
+app/api/data/enrichment-pipeline/route.ts
+app/api/data/indexing/route.ts
+app/api/data/partitioning/route.ts
+app/api/data/pipeline/route.ts
+app/api/data/primary-db/route.ts
+app/api/data/query-optimization/route.ts
+app/api/data/storage-tiers/route.ts
+app/api/data/ttl-cleanup/route.ts
+app/api/data/validation-pipeline/route.ts
+app/api/debug/boot-metrics/route.ts
+app/api/dev/routes/route.ts
+app/api/dev/testers/reset/route.ts
+app/api/diag/apilogs/route.ts
+app/api/diag/rate-limit/route.ts
+app/api/diag/route.ts
+app/api/diag/trace/route.ts
+app/api/diag/traffic/route.ts
+app/api/discovery/side-path/route.ts
+app/api/dist/embed/route.ts
+app/api/dist/shorten/route.ts
+app/api/dist/stats/route.ts
+app/api/echo/list/route.ts
+app/api/eco/rollup/run/route.ts
+app/api/eco/summary/route.ts
+app/api/eco/timeseries/route.ts
+app/api/email/digest/route.ts
+app/api/emml/_store.ts
+app/api/emml/aggregate/route.ts
+app/api/emml/assets/route.ts
+app/api/emml/chart/route.ts
+app/api/emml/compute/route.ts
+app/api/emml/health/route.ts
+app/api/emml/heat/route.ts
+app/api/emml/indices/route.ts
+app/api/emml/ingest/route.ts
+app/api/emml/sse/route.ts
+app/api/emml/state/route.ts
+app/api/emml/ticks/route.ts
+app/api/emotion/demo-add/route.ts
+app/api/emotion/export/route.ts
+app/api/emotion/heat/route.ts
+app/api/emotion/index-calc/route.ts
+app/api/emotion/ingest/route.ts
+app/api/emotion/stream/route.ts
+app/api/env/validate/route.ts
+app/api/errors/report/route.ts
+app/api/events/stream/route.ts
+app/api/fan/follow/route.ts
+app/api/fan/inbox/route.ts
+app/api/fan/unfollow/route.ts
+app/api/feed/ab/route.ts
+app/api/feed/assemble/route.ts
+app/api/feed/cache/route.ts
+app/api/feed/cineverse/route.ts
+app/api/feed/dedupe/route.ts
+app/api/feed/discovery/route.ts
+app/api/feed/diversity/route.ts
+app/api/feed/final/route.ts
+app/api/feed/fomo/route.ts
+app/api/feed/freshness/route.ts
+app/api/feed/guardrails/route.ts
+app/api/feed/integrity/route.ts
+app/api/feed/latency/route.ts
+app/api/feed/metrics/route.ts
+app/api/feed/mix/route.ts
+app/api/feed/mock/route.ts
+app/api/feed/override/route.ts
+app/api/feed/personalize/route.ts
+app/api/feed/ranking/route.ts
+app/api/feed/route.ts
+app/api/feed/scroll/route.ts
+app/api/feed/sentiment/route.ts
+app/api/feed/session/route.ts
+app/api/feedback/aggregate/route.ts
+app/api/feedback/alerts/route.ts
+app/api/feedback/anomaly/route.ts
+app/api/feedback/auto-optimization/route.ts
+app/api/feedback/ctr/route.ts
+app/api/feedback/dashboard/route.ts
+app/api/feedback/engagement-events/route.ts
+app/api/feedback/event-stream/route.ts
+app/api/feedback/events/route.ts
+app/api/feedback/learning-rate/route.ts
+app/api/feedback/loop/route.ts
+app/api/feedback/ranking-integration/route.ts
+app/api/feedback/replay-weighting/route.ts
+app/api/feedback/scoring/route.ts
+app/api/feedback/skip-penalty/route.ts
+app/api/feedback/trigger-rerank/route.ts
+app/api/feedback/triggers/route.ts
+app/api/feedback/watch-time-weighting/route.ts
+app/api/final/civilization-seal/route.ts
+app/api/finance/route.ts
+app/api/fomo/calendar/route.ts
+app/api/fomo/cooldown/route.ts
+app/api/fomo/countdown/route.ts
+app/api/fomo/countdowns/route.ts
+app/api/fomo/decay/route.ts
+app/api/fomo/exclusive/route.ts
+app/api/fomo/exclusivity/route.ts
+app/api/fomo/push-notifications/route.ts
+app/api/fomo/redacted/route.ts
+app/api/fomo/reminders/route.ts
+app/api/fomo/replay-window/route.ts
+app/api/fomo/replay/route.ts
+app/api/fomo/throttling/route.ts
+app/api/fomo/trailer/route.ts
+app/api/fomo/tuning/route.ts
+app/api/format/audio/route.ts
+app/api/format/fallback/route.ts
+app/api/format/kinetic/route.ts
+app/api/format/language/route.ts
+app/api/format/overlay/route.ts
+app/api/format/templates/route.ts
+app/api/format/trailer-template/route.ts
+app/api/format/translation/route.ts
+app/api/format/validation/route.ts
+app/api/fyp/_store.ts
+app/api/fyp/alive/route.ts
+app/api/fyp/assembler/route.ts
+app/api/fyp/cache-edge/route.ts
+app/api/fyp/cineverse/route.ts
+app/api/fyp/cold-start/route.ts
+app/api/fyp/connect/route.ts
+app/api/fyp/daily-drop/route.ts
+app/api/fyp/debug/route.ts
+app/api/fyp/dedup/route.ts
+app/api/fyp/discovery/route.ts
+app/api/fyp/diversity/route.ts
+app/api/fyp/fallback-feed/route.ts
+app/api/fyp/feed/route.ts
+app/api/fyp/fomo/route.ts
+app/api/fyp/generate/route.ts
+app/api/fyp/health/route.ts
+app/api/fyp/healthz/route.ts
+app/api/fyp/interact/route.ts
+app/api/fyp/language/route.ts
+app/api/fyp/latency/route.ts
+app/api/fyp/native-events/route.ts
+app/api/fyp/native-feed/route.ts
+app/api/fyp/native-upload/route.ts
+app/api/fyp/observability/route.ts
+app/api/fyp/personalization/route.ts
+app/api/fyp/prefetch/route.ts
+app/api/fyp/ranking/route.ts
+app/api/fyp/recommend/route.ts
+app/api/fyp/regional/route.ts
+app/api/fyp/route.ts
+app/api/fyp/runtime/route.ts
+app/api/fyp/scroll/route.ts
+app/api/fyp/session/route.ts
+app/api/fyp/summary/route.ts
+app/api/fyp/track/route.ts
+app/api/fyp/trailer-override/route.ts
+app/api/fyp/youtube-feed/route.ts
+app/api/fyp94/feed/route.ts
+app/api/fyp94/health/route.ts
+app/api/fyp94/library/route.ts
+app/api/fyp94/production-health/route.ts
+app/api/geo/consent/route.ts
+app/api/geo/whereami/route.ts
+app/api/gmar/ai/suggest-mission/route.ts
+app/api/gmar/alive/route.ts
+app/api/gmar/creator/profile/route.ts
+app/api/gmar/economy/claim/route.ts
+app/api/gmar/final/admin/action/route.ts
+app/api/gmar/final/auth/session/route.ts
+app/api/gmar/final/compliance/status/route.ts
+app/api/gmar/final/creator/publish/route.ts
+app/api/gmar/final/database/restore/route.ts
+app/api/gmar/final/database/save/route.ts
+app/api/gmar/final/economy/spend/route.ts
+app/api/gmar/final/gameplay/missions/route.ts
+app/api/gmar/final/infrastructure/status/route.ts
+app/api/gmar/final/live/events/route.ts
+app/api/gmar/final/matchmaking/session/route.ts
+app/api/gmar/final/observability/event/route.ts
+app/api/gmar/final/realtime/presence/route.ts
+app/api/gmar/final/release/status/route.ts
+app/api/gmar/final/security/check/route.ts
+app/api/gmar/fyp/activity/route.ts
+app/api/gmar/gameplay/complete-objective/route.ts
+app/api/gmar/health/route.ts
+app/api/gmar/healthz/route.ts
+app/api/gmar/home/route.ts
+app/api/gmar/inventory/grant/route.ts
+app/api/gmar/launch/soft/route.ts
+app/api/gmar/memory/route.ts
+app/api/gmar/onboarding/start/route.ts
+app/api/gmar/persistence/save/route.ts
+app/api/gmar/player/init/route.ts
+app/api/gmar/playtest/session/route.ts
+app/api/gmar/public-ready/route.ts
+app/api/gmar/ready/route.ts
+app/api/gmar/social/squad/join/route.ts
+app/api/gmar/state/init/route.ts
+app/api/gmar/summary/route.ts
+app/api/gmar/tester/register/route.ts
+app/api/gmar/world/event/join/route.ts
+app/api/health-alias/route.ts
+app/api/health/portals/route.ts
+app/api/health/route.ts
+app/api/healthz/route.ts
+app/api/hybrid/avatar/gen/route.ts
+app/api/hybrid/avatar/list/route.ts
+app/api/hybrid/avatar/transform/route.ts
+app/api/hybrid/avatar/upload/route.ts
+app/api/hybrid/claim/route.ts
+app/api/hybrid/credits/route.ts
+app/api/hybrid/dev/reset/route.ts
+app/api/hybrid/dev/state/route.ts
+app/api/hybrid/emoji/gen/route.ts
+app/api/hybrid/emoji/list/route.ts
+app/api/hybrid/emoji/route.ts
+app/api/hybrid/generate/route.ts
+app/api/hybrid/health/route.ts
+app/api/hybrid/placeholder/avatar/route.ts
+app/api/hybrid/placeholder/emoji/route.ts
+app/api/hybrid/providers/route.ts
+app/api/hybrid/status/route.ts
+app/api/i18n/set/route.ts
+app/api/i18n/strings/route.ts
+app/api/inbox/route.ts
+app/api/info/route.ts
+app/api/infra/alerting/route.ts
+app/api/infra/api-gateway/route.ts
+app/api/infra/autoscaling/route.ts
+app/api/infra/cdn/route.ts
+app/api/infra/circuit-breakers/route.ts
+app/api/infra/cost/route.ts
+app/api/infra/edge-cache/route.ts
+app/api/infra/failover-routing/route.ts
+app/api/infra/load-balancer/route.ts
+app/api/infra/logging/route.ts
+app/api/infra/monitoring/route.ts
+app/api/infra/rate-limit/route.ts
+app/api/infra/retry-strategies/route.ts
+app/api/infra/tracing/route.ts
+app/api/ingest/credentials/route.ts
+app/api/ingest/dedup/route.ts
+app/api/ingest/fallback-provider/route.ts
+app/api/ingest/health/route.ts
+app/api/ingest/instagram/route.ts
+app/api/ingest/logging/route.ts
+app/api/ingest/metrics/route.ts
+app/api/ingest/normalize/route.ts
+app/api/ingest/queue/route.ts
+app/api/ingest/rate-limit/route.ts
+app/api/ingest/reddit/route.ts
+app/api/ingest/retry/route.ts
+app/api/ingest/rss/route.ts
+app/api/ingest/schema-validation/route.ts
+app/api/ingest/tiktok/route.ts
+app/api/ingest/timestamp-sync/route.ts
+app/api/ingest/trends/route.ts
+app/api/ingest/twitch/route.ts
+app/api/ingest/x/route.ts
+app/api/integration/engines/route.ts
+app/api/integration/feed-consistency/route.ts
+app/api/integration/personalization-flow/route.ts
+app/api/integration/sync/route.ts
+app/api/intelligence/attention-score/route.ts
+app/api/intelligence/clusters/route.ts
+app/api/intelligence/coherence/route.ts
+app/api/intelligence/consistency/route.ts
+app/api/intelligence/cultural-tagging/route.ts
+app/api/intelligence/culture/route.ts
+app/api/intelligence/decay-prediction/route.ts
+app/api/intelligence/decay/route.ts
+app/api/intelligence/emotion/route.ts
+app/api/intelligence/emotions/route.ts
+app/api/intelligence/enriched-store/route.ts
+app/api/intelligence/gravity/route.ts
+app/api/intelligence/inference-cache/route.ts
+app/api/intelligence/lifecycle/route.ts
+app/api/intelligence/low-signal-suppression/route.ts
+app/api/intelligence/narrative-score/route.ts
+app/api/intelligence/priority-boost/route.ts
+app/api/intelligence/ranking-cache/route.ts
+app/api/intelligence/ranking-compute/route.ts
+app/api/intelligence/ranking-precompute/route.ts
+app/api/intelligence/recompute-scheduler/route.ts
+app/api/intelligence/recompute/route.ts
+app/api/intelligence/saturation/route.ts
+app/api/intelligence/trailer-priority/route.ts
+app/api/intelligence/trend-clustering/route.ts
+app/api/intelligence/weighting/route.ts
+app/api/intelligence/weights/route.ts
+app/api/interaction/haptic/route.ts
+app/api/interaction/hold/route.ts
+app/api/interaction/like/route.ts
+app/api/interaction/log/route.ts
+app/api/interaction/multitouch/route.ts
+app/api/interaction/not-interested/route.ts
+app/api/interaction/predict/route.ts
+app/api/interaction/save/route.ts
+app/api/interaction/scroll/route.ts
+app/api/interaction/share/route.ts
+app/api/interaction/swipe/route.ts
+app/api/interaction/tap/route.ts
+app/api/interaction/tilt/route.ts
+app/api/interaction/vibe/route.ts
+app/api/interaction/voice/route.ts
+app/api/kyc/request/route.ts
+app/api/kyc/status/route.ts
+app/api/kyc/upload/route.ts
+app/api/launch-readiness/api-contracts/route.ts
+app/api/launch-readiness/final-seal/route.ts
+app/api/launch-readiness/fyp-live-production/route.ts
+app/api/launch-readiness/gmar-creator-monetization/route.ts
+app/api/launch-readiness/persistence-state/route.ts
+app/api/launch-readiness/reality-simulation/route.ts
+app/api/launch-readiness/realtime-events/route.ts
+app/api/launch-readiness/route-reality/route.ts
+app/api/launch-visual-state/route.ts
+app/api/launch/readiness/route.ts
+app/api/learning/profile/route.ts
+app/api/learning/rank/route.ts
+app/api/ledger/credit/route.ts
+app/api/ledger/debit/route.ts
+app/api/ledger/list/[ownerId]/route.ts
+app/api/ledger/refund/route.ts
+app/api/ledger/refunds/[ownerId]/[refType]/[refId]/route.ts
+app/api/links/create/route.ts
+app/api/links/resolve/route.ts
+app/api/live/_reactions_store.ts
+app/api/live/_store.ts
+app/api/live/afterglow/route.ts
+app/api/live/alive/route.ts
+app/api/live/bookmark/route.ts
+app/api/live/click/route.ts
+app/api/live/events/route.ts
+app/api/live/feed-variation/route.ts
+app/api/live/feed/route.ts
+app/api/live/feedback/route.ts
+app/api/live/google-trends/route.ts
+app/api/live/health-badge/route.ts
+app/api/live/health/route.ts
+app/api/live/healthz/route.ts
+app/api/live/ingest/youtube/route.ts
+app/api/live/load/route.ts
+app/api/live/mic/route.ts
+app/api/live/persist/google.ts
+app/api/live/persist/reddit.ts
+app/api/live/persist/route.ts
+app/api/live/portal-hubs/route.ts
+app/api/live/portal-spec/route.ts
+app/api/live/proof/route.ts
+app/api/live/publish/route.ts
+app/api/live/ranking/route.ts
+app/api/live/raw-audit/route.ts
+app/api/live/reddit/route.ts
+app/api/live/room-list/route.ts
+app/api/live/room-state/route.ts
+app/api/live/room/route.ts
+app/api/live/roomlist/route.ts
+app/api/live/rooms-list/route.ts
+app/api/live/rooms/[id]/end/route.ts
+app/api/live/rooms/[id]/events/route.ts
+app/api/live/rooms/[id]/react/route.ts
+app/api/live/rooms/[id]/reactions/route.ts
+app/api/live/rooms/[id]/route.ts
+app/api/live/rooms/list/route.ts
+app/api/live/rooms/public/route.ts
+app/api/live/rooms/route.ts
+app/api/live/roomslist/route.ts
+app/api/live/rss/route.ts
+app/api/live/runtime/route.ts
+app/api/live/share/route.ts
+app/api/live/signals/parser.ts
+app/api/live/signals/route.ts
+app/api/live/skip/route.ts
+app/api/live/status/route.ts
+app/api/live/summary/route.ts
+app/api/live/validation/route.ts
+app/api/live/watch/route.ts
+app/api/live/world-pulse/route.ts
+app/api/live/youtube/route.ts
+app/api/lumaspace/alive/route.ts
+app/api/lumaspace/aura/route.ts
+app/api/lumaspace/civilization/route.ts
+app/api/lumaspace/init/route.ts
+app/api/lumaspace/mirror/route.ts
+app/api/lumaspace/ping/route.ts
+app/api/lumaspace/reflection/route.ts
+app/api/lumaspace/runtime/route.ts
+app/api/lumaspace/shadow/export/route.ts
+app/api/lumaspace/shadow/route.ts
+app/api/lumaspace/share/route.ts
+app/api/lumaspace/state/route.ts
+app/api/lumaspace/tree/route.ts
+app/api/lumaspace/zen/preview/route.ts
+app/api/media/complete/route.ts
+app/api/media/upload/route.ts
+app/api/memory/list/route.ts
+app/api/memory/save/route.ts
+app/api/metrics/ads/route.ts
+app/api/metrics/batch/route.ts
+app/api/mod/action/route.ts
+app/api/mod/queue/route.ts
+app/api/mod/report/route.ts
+app/api/mode/route.ts
+app/api/moderation/appeal/route.ts
+app/api/moderation/audit/route.ts
+app/api/moderation/block/route.ts
+app/api/moderation/check/route.ts
+app/api/moderation/policy/route.ts
+app/api/moderation/report/route.ts
+app/api/moderation/review-queue/route.ts
+app/api/moderation/risk-mode/route.ts
+app/api/moments/list/route.ts
+app/api/moments/save/route.ts
+app/api/monetization/ad-hooks/route.ts
+app/api/monetization/engagement/route.ts
+app/api/monetization/rewards/route.ts
+app/api/monetization/validation/route.ts
+app/api/motion/audio-reactive/route.ts
+app/api/motion/fps/route.ts
+app/api/motion/gpu/route.ts
+app/api/motion/gradient/route.ts
+app/api/motion/grain/route.ts
+app/api/motion/performance/route.ts
+app/api/motion/smoothing/route.ts
+app/api/motion/transitions/route.ts
+app/api/motion/vector/route.ts
+app/api/movies/alive/route.ts
+app/api/movies/catalog/route.ts
+app/api/movies/health/route.ts
+app/api/movies/healthz/route.ts
+app/api/movies/item/route.ts
+app/api/music/catalog/route.ts
+app/api/music/health/route.ts
+app/api/music/item/route.ts
+app/api/news/route.ts
+app/api/nexa/alive/route.ts
+app/api/nexa/diag/route.ts
+app/api/nexa/health/route.ts
+app/api/nexa/healthz/route.ts
+app/api/nexa/info/route.ts
+app/api/nexa/metrics/route.ts
+app/api/nexa/ops/route.ts
+app/api/nexa/route.ts
+app/api/nexa/status/route.ts
+app/api/nexa/summary/route.ts
+app/api/nexmoji/anim-check/route.ts
+app/api/notifications/route.ts
+app/api/notify/check-low-balance/route.ts
+app/api/notify/emit/route.ts
+app/api/notify/inbox/route.ts
+app/api/notify/subscribe/route.ts
+app/api/offline/auto-recover/route.ts
+app/api/offline/batch/route.ts
+app/api/offline/batch/send/route.ts
+app/api/offline/benchmark/route.ts
+app/api/offline/delta/sync/route.ts
+app/api/offline/hash-verify/route.ts
+app/api/offline/mirror-verify.ts
+app/api/offline/predict/merge/route.ts
+app/api/offline/predict/route.ts
+app/api/offline/repair-log/route.ts
+app/api/offline/reward-sync/route.ts
+app/api/offline/rewards/sync/route.ts
+app/api/orders/[id]/route.ts
+app/api/orders/route.ts
+app/api/payments/checkout/route.ts
+app/api/payments/webhook/route.ts
+app/api/persona/assets/route.ts
+app/api/persona/emojis/route.ts
+app/api/persona/expansions/route.ts
+app/api/persona/health/route.ts
+app/api/persona/manifest/route.ts
+app/api/persona/privacy/route.ts
+app/api/persona/profile/route.ts
+app/api/persona/reaction-map/route.ts
+app/api/persona/select/route.ts
+app/api/persona/variants/route.ts
+app/api/persona/voice/route.ts
+app/api/personalization/cache/route.ts
+app/api/personalization/cold-start/route.ts
+app/api/personalization/cross-session-memory/route.ts
+app/api/personalization/diversity/route.ts
+app/api/personalization/emotional-profile/route.ts
+app/api/personalization/explore-exploit/route.ts
+app/api/personalization/gift/route.ts
+app/api/personalization/interaction-signals/route.ts
+app/api/personalization/interest-graph/route.ts
+app/api/personalization/metrics/route.ts
+app/api/personalization/monitoring/route.ts
+app/api/personalization/pacing-model/route.ts
+app/api/personalization/preference-decay/route.ts
+app/api/personalization/session-learning/route.ts
+app/api/personalization/short-term-intent/route.ts
+app/api/portal-cards/route.ts
+app/api/portal-health/route.ts
+app/api/portal-overview/route.ts
+app/api/portal-runtime/route.ts
+app/api/portal-status/route.ts
+app/api/portals/alive/route.ts
+app/api/portals/health/route.ts
+app/api/portals/route.ts
+app/api/portals/status/route.ts
+app/api/posts/route.ts
+app/api/private-access/route.ts
+app/api/private-beta/access/route.ts
+app/api/private-beta/allowlist/route.ts
+app/api/private-beta/gate/route.ts
+app/api/private-beta/switch/route.ts
+app/api/private/access/route.ts
+app/api/products/[id]/route.ts
+app/api/products/route.ts
+app/api/profile/attention/route.ts
+app/api/profile/cache/route.ts
+app/api/profile/emotion/route.ts
+app/api/profile/expansion/route.ts
+app/api/profile/interests/route.ts
+app/api/profile/locale/route.ts
+app/api/profile/merge/route.ts
+app/api/profile/mix/route.ts
+app/api/profile/pacing/route.ts
+app/api/profile/replay/route.ts
+app/api/profile/schema/route.ts
+app/api/profile/skip/route.ts
+app/api/profile/summary/route.ts
+app/api/profile/validation/route.ts
+app/api/profile/watchtime/route.ts
+app/api/proximity/ping/route.ts
+app/api/pulse/action/route.ts
+app/api/pulse/event/route.ts
+app/api/pulse/state/route.ts
+app/api/pwa/diag/route.ts
+app/api/r/[slug]/route.ts
+app/api/rankings/feed/route.ts
+app/api/reaction/aggregation/route.ts
+app/api/reaction/capture/route.ts
+app/api/reaction/performance/route.ts
+app/api/reaction/preroll/route.ts
+app/api/reaction/privacy/route.ts
+app/api/reaction/silhouette/route.ts
+app/api/reaction/timeline/route.ts
+app/api/reaction/visual/route.ts
+app/api/ready/route.ts
+app/api/readyz/route.ts
+app/api/resilience/fallback/route.ts
+app/api/resilience/heartbeat/route.ts
+app/api/resilience/recovery/route.ts
+app/api/resilience/retry/route.ts
+app/api/reviews/route.ts
+app/api/runtime-consolidation/activation/route.ts
+app/api/runtime-consolidation/api-contract/route.ts
+app/api/runtime-consolidation/build-debt/route.ts
+app/api/runtime-consolidation/deprecations/route.ts
+app/api/runtime-consolidation/domain-ownership/route.ts
+app/api/runtime-consolidation/duplicate-audit/route.ts
+app/api/runtime-consolidation/event-bus/route.ts
+app/api/runtime-consolidation/final-seal/route.ts
+app/api/runtime-consolidation/observability/route.ts
+app/api/runtime-consolidation/orchestrators/route.ts
+app/api/runtime-consolidation/persistence-boundary/route.ts
+app/api/runtime-consolidation/route-inventory/route.ts
+app/api/runtime-summary/route.ts
+app/api/runtime/events/route.ts
+app/api/runtime/signals/route.ts
+app/api/runtime/state/route.ts
+app/api/safety-circle/opt-in/route.ts
+app/api/safety/abuse-check/route.ts
+app/api/safety/alerts/route.ts
+app/api/safety/audio-transcript/route.ts
+app/api/safety/audio/route.ts
+app/api/safety/bot-check/route.ts
+app/api/safety/cooldown/route.ts
+app/api/safety/dashboard/route.ts
+app/api/safety/device-nsfw/route.ts
+app/api/safety/fallback/route.ts
+app/api/safety/fatigue/route.ts
+app/api/safety/image/route.ts
+app/api/safety/keywords/route.ts
+app/api/safety/motion/route.ts
+app/api/safety/nsfw/route.ts
+app/api/safety/personal-limits/route.ts
+app/api/safety/quarantine/route.ts
+app/api/safety/rate-limit/route.ts
+app/api/safety/rating/route.ts
+app/api/safety/review/route.ts
+app/api/safety/session-break/route.ts
+app/api/safety/validation/route.ts
+app/api/security/abuse/route.ts
+app/api/security/audit/route.ts
+app/api/security/check/route.ts
+app/api/security/consent/route.ts
+app/api/seller/orders/route.ts
+app/api/seller/products/route.ts
+app/api/seller/route.ts
+app/api/share/alive/route.ts
+app/api/share/healthz/route.ts
+app/api/share/link/route.ts
+app/api/share/resolve/route.ts
+app/api/share/route.ts
+app/api/share/track/route.ts
+app/api/shop/order/route.ts
+app/api/shop/webhook/route.ts
+app/api/signals/cache/route.ts
+app/api/signals/dedupe/route.ts
+app/api/signals/fallback/route.ts
+app/api/signals/freshness/route.ts
+app/api/signals/google-trends/route.ts
+app/api/signals/instagram/route.ts
+app/api/signals/latency/route.ts
+app/api/signals/news-rss/route.ts
+app/api/signals/normalize/route.ts
+app/api/signals/reddit/route.ts
+app/api/signals/score/route.ts
+app/api/signals/store/route.ts
+app/api/signals/tiktok/route.ts
+app/api/signals/twitch/route.ts
+app/api/signals/twitter-x/route.ts
+app/api/social/abuse-guards/route.ts
+app/api/social/analytics/route.ts
+app/api/social/attention-overlay/route.ts
+app/api/social/ghost-room/route.ts
+app/api/social/reaction-echo/route.ts
+app/api/social/viewers/route.ts
+app/api/state/capture/route.ts
+app/api/state/persist/route.ts
+app/api/state/recover/route.ts
+app/api/state/sync/route.ts
+app/api/stillness/toggle/route.ts
+app/api/stream/mock-webhook/route.ts
+app/api/stream/upload-token/route.ts
+app/api/stream/video/route.ts
+app/api/stream/webhook/route.ts
+app/api/stripe/checkout/route.ts
+app/api/stripe/create-checkout-session/route.ts
+app/api/stripe/dev/simulate/route.ts
+app/api/stripe/webhook/route.ts
+app/api/subscriptions/cancel/route.ts
+app/api/subscriptions/create/route.ts
+app/api/surge/challenge/leaderboard/route.ts
+app/api/surge/challenge/queue/route.ts
+app/api/surge/challenge/rewards/route.ts
+app/api/surge/challenge/route.ts
+app/api/surge/challenge/state/route.ts
+app/api/surge/challenge/submit/route.ts
+app/api/surge/competition/entry/route.ts
+app/api/surge/duel/anti-spam/route.ts
+app/api/surge/duel/momentum/route.ts
+app/api/surge/duel/resolve/route.ts
+app/api/surge/duel/route.ts
+app/api/surge/duel/start/route.ts
+app/api/surge/duel/vote-audit/route.ts
+app/api/surge/duel/vote/route.ts
+app/api/surge/leaderboard/reset/route.ts
+app/api/surge/leaderboard/route.ts
+app/api/surge/matchmaking/route.ts
+app/api/surge/timer/route.ts
+app/api/teasers/create/route.ts
+app/api/telemetry/event/route.ts
+app/api/telemetry/r2-egress/route.ts
+app/api/telemetry/resolution/route.ts
+app/api/telemetry/route-metrics/route.ts
+app/api/telemetry/route.ts
+app/api/telemetry/track/route.ts
+app/api/track/route.ts
+app/api/trend/decay/route.ts
+app/api/trend/detect/route.ts
+app/api/trend/score/route.ts
+app/api/trend/velocity/route.ts
+app/api/trust/anomalies/route.ts
+app/api/trust/anomaly/route.ts
+app/api/trust/audit-logs/route.ts
+app/api/trust/audit/route.ts
+app/api/trust/bot-detection/route.ts
+app/api/trust/bot-patterns/route.ts
+app/api/trust/compliance/route.ts
+app/api/trust/creator-thresholds/route.ts
+app/api/trust/decay/route.ts
+app/api/trust/escalation-rules/route.ts
+app/api/trust/fake-engagement/route.ts
+app/api/trust/filter/route.ts
+app/api/trust/gate/route.ts
+app/api/trust/metrics/route.ts
+app/api/trust/misinformation/route.ts
+app/api/trust/moderation-alerts/route.ts
+app/api/trust/repeat-offenders/route.ts
+app/api/trust/route.ts
+app/api/trust/runtime/anomaly/route.ts
+app/api/trust/runtime/bot/route.ts
+app/api/trust/runtime/enforcement/route.ts
+app/api/trust/runtime/fake-engagement/route.ts
+app/api/trust/runtime/misinformation/route.ts
+app/api/trust/runtime/quarantine/route.ts
+app/api/trust/runtime/scam/route.ts
+app/api/trust/runtime/toxicity/route.ts
+app/api/trust/safe-fallback/route.ts
+app/api/trust/scam/route.ts
+app/api/trust/score/route.ts
+app/api/trust/semantic/route.ts
+app/api/trust/takedown/route.ts
+app/api/trust/toxic-velocity/route.ts
+app/api/trust/tq/route.ts
+app/api/uploads/presign/route.ts
+app/api/user/profile/route.ts
+app/api/validation/crash-free/route.ts
+app/api/validation/ingestion/route.ts
+app/api/validation/latency-fps/route.ts
+app/api/validation/multi-platform-ingestion/route.ts
+app/api/validation/notifications/route.ts
+app/api/validation/performance/route.ts
+app/api/validation/personalization-accuracy/route.ts
+app/api/validation/personalization/route.ts
+app/api/validation/real-user-simulation/route.ts
+app/api/validation/real-user/route.ts
+app/api/validation/retention-loops/route.ts
+app/api/validation/retention/route.ts
+app/api/validation/safety/route.ts
+app/api/validation/system-tests/route.ts
+app/api/validation/zero-explicit-leaks/route.ts
+app/api/vault/route.ts
+app/api/vendor/campaigns/[id]/route.ts
+app/api/vendor/campaigns/assign/route.ts
+app/api/vendor/campaigns/assigned/route.ts
+app/api/vendor/campaigns/route.ts
+app/api/vendor/summary/route.ts
+app/api/vendor/timeseries/route.ts
+app/api/version/route.ts
+app/api/vibe/apply/route.ts
+app/api/vibe/my-recent/route.ts
+app/api/vibe/status/route.ts
+app/api/vibe/tags/route.ts
+app/api/vibe/wall/route.ts
+app/api/video-gen/guard/route.ts
+app/api/video-gen/route.ts
+app/api/video-gen/status/route.ts
+app/api/video-gen/submit/route.ts
+app/api/video/alive/route.ts
+app/api/video/color/route.ts
+app/api/video/fallback/route.ts
+app/api/video/health/route.ts
+app/api/video/masking/route.ts
+app/api/video/performance/route.ts
+app/api/video/preview/route.ts
+app/api/video/skin/route.ts
+app/api/video/sync/route.ts
+app/api/videos/debug/list/route.ts
+app/api/videos/feed/route.ts
+app/api/videos/health/route.ts
+app/api/videos/healthz/route.ts
+app/api/videos/stream-webhook/route.ts
+app/api/wallet/balance/route.ts
+app/api/wallet/credit-ledger/route.ts
+app/api/wallet/credit/route.ts
+app/api/wallet/debit/route.ts
+app/api/wallet/history/route.ts
+app/api/wallet/ledger/route.ts
+app/api/wallet/route.ts
+app/api/wallet/summary/route.ts
+app/api/wallet/topup/route.ts
+app/api/wallet/txid-check/route.ts
+app/api/wallet/withdraw/route.ts
+app/api/wallets/[ownerId]/balance/route.ts
+app/api/wallets/[ownerId]/route.ts
+app/api/wallets/credit/route.ts
+app/api/wallets/debit/route.ts
+app/api/wallets/ensure/route.ts
+app/api/wallets/route.ts
+app/api/wallets/transfer/route.ts
+app/api/weather/route.ts
+app/api/webhooks/zendoro/route.ts
+app/api/whereami/route.ts
+app/api/zen/economy/route.ts
+app/api/zencoin/admin/route.ts
+app/api/zencoin/balance/route.ts
+app/api/zencoin/fraud/route.ts
+app/api/zencoin/governance/route.ts
+app/api/zencoin/transactions/route.ts
+app/api/zencoin/transfer/route.ts
+app/api/zencoin/treasury/route.ts
+app/api/zencoin/wallet/route.ts
+app/api/zendoro/admin/route.ts
+app/api/zendoro/cart/route.ts
+app/api/zendoro/checkout/route.ts
+app/api/zendoro/orders/route.ts
+app/api/zendoro/products/route.ts
+app/api/zendoro/reviews/route.ts
+app/api/zendoro/seller/route.ts
+app/api/zendoro/webhook/route.ts
+app/api/zenwallet/creator/route.ts
+app/api/zenwallet/final-seal/route.ts
+app/api/zenwallet/ledger/route.ts
+app/api/zenwallet/offline/route.ts
+app/api/zenwallet/portals/route.ts
+app/api/zenwallet/refunds/route.ts
+app/api/zenwallet/runtime/route.ts
+app/api/zenwallet/security/route.ts
+app/api/zenwallet/subscriptions/route.ts
+app/api/zenwallet/support/route.ts
+app/api/zenwallet/transparency/route.ts
+app/feed/FeedClient.tsx
+app/feed/page.tsx
+app/fyp94/page.tsx
+pages/api/ad-server/click.ts
+pages/api/ad-server/next.ts
+pages/api/ad-server/view.ts
+pages/api/business.ts
+pages/api/campaigns/[id]/status.ts
+pages/api/lumasearch.ts
+pages/api/ping.ts
+pages/api/redemptions.ts
+pages/api/stats/overview.ts
+pages/api/upstream.ts
+
+--- legacy fyp94 references ---
+app/api/fyp94/production-health/route.ts:  return compatibilityJson("/api/fyp94/production-health", "/api/fyp/healthz");
+app/api/fyp94/health/route.ts:  return compatibilityJson("/api/fyp94/health", "/api/fyp/health");
+app/api/fyp94/library/route.ts:  return compatibilityJson("/api/fyp94/library", "/api/fyp/native-feed");
+app/api/fyp94/feed/route.ts:  return compatibilityJson("/api/fyp94/feed", "/api/fyp/feed");
+app/fyp94/page.tsx:  "/api/fyp94/library?fresh=",
+app/fyp94/page.tsx:    /* /api/fyp94/library?fresh= */ Promise.resolve({ json: async () => ({ items: buildFyp94FinalFeed() }) })
+app/fyp94/page.tsx:      className="fyp94-visible-player"
+app/fyp94/page.tsx:        className="fyp94-video"
+src/core/runtime-consolidation/domainOwnership.ts:    deprecatedPrefixes: ["/api/feed/fyp", "/api/fyp94"]
+src/core/runtime-consolidation/deprecation/registry.ts:    deprecatedPrefix: "/api/fyp94",
+src/core/runtime-consolidation/duplicateResponsibilityAudit.ts:    routePrefixes: ["/api/fyp", "/api/feed", "/api/content/multi-source", "/api/fyp94"],
+src/core/launch-readiness/route-reality/classifier.ts:    "/api/fyp94",
+src/components/fyp94/Fyp94Overlay.tsx:    <div data-testid="fyp94-overlay" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+src/components/fyp94/Fyp94VisiblePlayer.tsx:      data-testid="fyp94-visible-player"
+src/components/fyp94/Fyp94VisiblePlayer.tsx:        data-testid="fyp94-video"
+src/lib/fyp94/feed/fallback.ts:    id: `fyp94_fallback_${index + 1}`,
+src/lib/fyp94/feed/contract.ts:    source: "fyp94",
+src/lib/fyp94/feed/contract.ts:    response.source === "fyp94" &&
+src/lib/fyp94/feed/types.ts:  source: "fyp94";
+src/lib/fyp94/feed-intelligence/seen.ts:const KEY = "lumora_fyp94_seen_ids";
+src/lib/fyp94/media/storage.ts:  return `fyp94/${safeSource}/${safeAsset}/${safeFile}`;
+lib/fyp94/ui/performance.ts:export * from "../../../src/lib/fyp94/ui/performance";
+lib/fyp94/pulse-sync/types.ts:export * from "../../../src/lib/fyp94/pulse-sync/types";
+lib/fyp94/pulse-sync/preferences.ts:export * from "../../../src/lib/fyp94/pulse-sync/preferences";
+lib/fyp94/pulse-sync/limits.ts:export * from "../../../src/lib/fyp94/pulse-sync/limits";
+lib/fyp94/pulse-sync/triggers.ts:export * from "../../../src/lib/fyp94/pulse-sync/triggers";
+lib/fyp94/pulse-sync/effects.ts:export * from "../../../src/lib/fyp94/pulse-sync/effects";
+lib/fyp94/core/constraints.ts:export * from "../../../src/lib/fyp94/core/constraints";
+lib/fyp94/core/policy.ts:export * from "../../../src/lib/fyp94/core/policy";
+lib/fyp94/quality/performance.ts:export * from "../../../src/lib/fyp94/quality/performance";
+lib/fyp94/quality/mixQualityGate.ts:export * from "../../../src/lib/fyp94/quality/mixQualityGate";
+lib/fyp94/quality/duplicate.ts:export * from "../../../src/lib/fyp94/quality/duplicate";
+lib/fyp94/quality/limits.ts:export * from "../../../src/lib/fyp94/quality/limits";
+lib/fyp94/api-stability/headers.ts:export * from "../../../src/lib/fyp94/api-stability/headers";
+lib/fyp94/api-stability/manifest.ts:export * from "../../../src/lib/fyp94/api-stability/manifest";
+lib/fyp94/trend/captions.ts:export * from "../../../src/lib/fyp94/trend/captions";
+lib/fyp94/trend/youtubeMetadata.ts:export * from "../../../src/lib/fyp94/trend/youtubeMetadata";
+lib/fyp94/trend/inject.ts:export * from "../../../src/lib/fyp94/trend/inject";
+lib/fyp94/trend/map.ts:export * from "../../../src/lib/fyp94/trend/map";
+lib/fyp94/trend/types.ts:export * from "../../../src/lib/fyp94/trend/types";
+lib/fyp94/production2/monitor.ts:export * from "../../../src/lib/fyp94/production2/monitor";
+lib/fyp94/production2/config.ts:export * from "../../../src/lib/fyp94/production2/config";
+lib/fyp94/signals/types.ts:export * from "../../../src/lib/fyp94/signals/types";
+lib/fyp94/signals/create.ts:export * from "../../../src/lib/fyp94/signals/create";
+lib/fyp94/signals/ingestion.ts:export * from "../../../src/lib/fyp94/signals/ingestion";
+lib/fyp94/signals/aggregate.ts:export * from "../../../src/lib/fyp94/signals/aggregate";
+lib/fyp94/time-machine/mix.ts:export * from "../../../src/lib/fyp94/time-machine/mix";
+lib/fyp94/time-machine/decade.ts:export * from "../../../src/lib/fyp94/time-machine/decade";
+lib/fyp94/vimeo/gate.ts:export * from "../../../src/lib/fyp94/vimeo/gate";
+lib/fyp94/narrative/state.ts:export * from "../../../src/lib/fyp94/narrative/state";
+lib/fyp94/narrative/group.ts:export * from "../../../src/lib/fyp94/narrative/group";
+lib/fyp94/narrative/types.ts:export * from "../../../src/lib/fyp94/narrative/types";
+lib/fyp94/narrative/sequence.ts:export * from "../../../src/lib/fyp94/narrative/sequence";
+lib/fyp94/lanes/mix.ts:export * from "../../../src/lib/fyp94/lanes/mix";
+lib/fyp94/lanes/map.ts:export * from "../../../src/lib/fyp94/lanes/map";
+lib/fyp94/pulse-score/streak.ts:export * from "../../../src/lib/fyp94/pulse-score/streak";
+lib/fyp94/pulse-score/display.ts:export * from "../../../src/lib/fyp94/pulse-score/display";
+lib/fyp94/pulse-score/types.ts:export * from "../../../src/lib/fyp94/pulse-score/types";
+lib/fyp94/pulse-score/scoring.ts:export * from "../../../src/lib/fyp94/pulse-score/scoring";
+lib/fyp94/pulse-score/decay.ts:export * from "../../../src/lib/fyp94/pulse-score/decay";
+lib/fyp94/behavioral/engine.ts:export * from "../../../src/lib/fyp94/behavioral/engine";
+lib/fyp94/supply/fallback.ts:export * from "../../../src/lib/fyp94/supply/fallback";
+lib/fyp94/supply/schedule.ts:export * from "../../../src/lib/fyp94/supply/schedule";
+lib/fyp94/supply/contracts.ts:export * from "../../../src/lib/fyp94/supply/contracts";
+lib/fyp94/supply/clients.ts:export * from "../../../src/lib/fyp94/supply/clients";
+lib/fyp94/supply/sources.ts:export * from "../../../src/lib/fyp94/supply/sources";
+lib/fyp94/supply/licenseRegistry.ts:export * from "../../../src/lib/fyp94/supply/licenseRegistry";
+lib/fyp94/supply/verticalGuard.ts:export * from "../../../src/lib/fyp94/supply/verticalGuard";
+lib/fyp94/crowd/privacy.ts:export * from "../../../src/lib/fyp94/crowd/privacy";
+lib/fyp94/crowd/viewers.ts:export * from "../../../src/lib/fyp94/crowd/viewers";
+lib/fyp94/crowd/display.ts:export * from "../../../src/lib/fyp94/crowd/display";
+lib/fyp94/crowd/types.ts:export * from "../../../src/lib/fyp94/crowd/types";
+lib/fyp94/crowd/heat.ts:export * from "../../../src/lib/fyp94/crowd/heat";
+lib/fyp94/echoes/poster.ts:export * from "../../../src/lib/fyp94/echoes/poster";
+lib/fyp94/echoes/types.ts:export * from "../../../src/lib/fyp94/echoes/types";
+lib/fyp94/echoes/decay.ts:export * from "../../../src/lib/fyp94/echoes/decay";
+lib/fyp94/echoes/slots.ts:export * from "../../../src/lib/fyp94/echoes/slots";
+lib/fyp94/echoes/create.ts:export * from "../../../src/lib/fyp94/echoes/create";
+lib/fyp94/action/filter.ts:export * from "../../../src/lib/fyp94/action/filter";
+lib/fyp94/action/thrillScore.ts:export * from "../../../src/lib/fyp94/action/thrillScore";
+lib/fyp94/action/peak.ts:export * from "../../../src/lib/fyp94/action/peak";
+lib/fyp94/diversity/index.ts:export * from "../../../src/lib/fyp94/diversity/index";
+lib/fyp94/unfinished/detect.ts:export * from "../../../src/lib/fyp94/unfinished/detect";
+lib/fyp94/unfinished/types.ts:export * from "../../../src/lib/fyp94/unfinished/types";
+lib/fyp94/unfinished/rateLimit.ts:export * from "../../../src/lib/fyp94/unfinished/rateLimit";
+lib/fyp94/unfinished/message.ts:export * from "../../../src/lib/fyp94/unfinished/message";
+lib/fyp94/unfinished/resume.ts:export * from "../../../src/lib/fyp94/unfinished/resume";
+lib/fyp94/feed/diversity.ts:export * from "../../../src/lib/fyp94/feed/diversity";
+lib/fyp94/feed/fallback.ts:export * from "../../../src/lib/fyp94/feed/fallback";
+lib/fyp94/feed/contract.ts:export * from "../../../src/lib/fyp94/feed/contract";
+lib/fyp94/feed/types.ts:export * from "../../../src/lib/fyp94/feed/types";
+lib/fyp94/feed/merge.ts:export * from "../../../src/lib/fyp94/feed/merge";
+lib/fyp94/feed/build.ts:export * from "../../../src/lib/fyp94/feed/build";
+lib/fyp94/attribution/types.ts:export * from "../../../src/lib/fyp94/attribution/types";
+lib/fyp94/attribution/rateLimit.ts:export * from "../../../src/lib/fyp94/attribution/rateLimit";
+lib/fyp94/attribution/message.ts:export * from "../../../src/lib/fyp94/attribution/message";
+lib/fyp94/attribution/link.ts:export * from "../../../src/lib/fyp94/attribution/link";
+lib/fyp94/waves/detect.ts:export * from "../../../src/lib/fyp94/waves/detect";
+lib/fyp94/waves/pool.ts:export * from "../../../src/lib/fyp94/waves/pool";
+lib/fyp94/waves/participation.ts:export * from "../../../src/lib/fyp94/waves/participation";
+lib/fyp94/waves/types.ts:export * from "../../../src/lib/fyp94/waves/types";
+lib/fyp94/waves/create.ts:export * from "../../../src/lib/fyp94/waves/create";
+lib/fyp94/production/storage.ts:export * from "../../../src/lib/fyp94/production/storage";
+lib/fyp94/production/health.ts:export * from "../../../src/lib/fyp94/production/health";
+lib/fyp94/final/seal.ts:export * from "../../../src/lib/fyp94/final/seal";
+lib/fyp94/auto-refresh/archive.ts:export * from "../../../src/lib/fyp94/auto-refresh/archive";
+lib/fyp94/auto-refresh/policy.ts:export * from "../../../src/lib/fyp94/auto-refresh/policy";
+lib/fyp94/quality2/dedupe.ts:export * from "../../../src/lib/fyp94/quality2/dedupe";
+lib/fyp94/quality2/limits.ts:export * from "../../../src/lib/fyp94/quality2/limits";
+lib/fyp94/fomo/guard.ts:export * from "../../../src/lib/fyp94/fomo/guard";
+lib/fyp94/fomo/assign.ts:export * from "../../../src/lib/fyp94/fomo/assign";
+lib/fyp94/fomo/types.ts:export * from "../../../src/lib/fyp94/fomo/types";
+lib/fyp94/legal/proofStore.ts:export * from "../../../src/lib/fyp94/legal/proofStore";
+lib/fyp94/legal/validate.ts:export * from "../../../src/lib/fyp94/legal/validate";
+lib/fyp94/legal/types.ts:export * from "../../../src/lib/fyp94/legal/types";
+lib/fyp94/legal/audit.ts:export * from "../../../src/lib/fyp94/legal/audit";
+lib/fyp94/legal/blocklist.ts:export * from "../../../src/lib/fyp94/legal/blocklist";
+lib/fyp94/feed-intelligence/seen.ts:export * from "../../../src/lib/fyp94/feed-intelligence/seen";
+lib/fyp94/feed-intelligence/mixer.ts:export * from "../../../src/lib/fyp94/feed-intelligence/mixer";
+lib/fyp94/vault/recycle.ts:export * from "../../../src/lib/fyp94/vault/recycle";
+lib/fyp94/vault/eligibility.ts:export * from "../../../src/lib/fyp94/vault/eligibility";
+lib/fyp94/vault/select.ts:export * from "../../../src/lib/fyp94/vault/select";
+lib/fyp94/vault/types.ts:export * from "../../../src/lib/fyp94/vault/types";
+lib/fyp94/vault/window.ts:export * from "../../../src/lib/fyp94/vault/window";
+lib/fyp94/media/storage.ts:export * from "../../../src/lib/fyp94/media/storage";
+lib/fyp94/media/poster.ts:export * from "../../../src/lib/fyp94/media/poster";
+lib/fyp94/media/validate.ts:export * from "../../../src/lib/fyp94/media/validate";
+lib/fyp94/media/types.ts:export * from "../../../src/lib/fyp94/media/types";
+lib/fyp94/media/register.ts:export * from "../../../src/lib/fyp94/media/register";
+
+--- old stock/fyp signatures ---
+
+--- known risky duplicate live route aliases ---
+app/api/live/room-list/route.ts
+app/api/live/roomlist/route.ts
+app/api/live/rooms-list/route.ts
+app/api/live/rooms/public/route.ts
+app/api/live/roomslist/route.ts

@@ -1,22 +1,11 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  return NextResponse.json(
-    {
-      ok: true,
-      status: "healthy",
-      service: "lumora",
-      route: "/api/healthz",
-      checkedAt: new Date().toISOString(),
-    },
-    {
-      status: 200,
-      headers: {
-        "Cache-Control": "no-store, max-age=0",
-      },
-    }
-  );
+  return NextResponse.json({
+    ok: true,
+    service: "lumora-web",
+    route: "/api/healthz"
+  });
 }

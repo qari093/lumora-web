@@ -1,0 +1,108 @@
+--- health endpoints ---
+OK app/api/health/route.ts
+OK app/api/ready/route.ts
+
+--- observability scripts ---
+128:    "health:probe": "sh scripts/health/probe_health_endpoints.sh",
+140:    "health:live": "sh scripts/live/health_macro.sh",
+165:    "monitor": "node monitoring/monitor.cjs"
+28:    "metrics": "curl -s -H 'x-api-key: \\${LUMORA_API_KEY}' http://127.0.0.1:3000/api/admin/metrics | jq .",
+
+--- health related files ---
+scripts/nexa/healthcheck.sh
+scripts/health
+scripts/health/probe_health_endpoints.sh
+scripts/tests/run_health_suite.sh
+scripts/fyp/fyp_mega_pack_03_source_health_runtime.mjs
+scripts/live/health_macro.sh
+tests/nexa/nexa_pack08_hormonal_pelvic_health.test.ts
+tests/health
+tests/health/health_api_smoke.test.ts
+tests/health/health_contract_unit.test.ts
+tests/health/health_smoke.test.ts
+tests/health/middleware_health.test.ts
+tests/health/helpers/healthTestUtils.ts
+tests/runtime/private_beta_daily_health_snapshot.test.ts
+tests/runtime/live_healthz_contract.test.ts
+tests/runtime/runtime_health.test.ts
+tests/fyp/fyp_mega_pack_03_source_health_runtime.test.ts
+tests/emml.health.test.ts
+tests/system/healthDashboard.test.ts
+tests/portals/healthAggregation.test.ts
+tests/live/health_page.contract.test.ts
+tests/softlaunch/coreApiHealthSweep.test.ts
+tests/softlaunch/portalHealthSweep.test.ts
+tests/monetization/healthz_contract.test.ts
+
+--- runtime readiness markers ---
+.lumora_pack01_export_runtime_normalization_lock
+.lumora_pack01_lock
+.lumora_pack01_runtime_consolidation_lock
+.lumora_pack02_duplicate_legacy_route_audit_lock
+.lumora_pack02_lock
+.lumora_pack02_zendoro_database_finalization_lock
+.lumora_pack03_live_route_ownership_lock
+.lumora_pack03_lock
+.lumora_pack03_real_persistent_commerce_flows_lock
+.lumora_pack04_lock
+.lumora_pack04_main_user_journey_validation_lock
+.lumora_pack04_stripe_payment_hardening_lock
+.lumora_pack05_06_quality_fix_lock
+.lumora_pack05_buyer_experience_finalization_lock
+.lumora_pack05_lock
+.lumora_pack05_zendoro_payments_lock
+.lumora_pack06_live_fyp_lock
+.lumora_pack06_lock
+.lumora_pack07_lock
+.lumora_pack07_private_beta_gate_lock
+.lumora_pack08_deployment_hardening_lock
+.lumora_pack08_lock
+.lumora_pack09_lock
+.lumora_pack09_route_api_reality_lock
+
+--- validation ---
+├ ○ /zendoro/cart                                    3.08 kB         105 kB
+├ ○ /zendoro/checkout                                  247 B         105 kB
+├ ○ /zendoro/orders                                    247 B         105 kB
+├ ƒ /zendoro/product/[id]                            3.08 kB         105 kB
+├ ○ /zendoro/products                                3.08 kB         105 kB
+├ ○ /zendoro/reviews                                   247 B         105 kB
+├ ○ /zendoro/seller                                  3.08 kB         105 kB
+└ ○ /zenwallet                                         247 B         105 kB
++ First Load JS shared by all                         102 kB
+  ├ chunks/5a444783-9b676881ac33fab1.js              54.2 kB
+  ├ chunks/6006-7f216d380614d973.js                  45.5 kB
+  └ other shared chunks (total)                      1.99 kB
+
+Route (pages)                                           Size  First Load JS
+┌ ○ /ads-test (612 ms)                               1.96 kB        97.8 kB
+├ ƒ /api/ad-server/click                                 0 B        95.9 kB
+├ ƒ /api/ad-server/next                                  0 B        95.9 kB
+├ ƒ /api/ad-server/view                                  0 B        95.9 kB
+├ ƒ /api/business                                        0 B        95.9 kB
+├ ƒ /api/campaigns/[id]/status                           0 B        95.9 kB
+├ ƒ /api/lumasearch                                      0 B        95.9 kB
+├ ƒ /api/ping                                            0 B        95.9 kB
+├ ƒ /api/redemptions                                     0 B        95.9 kB
+├ ƒ /api/stats/overview                                  0 B        95.9 kB
+├ ƒ /api/upstream                                        0 B        95.9 kB
+├ ○ /components/ads/AdBanner (606 ms)                  977 B        96.8 kB
+├ ○ /vendor/campaigns/[id]/stats (609 ms)            1.51 kB        97.4 kB
+├ ○ /vendor/campaigns/new (608 ms)                   1.29 kB        97.2 kB
+├ ○ /vendor/profile (606 ms)                         1.48 kB        97.3 kB
+└ ○ /vendor/wallet (607 ms)                          1.62 kB        97.5 kB
++ First Load JS shared by all                        95.9 kB
+  ├ chunks/framework-c3ac72a22c65e209.js             57.4 kB
+  ├ chunks/main-a6dbbd55baf79be2.js                  36.5 kB
+  └ other shared chunks (total)                      1.95 kB
+
+ƒ Middleware                                         34.4 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+--- status ---
+TSC_STATUS=0
+BUILD_STATUS=0
+REPORT=.observability_health_seal_20260614_214826.txt

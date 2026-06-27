@@ -1,0 +1,228 @@
+"use client";
+
+import {
+  Home,
+  Search,
+  Share2,
+  Sparkles,
+  Heart,
+  Layers3
+} from "lucide-react";
+
+const item = {
+  title: "Nebula",
+  chip: "Genesis Collection · 1 of 10",
+  video: "/genesis/videos/trace01.mp4",
+  poster: "/genesis/posters/trace01.jpg",
+};
+
+function Action({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <button
+      className="
+      flex h-14 w-14 flex-col items-center justify-center
+      rounded-full
+      border border-white/15
+      bg-black/50
+      backdrop-blur-xl
+      shadow-[0_0_28px_rgba(34,211,238,.22)]
+      "
+    >
+      {icon}
+      <span className="sr-only">{label}</span>
+    </button>
+  );
+}
+
+export default function FypOmegaPlayer() {
+  return (
+    <main
+      className="
+      fixed inset-0
+      z-[2147483647]
+      h-[100svh]
+      w-screen
+      overflow-hidden
+      bg-black
+      text-white
+      isolate
+      "
+    >
+
+      <div
+        className="
+        absolute inset-0 z-0
+        bg-[radial-gradient(circle_at_80%_80%,rgba(34,211,238,.18),transparent_42%),
+        radial-gradient(circle_at_20%_20%,rgba(168,85,247,.12),transparent_35%),
+        linear-gradient(180deg,#02030a_0%,#07111f_55%,#02030a_100%)]
+        "
+      />
+
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={item.video}
+        poster={item.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        controls={false}
+      />
+
+      <div className="absolute inset-0 bg-black/15" />
+
+      {/* TOP */}
+
+      <div
+        className="
+        absolute
+        top-[max(16px,env(safe-area-inset-top))]
+        left-5
+        right-5
+        z-30
+        flex
+        items-center
+        justify-between
+        "
+      >
+
+        <div className="flex items-center gap-3">
+
+          <div
+            className="
+            h-8 w-2 rounded-full
+            bg-cyan-300
+            shadow-[0_0_22px_rgba(34,211,238,.95)]
+            "
+          />
+
+          <span className="font-bold tracking-[0.35em]">
+            LUMORA
+          </span>
+
+          <div
+            className="
+            rounded-full
+            border border-cyan-400/30
+            bg-black/40
+            px-3 py-1
+            text-xs
+            backdrop-blur-xl
+            "
+          >
+            Wonder
+          </div>
+
+        </div>
+
+        <div
+          className="
+          rounded-full
+          border border-white/10
+          bg-black/40
+          px-3 py-1
+          text-sm
+          backdrop-blur-xl
+          "
+        >
+          1 / 10
+        </div>
+
+      </div>
+
+      {/* RIGHT */}
+
+      <aside
+        className="
+        absolute
+        right-4
+        top-[26%]
+        z-30
+        flex
+        flex-col
+        gap-4
+        "
+      >
+
+        <Action icon={<Sparkles size={22} />} label="Deep" />
+        <Action icon={<Layers3 size={22} />} label="Board" />
+        <Action icon={<Share2 size={22} />} label="Share" />
+        <Action icon={<Heart size={22} />} label="Like" />
+
+      </aside>
+
+      {/* HERO */}
+
+      <section
+        className="
+        absolute
+        bottom-32
+        left-5
+        right-24
+        z-30
+        "
+      >
+
+        <h1
+          className="
+          text-5xl
+          font-black
+          tracking-tight
+          drop-shadow-[0_0_35px_rgba(255,255,255,.35)]
+          "
+        >
+          {item.title}
+        </h1>
+
+        <div
+          className="
+          mt-3
+          inline-flex
+          rounded-full
+          border border-white/10
+          bg-black/45
+          px-4 py-2
+          text-sm
+          backdrop-blur-xl
+          "
+        >
+          {item.chip}
+        </div>
+
+      </section>
+
+      {/* BOTTOM */}
+
+      <nav
+        className="
+        absolute
+        left-4
+        right-4
+        bottom-[max(16px,env(safe-area-inset-bottom))]
+        z-40
+
+        flex
+        h-16
+        items-center
+        justify-around
+
+        rounded-full
+        border border-white/10
+        bg-black/45
+        backdrop-blur-2xl
+
+        shadow-[0_10px_40px_rgba(0,0,0,.8)]
+        "
+      >
+
+        <Home />
+        <Search />
+        <Sparkles className="text-cyan-300" />
+        <Share2 />
+        <Heart />
+
+      </nav>
+
+    </main>
+  );
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import HomeBeaconDashboard from "./HomeBeaconDashboard";
 import HomeBeaconPortalArc from "./HomeBeaconPortalArc";
 import { useEffect, useState } from "react";
@@ -13,6 +14,12 @@ DEFAULT_HOME_BEACON_CONFIG,
 } from "@/src/core/home-beacon";
 
 export default function HomeBeacon() {
+  const pathname = usePathname();
+
+  if (pathname === "/fyp" || pathname?.startsWith("/fyp/")) {
+    return null;
+  }
+
   const [state, setState] = useState<HomeBeaconState>("idle");
   const [tick, setTick] = useState(0);
 

@@ -1,0 +1,389 @@
+"use client";
+
+import React from "react";
+import { useRouter } from "next/navigation";
+
+type FypItem = {
+  id: string;
+  title: string;
+  text?: string;
+  lane: string;
+  attribution?: string;
+  media: {
+    videoUrl: string;
+    posterUrl: string;
+  };
+};
+
+const ACTIONS = ["Deep", "Board", "Share", "LumaSpace"] as const;
+const LANES = ["wonder", "reflect", "build", "learn", "laugh", "connect"] as const;
+
+function laneLabel(lane: string) {
+  return lane.slice(0, 1).toUpperCase() + lane.slice(1);
+}
+
+export default function FypOmegaPlayer({
+  initialFeed,
+  source
+}: {
+  initialFeed: FypItem[];
+  source: string;
+}) {
+  const router = useRouter();
+  const [index, setIndex] = React.useState(0);
+  const [toast, setToast] = React.useState("");
+  const [playing, setPlaying] = React.useState(false);
+  const [failed, setFailed] = React.useState(false);
+  const [retryCount, setRetryCount] = React.useState(0);
+  const [curiosity, setCuriosity] = React.useState(0);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+
+  const feed = Array.isArray(initialFeed) ? initialFeed.filter(Boolean) : [];
+  const item = feed[index];
+
+  const showToast = React.useCallback((message: string) => {
+    setToast(message);
+    window.setTimeout(() => setToast(""), 1800);
+  }, []);
+
+  const resetPlaybackState = React.useCallback(() => {
+    setFailed(false);
+    setPlaying(false);
+    setRetryCount(0);
+    setCuriosity(0);
+  }, []);
+
+  const next = React.useCallback(() => {
+    if (!feed.length) return;
+    resetPlaybackState();
+    setIndex(current => (current + 1) % feed.length);
+  }, [feed.length, resetPlaybackState]);
+
+  const previous = React.useCallback(() => {
+    if (!feed.length) return;
+    resetPlaybackState();
+    setIndex(current => (current - 1 + feed.length) % feed.length);
+  }, [feed.length, resetPlaybackState]);
+
+  React.useEffect(() => {
+    resetPlaybackState();
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+
+    const timer = window.setTimeout(() => {
+      video.play().catch(() => undefined);
+    }, 150);
+
+    return () => window.clearTimeout(timer);
+  }, [index, resetPlaybackState]);
+
+  function handleTimeUpdate() {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return;
+
+    const progress = Math.min(100, Math.max(0, (video.currentTime / video.duration) * 100));
+    setCuriosity(progress);
+  }
+
+  function handleVideoError() {
+    const video = videoRef.current;
+
+    if (retryCount < 1 && video) {
+      setRetryCount(count => count + 1);
+      showToast("Retrying Trace once…");
+
+      window.setTimeout(() => {
+        video.load();
+        video.play().catch(() => {
+          setFailed(true);
+          setPlaying(false);
+          showToast("This Trace is still forming. Another wonder is waiting.");
+          window.setTimeout(next, 1200);
+        });
+      }, 900);
+
+      return;
+    }
+
+    setFailed(true);
+    setPlaying(false);
+    showToast("This Trace is still forming. Another wonder is waiting.");
+    window.setTimeout(next, 1200);
+  }
+
+  function handleAction(action: string) {
+    if (action === "LumaSpace") {
+      showToast("Opening LumaSpace bridge…");
+      window.setTimeout(() => router.push("/lumaspace"), 350);
+      return;
+    }
+
+    if (action === "Share") {
+      showToast("Share trace requested");
+      return;
+    }
+
+    if (action === "Board") {
+      try {
+        localStorage.setItem("lumora_first_trace_saved", item?.id || "");
+      } catch {}
+      showToast("Saved to your first Trace");
+      return;
+    }
+
+    showToast("Deep Dive requested — related traces coming soon");
+  }
+
+  function navigateTo(route: "/" | "/fyp" | "/live" | "/lumaspace" | "trace") {
+    if (route === "trace") {
+      showToast("Trace map coming soon");
+      return;
+    }
+
+    if (route === "/fyp") {
+      showToast("You are already in Flow");
+      return;
+    }
+
+    router.push(route);
+  }
+
+  const ringRadius = 24;
+  const ringCircumference = 2 * Math.PI * ringRadius;
+  const ringOffset = ringCircumference * (1 - curiosity / 100);
+
+  if (!item) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#03040a] px-6 text-center text-white">
+        <div className="rounded-[2rem] border border-cyan-300/20 bg-white/5 p-8">
+          <p className="text-sm uppercase tracking-[0.35em] text-cyan-200">
+            Lumora FYP
+          </p>
+          <h1 className="mt-4 text-3xl font-semibold">No playable traces yet.</h1>
+          <p className="mt-3 text-slate-300">
+            Genesis media is required before the feed can breathe.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main
+      data-testid="fyp-omega-depthcanvas"
+      data-source={source}
+      className="fixed inset-0 z-[9999] h-[100dvh] w-screen overflow-hidden bg-[#02030a] text-white"
+    >
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_20%,rgba(34,211,238,0.25),transparent_35%),radial-gradient(circle_at_15%_75%,rgba(168,85,247,0.20),transparent_30%),linear-gradient(180deg,#02030a_0%,#07111f_48%,#02030a_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(0,0,0,0.62),transparent_28%,transparent_72%,rgba(0,0,0,0.66)),linear-gradient(180deg,rgba(0,0,0,0.28),transparent_45%,rgba(0,0,0,0.82))]" />
+
+      <section className="relative z-[2] flex h-[100dvh] w-screen items-center justify-center">
+        <div className="relative h-[100dvh] w-screen overflow-hidden bg-black shadow-[0_0_60px_rgba(34,211,238,0.16)]">
+          {!failed ? (
+            <video
+              key={item.id}
+              ref={videoRef}
+              data-testid="fyp-omega-video"
+              className="h-full w-full object-cover transition-opacity duration-300"
+              src={item.media.videoUrl}
+              poster={item.media.posterUrl}
+              muted
+              playsInline
+              autoPlay
+              loop
+              preload="metadata"
+              controls={false}
+              onPlaying={() => {
+                setPlaying(true);
+                setFailed(false);
+              }}
+              onWaiting={() => setPlaying(false)}
+              onPause={() => setPlaying(false)}
+              onTimeUpdate={handleTimeUpdate}
+              onError={handleVideoError}
+              onClick={() => {
+                const video = videoRef.current;
+                if (!video) return;
+                if (video.paused) video.play().catch(() => undefined);
+                else video.pause();
+              }}
+            />
+          ) : (
+            <div
+              data-testid="fyp-beautiful-failure"
+              className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_50%_45%,rgba(34,211,238,0.25),transparent_35%),linear-gradient(180deg,#07111f,#02030a)] px-8 text-center"
+            >
+              <div className="rounded-[2rem] border border-cyan-200/20 bg-black/45 p-6 shadow-[0_0_45px_rgba(34,211,238,0.22)] backdrop-blur-xl">
+                <div className="mx-auto mb-5 h-16 w-16 rounded-full border border-cyan-200/40 bg-cyan-300/10 shadow-[0_0_35px_rgba(34,211,238,0.38)]" />
+                <h2 className="text-2xl font-semibold">This Trace is still forming.</h2>
+                <p className="mt-3 text-sm leading-6 text-cyan-50/80">
+                  Another wonder is waiting.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <button
+            type="button"
+            aria-label="Previous Trace"
+            className="absolute left-0 top-0 h-full w-1/3"
+            onClick={previous}
+          />
+          <button
+            type="button"
+            aria-label="Next Trace"
+            className="absolute right-0 top-0 h-full w-1/3"
+            onClick={next}
+          />
+
+          <div className="pointer-events-none absolute bottom-28 left-4 right-20 z-20">
+            <div className="mb-3 flex flex-wrap gap-2">
+              <span className="rounded-full border border-cyan-200/25 bg-black/55 px-3 py-1 text-xs font-semibold text-cyan-50 backdrop-blur-xl">
+                {laneLabel(item.lane)}
+              </span>
+              <span className="rounded-full border border-white/15 bg-black/45 px-3 py-1 text-xs text-white/80 backdrop-blur-xl">
+                Genesis Trace {index + 1}/{feed.length}
+              </span>
+            </div>
+
+            <h1 className="text-2xl font-bold tracking-tight drop-shadow-lg">
+              {item.title}
+            </h1>
+
+            <button
+              type="button"
+              onClick={() => showToast("Trace Thread coming soon")}
+              className="pointer-events-auto mt-3 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[10px] font-medium text-cyan-50/80 backdrop-blur-xl transition hover:bg-black/60 hover:text-white"
+            >
+              Genesis Collection · {index + 1}/{feed.length} ›
+            </button>
+
+            
+            
+          </div>
+
+          <div className="absolute bottom-24 left-4 right-4 z-20 h-1 overflow-hidden rounded-full bg-white/10">
+            <div
+              data-testid="fyp-trace-pulse"
+              data-playing={playing ? "true" : "false"}
+              className={`h-full rounded-full bg-cyan-200 ${playing ? "animate-pulse" : ""}`}
+              style={{ width: playing ? "72%" : "18%" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <aside
+        data-testid="fyp-right-rail"
+        className="fixed right-3 top-1/2 z-[10020] flex -translate-y-1/2 flex-col items-center gap-3"
+      >
+        <div
+          data-testid="fyp-curiosity-ring"
+          className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-black/45 backdrop-blur-xl"
+          aria-label={`Curiosity ${Math.round(curiosity)} percent`}
+        >
+          <svg className="h-14 w-14 shrink-0 -rotate-90" viewBox="0 0 60 60" width="56" height="56">
+            <circle
+              cx="30"
+              cy="30"
+              r={ringRadius}
+              fill="none"
+              stroke="rgba(255,255,255,0.12)"
+              strokeWidth="4"
+            />
+            <circle
+              cx="30"
+              cy="30"
+              r={ringRadius}
+              fill="none"
+              stroke="#22d3ee"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray={ringCircumference}
+              strokeDashoffset={ringOffset}
+              className="transition-all duration-200 ease-linear"
+            />
+          </svg>
+          <span className="absolute text-[10px] font-bold text-cyan-50">
+            {Math.round(curiosity)}%
+          </span>
+        </div>
+
+        {ACTIONS.map(action => (
+          <button
+            key={action}
+            type="button"
+            onClick={() => handleAction(action)}
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/55 text-[10px] font-semibold text-cyan-50 shadow-[0_0_24px_rgba(34,211,238,0.24)] backdrop-blur-xl active:scale-95"
+          >
+            {action}
+          </button>
+        ))}
+      </aside>
+
+      <div
+        data-testid="fyp-lane-pills"
+        className="fixed left-4 right-4 top-5 z-[10010] flex gap-2 overflow-x-auto"
+      >
+        {LANES.map(lane => (
+          <button
+            key={lane}
+            type="button"
+            onClick={() => {
+              const found = feed.findIndex(video => video.lane === lane);
+              if (found >= 0) setIndex(found);
+            }}
+            className={`rounded-full border px-4 py-2 text-xs font-semibold backdrop-blur-xl ${
+              lane === item.lane
+                ? "border-cyan-200/50 bg-cyan-200/20 text-cyan-50"
+                : "border-white/15 bg-black/35 text-white/75"
+            }`}
+          >
+            {laneLabel(lane)}
+          </button>
+        ))}
+      </div>
+
+      {toast ? (
+        <div
+          data-testid="fyp-visible-toast"
+          className="absolute left-1/2 top-20 z-40 -translate-x-1/2 rounded-full border border-cyan-200/25 bg-black/70 px-5 py-3 text-center text-xs font-semibold text-cyan-50 shadow-[0_0_28px_rgba(34,211,238,0.24)] backdrop-blur-xl"
+        >
+          {toast}
+        </div>
+      ) : null}
+
+      
+      <div className="absolute bottom-6 right-4 z-20 text-[9px] font-light text-white/15">
+        Lumora Genesis · CC0 · 4K
+      </div>
+      <nav
+        data-testid="fyp-bottom-nav"
+        className="fixed bottom-4 left-4 right-4 z-[10030] flex h-16 items-center justify-around rounded-full border border-white/10 bg-black/60 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.8)] backdrop-blur-2xl"
+      >
+        <button onClick={() => navigateTo("/")} className="flex flex-col items-center gap-0.5 text-[10px] text-white/45 transition hover:text-white/80">
+          <span className="text-lg">🏠</span>
+          <span className="text-[9px]">Home</span>
+        </button>
+        <button onClick={() => navigateTo("/fyp")} className="flex flex-col items-center gap-0.5 text-[10px] text-cyan-200">
+          <span className="text-2xl drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]">🌊</span>
+          <span className="text-[9px] font-semibold text-cyan-200">Flow</span>
+        </button>
+        <button onClick={() => navigateTo("/live")} className="flex flex-col items-center gap-0.5 text-[10px] text-white/45 transition hover:text-white/80">
+          <span className="text-lg">🔴</span>
+          <span className="text-[9px]">Live</span>
+        </button>
+        <button onClick={() => navigateTo("trace")} className="flex flex-col items-center gap-0.5 text-[10px] text-white/45 transition hover:text-white/80">
+          <span className="text-lg">🧭</span>
+          <span className="text-[9px]">Trace</span>
+        </button>
+        <button onClick={() => navigateTo("/lumaspace")} className="flex flex-col items-center gap-0.5 text-[10px] text-white/45 transition hover:text-white/80">
+          <span className="text-lg">🌌</span>
+          <span className="text-[9px]">Space</span>
+        </button>
+      </nav>
+    </main>
+  );
+}

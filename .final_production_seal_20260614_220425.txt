@@ -1,0 +1,73 @@
+--- all pack locks ---
+OK .lumora_pack01_lock
+OK .lumora_pack02_lock
+OK .lumora_pack03_lock
+OK .lumora_pack04_lock
+OK .lumora_pack05_lock
+OK .lumora_pack06_lock
+OK .lumora_pack07_lock
+OK .lumora_pack08_lock
+OK .lumora_pack09_lock
+OK .lumora_pack10_lock
+OK .lumora_pack11_prelaunch_certification_lock
+
+--- final production build gate ---
+├ ○ /videos                                          3.08 kB         105 kB
+├ ○ /videos/upload                                     676 B         102 kB
+├ ○ /wallet                                          3.08 kB         105 kB
+├ ○ /wallet-demo                                       728 B         102 kB
+├ ƒ /wallets                                           247 B         105 kB
+├ ƒ /wallets/[ownerId]                                 247 B         105 kB
+├ ƒ /watch                                           3.08 kB         105 kB
+├ ƒ /watch/[id]                                      3.08 kB         105 kB
+├ ○ /zendoro                                           247 B         105 kB
+├ ○ /zendoro/admin                                   3.08 kB         105 kB
+├ ○ /zendoro/cart                                    3.08 kB         105 kB
+├ ○ /zendoro/checkout                                  247 B         105 kB
+├ ○ /zendoro/orders                                    247 B         105 kB
+├ ƒ /zendoro/product/[id]                            3.08 kB         105 kB
+├ ○ /zendoro/products                                3.08 kB         105 kB
+├ ○ /zendoro/reviews                                   247 B         105 kB
+├ ○ /zendoro/seller                                  3.08 kB         105 kB
+└ ○ /zenwallet                                         247 B         105 kB
++ First Load JS shared by all                         102 kB
+  ├ chunks/5a444783-9b676881ac33fab1.js              54.2 kB
+  ├ chunks/6006-7f216d380614d973.js                  45.5 kB
+  └ other shared chunks (total)                      1.99 kB
+
+Route (pages)                                           Size  First Load JS
+┌ ○ /ads-test (772 ms)                               1.96 kB        97.8 kB
+├ ƒ /api/ad-server/click                                 0 B        95.9 kB
+├ ƒ /api/ad-server/next                                  0 B        95.9 kB
+├ ƒ /api/ad-server/view                                  0 B        95.9 kB
+├ ƒ /api/business                                        0 B        95.9 kB
+├ ƒ /api/campaigns/[id]/status                           0 B        95.9 kB
+├ ƒ /api/lumasearch                                      0 B        95.9 kB
+├ ƒ /api/ping                                            0 B        95.9 kB
+├ ƒ /api/redemptions                                     0 B        95.9 kB
+├ ƒ /api/stats/overview                                  0 B        95.9 kB
+├ ƒ /api/upstream                                        0 B        95.9 kB
+├ ○ /components/ads/AdBanner (749 ms)                  977 B        96.8 kB
+├ ○ /vendor/campaigns/[id]/stats (749 ms)            1.51 kB        97.4 kB
+├ ○ /vendor/campaigns/new (758 ms)                   1.29 kB        97.2 kB
+├ ○ /vendor/profile (733 ms)                         1.48 kB        97.3 kB
+└ ○ /vendor/wallet (750 ms)                          1.62 kB        97.5 kB
++ First Load JS shared by all                        95.9 kB
+  ├ chunks/framework-c3ac72a22c65e209.js             57.4 kB
+  ├ chunks/main-a6dbbd55baf79be2.js                  36.5 kB
+  └ other shared chunks (total)                      1.96 kB
+
+ƒ Middleware                                         34.4 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+--- final deployment command readiness ---
+VERCEL_CLI=OK
+DEPLOY_COMMAND=vercel --prod --archive=tgz
+
+--- final status ---
+TSC_STATUS=0
+BUILD_STATUS=0
+REPORT=.final_production_seal_20260614_220425.txt

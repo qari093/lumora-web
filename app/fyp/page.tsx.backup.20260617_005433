@@ -1,0 +1,56 @@
+import fs from "fs";
+import path from "path";
+import FypAutoplayFeed from "./FypAutoplayFeed";
+import DepthCanvasFrame from "./DepthCanvasFrame";
+import type { FypFullscreenSource } from "@/src/core/fyp/fullscreenSourceFeed";
+
+export const dynamic = "force-dynamic";
+
+const LANES = ["wonder", "explore", "learn", "build", "laugh"] as const;
+
+function buildPublicVideoItems(): FypFullscreenSource[] {
+  const dir = path.join(process.cwd(), "public", "videos");
+  const allowed = new Set([".mp4", ".webm", ".mov"]);
+
+  let files: string[] = [];
+
+  try {
+    files = fs
+      .readdirSync(dir)
+      .filter((name) => allowed.has(path.extname(name).toLowerCase()))
+      .filter((name) => !name.toLowerCase().includes("poster"))
+      .sort();
+  } catch {
+    files = [];
+  }
+
+  return files.map((name, index) => {
+    const clean = name.replace(/\.(mp4|webm|mov)$/i, "").replace(/[^a-z0-9]+/gi, " ").trim();
+    const lane = LANES[index % LANES.length];
+
+    return {
+      id: `lumora-public-video-${index + 1}`,
+      sourceName: "Lumora Public Video Pool",
+      handle: "@lumora",
+      policy: "owned or licensed",
+      title: clean ? clean.replace(/\b\w/g, (c) => c.toUpperCase()) : `Lumora Video ${index + 1}`,
+      lane,
+      videoUrl: `/videos/${name}`,
+      posterUrl: "",
+      likes: `${Math.max(1, 98 - index * 3)}K`,
+      comments: "Trace",
+      saves: "Save",
+      shares: "Share"
+    };
+  });
+}
+
+export default function FypPage() {
+  const items = buildPublicVideoItems();
+
+  return (
+    <DepthCanvasFrame>
+      <FypAutoplayFeed items={items} />
+    </DepthCanvasFrame>
+  );
+}

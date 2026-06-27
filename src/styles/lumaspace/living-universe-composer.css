@@ -1,0 +1,511 @@
+.ls-composer {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.ls-composer-orbit {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(78vw, 390px);
+  height: min(78vw, 390px);
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  border: 1px dashed rgba(103,232,249,.14);
+  box-shadow: inset 0 0 40px rgba(103,232,249,.035);
+  animation: lsComposerOrbit 28s linear infinite;
+}
+
+.ls-composer-you {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 104px;
+  height: 104px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.96);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.96), rgba(103,232,249,.44), rgba(37,99,235,.10));
+  box-shadow:
+    0 0 32px rgba(255,255,255,.45),
+    0 0 88px rgba(103,232,249,.30);
+  animation: lsComposerYouBreath 6s ease-in-out infinite;
+  pointer-events: auto;
+}
+
+.ls-composer-world {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: white;
+  background: rgba(255,255,255,.035);
+  backdrop-filter: blur(22px);
+  pointer-events: auto;
+  overflow: hidden;
+  transition: transform .8s ease, filter .8s ease, opacity .8s ease;
+}
+
+.ls-composer-glyph {
+  font-size: 24px;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,.38));
+}
+
+.ls-composer-label {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.ls-composer-world:focus-visible .ls-composer-label,
+.ls-composer-world:active .ls-composer-label {
+  opacity: .88;
+  transform: translateX(-50%) translateY(0);
+}
+
+.ls-composer-world.dream {
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255,215,120,.30), rgba(255,215,120,.055));
+  animation: lsComposerWorldBreath 8s ease-in-out infinite;
+}
+
+.ls-composer-world.wonder {
+  left: 14%;
+  top: 31%;
+  background: radial-gradient(circle, rgba(103,232,249,.32), rgba(103,232,249,.055));
+  animation: lsComposerWorldBreath 7s ease-in-out infinite;
+}
+
+.ls-composer-world.creator {
+  right: 14%;
+  top: 31%;
+  background: radial-gradient(circle, rgba(96,165,250,.30), rgba(96,165,250,.055));
+  animation: lsComposerWorldBreath 9s ease-in-out infinite;
+}
+
+.ls-composer-world.shadow {
+  left: 14%;
+  bottom: 26%;
+  background: radial-gradient(circle, rgba(168,85,247,.28), rgba(168,85,247,.045));
+  animation: lsComposerWorldBreath 10s ease-in-out infinite;
+}
+
+.ls-composer-world.gaming {
+  right: 14%;
+  bottom: 26%;
+  background: radial-gradient(circle, rgba(34,211,238,.24), rgba(34,211,238,.045));
+  animation: lsComposerWorldBreath 5s ease-in-out infinite;
+}
+
+.ls-composer-world.calm {
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(147,197,253,.24), rgba(147,197,253,.045));
+  animation: lsComposerWorldBreath 12s ease-in-out infinite;
+}
+
+@keyframes lsComposerYouBreath {
+  0%,100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.06); }
+}
+
+@keyframes lsComposerWorldBreath {
+  0%,100% { filter: drop-shadow(0 0 12px rgba(103,232,249,.10)); }
+  50% { filter: drop-shadow(0 0 24px rgba(103,232,249,.22)); }
+}
+
+@keyframes lsComposerOrbit {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .ls-composer-you {
+    width: 96px;
+    height: 96px;
+  }
+
+  .ls-composer-world {
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+  }
+
+  .ls-composer-world.wonder,
+  .ls-composer-world.shadow {
+    left: 9%;
+  }
+
+  .ls-composer-world.creator,
+  .ls-composer-world.gaming {
+    right: 9%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-composer-orbit,
+  .ls-composer-you,
+  .ls-composer-world {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   B4 CORE VISUAL SEAL
+   Reduce text, strengthen YOU, keep worlds atmospheric
+========================================= */
+
+.ls-composer {
+  z-index: 18;
+}
+
+.ls-composer-you {
+  width: 118px;
+  height: 118px;
+  font-size: 12px;
+  text-shadow: 0 0 22px rgba(255,255,255,.46);
+  box-shadow:
+    0 0 36px rgba(255,255,255,.52),
+    0 0 96px rgba(103,232,249,.38),
+    inset 0 0 34px rgba(255,255,255,.20);
+}
+
+.ls-composer-you span {
+  opacity: .82;
+}
+
+.ls-composer-world {
+  width: 70px;
+  height: 70px;
+  opacity: .92;
+}
+
+.ls-composer-label {
+  opacity: 0 !important;
+}
+
+.ls-composer-world:focus-visible .ls-composer-label,
+.ls-composer-world:active .ls-composer-label {
+  opacity: .74 !important;
+}
+
+@media (max-width: 480px) {
+  .ls-composer-you {
+    width: 104px;
+    height: 104px;
+  }
+
+  .ls-composer-world {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+/* =========================================
+   MEGA STEP C — LIVING UNIVERSE POLISH Ω
+   Canonical visual composition only
+========================================= */
+
+.lumaspace-runtime-shell {
+  position: fixed;
+  inset: 0;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #02030a;
+  isolation: isolate;
+}
+
+.ls-composer {
+  z-index: 30;
+}
+
+.ls-composer-orbit {
+  width: min(82vw, 430px);
+  height: min(72vw, 380px);
+  border-color: rgba(103,232,249,.10);
+  box-shadow:
+    inset 0 0 44px rgba(103,232,249,.030),
+    0 0 66px rgba(37,99,235,.035);
+  animation-duration: 42s;
+}
+
+.ls-composer-you {
+  width: 126px;
+  height: 126px;
+  top: 47%;
+  background:
+    radial-gradient(circle at 42% 36%, rgba(255,255,255,.98), rgba(186,230,253,.72) 22%, rgba(103,232,249,.36) 46%, rgba(37,99,235,.10) 72%, transparent 100%);
+  box-shadow:
+    0 0 34px rgba(255,255,255,.48),
+    0 0 92px rgba(103,232,249,.38),
+    0 0 150px rgba(37,99,235,.18),
+    inset 0 0 38px rgba(255,255,255,.20);
+  animation: lsComposerYouBreath 6s cubic-bezier(.22,.61,.36,1) infinite;
+}
+
+.ls-composer-you::before,
+.ls-composer-you::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.ls-composer-you::before {
+  inset: -18px;
+  border: 1px solid rgba(103,232,249,.12);
+  animation: lsYouQuietRing 6s ease-in-out infinite;
+}
+
+.ls-composer-you::after {
+  inset: -42px;
+  background:
+    radial-gradient(circle, rgba(103,232,249,.10), transparent 58%);
+  filter: blur(2px);
+  animation: lsYouAuraBreath 9s ease-in-out infinite;
+}
+
+.ls-composer-you span {
+  opacity: .78;
+  font-size: 11px;
+  letter-spacing: .20em;
+}
+
+.ls-composer-world {
+  width: 76px;
+  height: 76px;
+  border-radius: 28px;
+  border-color: rgba(255,255,255,.09);
+  opacity: .94;
+  box-shadow:
+    inset 0 0 22px rgba(255,255,255,.045),
+    0 0 26px rgba(103,232,249,.06);
+}
+
+.ls-composer-world::before,
+.ls-composer-world::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.ls-composer-world::before {
+  opacity: .58;
+  filter: blur(.4px);
+}
+
+.ls-composer-world::after {
+  inset: 18%;
+  opacity: .38;
+  filter: blur(2px);
+  animation: lsWorldInnerBreath 8s ease-in-out infinite;
+}
+
+.ls-composer-glyph {
+  z-index: 2;
+  font-size: 24px;
+  opacity: .9;
+}
+
+.ls-composer-label {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.ls-composer-world:focus-visible .ls-composer-label,
+.ls-composer-world:active .ls-composer-label {
+  opacity: .76 !important;
+}
+
+.ls-composer-world.dream {
+  top: 13%;
+  left: 50%;
+  background:
+    radial-gradient(circle at 45% 35%, rgba(255,238,170,.30), rgba(255,200,90,.09) 54%, rgba(2,3,10,.12));
+  animation-duration: 8s;
+}
+
+.ls-composer-world.dream::before {
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,248,180,.85) 0 1.4px, transparent 2px),
+    radial-gradient(circle at 70% 64%, rgba(255,215,120,.70) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 46% 78%, rgba(255,255,255,.58) 0 1px, transparent 2px);
+  animation: lsFireflies 12s ease-in-out infinite;
+}
+
+.ls-composer-world.wonder {
+  top: 29%;
+  left: 11%;
+  background:
+    radial-gradient(circle at 46% 36%, rgba(103,232,249,.34), rgba(14,165,233,.08) 58%, rgba(2,3,10,.10));
+  animation-duration: 7s;
+}
+
+.ls-composer-world.wonder::before {
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255,255,255,.68) 0 1px, transparent 2px),
+    radial-gradient(circle at 63% 44%, rgba(103,232,249,.80) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 70%, rgba(186,230,253,.60) 0 1px, transparent 2px);
+  animation: lsStardust 10s linear infinite;
+}
+
+.ls-composer-world.creator {
+  top: 30%;
+  right: 10%;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 46% 34%, rgba(96,165,250,.34), rgba(37,99,235,.08) 58%, rgba(2,3,10,.10));
+  animation-duration: 9s;
+}
+
+.ls-composer-world.creator::before {
+  background:
+    conic-gradient(from 0deg, transparent, rgba(96,165,250,.22), transparent 34%, rgba(255,255,255,.10), transparent 62%);
+  animation: lsForgeTurn 18s linear infinite;
+}
+
+.ls-composer-world.shadow {
+  bottom: 27%;
+  left: 10%;
+  background:
+    radial-gradient(circle at 48% 34%, rgba(168,85,247,.30), rgba(88,28,135,.11) 58%, rgba(2,3,10,.18));
+  animation-duration: 10s;
+}
+
+.ls-composer-world.shadow::before {
+  background:
+    radial-gradient(circle at 36% 36%, rgba(255,255,255,.44) 0 1px, transparent 2px),
+    radial-gradient(circle at 66% 54%, rgba(216,180,254,.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 50% 75%, rgba(255,255,255,.30) 0 1px, transparent 2px);
+  animation: lsQuietStars 14s ease-in-out infinite;
+}
+
+.ls-composer-world.gaming {
+  bottom: 26%;
+  right: 10%;
+  border-radius: 22px;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    radial-gradient(circle at 46% 36%, rgba(34,211,238,.26), rgba(6,182,212,.07) 58%, rgba(2,3,10,.13));
+  background-size: 18px 18px, 18px 18px, auto;
+  animation-duration: 5s;
+}
+
+.ls-composer-world.calm {
+  bottom: 10%;
+  left: 50%;
+  background:
+    radial-gradient(ellipse at 50% 55%, rgba(147,197,253,.28), rgba(59,130,246,.07) 58%, rgba(2,3,10,.12));
+  animation-duration: 12s;
+}
+
+.ls-composer-world.calm::before {
+  background:
+    radial-gradient(ellipse at 50% 60%, transparent 28%, rgba(147,197,253,.18) 30%, transparent 36%),
+    radial-gradient(ellipse at 50% 60%, transparent 44%, rgba(147,197,253,.12) 46%, transparent 52%);
+  animation: lsWaterRipple 12s ease-in-out infinite;
+}
+
+.ls-composer-world.calm::after {
+  background:
+    radial-gradient(ellipse at 50% 56%, rgba(255,255,255,.26), transparent 28%);
+}
+
+@keyframes lsYouQuietRing {
+  0%,100% { opacity: .24; transform: scale(.96); }
+  50% { opacity: .64; transform: scale(1.08); }
+}
+
+@keyframes lsYouAuraBreath {
+  0%,100% { opacity: .46; transform: scale(.96); }
+  50% { opacity: .82; transform: scale(1.07); }
+}
+
+@keyframes lsWorldInnerBreath {
+  0%,100% { opacity: .24; transform: scale(.92); }
+  50% { opacity: .54; transform: scale(1.06); }
+}
+
+@keyframes lsFireflies {
+  0%,100% { transform: translate3d(0,0,0); opacity: .42; }
+  50% { transform: translate3d(5px,-7px,0); opacity: .86; }
+}
+
+@keyframes lsStardust {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.04); }
+}
+
+@keyframes lsForgeTurn {
+  0% { transform: rotate(0deg) scale(.86); opacity: .26; }
+  50% { opacity: .52; }
+  100% { transform: rotate(360deg) scale(.86); opacity: .26; }
+}
+
+@keyframes lsQuietStars {
+  0%,100% { opacity: .24; transform: translateY(0); }
+  50% { opacity: .58; transform: translateY(-3px); }
+}
+
+@keyframes lsWaterRipple {
+  0%,100% { opacity: .24; transform: scale(.9); }
+  50% { opacity: .56; transform: scale(1.08); }
+}
+
+@media (max-width: 480px) {
+  .ls-composer-you {
+    width: 112px;
+    height: 112px;
+  }
+
+  .ls-composer-world {
+    width: 66px;
+    height: 66px;
+    border-radius: 23px;
+  }
+
+  .ls-composer-world.wonder,
+  .ls-composer-world.shadow {
+    left: 7%;
+  }
+
+  .ls-composer-world.creator,
+  .ls-composer-world.gaming {
+    right: 7%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-composer-you::before,
+  .ls-composer-you::after,
+  .ls-composer-world::before,
+  .ls-composer-world::after {
+    animation: none !important;
+  }
+}

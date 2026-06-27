@@ -1,0 +1,68 @@
+.fypOmegaTopBar{
+position:fixed;
+top:max(env(safe-area-inset-top),18px);
+left:18px;
+right:18px;
+z-index:99999;
+display:flex;
+align-items:center;
+gap:16px;
+pointer-events:none;
+}
+
+.fypOmegaBlade{
+width:12px;
+height:58px;
+border-radius:999px;
+background:linear-gradient(180deg,#66d9ff 0%,#2563ff 100%);
+box-shadow:
+0 0 18px rgba(0,180,255,.75),
+0 0 38px rgba(0,180,255,.45);
+pointer-events:auto;
+}
+
+.fypOmegaWordmark{
+font-size:18px;
+font-weight:800;
+letter-spacing:.48em;
+color:#f4f8ff;
+text-shadow:
+0 0 8px rgba(255,255,255,.4),
+0 0 24px rgba(0,180,255,.25);
+pointer-events:auto;
+}
+
+.fypOmegaWonder{
+height:52px;
+padding:0 24px;
+border-radius:999px;
+display:flex;
+align-items:center;
+font-weight:700;
+font-size:20px;
+color:#fff;
+backdrop-filter:blur(24px);
+background:rgba(18,20,28,.55);
+border:1px solid rgba(0,220,255,.55);
+box-shadow:
+inset 0 0 18px rgba(0,200,255,.12),
+0 0 24px rgba(0,180,255,.22);
+pointer-events:auto;
+}
+
+.fypOmegaCount{
+height:52px;
+min-width:90px;
+padding:0 18px;
+border-radius:999px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:18px;
+font-weight:700;
+color:#fff;
+backdrop-filter:blur(24px);
+background:rgba(28,28,34,.55);
+border:1px solid rgba(255,255,255,.08);
+pointer-events:auto;
+}

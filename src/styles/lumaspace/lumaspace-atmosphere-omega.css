@@ -1,0 +1,111 @@
+.ls-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(34,211,238,.11), transparent 30%),
+    radial-gradient(circle at 20% 76%, rgba(168,85,247,.10), transparent 38%),
+    #02030a;
+}
+
+.ls-atmosphere-nebula {
+  position: absolute;
+  inset: -18%;
+  opacity: .82;
+  background:
+    radial-gradient(circle at 34% 20%, rgba(103,232,249,.16), transparent 26%),
+    radial-gradient(circle at 72% 54%, rgba(59,130,246,.12), transparent 30%),
+    radial-gradient(circle at 35% 86%, rgba(168,85,247,.11), transparent 32%);
+  filter: blur(16px);
+  animation: lumaNebulaDrift 28s ease-in-out infinite;
+}
+
+.ls-atmosphere-stars {
+  position: absolute;
+  inset: 0;
+  opacity: .48;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.70) 0 1px, transparent 1.2px),
+    radial-gradient(circle, rgba(103,232,249,.42) 0 1px, transparent 1.4px);
+  background-size: 82px 82px, 137px 137px;
+  background-position: 0 0, 40px 60px;
+}
+
+.ls-atmosphere-stars.stars-a {
+  animation: lumaStarsDriftA 36s linear infinite;
+}
+
+.ls-atmosphere-stars.stars-b {
+  opacity: .22;
+  transform: scale(1.35);
+  animation: lumaStarsDriftB 44s linear infinite;
+}
+
+.ls-atmosphere-fog {
+  position: absolute;
+  inset: auto -10% -20% -10%;
+  height: 48%;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(15,23,42,.72), transparent 68%);
+  filter: blur(18px);
+}
+
+.ls-atmosphere-light {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255,255,255,.035), transparent 22%),
+    radial-gradient(circle at 50% 45%, rgba(103,232,249,.08), transparent 34%);
+  animation: lumaAtmosphereLight 12s ease-in-out infinite;
+}
+
+.ls-atmosphere-breath {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 44vmin;
+  height: 44vmin;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  border: 1px solid rgba(103,232,249,.06);
+  box-shadow:
+    0 0 90px rgba(103,232,249,.08),
+    inset 0 0 70px rgba(255,255,255,.025);
+  animation: lumaUniverseBreath 12s ease-in-out infinite;
+}
+
+@keyframes lumaNebulaDrift {
+  0%,100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-2%,1.5%,0) scale(1.04); }
+}
+
+@keyframes lumaStarsDriftA {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-82px,82px,0); }
+}
+
+@keyframes lumaStarsDriftB {
+  0% { transform: translate3d(0,0,0) scale(1.35); }
+  100% { transform: translate3d(137px,-137px,0) scale(1.35); }
+}
+
+@keyframes lumaAtmosphereLight {
+  0%,100% { opacity: .64; }
+  50% { opacity: .92; }
+}
+
+@keyframes lumaUniverseBreath {
+  0%,100% { opacity: .36; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: .62; transform: translate(-50%, -50%) scale(1.035); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-atmosphere-nebula,
+  .ls-atmosphere-stars,
+  .ls-atmosphere-light,
+  .ls-atmosphere-breath {
+    animation: none !important;
+  }
+}

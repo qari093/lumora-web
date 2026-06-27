@@ -1,0 +1,279 @@
+/* =========================================
+   LUMASPACE Ω∞ — F4 HOMECOMING RITUAL
+   Black → Blue Blade → Spark → Promise → Universe
+========================================= */
+
+.ls-homecoming-ritual {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(14,165,233,.08), transparent 34%),
+    #02030a;
+  animation: lsHomecomingRelease 7.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.ls-homecoming-black {
+  position: absolute;
+  inset: 0;
+  background: #02030a;
+  animation: lsHomecomingBlack 7.2s ease forwards;
+}
+
+.ls-homecoming-blade {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 20px rgba(103,232,249,.42))
+    drop-shadow(0 0 60px rgba(37,99,235,.18));
+  animation: lsHomecomingBlade 7.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.ls-homecoming-blade svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ls-homecoming-spark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  opacity: 0;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.98), rgba(103,232,249,.64) 42%, rgba(37,99,235,.12) 72%, transparent);
+  box-shadow:
+    0 0 28px rgba(255,255,255,.74),
+    0 0 82px rgba(103,232,249,.46),
+    0 0 140px rgba(37,99,235,.22);
+  animation: lsHomecomingSpark 7.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.ls-homecoming-promise {
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(84vw, 420px);
+  display: grid;
+  gap: 8px;
+  text-align: center;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: 800;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 0 26px rgba(103,232,249,.22);
+}
+
+.ls-homecoming-promise span {
+  opacity: 0;
+  font-size: clamp(15px, 4.4vw, 24px);
+}
+
+.ls-homecoming-promise .space {
+  animation: lsHomecomingPromiseLine 7.2s ease forwards;
+  animation-delay: 2.15s;
+}
+
+.ls-homecoming-promise .people {
+  animation: lsHomecomingPromiseLine 7.2s ease forwards;
+  animation-delay: 2.9s;
+}
+
+.ls-homecoming-promise .story {
+  animation: lsHomecomingPromiseLine 7.2s ease forwards;
+  animation-delay: 3.65s;
+}
+
+.ls-homecoming-whisper {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom) + 58px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.62);
+  opacity: 0;
+  animation: lsHomecomingWhisper 7.2s ease forwards;
+}
+
+@keyframes lsHomecomingRelease {
+  0%, 82% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes lsHomecomingBlack {
+  0%, 18% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: .92;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lsHomecomingBlade {
+  0%, 12% {
+    opacity: 0;
+    transform: translateY(16px) scale(.72);
+  }
+
+  24%, 46% {
+    opacity: .98;
+    transform: translateY(0) scale(1);
+  }
+
+  68% {
+    opacity: .32;
+    transform: translateY(-10px) scale(.86);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-18px) scale(.74);
+  }
+}
+
+@keyframes lsHomecomingSpark {
+  0%, 26% {
+    opacity: 0;
+    transform: scale(.52);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  60% {
+    opacity: .92;
+    transform: scale(2.8);
+  }
+
+  82% {
+    opacity: .36;
+    transform: scale(14);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(22);
+  }
+}
+
+@keyframes lsHomecomingPromiseLine {
+  0%, 18% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  28%, 54% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  74%, 100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes lsHomecomingWhisper {
+  0%, 56% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  68%, 82% {
+    opacity: .78;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-homecoming-ritual {
+    animation: lsHomecomingReducedRelease 1.4s ease forwards;
+  }
+
+  .ls-homecoming-black,
+  .ls-homecoming-blade,
+  .ls-homecoming-spark,
+  .ls-homecoming-promise span,
+  .ls-homecoming-whisper {
+    animation-duration: 1.4s !important;
+    transition: none !important;
+  }
+}
+
+@keyframes lsHomecomingReducedRelease {
+  0%, 72% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* F4 visual verification mode only: /lumaspace?homecoming=hold */
+.ls-homecoming-ritual.ls-homecoming-hold,
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-black,
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-blade,
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-spark,
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-promise span,
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-whisper {
+  animation-play-state: paused !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-black {
+  opacity: .96 !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-blade {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-spark {
+  opacity: 1 !important;
+  transform: scale(1.4) !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-promise span {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.ls-homecoming-ritual.ls-homecoming-hold .ls-homecoming-whisper {
+  opacity: .78 !important;
+  transform: translateX(-50%) translateY(0) !important;
+}

@@ -1,0 +1,157 @@
+.ls-environment-worlds{
+position:absolute;
+inset:0;
+pointer-events:none;
+z-index:8;
+}
+
+.ls-env-world{
+position:absolute;
+width:180px;
+height:180px;
+border-radius:50%;
+opacity:.95;
+filter:blur(.2px);
+}
+
+.ls-env-atmosphere,
+.ls-env-particles{
+position:absolute;
+inset:0;
+border-radius:inherit;
+}
+
+.ls-env-atmosphere{
+animation:lsAtmosphere 10s ease-in-out infinite;
+}
+
+.ls-env-particles{
+animation:lsParticles 14s linear infinite;
+opacity:.55;
+}
+
+.dream{left:50%;top:8%;transform:translateX(-50%);}
+.wonder{left:8%;top:24%;}
+.creator{right:8%;top:24%;}
+.shadow{left:8%;bottom:18%;}
+.gaming{right:8%;bottom:18%;}
+.calm{left:50%;bottom:4%;transform:translateX(-50%);}
+
+.dream .ls-env-atmosphere{background:radial-gradient(circle,rgba(255,214,102,.28),transparent 72%);}
+.wonder .ls-env-atmosphere{background:radial-gradient(circle,rgba(103,232,249,.24),transparent 72%);}
+.creator .ls-env-atmosphere{background:radial-gradient(circle,rgba(96,165,250,.24),transparent 72%);}
+.shadow .ls-env-atmosphere{background:radial-gradient(circle,rgba(168,85,247,.22),transparent 72%);}
+.gaming .ls-env-atmosphere{background:radial-gradient(circle,rgba(34,211,238,.22),transparent 72%);}
+.calm .ls-env-atmosphere{background:radial-gradient(circle,rgba(147,197,253,.22),transparent 72%);}
+
+@keyframes lsAtmosphere{
+0%,100%{transform:scale(1);opacity:.65;}
+50%{transform:scale(1.08);opacity:1;}
+}
+
+@keyframes lsParticles{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@media (prefers-reduced-motion:reduce){
+.ls-env-atmosphere,
+.ls-env-particles{
+animation:none;
+}
+}
+
+/* =========================================
+   B4 ENVIRONMENTAL WORLD SEAL
+========================================= */
+
+.ls-environment-worlds {
+  z-index: 10;
+}
+
+.ls-env-world {
+  opacity: .82;
+  mix-blend-mode: screen;
+}
+
+.ls-env-world::after {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border-radius: 999px;
+  opacity: .42;
+  filter: blur(3px);
+  animation: lsWorldInnerLife 9s ease-in-out infinite;
+}
+
+.ls-env-world.dream::after { background: rgba(255,215,120,.36); }
+.ls-env-world.wonder::after { background: rgba(103,232,249,.34); }
+.ls-env-world.creator::after { background: rgba(96,165,250,.34); }
+.ls-env-world.shadow::after { background: rgba(168,85,247,.32); }
+.ls-env-world.gaming::after { background: rgba(34,211,238,.28); }
+.ls-env-world.calm::after { background: rgba(147,197,253,.30); }
+
+@keyframes lsWorldInnerLife {
+  0%,100% {
+    transform: scale(.96);
+    opacity: .28;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: .56;
+  }
+}
+
+/* =========================================
+   MEGA STEP C — ENVIRONMENT DEPTH Ω
+========================================= */
+
+.ls-environment-worlds {
+  z-index: 9;
+}
+
+.ls-env-world {
+  width: 210px;
+  height: 210px;
+  opacity: .64;
+}
+
+.ls-env-world.dream {
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%);
+}
+
+.ls-env-world.wonder {
+  left: 2%;
+  top: 20%;
+}
+
+.ls-env-world.creator {
+  right: 2%;
+  top: 20%;
+}
+
+.ls-env-world.shadow {
+  left: 2%;
+  bottom: 12%;
+}
+
+.ls-env-world.gaming {
+  right: 2%;
+  bottom: 12%;
+}
+
+.ls-env-world.calm {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 480px) {
+  .ls-env-world {
+    width: 170px;
+    height: 170px;
+  }
+}

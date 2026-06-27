@@ -1,0 +1,46 @@
+LUMORA MAIN USER JOURNEY VALIDATION
+REPORT=.main_user_journey_validation_20260614_095758.txt
+
+=== REQUIRED USER ROUTES ===
+PASS ROUTE_FILE app/page.tsx
+PASS ROUTE_FILE app/fyp/page.tsx
+PASS ROUTE_FILE app/live/page.tsx
+PASS ROUTE_FILE app/gmar/page.tsx
+PASS ROUTE_FILE app/zendoro/page.tsx
+PASS ROUTE_FILE app/wallet/page.tsx
+PASS ROUTE_FILE app/creator-hub/page.tsx
+
+=== REQUIRED API ROUTES ===
+PASS API_FILE app/api/health/route.ts
+PASS API_FILE app/api/fyp/health/route.ts
+PASS API_FILE app/api/live/health/route.ts
+PASS API_FILE app/api/gmar/health/route.ts
+PASS API_FILE app/api/zendoro/products/route.ts
+PASS API_FILE app/api/wallet/balance/route.ts
+
+=== FYP SHELL CLEANER CHECK ===
+PASS FYP_SHELL_CLASS
+PASS FYP_CLEANER_MOUNTED
+
+=== VALIDATION TESTS ===
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/fyp/fyp_trace_current_final_build_guard.test.ts > Trace Current final build guard > keeps CSS module pure and syntax-safe
+ ✓ tests/fyp/fyp_trace_current_final_build_guard.test.ts > Trace Current final build guard > keeps FYP shell cleaner active
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  09:58:09
+   Duration  55.76s (transform 489ms, setup 89ms, collect 19ms, tests 9ms, environment 2.98s, prepare 597ms)
+
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/fyp/fyp_trace_current_shell_cleaner.test.ts > Trace Current shell cleaner > moves global shell hiding out of CSS modules into client runtime
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  09:59:11
+   Duration  29.18s (transform 177ms, setup 80ms, collect 34ms, tests 11ms, environment 1.89s, prepare 515ms)
+

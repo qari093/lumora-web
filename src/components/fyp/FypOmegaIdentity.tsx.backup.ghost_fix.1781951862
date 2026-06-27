@@ -1,0 +1,37 @@
+import Image from "next/image";
+import styles from "./FypOmegaIdentity.module.css";
+
+export default function FypOmegaIdentity({
+  lane = "Wonder",
+  count = "1/10"
+}: {
+  lane?: string;
+  count?: string;
+}) {
+  return (
+    <div data-testid="fyp-omega-identity" className={styles.topBar}>
+
+      <div className={styles.logoWrap}>
+        <Image
+          src="/brand/lumora-blade.png"
+          alt="Lumora"
+          width={46}
+          height={46}
+          priority
+          className={styles.logo}
+        />
+      </div>
+
+      <span className={styles.word}>LUMORA</span>
+
+      <span className={styles.pill}>
+        ✦ {lane}
+      </span>
+
+      <span className={styles.count}>
+        {count}
+      </span>
+
+    </div>
+  );
+}

@@ -1,0 +1,211 @@
+/* =========================================
+   LUMASPACE Ω∞ MEGA PACK E
+   Actual Motion Runtime Implementation
+========================================= */
+
+.ls-interaction-motion-field {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ls-motion-current {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(186,230,253,.72);
+  box-shadow:
+    0 0 14px rgba(186,230,253,.44),
+    0 0 28px rgba(103,232,249,.20);
+  opacity: .34;
+  animation: lsMotionCurrentDrift 18s ease-in-out infinite;
+}
+
+.ls-motion-current.c1 { left: 22%; top: 24%; animation-duration: 16s; }
+.ls-motion-current.c2 { left: 72%; top: 30%; animation-duration: 19s; animation-delay: -3s; }
+.ls-motion-current.c3 { left: 18%; top: 68%; animation-duration: 21s; animation-delay: -6s; }
+.ls-motion-current.c4 { left: 76%; top: 72%; animation-duration: 17s; animation-delay: -9s; }
+.ls-motion-current.c5 { left: 50%; top: 18%; animation-duration: 22s; animation-delay: -12s; }
+.ls-motion-current.c6 { left: 50%; top: 82%; animation-duration: 20s; animation-delay: -15s; }
+
+@keyframes lsMotionCurrentDrift {
+  0%,100% {
+    transform: translate3d(0,0,0) scale(.82);
+    opacity: .18;
+  }
+
+  45% {
+    transform: translate3d(10px,-16px,0) scale(1.16);
+    opacity: .46;
+  }
+
+  70% {
+    transform: translate3d(-8px,10px,0) scale(.96);
+    opacity: .32;
+  }
+}
+
+/* YOU heartbeat */
+.ls-composer-you {
+  animation:
+    lsComposerYouBreath 6s cubic-bezier(.22,.61,.36,1) infinite,
+    lsYouLivingHeartbeat 6s ease-in-out infinite !important;
+  transition:
+    transform 400ms cubic-bezier(.22,.61,.36,1),
+    filter 400ms ease,
+    box-shadow 400ms ease;
+}
+
+.ls-composer-you:active {
+  transform: translate(-50%, -50%) scale(1.08) !important;
+  filter: saturate(1.12) brightness(1.08);
+}
+
+@keyframes lsYouLivingHeartbeat {
+  0%,100% {
+    box-shadow:
+      0 0 42px rgba(255,255,255,.50),
+      0 0 112px rgba(103,232,249,.38),
+      inset 0 0 38px rgba(255,255,255,.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 56px rgba(255,255,255,.62),
+      0 0 142px rgba(103,232,249,.48),
+      0 0 210px rgba(37,99,235,.18),
+      inset 0 0 48px rgba(255,255,255,.28);
+  }
+}
+
+/* World touch physics */
+.ls-composer-world,
+.ls-world-identity-glass,
+.ls-world-identity-glyph {
+  transition:
+    transform 400ms cubic-bezier(.22,.61,.36,1),
+    opacity 600ms ease,
+    filter 600ms ease,
+    box-shadow 600ms ease;
+}
+
+.ls-composer-world:active {
+  transform: scale(1.08) !important;
+}
+
+.ls-world-identity:has(+ *) .ls-world-identity-glass {
+  will-change: transform, opacity;
+}
+
+.ls-world-identity-glass {
+  animation:
+    lsWorldGlassBreath 9s ease-in-out infinite,
+    lsWorldSoftFloat 10s ease-in-out infinite;
+}
+
+.ls-world-identity.dream .ls-world-identity-glass {
+  animation-duration: 8s, 13s;
+}
+
+.ls-world-identity.wonder .ls-world-identity-glass {
+  animation-duration: 7s, 11s;
+}
+
+.ls-world-identity.creator .ls-world-identity-glass {
+  animation-duration: 9s, 15s;
+}
+
+.ls-world-identity.shadow .ls-world-identity-glass {
+  animation-duration: 10s, 16s;
+}
+
+.ls-world-identity.gaming .ls-world-identity-glass {
+  animation-duration: 5s, 10s;
+}
+
+.ls-world-identity.calm .ls-world-identity-glass {
+  animation-duration: 12s, 18s;
+}
+
+@keyframes lsWorldSoftFloat {
+  0%,100% {
+    filter: drop-shadow(0 0 16px rgba(103,232,249,.10));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 28px rgba(103,232,249,.22));
+  }
+}
+
+/* Presence becomes ambient, not static */
+.ls-presence-star {
+  animation: lsPresenceOrganicOrbit 13s ease-in-out infinite;
+}
+
+.ls-presence-star.wonder { animation-duration: 12s; }
+.ls-presence-star.dream { animation-duration: 14s; }
+.ls-presence-star.creator { animation-duration: 15s; }
+.ls-presence-star.shadow { animation-duration: 16s; }
+.ls-presence-star.gaming { animation-duration: 11s; }
+.ls-presence-star.calm { animation-duration: 18s; }
+
+.ls-presence-trace {
+  animation:
+    lsTraceBreath 8s ease-in-out infinite,
+    lsTraceDashDrift 18s linear infinite !important;
+  background:
+    linear-gradient(90deg, transparent, rgba(103,232,249,.18), transparent);
+}
+
+@keyframes lsPresenceOrganicOrbit {
+  0%,100% {
+    transform: translate3d(0,0,0) scale(1);
+    opacity: .62;
+  }
+
+  50% {
+    transform: translate3d(4px,-6px,0) scale(1.08);
+    opacity: .86;
+  }
+}
+
+@keyframes lsTraceDashDrift {
+  0% {
+    filter: drop-shadow(0 0 4px rgba(103,232,249,.10));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 10px rgba(103,232,249,.24));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 4px rgba(103,232,249,.10));
+  }
+}
+
+/* Homecoming should be perceptible, not harsh */
+.ls-ritual {
+  animation-duration: 6.2s !important;
+}
+
+.ls-ritual-whisper {
+  animation-duration: 6.2s !important;
+  transition: opacity 300ms ease;
+}
+
+/* Reduced motion protection */
+@media (prefers-reduced-motion: reduce) {
+  .ls-motion-current,
+  .ls-composer-you,
+  .ls-world-identity-glass,
+  .ls-presence-star,
+  .ls-presence-trace,
+  .ls-ritual,
+  .ls-ritual-whisper {
+    animation: none !important;
+    transition: none !important;
+  }
+}

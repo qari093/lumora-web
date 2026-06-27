@@ -1,0 +1,110 @@
+.ls-f3-presence-field {
+  position: fixed;
+  inset: 0;
+  z-index: 24;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.ls-f3-presence {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  opacity: .58;
+  animation: lsF3PresenceDrift 18s ease-in-out infinite;
+}
+
+.ls-f3-orb {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 0 14px rgba(255,255,255,.58), 0 0 28px rgba(103,232,249,.18);
+  animation: lsF3PresencePulse 8s ease-in-out infinite;
+}
+
+.ls-f3-echo {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(186,230,253,.11);
+  opacity: .22;
+  animation: lsF3EchoRing 10s ease-in-out infinite;
+}
+
+.ls-f3-echo.b {
+  width: 50px;
+  height: 50px;
+  opacity: .14;
+  animation-duration: 14s;
+  animation-delay: -5s;
+}
+
+.ls-f3-trace {
+  position: absolute;
+  width: 112px;
+  height: 1px;
+  border-top: 1px dashed rgba(103,232,249,.13);
+  background: linear-gradient(90deg, transparent, rgba(103,232,249,.16), transparent);
+  opacity: .22;
+  filter: drop-shadow(0 0 8px rgba(103,232,249,.10));
+  animation: lsF3TraceBreathe 10s ease-in-out infinite;
+}
+
+.ls-f3-presence.wonder { left: 24%; top: 31%; animation-duration: 16s; }
+.ls-f3-presence.dream { left: 47%; top: 22%; animation-duration: 18s; animation-delay: -3s; }
+.ls-f3-presence.creator { right: 24%; top: 32%; animation-duration: 17s; animation-delay: -6s; }
+.ls-f3-presence.shadow { left: 23%; bottom: 25%; animation-duration: 21s; animation-delay: -9s; }
+.ls-f3-presence.gaming { right: 23%; bottom: 25%; animation-duration: 15s; animation-delay: -11s; }
+.ls-f3-presence.calm { left: 48%; bottom: 15%; animation-duration: 24s; animation-delay: -14s; }
+
+.ls-f3-presence.wonder .ls-f3-orb { box-shadow: 0 0 18px rgba(103,232,249,.36); }
+.ls-f3-presence.dream .ls-f3-orb { box-shadow: 0 0 18px rgba(255,215,120,.34); }
+.ls-f3-presence.creator .ls-f3-orb { box-shadow: 0 0 18px rgba(96,165,250,.34); }
+.ls-f3-presence.shadow .ls-f3-orb { box-shadow: 0 0 18px rgba(168,85,247,.32); }
+.ls-f3-presence.gaming .ls-f3-orb { box-shadow: 0 0 18px rgba(34,211,238,.32); }
+.ls-f3-presence.calm .ls-f3-orb { box-shadow: 0 0 18px rgba(147,197,253,.32); }
+
+@keyframes lsF3PresenceDrift {
+  0%,100% { transform: translate3d(0,0,0) scale(1); opacity: .48; }
+  35% { transform: translate3d(5px,-8px,0) scale(1.06); opacity: .74; }
+  70% { transform: translate3d(-4px,5px,0) scale(.96); opacity: .58; }
+}
+
+@keyframes lsF3PresencePulse {
+  0%,100% { transform: scale(.92); opacity: .58; }
+  50% { transform: scale(1.18); opacity: .95; }
+}
+
+@keyframes lsF3EchoRing {
+  0%,100% { transform: scale(.78); opacity: .10; }
+  50% { transform: scale(1.22); opacity: .34; }
+}
+
+@keyframes lsF3TraceBreathe {
+  0%,100% { opacity: .10; filter: drop-shadow(0 0 4px rgba(103,232,249,.08)); }
+  50% { opacity: .34; filter: drop-shadow(0 0 12px rgba(103,232,249,.20)); }
+}
+
+@media (max-width: 480px) {
+  .ls-f3-presence { width: 64px; height: 64px; }
+  .ls-f3-trace { width: 86px; }
+  .ls-f3-presence.wonder,
+  .ls-f3-presence.shadow { left: 20%; }
+  .ls-f3-presence.creator,
+  .ls-f3-presence.gaming { right: 20%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-f3-presence,
+  .ls-f3-orb,
+  .ls-f3-echo,
+  .ls-f3-trace {
+    animation: none !important;
+  }
+}

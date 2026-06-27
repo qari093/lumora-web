@@ -1,0 +1,190 @@
+.ls-presence-constellation-field {
+  position: fixed;
+  inset: 0;
+  z-index: 13;
+  pointer-events: none;
+}
+
+.ls-presence-star {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  opacity: .86;
+}
+
+.ls-presence-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  box-shadow:
+    0 0 14px rgba(255,255,255,.76),
+    0 0 28px rgba(103,232,249,.28);
+  animation: lsPresencePulse 6s ease-in-out infinite;
+}
+
+.ls-presence-trace {
+  position: absolute;
+  width: 96px;
+  height: 1px;
+  border-top: 1px dashed rgba(103,232,249,.22);
+  transform-origin: left center;
+  opacity: .42;
+  animation: lsTraceBreath 6s ease-in-out infinite;
+}
+
+.ls-presence-name {
+  position: absolute;
+  top: 36px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: capitalize;
+  color: rgba(255,255,255,.72);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.ls-presence-star:active .ls-presence-name {
+  opacity: .72;
+  transform: translateY(0);
+}
+
+.ls-presence-star.wonder {
+  left: 24%;
+  top: 30%;
+}
+
+.ls-presence-star.dream {
+  left: 43%;
+  top: 22%;
+}
+
+.ls-presence-star.creator {
+  right: 25%;
+  top: 31%;
+}
+
+.ls-presence-star.shadow {
+  left: 25%;
+  bottom: 30%;
+}
+
+.ls-presence-star.gaming {
+  right: 25%;
+  bottom: 30%;
+}
+
+.ls-presence-star.calm {
+  left: 47%;
+  bottom: 20%;
+}
+
+.ls-presence-star.gold .ls-presence-core {
+  box-shadow:
+    0 0 14px rgba(255,255,255,.72),
+    0 0 30px rgba(255,215,120,.34);
+}
+
+.ls-presence-star.violet .ls-presence-core {
+  box-shadow:
+    0 0 14px rgba(255,255,255,.70),
+    0 0 30px rgba(168,85,247,.34);
+}
+
+.ls-presence-star.neon .ls-presence-core {
+  box-shadow:
+    0 0 14px rgba(255,255,255,.70),
+    0 0 30px rgba(34,211,238,.34);
+}
+
+.ls-presence-star.water .ls-presence-core {
+  box-shadow:
+    0 0 14px rgba(255,255,255,.70),
+    0 0 30px rgba(147,197,253,.34);
+}
+
+@keyframes lsPresencePulse {
+  0%,100% {
+    transform: scale(1);
+    opacity: .72;
+  }
+
+  50% {
+    transform: scale(1.22);
+    opacity: 1;
+  }
+}
+
+@keyframes lsTraceBreath {
+  0%,100% {
+    opacity: .18;
+  }
+
+  50% {
+    opacity: .48;
+  }
+}
+
+@media (max-width: 480px) {
+  .ls-presence-star {
+    width: 46px;
+    height: 46px;
+  }
+
+  .ls-presence-trace {
+    width: 72px;
+  }
+
+  .ls-presence-name {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-presence-core,
+  .ls-presence-trace {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   B4 PRESENCE SEAL
+========================================= */
+
+.ls-presence-constellation-field {
+  z-index: 16;
+}
+
+.ls-presence-name {
+  opacity: 0 !important;
+}
+
+.ls-presence-star:active .ls-presence-name {
+  opacity: .68 !important;
+}
+
+/* =========================================
+   MEGA STEP C — QUIET PRESENCE POLISH Ω
+========================================= */
+
+.ls-presence-constellation-field {
+  z-index: 22;
+}
+
+.ls-presence-core {
+  width: 8px;
+  height: 8px;
+}
+
+.ls-presence-trace {
+  opacity: .22;
+  border-top-color: rgba(103,232,249,.16);
+}
+
+.ls-presence-star {
+  opacity: .70;
+}

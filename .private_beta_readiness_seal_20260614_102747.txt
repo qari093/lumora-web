@@ -1,0 +1,1481 @@
+LUMORA PRIVATE BETA READINESS SEAL
+REPORT=.private_beta_readiness_seal_20260614_102747.txt
+
+=== REQUIRED LOCKS ===
+FAIL LOCK .lumora_runtime_consolidation_step1_lock
+PASS LOCK .lumora_runtime_consolidation_step2_lock
+PASS LOCK .lumora_runtime_consolidation_step3_lock
+PASS LOCK .lumora_runtime_consolidation_step4_lock
+PASS LOCK .lumora_runtime_consolidation_step5_lock
+
+=== RESUME STATE ===
+LUMORA_RUNTIME_CONSOLIDATION_LAST_COMPLETED=STEP_5_OF_6
+NEXT_STEP=6_OF_6_PRIVATE_BETA_READINESS_SEAL
+AUDIT_REPORT=.runtime_consolidation_audit_20260613_235821.txt
+DUPLICATE_LEGACY_ROUTE_AUDIT_REPORT=.duplicate_legacy_route_audit_20260614_095121.txt
+MAIN_USER_JOURNEY_VALIDATION_REPORT=.main_user_journey_validation_20260614_095758.txt
+ZENDORO_PAYMENTS_VALIDATION_REPORT=.zendoro_payments_validation_20260614_100335.txt
+LIVE_FYP_VALIDATION_REPORT=.live_fyp_validation_20260614_101705.txt
+
+=== FINAL BUILD ===
+   ▲ Next.js 15.5.9
+   - Environments: .env.production.local, .env.local, .env.production, .env
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings in 59s
+
+./app/api/content/attention/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/attention/route.ts
+
+./app/api/content/attention/route.ts
+Attempted import error: 'attachAttentionMetrics' is not exported from '@/lib/content/attention' (imported as 'attachAttentionMetrics').
+
+Import trace for requested module:
+./app/api/content/attention/route.ts
+
+./app/api/content/emotions/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/emotions/route.ts
+
+./app/api/content/lifecycle/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/lifecycle/route.ts
+
+./app/api/content/origin/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/origin/route.ts
+
+./app/api/content/saturation/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/saturation/route.ts
+
+./app/api/content/schema/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/schema/route.ts
+
+./app/api/content/trust/route.ts
+Attempted import error: 'buildBaseContent' is not exported from '@/lib/content/schema' (imported as 'buildBaseContent').
+
+Import trace for requested module:
+./app/api/content/trust/route.ts
+
+ ✓ Compiled successfully in 102s
+   Linting and checking validity of types ...
+
+./app/(diag)/offline-diagnostics/OfflineDiagnosticsClient.tsx
+98:3  Warning: The 'refresh' function makes the dependencies of useEffect Hook (at line 164) change on every render. To fix this, wrap the definition of 'refresh' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./app/admin/celebrations/moderation/ParticipantsPanel.tsx
+65:1  Warning: Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps').
+73:6  Warning: React Hook useEffect has a missing dependency: 'fetchAudit'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/api/fyp/native-feed/route.ts
+26:12  Warning: 'e' is defined but never used. Allowed unused caught errors must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/fyp/route.ts
+285:71  Warning: 'index' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/interaction/not-interested/route.ts
+15:12  Warning: 'e' is defined but never used. Allowed unused caught errors must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/live/bookmark/route.ts
+24:12  Warning: 'e' is defined but never used. Allowed unused caught errors must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/live/feed/route.ts
+26:10  Warning: 'applyRepeatPenalty' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+27:10  Warning: 'applySessionDecay' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/nexa/diag/route.ts
+1:10  Warning: 'productionDebugGate' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/api/rankings/feed/route.ts
+9:3  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-var-requires').
+
+./app/celebrations/[slug]/SlugClient.tsx
+25:3  Warning: The 'load' function makes the dependencies of useEffect Hook (at line 38) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./app/creator/review/CreatorReviewClient.tsx
+19:3  Warning: The 'load' function makes the dependencies of useEffect Hook (at line 30) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./app/fyp/FypAutoplayFeed.tsx
+327:36  Warning: The ref value 'startedAtRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'startedAtRef.current' to a variable inside the effect, and use that variable in the cleanup function.  react-hooks/exhaustive-deps
+
+./app/fyp94/page.tsx
+15:7  Warning: 'FYP94_LEGACY_FALLBACK_CONTRACT' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+17:7  Warning: 'FYP94_FEED_INTELLIGENCE_CONTRACT' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+34:10  Warning: 'writeFyp94SeenId' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./app/me/space/ZENPreview.tsx
+18:3  Warning: The 'load' function makes the dependencies of useEffect Hook (at line 36) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./app/me/space/page.tsx
+1:8  Warning: 'VibeWall' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./components/LumoraVideoInterface.tsx
+2:15  Warning: 'VibeTagLite' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+4:8  Warning: 'VibeTray' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+5:8  Warning: 'VibeStatusBadge' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+47:7  Warning: 'vibeLiteOn' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+50:10  Warning: 'vibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+50:20  Warning: 'setVibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+51:10  Warning: 'vibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+51:20  Warning: 'setVibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+52:9  Warning: 'lastVibeAtRef' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+53:9  Warning: 'cooldownMs' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+75:3  Warning: The 'refreshLedger' function makes the dependencies of useEffect Hook (at line 101) change on every render. To fix this, wrap the definition of 'refreshLedger' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./components/lumaspace/RecorderEngine.tsx
+133:1  Warning: Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps').
+150:6  Warning: React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.  react-hooks/exhaustive-deps
+155:6  Warning: React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.  react-hooks/exhaustive-deps
+235:6  Warning: React Hook useCallback has missing dependencies: 'handleError' and 'stopInternal'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+415:1  Warning: Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps').
+421:6  Warning: React Hook useEffect has a missing dependency: 'start'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/portals/AlivePulse.tsx
+18:10  Warning: 'tick' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./lib/ads/adFatigue.ts
+23:9  Warning: 'safeUnique' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./lib/ads/campaign.ts
+33:3  Warning: 'now' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./lib/portals/registry.ts
+61:3  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-var-requires').
+
+./lib/portals/status.ts
+92:5  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-var-requires').
+97:5  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-var-requires').
+
+./lib/prisma.ts
+4:3  Warning: Unused eslint-disable directive (no problems were reported from 'no-var').
+
+./src/components/coin/BalanceCard.tsx
+8:3  Warning: The 'load' function makes the dependencies of useEffect Hook (at line 19) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./src/components/coin/LedgerTable.tsx
+10:3  Warning: The 'load' function makes the dependencies of useEffect Hook (at line 21) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./src/components/fyp94/Fyp94VisiblePlayer.tsx
+30:6  Warning: React Hook useEffect has a missing dependency: 'nextItem'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/native-fyp/FypSwiper.tsx
+53:29  Warning: React Hook "usePreload" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.  react-hooks/rules-of-hooks
+54:31  Warning: React Hook "usePreload" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.  react-hooks/rules-of-hooks
+69:6  Warning: React Hook useEffect has a missing dependency: 'goNext'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/native-fyp/useGlobalMute.ts
+3:10  Warning: 'useEffect' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/native-fyp/useVideoReady.ts
+3:10  Warning: 'useEffect' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/fyp/gutcheck/types.ts
+1:15  Warning: 'FeedItem' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/gmar/final-completion/database/databasePersistence.ts
+1:15  Warning: 'GmarGameState' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/accessibility/accessibilityRuntime.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/contracts/foundationContract.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/contracts/immutableLaws.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/onboarding/quietBeginning.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/rendering/atmosphereTokens.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/foundation/types.ts
+23:39  Warning: 'v' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/core/lumaspace/omega/memory/omegaPack06Runtime.ts
+3:101  Warning: 'selectEchoOfYesterday' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/hooks/useEnergy.ts
+56:1  Warning: Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps').
+73:6  Warning: React Hook React.useEffect has a missing dependency: 'crew'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/lib/content/query.ts
+1:30  Warning: 'id' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/fyp_movie_clips/live/fyp_movie_bridge.ts
+17:3  Warning: 'ratio' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/infra/worker.ts
+4:10  Warning: 'e' is defined but never used. Allowed unused caught errors must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/integration/echo-layer/removeCountsComments.ts
+2:11  Warning: 'counts' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:19  Warning: 'comments' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:29  Warning: 'likes' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:36  Warning: 'views' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/integration/feed-rendering/vanityMetricGuard.ts
+2:11  Warning: 'views' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:18  Warning: 'likes' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:25  Warning: 'comments' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:35  Warning: 'followers' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/motion/fps/stability.ts
+4:9  Warning: 'targetFrameMs' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/native-fyp/runtime/eventsPipeline.ts
+7:29  Warning: 'events' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/lib/uid.ts
+1:10  Warning: 'cookies' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+2:10  Warning: 'randomUUID' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+4:7  Warning: 'COOKIE' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+10:5  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-var-requires').
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+ ⚠ Using edge runtime on a page currently disables static generation for that page
+   Generating static pages (0/573) ...
+   Generating static pages (143/573) 
+   Generating static pages (286/573) 
+   Generating static pages (429/573) 
+ ✓ Generating static pages (573/573)
+Step 16.44 — Memory Palace Deep View loaded
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                             Size  First Load JS  Revalidate  Expire
+┌ ○ /                                                  247 B         105 kB
+├ ƒ /_not-found                                      3.08 kB         105 kB
+├ ƒ /account/kyc                                     1.42 kB         103 kB
+├ ƒ /admin                                           2.11 kB         107 kB
+├ ƒ /admin/campaigns                                 3.08 kB         105 kB
+├ ƒ /admin/celebrations/moderation                   4.32 kB         106 kB
+├ ƒ /admin/kyc                                       1.19 kB         103 kB
+├ ƒ /admin/testers                                   1.79 kB         104 kB
+├ ○ /admin/zendoro                                   3.08 kB         105 kB
+├ ƒ /ads                                               620 B         102 kB
+├ ƒ /ads/[id]                                        3.08 kB         105 kB
+├ ƒ /ads/[id]/edit                                     619 B         102 kB
+├ ƒ /ads/admin                                       3.08 kB         105 kB
+├ ƒ /ads/new                                           602 B         102 kB
+├ ƒ /ads/test                                        1.66 kB         103 kB
+├ ƒ /alive                                           1.53 kB         103 kB
+├ ○ /analytics                                       3.08 kB         105 kB
+├ ƒ /api/abuse/signal                                3.08 kB         105 kB
+├ ƒ /api/account                                     3.08 kB         105 kB
+├ ƒ /api/account/upgrade                             3.08 kB         105 kB
+├ ƒ /api/activation/claims                           3.08 kB         105 kB
+├ ƒ /api/activation/dashboard                        3.08 kB         105 kB
+├ ƒ /api/activation/env                              3.08 kB         105 kB
+├ ƒ /api/activation/health                           3.08 kB         105 kB
+├ ƒ /api/activation/live-status                      3.08 kB         105 kB
+├ ƒ /api/activation/proof                            3.08 kB         105 kB
+├ ƒ /api/activation/status                           3.08 kB         105 kB
+├ ƒ /api/admin/health                                3.08 kB         105 kB
+├ ƒ /api/admin/kyc/decision                          3.08 kB         105 kB
+├ ƒ /api/admin/kyc/pending                           3.08 kB         105 kB
+├ ƒ /api/admin/kyc/review                            3.08 kB         105 kB
+├ ƒ /api/admin/moderation/list                       3.08 kB         105 kB
+├ ƒ /api/admin/moderation/review                     3.08 kB         105 kB
+├ ƒ /api/admin/overview                              3.08 kB         105 kB
+├ ƒ /api/admin/testers/summary                       3.08 kB         105 kB
+├ ƒ /api/admin/zendoro                               3.08 kB         105 kB
+├ ƒ /api/ads                                         3.08 kB         105 kB
+├ ƒ /api/ads/analytics-snapshot                      3.08 kB         105 kB
+├ ƒ /api/ads/analytics/brands                        3.08 kB         105 kB
+├ ƒ /api/ads/analytics/channel                       3.08 kB         105 kB
+├ ƒ /api/ads/analytics/rollup/run                    3.08 kB         105 kB
+├ ƒ /api/ads/analytics/summary                       3.08 kB         105 kB
+├ ƒ /api/ads/analytics/timeseries                    3.08 kB         105 kB
+├ ƒ /api/ads/budget                                  3.08 kB         105 kB
+├ ƒ /api/ads/budget-gate                             3.08 kB         105 kB
+├ ƒ /api/ads/budget-guard                            3.08 kB         105 kB
+├ ƒ /api/ads/campaigns                               3.08 kB         105 kB
+├ ƒ /api/ads/campaigns/[id]                          3.08 kB         105 kB
+├ ƒ /api/ads/click                                   3.08 kB         105 kB
+├ ƒ /api/ads/content                                 3.08 kB         105 kB
+├ ƒ /api/ads/context                                 3.08 kB         105 kB
+├ ƒ /api/ads/conversion                              3.08 kB         105 kB
+├ ƒ /api/ads/conversion-rate                         3.08 kB         105 kB
+├ ƒ /api/ads/convert                                 3.08 kB         105 kB
+├ ƒ /api/ads/ctr                                     3.08 kB         105 kB
+├ ƒ /api/ads/eligibility                             3.08 kB         105 kB
+├ ƒ /api/ads/engagement                              3.08 kB         105 kB
+├ ƒ /api/ads/event                                   3.08 kB         105 kB
+├ ƒ /api/ads/event/stats                             3.08 kB         105 kB
+├ ƒ /api/ads/events                                  3.08 kB         105 kB
+├ ƒ /api/ads/exposure-summary                        3.08 kB         105 kB
+├ ƒ /api/ads/fatigue                                 3.08 kB         105 kB
+├ ƒ /api/ads/fatigue-gate                            3.08 kB         105 kB
+├ ƒ /api/ads/filter                                  3.08 kB         105 kB
+├ ƒ /api/ads/fraud/stats                             3.08 kB         105 kB
+├ ƒ /api/ads/frequency                               3.08 kB         105 kB
+├ ƒ /api/ads/fyp-audit                               3.08 kB         105 kB
+├ ƒ /api/ads/generate                                3.08 kB         105 kB
+├ ƒ /api/ads/health                                  3.08 kB         105 kB
+├ ƒ /api/ads/imp                                     3.08 kB         105 kB
+├ ƒ /api/ads/impression                              3.08 kB         105 kB
+├ ƒ /api/ads/injection                               3.08 kB         105 kB
+├ ƒ /api/ads/intent                                  3.08 kB         105 kB
+├ ƒ /api/ads/perf                                    3.08 kB         105 kB
+├ ƒ /api/ads/performance                             3.08 kB         105 kB
+├ ƒ /api/ads/performance-tier                        3.08 kB         105 kB
+├ ƒ /api/ads/policy                                  3.08 kB         105 kB
+├ ƒ /api/ads/rank                                    3.08 kB         105 kB
+├ ƒ /api/ads/ranking                                 3.08 kB         105 kB
+├ ƒ /api/ads/redirect                                3.08 kB         105 kB
+├ ƒ /api/ads/resolve                                 3.08 kB         105 kB
+├ ƒ /api/ads/rights/validate                         3.08 kB         105 kB
+├ ƒ /api/ads/roi                                     3.08 kB         105 kB
+├ ƒ /api/ads/rotation                                3.08 kB         105 kB
+├ ƒ /api/ads/safety                                  3.08 kB         105 kB
+├ ƒ /api/ads/select                                  3.08 kB         105 kB
+├ ƒ /api/ads/select-budgeted                         3.08 kB         105 kB
+├ ƒ /api/ads/select-fatigue-safe                     3.08 kB         105 kB
+├ ƒ /api/ads/select-tiered                           3.08 kB         105 kB
+├ ƒ /api/ads/serve                                   3.08 kB         105 kB
+├ ƒ /api/ads/session-rollup                          3.08 kB         105 kB
+├ ƒ /api/ads/stats                                   3.08 kB         105 kB
+├ ƒ /api/ads/track                                   3.08 kB         105 kB
+├ ƒ /api/ai/fault-healer/log                         3.08 kB         105 kB
+├ ƒ /api/analytics/event                             3.08 kB         105 kB
+├ ƒ /api/auth/forgot-password                        3.08 kB         105 kB
+├ ƒ /api/auth/recovery                               3.08 kB         105 kB
+├ ƒ /api/auth/reset-password                         3.08 kB         105 kB
+├ ƒ /api/auth/session                                3.08 kB         105 kB
+├ ƒ /api/auth/sessions                               3.08 kB         105 kB
+├ ƒ /api/auth/verify-email                           3.08 kB         105 kB
+├ ƒ /api/auto/generate                               3.08 kB         105 kB
+├ ƒ /api/beta/keystone                               3.08 kB         105 kB
+├ ƒ /api/billing/checkout                            3.08 kB         105 kB
+├ ƒ /api/billing/webhook                             3.08 kB         105 kB
+├ ƒ /api/boom                                        3.08 kB         105 kB
+├ ƒ /api/brand/splash                                3.08 kB         105 kB
+├ ƒ /api/brand/splash/guard                          3.08 kB         105 kB
+├ ƒ /api/brand/splash/memory                         3.08 kB         105 kB
+├ ƒ /api/brand/splash/metrics                        3.08 kB         105 kB
+├ ƒ /api/brand/splash/profile                        3.08 kB         105 kB
+├ ƒ /api/campaigns                                   3.08 kB         105 kB
+├ ƒ /api/campaigns/[id]                              3.08 kB         105 kB
+├ ƒ /api/cart                                        3.08 kB         105 kB
+├ ƒ /api/cart/clear                                  3.08 kB         105 kB
+├ ƒ /api/cart/items                                  3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/admin/audit             3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/admin/set-status        3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/demo                    3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/end                     3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/export                  3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/reset                   3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/shows                   3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/shows/[id]              3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/shows/[id]/ics          3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/shows/ics               3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/sse                     3.08 kB         105 kB
+├ ƒ /api/celebrations/[slug]/summary                 3.08 kB         105 kB
+├ ƒ /api/celebrations/alive                          3.08 kB         105 kB
+├ ƒ /api/celebrations/create                         3.08 kB         105 kB
+├ ƒ /api/celebrations/healthz                        3.08 kB         105 kB
+├ ƒ /api/celebrations/list                           3.08 kB         105 kB
+├ ƒ /api/celebrations/manifest                       3.08 kB         105 kB
+├ ƒ /api/cf/images                                   3.08 kB         105 kB
+├ ƒ /api/checkout                                    3.08 kB         105 kB
+├ ƒ /api/cineverse/evolution                         3.08 kB         105 kB
+├ ƒ /api/cineverse/federation/health                 3.08 kB         105 kB
+├ ƒ /api/cineverse/fyp                               3.08 kB         105 kB
+├ ƒ /api/cineverse/history                           3.08 kB         105 kB
+├ ƒ /api/cineverse/ingest                            3.08 kB         105 kB
+├ ƒ /api/cineverse/list                              3.08 kB         105 kB
+├ ƒ /api/cineverse/mood-rail                         3.08 kB         105 kB
+├ ƒ /api/cineverse/reactions                         3.08 kB         105 kB
+├ ƒ /api/cineverse/spoiler                           3.08 kB         105 kB
+├ ƒ /api/cineverse/summary                           3.08 kB         105 kB
+├ ƒ /api/cineverse/teasers                           3.08 kB         105 kB
+├ ƒ /api/cineverse/timeline                          3.08 kB         105 kB
+├ ƒ /api/coin/balance                                3.08 kB         105 kB
+├ ƒ /api/coin/ledger                                 3.08 kB         105 kB
+├ ƒ /api/coin/transfer                               3.08 kB         105 kB
+├ ƒ /api/comments                                    3.08 kB         105 kB
+├ ƒ /api/config                                      3.08 kB         105 kB
+├ ƒ /api/config/flags                                3.08 kB         105 kB
+├ ƒ /api/content-engine/alive                        3.08 kB         105 kB
+├ ƒ /api/content-engine/feed                         3.08 kB         105 kB
+├ ƒ /api/content-engine/pulse                        3.08 kB         105 kB
+├ ƒ /api/content-supply/fallback                     3.08 kB         105 kB
+├ ƒ /api/content-supply/regeneration                 3.08 kB         105 kB
+├ ƒ /api/content-supply/seed                         3.08 kB         105 kB
+├ ƒ /api/content-supply/trailer-priority             3.08 kB         105 kB
+├ ƒ /api/content-supply/ugc                          3.08 kB         105 kB
+├ ƒ /api/content/attention                           3.08 kB         105 kB
+├ ƒ /api/content/emotions                            3.08 kB         105 kB
+├ ƒ /api/content/graph                               3.08 kB         105 kB
+├ ƒ /api/content/lifecycle                           3.08 kB         105 kB
+├ ƒ /api/content/multi-source/debug                  3.08 kB         105 kB
+├ ƒ /api/content/multi-source/feed                   3.08 kB         105 kB
+├ ƒ /api/content/multi-source/proof                  3.08 kB         105 kB
+├ ƒ /api/content/origin                              3.08 kB         105 kB
+├ ƒ /api/content/query                               3.08 kB         105 kB
+├ ƒ /api/content/saturation                          3.08 kB         105 kB
+├ ƒ /api/content/schema                              3.08 kB         105 kB
+├ ƒ /api/content/trust                               3.08 kB         105 kB
+├ ƒ /api/context                                     3.08 kB         105 kB
+├ ƒ /api/conv/postback                               3.08 kB         105 kB
+├ ƒ /api/cpv/track                                   3.08 kB         105 kB
+├ ƒ /api/creatives                                   3.08 kB         105 kB
+├ ƒ /api/creatives/[id]                              3.08 kB         105 kB
+├ ƒ /api/creatives/create                            3.08 kB         105 kB
+├ ƒ /api/creatives/list                              3.08 kB         105 kB
+├ ƒ /api/creatives/thumb                             3.08 kB         105 kB
+├ ƒ /api/creatives/update/[id]                       3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/advanced-governance         3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/civilization-stability      3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/constellation-runtime       3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/creator-commerce            3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/dashboard                   3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/dream-chamber               3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/events                      3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/final-readiness             3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/health                      3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/human-reality               3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/launch-readiness            3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/live-integration            3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/moderation                  3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/observability               3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/private-beta                3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/quiet-gifts                 3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/ritual-legacy               3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/scale-optimization          3.08 kB         105 kB
+├ ƒ /api/creator-alchemy/zeneconomy                  3.08 kB         105 kB
+├ ƒ /api/creator-share/live-readiness                3.08 kB         105 kB
+├ ƒ /api/creator/apply                               3.08 kB         105 kB
+├ ƒ /api/creator/hub                                 3.08 kB         105 kB
+├ ƒ /api/creator/list                                3.08 kB         105 kB
+├ ƒ /api/creator/mock                                3.08 kB         105 kB
+├ ƒ /api/creator/profile                             3.08 kB         105 kB
+├ ƒ /api/creator/resonance                           3.08 kB         105 kB
+├ ƒ /api/creator/update                              3.08 kB         105 kB
+├ ƒ /api/cultural/blending                           3.08 kB         105 kB
+├ ƒ /api/cultural/regions                            3.08 kB         105 kB
+├ ƒ /api/cultural/splicing                           3.08 kB         105 kB
+├ ƒ /api/cultural/weighting                          3.08 kB         105 kB
+├ ƒ /api/data/analytics-aggregation                  3.08 kB         105 kB
+├ ƒ /api/data/backup-restore                         3.08 kB         105 kB
+├ ƒ /api/data/cache                                  3.08 kB         105 kB
+├ ƒ /api/data/cache-invalidation                     3.08 kB         105 kB
+├ ƒ /api/data/cross-signal-linking                   3.08 kB         105 kB
+├ ƒ /api/data/db-failover                            3.08 kB         105 kB
+├ ƒ /api/data/db-metrics                             3.08 kB         105 kB
+├ ƒ /api/data/db-pooling                             3.08 kB         105 kB
+├ ƒ /api/data/db-retry                               3.08 kB         105 kB
+├ ƒ /api/data/db-scaling                             3.08 kB         105 kB
+├ ƒ /api/data/enrichment-pipeline                    3.08 kB         105 kB
+├ ƒ /api/data/indexing                               3.08 kB         105 kB
+├ ƒ /api/data/partitioning                           3.08 kB         105 kB
+├ ƒ /api/data/pipeline                               3.08 kB         105 kB
+├ ƒ /api/data/primary-db                             3.08 kB         105 kB
+├ ƒ /api/data/query-optimization                     3.08 kB         105 kB
+├ ƒ /api/data/storage-tiers                          3.08 kB         105 kB
+├ ƒ /api/data/ttl-cleanup                            3.08 kB         105 kB
+├ ƒ /api/data/validation-pipeline                    3.08 kB         105 kB
+├ ƒ /api/debug/boot-metrics                          3.08 kB         105 kB
+├ ƒ /api/dev/routes                                  3.08 kB         105 kB
+├ ƒ /api/dev/testers/reset                           3.08 kB         105 kB
+├ ƒ /api/diag                                        3.08 kB         105 kB
+├ ƒ /api/diag/apilogs                                3.08 kB         105 kB
+├ ƒ /api/diag/rate-limit                             3.08 kB         105 kB
+├ ƒ /api/diag/trace                                  3.08 kB         105 kB
+├ ƒ /api/diag/traffic                                3.08 kB         105 kB
+├ ƒ /api/discovery/side-path                         3.08 kB         105 kB
+├ ƒ /api/dist/embed                                  3.08 kB         105 kB
+├ ƒ /api/dist/shorten                                3.08 kB         105 kB
+├ ƒ /api/dist/stats                                  3.08 kB         105 kB
+├ ƒ /api/echo/list                                   3.08 kB         105 kB
+├ ƒ /api/eco/rollup/run                              3.08 kB         105 kB
+├ ƒ /api/eco/summary                                 3.08 kB         105 kB
+├ ƒ /api/eco/timeseries                              3.08 kB         105 kB
+├ ƒ /api/email/digest                                3.08 kB         105 kB
+├ ƒ /api/emml/aggregate                              3.08 kB         105 kB
+├ ƒ /api/emml/assets                                 3.08 kB         105 kB
+├ ƒ /api/emml/chart                                  3.08 kB         105 kB
+├ ƒ /api/emml/compute                                3.08 kB         105 kB
+├ ƒ /api/emml/health                                 3.08 kB         105 kB
+├ ƒ /api/emml/heat                                   3.08 kB         105 kB
+├ ƒ /api/emml/indices                                3.08 kB         105 kB
+├ ƒ /api/emml/ingest                                 3.08 kB         105 kB
+├ ƒ /api/emml/sse                                    3.08 kB         105 kB
+├ ƒ /api/emml/state                                  3.08 kB         105 kB
+├ ƒ /api/emml/ticks                                  3.08 kB         105 kB
+├ ƒ /api/emotion/demo-add                            3.08 kB         105 kB
+├ ƒ /api/emotion/export                              3.08 kB         105 kB
+├ ƒ /api/emotion/heat                                3.08 kB         105 kB
+├ ƒ /api/emotion/index-calc                          3.08 kB         105 kB
+├ ƒ /api/emotion/ingest                              3.08 kB         105 kB
+├ ƒ /api/emotion/stream                              3.08 kB         105 kB
+├ ƒ /api/env/validate                                3.08 kB         105 kB
+├ ƒ /api/errors/report                               3.08 kB         105 kB
+├ ƒ /api/events/stream                               3.08 kB         105 kB
+├ ƒ /api/fan/follow                                  3.08 kB         105 kB
+├ ƒ /api/fan/inbox                                   3.08 kB         105 kB
+├ ƒ /api/fan/unfollow                                3.08 kB         105 kB
+├ ƒ /api/feed                                        3.08 kB         105 kB
+├ ƒ /api/feed/ab                                     3.08 kB         105 kB
+├ ƒ /api/feed/assemble                               3.08 kB         105 kB
+├ ƒ /api/feed/cache                                  3.08 kB         105 kB
+├ ƒ /api/feed/cineverse                              3.08 kB         105 kB
+├ ƒ /api/feed/dedupe                                 3.08 kB         105 kB
+├ ƒ /api/feed/discovery                              3.08 kB         105 kB
+├ ƒ /api/feed/diversity                              3.08 kB         105 kB
+├ ƒ /api/feed/final                                  3.08 kB         105 kB
+├ ƒ /api/feed/fomo                                   3.08 kB         105 kB
+├ ƒ /api/feed/freshness                              3.08 kB         105 kB
+├ ƒ /api/feed/guardrails                             3.08 kB         105 kB
+├ ƒ /api/feed/integrity                              3.08 kB         105 kB
+├ ƒ /api/feed/latency                                3.08 kB         105 kB
+├ ƒ /api/feed/metrics                                3.08 kB         105 kB
+├ ƒ /api/feed/mix                                    3.08 kB         105 kB
+├ ƒ /api/feed/mock                                   3.08 kB         105 kB
+├ ƒ /api/feed/override                               3.08 kB         105 kB
+├ ƒ /api/feed/personalize                            3.08 kB         105 kB
+├ ƒ /api/feed/ranking                                3.08 kB         105 kB
+├ ƒ /api/feed/scroll                                 3.08 kB         105 kB
+├ ƒ /api/feed/sentiment                              3.08 kB         105 kB
+├ ƒ /api/feed/session                                3.08 kB         105 kB
+├ ƒ /api/feedback/aggregate                          3.08 kB         105 kB
+├ ƒ /api/feedback/alerts                             3.08 kB         105 kB
+├ ƒ /api/feedback/anomaly                            3.08 kB         105 kB
+├ ƒ /api/feedback/auto-optimization                  3.08 kB         105 kB
+├ ƒ /api/feedback/ctr                                3.08 kB         105 kB
+├ ƒ /api/feedback/dashboard                          3.08 kB         105 kB
+├ ƒ /api/feedback/engagement-events                  3.08 kB         105 kB
+├ ƒ /api/feedback/event-stream                       3.08 kB         105 kB
+├ ƒ /api/feedback/events                             3.08 kB         105 kB
+├ ƒ /api/feedback/learning-rate                      3.08 kB         105 kB
+├ ƒ /api/feedback/loop                               3.08 kB         105 kB
+├ ƒ /api/feedback/ranking-integration                3.08 kB         105 kB
+├ ƒ /api/feedback/replay-weighting                   3.08 kB         105 kB
+├ ƒ /api/feedback/scoring                            3.08 kB         105 kB
+├ ƒ /api/feedback/skip-penalty                       3.08 kB         105 kB
+├ ƒ /api/feedback/trigger-rerank                     3.08 kB         105 kB
+├ ƒ /api/feedback/triggers                           3.08 kB         105 kB
+├ ƒ /api/feedback/watch-time-weighting               3.08 kB         105 kB
+├ ƒ /api/final/civilization-seal                     3.08 kB         105 kB
+├ ƒ /api/finance                                     3.08 kB         105 kB
+├ ƒ /api/fomo/calendar                               3.08 kB         105 kB
+├ ƒ /api/fomo/cooldown                               3.08 kB         105 kB
+├ ƒ /api/fomo/countdown                              3.08 kB         105 kB
+├ ƒ /api/fomo/countdowns                             3.08 kB         105 kB
+├ ƒ /api/fomo/decay                                  3.08 kB         105 kB
+├ ƒ /api/fomo/exclusive                              3.08 kB         105 kB
+├ ƒ /api/fomo/exclusivity                            3.08 kB         105 kB
+├ ƒ /api/fomo/push-notifications                     3.08 kB         105 kB
+├ ƒ /api/fomo/redacted                               3.08 kB         105 kB
+├ ƒ /api/fomo/reminders                              3.08 kB         105 kB
+├ ƒ /api/fomo/replay                                 3.08 kB         105 kB
+├ ƒ /api/fomo/replay-window                          3.08 kB         105 kB
+├ ƒ /api/fomo/throttling                             3.08 kB         105 kB
+├ ƒ /api/fomo/trailer                                3.08 kB         105 kB
+├ ƒ /api/fomo/tuning                                 3.08 kB         105 kB
+├ ƒ /api/format/audio                                3.08 kB         105 kB
+├ ƒ /api/format/fallback                             3.08 kB         105 kB
+├ ƒ /api/format/kinetic                              3.08 kB         105 kB
+├ ƒ /api/format/language                             3.08 kB         105 kB
+├ ƒ /api/format/overlay                              3.08 kB         105 kB
+├ ƒ /api/format/templates                            3.08 kB         105 kB
+├ ƒ /api/format/trailer-template                     3.08 kB         105 kB
+├ ƒ /api/format/translation                          3.08 kB         105 kB
+├ ƒ /api/format/validation                           3.08 kB         105 kB
+├ ƒ /api/fyp                                         3.08 kB         105 kB
+├ ƒ /api/fyp/alive                                   3.08 kB         105 kB
+├ ƒ /api/fyp/assembler                               3.08 kB         105 kB
+├ ƒ /api/fyp/cache-edge                              3.08 kB         105 kB
+├ ƒ /api/fyp/cineverse                               3.08 kB         105 kB
+├ ƒ /api/fyp/cold-start                              3.08 kB         105 kB
+├ ƒ /api/fyp/connect                                 3.08 kB         105 kB
+├ ƒ /api/fyp/daily-drop                              3.08 kB         105 kB
+├ ƒ /api/fyp/debug                                   3.08 kB         105 kB
+├ ƒ /api/fyp/dedup                                   3.08 kB         105 kB
+├ ƒ /api/fyp/discovery                               3.08 kB         105 kB
+├ ƒ /api/fyp/diversity                               3.08 kB         105 kB
+├ ƒ /api/fyp/fallback-feed                           3.08 kB         105 kB
+├ ƒ /api/fyp/feed                                    3.08 kB         105 kB
+├ ƒ /api/fyp/fomo                                    3.08 kB         105 kB
+├ ƒ /api/fyp/generate                                3.08 kB         105 kB
+├ ƒ /api/fyp/health                                  3.08 kB         105 kB
+├ ƒ /api/fyp/healthz                                 3.08 kB         105 kB
+├ ƒ /api/fyp/interact                                3.08 kB         105 kB
+├ ƒ /api/fyp/language                                3.08 kB         105 kB
+├ ƒ /api/fyp/latency                                 3.08 kB         105 kB
+├ ƒ /api/fyp/native-events                           3.08 kB         105 kB
+├ ƒ /api/fyp/native-feed                             3.08 kB         105 kB
+├ ƒ /api/fyp/native-upload                           3.08 kB         105 kB
+├ ƒ /api/fyp/observability                           3.08 kB         105 kB
+├ ƒ /api/fyp/personalization                         3.08 kB         105 kB
+├ ƒ /api/fyp/prefetch                                3.08 kB         105 kB
+├ ƒ /api/fyp/ranking                                 3.08 kB         105 kB
+├ ƒ /api/fyp/recommend                               3.08 kB         105 kB
+├ ƒ /api/fyp/regional                                3.08 kB         105 kB
+├ ƒ /api/fyp/runtime                                 3.08 kB         105 kB
+├ ƒ /api/fyp/scroll                                  3.08 kB         105 kB
+├ ƒ /api/fyp/session                                 3.08 kB         105 kB
+├ ƒ /api/fyp/summary                                 3.08 kB         105 kB
+├ ƒ /api/fyp/track                                   3.08 kB         105 kB
+├ ƒ /api/fyp/trailer-override                        3.08 kB         105 kB
+├ ƒ /api/fyp/youtube-feed                            3.08 kB         105 kB
+├ ƒ /api/fyp94/feed                                  3.08 kB         105 kB
+├ ƒ /api/fyp94/health                                3.08 kB         105 kB
+├ ƒ /api/fyp94/library                               3.08 kB         105 kB
+├ ƒ /api/fyp94/production-health                     3.08 kB         105 kB
+├ ƒ /api/geo/consent                                 3.08 kB         105 kB
+├ ƒ /api/geo/whereami                                3.08 kB         105 kB
+├ ƒ /api/gmar/ai/suggest-mission                     3.08 kB         105 kB
+├ ƒ /api/gmar/alive                                  3.08 kB         105 kB
+├ ƒ /api/gmar/creator/profile                        3.08 kB         105 kB
+├ ƒ /api/gmar/economy/claim                          3.08 kB         105 kB
+├ ƒ /api/gmar/final/admin/action                     3.08 kB         105 kB
+├ ƒ /api/gmar/final/auth/session                     3.08 kB         105 kB
+├ ƒ /api/gmar/final/compliance/status                3.08 kB         105 kB
+├ ƒ /api/gmar/final/creator/publish                  3.08 kB         105 kB
+├ ƒ /api/gmar/final/database/restore                 3.08 kB         105 kB
+├ ƒ /api/gmar/final/database/save                    3.08 kB         105 kB
+├ ƒ /api/gmar/final/economy/spend                    3.08 kB         105 kB
+├ ƒ /api/gmar/final/gameplay/missions                3.08 kB         105 kB
+├ ƒ /api/gmar/final/infrastructure/status            3.08 kB         105 kB
+├ ƒ /api/gmar/final/live/events                      3.08 kB         105 kB
+├ ƒ /api/gmar/final/matchmaking/session              3.08 kB         105 kB
+├ ƒ /api/gmar/final/observability/event              3.08 kB         105 kB
+├ ƒ /api/gmar/final/realtime/presence                3.08 kB         105 kB
+├ ƒ /api/gmar/final/release/status                   3.08 kB         105 kB
+├ ƒ /api/gmar/final/security/check                   3.08 kB         105 kB
+├ ƒ /api/gmar/fyp/activity                           3.08 kB         105 kB
+├ ƒ /api/gmar/gameplay/complete-objective            3.08 kB         105 kB
+├ ƒ /api/gmar/health                                 3.08 kB         105 kB
+├ ƒ /api/gmar/healthz                                3.08 kB         105 kB
+├ ƒ /api/gmar/home                                   3.08 kB         105 kB
+├ ƒ /api/gmar/inventory/grant                        3.08 kB         105 kB
+├ ƒ /api/gmar/launch/soft                            3.08 kB         105 kB
+├ ƒ /api/gmar/memory                                 3.08 kB         105 kB
+├ ƒ /api/gmar/onboarding/start                       3.08 kB         105 kB
+├ ƒ /api/gmar/persistence/save                       3.08 kB         105 kB
+├ ƒ /api/gmar/player/init                            3.08 kB         105 kB
+├ ƒ /api/gmar/playtest/session                       3.08 kB         105 kB
+├ ƒ /api/gmar/public-ready                           3.08 kB         105 kB
+├ ƒ /api/gmar/ready                                  3.08 kB         105 kB
+├ ƒ /api/gmar/social/squad/join                      3.08 kB         105 kB
+├ ƒ /api/gmar/state/init                             3.08 kB         105 kB
+├ ƒ /api/gmar/summary                                3.08 kB         105 kB
+├ ƒ /api/gmar/tester/register                        3.08 kB         105 kB
+├ ƒ /api/gmar/world/event/join                       3.08 kB         105 kB
+├ ƒ /api/health                                      3.08 kB         105 kB
+├ ƒ /api/health-alias                                3.08 kB         105 kB
+├ ƒ /api/health/portals                              3.08 kB         105 kB
+├ ƒ /api/healthz                                     3.08 kB         105 kB
+├ ƒ /api/hybrid/avatar/gen                           3.08 kB         105 kB
+├ ƒ /api/hybrid/avatar/list                          3.08 kB         105 kB
+├ ƒ /api/hybrid/avatar/transform                     3.08 kB         105 kB
+├ ƒ /api/hybrid/avatar/upload                        3.08 kB         105 kB
+├ ƒ /api/hybrid/claim                                3.08 kB         105 kB
+├ ƒ /api/hybrid/credits                              3.08 kB         105 kB
+├ ƒ /api/hybrid/dev/reset                            3.08 kB         105 kB
+├ ƒ /api/hybrid/dev/state                            3.08 kB         105 kB
+├ ƒ /api/hybrid/emoji                                3.08 kB         105 kB
+├ ƒ /api/hybrid/emoji/gen                            3.08 kB         105 kB
+├ ƒ /api/hybrid/emoji/list                           3.08 kB         105 kB
+├ ƒ /api/hybrid/generate                             3.08 kB         105 kB
+├ ƒ /api/hybrid/health                               3.08 kB         105 kB
+├ ƒ /api/hybrid/placeholder/avatar                   3.08 kB         105 kB
+├ ƒ /api/hybrid/placeholder/emoji                    3.08 kB         105 kB
+├ ƒ /api/hybrid/providers                            3.08 kB         105 kB
+├ ƒ /api/hybrid/status                               3.08 kB         105 kB
+├ ƒ /api/i18n/set                                    3.08 kB         105 kB
+├ ƒ /api/i18n/strings                                3.08 kB         105 kB
+├ ƒ /api/inbox                                       3.08 kB         105 kB
+├ ƒ /api/info                                        3.08 kB         105 kB
+├ ƒ /api/infra/alerting                              3.08 kB         105 kB
+├ ƒ /api/infra/api-gateway                           3.08 kB         105 kB
+├ ƒ /api/infra/autoscaling                           3.08 kB         105 kB
+├ ƒ /api/infra/cdn                                   3.08 kB         105 kB
+├ ƒ /api/infra/circuit-breakers                      3.08 kB         105 kB
+├ ƒ /api/infra/cost                                  3.08 kB         105 kB
+├ ƒ /api/infra/edge-cache                            3.08 kB         105 kB
+├ ƒ /api/infra/failover-routing                      3.08 kB         105 kB
+├ ƒ /api/infra/load-balancer                         3.08 kB         105 kB
+├ ƒ /api/infra/logging                               3.08 kB         105 kB
+├ ƒ /api/infra/monitoring                            3.08 kB         105 kB
+├ ƒ /api/infra/rate-limit                            3.08 kB         105 kB
+├ ƒ /api/infra/retry-strategies                      3.08 kB         105 kB
+├ ƒ /api/infra/tracing                               3.08 kB         105 kB
+├ ƒ /api/ingest/credentials                          3.08 kB         105 kB
+├ ƒ /api/ingest/dedup                                3.08 kB         105 kB
+├ ƒ /api/ingest/fallback-provider                    3.08 kB         105 kB
+├ ƒ /api/ingest/health                               3.08 kB         105 kB
+├ ƒ /api/ingest/instagram                            3.08 kB         105 kB
+├ ƒ /api/ingest/logging                              3.08 kB         105 kB
+├ ƒ /api/ingest/metrics                              3.08 kB         105 kB
+├ ƒ /api/ingest/normalize                            3.08 kB         105 kB
+├ ƒ /api/ingest/queue                                3.08 kB         105 kB
+├ ƒ /api/ingest/rate-limit                           3.08 kB         105 kB
+├ ƒ /api/ingest/reddit                               3.08 kB         105 kB
+├ ƒ /api/ingest/retry                                3.08 kB         105 kB
+├ ƒ /api/ingest/rss                                  3.08 kB         105 kB
+├ ƒ /api/ingest/schema-validation                    3.08 kB         105 kB
+├ ƒ /api/ingest/tiktok                               3.08 kB         105 kB
+├ ƒ /api/ingest/timestamp-sync                       3.08 kB         105 kB
+├ ƒ /api/ingest/trends                               3.08 kB         105 kB
+├ ƒ /api/ingest/twitch                               3.08 kB         105 kB
+├ ƒ /api/ingest/x                                    3.08 kB         105 kB
+├ ƒ /api/integration/engines                         3.08 kB         105 kB
+├ ƒ /api/integration/feed-consistency                3.08 kB         105 kB
+├ ƒ /api/integration/personalization-flow            3.08 kB         105 kB
+├ ƒ /api/integration/sync                            3.08 kB         105 kB
+├ ƒ /api/intelligence/attention-score                3.08 kB         105 kB
+├ ƒ /api/intelligence/clusters                       3.08 kB         105 kB
+├ ƒ /api/intelligence/coherence                      3.08 kB         105 kB
+├ ƒ /api/intelligence/consistency                    3.08 kB         105 kB
+├ ƒ /api/intelligence/cultural-tagging               3.08 kB         105 kB
+├ ƒ /api/intelligence/culture                        3.08 kB         105 kB
+├ ƒ /api/intelligence/decay                          3.08 kB         105 kB
+├ ƒ /api/intelligence/decay-prediction               3.08 kB         105 kB
+├ ƒ /api/intelligence/emotion                        3.08 kB         105 kB
+├ ƒ /api/intelligence/emotions                       3.08 kB         105 kB
+├ ƒ /api/intelligence/enriched-store                 3.08 kB         105 kB
+├ ƒ /api/intelligence/gravity                        3.08 kB         105 kB
+├ ƒ /api/intelligence/inference-cache                3.08 kB         105 kB
+├ ƒ /api/intelligence/lifecycle                      3.08 kB         105 kB
+├ ƒ /api/intelligence/low-signal-suppression         3.08 kB         105 kB
+├ ƒ /api/intelligence/narrative-score                3.08 kB         105 kB
+├ ƒ /api/intelligence/priority-boost                 3.08 kB         105 kB
+├ ƒ /api/intelligence/ranking-cache                  3.08 kB         105 kB
+├ ƒ /api/intelligence/ranking-compute                3.08 kB         105 kB
+├ ƒ /api/intelligence/ranking-precompute             3.08 kB         105 kB
+├ ƒ /api/intelligence/recompute                      3.08 kB         105 kB
+├ ƒ /api/intelligence/recompute-scheduler            3.08 kB         105 kB
+├ ƒ /api/intelligence/saturation                     3.08 kB         105 kB
+├ ƒ /api/intelligence/trailer-priority               3.08 kB         105 kB
+├ ƒ /api/intelligence/trend-clustering               3.08 kB         105 kB
+├ ƒ /api/intelligence/weighting                      3.08 kB         105 kB
+├ ƒ /api/intelligence/weights                        3.08 kB         105 kB
+├ ƒ /api/interaction/haptic                          3.08 kB         105 kB
+├ ƒ /api/interaction/hold                            3.08 kB         105 kB
+├ ƒ /api/interaction/like                            3.08 kB         105 kB
+├ ƒ /api/interaction/log                             3.08 kB         105 kB
+├ ƒ /api/interaction/multitouch                      3.08 kB         105 kB
+├ ƒ /api/interaction/not-interested                  3.08 kB         105 kB
+├ ƒ /api/interaction/predict                         3.08 kB         105 kB
+├ ƒ /api/interaction/save                            3.08 kB         105 kB
+├ ƒ /api/interaction/scroll                          3.08 kB         105 kB
+├ ƒ /api/interaction/share                           3.08 kB         105 kB
+├ ƒ /api/interaction/swipe                           3.08 kB         105 kB
+├ ƒ /api/interaction/tap                             3.08 kB         105 kB
+├ ƒ /api/interaction/tilt                            3.08 kB         105 kB
+├ ƒ /api/interaction/vibe                            3.08 kB         105 kB
+├ ƒ /api/interaction/voice                           3.08 kB         105 kB
+├ ƒ /api/kyc/request                                 3.08 kB         105 kB
+├ ƒ /api/kyc/status                                  3.08 kB         105 kB
+├ ƒ /api/kyc/upload                                  3.08 kB         105 kB
+├ ƒ /api/launch-readiness/api-contracts              3.08 kB         105 kB
+├ ƒ /api/launch-readiness/final-seal                 3.08 kB         105 kB
+├ ƒ /api/launch-readiness/fyp-live-production        3.08 kB         105 kB
+├ ƒ /api/launch-readiness/gmar-creator-monetization  3.08 kB         105 kB
+├ ƒ /api/launch-readiness/persistence-state          3.08 kB         105 kB
+├ ƒ /api/launch-readiness/reality-simulation         3.08 kB         105 kB
+├ ƒ /api/launch-readiness/realtime-events            3.08 kB         105 kB
+├ ƒ /api/launch-readiness/route-reality              3.08 kB         105 kB
+├ ƒ /api/launch-visual-state                         3.08 kB         105 kB
+├ ƒ /api/launch/readiness                            3.08 kB         105 kB
+├ ƒ /api/learning/profile                            3.08 kB         105 kB
+├ ƒ /api/learning/rank                               3.08 kB         105 kB
+├ ƒ /api/ledger/credit                               3.08 kB         105 kB
+├ ƒ /api/ledger/debit                                3.08 kB         105 kB
+├ ƒ /api/ledger/list/[ownerId]                       3.08 kB         105 kB
+├ ƒ /api/ledger/refund                               3.08 kB         105 kB
+├ ƒ /api/ledger/refunds/[ownerId]/[refType]/[refId]  3.08 kB         105 kB
+├ ƒ /api/links/create                                3.08 kB         105 kB
+├ ƒ /api/links/resolve                               3.08 kB         105 kB
+├ ƒ /api/live/afterglow                              3.08 kB         105 kB
+├ ƒ /api/live/alive                                  3.08 kB         105 kB
+├ ƒ /api/live/bookmark                               3.08 kB         105 kB
+├ ƒ /api/live/click                                  3.08 kB         105 kB
+├ ƒ /api/live/events                                 3.08 kB         105 kB
+├ ƒ /api/live/feed                                   3.08 kB         105 kB
+├ ƒ /api/live/feed-variation                         3.08 kB         105 kB
+├ ƒ /api/live/feedback                               3.08 kB         105 kB
+├ ƒ /api/live/google-trends                          3.08 kB         105 kB
+├ ƒ /api/live/health                                 3.08 kB         105 kB
+├ ƒ /api/live/health-badge                           3.08 kB         105 kB
+├ ƒ /api/live/healthz                                3.08 kB         105 kB
+├ ƒ /api/live/ingest/youtube                         3.08 kB         105 kB
+├ ƒ /api/live/load                                   3.08 kB         105 kB
+├ ƒ /api/live/mic                                    3.08 kB         105 kB
+├ ƒ /api/live/persist                                3.08 kB         105 kB
+├ ƒ /api/live/portal-hubs                            3.08 kB         105 kB
+├ ƒ /api/live/portal-spec                            3.08 kB         105 kB
+├ ƒ /api/live/proof                                  3.08 kB         105 kB
+├ ƒ /api/live/publish                                3.08 kB         105 kB
+├ ƒ /api/live/ranking                                3.08 kB         105 kB
+├ ƒ /api/live/raw-audit                              3.08 kB         105 kB
+├ ƒ /api/live/reddit                                 3.08 kB         105 kB
+├ ƒ /api/live/room                                   3.08 kB         105 kB
+├ ƒ /api/live/room-list                              3.08 kB         105 kB
+├ ƒ /api/live/room-state                             3.08 kB         105 kB
+├ ƒ /api/live/roomlist                               3.08 kB         105 kB
+├ ƒ /api/live/rooms                                  3.08 kB         105 kB
+├ ƒ /api/live/rooms-list                             3.08 kB         105 kB
+├ ƒ /api/live/rooms/[id]                             3.08 kB         105 kB
+├ ƒ /api/live/rooms/[id]/end                         3.08 kB         105 kB
+├ ƒ /api/live/rooms/[id]/events                      3.08 kB         105 kB
+├ ƒ /api/live/rooms/[id]/react                       3.08 kB         105 kB
+├ ƒ /api/live/rooms/[id]/reactions                   3.08 kB         105 kB
+├ ƒ /api/live/rooms/list                             3.08 kB         105 kB
+├ ƒ /api/live/rooms/public                           3.08 kB         105 kB
+├ ƒ /api/live/roomslist                              3.08 kB         105 kB
+├ ƒ /api/live/rss                                    3.08 kB         105 kB
+├ ƒ /api/live/runtime                                3.08 kB         105 kB
+├ ƒ /api/live/share                                  3.08 kB         105 kB
+├ ƒ /api/live/signals                                3.08 kB         105 kB
+├ ƒ /api/live/skip                                   3.08 kB         105 kB
+├ ƒ /api/live/status                                 3.08 kB         105 kB
+├ ƒ /api/live/summary                                3.08 kB         105 kB
+├ ƒ /api/live/validation                             3.08 kB         105 kB
+├ ƒ /api/live/watch                                  3.08 kB         105 kB
+├ ƒ /api/live/world-pulse                            3.08 kB         105 kB
+├ ƒ /api/live/youtube                                3.08 kB         105 kB
+├ ƒ /api/lumaspace/alive                             3.08 kB         105 kB
+├ ƒ /api/lumaspace/aura                              3.08 kB         105 kB
+├ ƒ /api/lumaspace/civilization                      3.08 kB         105 kB
+├ ƒ /api/lumaspace/init                              3.08 kB         105 kB
+├ ƒ /api/lumaspace/mirror                            3.08 kB         105 kB
+├ ƒ /api/lumaspace/ping                              3.08 kB         105 kB
+├ ƒ /api/lumaspace/reflection                        3.08 kB         105 kB
+├ ƒ /api/lumaspace/runtime                           3.08 kB         105 kB
+├ ƒ /api/lumaspace/shadow                            3.08 kB         105 kB
+├ ƒ /api/lumaspace/shadow/export                     3.08 kB         105 kB
+├ ƒ /api/lumaspace/share                             3.08 kB         105 kB
+├ ƒ /api/lumaspace/state                             3.08 kB         105 kB
+├ ƒ /api/lumaspace/tree                              3.08 kB         105 kB
+├ ƒ /api/lumaspace/zen/preview                       3.08 kB         105 kB
+├ ƒ /api/media/complete                              3.08 kB         105 kB
+├ ƒ /api/media/upload                                3.08 kB         105 kB
+├ ƒ /api/memory/list                                 3.08 kB         105 kB
+├ ƒ /api/memory/save                                 3.08 kB         105 kB
+├ ƒ /api/metrics/ads                                 3.08 kB         105 kB
+├ ƒ /api/metrics/batch                               3.08 kB         105 kB
+├ ƒ /api/mod/action                                  3.08 kB         105 kB
+├ ƒ /api/mod/queue                                   3.08 kB         105 kB
+├ ƒ /api/mod/report                                  3.08 kB         105 kB
+├ ƒ /api/mode                                        3.08 kB         105 kB
+├ ƒ /api/moderation/appeal                           3.08 kB         105 kB
+├ ƒ /api/moderation/audit                            3.08 kB         105 kB
+├ ƒ /api/moderation/block                            3.08 kB         105 kB
+├ ƒ /api/moderation/check                            3.08 kB         105 kB
+├ ƒ /api/moderation/policy                           3.08 kB         105 kB
+├ ƒ /api/moderation/report                           3.08 kB         105 kB
+├ ƒ /api/moderation/review-queue                     3.08 kB         105 kB
+├ ƒ /api/moderation/risk-mode                        3.08 kB         105 kB
+├ ƒ /api/moments/list                                3.08 kB         105 kB
+├ ƒ /api/moments/save                                3.08 kB         105 kB
+├ ƒ /api/monetization/ad-hooks                       3.08 kB         105 kB
+├ ƒ /api/monetization/engagement                     3.08 kB         105 kB
+├ ƒ /api/monetization/rewards                        3.08 kB         105 kB
+├ ƒ /api/monetization/validation                     3.08 kB         105 kB
+├ ƒ /api/motion/audio-reactive                       3.08 kB         105 kB
+├ ƒ /api/motion/fps                                  3.08 kB         105 kB
+├ ƒ /api/motion/gpu                                  3.08 kB         105 kB
+├ ƒ /api/motion/gradient                             3.08 kB         105 kB
+├ ƒ /api/motion/grain                                3.08 kB         105 kB
+├ ƒ /api/motion/performance                          3.08 kB         105 kB
+├ ƒ /api/motion/smoothing                            3.08 kB         105 kB
+├ ƒ /api/motion/transitions                          3.08 kB         105 kB
+├ ƒ /api/motion/vector                               3.08 kB         105 kB
+├ ƒ /api/movies/alive                                3.08 kB         105 kB
+├ ƒ /api/movies/catalog                              3.08 kB         105 kB
+├ ƒ /api/movies/health                               3.08 kB         105 kB
+├ ƒ /api/movies/healthz                              3.08 kB         105 kB
+├ ƒ /api/movies/item                                 3.08 kB         105 kB
+├ ƒ /api/music/catalog                               3.08 kB         105 kB
+├ ƒ /api/music/health                                3.08 kB         105 kB
+├ ƒ /api/music/item                                  3.08 kB         105 kB
+├ ƒ /api/news                                        3.08 kB         105 kB
+├ ƒ /api/nexa                                        3.08 kB         105 kB
+├ ƒ /api/nexa/alive                                  3.08 kB         105 kB
+├ ƒ /api/nexa/diag                                   3.08 kB         105 kB
+├ ƒ /api/nexa/health                                 3.08 kB         105 kB
+├ ƒ /api/nexa/healthz                                3.08 kB         105 kB
+├ ƒ /api/nexa/info                                   3.08 kB         105 kB
+├ ƒ /api/nexa/metrics                                3.08 kB         105 kB
+├ ƒ /api/nexa/ops                                    3.08 kB         105 kB
+├ ƒ /api/nexa/status                                 3.08 kB         105 kB
+├ ƒ /api/nexa/summary                                3.08 kB         105 kB
+├ ƒ /api/nexmoji/anim-check                          3.08 kB         105 kB
+├ ƒ /api/notifications                               3.08 kB         105 kB
+├ ƒ /api/notify/check-low-balance                    3.08 kB         105 kB
+├ ƒ /api/notify/emit                                 3.08 kB         105 kB
+├ ƒ /api/notify/inbox                                3.08 kB         105 kB
+├ ƒ /api/notify/subscribe                            3.08 kB         105 kB
+├ ƒ /api/offline/auto-recover                        3.08 kB         105 kB
+├ ƒ /api/offline/batch                               3.08 kB         105 kB
+├ ƒ /api/offline/batch/send                          3.08 kB         105 kB
+├ ƒ /api/offline/benchmark                           3.08 kB         105 kB
+├ ƒ /api/offline/delta/sync                          3.08 kB         105 kB
+├ ƒ /api/offline/hash-verify                         3.08 kB         105 kB
+├ ƒ /api/offline/predict                             3.08 kB         105 kB
+├ ƒ /api/offline/predict/merge                       3.08 kB         105 kB
+├ ƒ /api/offline/repair-log                          3.08 kB         105 kB
+├ ƒ /api/offline/reward-sync                         3.08 kB         105 kB
+├ ƒ /api/offline/rewards/sync                        3.08 kB         105 kB
+├ ƒ /api/orders                                      3.08 kB         105 kB
+├ ƒ /api/orders/[id]                                 3.08 kB         105 kB
+├ ƒ /api/payments/checkout                           3.08 kB         105 kB
+├ ƒ /api/payments/webhook                            3.08 kB         105 kB
+├ ƒ /api/persona/assets                              3.08 kB         105 kB
+├ ƒ /api/persona/emojis                              3.08 kB         105 kB
+├ ƒ /api/persona/expansions                          3.08 kB         105 kB
+├ ƒ /api/persona/health                              3.08 kB         105 kB
+├ ○ /api/persona/manifest                            3.08 kB         105 kB          1h      1y
+├ ƒ /api/persona/privacy                             3.08 kB         105 kB
+├ ƒ /api/persona/profile                             3.08 kB         105 kB
+├ ƒ /api/persona/reaction-map                        3.08 kB         105 kB
+├ ƒ /api/persona/select                              3.08 kB         105 kB
+├ ƒ /api/persona/variants                            3.08 kB         105 kB
+├ ƒ /api/persona/voice                               3.08 kB         105 kB
+├ ƒ /api/personalization/cache                       3.08 kB         105 kB
+├ ƒ /api/personalization/cold-start                  3.08 kB         105 kB
+├ ƒ /api/personalization/cross-session-memory        3.08 kB         105 kB
+├ ƒ /api/personalization/diversity                   3.08 kB         105 kB
+├ ƒ /api/personalization/emotional-profile           3.08 kB         105 kB
+├ ƒ /api/personalization/explore-exploit             3.08 kB         105 kB
+├ ƒ /api/personalization/gift                        3.08 kB         105 kB
+├ ƒ /api/personalization/interaction-signals         3.08 kB         105 kB
+├ ƒ /api/personalization/interest-graph              3.08 kB         105 kB
+├ ƒ /api/personalization/metrics                     3.08 kB         105 kB
+├ ƒ /api/personalization/monitoring                  3.08 kB         105 kB
+├ ƒ /api/personalization/pacing-model                3.08 kB         105 kB
+├ ƒ /api/personalization/preference-decay            3.08 kB         105 kB
+├ ƒ /api/personalization/session-learning            3.08 kB         105 kB
+├ ƒ /api/personalization/short-term-intent           3.08 kB         105 kB
+├ ƒ /api/portal-cards                                3.08 kB         105 kB
+├ ƒ /api/portal-health                               3.08 kB         105 kB
+├ ƒ /api/portal-overview                             3.08 kB         105 kB
+├ ƒ /api/portal-runtime                              3.08 kB         105 kB
+├ ƒ /api/portal-status                               3.08 kB         105 kB
+├ ƒ /api/portals                                     3.08 kB         105 kB
+├ ƒ /api/portals/alive                               3.08 kB         105 kB
+├ ƒ /api/portals/health                              3.08 kB         105 kB
+├ ƒ /api/portals/status                              3.08 kB         105 kB
+├ ƒ /api/posts                                       3.08 kB         105 kB
+├ ƒ /api/private-access                              3.08 kB         105 kB
+├ ƒ /api/private-beta/access                         3.08 kB         105 kB
+├ ƒ /api/private-beta/allowlist                      3.08 kB         105 kB
+├ ƒ /api/private-beta/gate                           3.08 kB         105 kB
+├ ƒ /api/private-beta/switch                         3.08 kB         105 kB
+├ ƒ /api/private/access                              3.08 kB         105 kB
+├ ƒ /api/products                                    3.08 kB         105 kB
+├ ƒ /api/products/[id]                               3.08 kB         105 kB
+├ ƒ /api/profile/attention                           3.08 kB         105 kB
+├ ƒ /api/profile/cache                               3.08 kB         105 kB
+├ ƒ /api/profile/emotion                             3.08 kB         105 kB
+├ ƒ /api/profile/expansion                           3.08 kB         105 kB
+├ ƒ /api/profile/interests                           3.08 kB         105 kB
+├ ƒ /api/profile/locale                              3.08 kB         105 kB
+├ ƒ /api/profile/merge                               3.08 kB         105 kB
+├ ƒ /api/profile/mix                                 3.08 kB         105 kB
+├ ƒ /api/profile/pacing                              3.08 kB         105 kB
+├ ƒ /api/profile/replay                              3.08 kB         105 kB
+├ ƒ /api/profile/schema                              3.08 kB         105 kB
+├ ƒ /api/profile/skip                                3.08 kB         105 kB
+├ ƒ /api/profile/summary                             3.08 kB         105 kB
+├ ƒ /api/profile/validation                          3.08 kB         105 kB
+├ ƒ /api/profile/watchtime                           3.08 kB         105 kB
+├ ƒ /api/proximity/ping                              3.08 kB         105 kB
+├ ƒ /api/pulse/action                                3.08 kB         105 kB
+├ ƒ /api/pulse/event                                 3.08 kB         105 kB
+├ ƒ /api/pulse/state                                 3.08 kB         105 kB
+├ ƒ /api/pwa/diag                                    3.08 kB         105 kB
+├ ƒ /api/r/[slug]                                    3.08 kB         105 kB
+├ ƒ /api/rankings/feed                               3.08 kB         105 kB
+├ ƒ /api/reaction/aggregation                        3.08 kB         105 kB
+├ ƒ /api/reaction/capture                            3.08 kB         105 kB
+├ ƒ /api/reaction/performance                        3.08 kB         105 kB
+├ ƒ /api/reaction/preroll                            3.08 kB         105 kB
+├ ƒ /api/reaction/privacy                            3.08 kB         105 kB
+├ ƒ /api/reaction/silhouette                         3.08 kB         105 kB
+├ ƒ /api/reaction/timeline                           3.08 kB         105 kB
+├ ƒ /api/reaction/visual                             3.08 kB         105 kB
+├ ƒ /api/ready                                       3.08 kB         105 kB
+├ ƒ /api/readyz                                      3.08 kB         105 kB
+├ ƒ /api/resilience/fallback                         3.08 kB         105 kB
+├ ƒ /api/resilience/heartbeat                        3.08 kB         105 kB
+├ ƒ /api/resilience/recovery                         3.08 kB         105 kB
+├ ƒ /api/resilience/retry                            3.08 kB         105 kB
+├ ƒ /api/reviews                                     3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/activation            3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/api-contract          3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/build-debt            3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/deprecations          3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/domain-ownership      3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/duplicate-audit       3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/event-bus             3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/final-seal            3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/observability         3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/orchestrators         3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/persistence-boundary  3.08 kB         105 kB
+├ ƒ /api/runtime-consolidation/route-inventory       3.08 kB         105 kB
+├ ƒ /api/runtime-summary                             3.08 kB         105 kB
+├ ƒ /api/runtime/events                              3.08 kB         105 kB
+├ ƒ /api/runtime/signals                             3.08 kB         105 kB
+├ ƒ /api/runtime/state                               3.08 kB         105 kB
+├ ƒ /api/safety-circle/opt-in                        3.08 kB         105 kB
+├ ƒ /api/safety/abuse-check                          3.08 kB         105 kB
+├ ƒ /api/safety/alerts                               3.08 kB         105 kB
+├ ƒ /api/safety/audio                                3.08 kB         105 kB
+├ ƒ /api/safety/audio-transcript                     3.08 kB         105 kB
+├ ƒ /api/safety/bot-check                            3.08 kB         105 kB
+├ ƒ /api/safety/cooldown                             3.08 kB         105 kB
+├ ƒ /api/safety/dashboard                            3.08 kB         105 kB
+├ ƒ /api/safety/device-nsfw                          3.08 kB         105 kB
+├ ƒ /api/safety/fallback                             3.08 kB         105 kB
+├ ƒ /api/safety/fatigue                              3.08 kB         105 kB
+├ ƒ /api/safety/image                                3.08 kB         105 kB
+├ ƒ /api/safety/keywords                             3.08 kB         105 kB
+├ ƒ /api/safety/motion                               3.08 kB         105 kB
+├ ƒ /api/safety/nsfw                                 3.08 kB         105 kB
+├ ƒ /api/safety/personal-limits                      3.08 kB         105 kB
+├ ƒ /api/safety/quarantine                           3.08 kB         105 kB
+├ ƒ /api/safety/rate-limit                           3.08 kB         105 kB
+├ ƒ /api/safety/rating                               3.08 kB         105 kB
+├ ƒ /api/safety/review                               3.08 kB         105 kB
+├ ƒ /api/safety/session-break                        3.08 kB         105 kB
+├ ƒ /api/safety/validation                           3.08 kB         105 kB
+├ ƒ /api/security/abuse                              3.08 kB         105 kB
+├ ƒ /api/security/audit                              3.08 kB         105 kB
+├ ƒ /api/security/check                              3.08 kB         105 kB
+├ ƒ /api/security/consent                            3.08 kB         105 kB
+├ ƒ /api/seller                                      3.08 kB         105 kB
+├ ƒ /api/seller/orders                               3.08 kB         105 kB
+├ ƒ /api/seller/products                             3.08 kB         105 kB
+├ ƒ /api/share                                       3.08 kB         105 kB
+├ ƒ /api/share/alive                                 3.08 kB         105 kB
+├ ƒ /api/share/healthz                               3.08 kB         105 kB
+├ ƒ /api/share/link                                  3.08 kB         105 kB
+├ ƒ /api/share/resolve                               3.08 kB         105 kB
+├ ƒ /api/share/track                                 3.08 kB         105 kB
+├ ƒ /api/shop/order                                  3.08 kB         105 kB
+├ ƒ /api/shop/webhook                                3.08 kB         105 kB
+├ ƒ /api/signals/cache                               3.08 kB         105 kB
+├ ƒ /api/signals/dedupe                              3.08 kB         105 kB
+├ ƒ /api/signals/fallback                            3.08 kB         105 kB
+├ ƒ /api/signals/freshness                           3.08 kB         105 kB
+├ ƒ /api/signals/google-trends                       3.08 kB         105 kB
+├ ƒ /api/signals/instagram                           3.08 kB         105 kB
+├ ƒ /api/signals/latency                             3.08 kB         105 kB
+├ ƒ /api/signals/news-rss                            3.08 kB         105 kB
+├ ƒ /api/signals/normalize                           3.08 kB         105 kB
+├ ƒ /api/signals/reddit                              3.08 kB         105 kB
+├ ƒ /api/signals/score                               3.08 kB         105 kB
+├ ƒ /api/signals/store                               3.08 kB         105 kB
+├ ƒ /api/signals/tiktok                              3.08 kB         105 kB
+├ ƒ /api/signals/twitch                              3.08 kB         105 kB
+├ ƒ /api/signals/twitter-x                           3.08 kB         105 kB
+├ ƒ /api/social/abuse-guards                         3.08 kB         105 kB
+├ ƒ /api/social/analytics                            3.08 kB         105 kB
+├ ƒ /api/social/attention-overlay                    3.08 kB         105 kB
+├ ƒ /api/social/ghost-room                           3.08 kB         105 kB
+├ ƒ /api/social/reaction-echo                        3.08 kB         105 kB
+├ ƒ /api/social/viewers                              3.08 kB         105 kB
+├ ƒ /api/state/capture                               3.08 kB         105 kB
+├ ƒ /api/state/persist                               3.08 kB         105 kB
+├ ƒ /api/state/recover                               3.08 kB         105 kB
+├ ƒ /api/state/sync                                  3.08 kB         105 kB
+├ ƒ /api/stillness/toggle                            3.08 kB         105 kB
+├ ƒ /api/stream/mock-webhook                         3.08 kB         105 kB
+├ ƒ /api/stream/upload-token                         3.08 kB         105 kB
+├ ƒ /api/stream/video                                3.08 kB         105 kB
+├ ƒ /api/stream/webhook                              3.08 kB         105 kB
+├ ƒ /api/stripe/checkout                             3.08 kB         105 kB
+├ ƒ /api/stripe/create-checkout-session              3.08 kB         105 kB
+├ ƒ /api/stripe/dev/simulate                         3.08 kB         105 kB
+├ ƒ /api/stripe/webhook                              3.08 kB         105 kB
+├ ƒ /api/subscriptions/cancel                        3.08 kB         105 kB
+├ ƒ /api/subscriptions/create                        3.08 kB         105 kB
+├ ƒ /api/surge/challenge                             3.08 kB         105 kB
+├ ƒ /api/surge/challenge/leaderboard                 3.08 kB         105 kB
+├ ƒ /api/surge/challenge/queue                       3.08 kB         105 kB
+├ ƒ /api/surge/challenge/rewards                     3.08 kB         105 kB
+├ ƒ /api/surge/challenge/state                       3.08 kB         105 kB
+├ ƒ /api/surge/challenge/submit                      3.08 kB         105 kB
+├ ƒ /api/surge/competition/entry                     3.08 kB         105 kB
+├ ƒ /api/surge/duel                                  3.08 kB         105 kB
+├ ƒ /api/surge/duel/anti-spam                        3.08 kB         105 kB
+├ ƒ /api/surge/duel/momentum                         3.08 kB         105 kB
+├ ƒ /api/surge/duel/resolve                          3.08 kB         105 kB
+├ ƒ /api/surge/duel/start                            3.08 kB         105 kB
+├ ƒ /api/surge/duel/vote                             3.08 kB         105 kB
+├ ƒ /api/surge/duel/vote-audit                       3.08 kB         105 kB
+├ ƒ /api/surge/leaderboard                           3.08 kB         105 kB
+├ ƒ /api/surge/leaderboard/reset                     3.08 kB         105 kB
+├ ƒ /api/surge/matchmaking                           3.08 kB         105 kB
+├ ƒ /api/surge/timer                                 3.08 kB         105 kB
+├ ƒ /api/teasers/create                              3.08 kB         105 kB
+├ ƒ /api/telemetry                                   3.08 kB         105 kB
+├ ƒ /api/telemetry/event                             3.08 kB         105 kB
+├ ƒ /api/telemetry/r2-egress                         3.08 kB         105 kB
+├ ƒ /api/telemetry/resolution                        3.08 kB         105 kB
+├ ƒ /api/telemetry/route-metrics                     3.08 kB         105 kB
+├ ƒ /api/telemetry/track                             3.08 kB         105 kB
+├ ƒ /api/track                                       3.08 kB         105 kB
+├ ƒ /api/trend/decay                                 3.08 kB         105 kB
+├ ƒ /api/trend/detect                                3.08 kB         105 kB
+├ ƒ /api/trend/score                                 3.08 kB         105 kB
+├ ƒ /api/trend/velocity                              3.08 kB         105 kB
+├ ƒ /api/trust                                       3.08 kB         105 kB
+├ ƒ /api/trust/anomalies                             3.08 kB         105 kB
+├ ƒ /api/trust/anomaly                               3.08 kB         105 kB
+├ ƒ /api/trust/audit                                 3.08 kB         105 kB
+├ ƒ /api/trust/audit-logs                            3.08 kB         105 kB
+├ ƒ /api/trust/bot-detection                         3.08 kB         105 kB
+├ ƒ /api/trust/bot-patterns                          3.08 kB         105 kB
+├ ƒ /api/trust/compliance                            3.08 kB         105 kB
+├ ƒ /api/trust/creator-thresholds                    3.08 kB         105 kB
+├ ƒ /api/trust/decay                                 3.08 kB         105 kB
+├ ƒ /api/trust/escalation-rules                      3.08 kB         105 kB
+├ ƒ /api/trust/fake-engagement                       3.08 kB         105 kB
+├ ƒ /api/trust/filter                                3.08 kB         105 kB
+├ ƒ /api/trust/gate                                  3.08 kB         105 kB
+├ ƒ /api/trust/metrics                               3.08 kB         105 kB
+├ ƒ /api/trust/misinformation                        3.08 kB         105 kB
+├ ƒ /api/trust/moderation-alerts                     3.08 kB         105 kB
+├ ƒ /api/trust/repeat-offenders                      3.08 kB         105 kB
+├ ƒ /api/trust/runtime/anomaly                       3.08 kB         105 kB
+├ ƒ /api/trust/runtime/bot                           3.08 kB         105 kB
+├ ƒ /api/trust/runtime/enforcement                   3.08 kB         105 kB
+├ ƒ /api/trust/runtime/fake-engagement               3.08 kB         105 kB
+├ ƒ /api/trust/runtime/misinformation                3.08 kB         105 kB
+├ ƒ /api/trust/runtime/quarantine                    3.08 kB         105 kB
+├ ƒ /api/trust/runtime/scam                          3.08 kB         105 kB
+├ ƒ /api/trust/runtime/toxicity                      3.08 kB         105 kB
+├ ƒ /api/trust/safe-fallback                         3.08 kB         105 kB
+├ ƒ /api/trust/scam                                  3.08 kB         105 kB
+├ ƒ /api/trust/score                                 3.08 kB         105 kB
+├ ƒ /api/trust/semantic                              3.08 kB         105 kB
+├ ƒ /api/trust/takedown                              3.08 kB         105 kB
+├ ƒ /api/trust/toxic-velocity                        3.08 kB         105 kB
+├ ƒ /api/trust/tq                                    3.08 kB         105 kB
+├ ƒ /api/uploads/presign                             3.08 kB         105 kB
+├ ƒ /api/user/profile                                3.08 kB         105 kB
+├ ƒ /api/validation/crash-free                       3.08 kB         105 kB
+├ ƒ /api/validation/ingestion                        3.08 kB         105 kB
+├ ƒ /api/validation/latency-fps                      3.08 kB         105 kB
+├ ƒ /api/validation/multi-platform-ingestion         3.08 kB         105 kB
+├ ƒ /api/validation/notifications                    3.08 kB         105 kB
+├ ƒ /api/validation/performance                      3.08 kB         105 kB
+├ ƒ /api/validation/personalization                  3.08 kB         105 kB
+├ ƒ /api/validation/personalization-accuracy         3.08 kB         105 kB
+├ ƒ /api/validation/real-user                        3.08 kB         105 kB
+├ ƒ /api/validation/real-user-simulation             3.08 kB         105 kB
+├ ƒ /api/validation/retention                        3.08 kB         105 kB
+├ ƒ /api/validation/retention-loops                  3.08 kB         105 kB
+├ ƒ /api/validation/safety                           3.08 kB         105 kB
+├ ƒ /api/validation/system-tests                     3.08 kB         105 kB
+├ ƒ /api/validation/zero-explicit-leaks              3.08 kB         105 kB
+├ ƒ /api/vault                                       3.08 kB         105 kB
+├ ƒ /api/vendor/campaigns                            3.08 kB         105 kB
+├ ƒ /api/vendor/campaigns/[id]                       3.08 kB         105 kB
+├ ƒ /api/vendor/campaigns/assign                     3.08 kB         105 kB
+├ ƒ /api/vendor/campaigns/assigned                   3.08 kB         105 kB
+├ ƒ /api/vendor/summary                              3.08 kB         105 kB
+├ ƒ /api/vendor/timeseries                           3.08 kB         105 kB
+├ ƒ /api/version                                     3.08 kB         105 kB
+├ ƒ /api/vibe/apply                                  3.08 kB         105 kB
+├ ƒ /api/vibe/my-recent                              3.08 kB         105 kB
+├ ƒ /api/vibe/status                                 3.08 kB         105 kB
+├ ƒ /api/vibe/tags                                   3.08 kB         105 kB
+├ ƒ /api/vibe/wall                                   3.08 kB         105 kB
+├ ƒ /api/video-gen                                   3.08 kB         105 kB
+├ ƒ /api/video-gen/guard                             3.08 kB         105 kB
+├ ƒ /api/video-gen/status                            3.08 kB         105 kB
+├ ƒ /api/video-gen/submit                            3.08 kB         105 kB
+├ ƒ /api/video/alive                                 3.08 kB         105 kB
+├ ƒ /api/video/color                                 3.08 kB         105 kB
+├ ƒ /api/video/fallback                              3.08 kB         105 kB
+├ ƒ /api/video/health                                3.08 kB         105 kB
+├ ƒ /api/video/masking                               3.08 kB         105 kB
+├ ƒ /api/video/performance                           3.08 kB         105 kB
+├ ƒ /api/video/preview                               3.08 kB         105 kB
+├ ƒ /api/video/skin                                  3.08 kB         105 kB
+├ ƒ /api/video/sync                                  3.08 kB         105 kB
+├ ƒ /api/videos/debug/list                           3.08 kB         105 kB
+├ ƒ /api/videos/feed                                 3.08 kB         105 kB
+├ ƒ /api/videos/health                               3.08 kB         105 kB
+├ ƒ /api/videos/healthz                              3.08 kB         105 kB
+├ ƒ /api/videos/stream-webhook                       3.08 kB         105 kB
+├ ƒ /api/wallet                                      3.08 kB         105 kB
+├ ƒ /api/wallet/balance                              3.08 kB         105 kB
+├ ƒ /api/wallet/credit                               3.08 kB         105 kB
+├ ƒ /api/wallet/credit-ledger                        3.08 kB         105 kB
+├ ƒ /api/wallet/debit                                3.08 kB         105 kB
+├ ƒ /api/wallet/history                              3.08 kB         105 kB
+├ ƒ /api/wallet/ledger                               3.08 kB         105 kB
+├ ƒ /api/wallet/summary                              3.08 kB         105 kB
+├ ƒ /api/wallet/topup                                3.08 kB         105 kB
+├ ƒ /api/wallet/txid-check                           3.08 kB         105 kB
+├ ƒ /api/wallet/withdraw                             3.08 kB         105 kB
+├ ƒ /api/wallets                                     3.08 kB         105 kB
+├ ƒ /api/wallets/[ownerId]                           3.08 kB         105 kB
+├ ƒ /api/wallets/[ownerId]/balance                   3.08 kB         105 kB
+├ ƒ /api/wallets/credit                              3.08 kB         105 kB
+├ ƒ /api/wallets/debit                               3.08 kB         105 kB
+├ ƒ /api/wallets/ensure                              3.08 kB         105 kB
+├ ƒ /api/wallets/transfer                            3.08 kB         105 kB
+├ ƒ /api/weather                                     3.08 kB         105 kB
+├ ƒ /api/webhooks/zendoro                            3.08 kB         105 kB
+├ ƒ /api/whereami                                    3.08 kB         105 kB
+├ ƒ /api/zen/economy                                 3.08 kB         105 kB
+├ ƒ /api/zencoin/admin                               3.08 kB         105 kB
+├ ƒ /api/zencoin/balance                             3.08 kB         105 kB
+├ ƒ /api/zencoin/fraud                               3.08 kB         105 kB
+├ ƒ /api/zencoin/governance                          3.08 kB         105 kB
+├ ƒ /api/zencoin/transactions                        3.08 kB         105 kB
+├ ƒ /api/zencoin/transfer                            3.08 kB         105 kB
+├ ƒ /api/zencoin/treasury                            3.08 kB         105 kB
+├ ƒ /api/zencoin/wallet                              3.08 kB         105 kB
+├ ƒ /api/zendoro/admin                               3.08 kB         105 kB
+├ ƒ /api/zendoro/cart                                3.08 kB         105 kB
+├ ƒ /api/zendoro/checkout                            3.08 kB         105 kB
+├ ƒ /api/zendoro/orders                              3.08 kB         105 kB
+├ ƒ /api/zendoro/products                            3.08 kB         105 kB
+├ ƒ /api/zendoro/reviews                             3.08 kB         105 kB
+├ ƒ /api/zendoro/seller                              3.08 kB         105 kB
+├ ƒ /api/zendoro/webhook                             3.08 kB         105 kB
+├ ƒ /api/zenwallet/creator                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/final-seal                        3.08 kB         105 kB
+├ ƒ /api/zenwallet/ledger                            3.08 kB         105 kB
+├ ƒ /api/zenwallet/offline                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/portals                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/refunds                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/runtime                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/security                          3.08 kB         105 kB
+├ ƒ /api/zenwallet/subscriptions                     3.08 kB         105 kB
+├ ƒ /api/zenwallet/support                           3.08 kB         105 kB
+├ ƒ /api/zenwallet/transparency                      3.08 kB         105 kB
+├ ƒ /apple-icon                                      3.08 kB         105 kB
+├ ○ /avatar-bridge                                   1.25 kB         103 kB
+├ ○ /avatar-lab                                      1.18 kB         103 kB
+├ ○ /beta                                            3.08 kB         105 kB
+├ ƒ /brand/eco                                       3.08 kB         105 kB
+├ ƒ /brand/insights                                  3.08 kB         105 kB
+├ ƒ /buy-credits                                       925 B         103 kB
+├ ○ /celebrations                                    3.08 kB         105 kB
+├ ƒ /celebrations/[slug]                             2.28 kB         104 kB
+├ ƒ /cf-upload                                         836 B         103 kB
+├ ○ /cineverse                                         247 B         105 kB
+├ ○ /cineverse/fyp                                   3.08 kB         105 kB
+├ ○ /cineverse/open-canon                            3.08 kB         105 kB
+├ ○ /control-center                                    247 B         105 kB
+├ ƒ /create                                          3.08 kB         105 kB
+├ ƒ /create/publish                                  3.08 kB         105 kB
+├ ƒ /create/record                                   3.08 kB         105 kB
+├ ƒ /create/upload                                   3.08 kB         105 kB
+├ ○ /creator                                         3.08 kB         105 kB
+├ ○ /creator-hub                                       175 B         102 kB
+├ ○ /creator/dashboard                               3.08 kB         105 kB
+├ ○ /creator/first-breath                            3.08 kB         105 kB
+├ ƒ /creator/review                                  1.54 kB         103 kB
+├ ○ /creator/settings                                3.08 kB         105 kB
+├ ƒ /dash/coin                                       3.08 kB         105 kB
+├ ƒ /dash/emml                                       3.08 kB         105 kB
+├ ƒ /dash/emml/heat                                  1.29 kB         103 kB
+├ ○ /dashboard                                       3.08 kB         105 kB
+├ ○ /dbg-min                                         3.08 kB         105 kB
+├ ○ /demo/gestures-demo                              1.25 kB         103 kB
+├ ƒ /dev/routes                                      3.08 kB         105 kB
+├ ƒ /dev/testers                                     3.08 kB         105 kB
+├ ƒ /distribute                                      3.08 kB         105 kB
+├ ○ /echo                                              247 B         105 kB
+├ ○ /echoes                                          3.08 kB         105 kB
+├ ƒ /echoes/[id]                                     3.08 kB         105 kB
+├ ƒ /embed                                           3.08 kB         105 kB
+├ ƒ /emml/chart                                        311 B         102 kB
+├ ○ /emoji-lab                                        1.2 kB         103 kB
+├ ƒ /emojis                                          1.91 kB         104 kB
+├ ○ /fan                                             3.08 kB         105 kB
+├ ○ /fan/settings                                      268 B         102 kB
+├ ƒ /feed                                            1.57 kB         103 kB
+├ ○ /forgot-password                                 3.08 kB         105 kB
+├ ƒ /fyp                                             4.55 kB         106 kB
+├ ƒ /fyp/raw                                           631 B         102 kB
+├ ○ /fyp94                                           1.22 kB         103 kB
+├ ○ /gestures-demo                                   1.13 kB         103 kB
+├ ƒ /glyphs                                          3.08 kB         105 kB
+├ ○ /gmar                                              247 B         105 kB
+├ ƒ /gmar/games/[slug]                               3.08 kB         105 kB
+├ ƒ /gmar/play                                       1.67 kB         103 kB
+├ ○ /go                                                596 B         106 kB
+├ ○ /holo-playground                                 1.45 kB         103 kB
+├ ƒ /hybrid                                          3.08 kB         105 kB
+├ ƒ /hybrid-demo                                     1.92 kB         104 kB
+├ ƒ /icon                                            3.08 kB         105 kB
+├ ○ /inbox                                           3.08 kB         105 kB
+├ ƒ /l/[id]                                          3.08 kB         105 kB
+├ ○ /lafs                                            3.08 kB         105 kB
+├ ○ /launch                                          3.08 kB         105 kB
+├ ○ /legal                                           3.08 kB         105 kB
+├ ○ /legal/creator-agreement                         3.08 kB         105 kB
+├ ○ /legal/privacy                                   3.08 kB         105 kB
+├ ○ /legal/terms                                     3.08 kB         105 kB
+├ ○ /live                                              247 B         105 kB
+├ ƒ /live/health                                     3.08 kB         105 kB
+├ ƒ /live/healthz                                    3.08 kB         105 kB
+├ ○ /live/hubs                                       1.61 kB         103 kB
+├ ƒ /live/room                                       3.08 kB         105 kB
+├ ƒ /live/room/[id]                                  4.51 kB         106 kB
+├ ○ /login                                           3.08 kB         105 kB
+├ ○ /lumaspace                                         247 B         105 kB
+├ ○ /lumaspace/accessibility                         1.28 kB         106 kB
+├ ○ /lumaspace/airdrop                               2.76 kB         108 kB
+├ ○ /lumaspace/coach                                   890 B         139 kB
+├ ƒ /lumaspace/converter                             3.08 kB         105 kB
+├ ○ /lumaspace/dashboard                                1 kB         106 kB
+├ ƒ /lumaspace/debug                                 3.08 kB         105 kB
+├ ○ /lumaspace/forecast                              3.08 kB         105 kB
+├ ○ /lumaspace/journal                               1.05 kB         103 kB
+├ ○ /lumaspace/memory                                 233 kB         335 kB
+├ ƒ /lumaspace/recorder                              1.31 kB         103 kB
+├ ƒ /lumaspace/reflection                            1.76 kB         103 kB
+├ ○ /lumaspace/shadow                                 1.7 kB         143 kB
+├ ○ /lumaspace/shadow/analytics                      3.08 kB         105 kB
+├ ○ /lumaspace/sync                                   2.4 kB         104 kB
+├ ○ /lumaspace/trading                                1.7 kB         143 kB
+├ ƒ /lumen                                           3.08 kB         105 kB
+├ ○ /lumexa                                          3.08 kB         105 kB
+├ ƒ /lumexa/chat                                       995 B         103 kB
+├ ƒ /lumexa/search                                   3.08 kB         105 kB
+├ ƒ /lumexa/shop                                       247 B         105 kB
+├ ○ /manifest.webmanifest                            3.08 kB         105 kB
+├ ○ /me/space                                        1.13 kB         103 kB
+├ ○ /media                                           3.08 kB         105 kB
+├ ƒ /memory/[memoryId]                               3.08 kB         105 kB
+├ ○ /mission-control                                 3.08 kB         105 kB
+├ ○ /moderation                                      3.08 kB         105 kB
+├ ○ /movies                                            247 B         105 kB
+├ ƒ /movies/portal                                   3.08 kB         105 kB
+├ ƒ /movies/watch                                    3.08 kB         105 kB
+├ ƒ /movies/watch/[id]                               3.08 kB         105 kB
+├ ○ /music                                             247 B         105 kB
+├ ƒ /music/play                                      3.08 kB         105 kB
+├ ○ /nexa                                              247 B         105 kB
+├ ○ /nexa/checkin                                    1.53 kB         103 kB
+├ ƒ /nexa/ops                                        3.08 kB         105 kB
+├ ƒ /nexmoji                                         7.95 kB         110 kB
+├ ○ /notifications                                   3.08 kB         105 kB
+├ ○ /offline                                         3.08 kB         105 kB
+├ ƒ /offline-diagnostics                             2.38 kB         104 kB
+├ ○ /offline-video                                     677 B         102 kB
+├ ○ /onboarding                                      3.08 kB         105 kB
+├ ○ /operator                                        3.08 kB         105 kB
+├ ○ /overlay-demo                                    3.08 kB         105 kB
+├ ○ /overlay-feed                                     1.7 kB         103 kB
+├ ○ /overlay-sprite                                    453 B         102 kB
+├ ƒ /p.gif                                           3.08 kB         105 kB
+├ ○ /payments                                        3.08 kB         105 kB
+├ ƒ /persona/emoji-lab                                 247 B         105 kB
+├ ƒ /persona/lab                                       247 B         105 kB
+├ ƒ /persona/live-preview                              995 B         103 kB
+├ ƒ /persona/select                                  1.69 kB         103 kB
+├ ○ /portals                                         3.08 kB         105 kB
+├ ○ /posts                                           3.08 kB         105 kB
+├ ○ /private-access                                  1.11 kB         103 kB
+├ ○ /profile                                           646 B         102 kB
+├ ○ /progress                                        3.08 kB         105 kB
+├ ○ /pwa/diag                                        1.18 kB         103 kB
+├ ƒ /r                                               3.08 kB         105 kB
+├ ○ /reset-password                                  3.08 kB         105 kB
+├ ○ /robots.txt                                      3.08 kB         105 kB
+├ ○ /safety-circle                                   3.08 kB         105 kB
+├ ○ /settings                                          588 B         102 kB
+├ ○ /share                                             247 B         105 kB
+├ ○ /shop                                            1.13 kB         103 kB
+├ ○ /signup                                          3.08 kB         105 kB
+├ ○ /social                                          3.08 kB         105 kB
+├ ○ /status                                          3.08 kB         105 kB
+├ ○ /stillness                                       3.08 kB         105 kB
+├ ○ /store                                           3.08 kB         105 kB
+├ ○ /system                                            247 B         105 kB
+├ ○ /teasers                                         3.08 kB         105 kB
+├ ○ /test                                            1.01 kB         103 kB
+├ ƒ /trending                                        3.08 kB         105 kB
+├ ○ /trust                                           3.08 kB         105 kB
+├ ○ /trust/creator                                   3.08 kB         105 kB
+├ ƒ /vendor                                          3.08 kB         105 kB
+├ ƒ /vendor/campaigns                                3.08 kB         105 kB
+├ ƒ /vendor/camps                                    3.08 kB         105 kB
+├ ƒ /vendor/creatives                                3.08 kB         105 kB
+├ ƒ /vendor/metrics                                  3.08 kB         105 kB
+├ ○ /vibe-demo                                       1.84 kB         104 kB
+├ ƒ /video                                           3.08 kB         105 kB
+├ ○ /video-gen                                         247 B         105 kB
+├ ○ /video-gen/demo                                  1.44 kB         103 kB
+├ ○ /videos                                          3.08 kB         105 kB
+├ ○ /videos/upload                                     676 B         102 kB
+├ ○ /wallet                                          3.08 kB         105 kB
+├ ○ /wallet-demo                                       728 B         102 kB
+├ ƒ /wallets                                           247 B         105 kB
+├ ƒ /wallets/[ownerId]                                 247 B         105 kB
+├ ƒ /watch                                           3.08 kB         105 kB
+├ ƒ /watch/[id]                                      3.08 kB         105 kB
+├ ○ /zendoro                                           247 B         105 kB
+├ ○ /zendoro/admin                                   3.08 kB         105 kB
+├ ○ /zendoro/cart                                    3.08 kB         105 kB
+├ ○ /zendoro/checkout                                  247 B         105 kB
+├ ○ /zendoro/orders                                    247 B         105 kB
+├ ƒ /zendoro/product/[id]                            3.08 kB         105 kB
+├ ○ /zendoro/products                                3.08 kB         105 kB
+├ ○ /zendoro/reviews                                   247 B         105 kB
+├ ○ /zendoro/seller                                  3.08 kB         105 kB
+└ ○ /zenwallet                                         247 B         105 kB
++ First Load JS shared by all                         102 kB
+  ├ chunks/5a444783-9b676881ac33fab1.js              54.2 kB
+  ├ chunks/6006-7f216d380614d973.js                  45.5 kB
+  └ other shared chunks (total)                      1.99 kB
+
+Route (pages)                                           Size  First Load JS
+┌ ○ /ads-test (716 ms)                               1.96 kB        97.8 kB
+├ ƒ /api/ad-server/click                                 0 B        95.9 kB
+├ ƒ /api/ad-server/next                                  0 B        95.9 kB
+├ ƒ /api/ad-server/view                                  0 B        95.9 kB
+├ ƒ /api/business                                        0 B        95.9 kB
+├ ƒ /api/campaigns/[id]/status                           0 B        95.9 kB
+├ ƒ /api/lumasearch                                      0 B        95.9 kB
+├ ƒ /api/ping                                            0 B        95.9 kB
+├ ƒ /api/redemptions                                     0 B        95.9 kB
+├ ƒ /api/stats/overview                                  0 B        95.9 kB
+├ ƒ /api/upstream                                        0 B        95.9 kB
+├ ○ /components/ads/AdBanner (721 ms)                  977 B        96.8 kB
+├ ○ /vendor/campaigns/[id]/stats (727 ms)            1.51 kB        97.4 kB
+├ ○ /vendor/campaigns/new (722 ms)                   1.29 kB        97.2 kB
+├ ○ /vendor/profile (715 ms)                         1.48 kB        97.3 kB
+└ ○ /vendor/wallet (714 ms)                          1.62 kB        97.5 kB
++ First Load JS shared by all                        95.9 kB
+  ├ chunks/framework-c3ac72a22c65e209.js             57.4 kB
+  ├ chunks/main-a6dbbd55baf79be2.js                  36.5 kB
+  └ other shared chunks (total)                      1.95 kB
+
+ƒ Middleware                                         34.4 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
