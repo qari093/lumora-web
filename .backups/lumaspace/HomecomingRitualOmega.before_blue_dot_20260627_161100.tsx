@@ -46,7 +46,7 @@ export default function HomecomingRitualOmega() {
       <div className="ls-homecoming-spark" data-testid="ls-homecoming-spark" />
 
       <div className="ls-homecoming-promise" data-testid="ls-homecoming-promise">
-        <span className="space">YOUR SPACE.<i className="ls-homecoming-blue-dot" aria-hidden="true" /></span>
+        <span className="space">YOUR SPACE.</span>
         <span className="people">YOUR PEOPLE.</span>
         <span className="story">YOUR STORY.</span>
       </div>

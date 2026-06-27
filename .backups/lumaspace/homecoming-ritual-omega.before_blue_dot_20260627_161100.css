@@ -291,17 +291,3 @@
   visibility: visible !important;
   background: #02030a !important;
 }
-
-/* F4 polish: restore light blue dot beside YOUR SPACE */
-.ls-homecoming-blue-dot {
-  display: inline-block;
-  width: .48em;
-  height: .48em;
-  margin-left: .42em;
-  border-radius: 999px;
-  vertical-align: .08em;
-  background: #67e8f9;
-  box-shadow:
-    0 0 10px rgba(103,232,249,.82),
-    0 0 24px rgba(56,189,248,.36);
-}

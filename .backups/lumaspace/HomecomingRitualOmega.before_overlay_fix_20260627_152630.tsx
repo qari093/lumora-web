@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import "@/src/styles/lumaspace/homecoming-ritual-omega.css";
 
 export default function HomecomingRitualOmega() {
-  const [holdEnabled, setHoldEnabled] = useState(false);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setHoldEnabled(params.get("homecoming") === "hold");
-  }, []);
+  const holdEnabled =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("homecoming") === "hold";
 
   return (
     <section
@@ -17,13 +13,6 @@ export default function HomecomingRitualOmega() {
       data-testid="ls-homecoming-ritual"
       data-homecoming-hold={holdEnabled ? "true" : "false"}
       aria-label="LumaSpace Homecoming"
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 2147483647,
-        isolation: "isolate",
-        pointerEvents: "none"
-      }}
     >
       <div className="ls-homecoming-black" />
 
@@ -46,7 +35,7 @@ export default function HomecomingRitualOmega() {
       <div className="ls-homecoming-spark" data-testid="ls-homecoming-spark" />
 
       <div className="ls-homecoming-promise" data-testid="ls-homecoming-promise">
-        <span className="space">YOUR SPACE.<i className="ls-homecoming-blue-dot" aria-hidden="true" /></span>
+        <span className="space">YOUR SPACE.</span>
         <span className="people">YOUR PEOPLE.</span>
         <span className="story">YOUR STORY.</span>
       </div>
