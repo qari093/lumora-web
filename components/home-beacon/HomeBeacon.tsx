@@ -16,7 +16,12 @@ DEFAULT_HOME_BEACON_CONFIG,
 export default function HomeBeacon() {
   const pathname = usePathname();
 
-  if (pathname === "/fyp" || pathname?.startsWith("/fyp/")) {
+  if (
+    pathname === "/fyp" ||
+    pathname?.startsWith("/fyp/") ||
+    pathname === "/lumaspace" ||
+    pathname?.startsWith("/lumaspace/")
+  ) {
     return null;
   }
 

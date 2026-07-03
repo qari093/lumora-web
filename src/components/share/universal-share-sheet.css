@@ -1,0 +1,229 @@
+.usl-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482000;
+  display: grid;
+  align-items: end;
+  background: rgba(0, 0, 0, .52);
+  backdrop-filter: blur(18px);
+}
+
+.usl-sheet {
+  width: min(720px, calc(100vw - 24px));
+  max-height: min(82vh, 820px);
+  margin: 0 auto max(12px, env(safe-area-inset-bottom));
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(103, 232, 249, .14), transparent 32%),
+    radial-gradient(circle at 88% 18%, rgba(96, 165, 250, .12), transparent 30%),
+    rgba(2, 3, 10, .94);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .55);
+  color: white;
+  padding: 20px;
+}
+
+.usl-sheet-header,
+.usl-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.usl-eyebrow {
+  margin: 0 0 5px;
+  color: rgba(103, 232, 249, .82);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.usl-sheet h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -.02em;
+}
+
+.usl-close,
+.usl-secondary,
+.usl-primary,
+.usl-destination,
+.usl-mode {
+  border: 0;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+}
+
+.usl-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  font-size: 24px;
+}
+
+.usl-preview {
+  display: grid;
+  gap: 5px;
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .05);
+}
+
+.usl-preview span,
+.usl-preview small,
+.usl-destination small,
+.usl-mode small {
+  color: rgba(255, 255, 255, .58);
+}
+
+.usl-preview strong {
+  font-size: 18px;
+}
+
+.usl-section-title {
+  margin: 18px 0 10px;
+  color: rgba(255, 255, 255, .74);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.usl-destinations {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.usl-destination {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-height: 92px;
+  padding: 14px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .045);
+}
+
+.usl-destination.active,
+.usl-mode.active {
+  border-color: rgba(103, 232, 249, .5);
+  background: rgba(103, 232, 249, .12);
+  box-shadow: 0 0 28px rgba(56, 189, 248, .14);
+}
+
+.usl-destination-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background: rgba(103, 232, 249, .12);
+  color: #67e8f9;
+}
+
+.usl-destination span:last-child,
+.usl-mode {
+  display: grid;
+  gap: 4px;
+}
+
+.usl-modes {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.usl-mode {
+  min-width: 156px;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .045);
+}
+
+.usl-actions {
+  margin-top: 18px;
+}
+
+.usl-secondary,
+.usl-primary {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+}
+
+.usl-secondary {
+  background: rgba(255, 255, 255, .07);
+}
+
+.usl-primary {
+  background: linear-gradient(135deg, rgba(103, 232, 249, .92), rgba(37, 99, 235, .92));
+  color: #02030a;
+  font-weight: 900;
+}
+
+@media (max-width: 560px) {
+  .usl-sheet {
+    width: 100vw;
+    max-height: 88vh;
+    margin-bottom: 0;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .usl-destinations {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* USL 02 final production polish */
+.usl-success,
+.usl-error,
+.usl-empty,
+.usl-recommendation {
+  word-break: break-word;
+}
+
+.usl-inline-share-button {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  color: #02030a;
+  font-weight: 900;
+  background: linear-gradient(135deg, rgba(103,232,249,.96), rgba(37,99,235,.92));
+}
+
+.usl-share-fab {
+  position: fixed;
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 120;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(103,232,249,.18);
+  color: #67e8f9;
+  box-shadow: 0 0 34px rgba(56,189,248,.28);
+  backdrop-filter: blur(18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .usl-sheet {
+    animation: none !important;
+  }
+}

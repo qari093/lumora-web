@@ -1834,3 +1834,59 @@ body:has(.lumaspace-runtime-shell) {
   background: #02030a !important;
 }
 
+
+/* F5: hide legacy floating NEXA/N orb from LumaSpace sanctuary surface */
+.lumaspace-runtime-shell .ls-nexa-orb,
+.lumaspace-runtime-shell .ls-nexa-companion,
+.lumaspace-runtime-shell [data-testid="lumaspace-nexa-orb"],
+.lumaspace-runtime-shell [data-testid="ls-nexa-companion"],
+.lumaspace-runtime-shell [aria-label="Open NEXA companion"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* F5.5: hide leaked global FYP/N identity badge from LumaSpace only */
+body:has(.lumaspace-runtime-shell) .fyp-omega-identity,
+body:has(.lumaspace-runtime-shell) .fyp-identity,
+body:has(.lumaspace-runtime-shell) .lumora-identity,
+body:has(.lumaspace-runtime-shell) [class*="FypOmegaIdentity"],
+body:has(.lumaspace-runtime-shell) [class*="fypOmegaIdentity"],
+body:has(.lumaspace-runtime-shell) [class*="fyp-omega-identity"],
+body:has(.lumaspace-runtime-shell) [class*="omegaIdentity"],
+body:has(.lumaspace-runtime-shell) [aria-label*="FYP"],
+body:has(.lumaspace-runtime-shell) [aria-label*="Lumora identity"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* H2: stable route-scoped LumaSpace shell for Safari/iPhone */
+body.lumora-lumaspace-route {
+  overflow: hidden !important;
+  background: #02030a !important;
+}
+
+body.lumora-lumaspace-route .lumaspace-runtime-shell {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100svh !important;
+  z-index: 1000 !important;
+  background: #02030a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+body.lumora-lumaspace-route [data-testid="lumora-home-beacon"],
+body.lumora-lumaspace-route [data-testid="home-beacon-dashboard"],
+body.lumora-lumaspace-route nav[aria-label="Lumora portal arc"],
+body.lumora-lumaspace-route nav[aria-label="Global portal navigation"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

@@ -305,3 +305,79 @@
     0 0 10px rgba(103,232,249,.82),
     0 0 24px rgba(56,189,248,.36);
 }
+
+/* H2: safer overlay z-index for Safari/iPhone */
+body.lumora-lumaspace-route .ls-homecoming-ritual {
+  z-index: 2000 !important;
+  background: #02030a !important;
+}
+
+/* H6: canonical Lumora asset, no decorative dot */
+.ls-homecoming-logo-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 18px rgba(103,232,249,.55))
+    drop-shadow(0 0 42px rgba(56,189,248,.22));
+}
+
+.ls-homecoming-blue-dot {
+  display: none !important;
+}
+
+/* H8 — Sacred choreography */
+
+.ls-homecoming-logo-img{
+  width:96px;
+  height:96px;
+  opacity:0;
+  transform:translateY(10px) scale(.88);
+  animation:lsH8Logo .9s cubic-bezier(.22,.61,.36,1) .55s forwards;
+}
+
+.ls-homecoming-spark{
+  opacity:0;
+  animation:lsH8Spark .7s ease .95s forwards;
+}
+
+.ls-homecoming-promise .space{
+  opacity:0;
+  animation:lsH8Reveal .45s ease 1.60s forwards;
+}
+
+.ls-homecoming-promise .people{
+  opacity:0;
+  animation:lsH8Reveal .45s ease 2.20s forwards;
+}
+
+.ls-homecoming-promise .story{
+  opacity:0;
+  animation:lsH8Reveal .45s ease 2.80s forwards;
+}
+
+.ls-homecoming-whisper{
+  opacity:0;
+  animation:lsH8Whisper .8s ease 3.70s forwards;
+}
+
+@keyframes lsH8Logo{
+  from{opacity:0;transform:translateY(10px) scale(.88);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+@keyframes lsH8Spark{
+  0%{opacity:0;transform:scale(.25);}
+  45%{opacity:1;transform:scale(1.65);}
+  100%{opacity:1;transform:scale(1);}
+}
+
+@keyframes lsH8Reveal{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes lsH8Whisper{
+  from{opacity:0;}
+  to{opacity:.55;}
+}

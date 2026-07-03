@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import "@/src/styles/lumaspace/living-universe.css";
 import HomecomingRitualOmega from "@/src/components/lumaspace/homecoming/HomecomingRitualOmega";
 import LumaAtmosphereEngine from "@/src/components/lumaspace/atmosphere/LumaAtmosphereEngine";
@@ -11,6 +12,11 @@ import LivingWorldIdentitiesLayer from "@/src/components/lumaspace/experience/Li
 import AmbientPresenceEvolutionLayer from "@/src/components/lumaspace/experience/AmbientPresenceEvolutionLayer";
 
 export default function LivingUniverseRuntime() {
+  useEffect(() => {
+    document.body.classList.add("lumora-lumaspace-route");
+    return () => document.body.classList.remove("lumora-lumaspace-route");
+  }, []);
+
   return (
     <>
       <HomecomingRitualOmega />

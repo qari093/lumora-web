@@ -1,9 +1,11 @@
 {
-  "status": "LIVE_FYP_VALIDATED",
-  "checks": {
-    "productionMatrix": "PASS",
-    "legacyAliasSafety": "PASS",
-    "productionGuards": "PASS"
-  },
-  "nextCanonicalPhase": "Start private beta"
+  "id": "live_fyp_final_validation_seal_v1",
+  "status": "PASS",
+  "checkedAt": "2026-07-03T21:10:47.193Z",
+  "requires": [
+    "production_guards",
+    "no_5xx_guarded_routes",
+    "debug_routes_safe",
+    "safe_methods_guarded"
+  ]
 }
