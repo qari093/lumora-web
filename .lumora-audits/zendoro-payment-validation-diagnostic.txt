@@ -1,0 +1,15 @@
+=== TEST EXIT ===
+0
+
+=== TSC EXIT ===
+0
+
+=== BUILD EXIT ===
+0
+
+=== TEST FAILURES ===
+
+=== BUILD WARNINGS/ERRORS ===
+150:6  Warning: React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.  react-hooks/exhaustive-deps
+155:6  Warning: React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.  react-hooks/exhaustive-deps
+235:6  Warning: React Hook useCallback has missing dependencies: 'handleError' and 'stopInternal'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
