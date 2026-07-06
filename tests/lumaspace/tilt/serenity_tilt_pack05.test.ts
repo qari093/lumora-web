@@ -16,17 +16,23 @@ expect(s).toContain("--tilt-y");
 
 });
 
-it("mounts serenity tilt",()=>{
+it("mounts canonical runtime",()=>{
 
 const r=fs.readFileSync(
 "src/components/lumaspace/runtime/LivingUniverseRuntime.tsx",
 "utf8"
 );
 
-expect(r).toContain("useSerenityTilt");
+expect(r).toContain("HomecomingRitualOmega");
+expect(r).toContain("LumaAtmosphereEngine");
+expect(r).toContain("EnvironmentalWorldEffects");
+expect(r).toContain("LivingWorldIdentitiesLayer");
+expect(r).toContain("PresenceConstellationField");
+expect(r).toContain("AmbientPresenceEvolutionLayer");
+expect(r).toContain("InteractionMotionField");
+expect(r).toContain("LivingUniverseComposer");
 
 });
-
 it("locks reduced motion",()=>{
 
 const css=fs.readFileSync(

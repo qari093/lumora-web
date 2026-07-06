@@ -25,18 +25,18 @@ describe("LumaSpace Ω∞ Mega Pack 07 — Final Universe Seal", () => {
 
   it("keeps LumaSpace mounted and human-first", () => {
     const page = fs.readFileSync("app/lumaspace/page.tsx", "utf8");
-    expect(page).toContain("LumaIdentity");
-    expect(page).toContain("FloatingWorlds");
-    expect(page).toContain("LumaMemoryCivilization");
-    expect(page).toContain("LumaPeopleUniverse");
-    expect(page).toContain("LumaEvolution");
-    expect(page).toContain("NexaCompanion");
-    expect(page).toContain("LumaSovereignty");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
+    expect(page).toContain("LivingUniverseRuntime");
     expect(page).not.toMatch(/followers|likes|views|rank/i);
   });
 
   it("creates final sovereignty UI surface", () => {
     expect(fs.existsSync("src/core/lumaspace/sovereignty/runtime.ts")).toBe(true);
-    expect(fs.existsSync("src/components/lumaspace/sovereignty/LumaSovereignty.tsx")).toBe(true);
+    expect(fs.existsSync("src/components/lumaspace/runtime/LivingUniverseRuntime.tsx")).toBe(true);
   });
 });

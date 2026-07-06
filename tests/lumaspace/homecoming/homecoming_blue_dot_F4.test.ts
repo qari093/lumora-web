@@ -8,7 +8,7 @@ describe("LumaSpace Ω∞ F4 — Homecoming Blue Dot", () => {
       "utf8"
     );
 
-    expect(component).toContain("ls-homecoming-blue-dot");
+    expect(component).toContain("ls-homecoming-logo-img");
     expect(component).toContain("YOUR SPACE.");
   });
 
@@ -19,7 +19,7 @@ describe("LumaSpace Ω∞ F4 — Homecoming Blue Dot", () => {
     );
 
     expect(css).toContain("#67e8f9");
-    expect(css).toContain("ls-homecoming-blue-dot");
+    expect(css).toContain("ls-homecoming-logo-img");
     expect(css).toContain("border-radius: 999px");
   });
 });

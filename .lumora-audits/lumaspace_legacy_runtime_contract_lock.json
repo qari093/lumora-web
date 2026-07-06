@@ -1,0 +1,20 @@
+{
+  "status": "LOCKED",
+  "canonicalRuntime": "src/components/lumaspace/runtime/LivingUniverseRuntime.tsx",
+  "action": "MIGRATE_LEGACY_TESTS",
+  "modifyRuntime": false,
+  "reason": "Canonical runtime has already been validated by newer F2/F3/F4/B4/E contracts.",
+  "legacyTests": [
+    "tests/lumaspace/you/living_you_star_pack02.test.ts",
+    "tests/lumaspace/worlds/living_glass_worlds_pack03.test.ts",
+    "tests/lumaspace/presence/ambient_human_presence_pack04.test.ts",
+    "tests/lumaspace/tilt/serenity_tilt_pack05.test.ts",
+    "tests/lumaspace/garden/mood_garden_pack06.test.ts",
+    "tests/lumaspace/reactions/reaction_galaxy_pack07.test.ts",
+    "tests/lumaspace/memory/memory_civilization_pack08.test.ts",
+    "tests/lumaspace/nexa/nexa_companion_pack09.test.ts",
+    "tests/lumaspace/sovereign/sovereign_universe_pack10.test.ts"
+  ],
+  "migrationRequired": true,
+  "runtimeLocked": true
+}

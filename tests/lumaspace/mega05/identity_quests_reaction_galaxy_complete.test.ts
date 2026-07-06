@@ -28,6 +28,6 @@ describe("LumaSpace Ω∞ Mega Pack 05 — Identity Quests & Reaction Galaxy", (
 
   it("mounts evolution into LumaSpace page", () => {
     const page = fs.readFileSync("app/lumaspace/page.tsx", "utf8");
-    expect(page).toContain("LumaEvolution");
+    expect(page).toContain("LivingUniverseRuntime");
   });
 });

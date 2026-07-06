@@ -31,15 +31,21 @@ expect(css).toContain("dashed");
 
 });
 
-it("mounts presence runtime",()=>{
+it("mounts canonical runtime",()=>{
 
 const r=fs.readFileSync(
 "src/components/lumaspace/runtime/LivingUniverseRuntime.tsx",
 "utf8"
 );
 
-expect(r).toContain("AmbientHumanPresence");
+expect(r).toContain("HomecomingRitualOmega");
+expect(r).toContain("LumaAtmosphereEngine");
+expect(r).toContain("EnvironmentalWorldEffects");
+expect(r).toContain("LivingWorldIdentitiesLayer");
+expect(r).toContain("PresenceConstellationField");
+expect(r).toContain("AmbientPresenceEvolutionLayer");
+expect(r).toContain("InteractionMotionField");
+expect(r).toContain("LivingUniverseComposer");
 
 });
-
 });

@@ -27,15 +27,21 @@ expect(css).toContain("6s");
 
 });
 
-it("mounts YOU",()=>{
+it("mounts canonical runtime",()=>{
 
-const page=fs.readFileSync(
+const r=fs.readFileSync(
 "src/components/lumaspace/runtime/LivingUniverseRuntime.tsx",
 "utf8"
 );
 
-expect(page).toContain("LivingYouStar");
+expect(r).toContain("HomecomingRitualOmega");
+expect(r).toContain("LumaAtmosphereEngine");
+expect(r).toContain("EnvironmentalWorldEffects");
+expect(r).toContain("LivingWorldIdentitiesLayer");
+expect(r).toContain("PresenceConstellationField");
+expect(r).toContain("AmbientPresenceEvolutionLayer");
+expect(r).toContain("InteractionMotionField");
+expect(r).toContain("LivingUniverseComposer");
 
 });
-
 });

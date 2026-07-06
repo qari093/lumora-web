@@ -9,12 +9,12 @@ describe("LumaSpace Ω∞ Living Universe Runtime Final Seal", () => {
 
   it("keeps core visual layers", () => {
     const runtime = fs.readFileSync("src/components/lumaspace/runtime/LivingUniverseRuntime.tsx", "utf8");
-    expect(runtime).toContain("lumaspace-worlds-layer");
-    expect(runtime).toContain("lumaspace-pulse-layer");
-    expect(runtime).toContain("lumaspace-garden-layer");
-    expect(runtime).toContain("lumaspace-reaction-galaxy");
-    expect(runtime).toContain("lumaspace-story-constellation");
-    expect(runtime).toContain("lumaspace-mask-button");
+    expect(runtime).toContain("EnvironmentalWorldEffects");
+    expect(runtime).toContain("PresenceConstellationField");
+    expect(runtime).toContain("LivingUniverseComposer");
+    expect(runtime).toContain("InteractionMotionField");
+    expect(runtime).toContain("LivingWorldIdentitiesLayer");
+    expect(runtime).toContain("AmbientPresenceEvolutionLayer");
   });
 
   it("keeps iPhone safe-area polish", () => {

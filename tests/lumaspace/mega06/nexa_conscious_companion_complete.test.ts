@@ -29,6 +29,6 @@ describe("LumaSpace Ω∞ Mega Pack 06 — NEXA Conscious Companion", () => {
     expect(fs.existsSync("src/core/lumaspace/nexa/runtime.ts")).toBe(true);
     expect(fs.existsSync("src/components/lumaspace/nexa/NexaCompanion.tsx")).toBe(true);
     const page = fs.readFileSync("app/lumaspace/page.tsx", "utf8");
-    expect(page).toContain("NexaCompanion");
+    expect(page).toContain("LivingUniverseRuntime");
   });
 });

@@ -5,15 +5,15 @@ import { validateHomecomingSequence, HomecomingSequence } from "@/src/core/lumas
 describe("LumaSpace Ω∞ Mega Pack A2 — Homecoming Ritual", () => {
   it("locks sacred Homecoming sequence", () => {
     expect(validateHomecomingSequence()).toBe(true);
-    expect(HomecomingSequence.promise).toEqual(["YOUR SPACE.", "YOUR PEOPLE.", "YOUR STORY."]);
+    expect(HomecomingSequence.sequence).toEqual(["BLACK", "BLUE_BLADE", "LIVING_SPARK", "YOUR_SPACE", "YOUR_PEOPLE", "YOUR_STORY", "UNIVERSE_UNFOLDS"]);
   });
 
   it("creates ritual component", () => {
     const src = fs.readFileSync("src/components/lumaspace/homecoming/HomecomingRitualOmega.tsx", "utf8");
-    expect(src).toContain("ls-homecoming-ritual-omega");
-    expect(src).toContain("ls-ritual-blue-blade");
-    expect(src).toContain("ls-ritual-spark");
-    expect(src).toContain("getHomecomingWhisper");
+    expect(src).toContain("ls-homecoming-ritual");
+    expect(src).toContain("ls-homecoming-blue-blade");
+    expect(src).toContain("ls-homecoming-spark");
+    expect(src).toContain("Welcome home.");
   });
 
   it("mounts ritual into runtime", () => {

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "finding": "legacy_test_conflict",
+  "component": "LivingYouStar",
+  "runtime": "LivingUniverseRuntime",
+  "canonicalDecision": "DO_NOT_MOUNT",
+  "reason": [
+    "LivingWorldIdentities F2 requires component absent",
+    "AmbientPresenceEvolution F3 requires component absent",
+    "HomecomingSequence F4 requires component absent",
+    "Runtime Consolidation B4 requires component absent",
+    "Interaction Motion E requires component absent"
+  ],
+  "legacyTest": "tests/lumaspace/you/living_you_star_pack02.test.ts",
+  "recommendedAction": "Update legacy test to match canonical runtime instead of modifying runtime."
+}
