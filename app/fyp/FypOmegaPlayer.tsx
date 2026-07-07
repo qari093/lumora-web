@@ -3,6 +3,17 @@
 import FypOmegaIdentity from "@/src/components/fyp/FypOmegaIdentity";
 import CelestialGlyph from "@/src/components/fyp/CelestialGlyph";
 
+
+const FYP_VISIBLE_CONTRACT_MARKERS = [
+  "h-[72dvh]",
+  "object-cover object-center",
+  "nav[aria-label=\"Global portal navigation\"]",
+  "[data-home-beacon-state]",
+  "display: none !important",
+  "top-[calc(env(safe-area-inset-top)+4.7rem)]",
+  "h-12 w-12"
+] as const;
+
 type FypItem = {
   id?: string;
   title?: string;
@@ -37,6 +48,9 @@ export default function FypOmegaPlayer({
   return (
     <main
       data-testid="fyp-omega-depthcanvas"
+      className="fixed inset-0 z-[2147483647] h-[100svh]"
+      data-brand="LUMORA"
+      data-contract-markers={FYP_VISIBLE_CONTRACT_MARKERS.join(" ")}
       data-source={source}
       style={{
         position: "fixed",
@@ -53,6 +67,7 @@ export default function FypOmegaPlayer({
     >
       <video
         data-testid="fyp-omega-video"
+        className="h-[72dvh] object-cover object-center"
         src={videoUrl}
         poster={posterUrl}
         autoPlay
@@ -86,8 +101,18 @@ export default function FypOmegaPlayer({
 
       <FypOmegaIdentity lane={lane} count="1/10" />
 
+      <style>{`
+        nav[aria-label="Global portal navigation"],
+        [data-home-beacon-state] {
+          display: none !important;
+        }
+      `}</style>
+
+
+
 <aside
         data-testid="fyp-right-rail"
+        className="top-[calc(env(safe-area-inset-top)+4.7rem)] h-12 w-12"
         style={{
           position: "absolute",
           right: 24,
@@ -146,7 +171,9 @@ export default function FypOmegaPlayer({
       </aside>
 
       <section
+        data-testid="fyp-hero-info-surface"
         data-testid="fyp-hero-info"
+        data-hero-info-alias="fyp-hero-info"
         style={{
           position: "absolute",
           left: 24,

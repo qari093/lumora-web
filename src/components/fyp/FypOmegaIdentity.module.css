@@ -62,3 +62,21 @@ backdrop-filter:blur(24px);
 pointer-events:auto;
 white-space:nowrap;
 }
+
+
+.spark{
+width:24px;
+height:24px;
+border-radius:999px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
+font-weight:900;
+color:rgba(240,249,255,.96);
+background:linear-gradient(135deg,rgba(34,211,238,.34),rgba(59,130,246,.18),rgba(255,255,255,.08));
+border:1px solid rgba(34,211,238,.38);
+box-shadow:0 0 18px rgba(34,211,238,.28);
+backdrop-filter:blur(18px);
+pointer-events:auto;
+}

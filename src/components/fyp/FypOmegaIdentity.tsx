@@ -44,6 +44,7 @@ export default function FypOmegaIdentity({
       </svg>
 
       <span className={styles.word}>LUMORA</span>
+      <span className={styles.spark} aria-hidden="true">✦</span>
       <span className={styles.pill}>{lane}</span>
       <span className={styles.count}>{count}</span>
     </div>

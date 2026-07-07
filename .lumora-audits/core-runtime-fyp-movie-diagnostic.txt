@@ -1,0 +1,342 @@
+=== 1) Failed FYP visible tests ===
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ ✓ tests/fyp/visible/mega_pack_c_route_isolation.test.ts > FYP Ω∞ Mega Pack C — Route Isolation > hides global navigation and home beacon
+ ✓ tests/fyp/visible/mega_pack_c_route_isolation.test.ts > FYP Ω∞ Mega Pack C — Route Isolation > locks FYP body into isolated fullscreen mode
+ ✓ tests/fyp/visible/mega_pack_c_route_isolation.test.ts > FYP Ω∞ Mega Pack C — Route Isolation > hides native browser video controls
+ × tests/fyp/visible/mega_pack_c_route_isolation.test.ts > FYP Ω∞ Mega Pack C — Route Isolation > keeps the FYP player mounted as fullscreen canvas
+   → expected '"use client";\n\nimport FypOmegaIdent…' to contain 'fixed inset-0'
+ ✓ tests/fyp/visible/mega_pack_d_route_escape.test.ts > FYP Ω∞ Mega Pack D — Route Escape > GlobalPortalNav returns null on /fyp
+ ✓ tests/fyp/visible/mega_pack_d_route_escape.test.ts > FYP Ω∞ Mega Pack D — Route Escape > HomeBeacon returns null on /fyp
+ × tests/fyp/visible/mega_pack_d_route_escape.test.ts > FYP Ω∞ Mega Pack D — Route Escape > FYP player remains fullscreen and above shell
+   → expected '"use client";\n\nimport FypOmegaIdent…' to contain 'fixed inset-0'
+ ✓ tests/fyp/visible/pack_g_identity_connect.test.ts > FYP Ω∞ Pack G — Identity Connected > connects identity component into FYP player
+ × tests/fyp/visible/pack_g_identity_connect.test.ts > FYP Ω∞ Pack G — Identity Connected > renders Lumora identity primitives
+   → expected 'import styles from "./FypOmegaIdentit…' to contain '✦'
+ × tests/fyp/visible/pack_g_identity_connect.test.ts > FYP Ω∞ Pack G — Identity Connected > contains holographic blade and glass pill styling
+   → expected '.topBar{\nposition:absolute;\ntop:cal…' to contain 'linear-gradient'
+ ✓ tests/fyp/visible/mega_pack_e_inline_canvas.test.ts > FYP Ω∞ Mega Pack E — Inline Cinematic Canvas > uses inline fixed fullscreen canvas
+ × tests/fyp/visible/mega_pack_e_inline_canvas.test.ts > FYP Ω∞ Mega Pack E — Inline Cinematic Canvas > renders all canonical FYP controls
+   → expected '"use client";\n\nimport FypOmegaIdent…' to contain 'LUMORA'
+ ✓ tests/fyp/visible/mega_pack_e_inline_canvas.test.ts > FYP Ω∞ Mega Pack E — Inline Cinematic Canvas > keeps browser video controls disabled
+
+ Test Files  4 failed (4)
+      Tests  5 failed | 8 passed (13)
+   Start at  14:43:23
+   Duration  35.09s (transform 147ms, setup 91ms, collect 116ms, tests 216ms, environment 8.67s, prepare 3.02s)
+
+
+=== 2) Failed movie clip live tests ===
+
+ RUN  v1.6.1 /Users/waqarahmad/lumora-web
+
+ × tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts > Movie ingestion live Pack 3 — manifest + FYP bridge > writes and reads movie manifest records
+   → ENOENT: no such file or directory, open 'public/native-fyp/movie-meta/manifest.json'
+ ✓ tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts > Movie ingestion live Pack 3 — manifest + FYP bridge > builds FYP movie items safely
+ ✓ tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts > Movie ingestion live Pack 3 — manifest + FYP bridge > injects movie clips without breaking fallback when none playable
+ ✓ tests/fyp_movie_clips/live/pack3_manifest_fyp_bridge.test.ts > Movie ingestion live Pack 3 — manifest + FYP bridge > creates live ingestion runner script
+ ✓ tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts > Movie ingestion live Pack 1 — archive fetch + candidate plan > fetches archive search docs
+ ✓ tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts > Movie ingestion live Pack 1 — archive fetch + candidate plan > fetches metadata
+ ✓ tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts > Movie ingestion live Pack 1 — archive fetch + candidate plan > builds candidates from metadata
+ ✓ tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts > Movie ingestion live Pack 1 — archive fetch + candidate plan > builds download plan and validates before download
+ × tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts > Movie ingestion live Pack 1 — archive fetch + candidate plan > has preview script and directories
+   → expected false to be true // Object.is equality
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 7 passed (9)
+   Start at  14:44:01
+   Duration  18.27s (transform 188ms, setup 117ms, collect 200ms, tests 232ms, environment 5.63s, prepare 490ms)
+
+
+=== 3) FYP player source ===
+app/fyp/FypOmegaPlayer.tsx
+app/fyp/FypOmegaPlayer.tsx.backup.02d.20260617_222400
+app/fyp/FypOmegaPlayer.tsx.backup.1781902846
+app/fyp/FypOmegaPlayer.tsx.backup.20260617_230302
+app/fyp/FypOmegaPlayer.tsx.backup.ghost_fix.1781951862
+app/fyp/FypOmegaPlayer.tsx.backup.hero-media.20260618_232020
+app/fyp/FypOmegaPlayer.tsx.backup.immersive.20260619_001435
+app/fyp/FypOmegaPlayer.tsx.backup.inline_canvas.1781906945
+app/fyp/FypOmegaPlayer.tsx.backup.iphone-controls.20260619_014954
+app/fyp/FypOmegaPlayer.tsx.backup.pack01.1781983898
+app/fyp/FypOmegaPlayer.tsx.backup.pack02.1781985729
+app/fyp/FypOmegaPlayer.tsx.backup.pack03.1781986513
+app/fyp/FypOmegaPlayer.tsx.backup.pack04.1781987277
+app/fyp/FypOmegaPlayer.tsx.backup.pack05.1781988083
+app/fyp/FypOmegaPlayer.tsx.backup.pack06.1781988735
+app/fyp/FypOmegaPlayer.tsx.backup.pack07.1781989355
+app/fyp/FypOmegaPlayer.tsx.backup.pack08.1781990210
+app/fyp/FypOmegaPlayer.tsx.backup.pack09.1781990903
+app/fyp/FypOmegaPlayer.tsx.backup.pack10.1781992389
+app/fyp/FypOmegaPlayer.tsx.backup.pack11.1781993066
+app/fyp/FypOmegaPlayer.tsx.backup.pack12.1782031267
+app/fyp/FypOmegaPlayer.tsx.backup.packJ.1781952677
+app/fyp/FypOmegaPlayer.tsx.backup.packS.1781959815
+app/fyp/FypOmegaPlayer.tsx.backup.packU.1781961365
+app/fyp/FypOmegaPlayer.tsx.backup.packW.1781963261
+app/fyp/FypOmegaPlayer.tsx.backup.packX.1781967657
+app/fyp/FypOmegaPlayer.tsx.backup.packY.1781970674
+app/fyp/FypOmegaPlayer.tsx.backup.primal.20260617_092707
+app/fyp/FypOmegaPlayer.tsx.backup.trace-thread.20260618_225830
+app/fyp/page.tsx
+app/fyp/page.tsx.backup.1781904948
+tests/fyp/visible/fyp_complete_final_audit.test.ts
+tests/fyp/visible/fyp_visual_polish_final.test.ts
+tests/fyp/visible/mega_pack02_playback_depthcanvas.test.ts
+tests/fyp/visible/mega_pack02a_primal_visual_patch.test.ts
+tests/fyp/visible/mega_pack02d_final_primal_canvas.test.ts
+tests/fyp/visible/mega_pack03_trace_thread.test.ts
+tests/fyp/visible/mega_pack03a_hero_media.test.ts
+tests/fyp/visible/mega_pack03d_iphone_controls.test.ts
+tests/fyp/visible/mega_pack_c_route_isolation.test.ts
+tests/fyp/visible/mega_pack_d_route_escape.test.ts
+tests/fyp/visible/mega_pack_e_inline_canvas.test.ts
+tests/fyp/visible/pack01_existing_canvas_stabilization.test.ts
+tests/fyp/visible/pack02_identity_layer.test.ts
+tests/fyp/visible/pack03_right_rail_lock.test.ts
+tests/fyp/visible/pack04_hero_section_lock.test.ts
+tests/fyp/visible/pack05_bottom_navigation_lock.test.ts
+tests/fyp/visible/pack06_video_runtime_lock.test.ts
+tests/fyp/visible/pack07_interaction_layer_lock.test.ts
+tests/fyp/visible/pack08_lumaspace_integration_lock.test.ts
+tests/fyp/visible/pack09_ai_layer_lock.test.ts
+tests/fyp/visible/pack10_feed_intelligence_lock.test.ts
+tests/fyp/visible/pack11_atmosphere_layer_lock.test.ts
+tests/fyp/visible/pack12_human_first_rules_lock.test.ts
+tests/fyp/visible/pack13_final_seal.test.ts
+tests/fyp/visible/pack_g_identity_connect.test.ts
+tests/fyp/visible/pack_i_ghost_fix.test.ts
+tests/fyp/visible/pack_j_logo_rail_bottom.test.ts
+tests/fyp/visible/pack_s_celestial_glyphs.test.ts
+tests/fyp/visible/pack_u_full_glyph_integration.test.ts
+tests/fyp/visible/pack_y_final_polish.test.ts
+
+
+=== 4) FYP identity source/css ===
+     1	import styles from "./FypOmegaIdentity.module.css";
+     2	
+     3	export default function FypOmegaIdentity({
+     4	  lane = "Wonder",
+     5	  count = "1/10"
+     6	}: {
+     7	  lane?: string;
+     8	  count?: string;
+     9	}) {
+    10	  return (
+    11	    <div data-testid="fyp-omega-identity" className={styles.topBar}>
+    12	      <svg
+    13	        className={styles.logoSvg}
+    14	        viewBox="0 0 64 112"
+    15	        aria-label="Lumora"
+    16	        role="img"
+    17	      >
+    18	        <defs>
+    19	          <linearGradient id="bladeA" x1="8" x2="56" y1="104" y2="8">
+    20	            <stop offset="0%" stopColor="#38bdf8" />
+    21	            <stop offset="45%" stopColor="#2563eb" />
+    22	            <stop offset="100%" stopColor="#7dd3fc" />
+    23	          </linearGradient>
+    24	          <filter id="bladeGlow" x="-80%" y="-80%" width="260%" height="260%">
+    25	            <feGaussianBlur stdDeviation="4" result="blur" />
+    26	            <feMerge>
+    27	              <feMergeNode in="blur" />
+    28	              <feMergeNode in="SourceGraphic" />
+    29	            </feMerge>
+    30	          </filter>
+    31	        </defs>
+    32	        <path
+    33	          d="M12 102 C20 70 31 34 55 8 C50 45 40 78 12 102 Z"
+    34	          fill="url(#bladeA)"
+    35	          filter="url(#bladeGlow)"
+    36	        />
+    37	        <path
+    38	          d="M18 94 C28 66 38 38 52 14"
+    39	          fill="none"
+    40	          stroke="rgba(255,255,255,.78)"
+    41	          strokeWidth="2.2"
+    42	          strokeLinecap="round"
+    43	        />
+    44	      </svg>
+    45	
+    46	      <span className={styles.word}>LUMORA</span>
+    47	      <span className={styles.pill}>{lane}</span>
+    48	      <span className={styles.count}>{count}</span>
+    49	    </div>
+    50	  );
+    51	}
+
+     1	.topBar{
+     2	position:absolute;
+     3	top:calc(env(safe-area-inset-top) + 20px);
+     4	left:26px;
+     5	right:16px;
+     6	z-index:20;
+     7	display:flex;
+     8	align-items:center;
+     9	gap:13px;
+    10	pointer-events:none;
+    11	}
+    12	
+    13	.logoSvg{
+    14	width:34px;
+    15	height:58px;
+    16	object-fit:contain;
+    17	filter:drop-shadow(0 0 10px rgba(34,211,238,.85)) drop-shadow(0 0 22px rgba(59,130,246,.55));
+    18	pointer-events:auto;
+    19	}
+    20	
+    21	.word{
+    22	font-size:15px;
+    23	font-weight:900;
+    24	letter-spacing:.46em;
+    25	color:rgba(240,249,255,.96);
+    26	text-shadow:0 0 12px rgba(255,255,255,.45),0 0 28px rgba(34,211,238,.3);
+    27	pointer-events:auto;
+    28	white-space:nowrap;
+    29	}
+    30	
+    31	.pill{
+    32	height:48px;
+    33	padding:0 22px;
+    34	border-radius:999px;
+    35	display:flex;
+    36	align-items:center;
+    37	font-size:18px;
+    38	font-weight:850;
+    39	color:white;
+    40	background:rgba(18,22,31,.58);
+    41	border:1px solid rgba(34,211,238,.58);
+    42	backdrop-filter:blur(24px);
+    43	box-shadow:inset 0 0 18px rgba(34,211,238,.13),0 0 26px rgba(34,211,238,.26);
+    44	pointer-events:auto;
+    45	white-space:nowrap;
+    46	}
+    47	
+    48	.count{
+    49	height:48px;
+    50	min-width:78px;
+    51	padding:0 16px;
+    52	border-radius:999px;
+    53	display:flex;
+    54	align-items:center;
+    55	justify-content:center;
+    56	font-size:16px;
+    57	font-weight:800;
+    58	color:rgba(255,255,255,.9);
+    59	background:rgba(28,28,34,.60);
+    60	border:1px solid rgba(255,255,255,.12);
+    61	backdrop-filter:blur(24px);
+    62	pointer-events:auto;
+    63	white-space:nowrap;
+    64	}
+
+=== 5) Movie clip paths ===
+EXISTS scripts/fyp_movie_clips/live_archive_ingest_preview.mjs
+     1	import fs from "node:fs";
+     2	
+     3	fs.mkdirSync("public/native-fyp/movie-clips", { recursive: true });
+     4	fs.mkdirSync("public/native-fyp/movie-meta", { recursive: true });
+     5	
+     6	if (!fs.existsSync("public/native-fyp/movie-meta/manifest.json")) {
+     7	  fs.writeFileSync("public/native-fyp/movie-meta/manifest.json", "[]\n");
+     8	}
+     9	
+    10	console.log("LIVE_ARCHIVE_INGEST_PREVIEW_READY=true");
+    11	console.log("NEXT=wire network fetch + ffprobe download execution");
+MISSING public/native-fyp/movie-clips
+MISSING public/native-fyp/movie-meta
+MISSING public/native-fyp/movie-meta/manifest.json
+EXISTS src/lib/fyp_movie_clips/live/live_manifest_writer.ts
+     1	import fs from "node:fs";
+     2	
+     3	const MANIFEST_PATH = "public/native-fyp/movie-meta/manifest.json";
+     4	
+     5	export type LiveMovieClipRecord = {
+     6	  id: string;
+     7	  title?: string;
+     8	  localUrl: string;
+     9	  sourceType: "movie-clip";
+    10	  sourceId?: string;
+    11	  sourceUrl?: string;
+    12	  license?: string;
+    13	  hasAudio: true;
+    14	  duration?: number;
+    15	  mood?: string;
+    16	  category?: string;
+    17	};
+    18	
+    19	export function readLiveMovieManifest(): LiveMovieClipRecord[] {
+    20	  if (!fs.existsSync(MANIFEST_PATH)) return [];
+    21	
+    22	  try {
+    23	    const parsed = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+    24	    return Array.isArray(parsed) ? parsed : [];
+    25	  } catch {
+    26	    return [];
+    27	  }
+    28	}
+    29	
+    30	export function writeLiveMovieManifest(items: LiveMovieClipRecord[]): LiveMovieClipRecord[] {
+    31	  const existing = readLiveMovieManifest();
+    32	  const seen = new Set(existing.map((x) => x.localUrl));
+    33	  const merged = [...existing];
+    34	
+    35	  for (const item of items) {
+    36	    if (!item.localUrl || seen.has(item.localUrl)) continue;
+    37	
+    38	    merged.push({
+    39	      ...item,
+    40	      sourceType: "movie-clip",
+    41	      hasAudio: true,
+    42	    });
+    43	
+    44	    seen.add(item.localUrl);
+    45	  }
+    46	
+    47	  fs.writeFileSync(MANIFEST_PATH, JSON.stringify(merged, null, 2));
+    48	  return merged;
+    49	}
+    50	
+    51	export function getPlayableLiveMovieClips(): LiveMovieClipRecord[] {
+    52	  return readLiveMovieManifest().filter((x) => {
+    53	    if (!x.localUrl || !x.hasAudio) return false;
+    54	    return fs.existsSync(`public${x.localUrl}`);
+    55	  });
+    56	}
+
+=== 6) Exact legacy expectations ===
+tests/fyp/visible/pack_i_ghost_fix.test.ts:22:    expect(identity).toContain("LUMORA");
+tests/fyp/visible/mega_pack02a_primal_visual_patch.test.ts:8:    expect(source).toContain("fixed inset-0");
+tests/fyp/visible/pack_g_identity_connect.test.ts:15:    expect(component).toContain("LUMORA");
+tests/fyp/visible/pack_g_identity_connect.test.ts:16:    expect(component).toContain("✦");
+tests/fyp/visible/pack_g_identity_connect.test.ts:21:    expect(css).toContain("linear-gradient");
+tests/fyp/visible/mega_pack_c_route_isolation.test.ts:28:    expect(player).toContain("fixed inset-0");
+tests/fyp/visible/mega_pack_c_route_isolation.test.ts:29:    expect(player).toContain("z-[2147483647]");
+tests/fyp/visible/mega_pack_c_route_isolation.test.ts:30:    expect(player).toContain("h-[100svh]");
+tests/fyp/visible/mega_pack03a_hero_media.test.ts:26:    expect(src).toContain("LUMORA");
+tests/fyp/visible/pack11_atmosphere_layer_lock.test.ts:10:    expect(src).toContain("linear-gradient(180deg");
+tests/fyp/visible/mega_pack_d_route_escape.test.ts:22:    expect(player).toContain("fixed inset-0");
+tests/fyp/visible/mega_pack_d_route_escape.test.ts:23:    expect(player).toContain("z-[2147483647]");
+tests/fyp/visible/mega_pack_d_route_escape.test.ts:24:    expect(player).toContain("h-[100svh]");
+tests/fyp/visible/pack02_identity_layer.test.ts:14:  it("keeps LUMORA top identity primitives", () => {
+tests/fyp/visible/pack02_identity_layer.test.ts:15:    expect(identity).toContain("LUMORA");
+tests/fyp/visible/mega_pack_e_inline_canvas.test.ts:14:    expect(src).toContain("LUMORA");
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:4:  LUMORA_FYP_TOTAL_PACKS,
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:5:  LUMORA_FYP_REQUIRED_PRODUCTION_PACKS,
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:6:  LUMORA_FYP_ENGINE_CREATION_PACKS,
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:7:  LUMORA_FYP_OPTIONAL_EVOLUTION_PACKS,
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:8:  LUMORA_FYP_72_PACK_SEGMENTS,
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:14:    expect(LUMORA_FYP_TOTAL_PACKS).toBe(72);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:15:    expect(LUMORA_FYP_REQUIRED_PRODUCTION_PACKS).toBe(40);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:16:    expect(LUMORA_FYP_ENGINE_CREATION_PACKS).toBe(32);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:17:    expect(LUMORA_FYP_OPTIONAL_EVOLUTION_PACKS).toBe(32);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:21:    expect(LUMORA_FYP_72_PACK_SEGMENTS).toHaveLength(7);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:22:    expect(LUMORA_FYP_72_PACK_SEGMENTS[0]?.fromPack).toBe(1);
+tests/fyp/roadmap/fyp_72_pack_roadmap.test.ts:23:    expect(LUMORA_FYP_72_PACK_SEGMENTS.at(-1)?.toPack).toBe(72);
+tests/fyp/fyp_mega_pack_b_trace_lanes.test.ts:16:    expect(component).toContain("LUMORA_LANES.map");
+tests/fyp/fyp_final_mobile_layout_css.test.ts:8:    expect(css).toContain("LUMORA FYP FINAL MOBILE LAYOUT PATCH");
+tests/fyp/fyp_mega_pack_d_attention_memory.test.ts:2:  LUMORA_TRACE_ATTENTION_MEMORY_READY,
+tests/fyp/fyp_mega_pack_d_attention_memory.test.ts:51:    expect(LUMORA_TRACE_ATTENTION_MEMORY_READY).toBe(true);
+tests/fyp_movie_clips/live/pack1_live_archive_fetch.test.ts:50:    expect(fs.existsSync("public/native-fyp/movie-clips")).toBe(true);
+tests/fyp_movie_clips/pack4_fyp_integration.test.ts:33:    expect(fs.existsSync("public/native-fyp/movie-meta/manifest.json")).toBe(true);
