@@ -30,3 +30,5 @@ out/**
 .live_fyp_validation_*.txt
 .private_beta_readiness_seal_*.txt
 .production_deployment_readiness_check_*.txt
+
+.lumora-local-media/

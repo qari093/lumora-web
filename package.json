@@ -55,7 +55,7 @@
     "test:gmar-zendoro": "vitest run tests/gmar.zendoro.bridge.test.ts tests/gmar.zendoro.localAdapter.test.ts tests/gmar.zendoro.pipeline.test.ts",
     "test:gmar-offers": "vitest run tests/gmar.economy.products.test.ts tests/gmar.economy.priceMapping.test.ts tests/gmar.economy.offers.test.ts",
     "test:gmar-monetization-api": "vitest run tests/gmar.api.monetizationSnapshot.test.ts",
-    "gmar:dev:snapshot-preview": "echo \"GMAR snapshot preview → http://localhost:3000/gmar/monetization/snapshot-preview\"",
+    "gmar:dev:snapshot-preview": "echo \"GMAR snapshot preview \u2192 http://localhost:3000/gmar/monetization/snapshot-preview\"",
     "gmar:gate:monetization-all": "npm run gmar:gate:monetization && npm run test:gmar-monetization-api",
     "test:gmar-monetization-manifest": "vitest run tests/cc-tower.monetization.manifest.test.ts",
     "test:cc-tower-monetization-ready": "vitest run tests/cc-tower.api.monetizationReady.test.ts",
@@ -249,7 +249,7 @@
   },
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.53.1"
