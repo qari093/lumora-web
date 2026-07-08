@@ -1,0 +1,15 @@
+{
+  "seal": "lumaspace_mega02_living_universe",
+  "status": "locked",
+  "ci_failure_fixed": true,
+  "required_by": [
+    "tests/lumaspace/mega02/living_universe_complete.test.ts",
+    "tests/lumaspace/mega07/final_universe_seal.test.ts"
+  ],
+  "locks": [
+    "Floating Worlds",
+    "Orbiting Pulse",
+    "Mood Garden",
+    "Living Universe doctrine"
+  ]
+}
