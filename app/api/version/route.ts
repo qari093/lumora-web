@@ -1,19 +1,20 @@
 import { NextResponse } from "next/server";
+import { getLumoraRuntimeMetadata } from "@/src/lib/runtime/deploymentMetadata";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   return NextResponse.json(
     {
       ok: true,
-      service: "lumora-web",
-      version: "v7.5",
-      appEnv: process.env.NEXT_PUBLIC_APP_ENV || "development",
-      ts: Date.now(),
+      ...getLumoraRuntimeMetadata(),
+      checkedAt: new Date().toISOString(),
     },
     {
+      status: 200,
       headers: {
-        "Cache-Control": "no-store, must-revalidate",
+        "Cache-Control": "no-store, max-age=0, must-revalidate",
       },
     }
   );
