@@ -18,13 +18,39 @@ export default computeAttention;
 
 export function attachAttentionMetrics<T extends Record<string, unknown>>(
   content: T,
-  metrics: { attentionScore?: number; velocityScore?: number } = {}
-): T & { attention: { attentionScore: number; velocityScore: number } } {
+  metrics: {
+    score?: number;
+    attentionScore?: number;
+    velocityScore?: number;
+  } = {}
+): T & {
+  attention: {
+    score: number;
+    attentionScore: number;
+    velocityScore: number;
+  };
+} {
+  const sourceScore =
+    metrics.attentionScore ??
+    metrics.score ??
+    (typeof content.score === "number" ? content.score : 0);
+
+  const attentionScore = Math.max(
+    0,
+    Math.min(100, Math.round(sourceScore))
+  );
+
+  const velocityScore = Math.max(
+    0,
+    Math.min(100, Math.round(metrics.velocityScore ?? 0))
+  );
+
   return {
     ...content,
     attention: {
-      attentionScore: Math.max(0, Math.min(100, Math.round(metrics.attentionScore ?? 0))),
-      velocityScore: Math.max(0, Math.min(100, Math.round(metrics.velocityScore ?? 0))),
+      score: attentionScore,
+      attentionScore,
+      velocityScore,
     },
   };
 }

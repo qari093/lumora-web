@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-26T19:38:18.638Z",
+  "generatedAt": "2026-07-14T20:23:10.735Z",
   "clusterCount": 9,
-  "findingCount": 333,
-  "highRiskCount": 189,
-  "mediumRiskCount": 104,
+  "findingCount": 337,
+  "highRiskCount": 191,
+  "mediumRiskCount": 106,
   "deprecatedAliasCount": 26,
   "clusters": [
     {
@@ -173,6 +173,15 @@
       "canonical": false,
       "deprecatedAlias": true,
       "canonicalTarget": "/api/video",
+      "risk": "medium"
+    },
+    {
+      "route": "/api/cineverse/mood-rail",
+      "matchedCluster": "media_catalog_runtime",
+      "canonicalDomain": "media",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
       "risk": "medium"
     },
     {
@@ -572,6 +581,15 @@
       "risk": "high"
     },
     {
+      "route": "/api/fyp/daily-drop",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
       "route": "/api/fyp/debug",
       "matchedCluster": "feed_assembly",
       "canonicalDomain": "fyp",
@@ -825,6 +843,15 @@
     },
     {
       "route": "/api/fyp/trailer-override",
+      "matchedCluster": "feed_assembly",
+      "canonicalDomain": "fyp",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/fyp/youtube-feed",
       "matchedCluster": "feed_assembly",
       "canonicalDomain": "fyp",
       "canonical": false,
@@ -1707,6 +1734,15 @@
     },
     {
       "route": "/api/personalization/explore-exploit",
+      "matchedCluster": "personalization_profile",
+      "canonicalDomain": "personalization",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "medium"
+    },
+    {
+      "route": "/api/personalization/gift",
       "matchedCluster": "personalization_profile",
       "canonicalDomain": "personalization",
       "canonical": false,

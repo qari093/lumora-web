@@ -1,0 +1,35 @@
+{
+  "pack": "07/11",
+  "name": "LumaLink 3.0 Integration",
+  "generated_at": "2026-07-14T21:57:45.150200+00:00",
+  "checks": {
+    "required_files_pass": true,
+    "focused_test_suite_pass": true,
+    "connection_runtime_pass": true,
+    "group_runtime_pass": true,
+    "messaging_runtime_pass": true,
+    "presence_runtime_pass": true,
+    "consent_safety_pass": true,
+    "translation_bridge_pass": true,
+    "portal_ui_pass": true,
+    "production_build_pass": true
+  },
+  "required_files": [
+    "app/lumalink/page.tsx",
+    "app/api/lumalink/health/route.ts",
+    "app/api/lumalink/connections/route.ts",
+    "app/api/lumalink/relationships/route.ts",
+    "app/api/lumalink/groups/route.ts",
+    "app/api/lumalink/messages/route.ts",
+    "app/api/lumalink/presence/route.ts",
+    "src/core/lumalink/runtime.ts"
+  ],
+  "missing_files": [],
+  "vitest_summary": [
+    "Test Files  10 passed (10)",
+    "Tests  48 passed (48)",
+    "Duration  26.21s (transform 1.22s, setup 327ms, collect 4.92s, tests 151ms, environment 19.58s, prepare 3.92s)"
+  ],
+  "failed_entries": [],
+  "status": "PASS"
+}

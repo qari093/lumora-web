@@ -1,0 +1,74 @@
+{
+  "pack": "10/11",
+  "name": "Production Deployment Readiness",
+  "generated_at": "2026-07-15T13:50:15.073978+00:00",
+  "checks": {
+    "all_required_seals_present": true,
+    "all_required_seals_valid": true,
+    "database_url_configured": true,
+    "nextauth_secret_configured": true,
+    "nextauth_url_configured": true,
+    "vercel_project_linked": true,
+    "vercelignore_present": true,
+    "browser_smoke_pass": true
+  },
+  "environment": {
+    "DATABASE_URL": {
+      "configured": true,
+      "source": "vercel_production"
+    },
+    "NEXTAUTH_SECRET": {
+      "configured": true,
+      "source": "vercel_production"
+    },
+    "NEXTAUTH_URL": {
+      "configured": true,
+      "source": "vercel_production"
+    }
+  },
+  "seal_results": {
+    "docs/runtime-consolidation/final_runtime_consolidation_seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/main-user-journey/final-main-user-journey-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/zendoro-commerce-payments/final-zendoro-commerce-payments-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/native-fyp-media-runtime/final-native-fyp-media-runtime-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumaspace-core-completion/final-lumaspace-core-completion-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumalink-3-integration/final-lumalink-3-integration-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/auth-private-beta-readiness/final-auth-private-beta-readiness-seal.json": {
+      "exists": true,
+      "status": "PASS_WITH_PRODUCTION_ENV_REQUIRED",
+      "valid": true
+    },
+    "docs/production-browser-smoke/final-production-browser-smoke-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    }
+  },
+  "canonical_production_url": "https://lumoraverse.io",
+  "deployment_ready": true,
+  "status": "PASS"
+}

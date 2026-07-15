@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-07-14T20:13:24.293223+00:00",
+  "failed_entries": [
+    "FAIL  tests/launch/command_surfaces_matrix.test.ts > command surfaces matrix > global navigation exposes all command surfaces",
+    "\u276f tests/launch/command_surfaces_matrix.test.ts:43:37",
+    "FAIL  tests/runtime-consolidation/live_list_legacy_routes_no_500.test.ts > Live list legacy routes do not crash > marks legacy list routes as deprecated wrappers",
+    "\u276f tests/runtime-consolidation/live_list_legacy_routes_no_500.test.ts:20:19"
+  ],
+  "failed_count": 4,
+  "summary_lines": [
+    "Test Files  2 failed | 19 passed (21)",
+    "Tests  2 failed | 155 passed (157)",
+    "Duration  46.20s (transform 1.81s, setup 713ms, collect 6.64s, tests 5.38s, environment 49.11s, prepare 9.75s)"
+  ],
+  "node_modules_tests_executed": false,
+  "vitest_cli_error": false,
+  "status": "FAIL"
+}

@@ -1,0 +1,47 @@
+{
+  "pack": "09/11",
+  "name": "Production Browser Smoke",
+  "generated_at": "2026-07-15T13:31:50.737651+00:00",
+  "checks": {
+    "required_files_pass": true,
+    "playwright_runtime_pass": true,
+    "chromium_browser_pass": true,
+    "all_tests_pass": true,
+    "failure_count_zero": true,
+    "page_routes_pass": true,
+    "api_routes_pass": true,
+    "browser_console_errors_zero": true
+  },
+  "required_files": [
+    "playwright.config.ts",
+    "tests/browser/pack09.production-smoke.spec.ts",
+    "docs/production-browser-smoke/diagnostics/pack09_playwright.log"
+  ],
+  "missing_files": [],
+  "page_routes": {
+    "/": true,
+    "/login": true,
+    "/signup": true,
+    "/fyp": true,
+    "/live": true,
+    "/lumaspace": true,
+    "/lumalink": true,
+    "/zendoro": true,
+    "/lumexa/shop": true,
+    "/creator": true,
+    "/dashboard": true
+  },
+  "api_routes": {
+    "/api/healthz": true,
+    "/api/fyp/health": true,
+    "/api/live/health": true,
+    "/api/lumaspace/ping": true,
+    "/api/lumalink/health": true
+  },
+  "playwright_summary": {
+    "passed": 16,
+    "duration": "2.0m",
+    "failure_markers": []
+  },
+  "status": "PASS"
+}

@@ -15,10 +15,18 @@ enum UserRole {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  role      UserRole @default(fan)
-  createdAt DateTime @default(now())
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String?
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(fan)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
 
   creatorProfile Creator?
   subscriptions  Subscription[]
@@ -363,167 +371,223 @@ enum ZendoroSellerStatus {
 }
 
 model ZendoroSeller {
-  id           String   @id @default(cuid())
-  ownerId      String
-  slug         String   @unique
-  displayName  String
-  status       ZendoroSellerStatus @default(PENDING)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String              @id @default(cuid())
+  ownerId     String
+  slug        String              @unique
+  displayName String
+  status      ZendoroSellerStatus @default(PENDING)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
 
-  products     ZendoroProduct[]
-  payouts      ZendoroPayout[]
+  products ZendoroProduct[]
+  payouts  ZendoroPayout[]
 }
 
 model ZendoroProduct {
-  id           String   @id @default(cuid())
-  sellerId     String
-  slug         String   @unique
-  title        String
-  description  String
-  priceCents   Int
-  currency     String   @default("EUR")
-  active       Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  sellerId    String
+  slug        String   @unique
+  title       String
+  description String
+  priceCents  Int
+  currency    String   @default("EUR")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  seller       ZendoroSeller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  inventory    ZendoroInventory?
-  reviews      ZendoroReview[]
-  orderItems   ZendoroOrderItem[]
-  cartItems    ZendoroCartItem[]
+  seller     ZendoroSeller      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  inventory  ZendoroInventory?
+  reviews    ZendoroReview[]
+  orderItems ZendoroOrderItem[]
+  cartItems  ZendoroCartItem[]
 
   @@index([sellerId])
 }
 
 model ZendoroCart {
-  id           String   @id @default(cuid())
-  buyerId      String
-  currency     String   @default("EUR")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id        String   @id @default(cuid())
+  buyerId   String
+  currency  String   @default("EUR")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  items        ZendoroCartItem[]
+  items ZendoroCartItem[]
 }
 
 model ZendoroCartItem {
-  id           String   @id @default(cuid())
-  cartId       String
-  productId    String
-  quantity     Int
-  unitPrice    Int
+  id        String @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int
+  unitPrice Int
 
-  cart         ZendoroCart @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  product      ZendoroProduct @relation(fields: [productId], references: [id])
+  cart    ZendoroCart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id])
 
   @@unique([cartId, productId])
 }
 
 model ZendoroOrder {
-  id               String   @id @default(cuid())
-  buyerId          String
-  status           ZendoroOrderStatus @default(DRAFT)
-  subtotalCents    Int      @default(0)
-  totalCents       Int      @default(0)
-  currency         String   @default("EUR")
-  idempotencyKey   String?  @unique
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id             String             @id @default(cuid())
+  buyerId        String
+  status         ZendoroOrderStatus @default(DRAFT)
+  subtotalCents  Int                @default(0)
+  totalCents     Int                @default(0)
+  currency       String             @default("EUR")
+  idempotencyKey String?            @unique
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
 
-  items            ZendoroOrderItem[]
-  payments         ZendoroPayment[]
-  refunds          ZendoroRefund[]
-  returns          ZendoroReturn[]
-  shipments        ZendoroShipment[]
+  items     ZendoroOrderItem[]
+  payments  ZendoroPayment[]
+  refunds   ZendoroRefund[]
+  returns   ZendoroReturn[]
+  shipments ZendoroShipment[]
 }
 
 model ZendoroOrderItem {
-  id            String   @id @default(cuid())
-  orderId       String
-  productId     String
-  quantity      Int
-  unitPrice     Int
-  totalPrice    Int
+  id         String @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  unitPrice  Int
+  totalPrice Int
 
-  order         ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product       ZendoroProduct @relation(fields: [productId], references: [id])
+  order   ZendoroOrder   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id])
 
   @@index([orderId])
 }
 
 model ZendoroPayment {
-  id                 String   @id @default(cuid())
-  orderId            String
-  provider           String   @default("stripe")
-  providerPaymentId  String?  @unique
-  status             ZendoroPaymentStatus @default(CREATED)
-  amountCents        Int
-  currency           String   @default("EUR")
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                String               @id @default(cuid())
+  orderId           String
+  provider          String               @default("stripe")
+  providerPaymentId String?              @unique
+  status            ZendoroPaymentStatus @default(CREATED)
+  amountCents       Int
+  currency          String               @default("EUR")
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
 
-  order              ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
 }
 
 model ZendoroRefund {
-  id             String   @id @default(cuid())
-  orderId        String
-  amountCents    Int
-  reason         String?
-  createdAt      DateTime @default(now())
+  id          String   @id @default(cuid())
+  orderId     String
+  amountCents Int
+  reason      String?
+  createdAt   DateTime @default(now())
 
-  order          ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
 
 model ZendoroReturn {
-  id             String   @id @default(cuid())
-  orderId        String
-  reason         String
-  createdAt      DateTime @default(now())
+  id        String   @id @default(cuid())
+  orderId   String
+  reason    String
+  createdAt DateTime @default(now())
 
-  order          ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
 
 model ZendoroShipment {
-  id              String   @id @default(cuid())
-  orderId         String
-  trackingNumber  String?
-  carrier         String?
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  orderId        String
+  trackingNumber String?
+  carrier        String?
+  createdAt      DateTime @default(now())
 
-  order           ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
 
 model ZendoroPayout {
-  id             String   @id @default(cuid())
-  sellerId       String
-  amountCents    Int
-  currency       String   @default("EUR")
-  status         String   @default("pending")
-  createdAt      DateTime @default(now())
+  id          String   @id @default(cuid())
+  sellerId    String
+  amountCents Int
+  currency    String   @default("EUR")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
 
-  seller         ZendoroSeller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  seller ZendoroSeller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
 }
 
 model ZendoroReview {
-  id             String   @id @default(cuid())
-  productId      String
-  buyerId        String
-  rating         Int
-  body           String
-  createdAt      DateTime @default(now())
+  id        String   @id @default(cuid())
+  productId String
+  buyerId   String
+  rating    Int
+  body      String
+  createdAt DateTime @default(now())
 
-  product        ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model ZendoroInventory {
-  id             String   @id @default(cuid())
-  productId      String   @unique
-  stock          Int      @default(0)
-  reserved       Int      @default(0)
-  updatedAt      DateTime @updatedAt
+  id        String   @id @default(cuid())
+  productId String   @unique
+  stock     Int      @default(0)
+  reserved  Int      @default(0)
+  updatedAt DateTime @updatedAt
 
-  product        ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model StripeCheckoutSession {
+  id            String   @id @default(cuid())
+  stripeSession String   @unique
+  userId        String?
+  status        String   @default("pending")
+  credits       Int?
+  amountCents   Int?
+  currency      String   @default("EUR")
+  metadata      Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

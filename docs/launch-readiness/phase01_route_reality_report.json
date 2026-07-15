@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-05-24T08:39:38.758Z",
+  "generatedAt": "2026-07-14T20:23:01.578Z",
   "status": "FAILED",
-  "totalRoutes": 1131,
-  "apiRoutes": 948,
-  "pageRoutes": 183,
-  "unknownExposureRoutes": 143,
+  "totalRoutes": 1192,
+  "apiRoutes": 1002,
+  "pageRoutes": 190,
+  "unknownExposureRoutes": 149,
   "deprecatedRoutes": 21,
   "riskyPublicRoutes": 2,
-  "canonicalRoutes": 318,
+  "canonicalRoutes": 324,
   "orphanCandidates": [
     "/",
     "/__bak_step41_20260301_113444",
@@ -33,6 +33,7 @@
     "/api/_info",
     "/api/_ready",
     "/api/abuse/signal",
+    "/api/account",
     "/api/account/upgrade",
     "/api/activation/claims",
     "/api/activation/dashboard",
@@ -109,8 +110,14 @@
     "/api/ads/track",
     "/api/ai/fault-healer/log",
     "/api/analytics/event",
+    "/api/auth/forgot-password",
+    "/api/auth/recovery",
+    "/api/auth/reset-password",
     "/api/auth/session",
+    "/api/auth/sessions",
+    "/api/auth/verify-email",
     "/api/auto/generate",
+    "/api/beta/keystone",
     "/api/billing/checkout",
     "/api/billing/webhook",
     "/api/boom",
@@ -149,6 +156,7 @@
     "/api/cineverse/history",
     "/api/cineverse/ingest",
     "/api/cineverse/list",
+    "/api/cineverse/mood-rail",
     "/api/cineverse/reactions",
     "/api/cineverse/spoiler",
     "/api/cineverse/summary",
@@ -180,6 +188,7 @@
     "/api/creator/list",
     "/api/creator/mock",
     "/api/creator/profile",
+    "/api/creator/resonance",
     "/api/creator/update",
     "/api/cultural/blending",
     "/api/cultural/regions",
@@ -212,6 +221,7 @@
     "/api/diag/rate-limit",
     "/api/diag/trace",
     "/api/diag/traffic",
+    "/api/discovery/side-path",
     "/api/dist/embed",
     "/api/dist/shorten",
     "/api/dist/stats",
@@ -261,6 +271,7 @@
     "/api/feedback/trigger-rerank",
     "/api/feedback/triggers",
     "/api/feedback/watch-time-weighting",
+    "/api/final/civilization-seal",
     "/api/finance",
     "/api/fomo/calendar",
     "/api/fomo/cooldown",
@@ -393,6 +404,7 @@
     "/api/launch-readiness/reality-simulation",
     "/api/launch-readiness/realtime-events",
     "/api/launch-readiness/route-reality",
+    "/api/launch-visual-state",
     "/api/launch/readiness",
     "/api/learning/profile",
     "/api/learning/rank",
@@ -495,6 +507,7 @@
     "/api/personalization/diversity",
     "/api/personalization/emotional-profile",
     "/api/personalization/explore-exploit",
+    "/api/personalization/gift",
     "/api/personalization/interaction-signals",
     "/api/personalization/interest-graph",
     "/api/personalization/metrics",
@@ -506,6 +519,7 @@
     "/api/portal-cards",
     "/api/portal-health",
     "/api/portal-overview",
+    "/api/portal-runtime",
     "/api/portal-status",
     "/api/portals",
     "/api/portals/alive",
@@ -555,6 +569,7 @@
     "/api/resilience/recovery",
     "/api/resilience/retry",
     "/api/reviews",
+    "/api/runtime-summary",
     "/api/runtime/events",
     "/api/runtime/signals",
     "/api/runtime/state",
@@ -636,6 +651,7 @@
     "/api/validation/safety",
     "/api/validation/system-tests",
     "/api/validation/zero-explicit-leaks",
+    "/api/vault",
     "/api/vendor/campaigns",
     "/api/vendor/campaigns/[id]",
     "/api/vendor/campaigns/assign",
@@ -652,6 +668,10 @@
     "/api/video-gen/guard",
     "/api/video-gen/status",
     "/api/video-gen/submit",
+    "/api/video-ingestion/runtime/final-certification",
+    "/api/video-ingestion/runtime/fyp-smoke",
+    "/api/video-ingestion/runtime/lumaspace-smoke",
+    "/api/video-ingestion/validation-pool",
     "/api/video/alive",
     "/api/video/color",
     "/api/video/fallback",
@@ -676,6 +696,34 @@
     "/api/weather",
     "/api/webhooks/zendoro",
     "/api/whereami",
+    "/api/zen/economy",
+    "/api/zencoin/admin",
+    "/api/zencoin/balance",
+    "/api/zencoin/fraud",
+    "/api/zencoin/governance",
+    "/api/zencoin/transactions",
+    "/api/zencoin/transfer",
+    "/api/zencoin/treasury",
+    "/api/zencoin/wallet",
+    "/api/zendoro/admin",
+    "/api/zendoro/cart",
+    "/api/zendoro/checkout",
+    "/api/zendoro/orders",
+    "/api/zendoro/products",
+    "/api/zendoro/reviews",
+    "/api/zendoro/seller",
+    "/api/zendoro/webhook",
+    "/api/zenwallet/creator",
+    "/api/zenwallet/final-seal",
+    "/api/zenwallet/ledger",
+    "/api/zenwallet/offline",
+    "/api/zenwallet/portals",
+    "/api/zenwallet/refunds",
+    "/api/zenwallet/runtime",
+    "/api/zenwallet/security",
+    "/api/zenwallet/subscriptions",
+    "/api/zenwallet/support",
+    "/api/zenwallet/transparency",
     "/avatar-bridge",
     "/avatar-lab",
     "/beta",
@@ -713,6 +761,7 @@
     "/fan",
     "/fan/settings",
     "/feed",
+    "/forgot-password",
     "/fyp94",
     "/gestures-demo",
     "/glyphs",
@@ -722,6 +771,7 @@
     "/hybrid-demo",
     "/inbox",
     "/l/[id]",
+    "/lafs",
     "/launch",
     "/legal",
     "/legal/creator-agreement",
@@ -780,6 +830,7 @@
     "/progress",
     "/pwa/diag",
     "/r",
+    "/reset-password",
     "/safety-circle",
     "/settings",
     "/shop",
@@ -812,11 +863,15 @@
     "/watch",
     "/watch/[id]",
     "/zendoro",
+    "/zendoro/admin",
     "/zendoro/cart",
     "/zendoro/checkout",
     "/zendoro/orders",
     "/zendoro/product/[id]",
-    "/zendoro/reviews"
+    "/zendoro/products",
+    "/zendoro/reviews",
+    "/zendoro/seller",
+    "/zenwallet"
   ],
   "duplicatePublicEndpoints": [],
   "routes": [
@@ -1053,6 +1108,16 @@
     {
       "path": "/api/abuse/signal",
       "file": "app/api/abuse/signal/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/account",
+      "file": "app/api/account/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -1821,6 +1886,36 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/auth/forgot-password",
+      "file": "app/api/auth/forgot-password/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/auth/recovery",
+      "file": "app/api/auth/recovery/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/auth/reset-password",
+      "file": "app/api/auth/reset-password/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/auth/session",
       "file": "app/api/auth/session/route.ts",
       "kind": "api",
@@ -1831,8 +1926,38 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/auth/sessions",
+      "file": "app/api/auth/sessions/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/auth/verify-email",
+      "file": "app/api/auth/verify-email/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/auto/generate",
       "file": "app/api/auto/generate/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/beta/keystone",
+      "file": "app/api/beta/keystone/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -2213,6 +2338,16 @@
     {
       "path": "/api/cineverse/list",
       "file": "app/api/cineverse/list/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/cineverse/mood-rail",
+      "file": "app/api/cineverse/mood-rail/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -2871,6 +3006,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/creator/resonance",
+      "file": "app/api/creator/resonance/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/creator/update",
       "file": "app/api/creator/update/route.ts",
       "kind": "api",
@@ -3185,6 +3330,16 @@
       "file": "app/api/diag/traffic/route.ts",
       "kind": "api",
       "exposure": "diagnostic",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/discovery/side-path",
+      "file": "app/api/discovery/side-path/route.ts",
+      "kind": "api",
+      "exposure": "public",
       "domain": "unknown",
       "canonical": false,
       "deprecated": false,
@@ -3911,6 +4066,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/final/civilization-seal",
+      "file": "app/api/final/civilization-seal/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/finance",
       "file": "app/api/finance/route.ts",
       "kind": "api",
@@ -4231,6 +4396,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/fyp/daily-drop",
+      "file": "app/api/fyp/daily-drop/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "fyp",
+      "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/fyp/debug",
       "file": "app/api/fyp/debug/route.ts",
       "kind": "api",
@@ -4503,6 +4678,16 @@
     {
       "path": "/api/fyp/trailer-override",
       "file": "app/api/fyp/trailer-override/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "fyp",
+      "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/fyp/youtube-feed",
+      "file": "app/api/fyp/youtube-feed/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "fyp",
@@ -4823,6 +5008,16 @@
     {
       "path": "/api/gmar/launch/soft",
       "file": "app/api/gmar/launch/soft/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "gmar",
+      "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/gmar/memory",
+      "file": "app/api/gmar/memory/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "gmar",
@@ -6091,6 +6286,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/launch-visual-state",
+      "file": "app/api/launch-visual-state/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/launch/readiness",
       "file": "app/api/launch/readiness/route.ts",
       "kind": "api",
@@ -6187,6 +6392,16 @@
       "exposure": "public",
       "domain": "unknown",
       "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/live/afterglow",
+      "file": "app/api/live/afterglow/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "live",
+      "canonical": true,
       "deprecated": false,
       "riskyPublicExposure": false
     },
@@ -6561,6 +6776,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/live/runtime",
+      "file": "app/api/live/runtime/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "live",
+      "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/live/share",
       "file": "app/api/live/share/route.ts",
       "kind": "api",
@@ -6623,6 +6848,16 @@
     {
       "path": "/api/live/watch",
       "file": "app/api/live/watch/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "live",
+      "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/live/world-pulse",
+      "file": "app/api/live/world-pulse/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "live",
@@ -7681,6 +7916,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/personalization/gift",
+      "file": "app/api/personalization/gift/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/personalization/interaction-signals",
       "file": "app/api/personalization/interaction-signals/route.ts",
       "kind": "api",
@@ -7783,6 +8028,16 @@
     {
       "path": "/api/portal-overview",
       "file": "app/api/portal-overview/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/portal-runtime",
+      "file": "app/api/portal-runtime/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -8417,6 +8672,16 @@
       "exposure": "internal",
       "domain": "runtime_consolidation",
       "canonical": true,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/runtime-summary",
+      "file": "app/api/runtime-summary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
       "deprecated": false,
       "riskyPublicExposure": false
     },
@@ -9981,6 +10246,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/vault",
+      "file": "app/api/vault/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/vendor/campaigns",
       "file": "app/api/vendor/campaigns/route.ts",
       "kind": "api",
@@ -10133,6 +10408,46 @@
     {
       "path": "/api/video-gen/submit",
       "file": "app/api/video-gen/submit/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/video-ingestion/runtime/final-certification",
+      "file": "app/api/video-ingestion/runtime/final-certification/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/video-ingestion/runtime/fyp-smoke",
+      "file": "app/api/video-ingestion/runtime/fyp-smoke/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/video-ingestion/runtime/lumaspace-smoke",
+      "file": "app/api/video-ingestion/runtime/lumaspace-smoke/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/video-ingestion/validation-pool",
+      "file": "app/api/video-ingestion/validation-pool/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -10483,6 +10798,286 @@
     {
       "path": "/api/whereami",
       "file": "app/api/whereami/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zen/economy",
+      "file": "app/api/zen/economy/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/admin",
+      "file": "app/api/zencoin/admin/route.ts",
+      "kind": "api",
+      "exposure": "admin",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/balance",
+      "file": "app/api/zencoin/balance/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/fraud",
+      "file": "app/api/zencoin/fraud/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/governance",
+      "file": "app/api/zencoin/governance/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/transactions",
+      "file": "app/api/zencoin/transactions/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/transfer",
+      "file": "app/api/zencoin/transfer/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/treasury",
+      "file": "app/api/zencoin/treasury/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zencoin/wallet",
+      "file": "app/api/zencoin/wallet/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/admin",
+      "file": "app/api/zendoro/admin/route.ts",
+      "kind": "api",
+      "exposure": "admin",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/cart",
+      "file": "app/api/zendoro/cart/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/checkout",
+      "file": "app/api/zendoro/checkout/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/orders",
+      "file": "app/api/zendoro/orders/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/products",
+      "file": "app/api/zendoro/products/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/reviews",
+      "file": "app/api/zendoro/reviews/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/seller",
+      "file": "app/api/zendoro/seller/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zendoro/webhook",
+      "file": "app/api/zendoro/webhook/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/creator",
+      "file": "app/api/zenwallet/creator/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/final-seal",
+      "file": "app/api/zenwallet/final-seal/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/ledger",
+      "file": "app/api/zenwallet/ledger/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/offline",
+      "file": "app/api/zenwallet/offline/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/portals",
+      "file": "app/api/zenwallet/portals/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/refunds",
+      "file": "app/api/zenwallet/refunds/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/runtime",
+      "file": "app/api/zenwallet/runtime/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/security",
+      "file": "app/api/zenwallet/security/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/subscriptions",
+      "file": "app/api/zenwallet/subscriptions/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/support",
+      "file": "app/api/zenwallet/support/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/zenwallet/transparency",
+      "file": "app/api/zenwallet/transparency/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -10911,6 +11506,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/forgot-password",
+      "file": "app/forgot-password/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/fyp",
       "file": "app/fyp/page.tsx",
       "kind": "page",
@@ -11043,6 +11648,16 @@
     {
       "path": "/l/[id]",
       "file": "app/l/[id]/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/lafs",
+      "file": "app/lafs/page.tsx",
       "kind": "page",
       "exposure": "unknown",
       "domain": "unknown",
@@ -11751,6 +12366,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/reset-password",
+      "file": "app/reset-password/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/safety-circle",
       "file": "app/safety-circle/page.tsx",
       "kind": "page",
@@ -12081,6 +12706,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/zendoro/admin",
+      "file": "app/zendoro/admin/page.tsx",
+      "kind": "page",
+      "exposure": "admin",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/zendoro/cart",
       "file": "app/zendoro/cart/page.tsx",
       "kind": "page",
@@ -12121,8 +12756,38 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/zendoro/products",
+      "file": "app/zendoro/products/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/zendoro/reviews",
       "file": "app/zendoro/reviews/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/zendoro/seller",
+      "file": "app/zendoro/seller/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/zenwallet",
+      "file": "app/zenwallet/page.tsx",
       "kind": "page",
       "exposure": "unknown",
       "domain": "unknown",

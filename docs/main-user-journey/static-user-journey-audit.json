@@ -1,0 +1,15 @@
+{
+  "pack": "03/11",
+  "name": "Main User Journey Completion",
+  "generated_at": "2026-07-14T20:32:23.475387+00:00",
+  "required_surface_pass": true,
+  "home_navigation_pass": true,
+  "duplicate_route_pass": true,
+  "duplicate_required_routes": [],
+  "focused_tests": {
+    "test_files_passed": 21,
+    "tests_passed": 157
+  },
+  "production_build_pass": true,
+  "static_audit_pass": true
+}

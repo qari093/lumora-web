@@ -1,0 +1,22 @@
+{
+  "pack": "04/11",
+  "name": "Zendoro Commerce & Payments Validation",
+  "generated_at": "2026-07-14T21:02:06.849052+00:00",
+  "checks": {
+    "static_route_pass": true,
+    "focused_test_suite_pass": true,
+    "stripe_session_model_pass": true,
+    "stripe_session_unique_pass": true,
+    "attention_compatibility_pass": true,
+    "webhook_signature_pass": true,
+    "webhook_secret_guard_pass": true,
+    "idempotency_pass": true,
+    "production_build_pass": true
+  },
+  "vitest_summary": [
+    "Test Files  56 passed (56)",
+    "Tests  111 passed (111)",
+    "Duration  53.04s (transform 1.49s, setup 338ms, collect 2.64s, tests 29.58s, environment 1.47s, prepare 254ms)"
+  ],
+  "status": "PASS"
+}

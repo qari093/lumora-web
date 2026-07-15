@@ -1,0 +1,71 @@
+{
+  "pack": "11/11",
+  "name": "Final Production Activation",
+  "branch": "lumora-launch-final",
+  "head": "2c540735",
+  "checks": {
+    "all_required_seals_present": true,
+    "all_required_seals_valid": true,
+    "deployment_readiness_pass": true,
+    "vercel_project_linked": true,
+    "vercelignore_present": true,
+    "playwright_artifacts_removed": true,
+    "tracked_file_count_within_archive_limit": true
+  },
+  "seal_results": {
+    "docs/runtime-consolidation/final_runtime_consolidation_seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/main-user-journey/final-main-user-journey-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/zendoro-commerce-payments/final-zendoro-commerce-payments-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/native-fyp-media-runtime/final-native-fyp-media-runtime-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumaspace-core-completion/final-lumaspace-core-completion-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumalink-3-integration/final-lumalink-3-integration-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/auth-private-beta-readiness/final-auth-private-beta-readiness-seal.json": {
+      "exists": true,
+      "status": "PASS_WITH_PRODUCTION_ENV_REQUIRED",
+      "valid": true
+    },
+    "docs/production-browser-smoke/final-production-browser-smoke-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/production-deployment-readiness/final-production-deployment-readiness-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    }
+  },
+  "repository": {
+    "tracked_files": 15765,
+    "ignored_status_entries": 3546
+  },
+  "deployment_command": "vercel deploy --prod --archive=tgz",
+  "canonical_production_url": "https://lumoraverse.io",
+  "tester_invites_blocked": true,
+  "ready_for_deployment_execution": true,
+  "status": "READY"
+}

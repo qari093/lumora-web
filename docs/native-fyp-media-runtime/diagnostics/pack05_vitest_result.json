@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-07-14T21:10:14.352279+00:00",
+  "summaries": [
+    "Test Files  52 passed (52)",
+    "Tests  208 passed (208)",
+    "Duration  77.25s (transform 1.98s, setup 1.65s, collect 7.46s, tests 2.35s, environment 101.85s, prepare 21.77s)"
+  ],
+  "failed_entries": [],
+  "failed_count": 0,
+  "status": "PASS"
+}

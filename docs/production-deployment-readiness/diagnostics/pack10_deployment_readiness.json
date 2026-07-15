@@ -1,0 +1,82 @@
+{
+  "pack": "10/11",
+  "name": "Production Deployment Readiness",
+  "checks": {
+    "all_required_seals_present": true,
+    "all_required_seals_valid": true,
+    "database_url_configured": true,
+    "nextauth_secret_configured": false,
+    "nextauth_url_configured": false,
+    "vercel_project_linked": true,
+    "vercelignore_present": true,
+    "playwright_artifacts_present": true
+  },
+  "seal_results": {
+    "docs/runtime-consolidation/final_runtime_consolidation_seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/main-user-journey/final-main-user-journey-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/zendoro-commerce-payments/final-zendoro-commerce-payments-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/native-fyp-media-runtime/final-native-fyp-media-runtime-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumaspace-core-completion/final-lumaspace-core-completion-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/lumalink-3-integration/final-lumalink-3-integration-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    },
+    "docs/auth-private-beta-readiness/final-auth-private-beta-readiness-seal.json": {
+      "exists": true,
+      "status": "PASS_WITH_PRODUCTION_ENV_REQUIRED",
+      "valid": true
+    },
+    "docs/production-browser-smoke/final-production-browser-smoke-seal.json": {
+      "exists": true,
+      "status": "PASS",
+      "valid": true
+    }
+  },
+  "environment": {
+    "DATABASE_URL": {
+      "configured": true,
+      "source": "file"
+    },
+    "NEXTAUTH_SECRET": {
+      "configured": false,
+      "source": "missing"
+    },
+    "NEXTAUTH_URL": {
+      "configured": false,
+      "source": "missing"
+    }
+  },
+  "vercel": {
+    "linked": true,
+    "metadata": {
+      "project_id_present": true,
+      "organization_id_present": true
+    }
+  },
+  "repository": {
+    "tracked_files": 15765,
+    "working_tree_files": 89176
+  },
+  "deployment_ready": false
+}

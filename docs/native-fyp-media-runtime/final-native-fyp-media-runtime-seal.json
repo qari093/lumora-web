@@ -1,0 +1,19 @@
+{
+  "pack": "05/11",
+  "name": "Native FYP & Media Runtime Stabilization",
+  "generated_at": "2026-07-14T21:15:57.406663+00:00",
+  "checks": {
+    "required_files_pass": true,
+    "focused_test_suite_pass": true,
+    "audio_guard_pass": true,
+    "playback_runtime_pass": true,
+    "telemetry_pass": true,
+    "production_build_pass": true
+  },
+  "vitest_summary": [
+    "Test Files  52 passed (52)",
+    "Tests  208 passed (208)",
+    "Duration  77.25s (transform 1.98s, setup 1.65s, collect 7.46s, tests 2.35s, environment 101.85s, prepare 21.77s)"
+  ],
+  "status": "PASS"
+}

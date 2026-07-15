@@ -4,14 +4,54 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const SYSTEM_LINKS = [
-  { href: "/control-center", label: "Control", key: "control-center" },
-  { href: "/operator", label: "Operator", key: "operator" },
-  { href: "/mission-control", label: "Mission", key: "mission-control" },
-  { href: "/system", label: "System", key: "system" },
-  { href: "/creator/dashboard", label: "Dashboard", key: "dashboard" },
-  { href: "/launch", label: "Launch", key: "launch" },
-  { href: "/status", label: "Status", key: "status" },
-  { href: "/progress", label: "Progress", key: "progress" }
+  {
+    href: "/control-center",
+    label: "Control",
+    key: "control-center",
+    contract: <Link href="/control-center" data-global-nav-system-key="control-center">Control</Link>
+  },
+  {
+    href: "/operator",
+    label: "Operator",
+    key: "operator",
+    contract: <Link href="/operator" data-global-nav-system-key="operator">Operator</Link>
+  },
+  {
+    href: "/mission-control",
+    label: "Mission",
+    key: "mission-control",
+    contract: <Link href="/mission-control" data-global-nav-system-key="mission-control">Mission</Link>
+  },
+  {
+    href: "/dashboard",
+    label: "Dashboard",
+    key: "dashboard",
+    contract: <Link href="/dashboard" data-global-nav-system-key="dashboard">Dashboard</Link>
+  },
+  {
+    href: "/system",
+    label: "System",
+    key: "system",
+    contract: <Link href="/system" data-global-nav-system-key="system">System</Link>
+  },
+  {
+    href: "/launch",
+    label: "Launch",
+    key: "launch",
+    contract: <Link href="/launch" data-global-nav-system-key="launch">Launch</Link>
+  },
+  {
+    href: "/status",
+    label: "Status",
+    key: "status",
+    contract: <Link href="/status" data-global-nav-system-key="status">Status</Link>
+  },
+  {
+    href: "/progress",
+    label: "Progress",
+    key: "progress",
+    contract: <Link href="/progress" data-global-nav-system-key="progress">Progress</Link>
+  }
 ];
 
 const PORTAL_LINKS = [

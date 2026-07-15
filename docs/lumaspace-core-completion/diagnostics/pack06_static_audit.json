@@ -1,0 +1,89 @@
+{
+  "pack": "06/11",
+  "name": "LumaSpace Core Completion",
+  "generated_at": "2026-07-14T21:21:36.432339+00:00",
+  "required_surfaces": [
+    {
+      "path": "app/lumaspace/page.tsx",
+      "exists": true,
+      "kind": "file",
+      "bytes": 216
+    },
+    {
+      "path": "app/lumaspace/dashboard/page.tsx",
+      "exists": true,
+      "kind": "file",
+      "bytes": 150
+    },
+    {
+      "path": "app/lumaspace/memory/page.tsx",
+      "exists": true,
+      "kind": "file",
+      "bytes": 141
+    },
+    {
+      "path": "app/lumaspace/shadow/page.tsx",
+      "exists": true,
+      "kind": "file",
+      "bytes": 141
+    },
+    {
+      "path": "app/lumaspace/reflection/page.tsx",
+      "exists": false,
+      "kind": "file",
+      "bytes": 0
+    },
+    {
+      "path": "app/api/lumaspace/runtime/route.ts",
+      "exists": true,
+      "kind": "file",
+      "bytes": 173
+    },
+    {
+      "path": "app/api/lumaspace/state/route.ts",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1735
+    },
+    {
+      "path": "app/api/lumaspace/init/route.ts",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1833
+    },
+    {
+      "path": "app/api/lumaspace/shadow/route.ts",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4312
+    },
+    {
+      "path": "app/api/lumaspace/shadow/export/route.ts",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1808
+    },
+    {
+      "path": "src/core/lumaspace",
+      "exists": true,
+      "kind": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "src/lib/lumaspace",
+      "exists": false,
+      "kind": "file",
+      "bytes": 0
+    }
+  ],
+  "test_file_count": 114,
+  "checks": {
+    "required_surfaces_pass": false,
+    "runtime_vocabulary": true,
+    "persistence_vocabulary": true,
+    "memory_vocabulary": true,
+    "export_vocabulary": true,
+    "test_files_present": true
+  },
+  "static_status": "FAIL"
+}

@@ -32,3 +32,8 @@ out/**
 .production_deployment_readiness_check_*.txt
 
 .lumora-local-media/
+.lumora-local-media
+.next
+node_modules
+.git
+.vercel

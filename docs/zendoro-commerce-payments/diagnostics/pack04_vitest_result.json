@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-07-14T20:47:57.104714+00:00",
+  "summaries": [
+    "Test Files  3 failed | 53 passed (56)",
+    "Tests  3 failed | 108 passed (111)",
+    "Duration  119.26s (transform 1.20s, setup 2.11s, collect 4.92s, tests 59.19s, environment 147.88s, prepare 28.01s)"
+  ],
+  "failed_entries": [
+    "FAIL  tests/stripe/stripe_session_db_model.test.ts > stripe session db model > StripeCheckoutSession model is accessible via Prisma client",
+    "\u276f tests/stripe/stripe_session_db_model.test.ts:7:58",
+    "FAIL  tests/stripe/stripe_webhook_contract.test.ts > stripe webhook contract (no secrets) > POST /api/stripe/webhook fails fast when STRIPE_SECRET_KEY missing",
+    "\u276f tests/stripe/stripe_webhook_contract.test.ts:16:15",
+    "FAIL  tests/zendoro/zendoro_pack01b_export_warning_cleanup.test.ts > Zendoro Pack 1B/10 \u2014 Export Warning Cleanup > restores content runtime exports",
+    "\u276f tests/zendoro/zendoro_pack01b_export_warning_cleanup.test.ts:19:66"
+  ],
+  "failed_count": 6,
+  "status": "FAIL"
+}
