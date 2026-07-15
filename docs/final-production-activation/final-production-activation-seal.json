@@ -1,0 +1,46 @@
+{
+  "pack": "11/11",
+  "name": "Final Production Activation",
+  "generated_at": "2026-07-15T14:18:21.806793+00:00",
+  "git": {
+    "branch": "lumora-launch-final",
+    "commit": "88ff6e53",
+    "remote_pushed": true
+  },
+  "deployment": {
+    "id": "dpl_8vnBx598g8vgRgfz6BbAtj6mViFi",
+    "target": "production",
+    "status": "Ready",
+    "deployment_url": "https://lumora-hp8o4cdlf-qari093s-projects.vercel.app",
+    "canonical_url": "https://lumoraverse.io",
+    "aliases": [
+      "https://lumoraverse.io",
+      "https://lumora-web-phi.vercel.app",
+      "https://lumora-web-qari093s-projects.vercel.app",
+      "https://lumora-web-qari093-qari093s-projects.vercel.app"
+    ]
+  },
+  "health_routes": {
+    "/api/healthz": 200,
+    "/api/fyp/health": 200,
+    "/api/live/health": 200,
+    "/api/lumaspace/ping": 200,
+    "/api/lumalink/health": 200
+  },
+  "checks": {
+    "production_deployment_ready": true,
+    "canonical_domain_aliased": true,
+    "production_root_http_200": true,
+    "all_health_routes_http_200": true,
+    "vercel_deployment_status_ready": true,
+    "production_target_confirmed": true,
+    "production_state_committed": true,
+    "production_state_pushed": true,
+    "tester_invites_blocked": true
+  },
+  "operational_constraints": {
+    "private_beta_invites_allowed": false,
+    "founder_approval_required_before_invites": true
+  },
+  "status": "PASS"
+}
