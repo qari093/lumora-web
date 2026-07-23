@@ -1,0 +1,5 @@
+Prisma schema loaded from ../../../tmp/lumora-production-introspection.XXXXXX.prisma
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-flat-fog-alrsrygh.c-3.eu-central-1.aws.neon.tech"
+
+- Introspecting based on datasource defined in ../../../tmp/lumora-production-introspection.XXXXXX.prisma
+✖ Introspecting based on datasource defined in ../../../tmp/lumora-production-introspection.XXXXXX.prisma

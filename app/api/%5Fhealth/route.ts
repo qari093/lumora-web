@@ -4,12 +4,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function versionGuess() {
-  return (
+  const raw =
     process.env.NEXT_PUBLIC_APP_VERSION ||
     process.env.APP_VERSION ||
     process.env.VERCEL_GIT_COMMIT_SHA ||
-    "dev"
-  );
+    "dev";
+
+  return raw.replace(/\\n|\\r/g, "").trim() || "dev";
 }
 
 export async function GET() {

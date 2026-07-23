@@ -1,0 +1,8 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma config detected, skipping environment variable loading.
+Error: P1001
+
+Can't reach database server at `ep-flat-fog-alrsrygh.c-3.eu-central-1.aws.neon.tech:5432`
+
+Please make sure your database server is running at `ep-flat-fog-alrsrygh.c-3.eu-central-1.aws.neon.tech:5432`.
