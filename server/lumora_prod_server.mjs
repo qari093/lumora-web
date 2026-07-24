@@ -3,6 +3,13 @@ import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import url from "node:url";
 
+const EMPTY_URL_ENV_KEYS = ["VERCEL_URL", "NEXTAUTH_URL", "AUTH_URL"];
+for (const envKey of EMPTY_URL_ENV_KEYS) {
+  if (typeof process.env[envKey] === "string" && process.env[envKey].trim() === "") {
+    delete process.env[envKey];
+  }
+}
+
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

@@ -1,0 +1,19 @@
+{
+  "megaStep": "05",
+  "title": "Production Entry Route Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T14:45:05.737737+00:00",
+  "routes": {
+    "/": 200,
+    "/creator": 307,
+    "/wallet": 200,
+    "/login": 200
+  },
+  "rootCause": "An inherited empty VERCEL_URL value caused next-auth/react to throw ERR_INVALID_URL during /login rendering.",
+  "fix": "The custom production server now removes empty URL environment values for VERCEL_URL, NEXTAUTH_URL, and AUTH_URL before importing Next.js.",
+  "evidence": {
+    "emptyVercelUrlRetest": true,
+    "invalidUrlErrorAbsent": true,
+    "marker": "MEGA_STEP_05_HARDENED_ENTRY_ROUTE_AUDIT_PASS=true"
+  }
+}
