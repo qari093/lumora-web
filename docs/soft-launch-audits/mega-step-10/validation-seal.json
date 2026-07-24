@@ -1,0 +1,154 @@
+{
+  "megaStep": "10",
+  "title": "Production Deployment Integrity Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T17:04:05.985221+00:00",
+  "baseUrl": "https://lumoraverse.io",
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "home",
+      "method": "GET",
+      "route": "/",
+      "requestUrl": "https://lumoraverse.io/?__lumora_integrity=1784912644730",
+      "finalUrl": "https://lumoraverse.io/?__lumora_integrity=1784912644730",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 23258,
+      "contentType": "text/html; charset=utf-8",
+      "jsonValid": false,
+      "redirected": false,
+      "vercelId": "fra1::d5g7r-1784912645159-218ef6a62ae6",
+      "vercelCache": "HIT",
+      "ms": 414,
+      "ok": true
+    },
+    {
+      "name": "login",
+      "method": "GET",
+      "route": "/login",
+      "requestUrl": "https://lumoraverse.io/login?__lumora_integrity=1784912645144",
+      "finalUrl": "https://lumoraverse.io/login?__lumora_integrity=1784912645144",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 16538,
+      "contentType": "text/html; charset=utf-8",
+      "jsonValid": false,
+      "redirected": false,
+      "vercelId": "fra1::fra1::k2cpn-1784912645269-e506446bfe68",
+      "vercelCache": "MISS",
+      "ms": 137,
+      "ok": true
+    },
+    {
+      "name": "health",
+      "method": "GET",
+      "route": "/api/health",
+      "requestUrl": "https://lumoraverse.io/api/health?__lumora_integrity=1784912645281",
+      "finalUrl": "https://lumoraverse.io/api/health?__lumora_integrity=1784912645281",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 260,
+      "contentType": "application/json",
+      "jsonValid": true,
+      "redirected": false,
+      "vercelId": "fra1::fra1::2shdq-1784912645436-ff8b8ee1f57c",
+      "vercelCache": "MISS",
+      "ms": 141,
+      "ok": true
+    },
+    {
+      "name": "ready",
+      "method": "GET",
+      "route": "/api/ready",
+      "requestUrl": "https://lumoraverse.io/api/ready?__lumora_integrity=1784912645422",
+      "finalUrl": "https://lumoraverse.io/api/ready?__lumora_integrity=1784912645422",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 375,
+      "contentType": "application/json",
+      "jsonValid": true,
+      "redirected": false,
+      "vercelId": "fra1::fra1::k2cpn-1784912645547-3497960699bc",
+      "vercelCache": "MISS",
+      "ms": 89,
+      "ok": true
+    },
+    {
+      "name": "coreHealth",
+      "method": "GET",
+      "route": "/api/_health",
+      "requestUrl": "https://lumoraverse.io/api/_health?__lumora_integrity=1784912645511",
+      "finalUrl": "https://lumoraverse.io/api/_health?__lumora_integrity=1784912645511",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 69,
+      "contentType": "application/json",
+      "jsonValid": true,
+      "redirected": false,
+      "vercelId": "fra1::fra1::lsl6l-1784912645639-08f9a960f000",
+      "vercelCache": "MISS",
+      "ms": 124,
+      "ok": true
+    },
+    {
+      "name": "healthz",
+      "method": "GET",
+      "route": "/api/healthz",
+      "requestUrl": "https://lumoraverse.io/api/healthz?__lumora_integrity=1784912645635",
+      "finalUrl": "https://lumoraverse.io/api/healthz?__lumora_integrity=1784912645635",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 53,
+      "contentType": "application/json",
+      "jsonValid": true,
+      "redirected": false,
+      "vercelId": "fra1::fra1::kkz5k-1784912645749-419b3898bbea",
+      "vercelCache": "MISS",
+      "ms": 81,
+      "ok": true
+    },
+    {
+      "name": "whereami",
+      "method": "GET",
+      "route": "/api/whereami",
+      "requestUrl": "https://lumoraverse.io/api/whereami?__lumora_integrity=1784912645716",
+      "finalUrl": "https://lumoraverse.io/api/whereami?__lumora_integrity=1784912645716",
+      "status": 200,
+      "expected": [
+        200
+      ],
+      "bytes": 109,
+      "contentType": "application/json",
+      "jsonValid": true,
+      "redirected": false,
+      "vercelId": "fra1::fra1::b4xks-1784912645847-63818e42d442",
+      "vercelCache": "MISS",
+      "ms": 97,
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "productionPagesValidated": true,
+    "healthAndReadinessValidated": true,
+    "deploymentHeadersObserved": true,
+    "auditScript": "scripts/runtime/production-deployment-integrity.mjs",
+    "marker": "MEGA_STEP_10_DEPLOYMENT_INTEGRITY_AUDIT_COMPLETED=true"
+  }
+}
