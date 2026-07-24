@@ -1,0 +1,86 @@
+{
+  "megaStep": "11",
+  "title": "Final Soft-Launch Readiness Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T17:07:58.100465+00:00",
+  "baseUrl": "https://lumoraverse.io",
+  "results": [
+    {
+      "path": "/api/dev/routes",
+      "url": "https://lumoraverse.io/api/dev/routes",
+      "status": 404,
+      "bytes": 78,
+      "ms": 416,
+      "ok": true
+    },
+    {
+      "path": "/api/dev/testers/reset",
+      "url": "https://lumoraverse.io/api/dev/testers/reset",
+      "status": 404,
+      "bytes": 78,
+      "ms": 105,
+      "ok": true
+    },
+    {
+      "path": "/api/debug/boot-metrics",
+      "url": "https://lumoraverse.io/api/debug/boot-metrics",
+      "status": 404,
+      "bytes": 78,
+      "ms": 113,
+      "ok": true
+    },
+    {
+      "path": "/api/diag",
+      "url": "https://lumoraverse.io/api/diag",
+      "status": 404,
+      "bytes": 78,
+      "ms": 103,
+      "ok": true
+    },
+    {
+      "path": "/api/fyp/debug",
+      "url": "https://lumoraverse.io/api/fyp/debug",
+      "status": 404,
+      "bytes": 78,
+      "ms": 123,
+      "ok": true
+    },
+    {
+      "path": "/api/hybrid/dev/state",
+      "url": "https://lumoraverse.io/api/hybrid/dev/state",
+      "status": 404,
+      "bytes": 78,
+      "ms": 84,
+      "ok": true
+    },
+    {
+      "path": "/api/live/raw-audit",
+      "url": "https://lumoraverse.io/api/live/raw-audit",
+      "status": 404,
+      "bytes": 78,
+      "ms": 99,
+      "ok": true
+    },
+    {
+      "path": "/api/stripe/dev/simulate",
+      "url": "https://lumoraverse.io/api/stripe/dev/simulate",
+      "status": 404,
+      "bytes": 78,
+      "ms": 76,
+      "ok": true
+    },
+    {
+      "path": "/api/videos/debug/list",
+      "url": "https://lumoraverse.io/api/videos/debug/list",
+      "status": 404,
+      "bytes": 78,
+      "ms": 129,
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "productionGuardValidated": true,
+    "debugEndpointsHidden": true,
+    "marker": "MEGA_STEP_11_FINAL_SOFT_LAUNCH_AUDIT_COMPLETED=true"
+  }
+}
