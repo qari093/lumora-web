@@ -1,0 +1,40 @@
+{
+  "megaStep": "02/11",
+  "title": "Duplicate and Legacy Route Consolidation",
+  "generatedAt": "2026-07-24T10:36:06.239Z",
+  "canonicalRouterRoot": "app",
+  "legacyRouterRoot": "src/app",
+  "buildId": "0cHJp-IH5xSC3DE470YNo",
+  "deletedLegacyFiles": [
+    "src/app/api/creator/disable/route.ts",
+    "src/app/api/creator/enable/route.ts",
+    "src/app/api/feed/mix/route.ts",
+    "src/app/api/track/route.ts",
+    "src/app/api/whereami/route.ts",
+    "src/app/layout.tsx",
+    "src/app/wallet/page.tsx"
+  ],
+  "canonicalFilesVerified": [
+    "app/api/creator/disable/route.ts",
+    "app/api/creator/enable/route.ts",
+    "app/api/feed/mix/route.ts",
+    "app/api/track/route.ts",
+    "app/api/whereami/route.ts",
+    "app/layout.tsx",
+    "app/wallet/page.tsx"
+  ],
+  "builtArtifactsVerified": [
+    ".next/server/app/api/creator/disable/route.js",
+    ".next/server/app/api/creator/enable/route.js",
+    ".next/server/app/api/feed/mix/route.js",
+    ".next/server/app/api/track/route.js",
+    ".next/server/app/api/whereami/route.js",
+    ".next/server/app/wallet/page.js"
+  ],
+  "remainingDuplicateCount": 0,
+  "missingCanonicalFiles": [],
+  "missingBuiltArtifacts": [],
+  "productionBuildPass": true,
+  "status": "PASS",
+  "marker": "MEGA_STEP_02_RUNTIME_CONSOLIDATION_VERIFIED=true"
+}
