@@ -1,0 +1,73 @@
+{
+  "megaStep": "08",
+  "title": "Production Zendoro Payment Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T16:48:46.284069+00:00",
+  "baseUrl": "https://lumoraverse.io",
+  "results": [
+    {
+      "name": "checkoutInfo",
+      "method": "GET",
+      "path": "/api/zendoro/checkout",
+      "expected": [
+        200
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/checkout",
+      "status": 200,
+      "bytes": 87,
+      "jsonValid": true,
+      "ms": 491,
+      "ok": true
+    },
+    {
+      "name": "webhookInfo",
+      "method": "GET",
+      "path": "/api/zendoro/webhook",
+      "expected": [
+        200
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/webhook",
+      "status": 200,
+      "bytes": 93,
+      "jsonValid": true,
+      "ms": 97,
+      "ok": true
+    },
+    {
+      "name": "checkoutPostSafe",
+      "method": "POST",
+      "path": "/api/zendoro/checkout",
+      "expected": [
+        501,
+        503
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/checkout",
+      "status": 503,
+      "bytes": 124,
+      "jsonValid": true,
+      "ms": 118,
+      "ok": true
+    },
+    {
+      "name": "webhookPostSafe",
+      "method": "POST",
+      "path": "/api/zendoro/webhook",
+      "expected": [
+        400,
+        501,
+        503
+      ],
+      "url": "https://lumoraverse.io/api/zendoro/webhook",
+      "status": 503,
+      "bytes": 135,
+      "jsonValid": true,
+      "ms": 232,
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "paymentRoutesValidated": true,
+    "safeFallbacksVerified": true,
+    "marker": "MEGA_STEP_08_ZENDORO_PAYMENT_AUDIT_COMPLETED=true"
+  }
+}
