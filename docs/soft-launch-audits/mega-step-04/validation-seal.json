@@ -1,0 +1,26 @@
+{
+  "megaStep": "04/11",
+  "title": "Runtime API Health Audit",
+  "generatedAt": "2026-07-24T14:19:36.802Z",
+  "runtimeHost": "127.0.0.1",
+  "runtimePort": 3055,
+  "serverCommand": "NODE_ENV=production npm run start",
+  "endpoints": [
+    {
+      "route": "/api/_health",
+      "status": 200
+    },
+    {
+      "route": "/api/healthz",
+      "status": 200
+    },
+    {
+      "route": "/api/whereami",
+      "status": 200
+    }
+  ],
+  "serverStarted": true,
+  "allEndpointsPassed": true,
+  "status": "PASS",
+  "marker": "MEGA_STEP_04_RUNTIME_API_HEALTH_AUDIT_PASS=true"
+}
