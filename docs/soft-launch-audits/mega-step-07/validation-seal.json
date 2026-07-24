@@ -1,0 +1,83 @@
+{
+  "megaStep": "07",
+  "title": "Production Main User Journey Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T16:44:53.977385+00:00",
+  "baseUrl": "https://lumoraverse.io",
+  "results": [
+    {
+      "name": "home",
+      "path": "/",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/",
+      "status": 200,
+      "ok": true,
+      "bytes": 23254,
+      "ms": 650
+    },
+    {
+      "name": "fyp",
+      "path": "/fyp",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/fyp",
+      "status": 200,
+      "ok": true,
+      "bytes": 28497,
+      "ms": 189
+    },
+    {
+      "name": "live",
+      "path": "/live",
+      "minBytes": 1000,
+      "url": "https://lumoraverse.io/live",
+      "status": 200,
+      "ok": true,
+      "bytes": 29910,
+      "ms": 65
+    },
+    {
+      "name": "gmar",
+      "path": "/gmar",
+      "minBytes": 100,
+      "url": "https://lumoraverse.io/gmar",
+      "status": 200,
+      "ok": true,
+      "bytes": 21136,
+      "ms": 74
+    },
+    {
+      "name": "creatorHub",
+      "path": "/creator-hub",
+      "minBytes": 100,
+      "url": "https://lumoraverse.io/creator-hub",
+      "status": 200,
+      "ok": true,
+      "bytes": 20064,
+      "ms": 192
+    },
+    {
+      "name": "health",
+      "path": "/api/health",
+      "minBytes": 10,
+      "url": "https://lumoraverse.io/api/health",
+      "status": 200,
+      "ok": true,
+      "bytes": 260,
+      "ms": 199
+    },
+    {
+      "name": "ready",
+      "path": "/api/ready",
+      "minBytes": 10,
+      "url": "https://lumoraverse.io/api/ready",
+      "status": 200,
+      "ok": true,
+      "bytes": 375,
+      "ms": 172
+    }
+  ],
+  "evidence": {
+    "allRoutesPassed": true,
+    "marker": "MEGA_STEP_07_MAIN_USER_JOURNEY_RERUN_COMPLETE=true"
+  }
+}
