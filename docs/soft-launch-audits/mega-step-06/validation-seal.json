@@ -1,0 +1,69 @@
+{
+  "megaStep": "06",
+  "title": "Production API Contract Audit",
+  "status": "PASS",
+  "validatedAt": "2026-07-24T14:59:26.175233+00:00",
+  "runtime": {
+    "nodeEnvironment": "production",
+    "serverReady": true,
+    "serverErrorsAbsent": true
+  },
+  "contracts": [
+    {
+      "route": "/api/_health",
+      "status": 200,
+      "contentType": "application/json",
+      "valid": true,
+      "body": {
+        "ok": true,
+        "service": "lumora-web",
+        "version": "dev",
+        "ts": 1784904954958
+      }
+    },
+    {
+      "route": "/api/healthz",
+      "status": 200,
+      "contentType": "application/json",
+      "valid": true,
+      "body": {
+        "ok": true,
+        "service": "lumora",
+        "route": "/api/healthz"
+      }
+    },
+    {
+      "route": "/api/whereami",
+      "status": 200,
+      "contentType": "application/json",
+      "valid": true,
+      "body": {
+        "ok": true,
+        "geo": {
+          "ip": "127.0.0.1",
+          "country": "DE",
+          "region": "TH",
+          "city": "Schmalkalden",
+          "currency": "EUR"
+        }
+      }
+    },
+    {
+      "route": "/api/feed/mix",
+      "status": 200,
+      "contentType": "application/json",
+      "valid": true,
+      "body": {
+        "ok": true,
+        "ping": "/api/feed/mix",
+        "usage": "POST {items:[{id,contentType,baseScore,engagement?,tags?,createdAtMs?}], limit?, tookBudgetMs?}"
+      }
+    }
+  ],
+  "evidence": {
+    "allHttpStatuses": 200,
+    "allContentTypes": "application/json",
+    "allContractsValid": true,
+    "marker": "MEGA_STEP_06_PRODUCTION_API_CONTRACT_AUDIT_PASS=true"
+  }
+}
