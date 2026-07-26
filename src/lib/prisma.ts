@@ -1,3 +1,4 @@
-const prisma = {} as any;
+import prisma, { prisma as namedPrisma } from "../../lib/prisma";
+
+export const prisma = namedPrisma;
 export default prisma;
-export { prisma };

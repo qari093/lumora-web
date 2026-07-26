@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/src/lib/db";
+
+const runtimeState = new Map<string, {
+  personaCode: string;
+  isSpeaking: boolean;
+  volume: number;
+  emotionHint: string | null;
+}>();
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,20 +16,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "personaCode required" }, { status: 400 });
     }
 
-    const state = await prisma.personaVoiceState.upsert({
-      where: { personaCode },
-      update: {
-        isSpeaking: !!isSpeaking,
-        volume: typeof volume === "number" ? volume : 0,
-        emotionHint: emotionHint ?? null,
-      },
-      create: {
-        personaCode,
-        isSpeaking: !!isSpeaking,
-        volume: typeof volume === "number" ? volume : 0,
-        emotionHint: emotionHint ?? null,
-      },
-    });
+    const state = {
+      personaCode,
+      isSpeaking: !!isSpeaking,
+      volume: typeof volume === "number" ? volume : 0,
+      emotionHint: emotionHint ?? null,
+    };
+
+    runtimeState.set(personaCode, state);
 
     return NextResponse.json({ ok: true, state });
   } catch (e: any) {
@@ -33,9 +33,13 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   const personaCode = req.nextUrl.searchParams.get("personaCode");
+
   if (!personaCode) {
     return NextResponse.json({ error: "personaCode required" }, { status: 400 });
   }
-  const state = await prisma.personaVoiceState.findUnique({ where: { personaCode } });
-  return NextResponse.json({ state });
+
+  return NextResponse.json({
+    ok: true,
+    state: runtimeState.get(personaCode) ?? null,
+  });
 }
