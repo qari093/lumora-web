@@ -1,6 +1,7 @@
+import { NextResponse } from 'next/server';
 // import { saveToFeed, awardZencoin } from "@/lib/your-feed";
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   const { _id, _path, _userId } = await req.json();

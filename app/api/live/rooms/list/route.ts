@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { rateLimitHeaders } from "@/src/lib/live/ratelimitHeaders";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const ROUTE_DEPRECATED = true;
 export const CANONICAL_ROUTE = "/api/live/rooms";
@@ -8,19 +10,22 @@ export async function GET() {
   return NextResponse.json(
     {
       ok: false,
-      error: "ROUTE_DEPRECATED",
+      error: {
+        code: "ROUTE_DEPRECATED",
+        message: "This endpoint has been retired. Use /api/live/rooms.",
+      },
       deprecated: true,
       alias: "/api/live/rooms/list",
       canonical: CANONICAL_ROUTE,
-      message: "This endpoint has been retired. Use /api/live/rooms."
     },
     {
       status: 410,
       headers: {
+        ...rateLimitHeaders(),
         "x-lumora-route-alias": "/api/live/rooms/list",
-        "x-lumora-canonical-route": "/api/live/rooms",
-        "cache-control": "no-store"
-      }
-    }
+        "x-lumora-canonical-route": CANONICAL_ROUTE,
+        "cache-control": "no-store",
+      },
+    },
   );
 }

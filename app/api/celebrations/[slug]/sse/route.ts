@@ -1,22 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const prisma = new PrismaClient();
 
 export async function GET(req: Request, { params }: { params: { slug: string } }) {
   const { slug } = params;
   const celeb = await prisma.celebration.findFirst({ where: { slug } });
-  if (!celeb) return new Response("celebration not found", { status: 404 });
+  if (!celeb) return new Response('celebration not found', { status: 404 });
+  const celebrationId = celeb.id;
 
   const enc = new TextEncoder();
 
   async function snapshot() {
     const [participants, reactions, rewards] = await Promise.all([
-      prisma.celebrationParticipant.count({ where: { celebrationId: celeb.id } }),
-      prisma.celebrationReaction.count({ where: { celebrationId: celeb.id } }),
-      prisma.celebrationReward.count({ where: { celebrationId: celeb.id } }),
+      prisma.celebrationParticipant.count({ where: { celebrationId } }),
+      prisma.celebrationReaction.count({ where: { celebrationId } }),
+      prisma.celebrationReward.count({ where: { celebrationId } }),
     ]);
     return { participants, reactions, rewards };
   }
@@ -25,7 +26,7 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
     async start(controller) {
       let prev = await snapshot();
       controller.enqueue(enc.encode(`event: init\ndata: ${JSON.stringify(prev)}\n\n`));
-      controller.enqueue(enc.encode("event: ping\ndata: ok\n\n"));
+      controller.enqueue(enc.encode('event: ping\ndata: ok\n\n'));
 
       const tick = async () => {
         try {
@@ -40,24 +41,27 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
             controller.enqueue(enc.encode(`event: reward\ndata: ${cur.rewards}\n\n`));
           }
           prev = cur;
-          controller.enqueue(enc.encode("event: ping\ndata: ok\n\n"));
+          controller.enqueue(enc.encode('event: ping\ndata: ok\n\n'));
         } catch {
-          controller.enqueue(enc.encode("event: ping\ndata: ok\n\n"));
+          controller.enqueue(enc.encode('event: ping\ndata: ok\n\n'));
         }
       };
 
       const id = setInterval(tick, 1500);
       // @ts-ignore
-      req.signal?.addEventListener?.("abort", () => { clearInterval(id); controller.close(); });
+      req.signal?.addEventListener?.('abort', () => {
+        clearInterval(id);
+        controller.close();
+      });
     },
   });
 
   return new Response(stream, {
     headers: {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache, no-transform",
-      "Connection": "keep-alive",
-      "X-Accel-Buffering": "no",
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache, no-transform',
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no',
     },
   });
 }

@@ -1,57 +1,59 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse } from 'next/server';
 
-export const runtime = "nodejs";
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
 
-const ALLOWED_TIERS = new Set(["TIER1", "TIER2", "TIER3"]);
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-type Body = { ownerId?: string; targetTier?: string; note?: string };
+const ALLOWED_TIERS = new Set(['TIER1', 'TIER2', 'TIER3']);
+
+type Body = {
+  targetTier?: string;
+  note?: string;
+};
+
+function json(body: unknown, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: userPrivateNoStoreHeaders(),
+  });
+}
 
 export async function POST(req: Request) {
-  try {
-    const { ownerId, targetTier, note }: Body = await req.json().catch(() => ({} as Body));
+  const auth = await requireUserSession();
 
-    if (!ownerId) {
-      return NextResponse.json({ ok: false, error: "ownerId is required" }, { status: 400 });
-    }
-    if (!targetTier || !ALLOWED_TIERS.has(targetTier)) {
-      return NextResponse.json(
-        { ok: false, error: `targetTier must be one of: ${[...ALLOWED_TIERS].join(", ")}` },
-        { status: 400 }
-      );
-    }
-
-    const acc =
-      (await prisma.userAccount.findFirst({ where: { ownerId } })) ??
-      (await prisma.userAccount.create({
-        data: { ownerId, tier: "TIER0", status: "ACTIVE" },
-      }));
-
-    const submission = await prisma.kycSubmission.create({
-      data: {
-        ownerId,
-        status: "SUBMITTED",
-        requestedTier: targetTier,
-        note: note?.slice(0, 1000) ?? null,
-      },
-      select: { id: true, status: true, createdAt: true },
-    });
-
-    await prisma.userAccount.update({
-      where: { id: acc.id },
-      data: { status: "PENDING" },
-    });
-
-    return NextResponse.json({
-      ok: true,
-      ownerId,
-      requestedTier: targetTier,
-      currentTier: acc.tier,
-      newStatus: "PENDING",
-      submissionId: submission.id,
-      requestId: Math.random().toString(36).slice(2),
-    });
-  } catch (err: any) {
-    return NextResponse.json({ ok: false, error: String(err?.message || err) }, { status: 500 });
+  if (!auth.ok) {
+    return auth.response;
   }
+
+  const ownerId = auth.identity.userId;
+  const body: Body = await req.json().catch(() => ({}) as Body);
+  const targetTier =
+    typeof body.targetTier === 'string' ? body.targetTier.trim().toUpperCase() : '';
+
+  if (!ALLOWED_TIERS.has(targetTier)) {
+    return json(
+      {
+        ok: false,
+        error: `targetTier must be one of: ${[...ALLOWED_TIERS].join(', ')}`,
+      },
+      400,
+    );
+  }
+
+  /*
+   * The repository currently has no UserAccount or KycSubmission Prisma models.
+   * Refuse the mutation explicitly rather than pretending that an upgrade was
+   * persisted or writing to an unrelated model.
+   */
+  return json(
+    {
+      ok: false,
+      error: 'account_upgrade_persistence_unavailable',
+      userId: ownerId,
+      requestedTier: targetTier,
+      retryable: false,
+    },
+    503,
+  );
 }

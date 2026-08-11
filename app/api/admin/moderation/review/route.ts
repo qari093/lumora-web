@@ -1,90 +1,130 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { randomUUID } from 'node:crypto';
 
-export const runtime = "nodejs";
+import { NextResponse } from 'next/server';
 
-type ReviewBody = { uid?: string; action?: "APPROVE" | "REJECT" };
+import { prisma } from '@/lib/prisma';
+import { adminNoStoreHeaders, requireAdminSession } from '@/src/lib/auth/requireAdminSession';
 
-function requireAdmin(req: Request) {
-  const token = req.headers.get("x-admin-token") || "";
-  const ok = token && token === (process.env.ADMIN_TOKEN || "dev-admin-token");
-  if (!ok) {
-    const err: any = new Error("Unauthorized");
-    err.status = 401;
-    throw err;
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+type ReviewBody = {
+  uid?: unknown;
+  action?: unknown;
+};
+
+function json(status: number, body: Record<string, unknown>): NextResponse {
+  return NextResponse.json(body, {
+    status,
+    headers: adminNoStoreHeaders(),
+  });
+}
+
+export async function POST(request: Request): Promise<NextResponse> {
+  const auth = await requireAdminSession();
+
+  if (!auth.ok) {
+    return auth.response;
   }
-}
 
-function sanitize<T>(obj: T): T {
-  // Strip BigInt (cast to number) so NextResponse.json won't throw
-  return JSON.parse(
-    JSON.stringify(obj, (_k, v) => (typeof v === "bigint" ? Number(v) : v))
-  );
-}
+  let body: ReviewBody;
 
-export async function POST(req: Request) {
   try {
-    requireAdmin(req);
-    const body = (await req.json()) as ReviewBody;
-    const uid = (body.uid || "").trim();
-    const action = body.action;
-
-    if (!uid || !action || !["APPROVE", "REJECT"].includes(action)) {
-      return NextResponse.json(
-        { ok: false, error: "uid and action(APPROVE|REJECT) are required" },
-        { status: 400 }
-      );
-    }
-
-    const video = await prisma.streamVideo.findUnique({
-      where: { uid },
-      select: { id: true, uid: true, ownerId: true, status: true, readyToStream: true },
+    body = (await request.json()) as ReviewBody;
+  } catch {
+    return json(400, {
+      ok: false,
+      route: '/api/admin/moderation/review',
+      error: 'invalid_json',
     });
+  }
+
+  const uid = typeof body.uid === 'string' ? body.uid.trim() : '';
+
+  const action = typeof body.action === 'string' ? body.action.trim().toUpperCase() : '';
+
+  if (!uid || (action !== 'APPROVE' && action !== 'REJECT')) {
+    return json(400, {
+      ok: false,
+      route: '/api/admin/moderation/review',
+      error: 'invalid_moderation_review',
+      required: {
+        uid: 'non-empty string',
+        action: ['APPROVE', 'REJECT'],
+      },
+    });
+  }
+
+  try {
+    const video = await prisma.streamVideo.findUnique({
+      where: {
+        uid,
+      },
+      select: {
+        id: true,
+        uid: true,
+        ownerId: true,
+        status: true,
+        readyToStream: true,
+      },
+    });
+
     if (!video) {
-      return NextResponse.json(
-        { ok: false, error: "video not found", uid },
-        { status: 404 }
-      );
+      return json(404, {
+        ok: false,
+        route: '/api/admin/moderation/review',
+        error: 'video_not_found',
+        uid,
+      });
     }
 
-    const updated =
-      action === "APPROVE"
-        ? await prisma.streamVideo.update({
-            where: { uid },
-            data: { status: "ready", readyToStream: true },
-            select: {
-              id: true,
-              uid: true,
-              ownerId: true,
-              status: true,
+    const updated = await prisma.streamVideo.update({
+      where: {
+        uid,
+      },
+      data:
+        action === 'APPROVE'
+          ? {
+              status: 'ready',
               readyToStream: true,
+            }
+          : {
+              status: 'rejected',
+              readyToStream: false,
             },
-          })
-        : await prisma.streamVideo.update({
-            where: { uid },
-            data: { status: "rejected", readyToStream: false },
-            select: {
-              id: true,
-              uid: true,
-              ownerId: true,
-              status: true,
-              readyToStream: true,
-            },
-          });
+      select: {
+        id: true,
+        uid: true,
+        ownerId: true,
+        status: true,
+        readyToStream: true,
+      },
+    });
 
-    return NextResponse.json(
-      sanitize({
-        ok: true,
-        action,
-        item: updated,
-        requestId: Math.random().toString(36).slice(2),
-      })
-    );
-  } catch (err: any) {
-    const status = Number(err?.status) || 500;
-    return NextResponse.json(
-      { ok: false, error: String(err?.message || err) },
-      { status }
-    );
+    return json(200, {
+      ok: true,
+      route: '/api/admin/moderation/review',
+      source: 'database',
+      requestId: randomUUID(),
+      action,
+      item: updated,
+      reviewedBy: {
+        userId: auth.identity.userId,
+        email: auth.identity.email,
+      },
+    });
+  } catch (error) {
+    console.error('ADMIN_MODERATION_REVIEW_FAILED', {
+      adminUserId: auth.identity.userId,
+      uid,
+      action,
+      message: error instanceof Error ? error.message : String(error),
+    });
+
+    return json(500, {
+      ok: false,
+      route: '/api/admin/moderation/review',
+      error: 'admin_moderation_review_failed',
+    });
   }
 }

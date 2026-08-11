@@ -1,47 +1,132 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse } from 'next/server';
 
-function isAdmin(req: Request) {
-  const t = req.headers.get("x-admin-token") || "";
-  return !!t && t === (process.env.ADMIN_TOKEN || "");
+import { prisma } from '@/lib/prisma';
+import { adminNoStoreHeaders, requireAdminSession } from '@/src/lib/auth/requireAdminSession';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+async function safeCount(operation: () => Promise<number>): Promise<number> {
+  try {
+    return Number(await operation());
+  } catch {
+    return 0;
+  }
 }
 
-export async function GET(req: Request) {
+async function safeAggregate<T>(operation: () => Promise<T>, fallback: T): Promise<T> {
   try {
-    if (!isAdmin(req)) return NextResponse.json({ ok:false, error:"UNAUTHORIZED" }, { status:401 });
+    return await operation();
+  } catch {
+    return fallback;
+  }
+}
 
-    const minutes = 60;
-    const since = new Date(Date.now() - minutes*60_000);
+export async function GET() {
+  const auth = await requireAdminSession();
 
-    // Safe helpers so we dont explode if certain tables dont exist yet
-    const safeCount = async (fn: () => Promise<number>) => {
-      try { return await fn(); } catch { return 0; }
-    };
-    const safeAgg = async <T>(fn: () => Promise<T>, fallback: T) => {
-      try { return await fn(); } catch { return fallback; }
-    };
+  if (!auth.ok) {
+    return auth.response;
+  }
 
-    const wallets = await safeAgg(async () => {
-      const rows = await prisma.wallet.findMany({ select:{ balanceCents:true } });
-      const totalCents = rows.reduce((s,r)=> s + Number(r.balanceCents||0), 0);
-      return { count: rows.length, totalCents };
-    }, { count: 0, totalCents: 0 });
+  try {
+    const windowMinutes = 60;
+    const since = new Date(Date.now() - windowMinutes * 60_000);
 
-    const campaigns = await safeCount(async () => await prisma.campaign.count());
-    const kycPending = await safeCount(async () => await prisma.kycRequest.count({ where:{ status: "PENDING" as any }}));
-    const fraudLastHr = await safeCount(async () => await prisma.fraudLog.count({ where:{ createdAt:{ gte: since }}}));
-    const eventsLastHr = await safeCount(async () => await prisma.adEvent.count({ where:{ createdAt:{ gte: since }}}));
-    const convLastHr = await safeCount(async () => await prisma.adConversion.count({ where:{ createdAt:{ gte: since }}}));
+    const wallets = await safeAggregate(
+      async () => {
+        const rows = await prisma.wallet.findMany({
+          select: {
+            balanceCents: true,
+          },
+        });
 
-    return NextResponse.json({
-      ok: true,
-      windowMinutes: minutes,
-      wallets,
-      campaigns,
-      kycPending,
-      activity: { eventsLastHr, convLastHr, fraudLastHr },
+        return {
+          count: rows.length,
+          totalCents: rows.reduce((sum, row) => sum + Number(row.balanceCents || 0), 0),
+        };
+      },
+      {
+        count: 0,
+        totalCents: 0,
+      },
+    );
+
+    const [campaigns, kycPending, fraudLastHr, eventsLastHr, convLastHr] = await Promise.all([
+      safeCount(() => prisma.campaign.count()),
+      safeCount(() =>
+        prisma.kycRequest.count({
+          where: {
+            status: 'PENDING',
+          },
+        }),
+      ),
+      safeCount(() =>
+        prisma.fraudLog.count({
+          where: {
+            createdAt: {
+              gte: since,
+            },
+          },
+        }),
+      ),
+      safeCount(() =>
+        prisma.adEvent.count({
+          where: {
+            createdAt: {
+              gte: since,
+            },
+          },
+        }),
+      ),
+      safeCount(() =>
+        prisma.adConversion.count({
+          where: {
+            createdAt: {
+              gte: since,
+            },
+          },
+        }),
+      ),
+    ]);
+
+    return NextResponse.json(
+      {
+        ok: true,
+        route: '/api/admin/overview',
+        source: 'database',
+        admin: auth.identity,
+        windowMinutes,
+        wallets,
+        campaigns,
+        kycPending,
+        activity: {
+          eventsLastHr,
+          convLastHr,
+          fraudLastHr,
+        },
+      },
+      {
+        status: 200,
+        headers: adminNoStoreHeaders(),
+      },
+    );
+  } catch (error) {
+    console.error('ADMIN_OVERVIEW_READ_FAILED', {
+      adminUserId: auth.identity.userId,
+      message: error instanceof Error ? error.message : String(error),
     });
-  } catch (e:any) {
-    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
+
+    return NextResponse.json(
+      {
+        ok: false,
+        route: '/api/admin/overview',
+        error: 'admin_overview_read_failed',
+      },
+      {
+        status: 500,
+        headers: adminNoStoreHeaders(),
+      },
+    );
   }
 }

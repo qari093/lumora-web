@@ -1,28 +1,110 @@
-import { NextRequest, NextResponse } from "next/server";
-import { emitNotification } from "@/src/lib/notify/store";
-import { reqId } from "@/src/lib/reqid";
+import { NextRequest, NextResponse } from 'next/server';
 
-const DEV = process.env.NODE_ENV !== "production";
+import { emitNotification } from '@/src/lib/notify/store';
+import { reqId } from '@/src/lib/reqid';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
 
-export async function POST(req: NextRequest) {
-  const id = reqId();
-  if (!DEV) return NextResponse.json({ ok:false, error:"DISABLED_IN_PRODUCTION", requestId:id }, { status:200, headers:{ "x-request-id": id } });
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-  let body: any = {};
-  try { body = await req.json(); } catch {}
-  const ownerId = typeof body?.ownerId === "string" ? body.ownerId : "";
-  const kind = (body?.kind || "").toString().toLowerCase();
-  const title = (body?.title || "").toString();
-  const msg = typeof body?.body === "string" ? body.body : null;
-  const meta = body?.meta;
+type EmitBody = {
+  kind?: unknown;
+  title?: unknown;
+  body?: unknown;
+  meta?: unknown;
+};
 
-  const need = [];
-  if (!ownerId) need.push("ownerId");
-  if (!["low_balance","spend_spike","approval","generic"].includes(kind)) need.push("kind(low_balance|spend_spike|approval|generic)");
-  if (!title) need.push("title");
-  if (need.length) return NextResponse.json({ ok:false, error:"BAD_REQUEST", need, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+const ALLOWED_KINDS = new Set(['low_balance', 'spend_spike', 'approval', 'generic']);
 
-  const n = emitNotification(ownerId, kind as any, title, msg, meta);
-  return NextResponse.json({ ok:true, notification:n, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const requestId = reqId();
+
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'disabled_in_production',
+        requestId,
+      },
+      {
+        status: 403,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  let body: EmitBody;
+
+  try {
+    body = (await request.json()) as EmitBody;
+  } catch {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'invalid_json',
+        requestId,
+      },
+      {
+        status: 400,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  const kind = typeof body.kind === 'string' ? body.kind.trim().toLowerCase() : '';
+
+  const title = typeof body.title === 'string' ? body.title.trim() : '';
+
+  if (!ALLOWED_KINDS.has(kind) || !title) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'invalid_notification',
+        requestId,
+      },
+      {
+        status: 422,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  const notification = emitNotification(
+    auth.identity.userId,
+    kind as 'low_balance' | 'spend_spike' | 'approval' | 'generic',
+    title,
+    typeof body.body === 'string' ? body.body : null,
+    body.meta,
+  );
+
+  return NextResponse.json(
+    {
+      ok: true,
+      route: '/api/notify/emit',
+      notification,
+      requestId,
+    },
+    {
+      status: 200,
+      headers: {
+        ...userPrivateNoStoreHeaders(),
+        'x-request-id': requestId,
+      },
+    },
+  );
 }
-export const dynamic = "force-dynamic";

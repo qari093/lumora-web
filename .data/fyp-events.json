@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fyp_evt_1785537488279_u4txj8yf",
+    "cardId": "seed-2",
+    "event": "save",
+    "value": 1,
+    "watchedMs": 0,
+    "lane": "learn",
+    "sessionId": "live-feed-test",
+    "userId": "anonymous-user",
+    "ts": 1785537488279,
+    "source": "fyp_tracking_v1"
+  }
+]

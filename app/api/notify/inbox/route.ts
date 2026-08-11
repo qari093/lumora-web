@@ -1,21 +1,38 @@
-import { NextRequest, NextResponse } from "next/server";
-import { listInbox, listSubscriptions } from "@/src/lib/notify/store";
-import { reqId } from "@/src/lib/reqid";
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
-  const id = reqId();
-  const u = new URL(req.url);
-  const ownerId = u.searchParams.get("ownerId") || "";
-  const limit = Math.max(1, Math.min(200, Number(u.searchParams.get("limit") || "50")));
+import { listInbox, listSubscriptions } from '@/src/lib/notify/store';
+import { reqId } from '@/src/lib/reqid';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
 
-  if (!ownerId) return NextResponse.json({ ok:false, error:"MISSING_OWNER", requestId:id }, { status:200, headers:{ "x-request-id": id } });
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-  return NextResponse.json({
-    ok:true,
-    ownerId,
-    subs: listSubscriptions(ownerId),
-    inbox: listInbox(ownerId, limit),
-    requestId:id
-  }, { status:200, headers:{ "x-request-id": id } });
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const requestId = reqId();
+  const limitRaw = Number(request.nextUrl.searchParams.get('limit') ?? '50');
+  const limit = Number.isFinite(limitRaw) ? Math.max(1, Math.min(200, Math.floor(limitRaw))) : 50;
+
+  return NextResponse.json(
+    {
+      ok: true,
+      route: '/api/notify/inbox',
+      ownerId: auth.identity.userId,
+      subscriptions: listSubscriptions(auth.identity.userId),
+      inbox: listInbox(auth.identity.userId, limit),
+      requestId,
+    },
+    {
+      status: 200,
+      headers: {
+        ...userPrivateNoStoreHeaders(),
+        'x-request-id': requestId,
+      },
+    },
+  );
 }
-export const dynamic = "force-dynamic";

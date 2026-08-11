@@ -1,5 +1,20 @@
-import { compatibilityJson } from "@/src/lib/runtime-guards/compatibilityResponse";
+import { compatibilityJson } from '@/src/lib/runtime-guards/compatibilityResponse';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  return compatibilityJson("/api/wallet/history", "/api/zenwallet/ledger");
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const response = compatibilityJson('/api/wallet/history', '/api/zenwallet/ledger');
+
+  Object.entries(userPrivateNoStoreHeaders()).forEach(([name, value]) => {
+    response.headers.set(name, value);
+  });
+
+  return response;
 }

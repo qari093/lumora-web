@@ -1,116 +1,128 @@
 import { describe, expect, test } from "vitest";
+import { NextRequest } from "next/server";
 
-function __baseUrl(): string {
-  const u = process.env.LUMORA_TEST_BASE_URL;
-  return (u && typeof u === 'string' && u.startsWith('http')) ? u : '" + __baseUrl() + "';
+function isIsoString(value: unknown): boolean {
+  return (
+    typeof value === "string" &&
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(value)
+  );
 }
 
+async function readJson(res: Response): Promise<Record<string, any>> {
+  const contentType = res.headers.get("content-type") ?? "";
+  expect(contentType).toContain("application/json");
 
-/**
- * These are UNIT contract tests (no server, no fetch).
- * They validate that our route handlers produce stable JSON shapes.
- *
- * NOTE: We call route GET handlers directly to avoid network flake.
- */
-
-function isIsoString(s: unknown): boolean {
-  return typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
-}
-
-async function readJson(res: Response): Promise<any> {
-  const ct = res.headers.get("content-type") ?? "";
-  expect(ct).toContain("application/json");
   const text = await res.text();
   expect(text.length).toBeGreaterThan(0);
-  return JSON.parse(text);
+
+  return JSON.parse(text) as Record<string, any>;
 }
 
 describe("health API contract (unit)", () => {
-  test("GET /api/health returns base contract", async () => {
+  test("GET /api/health returns canonical runtime metadata contract", async () => {
     const mod = await import("../../app/api/health/route");
+
     expect(typeof mod.GET).toBe("function");
-    const req = new Request("http://localhost:8088/api/health");
-    const res: Response = await mod.GET(req);
+
+    const res: Response = await mod.GET();
+
     expect(res.status).toBe(200);
-    const j = await readJson(res);
+    expect(res.headers.get("cache-control")).toContain("no-store");
 
-    expect(j).toBeTypeOf("object");
-    expect(j.ok).toBe(true);
-    expect(j.service).toBe("lumora-web");
-    expect(j.route).toBe("/api/health");
-    expect(isIsoString(j.ts)).toBe(true);
-    expect(typeof j.node).toBe("string");
-    expect(typeof j.env).toBe("string");
-    expect("checks" in j).toBe(false);
-  });
+    const body = await readJson(res);
 
-  test("GET /api/health?deep=1 returns deep contract with checks.self_healthz", async () => {
-    const mod = await import("../../app/api/health/route");
-    const req = new Request("http://localhost:8088/api/health?deep=1&timeout_ms=50");
-    const res: Response = await mod.GET(req);
-    expect(res.status).toBe(200);
-    const j = await readJson(res);
-
-    expect(j.ok).toBe(true);
-    expect(j.deep).toBe(true);
-    expect(typeof j.timeout_ms).toBe("number");
-    expect(typeof j.base_url).toBe("string");
-    expect(j.checks).toBeTypeOf("object");
-    expect(j.checks.self_healthz).toBeTypeOf("object");
-    expect(typeof j.checks.self_healthz.ok).toBe("boolean");
-    expect("status" in j.checks.self_healthz).toBe(true);
+    expect(body.ok).toBe(true);
+    expect(body.status).toBe("healthy");
+    expect(body.route).toBe("/api/health");
+    expect(body.service).toBe("lumora-web");
+    expect(typeof body.version).toBe("string");
+    expect(typeof body.appEnv).toBe("string");
     expect(
-      typeof j.checks.self_healthz.status === "number" || j.checks.self_healthz.status === null
+      body.commitSha === null || typeof body.commitSha === "string",
     ).toBe(true);
+    expect(
+      body.deploymentId === null || typeof body.deploymentId === "string",
+    ).toBe(true);
+    expect(isIsoString(body.checkedAt)).toBe(true);
+
+    expect("ts" in body).toBe(false);
+    expect("node" in body).toBe(false);
+    expect("env" in body).toBe(false);
+    expect("deep" in body).toBe(false);
+    expect("checks" in body).toBe(false);
+    expect("timeout_ms" in body).toBe(false);
+    expect("base_url" in body).toBe(false);
   });
 
-  test("GET /api/healthz contract", async () => {
+  test("GET /api/healthz returns canonical lightweight liveness contract", async () => {
     const mod = await import("../../app/api/healthz/route");
-    const req = new Request("http://localhost:8088/api/healthz");
-    const res: Response = await mod.GET(req);
-    expect(res.status).toBe(200);
-    const j = await readJson(res);
 
-    expect(j.ok).toBe(true);
-    expect(typeof j.service).toBe("string");
-    expect(typeof j.ts).toBe("number");
+    expect(typeof mod.GET).toBe("function");
+
+    const res: Response = await mod.GET();
+
+    expect(res.status).toBe(200);
+
+    const body = await readJson(res);
+
+    expect(body).toEqual({
+      ok: true,
+      service: "lumora",
+      route: "/api/healthz",
+    });
+    expect("ts" in body).toBe(false);
   });
 
-  test("GET /api/emml/health contract", async () => {
+  test("GET /api/emml/health returns EMML health contract", async () => {
     const mod = await import("../../app/api/emml/health/route");
-    const req = new Request("http://localhost:8088/api/emml/health");
-    const res: Response = await mod.GET(req);
-    expect(res.status).toBe(200);
-    const j = await readJson(res);
 
-    expect(j.ok).toBe(true);
-    expect(j.system).toBe("emml");
-    expect(j.status).toBe("healthy");
-    expect(typeof j.asOf).toBe("string");
+    expect(typeof mod.GET).toBe("function");
+
+    const res: Response = await mod.GET();
+
+    expect(res.status).toBe(200);
+
+    const body = await readJson(res);
+
+    expect(body.ok).toBe(true);
+    expect(body.system).toBe("emml");
+    expect(body.status).toBe("healthy");
+    expect(isIsoString(body.asOf)).toBe(true);
   });
 
-  test("GET /api/hybrid/health contract", async () => {
+  test("GET /api/hybrid/health returns hybrid health contract", async () => {
     const mod = await import("../../app/api/hybrid/health/route");
-    const req = new Request("http://localhost:8088/api/hybrid/health");
-    const res: Response = await mod.GET(req);
-    expect(res.status).toBe(200);
-    const j = await readJson(res);
 
-    expect(j.ok).toBe(true);
-    expect(j.service).toBe("hybrid-core");
-    expect(typeof j.time).toBe("string");
+    expect(typeof mod.GET).toBe("function");
+
+    const res: Response = await mod.GET();
+
+    expect(res.status).toBe(200);
+
+    const body = await readJson(res);
+
+    expect(body.ok).toBe(true);
+    expect(body.service).toBe("hybrid-core");
+    expect(isIsoString(body.time)).toBe(true);
   });
 
-  test("GET /api/ads/health contract", async () => {
+  test("GET /api/ads/health returns ads health contract", async () => {
     const mod = await import("../../app/api/ads/health/route");
-    const req = new Request("http://localhost:8088/api/ads/health");
-    const res: Response = await mod.GET(req);
-    expect(res.status).toBe(200);
-    const j = await readJson(res);
 
-    expect(j.ok).toBe(true);
-    expect(j.system).toBe("ads");
-    expect(j.route).toBe("/api/ads/health");
-    expect(typeof j.ts).toBe("string");
+    expect(typeof mod.GET).toBe("function");
+
+    const request = new NextRequest("http://localhost:8088/api/ads/health");
+    const res: Response = await mod.GET(request);
+
+    expect(res.status).toBe(200);
+    expect(res.headers.get("cache-control")).toContain("no-store");
+
+    const body = await readJson(res);
+
+    expect(body.ok).toBe(true);
+    expect(body.service).toBe("lumora");
+    expect(body.system).toBe("ads");
+    expect(body.route).toBe("/api/ads/health");
+    expect(isIsoString(body.ts)).toBe(true);
   });
 });

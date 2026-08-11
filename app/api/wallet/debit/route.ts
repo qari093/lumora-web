@@ -1,32 +1,23 @@
-import { NextResponse } from 'next/server';
-import { getWallet, addLedgerEntry } from '@/lib/wallet';
-import { ensureIdempotency } from '@/lib/idempotency';
+import { compatibilityJson } from "@/src/lib/runtime-guards/compatibilityResponse";
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json().catch(() => ({}));
-    const { ownerId, euros, reason, idempotencyKey } = body ?? {};
-    if (!ownerId || typeof euros !== 'number' || euros <= 0) {
-      return NextResponse.json({ ok: false, error: 'Invalid payload' }, { status: 400 });
-    }
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-    const headerKey = req.headers.get('Idempotency-Key') ?? undefined;
-    const key = headerKey || idempotencyKey;
+export async function POST(): Promise<Response> {
+  const auth = await requireUserSession();
 
-    if (key) {
-      const dedup = await ensureIdempotency({ ownerId, key, endpoint: 'wallet/debit' });
-      if (dedup) return NextResponse.json(dedup);
-    }
-
-    // Record debit (your addLedgerEntry must subtract when kind='debit')
-    const entry = await addLedgerEntry({ ownerId, kind: 'debit', euros, reason });
-    const wallet = await getWallet(ownerId);
-    const resp = { ok: true, wallet, entry, requestId: entry.requestId };
-
-    if (key) await ensureIdempotency({ ownerId, key, endpoint: 'wallet/debit', save: resp });
-    return NextResponse.json(resp);
-  } catch (err) {
-    console.error('[wallet/debit] error:', err);
-    return NextResponse.json({ ok: false, error: 'Server error' }, { status: 500 });
+  if (!auth.ok) {
+    return auth.response;
   }
+
+  const userId = auth.identity.userId;
+  const response = compatibilityJson("/api/wallet/debit", "/api/zenwallet/runtime");
+
+  for (const [name, value] of Object.entries(userPrivateNoStoreHeaders())) {
+    response.headers.set(name, value);
+  }
+
+  response.headers.set("x-lumora-authenticated-user", userId);
+  return response;
 }

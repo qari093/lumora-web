@@ -1,46 +1,71 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { adminNoStoreHeaders, requireAdminSession } from '@/src/lib/auth/requireAdminSession';
 
-function isAdmin(req: Request) {
-  const t = req.headers.get("x-admin-token") || "";
-  return !!t && t === (process.env.ADMIN_TOKEN || "");
-}
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-// Recursively convert BigInt to Number for JSON safety
 function sanitizeBigInt(x: any): any {
-  if (typeof x === "bigint") return Number(x);
+  if (typeof x === 'bigint') return Number(x);
   if (Array.isArray(x)) return x.map(sanitizeBigInt);
-  if (x && typeof x === "object") {
+  if (x && typeof x === 'object') {
     const out: any = {};
-    for (const k of Object.keys(x)) out[k] = sanitizeBigInt((x as any)[k]);
+    for (const k of Object.keys(x)) out[k] = sanitizeBigInt(x[k]);
     return out;
   }
   return x;
 }
 
-export async function GET(req: Request) {
+export async function GET() {
+  const auth = await requireAdminSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
-    if (!isAdmin(req)) return NextResponse.json({ ok:false, error:"UNAUTHORIZED" }, { status:401 });
+    const ping = sanitizeBigInt(await prisma.$queryRawUnsafe<any[]>(`SELECT 1 AS ok`));
 
-    // Raw ping may return BigInt in some drivers; sanitize it.
-    const pingRaw = await prisma.$queryRawUnsafe<any[]>(`SELECT 1 AS ok`);
-    const ping = sanitizeBigInt(pingRaw);
-
-    // Count common tables if present (guarded)
     const counts: Record<string, number> = {};
-    const tryCount = async (name: string, run: () => Promise<number>) => {
-      try { counts[name] = Number(await run()); } catch { /* ignore missing tables */ }
-    };
-    await tryCount("Wallet", async ()=> prisma.wallet.count());
-    await tryCount("Campaign", async ()=> prisma.campaign.count());
-    await tryCount("CpvView", async ()=> prisma.cpvView.count());
-    await tryCount("AdEvent", async ()=> prisma.adEvent.count());
-    await tryCount("AdConversion", async ()=> prisma.adConversion.count());
-    await tryCount("KycRequest", async ()=> prisma.kycRequest.count());
-    await tryCount("FraudLog", async ()=> prisma.fraudLog.count());
 
-    return NextResponse.json({ ok:true, db:"up", ping, counts });
-  } catch (e:any) {
-    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
+    const tryCount = async (name: string, run: () => Promise<number>) => {
+      try {
+        counts[name] = Number(await run());
+      } catch {}
+    };
+
+    await tryCount('Wallet', () => prisma.wallet.count());
+    await tryCount('Campaign', () => prisma.campaign.count());
+    await tryCount('CpvView', () => prisma.cpvView.count());
+    await tryCount('AdEvent', () => prisma.adEvent.count());
+    await tryCount('AdConversion', () => prisma.adConversion.count());
+    await tryCount('KycRequest', () => prisma.kycRequest.count());
+    await tryCount('FraudLog', () => prisma.fraudLog.count());
+
+    return NextResponse.json(
+      {
+        ok: true,
+        route: '/api/admin/health',
+        admin: auth.identity,
+        db: 'up',
+        ping,
+        counts,
+      },
+      {
+        status: 200,
+        headers: adminNoStoreHeaders(),
+      },
+    );
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: String(error?.message || error),
+      },
+      {
+        status: 500,
+        headers: adminNoStoreHeaders(),
+      },
+    );
   }
 }

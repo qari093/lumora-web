@@ -1,36 +1,89 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 function isValidCode(code: string) {
   return /^avatar_\d{3}$/.test(code);
 }
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
     const body = await req.json().catch(() => ({}));
-    const code = String(body?.code || "").trim();
+    const code = String(body?.code || '').trim();
+
     if (!isValidCode(code)) {
-      return NextResponse.json({ ok: false, error: "invalid_code" }, { status: 400 });
+      return NextResponse.json(
+        {
+          ok: false,
+          error: 'invalid_code',
+        },
+        {
+          status: 400,
+          headers: userPrivateNoStoreHeaders(),
+        },
+      );
     }
 
-    const res = NextResponse.json({ ok: true, code }, { status: 200 });
-    // 6 months, httpOnly so server components can read it; client writes via POST
-    res.cookies.set("persona_code", code, {
+    const response = NextResponse.json(
+      {
+        ok: true,
+        userId: auth.identity.userId,
+        code,
+      },
+      {
+        status: 200,
+        headers: userPrivateNoStoreHeaders(),
+      },
+    );
+
+    response.cookies.set('persona_code', code, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
-      path: "/",
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
       maxAge: 60 * 60 * 24 * 180,
     });
-    return res;
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: "select_failed", detail: String(e?.message || e) }, { status: 500 });
+
+    return response;
+  } catch (error: unknown) {
+    console.error('[persona/select] failed', error instanceof Error ? error.message : error);
+
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'select_failed',
+      },
+      {
+        status: 500,
+        headers: userPrivateNoStoreHeaders(),
+      },
+    );
   }
 }
 
 export async function GET() {
-  // light health probe / CORS-safe
-  return NextResponse.json({ ok: true }, { status: 200 });
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  return NextResponse.json(
+    {
+      ok: true,
+      userId: auth.identity.userId,
+    },
+    {
+      headers: userPrivateNoStoreHeaders(),
+    },
+  );
 }

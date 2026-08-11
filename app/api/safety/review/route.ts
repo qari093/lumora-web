@@ -1,33 +1,36 @@
-import { guardedJson } from "@/lib/api/guardedJson";
-import { readSignalStore } from "@/lib/signals/store/fileStore";
-import { listManualReviewItems, enqueueManualReview } from "@/lib/safety/review/manualReviewQueue";
+import { guardedJson } from '@/lib/api/guardedJson';
+import { readSignalStore } from '@/lib/signals/store/fileStore';
+import {
+  listManualReviewItems,
+  enqueueManualReview,
+} from '@/src/lib/safety/review/manualReviewQueue';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const mode = (searchParams.get("mode") || "list").trim();
+  const mode = (searchParams.get('mode') || 'list').trim();
 
-  if (mode === "seed") {
+  if (mode === 'seed') {
     const snapshot = await readSignalStore();
     const first = snapshot.signals[0];
     if (!first) {
-      return guardedJson("api.safety.review", {
+      return guardedJson('api.safety.review', {
         ok: true,
-        mode: "seed",
+        mode: 'seed',
         seeded: false,
-        reason: "no_signals_available",
+        reason: 'no_signals_available',
         ts: Date.now(),
       });
     }
 
-    const item = await enqueueManualReview(first, "manual_escalation", {
-      source: "step_028_seed",
+    const item = await enqueueManualReview(first, 'manual_escalation', {
+      source: 'step_028_seed',
     });
 
-    return guardedJson("api.safety.review", {
+    return guardedJson('api.safety.review', {
       ok: true,
-      mode: "seed",
+      mode: 'seed',
       seeded: true,
       item,
       ts: Date.now(),
@@ -35,9 +38,9 @@ export async function GET(req: Request) {
   }
 
   const store = await listManualReviewItems();
-  return guardedJson("api.safety.review", {
+  return guardedJson('api.safety.review', {
     ok: true,
-    mode: "list",
+    mode: 'list',
     count: store.items.length,
     updatedAt: store.updatedAt,
     items: store.items,

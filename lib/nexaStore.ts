@@ -1,16 +1,16 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
 //==============================
 // ✅ DB FILE PATH + LOAD / SAVE
 //==============================
-const dbFile = path.join(process.cwd(), "data", "nexa.json");
+const dbFile = path.join(process.cwd(), 'data', 'nexa.json');
 if (!fs.existsSync(path.dirname(dbFile))) fs.mkdirSync(path.dirname(dbFile), { recursive: true });
 
 let db: any = { users: {} };
 
 try {
-  if (fs.existsSync(dbFile)) db = JSON.parse(fs.readFileSync(dbFile, "utf-8"));
+  if (fs.existsSync(dbFile)) db = JSON.parse(fs.readFileSync(dbFile, 'utf-8'));
 } catch {
   db = { users: {} };
 }
@@ -66,15 +66,15 @@ function user(deviceId: string) {
 //==============================
 export function addXP(deviceId: string, amount: number) {
   const _u = user(deviceId);
-  u.xp += amount;
-  const newLevel = Math.floor(u.xp / 100) + 1;
-  if (newLevel > u.level) {
-    u.level = newLevel;
-    emit("xp:levelup", { device: deviceId, level: newLevel });
+  _u.xp += amount;
+  const newLevel = Math.floor(_u.xp / 100) + 1;
+  if (newLevel > _u.level) {
+    _u.level = newLevel;
+    emit('xp:levelup', { device: deviceId, level: newLevel });
   }
-  emit("xp:gain", { device: deviceId, xp: u.xp });
+  emit('xp:gain', { device: deviceId, xp: _u.xp });
   saveDB();
-  return { ok: true, xp: u.xp, level: u.level };
+  return { ok: true, xp: _u.xp, level: _u.level };
 }
 
 //==============================
@@ -82,15 +82,15 @@ export function addXP(deviceId: string, amount: number) {
 //==============================
 export function addWater(deviceId: string, ml: number) {
   const _u = user(deviceId);
-  u.waterMl += ml;
-  u.lastHydrationAt = Date.now();
-  if (u.waterMl >= u.waterGoalMl && !u.badges.includes("Hydration Hero")) {
-    u.badges.push("Hydration Hero");
-    emit("badge:new", { device: deviceId, badge: "Hydration Hero" });
+  _u.waterMl += ml;
+  _u.lastHydrationAt = Date.now();
+  if (_u.waterMl >= _u.waterGoalMl && !_u.badges.includes('Hydration Hero')) {
+    _u.badges.push('Hydration Hero');
+    emit('badge:new', { device: deviceId, badge: 'Hydration Hero' });
   }
-  emit("hydrate:add", { device: deviceId, ml: u.waterMl });
+  emit('hydrate:add', { device: deviceId, ml: _u.waterMl });
   saveDB();
-  return { ok: true, waterMl: u.waterMl, goal: u.waterGoalMl };
+  return { ok: true, waterMl: _u.waterMl, goal: _u.waterGoalMl };
 }
 
 //==============================
@@ -99,7 +99,7 @@ export function addWater(deviceId: string, ml: number) {
 export function addBreath(deviceId: string, type: string, seconds: number) {
   const _u = user(deviceId);
   addXP(deviceId, Math.floor(seconds / 5));
-  emit("breath:done", { device: deviceId, type, seconds });
+  emit('breath:done', { device: deviceId, type, seconds });
   saveDB();
   return { ok: true, type, seconds };
 }
@@ -109,12 +109,12 @@ export function addBreath(deviceId: string, type: string, seconds: number) {
 //==============================
 export function addBadge(deviceId: string, badge: string) {
   const _u = user(deviceId);
-  if (!u.badges.includes(badge)) {
-    u.badges.push(badge);
-    emit("badge:new", { device: deviceId, badge });
+  if (!_u.badges.includes(badge)) {
+    _u.badges.push(badge);
+    emit('badge:new', { device: deviceId, badge });
   }
   saveDB();
-  return { ok: true, badges: u.badges };
+  return { ok: true, badges: _u.badges };
 }
 
 //==============================
@@ -122,11 +122,11 @@ export function addBadge(deviceId: string, badge: string) {
 //==============================
 export function weeklyReflect(deviceId: string) {
   const _u = user(deviceId);
-  u.xp += 50;
-  u.waterMl = 0;
-  emit("weekly:reflect", { device: deviceId, weekXP: 50 });
+  _u.xp += 50;
+  _u.waterMl = 0;
+  emit('weekly:reflect', { device: deviceId, weekXP: 50 });
   saveDB();
-  return { ok: true, weekXP: 50, totalXP: u.xp };
+  return { ok: true, weekXP: 50, totalXP: _u.xp };
 }
 
 //==============================
@@ -134,18 +134,18 @@ export function weeklyReflect(deviceId: string) {
 //==============================
 export function getSummary(deviceId: string) {
   const _u = user(deviceId);
-  const pct = Math.min(100, Math.round((u.waterMl / u.waterGoalMl) * 100));
+  const pct = Math.min(100, Math.round((_u.waterMl / _u.waterGoalMl) * 100));
   return {
     ok: true,
     device: deviceId,
-    xp: u.xp,
-    level: u.level,
-    waterMl: u.waterMl,
-    waterGoalMl: u.waterGoalMl,
+    xp: _u.xp,
+    level: _u.level,
+    waterMl: _u.waterMl,
+    waterGoalMl: _u.waterGoalMl,
     waterPct: pct,
-    badges: u.badges,
-    streak: u.streak,
-    planId: u.planId,
+    badges: _u.badges,
+    streak: _u.streak,
+    planId: _u.planId,
   };
 }
 

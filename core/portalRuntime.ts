@@ -1,20 +1,17 @@
-import { PORTALS } from "./portals";
+import { PORTALS } from './portals';
 
 export type PortalRuntimeConfig = {
-  env: "dev" | "prod";
+  env: 'dev' | 'prod';
   buildId?: string;
-} & Record<string, boolean>;
+  [key: string]: boolean | string | undefined;
+};
 
 export function getPortalRuntimeConfig(): PortalRuntimeConfig {
-  const env =
-    process.env.NODE_ENV === "production" ? "prod" : "dev";
+  const env = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
   const cfg: PortalRuntimeConfig = {
     env,
-    buildId:
-      process.env.NEXT_PUBLIC_BUILD_ID ||
-      process.env.VERCEL_GIT_COMMIT_SHA ||
-      undefined,
+    buildId: process.env.NEXT_PUBLIC_BUILD_ID || process.env.VERCEL_GIT_COMMIT_SHA || undefined,
   };
 
   for (const portal of PORTALS) {

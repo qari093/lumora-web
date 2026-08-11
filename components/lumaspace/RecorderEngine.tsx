@@ -1,18 +1,18 @@
 // Step 4.1 — RecorderEngine component placeholder
 // components/lumaspace/RecorderEngine.tsx
-"use client";
+'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type RecorderEngineStatus =
-  | "idle"
-  | "unsupported"
-  | "initializing"
-  | "recording"
-  | "stopping"
-  | "error";
+  | 'idle'
+  | 'unsupported'
+  | 'initializing'
+  | 'recording'
+  | 'stopping'
+  | 'error';
 
-export type RecorderEngineMode = "browser" | "mock";
+export type RecorderEngineMode = 'browser' | 'mock';
 
 export interface RecorderSnapshot {
   /** Elapsed seconds since recording started (approximate) */
@@ -58,11 +58,7 @@ export interface RecorderEngineProps extends RecorderEngineCallbacks {
    * Custom UI renderer. If provided, takes precedence over autoRenderControls.
    * Use this to render your own buttons and consume render props.
    */
-  children?:
-    | ((
-        renderProps: RecorderRenderProps,
-      ) => React.ReactNode)
-    | undefined;
+  children?: ((renderProps: RecorderRenderProps) => React.ReactNode) | undefined;
 }
 
 export interface RecorderRenderProps {
@@ -81,11 +77,11 @@ type MediaRecorderLike = MediaRecorder & {
 };
 
 function getSupport(): boolean {
-  if (typeof window === "undefined") return false;
+  if (typeof window === 'undefined') return false;
   const nav = window.navigator as Navigator & {
     mediaDevices?: MediaDevices;
   };
-  return !!(nav.mediaDevices && typeof window.MediaRecorder !== "undefined");
+  return !!(nav.mediaDevices && typeof window.MediaRecorder !== 'undefined');
 }
 
 /**
@@ -97,7 +93,7 @@ function getSupport(): boolean {
  */
 export default function RecorderEngine(props: RecorderEngineProps) {
   const {
-    mode = "browser",
+    mode = 'browser',
     maxDurationSec = 300,
     tickIntervalMs = 500,
     autoStart = false,
@@ -112,7 +108,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   } = props;
 
   const [status, setStatusState] = useState<RecorderEngineStatus>(() =>
-    mode === "browser" && !getSupport() ? "unsupported" : "idle",
+    mode === 'browser' && !getSupport() ? 'unsupported' : 'idle',
   );
   const [elapsedSec, setElapsedSec] = useState(0);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -125,13 +121,11 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   const startTimeRef = useRef<number | null>(null);
   const lastUrlRef = useRef<string | null>(null);
 
-  const isSupported = useMemo(
-    () => (mode === "browser" ? getSupport() : true),
-    [mode],
-  );
+  const isSupported = useMemo(() => (mode === 'browser' ? getSupport() : true), [mode]);
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
-  const safeSetStatus = useCallback((next: RecorderEngineStatus) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const safeSetStatus = useCallback(
+    (next: RecorderEngineStatus) => {
       setStatusState(next);
       onStatusChange?.(next);
     },
@@ -147,17 +141,17 @@ export default function RecorderEngine(props: RecorderEngineProps) {
       window.clearTimeout(maxTimerRef.current);
       maxTimerRef.current = null;
     }
-  }, [handleError, stopInternal]);
+  }, []);
 
   const resetElapsed = useCallback(() => {
     setElapsedSec(0);
     startTimeRef.current = null;
-  }, [handleError, stopInternal]);
+  }, []);
 
   const cleanupMedia = useCallback(() => {
     if (mediaRecorderRef.current) {
       try {
-        if (mediaRecorderRef.current.state !== "inactive") {
+        if (mediaRecorderRef.current.state !== 'inactive') {
           mediaRecorderRef.current.stop();
         }
       } catch {
@@ -200,12 +194,10 @@ export default function RecorderEngine(props: RecorderEngineProps) {
         err instanceof Error
           ? err
           : new Error(
-              typeof err === "string"
-                ? err
-                : "RecorderEngine encountered an unknown error",
+              typeof err === 'string' ? err : 'RecorderEngine encountered an unknown error',
             );
       setErrorMsg(error.message);
-      safeSetStatus("error");
+      safeSetStatus('error');
       onError?.(error);
     },
     [onError, safeSetStatus],
@@ -237,17 +229,17 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   const stopInternal = useCallback(
     async (hitMaxDuration: boolean) => {
       try {
-        if (status !== "recording" && status !== "initializing") {
+        if (status !== 'recording' && status !== 'initializing') {
           return;
         }
-        safeSetStatus("stopping");
+        safeSetStatus('stopping');
         clearTimers();
 
-        if (mode === "mock") {
+        if (mode === 'mock') {
           const result: RecorderResult = {
             ...snapshot(hitMaxDuration),
           };
-          safeSetStatus("idle");
+          safeSetStatus('idle');
           resetElapsed();
           onStop?.(result);
           return;
@@ -259,7 +251,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
           const result: RecorderResult = {
             ...snapshot(hitMaxDuration),
           };
-          safeSetStatus("idle");
+          safeSetStatus('idle');
           resetElapsed();
           onStop?.(result);
           return;
@@ -267,12 +259,12 @@ export default function RecorderEngine(props: RecorderEngineProps) {
 
         await new Promise<void>((resolve) => {
           const handleStop = () => {
-            recorder.removeEventListener("stop", handleStop);
+            recorder.removeEventListener('stop', handleStop);
             resolve();
           };
-          recorder.addEventListener("stop", handleStop);
+          recorder.addEventListener('stop', handleStop);
           try {
-            if (recorder.state !== "inactive") {
+            if (recorder.state !== 'inactive') {
               recorder.stop();
             } else {
               resolve();
@@ -284,7 +276,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
 
         const blob =
           chunksRef.current.length > 0
-            ? new Blob(chunksRef.current, { type: recorder.mimeType || "audio/webm" })
+            ? new Blob(chunksRef.current, { type: recorder.mimeType || 'audio/webm' })
             : undefined;
 
         revokeLastUrl();
@@ -300,7 +292,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
         };
 
         cleanupMedia();
-        safeSetStatus("idle");
+        safeSetStatus('idle');
         resetElapsed();
         onStop?.(result);
       } catch (err) {
@@ -327,23 +319,23 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   const start = useCallback(async () => {
     setErrorMsg(null);
 
-    if (!isSupported && mode === "browser") {
-      safeSetStatus("unsupported");
-      handleError(new Error("Recording is not supported in this browser."));
+    if (!isSupported && mode === 'browser') {
+      safeSetStatus('unsupported');
+      handleError(new Error('Recording is not supported in this browser.'));
       return;
     }
 
-    if (status === "recording" || status === "initializing") {
+    if (status === 'recording' || status === 'initializing') {
       return;
     }
 
-    safeSetStatus("initializing");
+    safeSetStatus('initializing');
 
     try {
-      if (mode === "mock") {
+      if (mode === 'mock') {
         clearTimers();
         startTicking();
-        safeSetStatus("recording");
+        safeSetStatus('recording');
         onStart?.(snapshot(false));
         return;
       }
@@ -360,23 +352,23 @@ export default function RecorderEngine(props: RecorderEngineProps) {
 
       const recorder: MediaRecorderLike = new MediaRecorder(stream, {
         mimeType:
-          typeof MediaRecorder.isTypeSupported === "function" &&
-          MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-            ? "audio/webm;codecs=opus"
-            : "audio/webm",
+          typeof MediaRecorder.isTypeSupported === 'function' &&
+          MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+            ? 'audio/webm;codecs=opus'
+            : 'audio/webm',
       });
 
-      recorder.addEventListener("dataavailable", (event: BlobEvent) => {
+      recorder.addEventListener('dataavailable', (event: BlobEvent) => {
         if (event.data && event.data.size > 0) {
           chunksRef.current.push(event.data);
         }
       });
 
-      recorder.addEventListener("error", (event: MediaRecorderErrorEvent | Event) => {
+      recorder.addEventListener('error', (event: ErrorEvent | Event) => {
         const err =
-          "error" in event && event.error instanceof Error
+          'error' in event && event.error instanceof Error
             ? event.error
-            : new Error("MediaRecorder error event");
+            : new Error('MediaRecorder error event');
         handleError(err);
       });
 
@@ -385,7 +377,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
 
       clearTimers();
       startTicking();
-      safeSetStatus("recording");
+      safeSetStatus('recording');
       onStart?.(snapshot(false));
     } catch (err) {
       cleanupMedia();
@@ -412,10 +404,10 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   }, [stopInternal]);
 
   // Auto-start when requested and supported
-// eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!autoStart) return;
-    if (!isSupported && mode === "browser") return;
+    if (!isSupported && mode === 'browser') return;
     void start();
     // we intentionally ignore "start" dependencies beyond what's needed
   }, [autoStart, isSupported, mode]);
@@ -431,10 +423,10 @@ export default function RecorderEngine(props: RecorderEngineProps) {
   );
 
   const canStart =
-    (status === "idle" || status === "error" || status === "unsupported") &&
-    (mode === "mock" || isSupported);
+    (status === 'idle' || status === 'error' || status === 'unsupported') &&
+    (mode === 'mock' || isSupported);
 
-  const canStop = status === "recording" || status === "initializing";
+  const canStop = status === 'recording' || status === 'initializing';
 
   const renderProps: RecorderRenderProps = {
     status,
@@ -457,30 +449,30 @@ export default function RecorderEngine(props: RecorderEngineProps) {
 
   const statusLabel = (() => {
     switch (status) {
-      case "idle":
-        return "Idle";
-      case "unsupported":
-        return "Unsupported";
-      case "initializing":
-        return "Initializing…";
-      case "recording":
-        return "Recording…";
-      case "stopping":
-        return "Stopping…";
-      case "error":
-        return "Error";
+      case 'idle':
+        return 'Idle';
+      case 'unsupported':
+        return 'Unsupported';
+      case 'initializing':
+        return 'Initializing…';
+      case 'recording':
+        return 'Recording…';
+      case 'stopping':
+        return 'Stopping…';
+      case 'error':
+        return 'Error';
       default:
         return status;
     }
   })();
 
-  const tagLabel = debugTag ? ` • ${debugTag}` : "";
+  const tagLabel = debugTag ? ` • ${debugTag}` : '';
 
   return (
     <div
       className={
         className ??
-        "rounded-xl border border-border/60 bg-background/60 px-4 py-3 flex items-center justify-between gap-4 text-sm"
+        'rounded-xl border border-border/60 bg-background/60 px-4 py-3 flex items-center justify-between gap-4 text-sm'
       }
       data-recorder-status={status}
     >
@@ -494,7 +486,7 @@ export default function RecorderEngine(props: RecorderEngineProps) {
         </div>
         <div className="text-xs text-muted-foreground">
           Elapsed: {elapsedSec}s • Mode: {mode}
-          {!isSupported && mode === "browser" && (
+          {!isSupported && mode === 'browser' && (
             <span className="ml-1 text-[0.7rem] uppercase tracking-wide text-red-500">
               not supported
             </span>

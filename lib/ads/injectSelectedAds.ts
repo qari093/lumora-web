@@ -8,6 +8,11 @@ type AdItem = {
   adId: string;
   performanceScore: number;
   portal?: string;
+  tier?: string;
+  spent?: number;
+  budget?: number;
+  fatigueScore?: number;
+  threshold?: number;
 };
 
 export function injectSelectedAds(input: {
@@ -32,15 +37,15 @@ export function injectSelectedAds(input: {
 
       result.push({
         id: `feed_ad_${Date.now()}_${adIndex}`,
-        kind: "sponsored",
+        kind: 'sponsored',
         adId: ad.adId,
-        portal: ad.portal || "FYP",
+        portal: ad.portal || 'FYP',
         performanceScore: ad.performanceScore,
-        tier: ad.tier || "low",
-        spent: typeof ad.spent === "number" ? ad.spent : 0,
-        budget: typeof ad.budget === "number" ? ad.budget : 0,
-        fatigueScore: typeof ad.fatigueScore === "number" ? ad.fatigueScore : 0,
-        threshold: typeof ad.threshold === "number" ? ad.threshold : 0.45,
+        tier: ad.tier || 'low',
+        spent: typeof ad.spent === 'number' ? ad.spent : 0,
+        budget: typeof ad.budget === 'number' ? ad.budget : 0,
+        fatigueScore: typeof ad.fatigueScore === 'number' ? ad.fatigueScore : 0,
+        threshold: typeof ad.threshold === 'number' ? ad.threshold : 0.45,
         injected: true,
       });
     }

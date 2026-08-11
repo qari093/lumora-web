@@ -1,43 +1,52 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '../../../lib/prisma';
 
-const CPV_CENTS = 2; // cost per view
+const CPV_CENTS = 2;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader("Content-Type", "application/json");
+  res.setHeader('Content-Type', 'application/json');
 
   try {
-    if (req.method !== "POST") {
-      return res.status(405).json({ ok: false, error: "Method not allowed" });
+    if (req.method !== 'POST') {
+      return res.status(405).json({ ok: false, error: 'Method not allowed' });
     }
 
     const { adId } = req.body || {};
-    if (!adId) return res.status(400).json({ ok: false, error: "Missing adId" });
+    if (!adId) {
+      return res.status(400).json({ ok: false, error: 'Missing adId' });
+    }
 
-    // get or create wallet
-    let wallet = await prisma.wallet.findFirst();
+    const wallet = await prisma.wallet.findFirst({
+      orderBy: { createdAt: 'asc' },
+    });
+
     if (!wallet) {
-      wallet = await prisma.wallet.create({ data: { balanceCents: 0 } });
+      return res.status(503).json({
+        ok: false,
+        error: 'No billing wallet configured',
+      });
     }
 
     if (wallet.balanceCents < CPV_CENTS) {
-      return res.status(400).json({ ok: false, error: "Insufficient balance" });
+      return res.status(400).json({ ok: false, error: 'Insufficient balance' });
     }
 
     const newBalance = wallet.balanceCents - CPV_CENTS;
-    await prisma.wallet.update({
-      where: { id: wallet.id },
-      data: { balanceCents: newBalance },
-    });
 
-    await prisma.transaction.create({
-      data: {
-        walletId: wallet.id,
-        type: "spend",
-        amountCents: CPV_CENTS,
-        description: `CPV view for ${adId}`,
-      },
-    });
+    await prisma.$transaction([
+      prisma.wallet.update({
+        where: { id: wallet.id },
+        data: { balanceCents: newBalance },
+      }),
+      prisma.transaction.create({
+        data: {
+          walletId: wallet.id,
+          type: 'SPEND',
+          amountCents: CPV_CENTS,
+          description: `CPV view for ${adId}`,
+        },
+      }),
+    ]);
 
     return res.status(200).json({
       ok: true,
@@ -45,8 +54,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       chargedCents: CPV_CENTS,
       balanceCents: newBalance,
     });
-  } catch (err: any) {
-    console.error("❌ view error:", err);
-    return res.status(500).json({ ok: false, error: String(err?.message || err) });
+  } catch (err: unknown) {
+    console.error('view error:', err);
+    return res.status(500).json({
+      ok: false,
+      error: err instanceof Error ? err.message : String(err),
+    });
   }
 }

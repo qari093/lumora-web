@@ -3,7 +3,17 @@ import { createCampaign, listCampaigns } from "@/src/lib/vendor/campaign";
 import { computeOwnerSpendEuros, computeCampaignsSpendMap } from "@/src/lib/vendor/spend";
 import { reqId } from "@/src/lib/reqid";
 
-function withComputed(rows: ReturnType<typeof listCampaigns>, spent: number, per: Record<string,number>) {
+type VendorCampaignRow = {
+  id: string;
+  budgetEuros?: number | null;
+  [key: string]: unknown;
+};
+
+function withComputed(
+  rows: VendorCampaignRow[],
+  spent: number,
+  per: Record<string, number>,
+) {
   const budgetTotal = rows.reduce((s,c)=>s+(c.budgetEuros||0),0);
   const campaigns = rows.map(c => ({ ...c, spentEuros: per[c.id] || 0, remainingEuros: +((c.budgetEuros||0) - (per[c.id]||0)).toFixed(2) }));
   return {
@@ -18,9 +28,9 @@ export async function GET(req: NextRequest) {
   const ownerId = u.searchParams.get("ownerId") || "";
   if (!ownerId) return NextResponse.json({ ok:false, error:"MISSING_OWNER", requestId:id }, { status:200, headers:{ "x-request-id": id } });
 
-  const rows = listCampaigns(ownerId);
-  const spent = computeOwnerSpendEuros(ownerId);
-  const per = computeCampaignsSpendMap(ownerId);
+  const rows = (await listCampaigns(ownerId)) as VendorCampaignRow[];
+  const spent = await computeOwnerSpendEuros(ownerId);
+  const per = (await computeCampaignsSpendMap(ownerId)) as Record<string, number>;
   return NextResponse.json({ ok:true, ownerId, ...withComputed(rows, spent, per), requestId:id }, { status:200, headers:{ "x-request-id": id } });
 }
 
@@ -40,7 +50,7 @@ export async function POST(req: NextRequest) {
   if (need.length) return NextResponse.json({ ok:false, error:"BAD_REQUEST", need, requestId:id }, { status:200, headers:{ "x-request-id": id } });
 
   try {
-    const c = createCampaign({ ownerId, name, budgetEuros, startAt, endAt });
+    const c = await createCampaign({ ownerId, name, budgetEuros, startAt, endAt });
     return NextResponse.json({ ok:true, campaign:c, requestId:id }, { status:200, headers:{ "x-request-id": id } });
   } catch (e:any) {
     return NextResponse.json({ ok:false, error:String(e?.message||e), requestId:id }, { status:200, headers:{ "x-request-id": id } });

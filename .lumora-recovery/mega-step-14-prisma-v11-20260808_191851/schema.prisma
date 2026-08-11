@@ -1,0 +1,2239 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdEventType {
+  impression
+  click
+}
+
+enum AdObjective {
+  AWARENESS
+  TRAFFIC
+  CONVERSIONS
+  VISITS
+}
+
+enum AdStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum BadgeType {
+  STARTER
+  HOST_PRO
+  CONSISTENT
+  TRENDING
+  LEGEND
+}
+
+enum CelebrationStatus {
+  DRAFT
+  SCHEDULED
+  LIVE
+  ENDED
+  CANCELLED
+}
+
+enum CelebrationVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum CreativeType {
+  IMAGE
+  VIDEO
+}
+
+enum EmotionKind {
+  joy
+  calm
+  focus
+  love
+  stress
+  anxious
+  bored
+  excited
+  confident
+  tired
+  neutral
+}
+
+enum EventType {
+  JOIN
+  LEAVE
+  MUTE
+  UNMUTE
+  START_STREAM
+  STOP_STREAM
+  MESSAGE
+  SCREEN_START
+  SCREEN_STOP
+  RAISE_HAND
+  LOWER_HAND
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  BLOCKED
+}
+
+enum KycStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum LedgerType {
+  CREDIT // top-up, refund, promo
+  DEBIT // manual debit, fee
+  AD_SPEND // delivery spend
+  RESERVE // hold for upcoming spend
+  RELEASE // unhold back to balance
+  TRANSFER_IN // transfer from another wallet
+  TRANSFER_OUT // transfer to another wallet
+}
+
+enum ModerationKind {
+  TEXT
+  IMAGE
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum PersonaAssetKind {
+  AVATAR
+  REACTION
+}
+
+enum PersonaEmotion {
+  NEUTRAL
+  HAPPY
+  SAD
+  ANGRY
+  SURPRISED
+  DISGUSTED
+  FEARFUL
+  CALM
+  FOCUSED
+  TIRED
+  CONFIDENT
+}
+
+enum PersonaReactionType {
+  LIKE
+  LOVE
+  LAUGH
+  WOW
+  SAD
+  ANGRY
+  CLAP
+  FIRE
+  OK
+  THINKING
+  HEART
+  PARTY
+}
+
+enum PrivateBetaAccessStatus {
+  PENDING
+  APPROVED
+  REVOKED
+}
+
+enum PulseTxn {
+  EARN
+  SPEND
+  BURN
+  ADJUST
+  GRANT
+}
+
+enum ReactionKind {
+  MOOD
+  PARTY
+  STREAM
+}
+
+enum RefundStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+enum RenderStatus {
+  QUEUED
+  RUNNING
+  DONE
+  ERROR
+}
+
+enum RewardType {
+  ORGANIZER_FEE
+  ATTENDEE_PULSE
+  ATTENDEE_ZENCOIN
+  BONUS
+}
+
+enum RoomRole {
+  HOST
+  MODERATOR
+  PARTICIPANT
+}
+
+enum ScanStatus {
+  PENDING
+  CLEAN
+  INFECTED
+}
+
+enum SellerStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum ShipmentStatus {
+  PENDING
+  PACKED
+  SHIPPED
+  IN_TRANSIT
+  DELIVERED
+  RETURNED
+}
+
+enum ShowVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum TransactionType {
+  TOPUP
+  SPEND
+  REFUND
+}
+
+enum UserRole {
+  fan
+  creator
+  moderator
+  admin
+}
+
+enum VibeCategory {
+  AWE
+  WARMTH
+  ENERGY
+  INSIGHT
+}
+
+enum VibeRarity {
+  CORE
+  SEASONAL
+  EARNED
+}
+
+enum VideoGenStatus {
+  queued
+  running
+  done
+  failed
+}
+
+enum ZendoroOrderStatus {
+  DRAFT
+  PENDING
+  PAID
+  FULFILLED
+  CANCELLED
+  REFUNDED
+}
+
+enum ZendoroPaymentStatus {
+  CREATED
+  REQUIRES_ACTION
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum ZendoroSellerStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  creditTransactions CreditTransaction[]
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model AdCampaign {
+  id               String       @id @default(cuid())
+  ownerId          String?
+  title            String
+  objective        AdObjective
+  status           AdStatus     @default(DRAFT)
+  creativeType     CreativeType
+  creativeUrl      String
+  landingUrl       String?
+  dailyBudgetCents Int
+  totalBudgetCents Int
+  radiusKm         Int          @default(50)
+  centerLat        Float?
+  centerLon        Float?
+  locationsJson    String?
+  startAt          DateTime?
+  endAt            DateTime?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([ownerId])
+  @@index([status])
+  @@index([objective])
+  @@index([createdAt])
+}
+
+model AdConversion {
+  id          String  @id @default(cuid())
+  campaignId  String
+  creativeId  String?
+  viewKey     String  @unique
+  userId      String?
+  eventType   String // e.g. "CLICK", "INSTALL", "PURCHASE"
+  rewardCents Int     @default(0)
+  channel     String?
+  shortSlug   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([campaignId, eventType])
+}
+
+model AdCreative {
+  id          String   @id @default(cuid())
+  campaignId  String
+  imageUrl    String?
+  headline    String
+  description String
+  ctaText     String   @default("Learn More")
+  createdAt   DateTime @default(now())
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+}
+
+model AdEvent {
+  id         String   @id @default(cuid())
+  action     String // "view" | "hover" | "click" | "complete" | etc.
+  viewKey    String? // ties to CpvView.idempotencyKey if available
+  userId     String?
+  campaignId String? // derived from CpvView if viewKey present
+  ms         Int? // duration (ms) for hover/view segments
+  mood       String?
+  metaJson   String? // stringified JSON for extra fields
+  createdAt  DateTime @default(now())
+
+  @@index([action, createdAt])
+  @@index([viewKey, createdAt])
+  @@index([campaignId, createdAt])
+}
+
+model AdMetricDaily {
+  id           String   @id @default(cuid())
+  day          DateTime // UTC midnight
+  campaignId   String?
+  views        Int      @default(0)
+  hovers       Int      @default(0)
+  clicks       Int      @default(0)
+  conversions  Int      @default(0)
+  spendCents   Int      @default(0) // sum(CpvView.costCents)
+  rewardsCents Int      @default(0) // sum(AdConversion.rewardCents)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([day])
+  @@index([campaignId, day])
+}
+
+model AdminCelebrationControls {
+  id     Int   @id @default(1)
+  config Json?
+}
+
+model AnalyticsEvent {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  type   String
+  userId String?
+  roomId String?
+  path   String?
+  meta   Json?
+
+  @@index([ts, type])
+}
+
+model ApiLog {
+  id         String   @id @default(cuid())
+  ts         DateTime @default(now())
+  method     String
+  path       String
+  name       String?
+  status     Int
+  requestId  String?
+  durationMs Int
+
+  ownerId   String?
+  publisher String?
+  ip        String?
+  ua        String?
+
+  @@index([ts])
+  @@index([requestId])
+  @@index([path, ts])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  createdAt DateTime @default(now())
+}
+
+model Aura {
+  id        String     @id @default(cuid())
+  color     String
+  intensity Float      @default(0.5)
+  balance   Float      @default(0.5)
+  world     UserWorld?
+}
+
+model Business {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String?
+  whatsapp    String?
+  addressText String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Campaign {
+  id                   String       @id @default(cuid())
+  name                 String
+  dailyBudgetCents     Int
+  targetingRadiusMiles Int
+  status               String       @default("active")
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  ads                  AdCreative[]
+  cpvViews             CpvView[] // CPV events tied to this simple campaign
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Capsule {
+  id       String    @id @default(cuid())
+  worldId  String
+  type     String    @default("video")
+  mediaUrl String?
+  caption  String?
+  emotion  String?
+  ts       DateTime  @default(now())
+  world    UserWorld @relation(fields: [worldId], references: [id], onDelete: Cascade)
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int      @default(1)
+  price     Float
+  createdAt DateTime @default(now())
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  @@index([cartId])
+  @@index([productId])
+}
+
+model Celebration {
+  id            String                @id @default(cuid())
+  organizerId   String
+  organizer     User                  @relation("UserOrganized", fields: [organizerId], references: [id], onDelete: Cascade)
+  title         String
+  slug          String                @unique
+  description   String?
+  status        CelebrationStatus     @default(DRAFT)
+  visibility    CelebrationVisibility @default(PUBLIC)
+  startAt       DateTime?
+  endAt         DateTime?
+  themeKey      String?
+  goalPulse     Int?                  @default(0)
+  budgetZencoin Int?                  @default(0)
+  allowInvites  Boolean               @default(true)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+
+  invites         CelebrationInvite[]
+  participants    CelebrationParticipant[]
+  reactions       CelebrationReaction[]
+  rollups5m       CelebrationEIRollup5m[]
+  rewards         CelebrationReward[]
+  CelebrationShow CelebrationShow[]
+
+  @@index([organizerId, status])
+  @@index([status, startAt])
+}
+
+model CelebrationBadge {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation("UserBadges", fields: [userId], references: [id], onDelete: Cascade)
+  type      BadgeType
+  awardedAt DateTime  @default(now())
+
+  @@unique([userId, type])
+}
+
+model CelebrationEIRollup5m {
+  id            String      @id @default(cuid())
+  celebrationId String
+  celebration   Celebration @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  windowStart   DateTime
+  reactions     Int         @default(0)
+  eiScore       Float       @default(0)
+  moodVec       Json?
+
+  @@unique([celebrationId, windowStart])
+  @@index([windowStart])
+}
+
+model CelebrationInvite {
+  id            String       @id @default(cuid())
+  celebrationId String
+  celebration   Celebration  @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  inviterId     String
+  inviter       User         @relation("InviteInviter", fields: [inviterId], references: [id], onDelete: Cascade)
+  inviteeId     String?
+  invitee       User?        @relation("InviteInvitee", fields: [inviteeId], references: [id])
+  inviteeEmail  String?
+  role          String?
+  status        InviteStatus @default(PENDING)
+  createdAt     DateTime     @default(now())
+
+  @@index([celebrationId, status])
+}
+
+model CelebrationParticipant {
+  id            String      @id @default(cuid())
+  celebrationId String
+  celebration   Celebration @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User        @relation("UserParticipants", fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt      DateTime    @default(now())
+  createdAt     DateTime    @default(now())
+
+  @@unique([celebrationId, userId])
+  @@index([userId, joinedAt])
+}
+
+model CelebrationReaction {
+  id            String       @id @default(cuid())
+  celebrationId String
+  celebration   Celebration  @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User         @relation("UserReactions", fields: [userId], references: [id], onDelete: Cascade)
+  kind          ReactionKind
+  emotion       String?
+  intensity     Float?
+  meta          Json?
+  createdAt     DateTime     @default(now())
+
+  @@index([celebrationId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model CelebrationReward {
+  id            String      @id @default(cuid())
+  celebrationId String
+  celebration   Celebration @relation(fields: [celebrationId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User        @relation("UserRewards", fields: [userId], references: [id], onDelete: Cascade)
+  type          RewardType
+  zencoin       Int         @default(0)
+  pulse         Int         @default(0)
+  reason        String?
+  ledgerTxId    String?
+  createdAt     DateTime    @default(now())
+
+  @@index([celebrationId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model CelebrationShow {
+  id            String                 @id @default(cuid())
+  celebrationId String
+  celebration   Celebration            @relation(fields: [celebrationId], references: [id])
+  title         String
+  description   String?
+  coverUrl      String?
+  startAt       DateTime
+  endAt         DateTime
+  timezone      String?
+  hostId        String?
+  hostName      String?
+  hostAvatarUrl String?
+  visibility    ShowVisibility         @default(PUBLIC)
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  guests        CelebrationShowGuest[]
+
+  @@index([celebrationId])
+  @@index([startAt])
+  @@index([endAt])
+}
+
+model CelebrationShowGuest {
+  id        String          @id @default(cuid())
+  showId    String
+  show      CelebrationShow @relation(fields: [showId], references: [id], onDelete: Cascade)
+  name      String
+  avatarUrl String?
+  role      String?
+}
+
+model CelebrationStreak {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation("UserStreak", fields: [userId], references: [id], onDelete: Cascade)
+  days              Int       @default(0)
+  lastCelebrationAt DateTime?
+}
+
+model ChannelHit {
+  id          String   @id @default(cuid())
+  shortLinkId String?
+  channel     String
+  ip          String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  shortLink ShortLink? @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+
+  @@index([channel, createdAt])
+}
+
+model CineVerseMovie {
+  id         String   @id
+  title      String
+  source     String
+  license    String
+  videoUrl   String
+  resolution String?
+  category   String?
+  createdAt  DateTime @default(now())
+
+  @@map("CineverseMovie")
+}
+
+model CineverseMovie__DISABLED {
+  id         String   @id
+  title      String
+  source     String
+  license    String
+  videoUrl   String
+  resolution String
+  category   String
+  createdAt  DateTime @default(now())
+
+  @@ignore
+}
+
+model CoinAccount {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  balance   Int      @default(0)
+  createdAt DateTime @default(now())
+
+  txFrom CoinTx[] @relation("FromAccount")
+  txTo   CoinTx[] @relation("ToAccount")
+
+  @@index([createdAt])
+}
+
+model CoinTx {
+  id        String   @id @default(cuid())
+  fromId    String?
+  toId      String
+  amount    Int
+  memo      String?
+  createdAt DateTime @default(now())
+
+  from CoinAccount? @relation("FromAccount", fields: [fromId], references: [id])
+  to   CoinAccount  @relation("ToAccount", fields: [toId], references: [id])
+
+  @@index([toId, createdAt])
+  @@index([fromId, createdAt])
+}
+
+model CpvView {
+  id             String   @id @default(cuid())
+  campaignId     String
+  idempotencyKey String   @unique // e.g., "demo-view-<ts>" or any unique token per view
+  costCents      Int
+  ledgerId       String? // the WalletLedger.id that captured the charge
+  createdAt      DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+}
+
+model Creator {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  slug      String   @unique
+  bio       String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  posts Post[]
+  tiers SubscriptionTier[]
+}
+
+model CreditTransaction {
+  id                  String   @id @default(cuid())
+  accountId           String
+  stripeSessionId     String   @unique
+  stripePaymentIntent String?
+  amount              Int
+  currency            String // e.g. "usd"
+  credits             Int
+  createdAt           DateTime @default(now())
+  account             Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+}
+
+model EchoTrack {
+  id        String   @id
+  title     String
+  artist    String
+  license   String
+  audioUrl  String
+  genre     String
+  createdAt DateTime @default(now())
+}
+
+model EcoMetricDaily {
+  id         String   @id @default(cuid())
+  day        DateTime
+  campaignId String?
+  co2g       Float    @default(0) // grams CO2
+  energyWh   Float    @default(0) // watt-hours
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([day])
+  @@index([campaignId, day])
+}
+
+model EconDaily {
+  id         String   @id @default(cuid())
+  day        DateTime @unique
+  earnTotal  Int      @default(0)
+  spendTotal Int      @default(0)
+  burnTotal  Int      @default(0)
+  reserve    Int      @default(0)
+  poolNext   Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model EmmlAsset {
+  id        String     @id @default(cuid())
+  marketId  String
+  market    EmmlMarket @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  symbol    String
+  name      String
+  decimals  Int        @default(2)
+  supply    Float?
+  createdAt DateTime   @default(now())
+  ticks     EmmlTick[]
+
+  @@unique([marketId, symbol])
+}
+
+model EmmlEvent {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userId    String?
+  source    String? // "api-key" | "user" | etc.
+  type      String
+  emotion   String?
+  intensity Float?
+  meta      Json?
+
+  @@index([createdAt])
+  @@index([type, emotion])
+}
+
+model EmmlIndex {
+  id        String        @id @default(cuid())
+  slug      String        @unique
+  name      String
+  unit      String?
+  createdAt DateTime      @default(now())
+  readings  EmmlReading[]
+}
+
+model EmmlMarket {
+  id        String      @id @default(cuid())
+  slug      String      @unique
+  name      String
+  status    String      @default("ACTIVE") // ACTIVE | PAUSED
+  createdAt DateTime    @default(now())
+  assets    EmmlAsset[]
+}
+
+model EmmlReading {
+  id      String    @id @default(cuid())
+  indexId String
+  index   EmmlIndex @relation(fields: [indexId], references: [id], onDelete: Cascade)
+  ts      DateTime  @default(now())
+  value   Float
+  meta    Json?
+
+  @@index([indexId, ts])
+}
+
+model EmmlSnapshot {
+  id             String   @id @default(cuid())
+  health         String
+  heatSampleSize Int
+  indicesTracked Int
+  marketsOnline  Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  composite      Json?    @default("{}")
+  indicesJson    Json     @default("{}")
+  marketsJson    Json     @default("{}")
+  metaJson       Json     @default("{}")
+
+  @@map("emml_snapshot")
+}
+
+model EmmlTick {
+  id      String    @id @default(cuid())
+  assetId String
+  asset   EmmlAsset @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  ts      DateTime  @default(now())
+  price   Float
+  volume  Float?
+
+  @@index([assetId, ts])
+}
+
+model EmotionBaselineWeight {
+  id        String   @id
+  emotion   String   @unique
+  weight    Float    @default(1.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("EmotionBaselineWeight")
+}
+
+model EmotionDividend {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  userId String
+  amount Float
+  reason String?
+}
+
+model EmotionEvent {
+  id        String       @id @default(cuid())
+  kind      String
+  emotion   EmotionKind?
+  intensity Float?
+  userId    String?
+  source    String?
+  meta      Json?
+  createdAt DateTime     @default(now())
+
+  @@index([createdAt])
+  @@index([emotion])
+}
+
+model EmotionIndexDaily {
+  id           String      @id @default(cuid())
+  day          DateTime
+  emotion      EmotionKind
+  ei           Float
+  count        Int         @default(0)
+  avgIntensity Float       @default(0)
+
+  @@unique([day, emotion])
+  @@index([emotion, day])
+}
+
+model EmotionMarketTick {
+  id            String       @id @default(cuid())
+  ts            DateTime     @default(now())
+  emotion       EmotionKind?
+  ei            Float
+  globalEi      Float?
+  zenMultiplier Float?
+
+  @@index([ts])
+}
+
+model EmotionMirror {
+  id        String    @id @default(cuid())
+  worldId   String
+  emotion   String
+  intensity Float
+  ts        DateTime  @default(now())
+  world     UserWorld @relation(fields: [worldId], references: [id], onDelete: Cascade)
+}
+
+model EmotionStake {
+  id          String      @id @default(cuid())
+  userId      String
+  emotion     EmotionKind
+  amount      Float       @default(0)
+  windowStart DateTime
+  windowEnd   DateTime
+  status      String      @default("open")
+  createdAt   DateTime    @default(now())
+
+  @@index([userId, status])
+  @@index([emotion, windowStart, windowEnd])
+}
+
+model ErrorReport {
+  id         String   @id @default(cuid())
+  level      String   @default("error")
+  name       String?
+  message    String
+  stack      String?
+  route      String?
+  userAgent  String?
+  sessionId  String?
+  userId     String?
+  metadata   Json?
+  occurredAt DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([level, createdAt])
+  @@index([route, createdAt])
+  @@index([userId, createdAt])
+  @@index([occurredAt])
+}
+
+model Event {
+  id        String    @id @default(cuid())
+  roomId    String
+  type      EventType
+  timestamp DateTime  @default(now())
+  data      Json?
+  actorId   String?
+
+  room  Room  @relation(fields: [roomId], references: [id])
+  actor User? @relation("UserEvents", fields: [actorId], references: [id])
+
+  @@index([roomId, timestamp])
+}
+
+model FraudEvent {
+  id        String   @id @default(cuid())
+  kind      String // e.g. "RATE_LIMIT", "IP_BLOCK"
+  reason    String?
+  ip        String?
+  userId    String?
+  viewKey   String?
+  score     Int      @default(1)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([ip, createdAt])
+}
+
+model GlobalNowLiveTicker {
+  id               Int      @id @default(1)
+  liveCount        Int      @default(0)
+  topCelebrationId String?
+  eiIndex          Float    @default(0)
+  updatedAt        DateTime @updatedAt
+}
+
+model Inventory {
+  id         String   @id @default(cuid())
+  sellerId   String
+  productId  String
+  sku        String   @unique
+  quantity   Int      @default(0)
+  reserved   Int      @default(0)
+  lowStockAt Int      @default(5)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  seller     Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@index([sellerId])
+  @@index([productId])
+  @@index([sku])
+}
+
+model IpBlock {
+  ip        String    @id
+  reason    String?
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model KeyCounter {
+  key         String   @id
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([updatedAt])
+}
+
+model KycDocument {
+  id        String   @id @default(cuid())
+  requestId String
+  docType   String
+  mimeType  String
+  filePath  String
+  original  String?
+  size      Int      @default(0)
+  createdAt DateTime @default(now())
+
+  request KycRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@index([requestId, docType])
+}
+
+model KycRequest {
+  id        String    @id @default(cuid())
+  ownerId   String
+  status    KycStatus @default(PENDING)
+  fullName  String?
+  dob       String?
+  idType    String?
+  idNumber  String?
+  consent   Boolean   @default(false)
+  adminUser String?
+  reason    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  documents KycDocument[]
+
+  @@index([ownerId, status])
+  @@index([createdAt])
+}
+
+model Ledger {
+  id        String   @id @default(cuid())
+  fromId    String
+  toId      String
+  amount    Int
+  memo      String?
+  createdAt DateTime @default(now())
+
+  from User @relation("FromUser", fields: [fromId], references: [id])
+  to   User @relation("ToUser", fields: [toId], references: [id])
+
+  @@index([toId, createdAt])
+  @@index([fromId, createdAt])
+}
+
+model LedgerEntry {
+  id        String   @id @default(cuid())
+  ownerId   String
+  refType   String
+  refId     String
+  amount    Float
+  createdAt DateTime @default(now())
+  wallet    Wallet?  @relation(fields: [walletId], references: [id])
+  walletId  String?
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  postId    String?
+  url       String
+  type      String
+  createdAt DateTime @default(now())
+
+  post Post? @relation(fields: [postId], references: [id])
+}
+
+model Message {
+  id      String   @id @default(cuid())
+  roomId  String
+  userId  String
+  content String
+  sentAt  DateTime @default(now())
+
+  room   Room @relation(fields: [roomId], references: [id])
+  author User @relation("UserMessages", fields: [userId], references: [id])
+
+  @@index([roomId, sentAt])
+}
+
+model ModerationItem {
+  id         String           @id @default(cuid())
+  kind       ModerationKind
+  text       String?
+  objectKey  String?
+  status     ModerationStatus @default(PENDING)
+  flags      Json?
+  reason     String?
+  createdAt  DateTime         @default(now())
+  reviewedAt DateTime?
+  reviewer   String?
+  fileKey    String?
+  sha256     String?
+  scanStatus ScanStatus?
+  scanAt     DateTime?
+
+  @@index([status, createdAt])
+}
+
+model ObservabilityEvent {
+  id         String   @id @default(cuid())
+  category   String
+  eventType  String
+  severity   String   @default("info")
+  source     String
+  route      String?
+  sessionId  String?
+  userId     String?
+  testerId   String?
+  targetId   String?
+  message    String?
+  durationMs Int?
+  value      Float?
+  metadata   Json?
+  occurredAt DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([category, createdAt])
+  @@index([eventType, createdAt])
+  @@index([severity, createdAt])
+  @@index([source, createdAt])
+  @@index([route, createdAt])
+  @@index([userId, createdAt])
+  @@index([testerId, createdAt])
+  @@index([occurredAt])
+}
+
+model ObservabilityRateLimitBucket {
+  key         String   @id
+  scope       String
+  windowStart DateTime
+  count       Int      @default(0)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([scope, windowStart])
+  @@index([expiresAt])
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  sellerId  String
+  userId    String
+  status    OrderStatus @default(PENDING)
+  subtotal  Float
+  tax       Float       @default(0)
+  shipping  Float       @default(0)
+  total     Float
+  currency  String      @default("EUR")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  seller    Seller      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  items     OrderItem[]
+  payments  Payment[]
+  refunds   Refund[]
+  returns   Return[]
+  shipments Shipment[]
+
+  @@index([sellerId])
+  @@index([userId])
+  @@index([status])
+}
+
+model OrderItem {
+  id         String @id @default(cuid())
+  orderId    String
+  productId  String
+  title      String
+  quantity   Int
+  unitPrice  Float
+  totalPrice Float
+  order      Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  orderId     String
+  provider    String
+  providerRef String?
+  amount      Float
+  currency    String        @default("EUR")
+  status      PaymentStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status])
+}
+
+model Payout {
+  id        String   @id @default(cuid())
+  sellerId  String
+  amount    Float
+  currency  String   @default("EUR")
+  processed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  seller    Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@index([sellerId])
+}
+
+model PersonaAsset {
+  id                String           @id @default(cuid())
+  profileId         String
+  reactionProfileId String?
+  kind              PersonaAssetKind
+  emotion           PersonaEmotion   @default(NEUTRAL)
+  code              String // stable internal code, e.g. "avatar_001", "react_010"
+  label             String?
+  // Store either remote URL (CDN) or local public path. Keep both optional but at least one should exist at runtime.
+  url               String?
+  localPath         String?
+  width             Int?
+  height            Int?
+  mimeType          String?
+  isActive          Boolean          @default(true)
+  sortOrder         Int              @default(0)
+  meta              Json?
+
+  updatedAt DateTime @updatedAt
+
+  profileAvatars PersonaProfile @relation("PersonaProfileAvatars", fields: [profileId], references: [id], onDelete: Cascade, map: "persona_assets_avatar_profile_fkey")
+
+  // Separate relation alias for reactions to allow clean includes
+  profileReactions PersonaProfile? @relation("PersonaProfileReactions", fields: [reactionProfileId], references: [id], onDelete: Cascade, map: "persona_assets_reaction_profile_fkey")
+
+  @@unique([profileId, kind, code])
+  @@index([profileId, kind, emotion])
+  @@index([kind, isActive])
+  @@map("persona_assets")
+}
+
+model PersonaProfile {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  avatars        PersonaAsset[]           @relation("PersonaProfileAvatars")
+  reactions      PersonaAsset[]           @relation("PersonaProfileReactions")
+  userSelections PersonaUserSelection[]
+  mappings       PersonaReactionMapping[]
+
+  @@index([isDefault])
+  @@map("persona_profiles")
+}
+
+model PersonaReactionMapping {
+  id        String              @id @default(cuid())
+  profileId String
+  reaction  PersonaReactionType
+  emotion   PersonaEmotion      @default(NEUTRAL)
+  // References PersonaAsset.code where kind=REACTION (enforced by app logic + unique constraint on asset)
+  assetCode String
+  intensity Float? // 0..1 optional, used by Live/Feed nuance
+  isActive  Boolean             @default(true)
+  meta      Json?
+
+  updatedAt DateTime @updatedAt
+
+  profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, reaction, emotion])
+  @@index([profileId, reaction])
+  @@index([profileId, emotion])
+  @@map("persona_reaction_mappings")
+}
+
+model PersonaUserSelection {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  profileId  String
+  avatarCode String? // currently selected avatar asset code (kind=AVATAR)
+  // Future: allow multiple packs; keep minimal now.
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile PersonaProfile @relation(fields: [profileId], references: [id], onDelete: Restrict)
+
+  @@index([profileId])
+  @@map("persona_user_selections")
+}
+
+model PersonaVoiceState {
+  id          String   @id @default(cuid())
+  personaCode String
+  isSpeaking  Boolean  @default(false)
+  volume      Float    @default(0)
+  emotionHint String?
+  updatedAt   DateTime @updatedAt
+
+  @@index([personaCode])
+}
+
+model Post {
+  id         String   @id @default(cuid())
+  creatorId  String
+  title      String
+  content    String?
+  visibility String
+  createdAt  DateTime @default(now())
+
+  creator Creator @relation(fields: [creatorId], references: [id])
+
+  mediaAssets MediaAsset[]
+  moments     SavedMoment[]
+}
+
+model PrivateBetaAccess {
+  id             String                  @id @default(cuid())
+  userId         String?                 @unique
+  email          String                  @unique
+  inviteCodeHash String?                 @unique
+  status         PrivateBetaAccessStatus @default(PENDING)
+  approvedBy     String?
+  approvedAt     DateTime?
+  revokedAt      DateTime?
+  expiresAt      DateTime?
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Product {
+  id         String   @id @default(cuid())
+  creatorId  String
+  title      String
+  priceCents Int
+  createdAt  DateTime @default(now())
+}
+
+model PulseLedger {
+  id        String   @id @default(cuid())
+  userId    String
+  type      PulseTxn @default(EARN)
+  amount    Int
+  note      String?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model PulseWallet {
+  userId       String   @id
+  balance      Int      @default(0)
+  harmonyXp    Int      @default(0)
+  lastActiveAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model ReflectionJournal {
+  id        String    @id @default(cuid())
+  worldId   String
+  world     UserWorld @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  title     String?
+  text      String
+  mood      String? // optional self-reported mood
+  tags      Json? // simple string[] tags
+  score     Float? // optional AI score (sentiment/insight)
+  createdAt DateTime  @default(now())
+
+  @@index([worldId, createdAt])
+}
+
+model Refund {
+  id        String       @id @default(cuid())
+  orderId   String
+  amount    Float
+  reason    String?
+  status    RefundStatus @default(REQUESTED)
+  createdAt DateTime     @default(now())
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status])
+}
+
+model RenderJob {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  status    RenderStatus @default(QUEUED)
+  progress  Int          @default(0)
+  input     Json?
+  outputUrl String?
+  error     String?
+
+  @@index([createdAt, status])
+}
+
+model Return {
+  id        String   @id @default(cuid())
+  orderId   String
+  reason    String?
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  sellerId  String
+  userId    String
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  seller    Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@index([sellerId])
+  @@index([userId])
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  hostId    String
+  host      User     @relation("HostRooms", fields: [hostId], references: [id])
+  isPrivate Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members  RoomMember[]
+  events   Event[]
+  messages Message[]
+}
+
+model RoomMember {
+  id       String   @id @default(cuid())
+  userId   String
+  roomId   String
+  role     RoomRole @default(PARTICIPANT)
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
+
+  @@unique([userId, roomId])
+}
+
+model RuntimeSignal {
+  id          String   @id @default(cuid())
+  type        String
+  videoId     String
+  timestampMs Int
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([videoId, createdAt])
+}
+
+model SavedMoment {
+  id          String   @id @default(cuid())
+  userId      String
+  creatorId   String
+  postId      String?
+  timestampMs Int
+  createdAt   DateTime @default(now())
+
+  user User  @relation(fields: [userId], references: [id])
+  post Post? @relation(fields: [postId], references: [id])
+}
+
+model Seller {
+  id          String       @id @default(cuid())
+  userId      String       @unique
+  storeName   String
+  slug        String       @unique
+  bio         String?
+  logo        String?
+  banner      String?
+  status      SellerStatus @default(PENDING)
+  rating      Float        @default(0)
+  verified    Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  inventories Inventory[]
+  orders      Order[]
+  payouts     Payout[]
+  reviews     Review[]
+
+  @@index([status])
+  @@index([slug])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model ShadowEntry {
+  id        String        @id @default(cuid())
+  journalId String
+  journal   ShadowJournal @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  text      String
+  emotion   String?
+  privacy   String        @default("private")
+  createdAt DateTime      @default(now())
+
+  @@index([journalId, createdAt])
+}
+
+model ShadowGarden {
+  id      String @id @default(cuid())
+  entries Json
+
+  world UserWorld?
+}
+
+model ShadowJournal {
+  id        String        @id @default(cuid())
+  worldId   String
+  world     UserWorld     @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  entries   ShadowEntry[]
+
+  @@index([worldId])
+  @@index([worldId, createdAt])
+}
+
+model Shipment {
+  id             String         @id @default(cuid())
+  orderId        String
+  carrier        String?
+  trackingNumber String?
+  status         ShipmentStatus @default(PENDING)
+  shippedAt      DateTime?
+  deliveredAt    DateTime?
+  createdAt      DateTime       @default(now())
+  order          Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([trackingNumber])
+}
+
+model ShortLink {
+  id         String       @id @default(cuid())
+  slug       String       @unique
+  targetUrl  String
+  campaignId String?
+  clicks     Int          @default(0)
+  createdAt  DateTime     @default(now())
+  hits       ChannelHit[]
+
+  @@index([campaignId, createdAt])
+}
+
+model StripeCheckoutSession {
+  id            String   @id @default(cuid())
+  stripeSession String   @unique
+  userId        String?
+  status        String   @default("pending")
+  credits       Int?
+  amountCents   Int?
+  currency      String   @default("EUR")
+  metadata      Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model StripeEvent {
+  id        String   @id // Stripe event id (e.g. evt_..., or use the Checkout session id if you prefer)
+  type      String?
+  createdAt DateTime @default(now())
+
+  // You can expand later with account, payload hash, etc.
+  @@index([createdAt])
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String
+  tierId    String
+  status    String
+  createdAt DateTime @default(now())
+
+  user User             @relation(fields: [userId], references: [id])
+  tier SubscriptionTier @relation(fields: [tierId], references: [id])
+}
+
+model SubscriptionTier {
+  id           String   @id @default(cuid())
+  creatorId    String
+  title        String
+  monthlyCents Int
+  createdAt    DateTime @default(now())
+
+  creator Creator @relation(fields: [creatorId], references: [id])
+
+  subscriptions Subscription[]
+}
+
+model Transaction {
+  id          String          @id @default(cuid())
+  walletId    String
+  wallet      Wallet          @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type        TransactionType
+  amountCents Int
+  description String?
+  createdAt   DateTime        @default(now())
+
+  @@index([walletId, createdAt])
+  @@index([type])
+}
+
+model Treasury {
+  id        Int      @id @default(1)
+  reserve   Int      @default(0)
+  poolLive  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TreeState {
+  id        String     @id @default(cuid())
+  level     Int        @default(1)
+  xp        Int        @default(0)
+  updatedAt DateTime   @updatedAt
+  UserWorld UserWorld?
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String?
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(fan)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+
+  creatorProfile    Creator?
+  subscriptions     Subscription[]
+  purchases         Purchase[]
+  savedMoments      SavedMoment[]
+  privateBetaAccess PrivateBetaAccess?
+
+  organizedCelebrations      Celebration[]            @relation("UserOrganized")
+  celebrationBadges          CelebrationBadge[]       @relation("UserBadges")
+  sentCelebrationInvites     CelebrationInvite[]      @relation("InviteInviter")
+  receivedCelebrationInvites CelebrationInvite[]      @relation("InviteInvitee")
+  celebrationParticipants    CelebrationParticipant[] @relation("UserParticipants")
+  celebrationReactions       CelebrationReaction[]    @relation("UserReactions")
+  celebrationRewards         CelebrationReward[]      @relation("UserRewards")
+  celebrationStreak          CelebrationStreak?       @relation("UserStreak")
+  roomEvents                 Event[]                  @relation("UserEvents")
+  ledgerOutgoing             Ledger[]                 @relation("FromUser")
+  ledgerIncoming             Ledger[]                 @relation("ToUser")
+  roomMessages               Message[]                @relation("UserMessages")
+  hostedRooms                Room[]                   @relation("HostRooms")
+  roomMemberships            RoomMember[]
+  vibeTransactions           VibeTransaction[]
+}
+
+model UserWorld {
+  reflections ReflectionJournal[]
+
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  name      String
+  theme     String   @default("default")
+  mood      String   @default("neutral")
+  auraId    String?  @unique
+  treeId    String?  @unique
+  shadowId  String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  aura           Aura?           @relation(fields: [auraId], references: [id])
+  tree           TreeState?      @relation(fields: [treeId], references: [id])
+  shadow         ShadowGarden?   @relation(fields: [shadowId], references: [id])
+  capsules       Capsule[]
+  emotionLogs    EmotionMirror[]
+  zenLink        ZenLink?
+  shadowJournals ShadowJournal[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model VibeTag {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  label     String
+  category  VibeCategory
+  intensity Int          @default(3) // 1..5
+  rarity    VibeRarity   @default(CORE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  transactions VibeTransaction[]
+}
+
+model VibeTransaction {
+  id        String       @id @default(cuid())
+  userId    String
+  videoId   String
+  vibeId    String
+  category  VibeCategory
+  createdAt DateTime     @default(now())
+
+  // Lite telemetry (safe, optional)
+  watchMs   Int? // session duration before tagging (ms)
+  entropy   Float? // anti-spam heuristic score
+  isPassive Boolean @default(false)
+
+  vibe VibeTag @relation(fields: [vibeId], references: [id], onDelete: Cascade)
+  user User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, videoId, vibeId])
+  @@index([userId, createdAt])
+  @@index([videoId, createdAt])
+  @@index([vibeId, createdAt])
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  cfUid       String   @unique
+  playbackId  String?  @unique
+  status      String   @default("PROCESSING") // PROCESSING | READY | DELETED | FLAGGED
+  durationSec Int?
+  sizeBytes   Int?
+  creatorId   String?
+  flagged     Boolean  @default(false)
+  reason      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model VideoGenJob {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String?
+  prompt    String
+  status    VideoGenStatus @default(queued)
+  progress  Int            @default(0) // 0..100
+  resultUrl String?
+  error     String?
+
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
+}
+
+model Wallet {
+  id           String   @id @default(cuid())
+  ownerId      String
+  currency     String   @default("EUR")
+  balanceCents Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  ledgers      WalletLedger[]
+  outgoing     WalletTransfer[] @relation("fromWallet")
+  incoming     WalletTransfer[] @relation("toWallet")
+  transactions Transaction[]
+  ledger       LedgerEntry[]
+
+  @@unique([ownerId, currency])
+  @@index([ownerId, currency])
+}
+
+model WalletEntry {
+  id        String   @id @default(cuid())
+  walletId  String
+  type      String
+  amount    Float
+  createdAt DateTime @default(now())
+}
+
+model WalletLedger {
+  id          String     @id @default(cuid())
+  walletId    String
+  wallet      Wallet     @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type        LedgerType
+  amountCents Int
+  refType     String?
+  refId       String?
+  note        String?
+  createdAt   DateTime   @default(now())
+
+  @@unique([refType, refId])
+  @@index([walletId, createdAt])
+  @@index([type])
+}
+
+model WalletTransfer {
+  id           String   @id @default(cuid())
+  fromWalletId String
+  toWalletId   String
+  amountCents  Int
+  note         String?
+  createdAt    DateTime @default(now())
+
+  fromWallet Wallet @relation("fromWallet", fields: [fromWalletId], references: [id], onDelete: Cascade)
+  toWallet   Wallet @relation("toWallet", fields: [toWalletId], references: [id], onDelete: Cascade)
+
+  @@index([fromWalletId, createdAt])
+  @@index([toWalletId, createdAt])
+  @@index([createdAt])
+}
+
+model ZenBurn {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model ZenLink {
+  id         String    @id @default(cuid())
+  worldId    String    @unique
+  zenId      String
+  pulses     Int       @default(0)
+  multiplier Float     @default(1.0)
+  world      UserWorld @relation(fields: [worldId], references: [id], onDelete: Cascade)
+}
+
+model ZenOracle {
+  id            String   @id @default(cuid())
+  ts            DateTime @default(now())
+  zenMultiplier Float
+  note          String?
+}
+
+model ZenReissue {
+  id     String   @id @default(cuid())
+  ts     DateTime @default(now())
+  amount Float
+  reason String?
+  tickId String?
+}
+
+model ZendoroCart {
+  id        String   @id @default(cuid())
+  buyerId   String
+  currency  String   @default("EUR")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items ZendoroCartItem[]
+}
+
+model ZendoroCartItem {
+  id        String @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int
+  unitPrice Int
+
+  cart    ZendoroCart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+}
+
+model ZendoroInventory {
+  id        String   @id @default(cuid())
+  productId String   @unique
+  stock     Int      @default(0)
+  reserved  Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  product ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ZendoroOrder {
+  id             String             @id @default(cuid())
+  buyerId        String
+  status         ZendoroOrderStatus @default(DRAFT)
+  subtotalCents  Int                @default(0)
+  totalCents     Int                @default(0)
+  currency       String             @default("EUR")
+  idempotencyKey String?            @unique
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  items     ZendoroOrderItem[]
+  payments  ZendoroPayment[]
+  refunds   ZendoroRefund[]
+  returns   ZendoroReturn[]
+  shipments ZendoroShipment[]
+}
+
+model ZendoroOrderItem {
+  id         String @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  unitPrice  Int
+  totalPrice Int
+
+  order   ZendoroOrder   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product ZendoroProduct @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+}
+
+model ZendoroPayment {
+  id                String               @id @default(cuid())
+  orderId           String
+  provider          String               @default("stripe")
+  providerPaymentId String?              @unique
+  status            ZendoroPaymentStatus @default(CREATED)
+  amountCents       Int
+  currency          String               @default("EUR")
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model ZendoroPayout {
+  id          String   @id @default(cuid())
+  sellerId    String
+  amountCents Int
+  currency    String   @default("EUR")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+
+  seller ZendoroSeller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+}
+
+model ZendoroProduct {
+  id          String   @id @default(cuid())
+  sellerId    String
+  slug        String   @unique
+  title       String
+  description String
+  priceCents  Int
+  currency    String   @default("EUR")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  seller     ZendoroSeller      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  inventory  ZendoroInventory?
+  reviews    ZendoroReview[]
+  orderItems ZendoroOrderItem[]
+  cartItems  ZendoroCartItem[]
+
+  @@index([sellerId])
+}
+
+model ZendoroRefund {
+  id          String   @id @default(cuid())
+  orderId     String
+  amountCents Int
+  reason      String?
+  createdAt   DateTime @default(now())
+
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model ZendoroReturn {
+  id        String   @id @default(cuid())
+  orderId   String
+  reason    String
+  createdAt DateTime @default(now())
+
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model ZendoroReview {
+  id        String   @id @default(cuid())
+  productId String
+  buyerId   String
+  rating    Int
+  body      String
+  createdAt DateTime @default(now())
+
+  product ZendoroProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ZendoroSeller {
+  id          String              @id @default(cuid())
+  ownerId     String
+  slug        String              @unique
+  displayName String
+  status      ZendoroSellerStatus @default(PENDING)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  products ZendoroProduct[]
+  payouts  ZendoroPayout[]
+}
+
+model ZendoroShipment {
+  id             String   @id @default(cuid())
+  orderId        String
+  trackingNumber String?
+  carrier        String?
+  createdAt      DateTime @default(now())
+
+  order ZendoroOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model ConsentEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  kind      String
+  data      Json?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([kind, createdAt])
+}
+
+model CreatorProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DataRequest {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  status    String
+  payload   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model EarningEvent {
+  id        String   @id @default(cuid())
+  creatorId String
+  amount    Int      @default(0)
+  kind      String?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([creatorId, createdAt])
+}
+
+model FraudLog {
+  id        String   @id @default(cuid())
+  kind      String?
+  reason    String?
+  ownerId   String?
+  score     Int?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([ownerId, createdAt])
+}
+
+model Interaction {
+  id        String   @id @default(cuid())
+  videoId   String
+  action    String
+  mood      String?
+  ms        Int?
+  createdAt DateTime @default(now())
+
+  @@index([videoId, createdAt])
+  @@index([action, createdAt])
+}
+
+model KycSubmission {
+  id            String   @id @default(cuid())
+  ownerId       String
+  status        String   @default("PENDING")
+  requestedTier String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([ownerId, status])
+  @@index([createdAt])
+}
+
+model UserAccount {
+  id        String   @id @default(cuid())
+  ownerId   String   @unique
+  status    String   @default("PENDING")
+  tier      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+}
+
+model StreamVideo {
+  id            String   @id @default(cuid())
+  uid           String   @unique
+  ownerId       String?
+  readyToStream Boolean  @default(false)
+  status        String   @default("processing")
+  durationSec   Int?
+  sizeBytes     Int?
+  thumbnailUrl  String?
+  playbackId    String?
+  meta          Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([ownerId, createdAt])
+  @@index([status, createdAt])
+}
+
+model UserConsent {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  emotionProcessing Boolean  @default(false)
+  marketing         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model UserEngagement {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  xpBalance    Int      @default(0)
+  harmonyLevel Int      @default(0)
+  squadScore   Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

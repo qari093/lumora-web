@@ -1,13 +1,21 @@
 // FILE: app/_state/store.ts
-"use client";
+'use client';
 
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 /* ────────────────────────────── Types ────────────────────────────── */
 export type Emotion =
-  | "calm" | "focus" | "joy" | "neutral" | "curious"
-  | "anxious" | "sad" | "angry" | "energized" | "tired";
+  | 'calm'
+  | 'focus'
+  | 'joy'
+  | 'neutral'
+  | 'curious'
+  | 'anxious'
+  | 'sad'
+  | 'angry'
+  | 'energized'
+  | 'tired';
 
 export interface MoodEntry {
   emotion: Emotion;
@@ -32,8 +40,8 @@ export interface AppActions {
 }
 
 /* ────────────────────────────── Consts ───────────────────────────── */
-const STORAGE_KEY = "lumaspace";                   // primary
-const COMPAT_KEY  = "zustand-persist:lumaspace";   // legacy/compat
+const STORAGE_KEY = 'lumaspace'; // primary
+const COMPAT_KEY = 'zustand-persist:lumaspace'; // legacy/compat
 
 /* ───────────────────────────── Utilities ─────────────────────────── */
 const clamp01 = (v: unknown): number | null => {
@@ -42,8 +50,19 @@ const clamp01 = (v: unknown): number | null => {
 };
 
 const isEmotion = (v: unknown): v is Emotion =>
-  typeof v === "string" &&
-  ["calm","focus","joy","neutral","curious","anxious","sad","angry","energized","tired"].includes(v);
+  typeof v === 'string' &&
+  [
+    'calm',
+    'focus',
+    'joy',
+    'neutral',
+    'curious',
+    'anxious',
+    'sad',
+    'angry',
+    'energized',
+    'tired',
+  ].includes(v);
 
 /* Default, used for safe fallbacks and resets */
 const DEFAULT_STATE: AppState = { balance: 0, current: null, intensity: null, history: [] };
@@ -51,21 +70,25 @@ const DEFAULT_STATE: AppState = { balance: 0, current: null, intensity: null, hi
 /* Accepts either flat {..} or zustand-persist { state: {..}, version } */
 const migrateSnapshot = (raw: any): AppState | null => {
   try {
-    if (!raw || typeof raw !== "object") return null;
-    const src = raw.state && typeof raw.state === "object" ? raw.state : raw;
+    if (!raw || typeof raw !== 'object') return null;
+    const src = raw.state && typeof raw.state === 'object' ? raw.state : raw;
 
     const balance = Number(src.balance);
     const current = isEmotion(src.current) ? src.current : null;
     const intensity = clamp01(src.intensity);
 
     const history: MoodEntry[] = Array.isArray(src.history)
-      ? src.history
+      ? (src.history
           .map((h: any) =>
             h && isEmotion(h.emotion)
-              ? { emotion: h.emotion, at: Number(h.at) || Date.now(), intensity: clamp01(h.intensity) }
-              : null
+              ? {
+                  emotion: h.emotion,
+                  at: Number(h.at) || Date.now(),
+                  intensity: clamp01(h.intensity),
+                }
+              : null,
           )
-          .filter(Boolean) as MoodEntry[]
+          .filter(Boolean) as MoodEntry[])
       : [];
 
     return {
@@ -84,7 +107,7 @@ const getStorage = (): Storage | undefined => {
   try {
     // Prefer window.localStorage in JSDOM/browser
     // Fallback to globalThis.localStorage if present
-    if (typeof window !== "undefined" && window.localStorage) return window.localStorage;
+    if (typeof window !== 'undefined' && window.localStorage) return window.localStorage;
     const anyGlobal = globalThis as any;
     if (anyGlobal?.localStorage) return anyGlobal.localStorage as Storage;
   } catch {
@@ -107,7 +130,11 @@ const loadPersisted = (): AppState | null => {
       if (migrated) return migrated;
     } catch {
       // Corrupt → remove so subsequent runs start clean
-      try { ls.removeItem(key); } catch { /* ignore */ }
+      try {
+        ls.removeItem(key);
+      } catch {
+        /* ignore */
+      }
     }
   }
   return null;
@@ -126,7 +153,7 @@ const saveNow = (state: AppState) => {
 
 /* ───────────────────────────── Zustand Store ─────────────────────── */
 export const useAppStore = create<AppState & AppActions>()(
-  persist<AppState & AppActions>(
+  persist<AppState & AppActions, [], [], AppState>(
     (set, get) => {
       // Synchronous seed to satisfy deterministic tests
       const seeded = loadPersisted() ?? DEFAULT_STATE;
@@ -174,7 +201,8 @@ export const useAppStore = create<AppState & AppActions>()(
           sync(() => ({ balance: !Number.isFinite(n) || n < 0 ? 0 : n }));
         },
 
-        clearMoodHistory: () => sync((s) => ({ history: [], current: s.current, intensity: s.intensity })),
+        clearMoodHistory: () =>
+          sync((s) => ({ history: [], current: s.current, intensity: s.intensity })),
 
         reset: () => sync(() => ({ ...DEFAULT_STATE })),
       };
@@ -188,7 +216,7 @@ export const useAppStore = create<AppState & AppActions>()(
         intensity: s.intensity,
         history: s.history,
       }),
-      storage: createJSONStorage(() => {
+      storage: createJSONStorage<AppState>(() => {
         const ls = getStorage();
         if (ls) return ls;
 
@@ -196,15 +224,19 @@ export const useAppStore = create<AppState & AppActions>()(
         const mem = new Map<string, string>();
         return {
           getItem: (k) => (mem.has(k) ? (mem.get(k) as string) : null),
-          setItem: (k, v) => { mem.set(k, v); },
-          removeItem: (k) => { mem.delete(k); },
+          setItem: (k, v) => {
+            mem.set(k, v);
+          },
+          removeItem: (k) => {
+            mem.delete(k);
+          },
         } as Storage;
       }),
       // We synchronously preload, so we keep hydration disabled to avoid races.
       skipHydration: true,
       migrate: (persisted) => migrateSnapshot(persisted) ?? { ...DEFAULT_STATE },
-    }
-  )
+    },
+  ),
 );
 
 // Back-compat default export

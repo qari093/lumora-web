@@ -8,7 +8,14 @@ const nextConfig = {
   
   experimental: { },
 outputFileTracingRoot: process.cwd(),
-poweredByHeader: false,
+  outputFileTracingIncludes: {
+    "/*": [
+      "./node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/**/*",
+      "./node_modules/.pnpm/@prisma+client@*/node_modules/@prisma/client/**/*",
+      "./node_modules/.pnpm/prisma@*/node_modules/prisma/libquery_engine-rhel-openssl-3.0.x.so.node"
+    ]
+  },
+  poweredByHeader: false,
   reactStrictMode: true
 };
 

@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 type BenchIn = {
   ts?: number;
   results?: {
@@ -13,11 +14,11 @@ export async function POST(req: Request) {
   try {
     const body = (await req.json()) as BenchIn;
     const r = body?.results || {};
-    const latency = typeof r.latency_ms === "number" ? r.latency_ms : null;
-    const cacheEntries = typeof r.cache_entries === "number" ? r.cache_entries : null;
-    const ratio = typeof r.compress_ratio === "number" ? r.compress_ratio : null;
+    const latency = typeof r.latency_ms === 'number' ? r.latency_ms : null;
+    const cacheEntries = typeof r.cache_entries === 'number' ? r.cache_entries : null;
+    const ratio = typeof r.compress_ratio === 'number' ? r.compress_ratio : null;
     const q = r.queues || {};
-    const _ua = typeof r.user_agent === "string" ? r.user_agent : null;
+    const _ua = typeof r.user_agent === 'string' ? r.user_agent : null;
 
     let score = 100;
     if (latency != null) score -= Math.min(60, Math.max(0, (latency - 80) * 0.25));
@@ -33,10 +34,13 @@ export async function POST(req: Request) {
       echo_ts: body?.ts || null,
       score,
       advice:
-        score >= 85 ? "Great offline health" :
-        score >= 70 ? "Good, minor tweaks possible" :
-        score >= 55 ? "Fair, consider pruning and syncing" :
-        "Weak, check connectivity and caches",
+        score >= 85
+          ? 'Great offline health'
+          : score >= 70
+            ? 'Good, minor tweaks possible'
+            : score >= 55
+              ? 'Fair, consider pruning and syncing'
+              : 'Weak, check connectivity and caches',
     });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 400 });

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -24,9 +20,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -45,7 +39,9 @@
     "src/lib/persona/**/*",
     ".next/types/**/*.ts",
     "src/lib/fyp/**/*",
-    "app/api/feed/route.ts"
+    "app/api/feed/route.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",
@@ -54,6 +50,9 @@
     "public/demo/media/**/*",
     "backups/**/*",
     "scripts/**/*",
-    "src/_app_disabled_*/**/*"
+    "src/_app_disabled_*/**/*",
+    "app.disabled.*/**/*",
+    "app/**/__bak_*/**/*",
+    "app/**/_bak_*/**/*"
   ]
 }

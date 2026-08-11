@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 type SafetyValidationBody = {
   userId?: string;
@@ -9,24 +9,24 @@ type SafetyValidationBody = {
 };
 
 function validateSafetyPayload(body: SafetyValidationBody) {
-  const text = typeof body.text === "string" ? body.text.trim() : "";
-  const mediaType = typeof body.mediaType === "string" ? body.mediaType : "unknown";
-  const portal = typeof body.portal === "string" ? body.portal : "unknown";
+  const text = typeof body.text === 'string' ? body.text.trim() : '';
+  const mediaType = typeof body.mediaType === 'string' ? body.mediaType : 'unknown';
+  const portal = typeof body.portal === 'string' ? body.portal : 'unknown';
 
-  const hardBlockedTerms = ["self-harm-instruction", "exploit-child", "terror-instruction"];
+  const hardBlockedTerms = ['self-harm-instruction', 'exploit-child', 'terror-instruction'];
   const lower = text.toLowerCase();
   const blocked = hardBlockedTerms.some((term) => lower.includes(term));
 
   return {
     ok: !blocked,
     allowed: !blocked,
-    risk: blocked ? "blocked" : "low",
-    action: blocked ? "reject" : "allow",
+    risk: blocked ? 'blocked' : 'low',
+    action: blocked ? 'reject' : 'allow',
     checks: {
       textPresent: text.length > 0,
       mediaType,
       portal,
-      abuseKeywordScan: blocked ? "blocked" : "clear",
+      abuseKeywordScan: blocked ? 'blocked' : 'clear',
       betaSafeMode: true,
     },
   };
@@ -36,17 +36,17 @@ export async function GET() {
   return NextResponse.json(
     {
       ok: true,
-      service: "lumora-safety-validation",
-      status: "ready",
+      service: 'lumora-safety-validation',
+      status: 'ready',
       allowed: true,
-      mode: "preview_safe",
+      mode: 'preview_safe',
       checks: {
-        abuseKeywordScan: "available",
+        abuseKeywordScan: 'available',
         betaSafeMode: true,
-        runtime: "healthy",
+        runtime: 'healthy',
       },
       warnings: [
-        "Preview safety validation is contract-safe and must be connected to production moderation providers before public beta.",
+        'Preview safety validation is contract-safe and must be connected to production moderation providers before public beta.',
       ],
       ts: Date.now(),
     },
@@ -60,9 +60,8 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     {
-      ok: true,
-      service: "lumora-safety-validation",
-      status: "validated",
+      service: 'lumora-safety-validation',
+      status: 'validated',
       ...result,
       ts: Date.now(),
     },

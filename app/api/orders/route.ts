@@ -1,8 +1,27 @@
-import { listOrders } from "@/src/core/zendoro/api/store";
-import { okJson } from "@/src/core/zendoro/api/http";
+import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const userId = url.searchParams.get("userId") ?? undefined;
-  return okJson(listOrders(userId));
+import { listOrders } from '@/src/core/zendoro/api/store';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+export async function GET(): Promise<NextResponse> {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  return NextResponse.json(
+    {
+      ok: true,
+      route: '/api/orders',
+      data: listOrders(auth.identity.userId),
+    },
+    {
+      status: 200,
+      headers: userPrivateNoStoreHeaders(),
+    },
+  );
 }

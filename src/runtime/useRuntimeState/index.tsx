@@ -15,7 +15,7 @@ export function useRuntimeState() {
       inFlight = true;
 
       try {
-        const res = await fetch("/api/runtime/state", { cache: "no-store" });
+        const res = await fetch("/api/runtime/events", { cache: "no-store" });
         const json = await res.json();
 
         if (!mounted || !json?.ok) return;

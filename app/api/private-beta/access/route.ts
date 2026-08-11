@@ -1,58 +1,108 @@
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-type AccessBody = {
-  email?: string;
-  inviteCode?: string;
-  testerId?: string;
-};
+import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/src/core/auth/authOptions";
 
-function normalizeAccess(body: AccessBody) {
-  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-  const inviteCode = typeof body.inviteCode === "string" ? body.inviteCode.trim() : "";
-  const testerId = typeof body.testerId === "string" ? body.testerId.trim() : "";
+export const dynamic = "force-dynamic";
 
-  const hasIdentitySignal = Boolean(email || inviteCode || testerId);
+function accessDenied(reason: string, status: number) {
+  return NextResponse.json(
+    {
+      ok: false,
+      service: "lumora-private-beta-access",
+      allowed: false,
+      reason,
+      mode: "controlled",
+      ts: Date.now()
+    },
+    {
+      status,
+      headers: {
+        "cache-control": "no-store"
+      }
+    }
+  );
+}
 
-  return {
-    allowed: hasIdentitySignal,
-    reason: hasIdentitySignal ? "preview_identity_signal_present" : "identity_signal_required",
-    mode: "controlled",
-  };
+async function evaluateAuthenticatedAccess() {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id?.trim() ?? "";
+  const email = session?.user?.email?.trim().toLowerCase() ?? "";
+
+  if (!userId || !email) {
+    return accessDenied("authentication_required", 401);
+  }
+
+  const access = await prisma.privateBetaAccess.findFirst({
+    where: {
+      OR: [{ userId }, { email }]
+    },
+    select: {
+      id: true,
+      userId: true,
+      email: true,
+      status: true,
+      approvedAt: true,
+      revokedAt: true,
+      expiresAt: true
+    }
+  });
+
+  if (!access) {
+    return accessDenied("allowlist_entry_required", 403);
+  }
+
+  if (access.status !== "APPROVED") {
+    return accessDenied(
+      access.status === "REVOKED" ? "access_revoked" : "manual_approval_required",
+      403
+    );
+  }
+
+  if (access.revokedAt) {
+    return accessDenied("access_revoked", 403);
+  }
+
+  if (access.expiresAt && access.expiresAt.getTime() <= Date.now()) {
+    return accessDenied("access_expired", 403);
+  }
+
+  if (!access.userId) {
+    await prisma.privateBetaAccess.update({
+      where: { id: access.id },
+      data: { userId }
+    });
+  }
+
+  return NextResponse.json(
+    {
+      ok: true,
+      service: "lumora-private-beta-access",
+      status: "approved",
+      allowed: true,
+      reason: "approved_allowlist_entry",
+      mode: "controlled",
+      access: {
+        email: access.email,
+        approvedAt: access.approvedAt,
+        expiresAt: access.expiresAt
+      },
+      ts: Date.now()
+    },
+    {
+      status: 200,
+      headers: {
+        "cache-control": "no-store"
+      }
+    }
+  );
 }
 
 export async function GET() {
-  return NextResponse.json(
-    {
-      ok: true,
-      service: "lumora-private-beta-access",
-      status: "access_contract_ready",
-      allowed: false,
-      reason: "identity_signal_required",
-      mode: "controlled",
-      warnings: [
-        "GET validates route availability only. Real access approval must use DB-backed allowlist and authenticated identity.",
-      ],
-      ts: Date.now(),
-    },
-    { status: 200 },
-  );
+  return evaluateAuthenticatedAccess();
 }
 
-export async function POST(req: Request) {
-  const body = (await req.json().catch(() => ({}))) as AccessBody;
-  const access = normalizeAccess(body);
-
-  return NextResponse.json(
-    {
-      ok: true,
-      service: "lumora-private-beta-access",
-      status: "checked",
-      ...access,
-      warnings: [
-        "Preview access check is contract-safe. Production private beta must verify authenticated identity and allowlist persistence.",
-      ],
-      ts: Date.now(),
-    },
-    { status: 200 },
-  );
+export async function POST() {
+  return evaluateAuthenticatedAccess();
 }

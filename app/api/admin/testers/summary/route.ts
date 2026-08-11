@@ -1,71 +1,114 @@
-import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import { requireAdmin } from "@/app/_lib/admin/adminAuth";
+import { NextResponse } from 'next/server';
 
-export const dynamic = "force-dynamic";
+import { prisma } from '@/lib/prisma';
+import { adminNoStoreHeaders, requireAdminSession } from '@/src/lib/auth/requireAdminSession';
 
-type TelemetryRow = {
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+type TesterSummary = {
   testerId: string;
-  ts: number;
-  type: string;
-  path?: string;
-  dur_ms?: number;
+  events: number;
+  lastOccurredAt: Date;
+  pages: Record<string, number>;
 };
 
-function readNdjson(filePath: string): any[] {
+export async function GET(): Promise<NextResponse> {
+  const auth = await requireAdminSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
-    if (!fs.existsSync(filePath)) return [];
-    const raw = fs.readFileSync(filePath, "utf8");
-    return raw
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean)
-      .map((l) => {
-        try {
-          return JSON.parse(l);
-        } catch {
-          return null;
-        }
-      })
-      .filter(Boolean);
-  } catch {
-    return [];
-  }
-}
+    const rows = await prisma.observabilityEvent.findMany({
+      where: {
+        testerId: {
+          not: null,
+        },
+      },
+      orderBy: {
+        occurredAt: 'desc',
+      },
+      take: 10_000,
+      select: {
+        testerId: true,
+        eventType: true,
+        route: true,
+        occurredAt: true,
+      },
+    });
 
-export async function GET(req: NextRequest) {
-  const auth = requireAdmin(req);
-  if (!auth.ok) return auth.res;
+    const byTester = new Map<string, TesterSummary>();
 
-  const base = process.cwd();
-  const telePath = path.join(base, ".lumora_telemetry", "telemetry.ndjson");
+    for (const row of rows) {
+      const testerId = row.testerId?.trim();
 
-  const rows = readNdjson(telePath) as TelemetryRow[];
+      if (!testerId) {
+        continue;
+      }
 
-  // Aggregate
-  const byTester = new Map<string, { testerId: string; events: number; lastTs: number; pages: Record<string, number> }>();
-  for (const r of rows) {
-    if (!r || typeof r.testerId !== "string") continue;
-    const t = byTester.get(r.testerId) ?? { testerId: r.testerId, events: 0, lastTs: 0, pages: {} };
-    t.events += 1;
-    t.lastTs = Math.max(t.lastTs, typeof r.ts === "number" ? r.ts : 0);
-    if (r.type === "route_view" && typeof r.path === "string") {
-      t.pages[r.path] = (t.pages[r.path] || 0) + 1;
+      const summary = byTester.get(testerId) ?? {
+        testerId,
+        events: 0,
+        lastOccurredAt: row.occurredAt,
+        pages: {},
+      };
+
+      summary.events += 1;
+
+      if (row.occurredAt.getTime() > summary.lastOccurredAt.getTime()) {
+        summary.lastOccurredAt = row.occurredAt;
+      }
+
+      if (row.eventType === 'route_view' && row.route) {
+        summary.pages[row.route] = (summary.pages[row.route] ?? 0) + 1;
+      }
+
+      byTester.set(testerId, summary);
     }
-    byTester.set(r.testerId, t);
+
+    const testers = Array.from(byTester.values())
+      .sort((left, right) => right.lastOccurredAt.getTime() - left.lastOccurredAt.getTime())
+      .slice(0, 200)
+      .map((summary) => ({
+        ...summary,
+        lastOccurredAt: summary.lastOccurredAt.toISOString(),
+      }));
+
+    return NextResponse.json(
+      {
+        ok: true,
+        route: '/api/admin/testers/summary',
+        source: 'database',
+        admin: auth.identity,
+        totals: {
+          testers: byTester.size,
+          events: rows.length,
+        },
+        testers,
+      },
+      {
+        status: 200,
+        headers: adminNoStoreHeaders(),
+      },
+    );
+  } catch (error) {
+    console.error('ADMIN_TESTER_SUMMARY_FAILED', {
+      adminUserId: auth.identity.userId,
+      message: error instanceof Error ? error.message : String(error),
+    });
+
+    return NextResponse.json(
+      {
+        ok: false,
+        route: '/api/admin/testers/summary',
+        error: 'admin_tester_summary_failed',
+      },
+      {
+        status: 500,
+        headers: adminNoStoreHeaders(),
+      },
+    );
   }
-
-  const testers = Array.from(byTester.values()).sort((a, b) => b.lastTs - a.lastTs).slice(0, 200);
-
-  return NextResponse.json({
-    ok: true,
-    mode: auth.mode,
-    telemetryFile: fs.existsSync(telePath) ? ".lumora_telemetry/telemetry.ndjson" : null,
-    totals: {
-      testers: byTester.size,
-      events: rows.length,
-    },
-    testers,
-  });
 }

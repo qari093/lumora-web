@@ -1,310 +1,389 @@
-"use client";
+'use client';
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import Link from 'next/link';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Overview = {
   ok: boolean;
   windowMinutes: number;
-  wallets: { count: number; totalCents: number };
+  wallets: {
+    count: number;
+    totalCents: number;
+  };
   campaigns: number;
   kycPending: number;
-  activity: { eventsLastHr: number; convLastHr: number; fraudLastHr: number };
+  activity: {
+    eventsLastHr: number;
+    convLastHr: number;
+    fraudLastHr: number;
+  };
   error?: string;
 };
 
-type ApiError = { ok?: false; error?: string };
+type ApiError = {
+  ok?: false;
+  error?: string;
+};
+
+type RequestFailure = Error & {
+  status?: number;
+};
 
 const money = (cents: number) => `€${(cents / 100).toFixed(2)}`;
 
-function getAdminTokenSafe(): string {
-  try {
-    if (typeof window === "undefined") return "dev-admin-token";
-    return localStorage.getItem("adminToken") || "dev-admin-token";
-  } catch {
-    return "dev-admin-token";
-  }
-}
-
 async function fetchJson<T>(
   url: string,
-  opts: { headers?: Record<string, string>; timeoutMs?: number; signal?: AbortSignal } = {}
+  options: {
+    timeoutMs?: number;
+    signal?: AbortSignal;
+  } = {},
 ): Promise<T> {
-  const { headers, timeoutMs = 12_000, signal } = opts;
+  const { timeoutMs = 12_000, signal } = options;
 
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  const timeoutController = new AbortController();
 
-  // Merge external + internal abort signals
-  const anySignal = (() => {
-    if (!signal) return ctrl.signal;
-    if (signal.aborted) return signal;
-    const chained = new AbortController();
-    const onAbort = () => chained.abort();
-    signal.addEventListener("abort", onAbort, { once: true });
-    ctrl.signal.addEventListener("abort", onAbort, { once: true });
-    return chained.signal;
-  })();
+  const timeout = window.setTimeout(() => timeoutController.abort(), timeoutMs);
+
+  const requestController = new AbortController();
+
+  const abort = () => requestController.abort();
+
+  signal?.addEventListener('abort', abort, { once: true });
+
+  timeoutController.signal.addEventListener('abort', abort, { once: true });
 
   try {
-    const res = await fetch(url, {
-      headers,
-      cache: "no-store",
-      signal: anySignal,
+    const response = await fetch(url, {
+      method: 'GET',
+      credentials: 'same-origin',
+      cache: 'no-store',
+      signal: requestController.signal,
+      headers: {
+        accept: 'application/json',
+      },
     });
 
-    const text = await res.text();
-    let json: any = null;
+    const raw = await response.text();
+
+    let payload: unknown = null;
+
     try {
-      json = text ? JSON.parse(text) : null;
+      payload = raw ? JSON.parse(raw) : null;
     } catch {
-      json = { ok: false, error: "invalid_json" } satisfies ApiError;
+      payload = {
+        ok: false,
+        error: 'invalid_json_response',
+      };
     }
 
-    if (!res.ok) {
-      const errMsg =
-        (json && typeof json === "object" && (json.error as string)) ||
-        `http_${res.status}`;
-      throw new Error(errMsg);
+    if (!response.ok) {
+      const error = new Error(
+        typeof payload === 'object' &&
+          payload !== null &&
+          'error' in payload &&
+          typeof payload.error === 'string'
+          ? payload.error
+          : `http_${response.status}`,
+      ) as RequestFailure;
+
+      error.status = response.status;
+      throw error;
     }
 
-    return json as T;
+    return payload as T;
   } finally {
-    clearTimeout(t);
+    window.clearTimeout(timeout);
+
+    signal?.removeEventListener('abort', abort);
   }
 }
 
 export default function AdminHome() {
-  const [o, setO] = useState<Overview | null>(null);
-  const [msg, setMsg] = useState<string>("");
-  const [token, setToken] = useState<string>("dev-admin-token");
-  const [tokenDraft, setTokenDraft] = useState<string>("dev-admin-token");
-  const [busy, setBusy] = useState<boolean>(false);
+  const [overview, setOverview] = useState<Overview | null>(null);
 
-  const alive = useRef(true);
-  const reqSeq = useRef(0);
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    alive.current = true;
-    return () => {
-      alive.current = false;
-    };
-  }, []);
+  const [busy, setBusy] = useState(false);
 
-  // Load token from localStorage on mount (client-safe)
-  useEffect(() => {
-    const t = getAdminTokenSafe();
-    setToken(t);
-    setTokenDraft(t);
-  }, []);
+  const [authorizationFailure, setAuthorizationFailure] = useState(false);
 
-  const headers = useMemo(() => ({ "x-admin-token": token }), [token]);
+  const requestSequence = useRef(0);
 
-  const applyToken = useCallback(() => {
-    const next = (tokenDraft || "").trim() || "dev-admin-token";
-    setToken(next);
-    try {
-      localStorage.setItem("adminToken", next);
-    } catch {
-      // ignore
+  const handleFailure = useCallback((error: unknown) => {
+    const failure = error as RequestFailure;
+
+    if (failure?.status === 401 || failure?.status === 403) {
+      setAuthorizationFailure(true);
+      setOverview(null);
+      setMessage(
+        failure.status === 401
+          ? 'Your administrator session has expired.'
+          : 'Your account no longer has administrator access.',
+      );
+      return;
     }
-    setMsg("Token updated.");
-  }, [tokenDraft]);
+
+    setOverview(null);
+    setMessage(error instanceof Error ? error.message : String(error));
+  }, []);
 
   const load = useCallback(async () => {
-    const mySeq = ++reqSeq.current;
-    setBusy(true);
-    setMsg("Loading…");
-    try {
-      const ov = await fetchJson<Overview>("/api/admin/overview", { headers, timeoutMs: 15_000 });
-      if (!alive.current || mySeq !== reqSeq.current) return;
+    const sequence = ++requestSequence.current;
 
-      if (ov?.ok) {
-        setO(ov);
-        setMsg("");
-      } else {
-        setO(null);
-        setMsg((ov as ApiError)?.error || "Failed");
+    setBusy(true);
+    setMessage('Loading administrator overview…');
+    setAuthorizationFailure(false);
+
+    try {
+      const payload = await fetchJson<Overview>('/api/admin/overview', {
+        timeoutMs: 15_000,
+      });
+
+      if (sequence !== requestSequence.current) {
+        return;
       }
-    } catch (e: any) {
-      if (!alive.current || mySeq !== reqSeq.current) return;
-      setO(null);
-      setMsg(typeof e?.message === "string" ? e.message : String(e));
+
+      if (!payload?.ok) {
+        throw new Error(payload?.error || 'admin_overview_failed');
+      }
+
+      setOverview(payload);
+      setMessage('');
+    } catch (error) {
+      if (sequence !== requestSequence.current) {
+        return;
+      }
+
+      handleFailure(error);
     } finally {
-      if (!alive.current || mySeq !== reqSeq.current) return;
-      setBusy(false);
+      if (sequence === requestSequence.current) {
+        setBusy(false);
+      }
     }
-  }, [headers]);
+  }, [handleFailure]);
 
   const health = useCallback(async () => {
-    const mySeq = ++reqSeq.current;
+    const sequence = ++requestSequence.current;
+
     setBusy(true);
-    setMsg("Pinging DB…");
+    setMessage('Checking database health…');
+    setAuthorizationFailure(false);
+
     try {
-      const r = await fetchJson<{ ok: boolean; error?: string }>("/api/admin/health", {
-        headers,
+      const payload = await fetchJson<{
+        ok: boolean;
+        db?: string;
+        error?: string;
+      }>('/api/admin/health', {
         timeoutMs: 10_000,
       });
-      if (!alive.current || mySeq !== reqSeq.current) return;
-      setMsg(r?.ok ? "DB OK" : r?.error || "Health failed");
-    } catch (e: any) {
-      if (!alive.current || mySeq !== reqSeq.current) return;
-      setMsg(typeof e?.message === "string" ? e.message : String(e));
+
+      if (sequence !== requestSequence.current) {
+        return;
+      }
+
+      setMessage(
+        payload.ok && payload.db === 'up'
+          ? 'Database health check passed.'
+          : payload.error || 'Database health check failed.',
+      );
+    } catch (error) {
+      if (sequence !== requestSequence.current) {
+        return;
+      }
+
+      handleFailure(error);
     } finally {
-      if (!alive.current || mySeq !== reqSeq.current) return;
-      setBusy(false);
+      if (sequence === requestSequence.current) {
+        setBusy(false);
+      }
     }
-  }, [headers]);
+  }, [handleFailure]);
 
   useEffect(() => {
     void load();
+
+    return () => {
+      requestSequence.current += 1;
+    };
   }, [load]);
 
-  const statusColor = msg.toLowerCase().includes("fail") || msg.toLowerCase().includes("error") ? "#b00020" : "#0a7";
-
   return (
-    <div
+    <main
       style={{
         maxWidth: 1100,
-        margin: "24px auto",
-        padding: "0 16px",
-        fontFamily: "ui-sans-serif, system-ui",
+        margin: '24px auto',
+        padding: '0 16px 48px',
+        fontFamily: 'ui-sans-serif, system-ui, sans-serif',
       }}
     >
-      <h1 style={{ fontSize: 26, fontWeight: 700, margin: 0 }}>Admin Panel</h1>
+      <header>
+        <p style={eyebrow}>Session-protected operations</p>
 
-      <div style={{ marginTop: 8, color: "#666", fontSize: 13, lineHeight: 1.5 }}>
-        Token comes from <code>localStorage.adminToken</code>. Default is <code>dev-admin-token</code>.
-      </div>
+        <h1
+          style={{
+            fontSize: 30,
+            fontWeight: 750,
+            margin: '4px 0 0',
+          }}
+        >
+          Lumora Admin
+        </h1>
 
-      <div style={{ display: "flex", gap: 8, margin: "12px 0", flexWrap: "wrap", alignItems: "center" }}>
-        <button onClick={load} style={{ ...btn, opacity: busy ? 0.7 : 1 }} disabled={busy}>
-          Reload
+        <p
+          style={{
+            marginTop: 8,
+            opacity: 0.72,
+          }}
+        >
+          Administrator access is verified through your secure Lumora session.
+        </p>
+      </header>
+
+      <nav
+        aria-label="Administrator tools"
+        style={{
+          display: 'flex',
+          gap: 10,
+          flexWrap: 'wrap',
+          marginTop: 18,
+        }}
+      >
+        <button type="button" onClick={() => void load()} disabled={busy} style={button}>
+          {busy ? 'Working…' : 'Reload'}
         </button>
-        <button onClick={health} style={{ ...btn, opacity: busy ? 0.7 : 1 }} disabled={busy}>
-          Health Check
+
+        <button type="button" onClick={() => void health()} disabled={busy} style={button}>
+          Health check
         </button>
 
-        <Link href="/admin/kyc" style={{ ...btn, textDecoration: "none" }}>
-          KYC Queue
+        <Link href="/admin/kyc" style={linkButton}>
+          KYC queue
         </Link>
-        <Link href="/brand/insights" style={{ ...btn, textDecoration: "none" }}>
-          Brand Insights
-        </Link>
-        <Link href="/vendor" style={{ ...btn, textDecoration: "none" }}>
-          Vendor
-        </Link>
-        <Link href="/brand/eco" style={{ ...btn, textDecoration: "none" }}>
-          Eco
-        </Link>
-      </div>
 
-      <div style={{ ...card, marginTop: 10 }}>
-        <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-          <div style={{ minWidth: 220 }}>
-            <div style={label}>Admin Token</div>
-            <input
-              value={tokenDraft}
-              onChange={(e) => setTokenDraft(e.target.value)}
-              placeholder="admin token"
-              spellCheck={false}
-              style={input}
-            />
-          </div>
-          <button onClick={applyToken} style={btn}>
-            Apply Token
-          </button>
-          <div style={{ fontSize: 12, color: "#666" }}>
-            Active: <code>{token}</code>
-          </div>
+        <Link href="/admin/testers" style={linkButton}>
+          Tester telemetry
+        </Link>
+
+        <Link href="/admin/zendoro" style={linkButton}>
+          Zendoro runtime
+        </Link>
+
+        <Link href="/zendoro/admin" style={linkButton}>
+          Zendoro operations
+        </Link>
+      </nav>
+
+      {message ? (
+        <div
+          role={authorizationFailure ? 'alert' : 'status'}
+          style={{
+            ...card,
+            marginTop: 18,
+          }}
+        >
+          <strong>{authorizationFailure ? 'Authorization required' : 'Status'}</strong>
+
+          <p style={{ marginBottom: 0 }}>{message}</p>
+
+          {authorizationFailure ? (
+            <Link
+              href="/login?callbackUrl=/admin"
+              style={{
+                ...linkButton,
+                display: 'inline-block',
+                marginTop: 10,
+              }}
+            >
+              Sign in again
+            </Link>
+          ) : null}
         </div>
-      </div>
+      ) : null}
 
-      {msg && (
-        <div style={{ margin: "10px 0", color: statusColor, fontSize: 13 }}>
-          {busy ? "⏳ " : ""}
-          {msg}
-        </div>
-      )}
-
-      {o && (
+      {overview ? (
         <>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 12, marginTop: 12 }}>
-            <div style={card}>
-              <div style={label}>Wallets</div>
-              <div style={val}>{o.wallets.count}</div>
-            </div>
-            <div style={card}>
-              <div style={label}>Total Balance</div>
-              <div style={val}>{money(o.wallets.totalCents)}</div>
-            </div>
-            <div style={card}>
-              <div style={label}>Campaigns</div>
-              <div style={val}>{o.campaigns}</div>
-            </div>
-            <div style={card}>
-              <div style={label}>KYC Pending</div>
-              <div style={val}>{o.kycPending}</div>
-            </div>
-            <div style={card}>
-              <div style={label}>Events (1h)</div>
-              <div style={val}>{o.activity.eventsLastHr}</div>
-            </div>
-            <div style={card}>
-              <div style={label}>Conversions (1h)</div>
-              <div style={val}>{o.activity.convLastHr}</div>
-            </div>
-          </div>
+          <section
+            aria-label="Administrator overview"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: 12,
+              marginTop: 20,
+            }}
+          >
+            <Metric label="Wallets" value={overview.wallets.count} />
 
-          <div style={{ ...card, marginTop: 16 }}>
-            <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: ".06em", color: "#666" }}>
-              Fraud (1h)
-            </div>
-            <div style={{ fontSize: 22, fontWeight: 700, marginTop: 6 }}>{o.activity.fraudLastHr}</div>
-          </div>
+            <Metric label="Total balance" value={money(overview.wallets.totalCents)} />
+
+            <Metric label="Campaigns" value={overview.campaigns} />
+
+            <Metric label="KYC pending" value={overview.kycPending} />
+
+            <Metric label="Events · 1h" value={overview.activity.eventsLastHr} />
+
+            <Metric label="Conversions · 1h" value={overview.activity.convLastHr} />
+
+            <Metric label="Fraud events · 1h" value={overview.activity.fraudLastHr} />
+          </section>
+
+          <p
+            style={{
+              marginTop: 14,
+              fontSize: 13,
+              opacity: 0.65,
+            }}
+          >
+            Operational window: {overview.windowMinutes} minutes
+          </p>
         </>
-      )}
-    </div>
+      ) : null}
+    </main>
   );
 }
 
-const card: React.CSSProperties = {
-  background: "#fff",
-  border: "1px solid #eee",
-  borderRadius: 10,
-  padding: "12px 14px",
-};
+function Metric({ label, value }: { label: string; value: string | number }) {
+  return (
+    <article style={card}>
+      <div style={eyebrow}>{label}</div>
+      <div
+        style={{
+          fontSize: 24,
+          fontWeight: 760,
+          marginTop: 6,
+        }}
+      >
+        {value}
+      </div>
+    </article>
+  );
+}
 
-const label: React.CSSProperties = {
+const card = {
+  padding: '14px 16px',
+  border: '1px solid rgba(255,255,255,0.14)',
+  borderRadius: 12,
+  background: 'rgba(255,255,255,0.045)',
+} as const;
+
+const eyebrow = {
+  margin: 0,
   fontSize: 12,
-  textTransform: "uppercase",
-  letterSpacing: ".06em",
-  color: "#666",
-};
+  textTransform: 'uppercase',
+  letterSpacing: '0.07em',
+  opacity: 0.68,
+} as const;
 
-const val: React.CSSProperties = {
-  fontSize: 22,
-  fontWeight: 700,
-  marginTop: 4,
-};
+const button = {
+  padding: '9px 13px',
+  border: '1px solid rgba(255,255,255,0.18)',
+  borderRadius: 9,
+  background: 'rgba(255,255,255,0.07)',
+  color: 'inherit',
+  cursor: 'pointer',
+} as const;
 
-const btn: React.CSSProperties = {
-  padding: "8px 12px",
-  border: "1px solid #ddd",
-  borderRadius: 8,
-  background: "#fff",
-  cursor: "pointer",
-  color: "inherit",
-};
-
-const input: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 10px",
-  border: "1px solid #ddd",
-  borderRadius: 8,
-  outline: "none",
-  fontSize: 13,
-};
+const linkButton = {
+  ...button,
+  textDecoration: 'none',
+} as const;

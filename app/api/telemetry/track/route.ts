@@ -1,97 +1,189 @@
-import { NextRequest, NextResponse } from "next/server.js";
-import crypto from "crypto";
-import fs from "fs";
-import path from "path";
+import crypto from "node:crypto";
 
+import { NextRequest, NextResponse } from "next/server";
+
+import { persistObservabilityEvent } from "@/src/lib/observability/persistence";
+import {
+  enforceObservabilityRateLimit,
+  observabilityRateLimitHeaders,
+} from "@/src/lib/observability/abuseProtection";
+
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 type TelemetryEvent = {
-  type: string;
-  path?: string;
-  ts?: number;
-  dur_ms?: number;
-  meta?: Record<string, unknown>;
+  type?: unknown;
+  path?: unknown;
+  ts?: unknown;
+  dur_ms?: unknown;
+  meta?: unknown;
 };
 
-function safeJson<T = any>(raw: string): T | null {
+function safeJson(raw: string): unknown {
   try {
-    return JSON.parse(raw) as T;
+    return JSON.parse(raw);
   } catch {
     return null;
   }
 }
 
-function nowSec(): number {
-  return Math.floor(Date.now() / 1000);
+function clampString(value: unknown, maximumLength: number): string | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim();
+  return normalized ? normalized.slice(0, maximumLength) : null;
 }
 
-function getTesterId(req: NextRequest): string {
-  // Prefer your existing cookie/id scheme if present; fallback stable anon id.
-  const cookie = req.cookies.get("lumora_tester_id")?.value?.trim();
-  if (cookie) return cookie;
-  const h =
-    req.headers.get("user-agent") +
-    "|" +
-    (req.headers.get("accept-language") || "") +
-    "|" +
-    (req.headers.get("sec-ch-ua") || "");
-  return "anon_" + crypto.createHash("sha256").update(h).digest("hex").slice(0, 16);
-}
+function readCookie(
+  request: Request,
+  name: string,
+): string | null {
+  const cookieHeader = request.headers.get("cookie");
 
-function logDir(): string {
-  return path.join(process.cwd(), ".lumora_telemetry");
-}
-
-function appendNdjson(file: string, obj: unknown) {
-  const dir = logDir();
-  fs.mkdirSync(dir, { recursive: true });
-  fs.appendFileSync(path.join(dir, file), JSON.stringify(obj) + "\n", "utf8");
-}
-
-export async function POST(req: NextRequest) {
-  const raw = await req.text();
-  const body = safeJson<any>(raw) ?? {};
-
-  // Accept either:
-  //  A) { events: TelemetryEvent[] }
-  //  B) { type, path, dur_ms, meta }  (single event legacy)
-  let events: TelemetryEvent[] = [];
-  if (Array.isArray(body?.events)) {
-    events = body.events;
-  } else if (typeof body?.type === "string") {
-    events = [
-      {
-        type: body.type,
-        path: typeof body.path === "string" ? body.path : undefined,
-        dur_ms: typeof body.dur_ms === "number" ? body.dur_ms : undefined,
-        meta: body.meta && typeof body.meta === "object" ? body.meta : undefined,
-      },
-    ];
+  if (!cookieHeader) {
+    return null;
   }
 
-  if (!events.length) {
+  for (const part of cookieHeader.split(";")) {
+    const separator = part.indexOf("=");
+
+    if (separator < 0) {
+      continue;
+    }
+
+    const key = part.slice(0, separator).trim();
+
+    if (key !== name) {
+      continue;
+    }
+
+    const rawValue = part.slice(separator + 1).trim();
+
+    if (!rawValue) {
+      return null;
+    }
+
+    try {
+      return decodeURIComponent(rawValue);
+    } catch {
+      return rawValue;
+    }
+  }
+
+  return null;
+}
+
+function getTesterId(request: Request): string {
+  const cookieId = clampString(
+    readCookie(request, "lumora_tester_id"),
+    200,
+  );
+
+  if (cookieId) {
+    return cookieId;
+  }
+
+  const fingerprint = [
+    request.headers.get("user-agent") || "",
+    request.headers.get("accept-language") || "",
+    request.headers.get("sec-ch-ua") || "",
+  ].join("|");
+
+  return `anon_${crypto
+    .createHash("sha256")
+    .update(fingerprint)
+    .digest("hex")
+    .slice(0, 16)}`;
+}
+
+function normalizeEvents(body: unknown): TelemetryEvent[] {
+  if (body && typeof body === "object" && Array.isArray((body as { events?: unknown }).events)) {
+    return (body as { events: TelemetryEvent[] }).events.slice(0, 50);
+  }
+
+  if (body && typeof body === "object" && typeof (body as TelemetryEvent).type === "string") {
+    return [body as TelemetryEvent];
+  }
+
+  return [];
+}
+
+export async function POST(request: NextRequest) {
+  const rateLimit =
+    await enforceObservabilityRateLimit(request, {
+      scope: "api.telemetry.track",
+      limit: 60,
+      windowMs: 60_000,
+      maxBodyBytes: 65_536,
+    });
+
+  const rateHeaders =
+    observabilityRateLimitHeaders(rateLimit);
+
+  if (!rateLimit.allowed) {
     return NextResponse.json(
-      { ok: false, error: "bad_request", hint: "send {events:[{type,path,meta}]} or {type,path,...}" },
-      { status: 400 }
+      {
+        ok: false,
+        error: rateLimit.reason,
+      },
+      {
+        status: rateLimit.status,
+        headers: rateHeaders,
+      },
     );
   }
 
-  const testerId = getTesterId(req);
-  const ts = nowSec();
+  const raw = await request.text();
+  const body = safeJson(raw);
+  const events = normalizeEvents(body);
 
-  // sanitize + persist
-  const persisted = events
-    .map((e) => ({
+  if (events.length === 0) {
+    return NextResponse.json(
+      { ok: false, error: "bad_request", hint: "send {events:[{type,path,meta}]} or {type,path,...}" },
+      { status: 400, headers: { "cache-control": "no-store, max-age=0" } },
+    );
+  }
+
+  const testerId = getTesterId(request);
+
+  try {
+    const persisted = await Promise.all(
+      events.map(async event => {
+        const eventType = clampString(event.type, 120);
+        if (!eventType) throw new Error("telemetry_event_type_required");
+
+        return persistObservabilityEvent({
+          category: "telemetry",
+          eventType,
+          severity: "info",
+          source: "api.telemetry.track",
+          route: event.path,
+          testerId,
+          durationMs: event.dur_ms,
+          metadata: event.meta,
+          occurredAt: event.ts,
+        });
+      }),
+    );
+
+    return NextResponse.json(
+      {
+        ok: true,
+        source: "database",
+        testerId,
+        accepted: persisted.length,
+        eventIds: persisted.map(event => event.id),
+      },
+      { status: 201, headers: { "cache-control": "no-store, max-age=0" } },
+    );
+  } catch (error) {
+    console.error("TELEMETRY_TRACK_PERSIST_FAILED", {
       testerId,
-      ts: typeof e.ts === "number" ? e.ts : ts,
-      type: String(e.type || "unknown"),
-      path: e.path ? String(e.path) : undefined,
-      dur_ms: typeof e.dur_ms === "number" ? e.dur_ms : undefined,
-      meta: e.meta && typeof e.meta === "object" ? e.meta : undefined,
-    }))
-    .slice(0, 50); // cap burst
+      message: error instanceof Error ? error.message : String(error),
+    });
 
-  for (const ev of persisted) appendNdjson("telemetry.ndjson", ev);
-
-  return NextResponse.json({ ok: true, testerId, accepted: persisted.length });
+    return NextResponse.json(
+      { ok: false, error: "telemetry_track_persistence_failed" },
+      { status: 500, headers: { "cache-control": "no-store, max-age=0" } },
+    );
+  }
 }

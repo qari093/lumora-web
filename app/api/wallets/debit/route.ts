@@ -1,18 +1,27 @@
-export const runtime = "nodejs";
-import { NextResponse } from "next/server";
-import { ledgerEntry } from "../../../../lib/wallet";
+export const runtime = 'nodejs';
+import { NextResponse } from 'next/server';
+import { addLedgerEntry, ledgerEntry } from '../../../../lib/wallet';
 
 export async function POST(req: Request) {
   try {
-    const b = await req.json().catch(()=>({}));
-    const ownerId = String(b?.ownerId || "");
+    const b = await req.json().catch(() => ({}));
+    const ownerId = String(b?.ownerId || '');
     const euros = Number(b?.euros || 0);
-    if (!ownerId) return NextResponse.json({ ok:false, error:"ownerId required" }, { status:400 });
-    if (!(euros>0)) return NextResponse.json({ ok:false, error:"euros must be > 0" }, { status:400 });
+    if (!ownerId)
+      return NextResponse.json({ ok: false, error: 'ownerId required' }, { status: 400 });
+    if (!(euros > 0))
+      return NextResponse.json({ ok: false, error: 'euros must be > 0' }, { status: 400 });
     const cents = Math.round(euros * 100);
-    const r = await ledgerEntry({ ownerId, type:"DEBIT", amountCents:cents, note:b?.note || "manual debit" });
-    return NextResponse.json({ ok:true, wallet:r.wallet, ledger:r.ledger });
+    const entry = ledgerEntry({
+      userId: ownerId,
+      kind: 'debit',
+      amount: -Math.abs(cents),
+      currency: 'EUR',
+      memo: b?.note || 'manual debit',
+    });
+    const r = await addLedgerEntry(entry);
+    return NextResponse.json({ ok: true, wallet: null, ledger: r.ledger ?? null });
   } catch (e: any) {
-    return NextResponse.json({ ok:false, error:String(e?.message||e) }, { status:500 });
+    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
   }
 }

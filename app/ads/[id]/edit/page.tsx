@@ -1,8 +1,12 @@
 export const revalidate = false;
 
-import EditClient from "./EditClient";
+import EditClient from './EditClient';
 
-export default function Page() {
-  return <EditClient />;
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params;
+  return <EditClient params={resolvedParams} />;
 }
-

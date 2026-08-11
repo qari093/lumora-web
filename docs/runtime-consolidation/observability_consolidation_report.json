@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-07-14T20:23:24.601Z",
+  "generatedAt": "2026-08-04T17:37:45.373Z",
   "status": "critical",
-  "routeCount": 1191,
-  "apiRouteCount": 1007,
-  "pageRouteCount": 184,
-  "unknownDomainRoutes": 762,
+  "routeCount": 1202,
+  "apiRouteCount": 1017,
+  "pageRouteCount": 185,
+  "unknownDomainRoutes": 773,
   "duplicateFindings": 337,
   "highRiskDuplicates": 191,
   "deprecatedAliases": 9,
@@ -15,7 +15,7 @@
   "metrics": [
     {
       "key": "unknown_domain_routes",
-      "value": 762,
+      "value": 773,
       "status": "critical",
       "threshold": 250
     },

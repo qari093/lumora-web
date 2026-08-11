@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 export function GET(req: Request) {
   const url = new URL(req.url);
   const _origin = url.origin;
@@ -78,11 +79,11 @@ export function GET(req: Request) {
   return new NextResponse(js, {
     status: 200,
     headers: {
-      "content-type": "application/javascript; charset=utf-8",
-      "cache-control": "public, max-age=60",
-      "access-control-allow-origin": "*",
+      'content-type': 'application/javascript; charset=utf-8',
+      'cache-control': 'public, max-age=60',
+      'access-control-allow-origin': '*',
     },
   });
 }
 
-export const runtime = "edge";
+export const runtime = 'edge';

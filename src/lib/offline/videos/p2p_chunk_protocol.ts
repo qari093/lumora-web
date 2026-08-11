@@ -171,7 +171,7 @@ function __lumora__old_verifyFrame(frame: any, cfg: any, nowSec: number): Promis
     if (__seenEnabled && __sid) {
       const __k = __sid + ":" + String(__seq) + ":" + __sigProvided;
       if (__lumora_seenSigCache.has(__k)) return { ok: false, reason: "replay", error: "replay" };
-      __lumora_seenSigCache.set(__k, __now || Date._now());
+      __lumora_seenSigCache.set(__k, __now || Date.now());
     }
 
     // Rate limiting (token bucket per sid)
@@ -348,7 +348,7 @@ function pickSecret(cfg: any): string | undefined {
 /* __LUMORA_CHUNK_P2P_BINDING_V1___END__ */
 
 // // g chunk data.
- // * - Uses peer_auth rend
+// * - Uses peer_auth rend
 
 // __LUMORA_EXPORT_SEENCACHE_V2__
 // Minimal in-memory replay cache for tests + Node runtime.
@@ -369,7 +369,7 @@ function __chunk_createInMemorySeenCache(opts?: { maxEntries?: number }) {
     has: (k: string, _now: number) => {
       prune(_now);
       const exp = map.get(k);
-      return typeof exp === "number" && exp > _now;
+      return typeof exp === 'number' && exp > _now;
     },
     add: (k: string, expAt: number, _now: number) => {
       prune(_now);
@@ -385,21 +385,21 @@ function __chunk_createInMemorySeenCache(opts?: { maxEntries?: number }) {
 // __LUMORA_EXPORT_GETSIG_V2__
 // Accept multiple signature field names for backward/forward compatibility.
 function __chunk_getSig(frame: any): string | undefined {
-  const f: any = (frame && typeof frame === "object") ? frame : {};
-  const cands = ["sig", "signature", "mac", "hmac"];
+  const f: any = frame && typeof frame === 'object' ? frame : {};
+  const cands = ['sig', 'signature', 'mac', 'hmac'];
   for (const k of cands) {
     const v = f[k];
-    if (typeof v === "string" && v.trim()) return v;
+    if (typeof v === 'string' && v.trim()) return v;
   }
   return undefined;
 }
 // __LUMORA_EXPORT_GETSIG_V2_END__
 
 // ezvous token signature-like helper to prevent trivial tampering.
- // * - Includes strict size limits and fail-closed validation.
- // *
- // * NOTE: This is NOT network transport. Transport (WebRTC/BLE) is out of scope here.
- // * This is the protocol payload and verification logic used by future transports.
+// * - Includes strict size limits and fail-closed validation.
+// *
+// * NOTE: This is NOT network transport. Transport (WebRTC/BLE) is out of scope here.
+// * This is the protocol payload and verification logic used by future transports.
 //  */
 
 /**
@@ -445,14 +445,51 @@ import { verifyPeerToken } from "./peer_auth";
 /* ──────────────────────────────────────────────────────────────
  * Lumora Offline P2P — Stable signing helpers (canonical)
  * ────────────────────────────────────────────────────────────── */
+type PeerRendezvousToken = {
+  v?: number;
+  sessionId?: string;
+  purpose?: string;
+  issuedAt?: number;
+  expiresAt?: number;
+  nonce?: string;
+  peerId?: string;
+  pid?: string;
+  kid?: string;
+  keyId?: string;
+  kID?: string;
+  kidId?: string;
+  k?: string;
+  sig?: string;
+  signature?: string;
+  mac?: string;
+  hmac?: string;
+  [key: string]: unknown;
+};
+
+async function sha256Hex(input: string): Promise<string> {
+  const value = String(input ?? '');
+  const bytes = new TextEncoder().encode(value);
+  const subtle = globalThis.crypto?.subtle;
+
+  if (subtle) {
+    const digest = await subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  const crypto = require('node:crypto');
+  return crypto.createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
 function __lumora_stableStringify__dup_decl_2_L458(value: any): string {
   const seen = new WeakSet();
   const norm = (v: any): any => {
     if (v === null || v === undefined) return v;
     const t = typeof v;
-    if (t === "number" || t === "boolean" || t === "string") return v;
-    if (t !== "object") return String(v);
-    if (seen.has(v)) return "[Circular]";
+    if (t === 'number' || t === 'boolean' || t === 'string') return v;
+    if (t !== 'object') return String(v);
+    if (seen.has(v)) return '[Circular]';
     seen.add(v);
     if (Array.isArray(v)) return v.map(norm);
     const keys = Object.keys(v).sort();
@@ -464,10 +501,10 @@ function __lumora_stableStringify__dup_decl_2_L458(value: any): string {
 }
 
 function __lumora_bytesToHex__dup_decl_2_L476(bytes: Uint8Array): string {
-  let s = "";
+  let s = '';
   for (let i = 0; i < bytes.length; i++) {
     const b = bytes[i] & 0xff;
-    s += (b < 16 ? "0" : "") + b.toString(16);
+    s += (b < 16 ? '0' : '') + b.toString(16);
   }
   return s;
 }
@@ -476,11 +513,11 @@ function __lumora_hmacHex__dup_decl_2_L485(key: string, msg: string): string {
   // Browser-safe + Node-safe: WebCrypto if present, fallback to Node crypto.
   // This is sync via Node crypto; verifyFrame/signFrame below use the sync path.
   try {
-    const crypto = require("crypto");
-    return crypto.createHmac("sha256", String(key)).update(String(msg)).digest("hex");
+    const crypto = require('crypto');
+    return crypto.createHmac('sha256', String(key)).update(String(msg)).digest('hex');
   } catch {
     // Minimal fallback (should not happen in Node tests)
-    return "";
+    return '';
   }
 }
 
@@ -502,7 +539,7 @@ function __lumora_pickSigningKey__dup_decl_2_L498(frame: any, cfg: any): string 
     f.token ??
     f.sessionToken ??
     f.authToken ??
-    "dev_offline_p2p_key";
+    'dev_offline_p2p_key';
   return String(key);
 }
 
@@ -518,7 +555,7 @@ function __lumora_sigV2__dup_decl_2_L520(frame: any, key: string): string {
 const __lumora_seenSigCache: Map<string, number> = new Map();
 const __lumora_rateBuckets: Map<string, { tokens: number; last: number }> = new Map();
 
-export type P2PFrameType = "chunk_req" | "chunk_res" | "chunk_nak";
+export type P2PFrameType = 'chunk_req' | 'chunk_res' | 'chunk_nak';
 
 export interface P2PChunkFrameBase {
   v: 1;
@@ -529,30 +566,30 @@ export interface P2PChunkFrameBase {
 }
 
 export interface P2PChunkRequest extends P2PChunkFrameBase {
-  type: "chunk_req";
+  type: 'chunk_req';
   videoId: string;
   quality: string;
-//   chunkIndex: number;
-//   chunkHashHex?: string | null; // optional expected hash
+  //   chunkIndex: number;
+  //   chunkHashHex?: string | null; // optional expected hash
 }
 
 export interface P2PChunkResponse extends P2PChunkFrameBase {
-  type: "chunk_res";
+  type: 'chunk_res';
   videoId: string;
   quality: string;
-//   chunkIndex: number;
-//   chunkHashHex: string;
+  //   chunkIndex: number;
+  //   chunkHashHex: string;
   // byte payload as base64 for transport; real transports may carry raw bytes
   payloadB64: string;
   payloadBytes: number;
 }
 
-export interface P2PChunkNak extends P2PFrameBase {
-  type: "chunk_nak";
+export interface P2PChunkNak extends P2PChunkFrameBase {
+  type: 'chunk_nak';
   videoId: string;
   quality: string;
-//   chunkIndex: number;
-  reason: "not_found" | "not_allowed" | "bad_request" | "internal_error";
+  //   chunkIndex: number;
+  reason: 'not_found' | 'not_allowed' | 'bad_request' | 'internal_error';
 }
 
 export type P2PChunkFrame = (P2PChunkRequest | P2PChunkResponse | P2PChunkNak) & {
@@ -568,7 +605,7 @@ export interface P2PProtocolConfig {
 // Normalize wire aliases to canonical internal fields.
 // Accepts both legacy keys (sid/ts/t/q/len) and canonical keys (sessionId/sentAt/type/seq/payloadBytes).
 function normalizeFrame(input: any): any {
-  const f: any = input && typeof input === "object" ? { ...input } : {};
+  const f: any = input && typeof input === 'object' ? { ...input } : {};
 
   // Core aliases
   if (f.sessionId == null && f.sid != null) f.sessionId = f.sid;
@@ -592,64 +629,68 @@ function _canonicalFramePayload(frame: any): string {
 
   // Token may exist under multiple shapes; canonicalize token without signature fields.
   const rawTok: any =
-    (f && typeof f.token === "object" && f.token) ? f.token :
-    (f && typeof f.tok === "object" && f.tok) ? f.tok :
-    undefined;
+    f && typeof f.token === 'object' && f.token
+      ? f.token
+      : f && typeof f.tok === 'object' && f.tok
+        ? f.tok
+        : undefined;
 
-  const cleanToken = rawTok && typeof rawTok === "object"
-    ? Object.fromEntries(
-        Object.entries(rawTok).filter(([k]) =>
-          k !== "sig" && k !== "signature" && k !== "frameSig" && k !== "tokenSig"
+  const cleanToken =
+    rawTok && typeof rawTok === 'object'
+      ? Object.fromEntries(
+          Object.entries(rawTok).filter(
+            ([k]) => k !== 'sig' && k !== 'signature' && k !== 'frameSig' && k !== 'tokenSig',
+          ),
         )
-      )
-    : undefined;
+      : undefined;
 
   // Build minimal canonical object from fields actually used across frame types.
   const out: any = {};
-  const pick = (k: string, v: any) => { if (v !== undefined) out[k] = v; };
+  const pick = (k: string, v: any) => {
+    if (v !== undefined) out[k] = v;
+  };
 
-  pick("v", f.v);
-  pick("type", f.type);
-  pick("sessionId", f.sessionId);
-  pick("seq", f.seq);
-  pick("sentAt", f.sentAt);
+  pick('v', f.v);
+  pick('type', f.type);
+  pick('sessionId', f.sessionId);
+  pick('seq', f.seq);
+  pick('sentAt', f.sentAt);
 
   // Common payload fields (chunk_res)
-  pick("chunkHashHex", f.chunkHashHex);
-  pick("payloadB64", f.payloadB64);
-  pick("payloadBytes", f.payloadBytes);
+  pick('chunkHashHex', f.chunkHashHex);
+  pick('payloadB64', f.payloadB64);
+  pick('payloadBytes', f.payloadBytes);
 
   // Common request fields (chunk_req)
-  pick("len", f.len);
-  pick("length", f.length);
+  pick('len', f.len);
+  pick('length', f.length);
 
   if (cleanToken !== undefined) out.token = cleanToken;
 
   const stableStringify = (v: any): string => {
-    if (v === null) return "null";
+    if (v === null) return 'null';
     const t = typeof v;
-    if (t === "number") {
-      if (!Number.isFinite(v)) return "null";
+    if (t === 'number') {
+      if (!Number.isFinite(v)) return 'null';
       return String(v);
     }
-    if (t === "boolean") return v ? "true" : "false";
-    if (t === "string") return JSON.stringify(v);
-    if (t !== "object") return "null";
-    if (Array.isArray(v)) return "[" + v.map(stableStringify).join(",") + "]";
+    if (t === 'boolean') return v ? 'true' : 'false';
+    if (t === 'string') return JSON.stringify(v);
+    if (t !== 'object') return 'null';
+    if (Array.isArray(v)) return '[' + v.map(stableStringify).join(',') + ']';
     const keys = Object.keys(v).sort();
-    return "{" + keys.map((k) => JSON.stringify(k) + ":" + stableStringify(v[k])).join(",") + "}";
+    return '{' + keys.map((k) => JSON.stringify(k) + ':' + stableStringify(v[k])).join(',') + '}';
   };
 
   return stableStringify(out);
 }
 
 async function _resolveSecretForToken(cfg: any, token: any): Promise<string> {
-  const base = String(cfg?.sharedSecret || "");
+  const base = String(cfg?.sharedSecret || '');
 
   // kid can appear under multiple names depending on minting/version.
-  const kidRaw =
-    (token && (token.kid ?? token.keyId ?? token.kID ?? token.kidId ?? token.k)) ?? "";
-  const kid = typeof kidRaw === "string" ? kidRaw : "";
+  const kidRaw = (token && (token.kid ?? token.keyId ?? token.kID ?? token.kidId ?? token.k)) ?? '';
+  const kid = typeof kidRaw === 'string' ? kidRaw : '';
 
   // 1) Maps (multiple historical naming variants)
   const maps = [
@@ -661,12 +702,12 @@ async function _resolveSecretForToken(cfg: any, token: any): Promise<string> {
     cfg?.secretsByKid,
     cfg?.kidToSecret,
     cfg?.kidSecrets,
-  ].filter((m: any) => m && typeof m === "object");
+  ].filter((m: any) => m && typeof m === 'object');
 
   if (kid && maps.length) {
     for (const m of maps) {
       const v = (m as any)[kid];
-      if (typeof v === "string" && v.length > 0) return String(v);
+      if (typeof v === 'string' && v.length > 0) return String(v);
     }
   }
 
@@ -684,7 +725,7 @@ async function _resolveSecretForToken(cfg: any, token: any): Promise<string> {
     cfg?.secretResolver,
     cfg?.resolveSecret,
     cfg?.resolveSecretByKid,
-  ].filter((f: any) => typeof f === "function");
+  ].filter((f: any) => typeof f === 'function');
 
   // IMPORTANT:
   // If kid is missing, still allow 0-arg resolvers (some legacy tests/mint paths rotate secrets
@@ -696,8 +737,8 @@ async function _resolveSecretForToken(cfg: any, token: any): Promise<string> {
         if (kid) out = fn.length >= 1 ? fn(kid) : fn();
         else out = fn.length === 0 ? fn() : fn(undefined);
 
-        const v = out && typeof out.then === "function" ? await out : out;
-        if (typeof v === "string" && v.length > 0) return String(v);
+        const v = out && typeof out.then === 'function' ? await out : out;
+        if (typeof v === 'string' && v.length > 0) return String(v);
       } catch {
         // ignore and continue
       }
@@ -714,7 +755,7 @@ function __p2pRequirePeerBindingFromCfg(cfg: any): boolean {
     cfg?.enforcePeerBinding ??
     cfg?.peerBindingRequired ??
     cfg?.peerBinding?.required ??
-    false
+    false,
   );
 }
 
@@ -811,19 +852,86 @@ function __lumora_setSig_v2__dup_line_617(frame: any, sig: string): any {
 }
 
 /* FIX6P_HELPERS_END */
+function __lumora_stableStringify(value: any): string {
+  return __lumora_stableStringify__dup_decl_2_L458(value);
+}
+
+function __lumora_hmacHex(key: string, message: string): string {
+  return __lumora_hmacHex__dup_decl_2_L485(key, message);
+}
+
+function __lumora_getSig_v2(frame: any): string | undefined {
+  const f: any = frame && typeof frame === 'object' ? frame : {};
+  const value =
+    f.sig ??
+    f.signature ??
+    f._sig ??
+    f.hmac ??
+    f.mac ??
+    f.authSig ??
+    f.auth_sig ??
+    f.payloadSig ??
+    f.payload_sig;
+
+  return value === undefined || value === null ? undefined : String(value);
+}
+
+function __lumora_setSig_v2(frame: any, sig: string): any {
+  const f: any = frame && typeof frame === 'object' ? frame : {};
+
+  if ('hmac' in f && !('sig' in f)) return { ...f, hmac: sig };
+  if ('signature' in f && !('sig' in f)) return { ...f, signature: sig };
+  if ('mac' in f && !('sig' in f)) return { ...f, mac: sig };
+
+  return { ...f, sig };
+}
+
+function __lumora_canonicalFramePayloadUnsigned(frame: any): string {
+  const f: any = frame && typeof frame === 'object' ? { ...frame } : {};
+
+  delete f.sig;
+  delete f.signature;
+  delete f._sig;
+  delete f.hmac;
+  delete f.mac;
+  delete f.authSig;
+  delete f.auth_sig;
+  delete f.payloadSig;
+  delete f.payload_sig;
+
+  return __lumora_stableStringify(f);
+}
+
+function pickSecret(cfg: any): string {
+  const c: any = cfg && typeof cfg === 'object' ? cfg : {};
+  const value =
+    c.sharedSecret ??
+    c.secret ??
+    c.hmacSecret ??
+    c.p2pSecret ??
+    c.signingSecret ??
+    c.protocolSecret ??
+    '';
+
+  return typeof value === 'string' ? value : String(value ?? '');
+}
+
 async function __chunk_signFrame(frame: any, cfg: any): Promise<any> {
   const cfgAny: any = cfg as any;
   const frameAny: any = frame as any;
 
   const secret = pickSecret(cfgAny);
-  if (!secret) return __lumora_setSig_v2(frameAny, "");
+  if (!secret) return __lumora_setSig_v2(frameAny, '');
 
   // Ensure timestamp is stable; do NOT use "_now" from verifier.
   const ts =
-    typeof frameAny.timestamp === "number" ? frameAny.timestamp :
-    typeof frameAny.ts === "number" ? frameAny.ts :
-    typeof frameAny.time === "number" ? frameAny.time :
-    Date._now();
+    typeof frameAny.timestamp === 'number'
+      ? frameAny.timestamp
+      : typeof frameAny.ts === 'number'
+        ? frameAny.ts
+        : typeof frameAny.time === 'number'
+          ? frameAny.time
+          : Date.now();
 
   // Do not mutate input; write timestamp back if missing.
   const base = { ...frameAny, timestamp: ts };
@@ -837,13 +945,13 @@ async function __chunk_signFrame(frame: any, cfg: any): Promise<any> {
 function _getStr(o: any, keys: string[]): string | undefined {
   for (const k of keys) {
     const v = o ? o[k] : undefined;
-    if (typeof v === "string" && v.trim()) return v;
+    if (typeof v === 'string' && v.trim()) return v;
   }
   return undefined;
 }
 
 function _ctEqHex(a: string, b: string): boolean {
-  if (typeof a !== "string" || typeof b !== "string") return false;
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
   if (a.length !== b.length) return false;
   // constant-ish time: avoid early exit on mismatch
   let out = 0;
@@ -853,21 +961,21 @@ function _ctEqHex(a: string, b: string): boolean {
 
 async function _resolveCandidates(cfgAny: any, tokenKid?: string): Promise<string[]> {
   const cands: string[] = [];
-  const base = typeof cfgAny?.sharedSecret === "string" ? cfgAny.sharedSecret : "";
+  const base = typeof cfgAny?.sharedSecret === 'string' ? cfgAny.sharedSecret : '';
   if (base) cands.push(base);
 
   const r = cfgAny?.resolveSharedSecret;
-  if (typeof r === "function") {
+  if (typeof r === 'function') {
     try {
       const outU = r.length === 0 ? r() : r(undefined);
-      const vU = outU && typeof outU.then === "function" ? await outU : outU;
-      if (typeof vU === "string" && vU) cands.push(vU);
+      const vU = outU && typeof outU.then === 'function' ? await outU : outU;
+      if (typeof vU === 'string' && vU) cands.push(vU);
     } catch {}
     if (tokenKid) {
       try {
         const outK = r.length === 0 ? r() : r(tokenKid);
-        const vK = outK && typeof outK.then === "function" ? await outK : outK;
-        if (typeof vK === "string" && vK) cands.push(vK);
+        const vK = outK && typeof outK.then === 'function' ? await outK : outK;
+        if (typeof vK === 'string' && vK) cands.push(vK);
       } catch {}
     }
   }
@@ -876,11 +984,15 @@ async function _resolveCandidates(cfgAny: any, tokenKid?: string): Promise<strin
   return Array.from(new Set(cands.filter(Boolean)));
 }
 
-async function _verifyHmacAnySecret(sigHex: string, payload: string, secrets: string[]): Promise<boolean> {
+async function _verifyHmacAnySecret(
+  sigHex: string,
+  payload: string,
+  secrets: string[],
+): Promise<boolean> {
   for (const sec of secrets) {
     try {
       const exp = await __lumora_hmacHex(sec, payload);
-      if (_ctEqHex(String(exp || ""), String(sigHex || ""))) return true;
+      if (_ctEqHex(String(exp || ''), String(sigHex || ''))) return true;
     } catch {}
   }
   return false;
@@ -890,22 +1002,22 @@ async function _verifyHmacAnySecret(sigHex: string, payload: string, secrets: st
 // Canonicalize peer token payload for signing/verifying.
 // Must be stable across runtimes: sort keys, omit signature fields.
 function canonicalPeerTokenPayloadUnsigned(token: any): string {
-  const t: any = (token && typeof token === "object") ? token : {};
+  const t: any = token && typeof token === 'object' ? token : {};
   const out: any = {};
 
   // Prefer explicit known fields first (stable ordering), then any extras.
   const preferred = [
-    "v",
-    "sessionId",
-    "purpose",
-    "issuedAt",
-    "expiresAt",
-    "nonce",
-    "peerId",
-    "kid"
+    'v',
+    'sessionId',
+    'purpose',
+    'issuedAt',
+    'expiresAt',
+    'nonce',
+    'peerId',
+    'kid',
   ];
 
-  const omit = new Set(["sig", "signature", "mac", "hmac"]);
+  const omit = new Set(['sig', 'signature', 'mac', 'hmac']);
 
   const setIf = (k: string) => {
     if (omit.has(k)) return;
@@ -917,73 +1029,71 @@ function canonicalPeerTokenPayloadUnsigned(token: any): string {
   for (const k of preferred) setIf(k);
 
   // Include remaining enumerable keys deterministically.
-  const keys = Object.keys(t).filter((k) => !omit.has(k) && !preferred.includes(k)).sort();
+  const keys = Object.keys(t)
+    .filter((k) => !omit.has(k) && !preferred.includes(k))
+    .sort();
   for (const k of keys) setIf(k);
 
   return JSON.stringify(out);
 }
 // __LUMORA_CANON_PEER_TOKEN_UNSIGNED_END__
-async function __chunk_verifyFrame(
-  signed: any,
-  cfg: any,
-  nowMs?: number
-): Promise<any> {
+async function __chunk_verifyFrame(signed: any, cfg: any, nowMs?: number): Promise<any> {
   try {
-    const _now = typeof nowMs === "number" ? nowMs : Date._now();
-    if (!signed || typeof signed !== "object") return { ok: false, reason: "frame_invalid" };
+    const _now = typeof nowMs === 'number' ? nowMs : Date.now();
+    if (!signed || typeof signed !== 'object') return { ok: false, reason: 'frame_invalid' };
 
     const cfgAny: any = cfg as any;
 
     // normalize + version
     const nf = normalizeFrame(signed as any);
-    if (!nf || nf.v !== 1) return { ok: false, reason: "frame_version" };
+    if (!nf || nf.v !== 1) return { ok: false, reason: 'frame_version' };
 
     // timestamp / expiry
-    const ts = typeof (nf as any).timestamp === "number" ? (nf as any).timestamp : undefined;
-    if (!ts || !Number.isFinite(ts)) return { ok: false, reason: "frame_ts_missing" };
+    const ts = typeof (nf as any).timestamp === 'number' ? (nf as any).timestamp : undefined;
+    if (!ts || !Number.isFinite(ts)) return { ok: false, reason: 'frame_ts_missing' };
 
-    const maxSkewMs = typeof cfgAny?.maxClockSkewMs === "number" ? cfgAny.maxClockSkewMs : 60_000;
-    const maxAgeMs = typeof cfgAny?.maxFrameAgeMs === "number" ? cfgAny.maxFrameAgeMs : 120_000;
-    if (ts > _now + maxSkewMs) return { ok: false, reason: "frame_ts_future" };
-    if (_now - ts > maxAgeMs) return { ok: false, reason: "frame_ts_expired" };
+    const maxSkewMs = typeof cfgAny?.maxClockSkewMs === 'number' ? cfgAny.maxClockSkewMs : 60_000;
+    const maxAgeMs = typeof cfgAny?.maxFrameAgeMs === 'number' ? cfgAny.maxFrameAgeMs : 120_000;
+    if (ts > _now + maxSkewMs) return { ok: false, reason: 'frame_ts_future' };
+    if (_now - ts > maxAgeMs) return { ok: false, reason: 'frame_ts_expired' };
 
     // token presence
     const token = (nf as any).token;
-    if (!token || typeof token !== "object") return { ok: false, reason: "token_missing" };
+    if (!token || typeof token !== 'object') return { ok: false, reason: 'token_missing' };
 
     // peer binding requirement
     const requireBind = !!cfgAny?.requirePeerIdBinding;
-    const expectedPeerId = _getStr(cfgAny, ["expectedPeerId", "peerId", "peerID", "peer_id"]);
-    const tokenPeer = _getStr(token, ["peerId", "peerID", "peer_id"]);
+    const expectedPeerId = _getStr(cfgAny, ['expectedPeerId', 'peerId', 'peerID', 'peer_id']);
+    const tokenPeer = _getStr(token, ['peerId', 'peerID', 'peer_id']);
     if (requireBind) {
-      if (!expectedPeerId) return { ok: false, reason: "peer_binding_cfg_missing" };
-      if (!tokenPeer) return { ok: false, reason: "peer_binding_missing" };
-      if (tokenPeer !== expectedPeerId) return { ok: false, reason: "peer_binding_mismatch" };
+      if (!expectedPeerId) return { ok: false, reason: 'peer_binding_cfg_missing' };
+      if (!tokenPeer) return { ok: false, reason: 'peer_binding_missing' };
+      if (tokenPeer !== expectedPeerId) return { ok: false, reason: 'peer_binding_mismatch' };
     }
 
     // verify token signature (rotation-safe)
-    const tokenSig = _getStr(token, ["sig", "signature"]) || "";
-    if (!tokenSig) return { ok: false, reason: "token_sig_missing" };
+    const tokenSig = _getStr(token, ['sig', 'signature']) || '';
+    if (!tokenSig) return { ok: false, reason: 'token_sig_missing' };
 
-    const tokenKid = _getStr(token, ["kid", "keyId", "kID", "kidId", "k"]);
+    const tokenKid = _getStr(token, ['kid', 'keyId', 'kID', 'kidId', 'k']);
     const tokenPayload = canonicalPeerTokenPayloadUnsigned(token as any);
     const tokenCands = await _resolveCandidates(cfgAny, tokenKid);
-    if (!tokenCands.length) return { ok: false, reason: "missing_secret" };
+    if (!tokenCands.length) return { ok: false, reason: 'missing_secret' };
 
     const okTok = await _verifyHmacAnySecret(tokenSig, tokenPayload, tokenCands);
-    if (!okTok) return { ok: false, reason: "token_bad_sig" };
+    if (!okTok) return { ok: false, reason: 'token_bad_sig' };
 
     // verify frame signature (rotation-safe; may be signed with cfg.sharedSecret override)
     const frameSig = __lumora_getSig_v2(nf as any);
-    if (!frameSig) return { ok: false, reason: "frame_sig_missing" };
+    if (!frameSig) return { ok: false, reason: 'frame_sig_missing' };
 
     const framePayload = __lumora_canonicalFramePayloadUnsigned(nf as any);
     const okFrame = await _verifyHmacAnySecret(String(frameSig), framePayload, tokenCands);
-    if (!okFrame) return { ok: false, reason: "frame_bad_sig" };
+    if (!okFrame) return { ok: false, reason: 'frame_bad_sig' };
 
     return { ok: true, frame: nf };
   } catch (e: any) {
-    return { ok: false, reason: "verify_exception", error: String(e?.message || e) };
+    return { ok: false, reason: 'verify_exception', error: String(e?.message || e) };
   }
 }
 
@@ -999,9 +1109,15 @@ export type P2PRateLimiter = {
  * Optional per-peer rate limiter for P2P frames (abuse guard).
  * Token-bucket keyed by peerKey. In-memory only (offline/test).
  */
-export function createInMemoryRateLimiter(
-  opts?: { capacity?: number; refillPerSec?: number; maxPeers?: number }
-): P2PRateLimiter {
+export type P2PRateLimiter = {
+  allow: (peerKey: string, cost: number, nowMs: number) => boolean;
+};
+
+export function createInMemoryRateLimiter(opts?: {
+  capacity?: number;
+  refillPerSec?: number;
+  maxPeers?: number;
+}): P2PRateLimiter {
   const capacity = Math.max(1, Math.floor(opts?.capacity ?? 30)); // burst frames
   const refillPerSec = Math.max(0.1, Number(opts?.refillPerSec ?? 10)); // frames/sec
   const maxPeers = Math.max(64, Math.floor(opts?.maxPeers ?? 4096));
@@ -1020,9 +1136,9 @@ export function createInMemoryRateLimiter(
 
   return {
     allow(peerKey: string, cost: number, nowMs: number) {
-      const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
+      const _now = Number.isFinite(nowMs) ? nowMs : Date.now();
       const c = Math.max(1, Math.floor(cost || 1));
-      const key = peerKey && String(peerKey).length ? String(peerKey) : "anon";
+      const key = peerKey && String(peerKey).length ? String(peerKey) : 'anon';
       let st = m.get(key);
       if (!st) st = { tokens: capacity, lastMs: _now };
       const dt = Math.max(0, _now - st.lastMs);
@@ -1051,7 +1167,11 @@ type __LumoraSigCfg = {
   // Replay protection
   replayWindowMs?: number;
   maxClockSkewMs?: number;
-  seenCache?: { has: (k: string) => boolean; add: (k: string, nowMs: number) => void; sweep?: (nowMs: number) => void };
+  seenCache?: {
+    has: (k: string) => boolean;
+    add: (k: string, nowMs: number) => void;
+    sweep?: (nowMs: number) => void;
+  };
   // Rate limit
   rateLimiter?: { allow: (peerKey: string, cost: number, nowMs: number) => boolean };
   // Payload budget
@@ -1061,8 +1181,8 @@ type __LumoraSigCfg = {
 function __lumora__stableStringify(x: any): string {
   const seen = new WeakSet();
   const norm = (v: any): any => {
-    if (v === null || typeof v !== "object") return v;
-    if (seen.has(v)) return "[Circular]";
+    if (v === null || typeof v !== 'object') return v;
+    if (seen.has(v)) return '[Circular]';
     seen.add(v);
     if (Array.isArray(v)) return v.map(norm);
     const keys = Object.keys(v).sort();
@@ -1074,76 +1194,80 @@ function __lumora__stableStringify(x: any): string {
 }
 
 function __lumora__bytesToHex(bytes: Uint8Array): string {
-  let out = "";
-  for (let i = 0; i < bytes.length; i++) out += bytes[i].toString(16).padStart(2, "0");
+  let out = '';
+  for (let i = 0; i < bytes.length; i++) out += bytes[i].toString(16).padStart(2, '0');
   return out;
 }
 
 async function __lumora__hmacHex(keyStr: string, msg: string): Promise<string> {
   // WebCrypto in Node 20+ available via globalThis.crypto
-  const cryptoObj: any = (globalThis as any).crypto || require("crypto").webcrypto;
+  const cryptoObj: any = (globalThis as any).crypto || require('crypto').webcrypto;
   const enc = new TextEncoder();
   const key = await cryptoObj.subtle.importKey(
-    "raw",
-    enc.encode(String((keyStr && String(keyStr).length > 0) ? keyStr : "__lumora_offline_default_hmac_key__")),
-    { name: "HMAC", hash: "SHA-256" },
+    'raw',
+    enc.encode(
+      String(keyStr && String(keyStr).length > 0 ? keyStr : '__lumora_offline_default_hmac_key__'),
+    ),
+    { name: 'HMAC', hash: 'SHA-256' },
     false,
-    ["sign", "verify"]
+    ['sign', 'verify'],
   );
-  const sig = await cryptoObj.subtle.sign("HMAC", key, enc.encode(msg));
+  const sig = await cryptoObj.subtle.sign('HMAC', key, enc.encode(msg));
   return __lumora__bytesToHex(new Uint8Array(sig));
 }
 
 function __lumora__pickKey(cfg: __LumoraSigCfg, token: any): string {
-  const kid = token && typeof token === "object" ? token.kid : undefined;
+  const kid = token && typeof token === 'object' ? token.kid : undefined;
   const r = cfg.sharedSecretResolver ? cfg.sharedSecretResolver(kid) : undefined;
-  const k = r || cfg.sharedSecret || "";
+  const k = r || cfg.sharedSecret || '';
   return String(k);
 }
 
 function __lumora__payloadBytes(p: any): number {
   try {
     if (p == null) return 0;
-    if (typeof p === "string") return Buffer.byteLength(p, "utf8");
+    if (typeof p === 'string') return Buffer.byteLength(p, 'utf8');
     if (p instanceof Uint8Array) return p.byteLength;
-    if (typeof Buffer !== "undefined" && Buffer.isBuffer(p)) return p.length;
-    return Buffer.byteLength(JSON.stringify(p), "utf8");
+    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(p)) return p.length;
+    return Buffer.byteLength(JSON.stringify(p), 'utf8');
   } catch {
     return 0;
   }
 }
 
 function __lumora__frameType(frame: any): string | undefined {
-  if (!frame || typeof frame !== "object") return undefined;
+  if (!frame || typeof frame !== 'object') return undefined;
   return (frame.t ?? frame.type) as any;
 }
 
 function __lumora__frameSid(frame: any): string | undefined {
-  if (!frame || typeof frame !== "object") return undefined;
+  if (!frame || typeof frame !== 'object') return undefined;
   return (frame.sid ?? frame.sessionId) as any;
 }
 
 function __lumora__frameCid(frame: any): string | undefined {
-  if (!frame || typeof frame !== "object") return undefined;
+  if (!frame || typeof frame !== 'object') return undefined;
   return (frame.cid ?? frame.contentId) as any;
 }
 
 function __lumora__frameSeq(frame: any): number {
-  const v = frame && typeof frame === "object" ? (frame.seq ?? frame.sequence) : undefined;
+  const v = frame && typeof frame === 'object' ? (frame.seq ?? frame.sequence) : undefined;
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
 }
 
 function __lumora__frameSentAt(frame: any): number {
-  const v = frame && typeof frame === "object" ? (frame.sentAt ?? frame.ts ?? frame.time) : undefined;
+  const v =
+    frame && typeof frame === 'object' ? (frame.sentAt ?? frame.ts ?? frame.time) : undefined;
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
 }
 
 function __lumora__peerKey(token: any, sig: string): string {
-  const pid = token && typeof token === "object" ? (token.peerId ?? token.pid ?? token.kid) : undefined;
-  const base = pid ? String(pid) : "";
-  return base.length ? base : ("sig:" + String(sig || ""));
+  const pid =
+    token && typeof token === 'object' ? (token.peerId ?? token.pid ?? token.kid) : undefined;
+  const base = pid ? String(pid) : '';
+  return base.length ? base : 'sig:' + String(sig || '');
 }
 
 export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number }) {
@@ -1152,7 +1276,7 @@ export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number })
   const m = new Map<string, number>();
 
   function sweep(nowMs: number) {
-    const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
+    const _now = Number.isFinite(nowMs) ? nowMs : Date.now();
     // TTL eviction
     for (const [k, t] of m.entries()) {
       if (_now - t > ttlMs) m.delete(k);
@@ -1169,7 +1293,7 @@ export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number })
       return m.has(String(k));
     },
     add(k: string, nowMs: number) {
-      const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
+      const _now = Number.isFinite(nowMs) ? nowMs : Date.now();
       m.set(String(k), _now);
       sweep(_now);
     },
@@ -1178,7 +1302,7 @@ export function createInMemorySeenCache(opts?: { max?: number; ttlMs?: number })
 }
 
 export async function signFrame(frame: any, cfg: __LumoraSigCfg): Promise<any> {
-  const f = frame && typeof frame === "object" ? { ...frame } : { v: 1, ...frame };
+  const f = frame && typeof frame === 'object' ? { ...frame } : { v: 1, ...frame };
   // remove any existing signature fields before signing
   delete (f as any).sig;
   delete (f as any).signature;
@@ -1194,12 +1318,12 @@ export async function signFrame(frame: any, cfg: __LumoraSigCfg): Promise<any> {
 
 export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number): Promise<any> {
   try {
-    const _now = Number.isFinite(nowMs) ? nowMs : Date._now();
-    const f0 = frame && typeof frame === "object" ? frame : null;
-    if (!f0) return { ok: false, reason: "frame_invalid" };
+    const _now = Number.isFinite(nowMs) ? nowMs : Date.now();
+    const f0 = frame && typeof frame === 'object' ? frame : null;
+    if (!f0) return { ok: false, reason: 'frame_invalid' };
 
-    const sig = String((f0 as any).sig || (f0 as any).signature || "");
-    if (!sig.length) return { ok: false, reason: "frame_missing_sig" };
+    const sig = String((f0 as any).sig || (f0 as any).signature || '');
+    if (!sig.length) return { ok: false, reason: 'frame_missing_sig' };
 
     // Verify signature
     const unsigned: any = { ...f0 };
@@ -1210,7 +1334,7 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
     const key = __lumora__pickKey(cfg || {}, token);
     const msg = __lumora__stableStringify(unsigned);
     const expected = await __lumora__hmacHex(key, msg);
-    if (expected !== sig) return { ok: false, reason: "frame_bad_sig" };
+    if (expected !== sig) return { ok: false, reason: 'frame_bad_sig' };
 
     // Extract fields for tests
     const t = __lumora__frameType(unsigned);
@@ -1223,41 +1347,42 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
     // Clock skew checks (tests expect past/future/clock_skew reasons)
     const maxSkew = Math.max(0, Math.floor(cfg?.maxClockSkewMs ?? 30_000));
     if (sentAt && maxSkew) {
-      if (sentAt < _now - maxSkew) return { ok: false, reason: "clock_skew_past" };
-      if (sentAt > _now + maxSkew) return { ok: false, reason: "clock_skew_future" };
+      if (sentAt < _now - maxSkew) return { ok: false, reason: 'clock_skew_past' };
+      if (sentAt > _now + maxSkew) return { ok: false, reason: 'clock_skew_future' };
     }
 
     // Replay protection (tests enable seenCache + replayWindowMs)
     const windowMs = Math.max(0, Math.floor(cfg?.replayWindowMs ?? 0));
     const seen = cfg?.seenCache;
     if (seen && windowMs) {
-      const k = String(sid || "") + ":" + String(seq) + ":" + sig;
+      const k = String(sid || '') + ':' + String(seq) + ':' + sig;
       // Consider frame too old/new by replay window if sentAt present
       if (sentAt && windowMs) {
-        if (sentAt < _now - windowMs) return { ok: false, reason: "past" };
-        if (sentAt > _now + windowMs) return { ok: false, reason: "future" };
+        if (sentAt < _now - windowMs) return { ok: false, reason: 'past' };
+        if (sentAt > _now + windowMs) return { ok: false, reason: 'future' };
       }
-      if (seen.has(k)) return { ok: false, reason: "replay" };
+      if (seen.has(k)) return { ok: false, reason: 'replay' };
       seen.add(k, _now);
-      if (typeof seen.sweep === "function") seen.sweep(_now);
+      if (typeof seen.sweep === 'function') seen.sweep(_now);
     }
 
     // Payload size budget (oversized test)
     const maxPayloadBytes = Math.max(0, Math.floor(cfg?.maxPayloadBytes ?? 256 * 1024));
     if (maxPayloadBytes && __lumora__payloadBytes(payload) > maxPayloadBytes) {
-      return { ok: false, reason: "payload_too_large" };
+      return { ok: false, reason: 'payload_too_large' };
     }
 
     // Rate limit (tests expect rate_limit)
     const rl = cfg?.rateLimiter;
-    if (rl && typeof rl.allow === "function") {
+    if (rl && typeof rl.allow === 'function') {
       const peerKey = __lumora__peerKey(token, sig);
       // Cost model: base 1; chunk_res with payload is higher
-      const typ = String(t || "");
+      const typ = String(t || '');
       let cost = 1;
-      if (typ === "chunk_res") cost = 5 + Math.min(50, Math.ceil(__lumora__payloadBytes(payload) / 1024));
+      if (typ === 'chunk_res')
+        cost = 5 + Math.min(50, Math.ceil(__lumora__payloadBytes(payload) / 1024));
       const ok = rl.allow(peerKey, cost, _now);
-      if (!ok) return { ok: false, reason: "rate_limit" };
+      if (!ok) return { ok: false, reason: 'rate_limit' };
     }
 
     return {
@@ -1265,8 +1390,7 @@ export async function verifyFrame(frame: any, cfg: __LumoraSigCfg, nowMs: number
       frame: { t, sid, cid, seq, sentAt, payload },
     };
   } catch (e: any) {
-    const msg = typeof e?.message === "string" ? e.message : "internal_error";
+    const msg = typeof e?.message === 'string' ? e.message : 'internal_error';
     return { ok: false, reason: msg };
   }
 }
-

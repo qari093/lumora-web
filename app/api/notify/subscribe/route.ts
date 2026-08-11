@@ -1,21 +1,109 @@
-import { NextRequest, NextResponse } from "next/server";
-import { upsertSubscription } from "@/src/lib/notify/store";
-import { reqId } from "@/src/lib/reqid";
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest) {
-  const id = reqId();
-  let body: any = {};
-  try { body = await req.json(); } catch {}
-  const ownerId = typeof body?.ownerId === "string" ? body.ownerId : "";
-  const kind = (body?.kind || "").toString().toLowerCase();
-  const threshold = typeof body?.thresholdEuros === "number" ? body.thresholdEuros : null;
+import { upsertSubscription } from '@/src/lib/notify/store';
+import { reqId } from '@/src/lib/reqid';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
 
-  const need = [];
-  if (!ownerId) need.push("ownerId");
-  if (!["low_balance","spend_spike","approval","generic"].includes(kind)) need.push("kind(low_balance|spend_spike|approval|generic)");
-  if (need.length) return NextResponse.json({ ok:false, error:"BAD_REQUEST", need, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-  const sub = upsertSubscription(ownerId, kind as any, threshold);
-  return NextResponse.json({ ok:true, subscription: sub, requestId:id }, { status:200, headers:{ "x-request-id": id } });
+type SubscriptionBody = {
+  kind?: unknown;
+  thresholdEuros?: unknown;
+};
+
+const ALLOWED_KINDS = new Set(['low_balance', 'spend_spike', 'approval', 'generic']);
+
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const requestId = reqId();
+
+  let body: SubscriptionBody;
+
+  try {
+    body = (await request.json()) as SubscriptionBody;
+  } catch {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'invalid_json',
+        requestId,
+      },
+      {
+        status: 400,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  const kind = typeof body.kind === 'string' ? body.kind.trim().toLowerCase() : '';
+
+  if (!ALLOWED_KINDS.has(kind)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'invalid_notification_kind',
+        requestId,
+      },
+      {
+        status: 422,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  const threshold =
+    typeof body.thresholdEuros === 'number' && Number.isFinite(body.thresholdEuros)
+      ? body.thresholdEuros
+      : null;
+
+  if (threshold !== null && threshold < 0) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'invalid_threshold',
+        requestId,
+      },
+      {
+        status: 422,
+        headers: {
+          ...userPrivateNoStoreHeaders(),
+          'x-request-id': requestId,
+        },
+      },
+    );
+  }
+
+  const subscription = upsertSubscription(
+    auth.identity.userId,
+    kind as 'low_balance' | 'spend_spike' | 'approval' | 'generic',
+    threshold,
+  );
+
+  return NextResponse.json(
+    {
+      ok: true,
+      route: '/api/notify/subscribe',
+      subscription,
+      requestId,
+    },
+    {
+      status: 200,
+      headers: {
+        ...userPrivateNoStoreHeaders(),
+        'x-request-id': requestId,
+      },
+    },
+  );
 }
-export const dynamic = "force-dynamic";

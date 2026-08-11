@@ -1,5 +1,5 @@
-import { readQuarantineStore } from "@/lib/safety/quarantine/queue";
-import { readManualReviewItems } from "@/lib/safety/review/manualReviewQueue";
+import { readQuarantineStore } from '@/lib/safety/quarantine/queue';
+import { readManualReviewItems } from '@/src/lib/safety/review/manualReviewQueue';
 
 export type ModerationDashboardSnapshot = {
   ok: boolean;
@@ -28,13 +28,13 @@ export async function getModerationDashboard(): Promise<ModerationDashboardSnaps
   const quarantineItems = Array.isArray(quarantineStore.items) ? quarantineStore.items : [];
   const reviewItems = Array.isArray(reviewStore.items) ? reviewStore.items : [];
 
-  const queued = quarantineItems.filter((i) => i.status === "queued").length;
-  const released = quarantineItems.filter((i) => i.status === "released").length;
-  const removed = quarantineItems.filter((i) => i.status === "removed").length;
+  const queued = quarantineItems.filter((i) => i.status === 'queued').length;
+  const released = quarantineItems.filter((i) => i.status === 'released').length;
+  const removed = quarantineItems.filter((i) => i.status === 'removed').length;
 
-  const pending = reviewItems.filter((i) => i.status === "pending").length;
-  const approved = reviewItems.filter((i) => i.status === "approved").length;
-  const rejected = reviewItems.filter((i) => i.status === "rejected").length;
+  const pending = reviewItems.filter((i) => i.status === 'pending').length;
+  const approved = reviewItems.filter((i) => i.status === 'approved').length;
+  const rejected = reviewItems.filter((i) => i.status === 'rejected').length;
 
   return {
     ok: true,

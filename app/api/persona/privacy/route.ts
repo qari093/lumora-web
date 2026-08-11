@@ -1,13 +1,29 @@
-import { sanitizePersonaPrivacy } from "@/lib/persona/privacy";
+import { NextResponse } from 'next/server';
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+import { sanitizePersonaPrivacy } from '@/lib/persona/privacy';
+import { requireUserSession, userPrivateNoStoreHeaders } from '@/src/lib/auth/requireUserSession';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const auth = await requireUserSession();
 
-  // Pass through only; let sanitizer handle validation
-  const privacy = sanitizePersonaPrivacy(body as any);
+  if (!auth.ok) {
+    return auth.response;
+  }
 
-  return Response.json({ ok: true, privacy });
+  const body = await req.json().catch(() => ({}));
+  const privacy = sanitizePersonaPrivacy(body as never);
+
+  return NextResponse.json(
+    {
+      ok: true,
+      userId: auth.identity.userId,
+      privacy,
+    },
+    {
+      headers: userPrivateNoStoreHeaders(),
+    },
+  );
 }

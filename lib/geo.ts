@@ -4,6 +4,8 @@ export type GeoResult = {
   region: string;
   city: string;
   currency: string;
+  lat: number;
+  lon: number;
 };
 
 export function getClientIp(req?: Request | { headers?: Headers | Record<string, string | string[] | undefined> }): string {
@@ -24,6 +26,8 @@ export function geoByIp(ip = "127.0.0.1"): GeoResult {
     region: "TH",
     city: "Schmalkalden",
     currency: "EUR",
+    lat: 50.72,
+    lon: 10.45,
   };
 }
 

@@ -1,44 +1,15 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect } from "vitest";
 import { httpGetRetryOnce } from "../_util/http";
-
-// LUMORA_ECONNREFUSED_RETRY_V1
-async function __lumoraFetchWithRetry(url: string, init?: RequestInit, tries = 6, delayMs = 250): Promise<Response> {
-  let lastErr: any = null;
-  for (let i = 0; i < tries; i++) {
-    try {
-      const res = await __lumoraFetchWithRetry(url, init);
-      return res;
-    } catch (e: any) {
-      lastErr = e;
-      const code = String(e?.code || "");
-      const msg = String(e?.message || "");
-      const transient = code === "ECONNREFUSED" || msg.includes("ECONNREFUSED") || msg.includes("fetch failed");
-      if (!transient || i === tries - 1) throw e;
-      await new Promise(r => setTimeout(r, delayMs * (i + 1)));
-    }
-  }
-  throw lastErr ?? new Error("fetch_failed");
-}
-
-function getBase(): string {
-  const b =
-    process.env.BASE ||
-    process.env.npm_package_config_base ||
-    process.env.npm_config_base ||
-    "http://127.0.0.1:3000";
-  return String(b).replace(/\/+$/, "");
-}
-
-
 
 function baseUrl() {
   const port = process.env.PORT || "3000";
   return process.env.LIVE_BASE_URL || `http://127.0.0.1:${port}`;
 }
 
-function toNum(v: string | null | undefined): number | null {
-  if (!v) return null;
-  const n = Number(v);
+function toNum(v: string | string[] | null | undefined): number | null {
+  const value = Array.isArray(v) ? v[0] : v;
+  if (!value) return null;
+  const n = Number(value);
   return Number.isFinite(n) ? n : null;
 }
 

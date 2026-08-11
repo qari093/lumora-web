@@ -1,20 +1,73 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { FypFullscreenSource } from "@/src/core/fyp/fullscreenSourceFeed";
-import { LUMORA_LANES, createTraceSignal, normalizeLane, shouldOfferStoryContinuation, summarizeTrace, type LumoraLane, type TraceSignal } from "@/src/core/fyp/lumoraTrace";
-import styles from "./styles.module.css";
-import FypShellCleaner from "./FypShellCleaner";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { FypFullscreenSource } from '@/src/core/fyp/fullscreenSourceFeed';
+import {
+  LUMORA_LANES,
+  normalizeLane,
+  shouldOfferStoryContinuation,
+  summarizeTrace,
+  type LumoraTraceEvent,
+  type LumoraTraceLane,
+} from '@/src/core/fyp/lumoraTrace';
+import styles from './styles.module.css';
+import FypShellCleaner from './FypShellCleaner';
 
 type Props = {
   items: FypFullscreenSource[];
 };
 
+type TraceRecord = LumoraTraceEvent & {
+  watchedMs: number;
+  sparked: boolean;
+  completed: boolean;
+};
+
+const LANE_META: Record<LumoraTraceLane, { label: string; intent: string }> = {
+  wonder: { label: 'Wonder', intent: 'Discover something surprising' },
+  learn: { label: 'Learn', intent: 'Understand something meaningful' },
+  laugh: { label: 'Laugh', intent: 'Find something joyful' },
+  build: { label: 'Build', intent: 'Create or improve something' },
+  explore: { label: 'Explore', intent: 'Follow curiosity somewhere new' },
+};
+
+const LANE_OPTIONS = LUMORA_LANES.map((key) => ({
+  key,
+  ...LANE_META[key],
+}));
+
+function createTraceRecord(input: {
+  sourceId: string;
+  lane: string;
+  watchedMs: number;
+  saved?: boolean;
+  replayed?: boolean;
+  deepDiveOpened?: boolean;
+  sparked?: boolean;
+  completed?: boolean;
+}): TraceRecord {
+  const watchedMs = Math.max(0, Math.trunc(input.watchedMs));
+  const watchRatio = Math.max(0, Math.min(1, watchedMs / 10000));
+
+  return {
+    sourceId: input.sourceId,
+    lane: normalizeLane(input.lane),
+    watchRatio,
+    saved: input.saved ?? false,
+    replayed: input.replayed ?? false,
+    deepDiveOpened: input.deepDiveOpened ?? false,
+    timestamp: new Date().toISOString(),
+    watchedMs,
+    sparked: input.sparked ?? false,
+    completed: input.completed ?? false,
+  };
+}
+
 function safePlay(video: HTMLVideoElement) {
   video.muted = true;
   video.playsInline = true;
   const promise = video.play();
-  if (promise && typeof promise.catch === "function") {
+  if (promise && typeof promise.catch === 'function') {
     promise.catch(() => undefined);
   }
 }
@@ -23,10 +76,10 @@ function pauseVideo(video: HTMLVideoElement) {
   video.pause();
 }
 
-function readTrace(): TraceSignal[] {
-  if (typeof window === "undefined") return [];
+function readTrace(): TraceRecord[] {
+  if (typeof window === 'undefined') return [];
   try {
-    const raw = window.localStorage.getItem("lumora.trace.v1");
+    const raw = window.localStorage.getItem('lumora.trace.v1');
     const parsed = raw ? JSON.parse(raw) : [];
     return Array.isArray(parsed) ? parsed.slice(-120) : [];
   } catch {
@@ -34,26 +87,28 @@ function readTrace(): TraceSignal[] {
   }
 }
 
-function writeTrace(signals: TraceSignal[]) {
-  if (typeof window === "undefined") return;
+function writeTrace(signals: TraceRecord[]) {
+  if (typeof window === 'undefined') return;
   try {
-    window.localStorage.setItem("lumora.trace.v1", JSON.stringify(signals.slice(-120)));
+    window.localStorage.setItem('lumora.trace.v1', JSON.stringify(signals.slice(-120)));
   } catch {
     return;
   }
 }
 
 export default function FypAutoplayFeed({ items }: Props) {
-  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
-  const [selectedLane, setSelectedLane] = useState<LumoraLane>("wonder");
-  const [traceSignals, setTraceSignals] = useState<TraceSignal[]>([]);
+  const [activeId, setActiveId] = useState(items[0]?.id ?? '');
+  const [selectedLane, setSelectedLane] = useState<LumoraTraceLane>('wonder');
+  const [traceSignals, setTraceSignals] = useState<TraceRecord[]>([]);
   const [sparkedIds, setSparkedIds] = useState<Set<string>>(() => new Set());
   const [savedIds, setSavedIds] = useState<Set<string>>(() => new Set());
-  const [deepDiveId, setDeepDiveId] = useState("");
+  const [deepDiveId, setDeepDiveId] = useState('');
   const [chromeVisible, setChromeVisible] = useState(false);
   const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const startedAtRef = useRef(new Map<string, number>());
-  const sessionIdRef = useRef(`fyp_session_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
+  const sessionIdRef = useRef(
+    `fyp_session_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+  );
   const gestureStartRef = useRef<{ x: number; y: number; at: number } | null>(null);
   const chromeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -61,9 +116,9 @@ export default function FypAutoplayFeed({ items }: Props) {
     () =>
       items.map((item) => ({
         ...item,
-        traceLane: normalizeLane(item.lane)
+        traceLane: normalizeLane(item.lane),
       })),
-    [items]
+    [items],
   );
 
   const visibleItems = useMemo(() => {
@@ -72,43 +127,58 @@ export default function FypAutoplayFeed({ items }: Props) {
   }, [enhancedItems, selectedLane]);
 
   const itemIds = useMemo(() => visibleItems.map((item) => item.id), [visibleItems]);
-  const activeItem = useMemo(() => visibleItems.find((item) => item.id === activeId) || visibleItems[0], [visibleItems, activeId]);
+  const activeItem = useMemo(
+    () => visibleItems.find((item) => item.id === activeId) || visibleItems[0],
+    [visibleItems, activeId],
+  );
   const traceSummary = useMemo(() => {
     const summary = summarizeTrace(traceSignals);
     const curiosity = Number(summary.curiosityScore);
     return {
       ...summary,
       curiosityScore: Number.isFinite(curiosity) ? curiosity : 0,
-      dominantLane: summary.dominantLane || selectedLane
+      dominantLane: summary.dominantLane || selectedLane,
     };
   }, [traceSignals, selectedLane]);
   const storyContinuation = useMemo(
-    () => shouldOfferStoryContinuation(traceSignals, activeItem?.traceLane || selectedLane),
-    [traceSignals, activeItem, selectedLane]
+    () => shouldOfferStoryContinuation(traceSignals),
+    [traceSignals, activeItem, selectedLane],
   );
 
-  const postFypTrackEvent = useCallback((payload: {
-    cardId: string;
-    event: "impression" | "view" | "watch_progress" | "spark" | "save" | "deep_dive" | "complete" | "skip" | "share";
-    watchedMs?: number;
-    lane?: string;
-    value?: number;
-  }) => {
-    try {
-      void fetch("/api/fyp/track", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          ...payload,
-          sessionId: sessionIdRef.current,
-          userId: "anonymous-user"
-        }),
-        keepalive: true
-      });
-    } catch {
-      return;
-    }
-  }, []);
+  const postFypTrackEvent = useCallback(
+    (payload: {
+      cardId: string;
+      event:
+        | 'impression'
+        | 'view'
+        | 'watch_progress'
+        | 'spark'
+        | 'save'
+        | 'deep_dive'
+        | 'complete'
+        | 'skip'
+        | 'share';
+      watchedMs?: number;
+      lane?: string;
+      value?: number;
+    }) => {
+      try {
+        void fetch('/api/fyp/track', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            ...payload,
+            sessionId: sessionIdRef.current,
+            userId: 'anonymous-user',
+          }),
+          keepalive: true,
+        });
+      } catch {
+        return;
+      }
+    },
+    [],
+  );
 
   const revealChrome = useCallback(() => {
     setChromeVisible(true);
@@ -122,96 +192,119 @@ export default function FypAutoplayFeed({ items }: Props) {
     }, 3000);
   }, []);
 
-  const moveToRelativeCard = useCallback((direction: 1 | -1) => {
-    const currentIndex = itemIds.indexOf(activeId);
-    const nextIndex = Math.max(0, Math.min(itemIds.length - 1, currentIndex + direction));
-    const nextId = itemIds[nextIndex];
+  const moveToRelativeCard = useCallback(
+    (direction: 1 | -1) => {
+      const currentIndex = itemIds.indexOf(activeId);
+      const nextIndex = Math.max(0, Math.min(itemIds.length - 1, currentIndex + direction));
+      const nextId = itemIds[nextIndex];
 
-    if (!nextId || nextId === activeId) return;
+      if (!nextId || nextId === activeId) return;
 
-    setActiveId(nextId);
+      setActiveId(nextId);
 
-    const target = document.querySelector<HTMLElement>(`[data-fyp-video-id="${nextId}"]`);
-    target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
-  }, [activeId, itemIds]);
+      const target = document.querySelector<HTMLElement>(`[data-fyp-video-id="${nextId}"]`);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    },
+    [activeId, itemIds],
+  );
 
-  const openContextPanel = useCallback((itemId: string) => {
-    const item = visibleItems.find((candidate) => candidate.id === itemId);
-    if (!item) return;
+  const openContextPanel = useCallback(
+    (itemId: string) => {
+      const item = visibleItems.find((candidate) => candidate.id === itemId);
+      if (!item) return;
 
-    setDeepDiveId(item.id);
-    postFypTrackEvent({
-      cardId: item.id,
-      event: "deep_dive",
-      watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
-      lane: item.traceLane,
-      value: 0.8
-    });
-  }, [visibleItems, postFypTrackEvent]);
+      setDeepDiveId(item.id);
+      postFypTrackEvent({
+        cardId: item.id,
+        event: 'deep_dive',
+        watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+        lane: item.traceLane,
+        value: 0.8,
+      });
+    },
+    [visibleItems, postFypTrackEvent],
+  );
 
   const handleTraceGestureStart = useCallback((event: React.PointerEvent<HTMLElement>) => {
     gestureStartRef.current = {
       x: event.clientX,
       y: event.clientY,
-      at: Date.now()
+      at: Date.now(),
     };
   }, []);
 
-  const handleTraceGestureEnd = useCallback((event: React.PointerEvent<HTMLElement>) => {
-    const start = gestureStartRef.current;
-    gestureStartRef.current = null;
+  const handleTraceGestureEnd = useCallback(
+    (event: React.PointerEvent<HTMLElement>) => {
+      const start = gestureStartRef.current;
+      gestureStartRef.current = null;
 
-    revealChrome();
+      revealChrome();
 
-    if (!start) return;
+      if (!start) return;
 
-    const dx = event.clientX - start.x;
-    const dy = event.clientY - start.y;
-    const elapsed = Date.now() - start.at;
-    const absX = Math.abs(dx);
-    const absY = Math.abs(dy);
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      const elapsed = Date.now() - start.at;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
 
-    if (elapsed > 900 || Math.max(absX, absY) < 46) return;
+      if (elapsed > 900 || Math.max(absX, absY) < 46) return;
 
-    if (absX > absY) {
-      moveToRelativeCard(dx < 0 ? 1 : -1);
-      return;
-    }
-
-    if (dy < 0) {
-      const item = visibleItems.find((candidate) => candidate.id === activeId);
-      if (item) {
-        setDeepDiveId(item.id);
-        postFypTrackEvent({
-          cardId: item.id,
-          event: "deep_dive",
-          watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
-          lane: item.traceLane,
-          value: 0.8
-        });
+      if (absX > absY) {
+        moveToRelativeCard(dx < 0 ? 1 : -1);
+        return;
       }
-      return;
-    }
 
-    openContextPanel(activeId);
-  }, [activeId, moveToRelativeCard, openContextPanel, visibleItems, postFypTrackEvent, revealChrome]);
+      if (dy < 0) {
+        const item = visibleItems.find((candidate) => candidate.id === activeId);
+        if (item) {
+          setDeepDiveId(item.id);
+          postFypTrackEvent({
+            cardId: item.id,
+            event: 'deep_dive',
+            watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+            lane: item.traceLane,
+            value: 0.8,
+          });
+        }
+        return;
+      }
 
+      openContextPanel(activeId);
+    },
+    [activeId, moveToRelativeCard, openContextPanel, visibleItems, postFypTrackEvent, revealChrome],
+  );
 
-  const appendTrace = useCallback((signal: TraceSignal) => {
-    setTraceSignals((current) => {
-      const next = [...current, signal].slice(-120);
-      writeTrace(next);
-      return next;
-    });
+  const appendTrace = useCallback(
+    (signal: TraceRecord) => {
+      setTraceSignals((current) => {
+        const next = [...current, signal].slice(-120);
+        writeTrace(next);
+        return next;
+      });
 
-    postFypTrackEvent({
-      cardId: signal.videoId,
-      event: signal.saved ? "save" : signal.sparked ? "spark" : signal.deepDive ? "deep_dive" : signal.completed ? "complete" : "watch_progress",
-      watchedMs: signal.watchedMs,
-      lane: signal.lane,
-      value: signal.completed ? 1 : signal.saved || signal.sparked || signal.deepDive ? 0.85 : 0.5
-    });
-  }, [postFypTrackEvent]);
+      postFypTrackEvent({
+        cardId: signal.sourceId,
+        event: signal.saved
+          ? 'save'
+          : signal.sparked
+            ? 'spark'
+            : signal.deepDiveOpened
+              ? 'deep_dive'
+              : signal.completed
+                ? 'complete'
+                : 'watch_progress',
+        watchedMs: signal.watchedMs,
+        lane: signal.lane,
+        value: signal.completed
+          ? 1
+          : signal.saved || signal.sparked || signal.deepDiveOpened
+            ? 0.85
+            : 0.5,
+      });
+    },
+    [postFypTrackEvent],
+  );
 
   const registerVideo = useCallback((id: string, node: HTMLVideoElement | null) => {
     if (!node) {
@@ -221,45 +314,60 @@ export default function FypAutoplayFeed({ items }: Props) {
 
     node.muted = true;
     node.playsInline = true;
-    node.preload = "auto";
+    node.preload = 'auto';
     videoRefs.current.set(id, node);
   }, []);
 
-  const toggleSpark = useCallback((item: FypFullscreenSource & { traceLane: LumoraLane }) => {
-    setSparkedIds((current) => {
-      const next = new Set(current);
-      if (next.has(item.id)) next.delete(item.id);
-      else next.add(item.id);
-      return next;
-    });
+  const toggleSpark = useCallback(
+    (item: FypFullscreenSource & { traceLane: LumoraTraceLane }) => {
+      setSparkedIds((current) => {
+        const next = new Set(current);
+        if (next.has(item.id)) next.delete(item.id);
+        else next.add(item.id);
+        return next;
+      });
 
-    appendTrace(createTraceSignal({
-      videoId: item.id,
-      lane: item.traceLane,
-      watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
-      sparked: true
-    }));
-  }, [appendTrace]);
+      appendTrace(
+        createTraceRecord({
+          sourceId: item.id,
+          lane: item.traceLane,
+          watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+          sparked: true,
+        }),
+      );
+    },
+    [appendTrace],
+  );
 
-  const saveToSparkBoard = useCallback((item: FypFullscreenSource & { traceLane: LumoraLane }) => {
-    setSavedIds((current) => new Set(current).add(item.id));
-    appendTrace(createTraceSignal({
-      videoId: item.id,
-      lane: item.traceLane,
-      watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
-      saved: true
-    }));
-  }, [appendTrace]);
+  const saveToSparkBoard = useCallback(
+    (item: FypFullscreenSource & { traceLane: LumoraTraceLane }) => {
+      setSavedIds((current) => new Set(current).add(item.id));
+      appendTrace(
+        createTraceRecord({
+          sourceId: item.id,
+          lane: item.traceLane,
+          watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+          saved: true,
+        }),
+      );
+    },
+    [appendTrace],
+  );
 
-  const openDeepDive = useCallback((item: FypFullscreenSource & { traceLane: LumoraLane }) => {
-    setDeepDiveId(item.id);
-    appendTrace(createTraceSignal({
-      videoId: item.id,
-      lane: item.traceLane,
-      watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
-      deepDive: true
-    }));
-  }, [appendTrace]);
+  const openDeepDive = useCallback(
+    (item: FypFullscreenSource & { traceLane: LumoraTraceLane }) => {
+      setDeepDiveId(item.id);
+      appendTrace(
+        createTraceRecord({
+          sourceId: item.id,
+          lane: item.traceLane,
+          watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
+          deepDiveOpened: true,
+        }),
+      );
+    },
+    [appendTrace],
+  );
 
   useEffect(() => {
     setTraceSignals(readTrace());
@@ -267,22 +375,22 @@ export default function FypAutoplayFeed({ items }: Props) {
 
   useEffect(() => {
     if (!visibleItems.some((item) => item.id === activeId)) {
-      setActiveId(visibleItems[0]?.id ?? "");
+      setActiveId(visibleItems[0]?.id ?? '');
     }
   }, [visibleItems, activeId]);
 
   useEffect(() => {
-    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-fyp-fullscreen-card]"));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-fyp-fullscreen-card]'));
     const observer = new IntersectionObserver(
       (entries) => {
         const winner = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        const nextId = winner?.target.getAttribute("data-fyp-video-id");
+        const nextId = winner?.target.getAttribute('data-fyp-video-id');
         if (nextId) setActiveId(nextId);
       },
-      { threshold: [0.55, 0.65, 0.75, 0.9] }
+      { threshold: [0.55, 0.65, 0.75, 0.9] },
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -297,19 +405,19 @@ export default function FypAutoplayFeed({ items }: Props) {
           const item = visibleItems.find((candidate) => candidate.id === id);
           postFypTrackEvent({
             cardId: id,
-            event: "impression",
+            event: 'impression',
             watchedMs: 0,
             lane: item?.traceLane,
-            value: 0.25
+            value: 0.25,
           });
         }
         safePlay(video);
         postFypTrackEvent({
           cardId: id,
-          event: "view",
+          event: 'view',
           watchedMs: 0,
           lane: visibleItems.find((candidate) => candidate.id === id)?.traceLane,
-          value: 0.5
+          value: 0.5,
         });
       } else {
         pauseVideo(video);
@@ -328,19 +436,26 @@ export default function FypAutoplayFeed({ items }: Props) {
       if (item && started) {
         const watchedMs = Date.now() - started;
         if (watchedMs > 2500) {
-          appendTrace(createTraceSignal({
-            videoId: item.id,
-            lane: item.traceLane,
-            watchedMs,
-            completed: watchedMs > 7000
-          }));
+          appendTrace(
+            createTraceRecord({
+              sourceId: item.id,
+              lane: item.traceLane,
+              watchedMs,
+              completed: watchedMs > 7000,
+            }),
+          );
         }
       }
     };
   }, [activeId, itemIds, visibleItems, appendTrace, postFypTrackEvent]);
 
   return (
-    <main className={`${styles.shell} ${styles.fullScreenFypRoot}`} data-fyp-runtime="fullscreen-native-autoplay" data-depthfeed-runtime="lumora-depthfeed-trace" data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore">
+    <main
+      className={`${styles.shell} ${styles.fullScreenFypRoot}`}
+      data-fyp-runtime="fullscreen-native-autoplay"
+      data-depthfeed-runtime="lumora-depthfeed-trace"
+      data-depthfeed-emotional-lanes="Wonder Learn Laugh Build Explore"
+    >
       <FypShellCleaner />
       <div className={styles.tiktokFrame}>
         <header className={styles.depthTop}>
@@ -350,10 +465,14 @@ export default function FypAutoplayFeed({ items }: Props) {
             onClick={revealChrome}
             aria-label={`Current lane: ${selectedLane}`}
           >
-            {LUMORA_LANES.find((lane) => lane.key === selectedLane)?.label ?? "Flow"}
+            {LANE_OPTIONS.find((lane) => lane.key === selectedLane)?.label ?? 'Flow'}
           </button>
-          <nav className={styles.laneSwitch} data-visible={chromeVisible} aria-label="Lumora emotional lanes">
-            {LUMORA_LANES.map((lane) => (
+          <nav
+            className={styles.laneSwitch}
+            data-visible={chromeVisible}
+            aria-label="Lumora emotional lanes"
+          >
+            {LANE_OPTIONS.map((lane) => (
               <button
                 key={lane.key}
                 type="button"
@@ -369,10 +488,15 @@ export default function FypAutoplayFeed({ items }: Props) {
               </button>
             ))}
           </nav>
-          <div className={styles.tracePromise} aria-hidden="true">Trace Current</div>
+          <div className={styles.tracePromise} aria-hidden="true">
+            Trace Current
+          </div>
         </header>
 
-        <section className={styles.fullscreenFeed} aria-label="Lumora DepthFeed fullscreen native autoplay feed">
+        <section
+          className={styles.fullscreenFeed}
+          aria-label="Lumora DepthFeed fullscreen native autoplay feed"
+        >
           {visibleItems.map((item) => {
             const active = item.id === activeId;
             const sparkActive = sparkedIds.has(item.id);
@@ -414,16 +538,26 @@ export default function FypAutoplayFeed({ items }: Props) {
 
                 <aside className={styles.retentionRing} aria-label="Lumora retention ring lite">
                   <div className={styles.ringProgress} data-active={active}>
-                    <span>{active ? "LIVE" : "NEXT"}</span>
+                    <span>{active ? 'LIVE' : 'NEXT'}</span>
                   </div>
-                  <button type="button" aria-label="Spark" data-active={sparkActive} onClick={() => toggleSpark(item)}>
-                    💎<small>{sparkActive ? "Sparked" : item.likes}</small>
+                  <button
+                    type="button"
+                    aria-label="Spark"
+                    data-active={sparkActive}
+                    onClick={() => toggleSpark(item)}
+                  >
+                    💎<small>{sparkActive ? 'Sparked' : item.likes}</small>
                   </button>
                   <button type="button" aria-label="Deep Dive" onClick={() => openDeepDive(item)}>
                     ◌<small>Deep</small>
                   </button>
-                  <button type="button" aria-label="Save to SparkBoard" data-active={savedActive} onClick={() => saveToSparkBoard(item)}>
-                    ▣<small>{savedActive ? "Saved" : "Board"}</small>
+                  <button
+                    type="button"
+                    aria-label="Save to SparkBoard"
+                    data-active={savedActive}
+                    onClick={() => saveToSparkBoard(item)}
+                  >
+                    ▣<small>{savedActive ? 'Saved' : 'Board'}</small>
                   </button>
                   <button type="button" aria-label="Share">
                     ↗️<small>{item.shares}</small>
@@ -431,15 +565,19 @@ export default function FypAutoplayFeed({ items }: Props) {
                 </aside>
 
                 <section className={styles.creatorStrip} aria-label="Creator and tags">
-                  <strong>@{item.handle.replace(/^@/, "")}</strong>
+                  <strong>@{item.handle.replace(/^@/, '')}</strong>
                   <span>#{item.traceLane} #lumora</span>
                 </section>
 
                 {deepDiveId === item.id ? (
                   <section className={styles.deepDivePanel} aria-label="Deep Dive">
                     <strong>Deep Dive</strong>
-                    <span>Follow this trace through related sources, story context, and creator intent.</span>
-                    <button type="button" onClick={() => setDeepDiveId("")}>Close</button>
+                    <span>
+                      Follow this trace through related sources, story context, and creator intent.
+                    </span>
+                    <button type="button" onClick={() => setDeepDiveId('')}>
+                      Close
+                    </button>
                   </section>
                 ) : null}
               </article>
@@ -450,7 +588,11 @@ export default function FypAutoplayFeed({ items }: Props) {
         <section className={styles.traceDock} aria-label="Lumora Trace summary">
           <div>
             <span>Curiosity</span>
-            <strong>{Number.isFinite(Number(traceSummary.curiosityScore)) ? traceSummary.curiosityScore : 0}</strong>
+            <strong>
+              {Number.isFinite(Number(traceSummary.curiosityScore))
+                ? traceSummary.curiosityScore
+                : 0}
+            </strong>
           </div>
           <div>
             <span>Active Pulse</span>
@@ -460,15 +602,33 @@ export default function FypAutoplayFeed({ items }: Props) {
             <span>Dominant Trace</span>
             <strong>{traceSummary.dominantLane}</strong>
           </div>
-          {storyContinuation ? <button type="button">Continue this journey?</button> : <button type="button">Build my Trace</button>}
+          {storyContinuation ? (
+            <button type="button">Continue this journey?</button>
+          ) : (
+            <button type="button">Build my Trace</button>
+          )}
         </section>
 
         <nav className={styles.tiktokBottom} aria-label="Main navigation">
-          <a href="/"><span>⌂</span><strong>Home</strong></a>
-          <a href="/fyp"><span>⌕</span><strong>FYP</strong></a>
-          <a className={styles.createButton} href="/create" aria-label="Create">+</a>
-          <a href="/live"><span>▣</span><strong>Live</strong></a>
-          <a href="/profile"><span>○</span><strong>Profile</strong></a>
+          <a href="/">
+            <span>⌂</span>
+            <strong>Home</strong>
+          </a>
+          <a href="/fyp">
+            <span>⌕</span>
+            <strong>FYP</strong>
+          </a>
+          <a className={styles.createButton} href="/create" aria-label="Create">
+            +
+          </a>
+          <a href="/live">
+            <span>▣</span>
+            <strong>Live</strong>
+          </a>
+          <a href="/profile">
+            <span>○</span>
+            <strong>Profile</strong>
+          </a>
         </nav>
       </div>
     </main>
