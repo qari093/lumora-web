@@ -1,48 +1,113 @@
-// app/api/stream/upload-token/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import {
+  requireUserSession,
+  userPrivateNoStoreHeaders,
+} from "@/src/lib/auth/requireUserSession";
 
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-// POST { ownerId: string }
-export async function POST(req: Request) {
+function json(
+  data: unknown,
+  status = 200,
+) {
+  return NextResponse.json(data, {
+    status,
+    headers: userPrivateNoStoreHeaders(),
+  });
+}
+
+export async function POST() {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
-    const { ownerId } = await req.json().catch(() => ({}));
-    if (!ownerId) {
-      return NextResponse.json({ ok: false, error: 'ownerId is required' }, { status: 400 });
-    }
+    const ownerId = auth.identity.userId;
 
     const accountId = process.env.CF_ACCOUNT_ID;
     const token = process.env.CF_API_TOKEN;
+
     if (!accountId || !token) {
-      return NextResponse.json({ ok: false, error: 'Missing CF_ACCOUNT_ID/CF_API_TOKEN' }, { status: 500 });
+      return json(
+        { ok: false, error: "stream_provider_not_configured" },
+        503,
+      );
     }
 
-    const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/direct_upload`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+    const res = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/direct_upload`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          maxDurationSeconds: 600,
+          creator: ownerId,
+        }),
       },
-      body: JSON.stringify({
-        maxDurationSeconds: 600,
-        creator: ownerId,
-      }),
-    });
+    );
 
-    const cf = await res.json();
-    if (!cf?.success) {
-      return NextResponse.json({ ok: false, error: 'Cloudflare API failed', cf }, { status: 502 });
+    const cf = await res.json().catch(() => null);
+
+    if (!res.ok || !cf?.success) {
+      return json(
+        { ok: false, error: "stream_provider_request_failed" },
+        502,
+      );
     }
 
-    // cf.result.uploadURL is the one-time direct upload URL
-    return NextResponse.json({
-      ok: true,
-      ownerId,
-      uploadURL: cf.result?.uploadURL,
-      cfResult: cf.result,
-      requestId: Math.random().toString(36).slice(2),
+    const uid =
+      typeof cf?.result?.uid === "string"
+        ? cf.result.uid.trim()
+        : "";
+
+    const uploadURL =
+      typeof cf?.result?.uploadURL === "string"
+        ? cf.result.uploadURL
+        : "";
+
+    if (!uid || !uploadURL) {
+      return json(
+        { ok: false, error: "stream_provider_response_incomplete" },
+        502,
+      );
+    }
+
+    await prisma.streamVideo.upsert({
+      where: { uid },
+      create: {
+        uid,
+        ownerId,
+        readyToStream: false,
+        status: "uploaded",
+        playbackId: uid,
+        meta: {
+          ownershipSource: "authenticated_upload_token",
+        },
+      },
+      update: {
+        ownerId,
+      },
     });
-  } catch (err: any) {
-    return NextResponse.json({ ok: false, error: String(err?.message || err) }, { status: 500 });
+
+    return json({
+      ok: true,
+      uid,
+      ownerId,
+      uploadURL,
+      requestId: crypto.randomUUID(),
+    });
+  } catch {
+    return json(
+      { ok: false, error: "stream_upload_token_failed" },
+      500,
+    );
   }
 }

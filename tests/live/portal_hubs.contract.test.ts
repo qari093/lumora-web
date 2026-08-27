@@ -12,7 +12,12 @@ function getBase(): string {
 
 
 import { baseUrl, httpGet, httpGetRetryOnce } from "../_util/http";
-const base = process.env.LIVE_BASE_URL || "http://127.0.0.1:3000";
+const base =
+  process.env.LIVE_BASE_URL ||
+  process.env.LUMORA_TEST_BASE_URL ||
+  process.env.LUMORA_BASE_URL ||
+  process.env.BASE_URL ||
+  "http://127.0.0.1:3000";
 
 type Hub = {
   id: string;
@@ -38,7 +43,7 @@ describe("Live API contract: /api/live/portal-hubs", () => {
   it(
     "returns 200 + ratelimit headers + expected JSON shape",
     async () => {
-      const r = await httpGetRetryOnce(`${base}/api/live/portal-hubs`, 8000);
+      const r = await httpGetRetryOnce(`${base}/api/live/portal-hubs`, { timeoutMs: 8000 });
 
       expect(r.status).toBe(200);
       expect(String((r.headers["x-ratelimit-limit".replace(/"/g,"").replace(/'/g,"")] ?? ""))).toBeTruthy();

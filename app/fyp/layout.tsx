@@ -1,4 +1,4 @@
-import FypShellCleaner from "./FypShellCleaner";
+import FypShellCleaner from './FypShellCleaner';
 
 export default function FypLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +14,7 @@ export default function FypLayout({ children }: { children: React.ReactNode }) {
               background: #000 !important;
               width: 100vw !important;
               height: 100svh !important;
+              touch-action: pan-y pinch-zoom !important;
             }
 
             body.lumora-fyp-isolated nav[aria-label="Global portal navigation"],
@@ -26,7 +27,7 @@ export default function FypLayout({ children }: { children: React.ReactNode }) {
               display: none !important;
               visibility: hidden !important;
               opacity: 0 !important;
-              pointer-events: none !important;
+              pointer-events: auto !important;
             }
 
             body.lumora-fyp-isolated > * {
@@ -39,9 +40,9 @@ export default function FypLayout({ children }: { children: React.ReactNode }) {
             video::-webkit-media-controls-start-playback-button {
               display: none !important;
               opacity: 0 !important;
-              pointer-events: none !important;
+              pointer-events: auto !important;
             }
-          `
+          `,
         }}
       />
       <FypShellCleaner />

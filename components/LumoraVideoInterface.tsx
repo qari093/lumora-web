@@ -4,7 +4,6 @@ import { vibeTagsLiteEnabled } from "@/lib/flags/vibeTags";
 import VibeTray from "@/components/vibe/VibeTray";
 import VibeStatusBadge from "@/components/vibe/VibeStatusBadge";
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
 import { Heart, Users, Volume2, VolumeX, Gamepad2 } from "lucide-react";
 import VibeTrayMount from "@/components/vibe/VibeTrayMount";
 
@@ -51,13 +50,13 @@ const vibeLiteOn = React.useMemo(() => {
   const [vibeBusy, setVibeBusy] = React.useState(false);
   const lastVibeAtRef = React.useRef<number>(0);
   const cooldownMs = 3000;
-  const [zencoins, setZencoins] = useState(640);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [notifications, setNotifications] = useState<{ id: number; message: string }[]>([]);
-  const [ledger, setLedger] = useState<Ledger>({ total: 0, value: 0 });
+  const [zencoins, setZencoins] = React.useState(640);
+  const [isLiked, setIsLiked] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(false);
+  const [notifications, setNotifications] = React.useState<{ id: number; message: string }[]>([]);
+  const [ledger, setLedger] = React.useState<Ledger>({ total: 0, value: 0 });
 
-  const gifts = useMemo(() => ([
+  const gifts = React.useMemo(() => ([
     { name: "Sparkle",      cost: 10,  icon: "✨" },
     { name: "Fire Wave",    cost: 25,  icon: "🔥" },
     { name: "Diamond Rain", cost: 50,  icon: "💎" },
@@ -98,7 +97,7 @@ const vibeLiteOn = React.useMemo(() => {
     }
   }
 
-  useEffect(() => { refreshLedger(); }, [room, refreshLedger]);
+  React.useEffect(() => { void refreshLedger(); }, [room]);
 
   return (
     <div className="h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex flex-col relative overflow-hidden text-white">

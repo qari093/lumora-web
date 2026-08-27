@@ -163,7 +163,7 @@ export default function FypAutoplayFeed({ items }: Props) {
       value?: number;
     }) => {
       try {
-        void fetch('/api/fyp/track', {
+        void fetch("/api/fyp/track", {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
@@ -216,7 +216,7 @@ export default function FypAutoplayFeed({ items }: Props) {
       setDeepDiveId(item.id);
       postFypTrackEvent({
         cardId: item.id,
-        event: 'deep_dive',
+        event: "deep_dive",
         watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
         lane: item.traceLane,
         value: 0.8,
@@ -261,7 +261,7 @@ export default function FypAutoplayFeed({ items }: Props) {
           setDeepDiveId(item.id);
           postFypTrackEvent({
             cardId: item.id,
-            event: 'deep_dive',
+            event: "deep_dive",
             watchedMs: Date.now() - (startedAtRef.current.get(item.id) || Date.now()),
             lane: item.traceLane,
             value: 0.8,
@@ -285,8 +285,7 @@ export default function FypAutoplayFeed({ items }: Props) {
 
       postFypTrackEvent({
         cardId: signal.sourceId,
-        event: signal.saved
-          ? 'save'
+        event: signal.saved ? "save"
           : signal.sparked
             ? 'spark'
             : signal.deepDiveOpened
@@ -405,7 +404,7 @@ export default function FypAutoplayFeed({ items }: Props) {
           const item = visibleItems.find((candidate) => candidate.id === id);
           postFypTrackEvent({
             cardId: id,
-            event: 'impression',
+            event: "impression",
             watchedMs: 0,
             lane: item?.traceLane,
             value: 0.25,
@@ -414,7 +413,7 @@ export default function FypAutoplayFeed({ items }: Props) {
         safePlay(video);
         postFypTrackEvent({
           cardId: id,
-          event: 'view',
+          event: "view",
           watchedMs: 0,
           lane: visibleItems.find((candidate) => candidate.id === id)?.traceLane,
           value: 0.5,
@@ -448,6 +447,15 @@ export default function FypAutoplayFeed({ items }: Props) {
       }
     };
   }, [activeId, itemIds, visibleItems, appendTrace, postFypTrackEvent]);
+
+  useEffect(() => {
+    document.body.classList.add("lumora-fyp-active");
+
+    return () => {
+      document.body.classList.remove("lumora-fyp-active");
+    };
+  }, []);
+
 
   return (
     <main

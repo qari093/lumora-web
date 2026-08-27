@@ -1,10 +1,14 @@
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
   try {
     const b = await req.json().catch(()=> ({}));
-    const { ownerId, fullName, dob, idType, idNumber, consent } = b || {};
+    const { fullName, dob, idType, idNumber, consent } = b || {};
+    const ownerId = auth.identity.userId;
     if (!ownerId || typeof ownerId !== "string") {
       return NextResponse.json({ ok:false, error:"OWNER_REQUIRED" }, { status:400 });
     }

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-04T17:37:45.373Z",
+  "generatedAt": "2026-08-22T10:12:55.249Z",
   "status": "critical",
-  "routeCount": 1202,
-  "apiRouteCount": 1017,
+  "routeCount": 1224,
+  "apiRouteCount": 1039,
   "pageRouteCount": 185,
-  "unknownDomainRoutes": 773,
-  "duplicateFindings": 337,
-  "highRiskDuplicates": 191,
+  "unknownDomainRoutes": 795,
+  "duplicateFindings": 338,
+  "highRiskDuplicates": 192,
   "deprecatedAliases": 9,
   "orchestratorCount": 16,
   "eventBusReady": true,
@@ -15,13 +15,13 @@
   "metrics": [
     {
       "key": "unknown_domain_routes",
-      "value": 773,
+      "value": 795,
       "status": "critical",
       "threshold": 250
     },
     {
       "key": "high_risk_duplicate_findings",
-      "value": 191,
+      "value": 192,
       "status": "critical",
       "threshold": 50
     },

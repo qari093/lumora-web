@@ -1,10 +1,13 @@
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
   try {
     const url = new URL(req.url);
-    const ownerId = url.searchParams.get("ownerId") || "OWNER_A";
+    const ownerId = auth.identity.userId;
     const row = await prisma.kycRequest.findFirst({
       where: { ownerId },
       orderBy: { createdAt: "desc" },

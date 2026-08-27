@@ -12,11 +12,16 @@ function getBase(): string {
 
 
 
-const base = process.env.LIVE_BASE_URL || `http://127.0.0.1:${process.env.PORT || 3000}`;
+const base =
+  process.env.LIVE_BASE_URL ||
+  process.env.LUMORA_TEST_BASE_URL ||
+  process.env.LUMORA_BASE_URL ||
+  process.env.BASE_URL ||
+  `http://127.0.0.1:${process.env.PORT || 3000}`;
 
 async function warm(path: string) {
   // First hit can trigger Next compilation; allow long and retry once.
-  const r = await httpGetRetryOnce(`${base}${path}`, 25000);
+  const r = await httpGetRetryOnce(`${base}${path}`, { timeoutMs: 25000 });
   if (r.status !== 200) {
     const head = (r.bodyText || "").slice(0, 420);
     throw new Error(`warm(${path}) expected 200, got ${r.status}. bodyHead=${JSON.stringify(head)}`);
@@ -26,11 +31,14 @@ async function warm(path: string) {
 
 async function fast(path: string) {
   // After warm, should be fast.
-  const r = await httpGetRetryOnce(`${base}${path}`, 4000);
+  const r = await httpGetRetryOnce(`${base}${path}`, { timeoutMs: 4000 });
   return r;
 }
 
-describe("Live page: /live/health", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Live page: /live/health", () => {
   it(
     "healthz probe is warmable and then fast, returns marker",
     async () => {

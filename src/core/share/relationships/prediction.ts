@@ -42,7 +42,7 @@ export function predictShareRecipients(params: {
         portalScore +
         memoryScore;
 
-      const preferredMode =
+      const preferredMode: ShareRecipientPrediction["preferredMode"] =
         memory?.allowSilentShare && signal.silentShareAffinity >= 0.72
           ? "silent"
           : signal.echoShareAffinity >= 0.74

@@ -1,32 +1,41 @@
-import { NextRequest, NextResponse } from "next/server";
-import { creditWithLedger } from "@/lib/wallet/creditWithLedger";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-    if (!body?.userId || typeof body?.amount !== "number" || !body?.source) {
-      return NextResponse.json(
-        { ok: false, error: "missing_credit_ledger_fields" },
-        { status: 400 }
-      );
-    }
+function disabled() {
+  return NextResponse.json(
+    {
+      ok: false,
+      error: "legacy_wallet_credit_ledger_disabled",
+      quarantined: true,
+    },
+    {
+      status: 410,
+      headers: {
+        "cache-control": "private, no-store, max-age=0",
+        "x-lumora-launch-quarantine": "true",
+      },
+    },
+  );
+}
 
-    const result = creditWithLedger({
-      userId: String(body.userId),
-      amount: body.amount,
-      source: String(body.source),
-    });
+export async function GET() {
+  return disabled();
+}
 
-    return NextResponse.json({
-      ok: true,
-      source: "lumora_credit_ledger_v1",
-      ...result,
-    });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "credit_ledger_failed" },
-      { status: 500 }
-    );
-  }
+export async function POST() {
+  return disabled();
+}
+
+export async function PUT() {
+  return disabled();
+}
+
+export async function PATCH() {
+  return disabled();
+}
+
+export async function DELETE() {
+  return disabled();
 }

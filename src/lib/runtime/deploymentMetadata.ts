@@ -25,8 +25,8 @@ export function getLumoraRuntimeEnvironment(): LumoraRuntimeEnvironment {
 
 export function getLumoraVersion(): string {
   return (
-    process.env.NEXT_PUBLIC_APP_VERSION?.trim() ||
     process.env.APP_VERSION?.trim() ||
+    process.env.NEXT_PUBLIC_APP_VERSION?.trim() ||
     process.env.npm_package_version?.trim() ||
     "v7.5"
   );

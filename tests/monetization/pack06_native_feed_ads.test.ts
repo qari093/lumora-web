@@ -38,7 +38,7 @@ describe("Monetization Pack06 — Native Feed Ads", () => {
     });
 
     expect(feed).toHaveLength(3);
-    expect(feed[1].type).toBe("ad");
+    expect("type" in feed[1] ? feed[1].type : undefined).toBe("ad");
   });
 
   it("builds transparent sponsored disclosure", () => {

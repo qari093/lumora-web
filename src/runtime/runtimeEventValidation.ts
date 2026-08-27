@@ -12,13 +12,13 @@ export function validateRuntimeSignalInput(input: unknown) {
   const ok =
     isRuntimeSignalType(body?.type) &&
     typeof body?.videoId === "string" &&
-    body.videoId.trim().length > 0 &&
+    String(body.videoId).trim().length > 0 &&
     (typeof body?.timestampMs === "number" || typeof body?.timestampMs === "undefined");
 
   return {
     ok,
     type: ok ? body.type : null,
-    videoId: ok ? body.videoId.trim() : null,
+    videoId: ok ? String(body.videoId).trim() : null,
     timestampMs: ok ? body.timestampMs || 0 : 0,
     error: ok ? null : "invalid_runtime_signal",
   };

@@ -7,7 +7,7 @@ const CASES: ReadonlyArray<{ key: PortalKey; marker: string }> = [
   { key: "fyp", marker: "LUMORA_PORTAL_ALIVE_FYP" },
   { key: "gmar", marker: "LUMORA_PORTAL_ALIVE_GMAR" },
   { key: "nexa", marker: "LUMORA_PORTAL_ALIVE_NEXA" },
-  { key: "videos", marker: "LUMORA_PORTAL_ALIVE_VIDEOS" },
+  { key: "videos", marker: "LUMORA_VIDEOS_PRODUCTION_REALITY" },
   { key: "movies", marker: "LUMORA_PORTAL_ALIVE_MOVIES" },
   { key: "celebrations", marker: "LUMORA_PORTAL_ALIVE_CELEBRATIONS" },
   { key: "share", marker: "LUMORA_PORTAL_ALIVE_SHARE" },

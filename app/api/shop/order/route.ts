@@ -1,58 +1,100 @@
+import {
+  requireUserSession,
+  userPrivateNoStoreHeaders,
+} from "@/src/lib/auth/requireUserSession";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-const stripeSecret = process.env.STRIPE_SECRET_KEY;
-const successUrl = process.env.STRIPE_SUCCESS_URL || "http://localhost:3000/shop?status=success";
-const cancelUrl  = process.env.STRIPE_CANCEL_URL  || "http://localhost:3000/shop?status=cancel";
-
-const stripe = stripeSecret
-  ? new Stripe(stripeSecret, { apiVersion: "2024-06-20" })
-  : null;
+function privateJson(status: number, body: Record<string, unknown>) {
+  return NextResponse.json(body, {
+    status,
+    headers: userPrivateNoStoreHeaders(),
+  });
+}
 
 export async function POST(req: NextRequest) {
-  let body: any;
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
+
   const contentType = req.headers.get("content-type") || "";
+  if (!contentType.toLowerCase().includes("application/json")) {
+    return privateJson(400, {
+      ok: false,
+      error: "invalid_content_type",
+    });
+  }
+
   try {
-    if (!contentType.toLowerCase().includes("application/json")) {
-      return NextResponse.json(
-        { ok: false, error: "Content-Type must be application/json" },
-        { status: 400 }
-      );
-    }
-    body = await req.json();
+    await req.json();
   } catch {
-    return NextResponse.json(
-      { ok: false, error: "Invalid JSON", hint: "Ensure Content-Type: application/json and raw JSON body" },
-      { status: 400 }
-    );
+    return privateJson(400, {
+      ok: false,
+      error: "invalid_json",
+    });
   }
 
-  const { userId, priceId } = body || {};
-  if (!userId || !priceId) {
-    return NextResponse.json({ ok: false, error: "Missing userId or priceId" }, { status: 400 });
-  }
+  const stripeSecret = process.env.STRIPE_SECRET_KEY?.trim() ?? "";
+  const priceId =
+    process.env.STRIPE_PRICE_ID?.trim() ||
+    process.env.NEXT_PUBLIC_STRIPE_PRICE_ID?.trim() ||
+    "";
 
-  if (!stripe) {
-    return NextResponse.json({ ok: false, error: "Stripe not configured yet" }, { status: 501 });
+  const baseUrl =
+    process.env.NEXTAUTH_URL?.trim() ||
+    process.env.NEXT_PUBLIC_BASE_URL?.trim() ||
+    "http://localhost:3000";
+
+  const successUrl =
+    process.env.STRIPE_SUCCESS_URL?.trim() ||
+    `${baseUrl}/shop?status=success`;
+
+  const cancelUrl =
+    process.env.STRIPE_CANCEL_URL?.trim() ||
+    `${baseUrl}/shop?status=cancel`;
+
+  if (!stripeSecret || !priceId) {
+    return privateJson(503, {
+      ok: false,
+      error: "shop_checkout_not_configured",
+    });
   }
 
   try {
+    const stripe = new Stripe(stripeSecret, {
+      apiVersion: "2024-06-20",
+    });
+
+    const userId = auth.identity.userId;
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: successUrl,
       cancel_url: cancelUrl,
-      metadata: { userId }, // helpful later in your webhook
+      metadata: {
+        userId,
+        product: "zencoin",
+        source: "lumora_zenshop",
+      },
     });
 
-    return NextResponse.json({ ok: true, url: session.url }, { status: 200 });
-  } catch (err: any) {
-    console.error("Stripe create session failed:", err);
-    return NextResponse.json(
-      { ok: false, error: err?.message || "Stripe error creating session" },
-      { status: 500 }
+    return privateJson(200, {
+      ok: true,
+      url: session.url,
+    });
+  } catch (error) {
+    console.error(
+      "shop_checkout_session_failed",
+      error instanceof Error ? error.message : "unknown_error"
     );
+
+    return privateJson(502, {
+      ok: false,
+      error: "shop_checkout_session_failed",
+    });
   }
 }

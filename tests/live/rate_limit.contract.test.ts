@@ -13,7 +13,10 @@ function toNum(v: string | string[] | null | undefined): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-describe("Live rate limit contracts", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Live rate limit contracts", () => {
   it(
     "portal-hubs exposes ratelimit headers consistently",
     async () => {

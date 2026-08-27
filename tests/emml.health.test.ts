@@ -2,7 +2,17 @@
 import { describe, it, expect } from "vitest";
 import { getLatestEmmlSnapshot } from "../app/api/emml/health/route";
 
-describe("EMML Health — Snapshot-backed status", () => {
+const MEGA19_TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL?.trim() || "";
+
+const MEGA19_HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(MEGA19_TEST_DATABASE_URL);
+
+if (MEGA19_HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = MEGA19_TEST_DATABASE_URL;
+}
+
+describe.skipIf(!MEGA19_HAS_SAFE_TEST_DATABASE)("EMML Health — Snapshot-backed status", () => {
   it("should be able to obtain a latest EMML snapshot", async () => {
     const snap = await getLatestEmmlSnapshot();
 

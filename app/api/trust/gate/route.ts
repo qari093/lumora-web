@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { calculateTrustScore } from "@/lib/trust/trustScore";
 import { getFeatureGate } from "@/lib/trust/featureGate";
+import {
+  evaluateConsequentialAutomationBoundary,
+} from "@/src/core/governance/consequentialAutomationBoundary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,6 +22,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       ok: true,
       source: "lumora_trust_gate_v1",
+      constitutionalBoundary: {
+        decisionClass: "advisory",
+        governanceAuthorityGranted: false,
+        consequentialActionAuthorized: evaluateConsequentialAutomationBoundary({
+          decisionClass: "advisory",
+          producedByAutomation: true,
+        }).finalConsequentialActionAuthorized,
+      },
       trust,
       gate,
     });

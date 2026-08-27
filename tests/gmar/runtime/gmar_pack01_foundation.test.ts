@@ -18,7 +18,7 @@ describe("GMAR PACK 1", () => {
   it("creates initial state", () => {
     const state = createInitialState("player-1");
 
-    expect(state.level).toBe(1);
+    expect(state.player.level).toBe(1);
   });
 
   it("detects collision", () => {

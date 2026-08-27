@@ -19,12 +19,14 @@ export function createDiscoveryEdgeResult(input: {
   const budget = calculateChaosBudget({
     currentIntensity: input.request.currentIntensity,
     noveltyTolerance: input.request.noveltyTolerance,
-    intent: input.request.intent
+    intent: input.request.intent as Parameters<typeof calculateChaosBudget>[0]["intent"]
   });
 
   const allowedModes = [
     input.request.currentMode,
-    ...getSoftDissonanceModes(input.request.currentMode)
+    ...getSoftDissonanceModes(
+        input.request.currentMode as Parameters<typeof getSoftDissonanceModes>[0]
+      )
   ];
 
   const items = input.candidates

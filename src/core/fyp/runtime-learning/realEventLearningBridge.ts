@@ -14,14 +14,20 @@ const EVENT_MAP: Record<StoredFypEvent["event"], FypRuntimeTrackingEvent["type"]
 };
 
 export function convertStoredFypEventToTrackingEvent(event: StoredFypEvent): FypRuntimeTrackingEvent {
-  return {
-    id: event.id,
-    cardId: event.cardId,
-    type: EVENT_MAP[event.event],
-    value: event.value,
-    createdAt: new Date(event.ts).toISOString()
-  };
-}
+    const playbackLane: FypRuntimeTrackingEvent["playbackLane"] =
+      event.lane === "official_embed" ? "official_embed" : "native_video";
+
+    return {
+      id: event.id,
+      cardId: event.cardId,
+      sourceId: event.cardId,
+      playbackLane,
+      traceLane: event.lane?.trim() || "runtime_learning",
+      type: EVENT_MAP[event.event],
+      value: event.value,
+      createdAt: new Date(event.ts).toISOString()
+    };
+  }
 
 export function readRealFypTrackingEvents(limit = 200): FypRuntimeTrackingEvent[] {
   return readRecentFypEvents(limit).map(convertStoredFypEventToTrackingEvent);
@@ -29,7 +35,17 @@ export function readRealFypTrackingEvents(limit = 200): FypRuntimeTrackingEvent[
 
 export function getFypLearningEventsWithFallback(fallback: FypRuntimeTrackingEvent[]): FypRuntimeTrackingEvent[] {
   const realEvents = readRealFypTrackingEvents(300);
-  return realEvents.length > 0 ? realEvents : fallback;
+
+  if (realEvents.length >= 3) {
+    return realEvents;
+  }
+
+  const seen = new Set(realEvents.map((event) => event.id));
+
+  return [
+    ...realEvents,
+    ...fallback.filter((event) => !seen.has(event.id))
+  ].slice(0, Math.max(3, fallback.length));
 }
 
 export function validateRealEventLearningBridge(): boolean {

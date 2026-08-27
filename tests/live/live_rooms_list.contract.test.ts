@@ -12,7 +12,12 @@ function getBase(): string {
 
 
 import { baseUrl, httpGet, httpGetRetryOnce } from "../_util/http";
-const base = process.env.LIVE_BASE_URL || "http://127.0.0.1:3000";
+const base =
+  process.env.LIVE_BASE_URL ||
+  process.env.LUMORA_TEST_BASE_URL ||
+  process.env.LUMORA_BASE_URL ||
+  process.env.BASE_URL ||
+  "http://127.0.0.1:3000";
 
 
 
@@ -28,7 +33,7 @@ describe("Live API contract: /api/live/rooms", () => {
   it(
     "returns 200 + ratelimit headers + stable JSON envelope",
     async () => {
-      const r = await httpGetRetryOnce(`${base}/api/live/rooms`, 12000);
+      const r = await httpGetRetryOnce(`${base}/api/live/rooms`, { timeoutMs: 12000 });
 
       expect(r.status).toBe(200);
       expect(String((r.headers["x-ratelimit-limit".replace(/"/g,"").replace(/'/g,"")] ?? ""))).toBeTruthy();
@@ -51,7 +56,7 @@ describe("Live API contract: /api/live/rooms", () => {
     async () => {
       const aliases = ["/api/live/room-list", "/api/live/rooms/list", "/api/live/rooms/public"];
       for (const p of aliases) {
-        const r = await httpGetRetryOnce(`${base}${p}`, 6000);
+        const r = await httpGetRetryOnce(`${base}${p}`, { timeoutMs: 6000 });
         expect(r.status).toBe(410);
         const body = JSON.parse(r.bodyText || "{}");
         const code = body?.error?.code || body?.error?.code || body?.error?.code;

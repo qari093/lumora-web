@@ -5,6 +5,7 @@ import type {
 export function createOrbitSignal(): OrbitSignal {
   return {
     id: "orbit_001",
-    energy: 0.93
+      intensity: 0.93,
+    // energy: 0.93
   };
 }

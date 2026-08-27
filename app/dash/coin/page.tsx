@@ -10,10 +10,10 @@ export default function CoinDash() {
     <div style={{maxWidth:900, margin:"32px auto", padding:"0 16px", display:"grid", gap:16}}>
       <h1 style={{fontSize:24, fontWeight:700}}>ZenCoin</h1>
       <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:16}}>
-        <BalanceCard userId={demoUser} />
-        <TransferForm defaultFrom={demoUser} />
+        <BalanceCard />
+        <TransferForm />
       </div>
-      <LedgerTable userId={demoUser} limit={10} />
+      <LedgerTable />
     </div>
   );
 }

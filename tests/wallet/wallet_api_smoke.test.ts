@@ -3,7 +3,17 @@ import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
 
 const BASE = process.env.TEST_BASE_URL || "http://127.0.0.1:3000";
 
-describe("wallet api (smoke)", () => {
+const MEGA19_TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL?.trim() || "";
+
+const MEGA19_HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(MEGA19_TEST_DATABASE_URL);
+
+if (MEGA19_HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = MEGA19_TEST_DATABASE_URL;
+}
+
+describe.skipIf(!MEGA19_HAS_SAFE_TEST_DATABASE)("wallet api (smoke)", () => {
   beforeAll(async () => {
     await ensureServer();
   }, 60_000);

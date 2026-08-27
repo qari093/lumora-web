@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from "react";
-import type { VibeTagLite } from "@/lib/vibe/coreTags";
 import VibeTray from "@/components/vibe/VibeTray";
 
 export type VibeOverlayProps = {
@@ -42,9 +41,9 @@ export default function VibeOverlay({ enabled, userId, videoId }: VibeOverlayPro
 
       <VibeTray
         open={open}
-        disabled={busy}
+
         onClose={() => setOpen(false)}
-        onPick={async (tag: VibeTagLite) => {
+        onPick={async (slug: string) => {
           const now = Date.now();
           if (now - lastAtRef.current < cooldownMs) return;
           lastAtRef.current = now;
@@ -58,7 +57,7 @@ export default function VibeOverlay({ enabled, userId, videoId }: VibeOverlayPro
                 // TODO: wire real auth/session userId + actual currently playing videoId
                 userId: userId || "me",
                 videoId: videoId || "unknown",
-                vibeSlug: tag.slug,
+                vibeSlug: slug,
                 watchMs: 6000, // TODO: wire true watch time
               }),
             });

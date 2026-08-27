@@ -26,7 +26,7 @@ describe("command surfaces matrix", () => {
       'href="/control-center"',
       'href="/operator"',
       'href="/mission-control"',
-      'href="/dashboard"',
+      'href: "/dashboard"',
       'href="/system"',
       'href="/launch"',
       'href="/status"',

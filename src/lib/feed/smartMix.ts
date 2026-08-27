@@ -96,3 +96,39 @@ export function buildSmartMix(input: MixItem[], opts?: { limit?: number; tookBud
 
   return { ok: true, lanes, items: out, meta: { tookMs, cache: "miss", escalation, note } };
 }
+
+
+export type FeedItem = {
+  id: string;
+  kind: string;
+  score: number;
+};
+
+export type SmartMixInput = {
+  items: FeedItem[];
+  expectedCpuMs: number;
+  budgetMs?: number;
+};
+
+export type SmartMixResult = {
+  ok: true;
+  mode: "worker" | "origin";
+  items: FeedItem[];
+  remainingMs: number;
+};
+
+export function assembleSmartMix(input: SmartMixInput): SmartMixResult {
+  const budgetMs = Number.isFinite(input.budgetMs) ? Math.max(0, Number(input.budgetMs)) : 50;
+  const expectedCpuMs = Math.max(0, Number(input.expectedCpuMs || 0));
+  const items = [...input.items].sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.id.localeCompare(b.id);
+  });
+
+  return {
+    ok: true,
+    mode: expectedCpuMs <= budgetMs ? "worker" : "origin",
+    items,
+    remainingMs: Math.max(0, budgetMs - expectedCpuMs),
+  };
+}

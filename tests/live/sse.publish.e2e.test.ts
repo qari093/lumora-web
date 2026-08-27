@@ -71,10 +71,6 @@ describe.sequential("Live SSE publish E2E", () => {
     await ensureServer({ timeoutMs: 45000 });
   });
   afterAll(async () => { await shutdownServer(); });
-
-
-  testTimeout: 20000,
-
   test(
     "SSE stream receives published event",
     async () => {

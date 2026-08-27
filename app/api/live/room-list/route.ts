@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
-import { rateLimitHeaders } from "@/src/lib/live/ratelimitHeaders";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const ROUTE_DEPRECATED = true;
 export const CANONICAL_ROUTE = "/api/live/rooms";
+
+// compatibilityJson semantic replacement:
+// this legacy alias intentionally returns HTTP 410 rather than proxying
+// to the canonical endpoint.
 
 export async function GET() {
   return NextResponse.json(
@@ -21,10 +24,9 @@ export async function GET() {
     {
       status: 410,
       headers: {
-        ...rateLimitHeaders(),
+        "cache-control": "no-store",
         "x-lumora-route-alias": "/api/live/room-list",
         "x-lumora-canonical-route": CANONICAL_ROUTE,
-        "cache-control": "no-store",
       },
     },
   );

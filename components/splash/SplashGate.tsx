@@ -106,11 +106,12 @@ useEffect(() => {
   if (!visible) return null;
 
   return (
-    <LumoraSplash
-      // LumoraSplash should gracefully accept these props; if not, it will ignore unknown props.
-      // We pass `fadeOutMs` to allow a smooth fade-out tail.
-      fadeOutMs={fadeOutMs}
-      onDone={() => setVisible(false)}
-    />
+    <div
+      data-testid="lumora-splash-gate"
+      data-duration-ms={durationMs}
+      data-fadeout-ms={fadeOutMs}
+    >
+      <LumoraSplash />
+    </div>
   );
 }

@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-07-14T20:23:01.578Z",
+  "generatedAt": "2026-08-22T10:05:24.836Z",
   "status": "FAILED",
-  "totalRoutes": 1192,
-  "apiRoutes": 1002,
-  "pageRoutes": 190,
-  "unknownExposureRoutes": 149,
+  "totalRoutes": 1225,
+  "apiRoutes": 1034,
+  "pageRoutes": 191,
+  "unknownExposureRoutes": 150,
   "deprecatedRoutes": 21,
   "riskyPublicRoutes": 2,
   "canonicalRoutes": 324,
@@ -29,9 +29,9 @@
     "/alive",
     "/analytics",
     "/api/_boom",
-    "/api/_health",
     "/api/_info",
     "/api/_ready",
+    "/api/%5Fhealth",
     "/api/abuse/signal",
     "/api/account",
     "/api/account/upgrade",
@@ -46,6 +46,8 @@
     "/api/admin/kyc/decision",
     "/api/admin/kyc/pending",
     "/api/admin/kyc/review",
+    "/api/admin/moderation/appeals",
+    "/api/admin/moderation/appeals/[id]",
     "/api/admin/moderation/list",
     "/api/admin/moderation/review",
     "/api/admin/overview",
@@ -110,11 +112,13 @@
     "/api/ads/track",
     "/api/ai/fault-healer/log",
     "/api/analytics/event",
+    "/api/auth/[...nextauth]",
     "/api/auth/forgot-password",
     "/api/auth/recovery",
+    "/api/auth/register",
     "/api/auth/reset-password",
-    "/api/auth/session",
     "/api/auth/sessions",
+    "/api/auth/set-role",
     "/api/auth/verify-email",
     "/api/auto/generate",
     "/api/beta/keystone",
@@ -184,6 +188,8 @@
     "/api/creatives/update/[id]",
     "/api/creator-share/live-readiness",
     "/api/creator/apply",
+    "/api/creator/disable",
+    "/api/creator/enable",
     "/api/creator/hub",
     "/api/creator/list",
     "/api/creator/mock",
@@ -303,6 +309,21 @@
     "/api/fyp94/production-health",
     "/api/geo/consent",
     "/api/geo/whereami",
+    "/api/governance/authority-boundary",
+    "/api/governance/community-corporate-authority-boundary",
+    "/api/governance/conflict-of-interest-boundary",
+    "/api/governance/constitution-publication",
+    "/api/governance/constitutional-amendment-boundary",
+    "/api/governance/constitutional-conflict-resolution-boundary",
+    "/api/governance/constitutional-ratification-boundary",
+    "/api/governance/control-effectiveness-assurance-boundary",
+    "/api/governance/decision-publication",
+    "/api/governance/delegation-lifecycle-boundary",
+    "/api/governance/emergency-authority-boundary",
+    "/api/governance/jurisdictional-compliance-overlay-boundary",
+    "/api/governance/public-notice",
+    "/api/governance/remedy-enforcement-followthrough-boundary",
+    "/api/governance/rights-impact-review-boundary",
     "/api/health",
     "/api/health-alias",
     "/api/health/portals",
@@ -415,6 +436,12 @@
     "/api/ledger/refunds/[ownerId]/[refType]/[refId]",
     "/api/links/create",
     "/api/links/resolve",
+    "/api/lumalink/connections",
+    "/api/lumalink/groups",
+    "/api/lumalink/health",
+    "/api/lumalink/messages",
+    "/api/lumalink/presence",
+    "/api/lumalink/relationships",
     "/api/lumaspace/alive",
     "/api/lumaspace/aura",
     "/api/lumaspace/civilization",
@@ -443,6 +470,7 @@
     "/api/moderation/audit",
     "/api/moderation/block",
     "/api/moderation/check",
+    "/api/moderation/decisions",
     "/api/moderation/policy",
     "/api/moderation/report",
     "/api/moderation/review-queue",
@@ -526,6 +554,8 @@
     "/api/portals/health",
     "/api/portals/status",
     "/api/posts",
+    "/api/privacy/consent",
+    "/api/privacy/export",
     "/api/private-access",
     "/api/private-beta/access",
     "/api/private-beta/allowlist",
@@ -549,7 +579,9 @@
     "/api/profile/watchtime",
     "/api/proximity/ping",
     "/api/pulse/action",
+    "/api/pulse/earn",
     "/api/pulse/event",
+    "/api/pulse/spend",
     "/api/pulse/state",
     "/api/pwa/diag",
     "/api/r/[slug]",
@@ -778,6 +810,7 @@
     "/legal/privacy",
     "/legal/terms",
     "/login",
+    "/lumalink",
     "/lumaspace",
     "/lumaspace/accessibility",
     "/lumaspace/airdrop",
@@ -1076,16 +1109,6 @@
       "riskyPublicExposure": false
     },
     {
-      "path": "/api/_health",
-      "file": "app/api/_health/route.ts",
-      "kind": "api",
-      "exposure": "public",
-      "domain": "unknown",
-      "canonical": false,
-      "deprecated": false,
-      "riskyPublicExposure": false
-    },
-    {
       "path": "/api/_info",
       "file": "app/api/_info/route.ts",
       "kind": "api",
@@ -1098,6 +1121,16 @@
     {
       "path": "/api/_ready",
       "file": "app/api/_ready/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/%5Fhealth",
+      "file": "app/api/%5Fhealth/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -1238,6 +1271,26 @@
     {
       "path": "/api/admin/kyc/review",
       "file": "app/api/admin/kyc/review/route.ts",
+      "kind": "api",
+      "exposure": "admin",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/admin/moderation/appeals",
+      "file": "app/api/admin/moderation/appeals/route.ts",
+      "kind": "api",
+      "exposure": "admin",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/admin/moderation/appeals/[id]",
+      "file": "app/api/admin/moderation/appeals/[id]/route.ts",
       "kind": "api",
       "exposure": "admin",
       "domain": "unknown",
@@ -1886,6 +1939,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/auth/[...nextauth]",
+      "file": "app/api/auth/[...nextauth]/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/auth/forgot-password",
       "file": "app/api/auth/forgot-password/route.ts",
       "kind": "api",
@@ -1906,6 +1969,16 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/auth/register",
+      "file": "app/api/auth/register/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/auth/reset-password",
       "file": "app/api/auth/reset-password/route.ts",
       "kind": "api",
@@ -1916,8 +1989,8 @@
       "riskyPublicExposure": false
     },
     {
-      "path": "/api/auth/session",
-      "file": "app/api/auth/session/route.ts",
+      "path": "/api/auth/sessions",
+      "file": "app/api/auth/sessions/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -1926,8 +1999,8 @@
       "riskyPublicExposure": false
     },
     {
-      "path": "/api/auth/sessions",
-      "file": "app/api/auth/sessions/route.ts",
+      "path": "/api/auth/set-role",
+      "file": "app/api/auth/set-role/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -2958,6 +3031,26 @@
     {
       "path": "/api/creator/apply",
       "file": "app/api/creator/apply/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/creator/disable",
+      "file": "app/api/creator/disable/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/creator/enable",
+      "file": "app/api/creator/enable/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -5136,6 +5229,156 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/governance/authority-boundary",
+      "file": "app/api/governance/authority-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/community-corporate-authority-boundary",
+      "file": "app/api/governance/community-corporate-authority-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/conflict-of-interest-boundary",
+      "file": "app/api/governance/conflict-of-interest-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/constitution-publication",
+      "file": "app/api/governance/constitution-publication/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/constitutional-amendment-boundary",
+      "file": "app/api/governance/constitutional-amendment-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/constitutional-conflict-resolution-boundary",
+      "file": "app/api/governance/constitutional-conflict-resolution-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/constitutional-ratification-boundary",
+      "file": "app/api/governance/constitutional-ratification-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/control-effectiveness-assurance-boundary",
+      "file": "app/api/governance/control-effectiveness-assurance-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/decision-publication",
+      "file": "app/api/governance/decision-publication/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/delegation-lifecycle-boundary",
+      "file": "app/api/governance/delegation-lifecycle-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/emergency-authority-boundary",
+      "file": "app/api/governance/emergency-authority-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/jurisdictional-compliance-overlay-boundary",
+      "file": "app/api/governance/jurisdictional-compliance-overlay-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/public-notice",
+      "file": "app/api/governance/public-notice/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/remedy-enforcement-followthrough-boundary",
+      "file": "app/api/governance/remedy-enforcement-followthrough-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/governance/rights-impact-review-boundary",
+      "file": "app/api/governance/rights-impact-review-boundary/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/health",
       "file": "app/api/health/route.ts",
       "kind": "api",
@@ -6876,6 +7119,66 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/lumalink/connections",
+      "file": "app/api/lumalink/connections/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/lumalink/groups",
+      "file": "app/api/lumalink/groups/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/lumalink/health",
+      "file": "app/api/lumalink/health/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/lumalink/messages",
+      "file": "app/api/lumalink/messages/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/lumalink/presence",
+      "file": "app/api/lumalink/presence/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/lumalink/relationships",
+      "file": "app/api/lumalink/relationships/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/lumaspace/alive",
       "file": "app/api/lumaspace/alive/route.ts",
       "kind": "api",
@@ -7148,6 +7451,16 @@
     {
       "path": "/api/moderation/check",
       "file": "app/api/moderation/check/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/moderation/decisions",
+      "file": "app/api/moderation/decisions/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -8106,6 +8419,26 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/privacy/consent",
+      "file": "app/api/privacy/consent/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/privacy/export",
+      "file": "app/api/privacy/export/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/private-access",
       "file": "app/api/private-access/route.ts",
       "kind": "api",
@@ -8356,8 +8689,28 @@
       "riskyPublicExposure": false
     },
     {
+      "path": "/api/pulse/earn",
+      "file": "app/api/pulse/earn/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
       "path": "/api/pulse/event",
       "file": "app/api/pulse/event/route.ts",
+      "kind": "api",
+      "exposure": "public",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/api/pulse/spend",
+      "file": "app/api/pulse/spend/route.ts",
       "kind": "api",
       "exposure": "public",
       "domain": "unknown",
@@ -11778,6 +12131,16 @@
     {
       "path": "/login",
       "file": "app/login/page.tsx",
+      "kind": "page",
+      "exposure": "unknown",
+      "domain": "unknown",
+      "canonical": false,
+      "deprecated": false,
+      "riskyPublicExposure": false
+    },
+    {
+      "path": "/lumalink",
+      "file": "app/lumalink/page.tsx",
       "kind": "page",
       "exposure": "unknown",
       "domain": "unknown",

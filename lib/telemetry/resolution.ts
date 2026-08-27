@@ -33,6 +33,9 @@ function normalizeLabel(raw: string): string {
   const fromWxH = toHeightPFromWxH(s);
   if (fromWxH) return fromWxH;
 
+  const numeric = s.match(/^(\d{3,4})$/);
+  if (numeric) return `${Number(numeric[1])}p`;
+
   const hp = s.match(/^(\d{3,4})p$/);
   if (hp) return `${Number(hp[1])}p`;
 
@@ -83,4 +86,12 @@ export function getResolutionDistribution(limit = 50): ResolutionDistItem[] {
 
   out.sort((a, b) => b.bytes - a.bytes || b.count - a.count || a.label.localeCompare(b.label));
   return out.slice(0, Math.max(1, limit));
+}
+
+export function recordResolutionUsage(label: string, bytes: number) {
+  const safeBytes = Number.isFinite(bytes) && bytes > 0 ? bytes : 0;
+  getStore().push({
+    label: normalizeLabel(label),
+    bytes: safeBytes,
+  });
 }

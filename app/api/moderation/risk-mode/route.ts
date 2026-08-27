@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { evaluateRiskModeModeration } from "@/lib/moderation/riskModeModeration";
+import {
+  evaluateConsequentialAutomationBoundary,
+} from "@/src/core/governance/consequentialAutomationBoundary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,6 +24,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       ok: true,
       source: "lumora_risk_mode_moderation_v1",
+        constitutionalBoundary: {
+          decisionClass: result.allowed ? "advisory" : "temporary_safety_gate",
+          finalConsequentialActionAuthorized:
+            evaluateConsequentialAutomationBoundary({
+              decisionClass: result.allowed
+                ? "advisory"
+                : "temporary_safety_gate",
+              producedByAutomation: true,
+              humanReviewed: false,
+            }).finalConsequentialActionAuthorized,
+          humanReviewRequired: !result.allowed,
+          automatedDecisionRemainsNonFinal: true,
+          remedyMustRemainAvailable: true,
+          governanceAuthorityMutationAllowed: false,
+          secretReputationMutationAllowed: false,
+        },
       ...result,
     }, { status: result.allowed ? 200 : 403 });
   } catch {

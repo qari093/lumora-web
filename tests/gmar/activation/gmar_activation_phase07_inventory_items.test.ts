@@ -25,7 +25,7 @@ describe("GMAR Activation Phase 07 — Inventory + Items", () => {
       quantity: 3
     });
 
-    expect(updated.inventory.find(item => item.itemId === "origin_crystal")?.quantity).toBe(3);
+    expect(updated.inventory.find((item: any) => item.itemId === "origin_crystal")?.quantity).toBe(3);
     expect(assertGmarInventory(updated)).toBe(true);
   });
 

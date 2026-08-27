@@ -6,3 +6,4 @@ export function injectPersonalization(): FeedItem[] {
     score: Number((item.score + (idx === 0 ? 0.03 : 0)).toFixed(3)),
   })).sort((a, b) => b.score - a.score);
 }
+export type { FeedItem } from "@/lib/feed/ranking/engine";

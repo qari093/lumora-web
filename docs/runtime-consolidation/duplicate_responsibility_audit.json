@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-04T17:37:35.003Z",
+  "generatedAt": "2026-08-22T10:08:18.607Z",
   "clusterCount": 9,
-  "findingCount": 337,
-  "highRiskCount": 191,
+  "findingCount": 338,
+  "highRiskCount": 192,
   "mediumRiskCount": 106,
   "deprecatedAliasCount": 26,
   "clusters": [
@@ -1527,6 +1527,15 @@
     },
     {
       "route": "/api/moderation/check",
+      "matchedCluster": "trust_safety_moderation",
+      "canonicalDomain": "trust_safety",
+      "canonical": false,
+      "deprecatedAlias": false,
+      "canonicalTarget": null,
+      "risk": "high"
+    },
+    {
+      "route": "/api/moderation/decisions",
       "matchedCluster": "trust_safety_moderation",
       "canonicalDomain": "trust_safety",
       "canonical": false,

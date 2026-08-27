@@ -60,5 +60,9 @@ export function touchHubFromEvent(roomId: string, eventType: string) {
 
 export function listPortalHubs() {
   // Always return a fresh copy (avoid accidental mutation by callers)
-  return Array.from(portalHubs.values()).map((h) => ({ ...h }));
+  seedDemoHub();
+  return Array.from(hubs.values()).map((h) => ({
+    ...h,
+    lastPersona: { ...h.lastPersona },
+  }));
 }

@@ -8,6 +8,9 @@ export default function LivePage() {
   const summary = getLiveActivationSummary();
 
   return (
+    <>
+      {/* LUMORA_PORTAL_ALIVE_LIVE */}
+
     <main
       style={{
         minHeight: "100vh",
@@ -89,6 +92,7 @@ export default function LivePage() {
         </footer>
       </section>
     </main>
+    </>
   );
 }
 

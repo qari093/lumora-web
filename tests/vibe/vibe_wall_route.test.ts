@@ -1,8 +1,24 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 vi.mock("../../lib/flags/vibeTags", async () => {
   const actual: any = await vi.importActual("../../lib/flags/vibeTags");
   return { ...actual, vibeTagsLiteEnabled: () => true };
+});
+
+const previousVibeFlag =
+  process.env.VIBE_TAGS_LITE_ENABLED;
+
+beforeEach(() => {
+  process.env.VIBE_TAGS_LITE_ENABLED = "true";
+});
+
+afterEach(() => {
+  if (previousVibeFlag === undefined) {
+    delete process.env.VIBE_TAGS_LITE_ENABLED;
+  } else {
+    process.env.VIBE_TAGS_LITE_ENABLED =
+      previousVibeFlag;
+  }
 });
 
 describe("Vibe Tags Lite: wall route (in-process)", () => {

@@ -2,7 +2,17 @@ import { describe, it, expect } from 'vitest';
 import { prisma } from '@/lib/prisma';
 import { creditWalletOnce } from '@/lib/walletLedger';
 
-describe('wallet ledger idempotency', () => {
+const MEGA19_TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL?.trim() || "";
+
+const MEGA19_HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(MEGA19_TEST_DATABASE_URL);
+
+if (MEGA19_HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = MEGA19_TEST_DATABASE_URL;
+}
+
+describe.skipIf(!MEGA19_HAS_SAFE_TEST_DATABASE)('wallet ledger idempotency', () => {
   it('credits only once for same (source, refId)', async () => {
     const userId = `test_user_${Date.now()}`;
     const source = 'stripe';

@@ -7,7 +7,7 @@ import {
 export default function NexaPage() {
   const summary = getNexaActivationSummary();
 
-  return (
+  return ( /* LUMORA_PORTAL_ALIVE_NEXA */
     <main style={{
       minHeight: "100vh",
       background: "radial-gradient(circle at top left, rgba(176,141,255,0.2), transparent 34%), #080714",
@@ -28,6 +28,10 @@ export default function NexaPage() {
             AI autonomy, medical claims, and tester access blocked.
           </p>
         </header>
+
+        <Link href="/nexa/checkin" style={action}>
+          Open quick check-in
+        </Link>
 
         <section style={{
           display: "grid",

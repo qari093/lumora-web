@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import fs from "node:fs";
 import {
   applyApprovalDecision,
@@ -6,6 +6,17 @@ import {
   createApprovalRequest,
   getApprovalRule,
 } from "../../src/core/lafs/approvals";
+
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.setSystemTime(
+    new Date("2026-06-07T01:30:00.000Z")
+  );
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe("LAFS Pack 04/08 approval workflow + RBAC", () => {
   it("selects approval rules by amount", () => {

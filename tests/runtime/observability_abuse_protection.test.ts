@@ -18,7 +18,15 @@ afterEach(async () => {
   });
 });
 
-describe("observability abuse protection", () => {
+const TEST_DATABASE_URL = process.env.TEST_DATABASE_URL?.trim() || "";
+const HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(TEST_DATABASE_URL);
+
+if (HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = TEST_DATABASE_URL;
+}
+
+describe.skipIf(!HAS_SAFE_TEST_DATABASE)("observability abuse protection", () => {
   it("derives a stable non-plaintext client identity", () => {
     const request = new Request(
       "http://localhost/api/telemetry/event",

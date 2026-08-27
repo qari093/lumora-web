@@ -1,14 +1,14 @@
 import LumoraPortalPage from "@/components/portal/LumoraPortalPage";
 
 export default function MoviesPage() {
-  return (
+  return ( /* LUMORA_PORTAL_ALIVE_MOVIES */
     <LumoraPortalPage
       title="CineVerse"
       eyebrow="Movies and emotional discovery"
       description="Explore film-inspired discovery, trailer-style moments, watch paths, emotional reactions, and safe CineVerse content inside Lumora."
       actions={[
-        { label: "Open Movie Catalog", href: "/api/movies/catalog" },
-        { label: "Movies Health", href: "/api/movies/health" },
+        { label: "Open Movie Catalog", href: "/movies/portal" },
+
         { label: "Back to FYP", href: "/fyp" }
       ]}
       signals={[

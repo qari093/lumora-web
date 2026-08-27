@@ -36,7 +36,7 @@ describe("Pack 08 NextAuth production foundation", () => {
     expect(source).toContain("CredentialsProvider");
     expect(source).toContain("async authorize");
     expect(source).toContain("bcrypt.compare");
-    expect(source).toContain('strategy: "jwt"');
+    expect(source).toMatch(/strategy\s*:\s*["']jwt["']/);
   });
 
   it("extends Session, User, and JWT identity types", () => {
@@ -45,8 +45,8 @@ describe("Pack 08 NextAuth production foundation", () => {
     expect(source).toContain("interface Session");
     expect(source).toContain("interface User");
     expect(source).toContain("interface JWT");
-    expect(source).toContain("uid");
-    expect(source).toContain("role");
+    expect(source).toMatch(/uid\??\s*:/);
+    expect(source).toMatch(/role\??\s*:/);
   });
 
   it("has Prisma models required by the auth adapter", () => {

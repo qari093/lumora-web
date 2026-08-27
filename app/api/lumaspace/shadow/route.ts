@@ -1,108 +1,282 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/_server/prisma";
+import {
+  requireUserSession,
+  userPrivateNoStoreHeaders
+} from "@/src/lib/auth/requireUserSession";
 
-async function worldIdByEmail(email: string){
-  let user = await prisma.user.findUnique({ where: { email } });
-  if (!user) user = await prisma.user.create({ data: { email } });
-  let world = await prisma.userWorld.findFirst({ where: { userId: user.id } });
-  if (!world) {
-    world = await prisma.userWorld.create({
-      data: { userId: user.id, name: "Founders Space", theme: "aurora", mood: "inspired" }
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+function json(status: number, body: Record<string, unknown>) {
+  return NextResponse.json(body, {
+    status,
+    headers: userPrivateNoStoreHeaders(),
+  });
+}
+
+async function worldIdForAuthenticatedUser(
+  userId: string,
+  email: string,
+): Promise<string> {
+  let user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    user = await prisma.user.findUnique({
+      where: { email },
     });
   }
+
+  if (!user) {
+    throw new Error("authenticated user not found");
+  }
+
+  let world = await prisma.userWorld.findFirst({
+    where: { userId: user.id },
+  });
+
+  if (!world) {
+    world = await prisma.userWorld.create({
+      data: {
+        userId: user.id,
+        name: "Founders Space",
+        theme: "aurora",
+        mood: "inspired",
+      },
+    });
+  }
+
   return world.id;
 }
 
-async function _getWorldIdByEmail(email: string) {
-  let user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    user = await prisma.user.create({ data: { email } });
-    await prisma.userWorld.create({ data: { userId: user.id, name: "Founders Space", theme: "aurora", mood: "inspired" } });
+function emailMatchesSession(
+  supplied: unknown,
+  authenticatedEmail: string,
+): boolean {
+  if (typeof supplied !== "string" || !supplied.trim()) {
+    return true;
   }
-  const world = await prisma.userWorld.findFirst({ where: { userId: user.id } });
-  if (!world) throw new Error("world not found");
-  return world.id;
+
+  return supplied.trim().toLowerCase() === authenticatedEmail.toLowerCase();
 }
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
-    const b = await req.json();
-    const email = String(b.email || "").trim();
-    if (!email) return NextResponse.json({ ok: false, error: "email required" }, { status: 400 });
-    const worldId = await worldIdByEmail(email);
-    let journal = await prisma.shadowJournal.findFirst({ where: { worldId } });
-    if (!journal) journal = await prisma.shadowJournal.create({ data: { worldId } });
+    const body = await req.json();
+
+    if (!emailMatchesSession(body?.email, auth.identity.email)) {
+      return json(403, {
+        ok: false,
+        error: "forbidden_identity_scope",
+      });
+    }
+
+    const worldId = await worldIdForAuthenticatedUser(
+      auth.identity.userId,
+      auth.identity.email,
+    );
+
+    let journal = await prisma.shadowJournal.findFirst({
+      where: { worldId },
+    });
+
+    if (!journal) {
+      journal = await prisma.shadowJournal.create({
+        data: { worldId },
+      });
+    }
+
     const entry = await prisma.shadowEntry.create({
       data: {
         journalId: journal.id,
-        text: String(b.text || "").slice(0, 2000),
-        emotion: b.emotion ? String(b.emotion) : null,
-        privacy: b.privacy ? String(b.privacy) : "private"
+        text: String(body?.text || "").slice(0, 2000),
+        emotion: body?.emotion ? String(body.emotion) : null,
+        privacy: body?.privacy ? String(body.privacy) : "private",
       },
-      select: { id: true, text: true, emotion: true, privacy: true, createdAt: true }
+      select: {
+        id: true,
+        text: true,
+        emotion: true,
+        privacy: true,
+        createdAt: true,
+      },
     });
-    return NextResponse.json({ ok: true, entry });
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
+
+    return json(200, {
+      ok: true,
+      entry,
+    });
+  } catch (error) {
+    return json(500, {
+      ok: false,
+      error: error instanceof Error ? error.message : "shadow_create_failed",
+    });
   }
 }
 
-export async function GET(req: Request){
-  try{
-    const u = new URL(req.url);
-    const email = String(u.searchParams.get("email")||"").trim();
-    if(!email) return NextResponse.json({ ok:false, error:"email required" }, { status:400 });
+export async function GET(req: Request) {
+  const auth = await requireUserSession();
 
-    const takeParam = Number(u.searchParams.get("take") || "10");
-    const take = Math.max(1, Math.min(20, Number.isFinite(takeParam) ? takeParam : 10));
+  if (!auth.ok) {
+    return auth.response;
+  }
 
-    const cursorId = u.searchParams.get("cursor") || null;
+  try {
+    const url = new URL(req.url);
 
-    const worldId = await worldIdByEmail(email);
-    const journal = await prisma.shadowJournal.findFirst({ where: { worldId } });
-    if(!journal) return NextResponse.json({ ok:true, worldId, count:0, entries: [] });
-
-    let cursorCreatedAt: Date | null = null;
-    if (cursorId) {
-      const cur = await prisma.shadowEntry.findUnique({
-        where: { id: String(cursorId) },
-        select: { createdAt: true, id: true }
+    if (!emailMatchesSession(url.searchParams.get("email"), auth.identity.email)) {
+      return json(403, {
+        ok: false,
+        error: "forbidden_identity_scope",
       });
-      if (cur) cursorCreatedAt = cur.createdAt;
     }
 
-    const where:any = { journalId: journal.id };
+    const takeParam = Number(url.searchParams.get("take") || "10");
+    const take = Math.max(
+      1,
+      Math.min(20, Number.isFinite(takeParam) ? takeParam : 10),
+    );
+
+    const cursorId = url.searchParams.get("cursor") || null;
+
+    const worldId = await worldIdForAuthenticatedUser(
+      auth.identity.userId,
+      auth.identity.email,
+    );
+
+    const journal = await prisma.shadowJournal.findFirst({
+      where: { worldId },
+    });
+
+    if (!journal) {
+      return json(200, {
+        ok: true,
+        worldId,
+        count: 0,
+        entries: [],
+      });
+    }
+
+    let cursorCreatedAt: Date | null = null;
+
+    if (cursorId) {
+      const cursorEntry = await prisma.shadowEntry.findFirst({
+        where: {
+          id: cursorId,
+          journalId: journal.id,
+        },
+        select: {
+          createdAt: true,
+        },
+      });
+
+      if (cursorEntry) {
+        cursorCreatedAt = cursorEntry.createdAt;
+      }
+    }
+
+    const where: any = {
+      journalId: journal.id,
+    };
+
     if (cursorCreatedAt) {
-      where.createdAt = { lt: cursorCreatedAt };
+      where.createdAt = {
+        lt: cursorCreatedAt,
+      };
     }
 
     const entries = await prisma.shadowEntry.findMany({
       where,
       orderBy: { createdAt: "desc" },
       take,
-      select: { id:true, text:true, emotion:true, privacy:true, createdAt:true }
+      select: {
+        id: true,
+        text: true,
+        emotion: true,
+        privacy: true,
+        createdAt: true,
+      },
     });
 
-    return NextResponse.json({ ok:true, worldId, count: entries.length, entries });
-  }catch(e:any){
-    return NextResponse.json({ ok:false, error: String(e?.message||e) }, { status:500 });
+    return json(200, {
+      ok: true,
+      worldId,
+      count: entries.length,
+      entries,
+    });
+  } catch (error) {
+    return json(500, {
+      ok: false,
+      error: error instanceof Error ? error.message : "shadow_read_failed",
+    });
   }
 }
+
 export async function DELETE(req: Request) {
+  const auth = await requireUserSession();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   try {
-    const { email, id } = await req.json();
-    if (!email || !id) {
-      return NextResponse.json({ ok: false, error: "email and id required" }, { status: 400 });
+    const body = await req.json();
+    const id = typeof body?.id === "string" ? body.id.trim() : "";
+
+    if (!emailMatchesSession(body?.email, auth.identity.email)) {
+      return json(403, {
+        ok: false,
+        error: "forbidden_identity_scope",
+      });
     }
-    const worldId = await worldIdByEmail(String(email));
-    // find journal for this world
-    const journal = await prisma.shadowJournal.findFirst({ where: { worldId } });
-    if (!journal) return NextResponse.json({ ok: true, deleted: 0 });
-    // delete entry by id within this journal
-    const res = await prisma.shadowEntry.deleteMany({ where: { id, journalId: journal.id } });
-    return NextResponse.json({ ok: true, deleted: res.count });
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: String(e?.message || e) }, { status: 500 });
+
+    if (!id) {
+      return json(400, {
+        ok: false,
+        error: "id required",
+      });
+    }
+
+    const worldId = await worldIdForAuthenticatedUser(
+      auth.identity.userId,
+      auth.identity.email,
+    );
+
+    const journal = await prisma.shadowJournal.findFirst({
+      where: { worldId },
+    });
+
+    if (!journal) {
+      return json(200, {
+        ok: true,
+        deleted: 0,
+      });
+    }
+
+    const result = await prisma.shadowEntry.deleteMany({
+      where: {
+        id,
+        journalId: journal.id,
+      },
+    });
+
+    return json(200, {
+      ok: true,
+      deleted: result.count,
+    });
+  } catch (error) {
+    return json(500, {
+      ok: false,
+      error: error instanceof Error ? error.message : "shadow_delete_failed",
+    });
   }
 }
-export const dynamic = "force-dynamic";

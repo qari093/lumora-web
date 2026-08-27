@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { observabilityRuntime, observabilityHealthy } from "@/core/zencoin/observability/observabilityRuntime";
+import { observabilityRuntime, observabilityHealthy } from "@/src/core/zencoin/observability/observabilityRuntime";
 
 describe("Zencoin Pack 22 — Observability", () => {
   it("supports ledger monitoring", () => {

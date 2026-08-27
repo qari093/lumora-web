@@ -1,34 +1,10 @@
-import { applyAnomalyGuard } from '@/src/lib/learning/anomalyGuard';
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
-function loadRealtimeEvents() {
-  try {
-    const fs = require('fs');
-    const path = require('path');
-    const file = path.join(process.cwd(), 'data/interaction_logs/events.ndjson');
-    if (!fs.existsSync(file)) return [];
-    const lines = fs.readFileSync(file, 'utf-8').trim().split('\n');
-    const out = [];
-    for (const l of lines) {
-      try {
-        const j = JSON.parse(l);
-        if (Array.isArray(j.events)) out.push(...j.events);
-      } catch {}
-    }
-    return out;
-  } catch {
-    return [];
-  }
-}
-import { applyRealtimeFeedback } from '@/src/lib/learning/realtimeFeedback';
-import { setTTL } from '@/src/lib/learning/cacheTTL';
-import { applyFreshness } from '@/src/lib/learning/freshness';
-import { getFeedCache, setFeedCache } from '@/src/lib/learning/feedCache';
-import { applyRepeatPenalty } from '@/src/lib/learning/repeatPenalty';
-import { applySessionDecay } from '@/src/lib/learning/sessionDecay';
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { applyLearningScore } from '@/src/lib/learning/score';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type FeedItem = {
   rank?: number;
@@ -44,99 +20,149 @@ type FeedItem = {
   url?: string | null;
 };
 
-function normalize(items: any[]): FeedItem[] {
-  return (Array.isArray(items) ? items : []).map((x: any, i: number) => ({
-    rank: i + 1,
-    id: x.id,
-    title: x.title,
-    source: x.source,
-    topic: x.topic ?? x.media_type ?? x.source ?? 'general',
-    score: x.score ?? x.final_score ?? 0,
-    final_score: x.final_score ?? x.score ?? 0,
-    media_url: x.media_url ?? null,
-    thumb_url: x.thumb_url ?? 'https://placehold.co/600x400?text=Lumora',
-    media_type: x.media_type ?? 'placeholder',
-    url: x.url ?? null,
-  }));
-}
-
-function enforceDiversity(feed: FeedItem[]): FeedItem[] {
-  const out = [...feed];
-
-  if (out.length > 0) {
-    out[0] = {
-      ...out[0],
-      media_type: 'embed',
-      media_url:
-        out[0].media_url ||
-        out[0].url ||
-        'https://twitframe.com/show?url=https://x.com/Interior/status/463440424141459456',
-    };
-  }
-
-  if (out.length > 1) {
-    out[1] = {
-      ...out[1],
-      media_type: 'video',
-      media_url: 'https://www.w3schools.com/html/mov_bbb.mp4',
-    };
-  }
-
-  if (out.length > 2) {
-    out[2] = {
-      ...out[2],
-      media_type: 'youtube',
-      media_url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    };
-  }
-
-  return out.slice(0, 20).map((x, i) => ({ ...x, rank: i + 1 }));
-}
-
-function loadInterests(): Record<string, number> {
+function readJsonSafe(filePath: string): unknown {
   try {
-    const file = path.join(process.cwd(), 'data', 'user_profiles', 'user_A.json');
-    if (!fs.existsSync(file)) return {};
-    const profile = JSON.parse(fs.readFileSync(file, 'utf-8'));
-    return profile?.interests && typeof profile.interests === 'object' ? profile.interests : {};
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch {
-    return {};
+    return null;
   }
+}
+
+function normalize(items: unknown[]): FeedItem[] {
+  return items
+    .filter(
+      (item): item is Record<string, unknown> =>
+        Boolean(item && typeof item === "object"),
+    )
+    .map((item, index) => ({
+      rank: index + 1,
+      id: String(item.id ?? `live-${index + 1}`),
+      title: String(item.title ?? "Live"),
+      source: String(item.source ?? "lumora"),
+      topic:
+        item.topic == null
+          ? null
+          : String(item.topic),
+      score: Number(item.score ?? item.final_score ?? 0) || 0,
+      final_score: Number(item.final_score ?? item.score ?? 0) || 0,
+      media_url:
+        item.media_url == null
+          ? null
+          : String(item.media_url),
+      thumb_url:
+        item.thumb_url == null
+          ? null
+          : String(item.thumb_url),
+      media_type:
+        item.media_type == null
+          ? null
+          : String(item.media_type),
+      url:
+        item.url == null
+          ? null
+          : String(item.url),
+    }))
+    .sort(
+      (a, b) =>
+        (b.final_score ?? 0) - (a.final_score ?? 0),
+    )
+    .slice(0, 20)
+    .map((item, index) => ({
+      ...item,
+      rank: index + 1,
+    }));
+}
+
+function loadLatestFeedArtifact(): FeedItem[] {
+  const dir = path.join(
+    process.cwd(),
+    "data",
+    "live_feed",
+  );
+
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
+  const files = fs
+    .readdirSync(dir)
+    .filter((name) => /^feed_.*\.json$/i.test(name))
+    .map((name) => {
+      const full = path.join(dir, name);
+      return {
+        full,
+        mtime: fs.statSync(full).mtimeMs,
+      };
+    })
+    .sort((a, b) => b.mtime - a.mtime);
+
+  for (const file of files) {
+    const raw = readJsonSafe(file.full) as any;
+
+    if (Array.isArray(raw)) {
+      return normalize(raw);
+    }
+
+    if (Array.isArray(raw?.data?.feed)) {
+      return normalize(raw.data.feed);
+    }
+
+    if (Array.isArray(raw?.feed)) {
+      return normalize(raw.feed);
+    }
+  }
+
+  return [];
 }
 
 export async function GET() {
   try {
-    /* SAFE CACHE */
-    const cacheKey = 'feed_A';
-    const cached = getFeedCache(cacheKey);
-    if (cached) {
-      return NextResponse.json({ ok: true, data: { feed: cached } });
-    }
-    const base = 'http://127.0.0.1:3000';
-    const r = await fetch(`${base}/api/live/ranking?user=A`, { cache: 'no-store' });
-    const j = await r.json();
+    const feed = loadLatestFeedArtifact();
 
-    const ranked = normalize(j?.data?.top || []);
-    let feed = enforceDiversity(ranked);
+    return NextResponse.json(
+      {
+        ok: true,
+        data: {
+          feed,
+        },
+        degraded: feed.length === 0,
+        source:
+          feed.length > 0
+            ? "live_feed_artifact"
+            : "empty_safe_fallback",
+        servedAt: new Date().toISOString(),
+      },
+      {
+        status: 200,
+        headers: {
+          "cache-control": "no-store, max-age=0",
+        },
+      },
+    );
+  } catch (error) {
+    const detail =
+      error instanceof Error
+        ? error.message
+        : "unknown_error";
 
-    const interests = loadInterests();
-    /* FINAL PERSONALIZATION */
-    feed = applyFreshness(feed);
-    feed = applyAnomalyGuard(feed);
-    const realtimeEvents = loadRealtimeEvents();
-    feed = applyRealtimeFeedback(feed, realtimeEvents);
-    feed = applyLearningScore(feed, interests).map((x: any, i: number) => ({
-      ...x,
-      rank: i + 1,
-    }));
-
-    setFeedCache(cacheKey, feed);
-    setTTL(cacheKey, 30000);
-    return NextResponse.json({
-      ok: true,
-      data: { feed },
-    });
-  } catch (e: any) {
-    return NextResponse.json({ ok: false, error: e?.message || 'feed_failed' }, { status: 500 });
+    return NextResponse.json(
+      {
+        ok: true,
+        data: {
+          feed: [],
+        },
+        degraded: true,
+        source: "safe_error_fallback",
+        error: "live_feed_degraded",
+        detail,
+        servedAt: new Date().toISOString(),
+      },
+      {
+        status: 200,
+        headers: {
+          "cache-control": "no-store, max-age=0",
+        },
+      },
+    );
   }
 }

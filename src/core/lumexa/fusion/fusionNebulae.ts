@@ -1,1 +1,1 @@
-export * from "../fusion/fusionNebula";
+export * from "../fusions/fusionNebulae";

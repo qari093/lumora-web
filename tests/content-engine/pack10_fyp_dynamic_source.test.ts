@@ -20,6 +20,7 @@ describe("Content Engine Pack10 — FYP Dynamic Source Replacement", () => {
     expect(player).toContain("seek(-5)");
     expect(player).toContain("seek(5)");
 
-    expect(page).toContain("FypContentEngineFeed");
+    expect(page).toContain("FypOmegaPlayer");
+    expect(page).toContain("productionFeedAdapter");
   });
 });

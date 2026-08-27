@@ -3,6 +3,9 @@ import {
   calculateTrustScore,
   canAccessSurgeFeatures,
 } from "@/lib/trust/trustScore";
+import {
+  evaluateConsequentialAutomationBoundary,
+} from "@/src/core/governance/consequentialAutomationBoundary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,6 +22,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       ok: true,
       source: "lumora_trust_score_v1",
+      constitutionalBoundary: {
+        decisionClass: "advisory",
+        governanceAuthorityGranted: false,
+        consequentialActionAuthorized: evaluateConsequentialAutomationBoundary({
+          decisionClass: "advisory",
+          producedByAutomation: true,
+        }).finalConsequentialActionAuthorized,
+      },
       trust,
       surgeAccess: canAccessSurgeFeatures(trust.level),
     });
@@ -41,6 +52,14 @@ export async function GET() {
   return NextResponse.json({
     ok: true,
     source: "lumora_trust_score_v1",
+      constitutionalBoundary: {
+        decisionClass: "advisory",
+        governanceAuthorityGranted: false,
+        consequentialActionAuthorized: evaluateConsequentialAutomationBoundary({
+          decisionClass: "advisory",
+          producedByAutomation: true,
+        }).finalConsequentialActionAuthorized,
+      },
     trust,
     surgeAccess: canAccessSurgeFeatures(trust.level),
   });

@@ -5,7 +5,12 @@ export const dynamic = "force-dynamic";
 
 export default function Page({ params }: { params: { id: string } }) {
   const demo = getDemoContent();
-  const v = demo.videos.find((x) => x.id === params.id) ?? demo.videos[0];
+  const v = (demo.videos.find((x) => x.id === params.id) ?? demo.videos[0]) as
+    | ((typeof demo.videos)[number] & {
+        creator?: string;
+        durationSec?: number;
+      })
+    | undefined;
 
   return (
     <PortalShell title="Watch" subtitle="Demo watch page (iPhone-safe)" icon="▶️" accent="#34d399">

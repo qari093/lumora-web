@@ -16,11 +16,12 @@ export default function FypShellCleaner() {
   useEffect(() => {
     document.documentElement.classList.add("lumora-fyp-isolated");
     document.body.classList.add("lumora-fyp-isolated");
+    document.body.classList.add("lumora-fyp-active");
 
     const hide = () => {
       for (const selector of HIDE_SELECTORS) {
         document.querySelectorAll<HTMLElement>(selector).forEach((node) => {
-          node.style.display = "none";
+          node.style.setProperty("display", "none", "important");
           node.style.visibility = "hidden";
           node.style.opacity = "0";
           node.style.pointerEvents = "none";
@@ -38,6 +39,7 @@ export default function FypShellCleaner() {
       observer.disconnect();
       document.documentElement.classList.remove("lumora-fyp-isolated");
       document.body.classList.remove("lumora-fyp-isolated");
+      document.body.classList.remove("lumora-fyp-active");
     };
   }, []);
 

@@ -1,13 +1,14 @@
-import { describe, it, expect } from "vitest";
-import { invokeGET, isJsonLike } from "../_helpers/next.routeInvoke";
-
-import * as ReadyRoute from "../../app/api/ready/route";
+import { describe, expect, it } from "vitest";
+import { invokeGET } from "../_helpers/next.routeInvoke";
 
 describe("/api/ready (in-process)", () => {
-  it("returns 200 and JSON-ish body", async () => {
-    const r = await invokeGET(ReadyRoute as any, "http://local.test/api/ready");
-    expect(r.status).toBe(200);
-    expect(isJsonLike(r.json)).toBe(true);
-    expect(r.json.ok).toBe(true);
+  it("returns canonical readiness body", async () => {
+    const result = await invokeGET("/api/ready");
+
+    expect(result.status).toBe(200);
+    expect(result.body).not.toBeNull();
+    expect(typeof result.body).toBe("object");
+    expect(Array.isArray(result.body)).toBe(false);
+    expect(result.body.ok).toBe(true);
   });
 });

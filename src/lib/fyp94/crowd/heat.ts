@@ -10,7 +10,7 @@ export function calculateFyp94CategoryHeat(signals: Fyp94CrowdSignal[]): Fyp94Ca
     .map(([category, totalViewers]) => ({
       category,
       totalViewers,
-      heatLevel: totalViewers >= 500 ? "high" : totalViewers >= 100 ? "medium" : "low",
+      heatLevel: (totalViewers >= 500 ? "high" : totalViewers >= 100 ? "medium" : "low") as "low" | "medium" | "high",
     }))
     .sort((a, b) => b.totalViewers - a.totalViewers);
 }

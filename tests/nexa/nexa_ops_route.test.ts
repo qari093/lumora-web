@@ -28,7 +28,9 @@ vi.mock("../../lib/nexa/ops_snapshot", () => {
 describe("NEXA ops route", () => {
   it("returns x-nexa-ops header", async () => {
     const { GET } = await import("../../app/api/nexa/ops/route");
-    const res: any = await GET();
+    const res: any = await GET({
+        url: "http://localhost/api/nexa/ops",
+      } as any);
     expect(res.status).toBe(200);
     expect(res.headers.get("x-nexa-ops")).toBe("1");
   });

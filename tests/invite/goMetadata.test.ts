@@ -6,7 +6,9 @@ describe("Lumora invite /go metadata", () => {
     expect(metadata.title).toBe("Lumora — Private Beta Access");
     expect(metadata.description).toBe("A private invite to enter Lumora.");
     expect(metadata.openGraph?.url).toBe("https://www.lumora.app/go");
-    expect(metadata.openGraph?.images?.[0]).toMatchObject({
+      const images = metadata.openGraph?.images;
+      const firstImage = Array.isArray(images) ? images[0] : images;
+      expect(firstImage).toMatchObject({
       url: "https://www.lumora.app/lumora-invite.png",
       width: 1024,
       height: 1024,

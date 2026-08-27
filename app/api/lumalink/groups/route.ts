@@ -1,63 +1,65 @@
 import { NextResponse } from "next/server";
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import {
-  addGroupMember,
-  createGroup,
-  listGroups,
-} from "@/src/core/lumalink/runtime";
+  addGroupMemberForActor,
+  createGroupForActor,
+  listGroupsForActor,
+} from "@/src/core/lumalink/persistence";
 
-export async function GET(req: Request) {
-  const userId = new URL(req.url).searchParams.get("userId") ?? "";
+export async function GET() {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
 
-  if (!userId.trim()) {
-    return NextResponse.json(
-      { ok: false, error: "userId_required" },
-      { status: 400 },
-    );
-  }
-
-  return NextResponse.json({ ok: true, groups: listGroups(userId) });
+  return NextResponse.json(
+    { ok: true, groups: await listGroupsForActor(auth.identity.userId) },
+    { headers: userPrivateNoStoreHeaders() },
+  );
 }
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
+
   const body = await req.json().catch(() => null);
 
   try {
-    const group = createGroup({
-      name: body?.name,
-      ownerId: body?.ownerId,
-      memberIds: Array.isArray(body?.memberIds) ? body.memberIds : [],
-    });
-
-    return NextResponse.json({ ok: true, group }, { status: 201 });
+    const group = await createGroupForActor(
+      auth.identity.userId,
+      body?.name,
+      body?.memberIds,
+    );
+    return NextResponse.json(
+      { ok: true, group },
+      { status: 201, headers: userPrivateNoStoreHeaders() },
+    );
   } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : "group_creation_failed",
-      },
-      { status: 400 },
+      { ok: false, error: error instanceof Error ? error.message : "group_creation_failed" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
 }
 
 export async function PATCH(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
+
   const body = await req.json().catch(() => null);
 
   try {
-    const group = addGroupMember({
-      groupId: body?.groupId,
-      actorId: body?.actorId,
-      memberId: body?.memberId,
-    });
-
-    return NextResponse.json({ ok: true, group });
+    const group = await addGroupMemberForActor(
+      auth.identity.userId,
+      body?.groupId,
+      body?.memberId,
+    );
+    return NextResponse.json(
+      { ok: true, group },
+      { headers: userPrivateNoStoreHeaders() },
+    );
   } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : "group_update_failed",
-      },
-      { status: 400 },
+      { ok: false, error: error instanceof Error ? error.message : "group_update_failed" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
 }

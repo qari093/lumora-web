@@ -44,12 +44,33 @@ export function buildFypPersonalizationMemory(
 
   for (const event of events) {
     const card = ranked.find((item) => item.id === event.cardId);
-    if (!card) continue;
 
-    const signal = event.type === "skip" ? -0.12 : event.value * 0.18;
+    const traceLane =
+      card?.traceLane ||
+      event.traceLane ||
+      "wonder";
 
-    preferredTraceLanes = bump(preferredTraceLanes, card.traceLane, signal);
-    preferredSources = bump(preferredSources, card.sourceId, signal);
+    const sourceId =
+      card?.sourceId ||
+      event.sourceId ||
+      event.cardId;
+
+    const signal =
+      event.type === "skip"
+        ? -0.12
+        : event.value * 0.18;
+
+    preferredTraceLanes = bump(
+      preferredTraceLanes,
+      traceLane,
+      signal
+    );
+
+    preferredSources = bump(
+      preferredSources,
+      sourceId,
+      signal
+    );
   }
 
   const confidence = Math.max(0, Math.min(Number((events.length / 10).toFixed(4)), 1));

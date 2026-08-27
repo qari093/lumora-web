@@ -33,6 +33,12 @@ export default function HomePage() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
+              href="/fyp"
+              className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950"
+            >
+              Open FYP
+            </Link>
+            <Link
               href="/signup"
               className="rounded-full bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950"
             >

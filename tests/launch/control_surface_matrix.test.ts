@@ -38,7 +38,7 @@ describe("control surface matrix", () => {
 
     for (const snippet of [
       'href="/control-center"',
-      'href="/dashboard"',
+      'href: "/dashboard"',
       'href="/launch"',
       'href="/status"',
       'href="/progress"',

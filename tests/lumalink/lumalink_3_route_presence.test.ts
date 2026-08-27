@@ -1,32 +1,57 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import * as nodeFs from "node:fs";
 
-const requiredFiles = [
-  "app/lumalink/page.tsx",
-  "app/api/lumalink/health/route.ts",
+const protectedRoutes = [
   "app/api/lumalink/connections/route.ts",
   "app/api/lumalink/relationships/route.ts",
   "app/api/lumalink/groups/route.ts",
   "app/api/lumalink/messages/route.ts",
   "app/api/lumalink/presence/route.ts",
-  "src/core/lumalink/runtime.ts",
 ];
 
-describe("LumaLink 3.0 canonical route presence", () => {
-  for (const file of requiredFiles) {
-    it(`has ${file}`, () => {
-      expect(() => readFileSync(file, "utf8")).not.toThrow();
-    });
-  }
+describe("LumaLink 3.0 production security contract", () => {
+  it("uses authenticated server identity on every private route", () => {
+    for (const file of protectedRoutes) {
+      const source = nodeFs.readFileSync(file, "utf8");
+      expect(source).toContain("requireUserSession");
+      expect(source).toContain("auth.identity.userId");
+    }
+  });
 
-  it("exposes route handlers", () => {
-    const combined = requiredFiles
-      .filter((file) => file.includes("/api/"))
-      .map((file) => readFileSync(file, "utf8"))
+  it("does not trust client acting identity", () => {
+    const combined = protectedRoutes
+      .map((file) => nodeFs.readFileSync(file, "utf8"))
       .join("\n");
 
-    expect(combined).toContain("export async function GET");
-    expect(combined).toContain("export async function POST");
-    expect(combined).toContain("NextResponse.json");
+    const unsafe = [
+      "senderId: body?.senderId",
+      "ownerId: body?.ownerId",
+      "actorId: body?.actorId",
+      "userId: body?.userId",
+      "requesterId: body?.requesterId",
+    ];
+
+    for (const marker of unsafe) {
+      expect(combined).not.toContain(marker);
+    }
+  });
+
+  it("uses Prisma persistence", () => {
+    const source = nodeFs.readFileSync(
+      "src/core/lumalink/persistence.ts",
+      "utf8",
+    );
+
+    for (const marker of [
+      "prisma.lumaLinkConnection",
+      "prisma.lumaLinkGroup",
+      "prisma.lumaLinkGroupMember",
+      "prisma.lumaLinkMessage",
+      "prisma.lumaLinkPresence",
+    ]) {
+      expect(source).toContain(marker);
+    }
+
+    expect(source).not.toContain("new Map");
   });
 });

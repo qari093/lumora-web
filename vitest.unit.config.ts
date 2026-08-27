@@ -3,7 +3,6 @@ import path from "node:path";
 import base from "./vitest.config";
 
 export default mergeConfig(
-  // @ts-expect-error - base config typing varies by vitest version
   base,
   defineConfig({
   resolve: {

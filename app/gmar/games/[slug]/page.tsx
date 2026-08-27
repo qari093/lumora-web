@@ -5,7 +5,13 @@ export const dynamic = "force-dynamic";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const demo = getDemoContent();
-  const g = demo.games.find((x) => x.slug === params.slug) ?? demo.games[0];
+  const g = (demo.games.find((x) => x.slug === params.slug) ?? demo.games[0]) as
+    | ((typeof demo.games)[number] & {
+        name?: string;
+        genre?: string;
+        status?: string;
+      })
+    | undefined;
 
   return (
     <PortalShell title="GMAR Game" subtitle="Demo game page (placeholder shell)" icon="🕹️" accent="#fb7185">

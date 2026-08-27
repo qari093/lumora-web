@@ -34,7 +34,10 @@ function getJSON(urlStr: string, timeoutMs = 8000): Promise<{ status: number; js
   });
 }
 
-describe("Persona manifest: /api/persona/manifest", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Persona manifest: /api/persona/manifest", () => {
   it("returns ok:true and emojis array (seeded should be >=1)", async () => {
     const base = process.env.BASE || "http://127.0.0.1:3000";
     const url = `${base}/api/persona/manifest`;

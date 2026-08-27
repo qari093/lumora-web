@@ -110,7 +110,7 @@ export default async function ZendoroProductPage({ params }: Props) {
               {product.reviews.map((review) => (
                 <li key={review.id}>
                   {review.rating}/5
-                  {review.comment ? ` — ${review.comment}` : ""}
+                  {review.body ? ` — ${review.body}` : ""}
                 </li>
               ))}
             </ul>

@@ -1,6 +1,6 @@
 export async function fetchNASA() {
   try {
-    const res = await fetch("https://images-api.nasa.gov/search?media_type=video", { timeout: 10000 });
+    const res = await fetch("https://images-api.nasa.gov/search?media_type=video", { signal: AbortSignal.timeout(10000) });
     const json: any = await res.json();
 
     return (json.collection?.items || []).slice(0,10).map((i: any) => ({

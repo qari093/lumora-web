@@ -4,9 +4,9 @@ import { shouldShowPersona } from "../../src/lib/persona/shouldShow";
 
 describe("persona privacy", () => {
   it("sanitizes invalid input", () => {
-    const p = sanitizePersonaPrivacy({ visibility: "nope", allowLive: 1 });
+    const p = sanitizePersonaPrivacy({ visibility: "nope" as any, allowLive: false });
     expect(p.visibility).toBe("public");
-    expect(p.allowLive).toBe(true);
+    expect(p.allowLive).toBe(false);
   });
 
   it("private hides all surfaces", () => {

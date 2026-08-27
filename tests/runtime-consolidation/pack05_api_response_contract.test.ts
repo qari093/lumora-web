@@ -41,7 +41,7 @@ describe("Runtime Consolidation Pack 05 — Universal API Response Contract", ()
     });
 
     expect(response.ok).toBe(true);
-    expect(response.data.alive).toBe(true);
+    expect(response.data!.alive).toBe(true);
     expect(response.meta.domain).toBe("fyp");
     expect(isLumoraApiResponse(response)).toBe(true);
   });

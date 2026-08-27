@@ -1,0 +1,17 @@
+{
+	"appId": "io.lumoraverse.founder",
+	"appName": "Lumora",
+	"webDir": "native-shell",
+	"server": {
+		"url": "https://lumoraverse.io",
+		"cleartext": false,
+		"allowNavigation": [
+			"lumoraverse.io",
+			"*.lumoraverse.io"
+		]
+	},
+	"ios": {
+		"contentInset": "automatic"
+	},
+	"packageClassList": []
+}

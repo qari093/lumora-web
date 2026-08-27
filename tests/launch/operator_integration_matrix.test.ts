@@ -37,7 +37,7 @@ describe("operator integration matrix", () => {
     for (const snippet of [
       'href="/operator"',
       'href="/control-center"',
-      'href="/dashboard"',
+      'href: "/dashboard"',
       'href="/system"',
       'href="/launch"',
       'href="/status"',

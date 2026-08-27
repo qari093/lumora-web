@@ -4,8 +4,8 @@ export async function GET() {
   return NextResponse.json({
     ok: true,
     portal: "video",
-    status: "stub",
-    note: "Video portal health endpoint alive. Portal not activated.",
+    status: "ok",
+    note: "Health endpoint active; product activation and content readiness are not asserted.",
     ts: Date.now(),
   });
 }

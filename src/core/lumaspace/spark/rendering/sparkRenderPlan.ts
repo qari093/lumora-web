@@ -1,7 +1,5 @@
-import type {
-  LumaSpark,
-  SparkRenderPlan
-} from "../types";
+type LumaSpark = { id: string; [key: string]: unknown };
+type SparkRenderPlan = { sparkId: string; playable: boolean; loop: boolean; mode: "poetic" | "cinematic" };
 
 import {
   validateLumaSpark

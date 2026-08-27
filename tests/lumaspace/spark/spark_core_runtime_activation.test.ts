@@ -72,10 +72,7 @@ describe("LumaSpace Spark Core Runtime Activation", () => {
   });
 
   it("runs runtime", () => {
-    const runtime = runSparkRuntime([
-      spark,
-      sparkTwo
-    ]);
+    const runtime = runSparkRuntime();
 
     expect(runtime.active).toBe(true);
     expect(runtime.count).toBe(2);

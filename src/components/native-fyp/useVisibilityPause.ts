@@ -5,12 +5,13 @@ import { useEffect } from "react";
 export function useVisibilityPause(video?: HTMLVideoElement | null) {
   useEffect(() => {
     if (!video) return;
+    const currentVideo = video;
 
     function onVisibilityChange() {
       if (document.hidden) {
-        video.pause();
+        currentVideo.pause();
       } else {
-        video.play().catch(() => {});
+        currentVideo.play().catch(() => {});
       }
     }
 

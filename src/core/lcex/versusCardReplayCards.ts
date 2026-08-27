@@ -29,10 +29,10 @@ export type VersusCardReplayCard = {
 export function buildVersusCardReplay(
   input: VersusCardReplayInput
 ): VersusCardReplayCard {
-  const keyMoments = input.voteTimeline
+  const keyMoments: VersusCardReplayCard["keyMoments"] = input.voteTimeline
     .filter((m) => m.atSeconds >= 0)
     .slice(0, 6)
-    .map((moment) => ({
+    .map((moment): VersusCardReplayCard["keyMoments"][number] => ({
       atSeconds: Math.round(moment.atSeconds),
       label:
         moment.label?.trim() ||

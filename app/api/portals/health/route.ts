@@ -19,8 +19,9 @@ export async function GET(req: Request) {
   for (const p of PORTALS) {
     results[p] = {
       healthPath: `/api/${p}/health`,
-      status: "stub",
-      activated: false,
+      status: "registered",
+      activationState: "not_asserted",
+        probed: false,
     };
   }
 
@@ -28,7 +29,7 @@ export async function GET(req: Request) {
     ok: true,
     base,
     portals: results,
-    note: "This endpoint reports configured health paths only. No probing performed.",
+    note: "Configured health paths only. Endpoint availability, product activation, and content readiness are not asserted without probing.",
     ts: Date.now(),
   });
 }

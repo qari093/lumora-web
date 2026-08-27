@@ -4,11 +4,14 @@ import {
   getGmarActivationSummary
 } from "@/src/core/founder-activation/gmarActivation";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function GmarPage() {
   const summary = getGmarActivationSummary();
 
   return (
-    <main style={{
+    <main data-lumora-alive-gmar="LUMORA_PORTAL_ALIVE_GMAR" style={{
       minHeight: "100vh",
       background: "radial-gradient(circle at top,#1d2238,#080b14)",
       color: "#fff",
@@ -56,6 +59,7 @@ export default function GmarPage() {
           ))}
         </div>
 
+        <Link href="/gmar/play">Open GMAR Play</Link>
         <footer style={{marginTop:"24px"}}>
           Mission Surface · Pulse Store · Game Runtime · Reward Engine
         </footer>

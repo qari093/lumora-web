@@ -1,11 +1,15 @@
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
   try {
-    const { from, to, amount, memo } = await req.json();
+    const { to, amount, memo } = await req.json();
+    const from = auth.identity.userId;
     if (!to || typeof amount !== "number" || amount <= 0) {
       return NextResponse.json({ ok: false, error: "invalid_input" }, { status: 400 });
     }

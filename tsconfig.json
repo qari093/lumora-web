@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -20,7 +24,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*",
+        "./src/*"
+      ]
     },
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -53,6 +60,17 @@
     "src/_app_disabled_*/**/*",
     "app.disabled.*/**/*",
     "app/**/__bak_*/**/*",
-    "app/**/_bak_*/**/*"
+    "app/**/_bak_*/**/*",
+    "backups",
+    ".lumora-recovery",
+    ".lumora-recovery/**/*",
+    "quarantine",
+    "quarantine/**/*",
+    "legacy_pages_api",
+    "legacy_pages_api/**/*",
+    "src/_app_disabled_*",
+    "app.disabled.*",
+    "app/**/__bak_*",
+    "app/**/_bak_*"
   ]
 }

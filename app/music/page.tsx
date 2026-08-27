@@ -7,8 +7,8 @@ export default function MusicPage() {
       eyebrow="Music and emotional sound portal"
       description="Explore sound-led moments, emotional listening paths, calming audio surfaces, creator tracks, and FYP-connected music discovery inside Lumora."
       actions={[
-        { label: "Music Catalog", href: "/api/music/catalog" },
-        { label: "Music Health", href: "/api/music/health" },
+        { label: "Open Music", href: "/music/play" },
+
         { label: "Back to FYP", href: "/fyp" }
       ]}
       signals={[

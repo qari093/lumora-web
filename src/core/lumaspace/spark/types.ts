@@ -13,3 +13,6 @@ export interface SparkRuntime {
   active: boolean;
   sparkId: string;
 }
+
+export type LumaSpark = any;
+export type SparkRenderPlan = { sparkId: string; playable: boolean; loop: boolean; mode: "poetic" | "cinematic" };

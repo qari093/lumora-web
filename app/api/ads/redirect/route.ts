@@ -22,7 +22,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(
       {
-        ok: true,
         source: "lumora_ad_redirect_v1",
         ...payload,
       },

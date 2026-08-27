@@ -1,7 +1,7 @@
-import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 import http from "node:http";
 
-let proc: ChildProcessWithoutNullStreams | null = null;
+let proc: ChildProcess | null = null;
 let baseUrl = "http://127.0.0.1:3000";
 
 function sleep(ms: number) {

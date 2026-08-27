@@ -37,7 +37,7 @@ describe("dashboard integration matrix", () => {
     const nav = fs.readFileSync("components/navigation/GlobalPortalNav.tsx", "utf8");
 
     for (const snippet of [
-      'href="/dashboard"',
+      'href: "/dashboard"',
       'href="/system"',
       'href="/launch"',
       'href="/status"',

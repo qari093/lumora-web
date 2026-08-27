@@ -6,6 +6,7 @@ import {
   type UniversalShareObject,
 } from "./types";
 import { validateUniversalShareObject } from "./validator";
+export type { CreateShareInput } from "./types";
 
 export function createUniversalShareObject(input: CreateShareInput): UniversalShareObject {
   const now = new Date().toISOString();

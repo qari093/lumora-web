@@ -35,7 +35,10 @@ function useFps(){
 
 function useMetrics(){
   const [snap, setSnap] = React.useState(getSnapshot());
-  React.useEffect(()=> subscribe(()=> setSnap(getSnapshot())), []);
+  React.useEffect(() => {
+    const unsubscribe = subscribe(() => setSnap(getSnapshot()));
+    return () => { unsubscribe(); };
+  }, []);
   // Units per minute = count in last 60s
   const now = Date.now();
   const upm = snap.unitsTimestamps.filter(t => t >= now - 60_000).length;
@@ -46,7 +49,10 @@ export default function MicroInsights(){
   const fps = useFps();
   const { upm, limiter } = useMetrics();
   const team = useTeamAura();
-  const { event } = useEnergy();
+  const energyState = useEnergy();
+  const event = ("event" in energyState
+    ? (energyState as { event?: { multiplier?: number } | null }).event
+    : null) ?? null;
 
   return (
     <div style={{
@@ -59,7 +65,7 @@ export default function MicroInsights(){
         <span>FPS: <b>{fps}</b></span>
         <span>Units/min: <b>{upm}</b></span>
         <span>Team: <b>{team?.energy ?? 0}</b></span>
-        <span>Event: <b>{event ? `×${event.multiplier}` : "—"}</b></span>
+        <span>Event: <b>{event ? `×${event.multiplier ?? 1}` : "—"}</b></span>
       </div>
       {Object.keys(limiter).length>0 && (
         <div style={{ marginTop:6, opacity:.9 }}>

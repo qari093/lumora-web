@@ -4,6 +4,14 @@
 
 
 # Hardening: prevent repo-root drift into $HOME
+# Canonical Prisma provider is PostgreSQL. Never silently substitute SQLite.
+if [ -z "${DATABASE_URL:-}" ]; then
+  echo "CI_PREFLIGHT_DATABASE_URL_REQUIRED=true"
+  echo "error=DATABASE_URL_REQUIRED_FOR_CANONICAL_POSTGRES_PRISMA"
+  return 1 2>/dev/null || false
+fi
+
+
 bash "$(cd "$(dirname "$0")" && pwd)/repo_scope_guard.sh"
 
 set -euo pipefail
@@ -29,10 +37,6 @@ if [ ! -f "$SCHEMA" ]; then
 fi
 
 # Safe sqlite fallback if DATABASE_URL missing (so validate works in fresh shells)
-if [ -z "${DATABASE_URL:-}" ]; then
-  export DATABASE_URL="file:$ROOT/prisma/dev.db"
-fi
-
 echo "• prisma validate (schema: $SCHEMA)"
 npx -y prisma validate --schema "$SCHEMA"
 

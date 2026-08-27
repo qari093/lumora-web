@@ -32,13 +32,12 @@ function restoreEnv(keys: string[]) {
 }
 
 describe("stripe live-mode guard", () => {
-  const keys = ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "STRIPE_ALLOW_LIVE_MODE", "APP_URL", "NODE_ENV"];
+  const keys = ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "STRIPE_ALLOW_LIVE_MODE", "APP_URL"];
 
   beforeEach(() => {
     saveEnv(keys);
     process.env.APP_URL = "http://127.0.0.1:3000";
-    process.env.NODE_ENV = "test";
-    delete process.env.STRIPE_ALLOW_LIVE_MODE;
+delete process.env.STRIPE_ALLOW_LIVE_MODE;
   });
 
   afterEach(() => {
@@ -47,7 +46,7 @@ describe("stripe live-mode guard", () => {
 
   it("blocks sk_live_ checkout when STRIPE_ALLOW_LIVE_MODE is not true", async () => {
     process.env.STRIPE_SECRET_KEY = "sk_live_test_block_me";
-    const res = await Checkout.POST(mkReqJson("http://localhost/api/stripe/checkout", { userId: "u1", credits: 1 }));
+    const res = await (Checkout.POST as unknown as (req: Request) => Promise<Response>)(mkReqJson("http://localhost/api/stripe/checkout", { userId: "u1", credits: 1 }));
     expect(res.status).toBe(403);
     const j = await res.json();
     expect(j.ok).toBe(false);
@@ -57,7 +56,7 @@ describe("stripe live-mode guard", () => {
   it("blocks sk_live_ webhook when STRIPE_ALLOW_LIVE_MODE is not true", async () => {
     process.env.STRIPE_SECRET_KEY = "sk_live_test_block_me";
     process.env.STRIPE_WEBHOOK_SECRET = "whsec_test_block_me";
-    const res = await Webhook.POST(mkReqText("http://localhost/api/stripe/webhook", '{"x":1}', { "stripe-signature": "t=0,v1=bad" }));
+    const res = await (Webhook.POST as unknown as (req: Request) => Promise<Response>)(mkReqText("http://localhost/api/stripe/webhook", '{"x":1}', { "stripe-signature": "t=0,v1=bad" }));
     expect(res.status).toBe(403);
     const j = await res.json();
     expect(j.ok).toBe(false);
@@ -67,7 +66,7 @@ describe("stripe live-mode guard", () => {
   it("allows sk_live_ when STRIPE_ALLOW_LIVE_MODE=true (checkout not 403)", async () => {
     process.env.STRIPE_ALLOW_LIVE_MODE = "true";
     process.env.STRIPE_SECRET_KEY = "sk_live_test_allowed";
-    const res = await Checkout.POST(mkReqJson("http://localhost/api/stripe/checkout", { userId: "u1", credits: 1 }));
+    const res = await (Checkout.POST as unknown as (req: Request) => Promise<Response>)(mkReqJson("http://localhost/api/stripe/checkout", { userId: "u1", credits: 1 }));
     expect(res.status).not.toBe(403);
   });
 
@@ -75,7 +74,7 @@ describe("stripe live-mode guard", () => {
     process.env.STRIPE_ALLOW_LIVE_MODE = "true";
     process.env.STRIPE_SECRET_KEY = "sk_live_test_allowed";
     process.env.STRIPE_WEBHOOK_SECRET = "whsec_test_allowed";
-    const res = await Webhook.POST(mkReqText("http://localhost/api/stripe/webhook", '{"x":1}', { "stripe-signature": "t=0,v1=bad" }));
+    const res = await (Webhook.POST as unknown as (req: Request) => Promise<Response>)(mkReqText("http://localhost/api/stripe/webhook", '{"x":1}', { "stripe-signature": "t=0,v1=bad" }));
     expect(res.status).not.toBe(403);
     // should fail on signature
     expect([400, 500]).toContain(res.status);

@@ -1,3 +1,5 @@
+import { requireUserSession } from "@/src/lib/auth/requireUserSession";
+import { redirect } from "next/navigation";
 export const runtime = "nodejs";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
@@ -5,7 +7,15 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function WalletsPage() {
+  const auth = await requireUserSession();
+  if (!auth.ok) {
+    redirect("/login?callbackUrl=/wallets");
+  }
+
+  const userId = auth.identity.userId;
+
   const wallets = await prisma.wallet.findMany({
+    where: { ownerId: userId },
     orderBy: { updatedAt: "desc" },
     take: 50,
   });

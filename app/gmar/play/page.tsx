@@ -7,7 +7,7 @@ import MiniArena from "@/components/gmar/MiniArena";
 
 export default function GmarPlayPage() {
   return (
-    <PortalShell title="GMAR" subtitle="Play instantly. No dead ends." icon="🕹️" accent="#fb7185">
+    <PortalShell title="GMAR" subtitle="Play instantly. No dead ends.">
       <main className="px-4 pb-24 pt-4">
         <MiniArena />
       </main>

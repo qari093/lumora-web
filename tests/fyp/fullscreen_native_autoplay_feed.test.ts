@@ -21,7 +21,7 @@ describe("FYP fullscreen native autoplay feed", () => {
 
     expect(component).toContain("<video");
     expect(component).toContain("playsInline");
-    expect(component).toContain("node.play()");
+    expect(component).toContain("video.play()");
     expect(component).toContain("IntersectionObserver");
     expect(component).not.toContain("<iframe");
     expect(component).not.toContain("youtube-nocookie.com/embed");

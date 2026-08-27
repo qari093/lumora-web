@@ -1,0 +1,18 @@
+import fs from "node:fs";
+import path from "node:path";
+import { describe, expect, it } from "vitest";
+import { evaluateJurisdictionalComplianceOverlay, JURISDICTIONAL_COMPLIANCE_OVERLAY_BOUNDARY_VERSION, JURISDICTIONAL_COMPLIANCE_OVERLAY_CONTRACT, type JurisdictionalComplianceOverlayInput } from "../../src/core/governance/jurisdictionalComplianceOverlayBoundary";
+const root = process.cwd();
+const validInput = (o: Partial<JurisdictionalComplianceOverlayInput> = {}): JurisdictionalComplianceOverlayInput => ({ jurisdiction:"example-jurisdiction", applicableLawBasis:"Documented applicable legal requirement.", overlayPurpose:"Apply a bounded local compliance requirement.", lawfulRequirementIdentified:true, scopeBoundedToJurisdiction:true, rightsImpactReviewCompleted:true, publicAccountabilityReference:"/api/governance/public-notice", ...o });
+describe("Mega43 jurisdictional compliance overlay", () => {
+  it("uses mega43-v1",()=>expect(JURISDICTIONAL_COMPLIANCE_OVERLAY_BOUNDARY_VERSION).toBe("mega43-v1"));
+  it("authorizes bounded compatible overlay",()=>expect(evaluateJurisdictionalComplianceOverlay(validInput()).reason).toBe("authorized"));
+  const blocked: Array<[Partial<JurisdictionalComplianceOverlayInput>, string]> = [
+    [{jurisdiction:""},"jurisdiction_required"],[{applicableLawBasis:""},"applicable_law_basis_required"],[{overlayPurpose:""},"overlay_purpose_required"],[{lawfulRequirementIdentified:false},"lawful_requirement_required"],[{scopeBoundedToJurisdiction:false},"unbounded_overlay_blocked"],[{rightsImpactReviewCompleted:false},"rights_impact_review_required"],[{reducesFundamentalRights:true},"fundamental_rights_reduction_blocked"],[{removesDueProcess:true},"due_process_removal_blocked"],[{removesPrivacyBaseline:true},"privacy_baseline_removal_blocked"],[{removesAccountability:true},"accountability_removal_blocked"],[{removesHumanReview:true},"human_review_removal_blocked"],[{removesRemedyOrAppeal:true},"remedy_or_appeal_removal_blocked"],[{createsSecretRightsRestriction:true},"secret_rights_restriction_blocked"],[{overridesConstitutionalCore:true},"constitutional_core_override_blocked"],[{createsGovernmentalAuthority:true},"governmental_authority_creation_blocked"],[{claimsLegalCitizenship:true},"legal_citizenship_claim_blocked"],[{claimsStatehood:true},"statehood_claim_blocked"],[{claimsIndependentJurisdiction:true},"independent_jurisdiction_claim_blocked"],[{overridesCorporateLegalEntity:true},"corporate_legal_entity_override_blocked"],[{publicAccountabilityReference:""},"public_accountability_reference_required"]
+  ];
+  for (const [override, reason] of blocked) it(`fails closed ${reason}`,()=>expect(evaluateJurisdictionalComplianceOverlay(validInput(override)).reason).toBe(reason));
+  it("preserves constitutional floor",()=>expect(evaluateJurisdictionalComplianceOverlay(validInput()).fundamentalRightsFloorPreserved).toBe(true));
+  it("creates no governmental status",()=>expect(JURISDICTIONAL_COMPLIANCE_OVERLAY_CONTRACT.governmentalStatusCreated).toBe(false));
+  it("route is POST-only admin authenticated",()=>{ const s=fs.readFileSync(path.join(root,"app/api/governance/jurisdictional-compliance-overlay-boundary/route.ts"),"utf8"); expect(s).toContain("export async function POST"); expect(s).not.toContain("export async function GET"); expect(s).toContain("requireAdminSession"); });
+  it("adds no database dependency",()=>{ const s=["src/core/governance/jurisdictionalComplianceOverlayBoundary.ts","app/api/governance/jurisdictional-compliance-overlay-boundary/route.ts"].map(f=>fs.readFileSync(path.join(root,f),"utf8")).join("\n"); expect(s).not.toContain("prisma."); });
+});

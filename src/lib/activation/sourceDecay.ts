@@ -1,5 +1,5 @@
 export function applySourceDecay(items:any[]){
-  const penalty = {
+  const penalty: Record<string, number> = {
     rss: 0.9,
     google_trends: 1.0,
     reddit: 1.1

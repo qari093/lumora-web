@@ -3,7 +3,7 @@ import QuickCheckIn from "@/components/nexa/QuickCheckIn";
 
 export default function NexaCheckInPage() {
   return (
-    <PortalShell title="NEXA" subtitle="Usable now. Tiny ritual, real state." icon="🧠" accent="#38bdf8">
+    <PortalShell title="NEXA" subtitle="Usable now. Tiny ritual, real state.">
       <main className="px-4 pb-24 pt-4">
         <QuickCheckIn />
       </main>

@@ -2,8 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 const G: any = globalThis as any;
-G.__emmlRate = G.__emmlRate || new Map();
-G.__emmlSeen = G.__emmlSeen || new Map();
+
+type EmmlRateRecord = {
+  ts: number;
+  count: number;
+};
+
+const emmlRate: Map<string, EmmlRateRecord> =
+  G.__emmlRate instanceof Map ? G.__emmlRate : new Map<string, EmmlRateRecord>();
+
+const emmlSeen: Map<string, number> =
+  G.__emmlSeen instanceof Map ? G.__emmlSeen : new Map<string, number>();
+
+G.__emmlRate = emmlRate;
+G.__emmlSeen = emmlSeen;
 
 const ONE_MIN = 60_000;
 const LIMIT_PER_MIN = 60;
@@ -16,9 +28,9 @@ const ipOf = (req: NextRequest) => {
 const rateOk = (key: string) => {
   const now = Date.now();
   const slot = Math.floor(now / ONE_MIN);
-  const rec = G.__emmlRate.get(key);
+  const rec = emmlRate.get(key);
   if (!rec || rec.ts !== slot) {
-    G.__emmlRate.set(key, { ts: slot, count: 1 });
+    emmlRate.set(key, { ts: slot, count: 1 });
     return true;
   }
   if (rec.count >= LIMIT_PER_MIN) return false;
@@ -98,8 +110,8 @@ export async function POST(req: NextRequest) {
 
     // prune old dedupe keys
     const now = Date.now();
-    for (const [k, ts] of Array.from(G.__emmlSeen.entries())) {
-      if (now - Number(ts) > 3 * ONE_MIN) G.__emmlSeen.delete(k);
+    for (const [k, ts] of emmlSeen.entries()) {
+      if (now - Number(ts) > 3 * ONE_MIN) emmlSeen.delete(k);
     }
 
     const accepted: any[] = [];
@@ -107,11 +119,11 @@ export async function POST(req: NextRequest) {
     for (const raw of events) {
       const n = normalize(raw);
       const dk = dedupeKey(n);
-      if (G.__emmlSeen.has(dk)) {
+      if (emmlSeen.has(dk)) {
         deduped++;
         continue;
       }
-      G.__emmlSeen.set(dk, now);
+      emmlSeen.set(dk, now);
       accepted.push(n);
     }
 

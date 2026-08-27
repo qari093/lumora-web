@@ -1,1 +1,1 @@
-export * from "../intent/gradientRibbon";
+export * from "../navigation/gradientRibbon";

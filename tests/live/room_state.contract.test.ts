@@ -48,7 +48,10 @@ function httpGet(url: string, timeoutMs: number): Promise<{ status: number; head
   });
 }
 
-describe("Live room-state contract: /api/live/room-state", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Live room-state contract: /api/live/room-state", () => {
   test("GET returns 200 + ok:true + roomId", async () => {
     const base = getBase();
     const url = `${base}/api/live/room-state?roomId=demo-room`;

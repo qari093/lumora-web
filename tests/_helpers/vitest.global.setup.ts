@@ -76,6 +76,42 @@ function tailLog(n = 160): string {
 }
 
 export default async function globalSetup() {
+  const explicitBaseRaw =
+    process.env.NEXT_TEST_BASE_URL ||
+    process.env.BASE ||
+    process.env.LUMORA_TEST_BASE_URL ||
+    "";
+
+  const explicitBase = explicitBaseRaw.trim().replace(/\/$/, "");
+
+  if (explicitBase) {
+    try {
+      const parsed = new URL(explicitBase);
+      if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+        throw new Error("unsupported_test_base_protocol");
+      }
+
+      await waitFor(`${explicitBase}/api/healthz`, 30000);
+
+      const e = process.env as Record<string, string | undefined>;
+      e.NEXT_TEST_BASE_URL = explicitBase;
+      e.BASE = explicitBase;
+      e.BASE_URL = explicitBase;
+      e.LUMORA_BASE_URL = explicitBase;
+      e.LIVE_BASE_URL = explicitBase;
+      e.LUMORA_TEST_BASE_URL = explicitBase;
+      e.TEST_BASE_URL = explicitBase;
+
+      return async () => {};
+    } catch (error) {
+      throw new Error(
+        `explicit_test_server_unavailable ${explicitBase}: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
+  }
+
   const HOST = process.env.TEST_HOST || "127.0.0.1";
   const START_PORT = Number(process.env.TEST_PORT || "4174");
   const PORT = await findFreePort(HOST, START_PORT, 40);
@@ -90,6 +126,10 @@ export default async function globalSetup() {
   e.SITE_URL = BASE;
   e.BASE_URL = BASE;
   e.LUMORA_BASE_URL = BASE;
+  e.LIVE_BASE_URL = BASE;
+  e.LUMORA_TEST_BASE_URL = BASE;
+  e.TEST_BASE_URL = BASE;
+  e.PORT = String(PORT);
 
   // Reuse existing server if alive & healthy
   const existing = readPid();
@@ -132,7 +172,7 @@ export default async function globalSetup() {
 
   return async () => {
     try {
-      process.kill(child.pid);
+      if (typeof child.pid === "number") process.kill(child.pid);
     } catch {}
     try { if (fs.existsSync(PID_FILE)) fs.unlinkSync(PID_FILE); } catch {}
   };

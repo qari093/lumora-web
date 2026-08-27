@@ -5,7 +5,12 @@ export const dynamic = "force-dynamic";
 
 export default function Page({ params }: { params: { id: string } }) {
   const demo = getDemoContent();
-  const m = demo.movies.find((x) => x.id === params.id) ?? demo.movies[0];
+  const m = (demo.movies.find((x) => x.id === params.id) ?? demo.movies[0]) as
+    | ((typeof demo.movies)[number] & {
+        year?: number | string;
+        genre?: string;
+      })
+    | undefined;
 
   return (
     <PortalShell title="Movie Watch" subtitle="Demo movie watch page" icon="🎞️" accent="#f59e0b">

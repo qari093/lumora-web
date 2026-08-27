@@ -1,6 +1,8 @@
 export interface CosmosStar {
   id: string;
   resonance: string;
+  y?: number;
+  atmosphere?: string;
 }
 
 export interface CosmosCluster {

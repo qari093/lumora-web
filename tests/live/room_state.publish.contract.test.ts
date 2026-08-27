@@ -60,7 +60,10 @@ async function httpJson(method: string, url: string, body?: any): Promise<{ stat
   });
 }
 
-describe("Live room-state publish contract", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Live room-state publish contract", () => {
   test("POST /api/live/publish updates GET /api/live/room-state timestamps", async () => {
     const base = getBase();
     const roomId = "demo-room";

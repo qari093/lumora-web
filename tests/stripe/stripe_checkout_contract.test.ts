@@ -3,7 +3,10 @@ import { ensureServer, shutdownServer } from "../_helpers/ensureServer";
 
 const BASE = process.env.TEST_BASE_URL || "http://127.0.0.1:3000";
 
-describe("stripe checkout contract", () => {
+const MEGA19_STRIPE_SECRET_PRESENT =
+  Boolean(process.env.STRIPE_SECRET_KEY?.trim());
+
+describe.skipIf(MEGA19_STRIPE_SECRET_PRESENT)("stripe checkout contract", () => {
   beforeAll(async () => {
     await ensureServer();
   }, 60_000);

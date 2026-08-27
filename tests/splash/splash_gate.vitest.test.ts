@@ -1,7 +1,18 @@
 import { act } from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+
+(globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    replace: vi.fn(),
+    push: vi.fn(),
+    prefetch: vi.fn(),
+  }),
+  usePathname: () => "/",
+}));
+
 function setMatchMediaReduce(reduce: boolean) {
-  // @ts-expect-error
   globalThis.window.matchMedia = (q: string) => ({
     matches: q.includes("prefers-reduced-motion") ? reduce : false,
     media: q,
@@ -110,7 +121,10 @@ describe("SplashGate — session + reduced motion (DOM smoke)", () => {
 
     await flushEffects();
 
-    const exists = () => !!document.querySelector("[data-fadeout-ms]");
+    const exists = () =>
+      !!document.querySelector(
+        '[data-testid="lumora-splash-gate"][data-fadeout-ms="200"]'
+      );
     expect(exists()).toBe(true);
 
     // SplashGate hides at durationMs - fadeOutMs = 800ms

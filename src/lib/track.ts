@@ -142,3 +142,7 @@ export function videoImpression(
 
   videoAction(merged);
 }
+
+export function pageView(pathname: string, meta: Record<string, unknown> = {}) {
+  return { type: "page_view", pathname, meta };
+}

@@ -1,5 +1,5 @@
 export function applySourceReliability(items:any[]){
-  const trust = {
+  const trust: Record<string, number> = {
     google_trends: 1.2,
     reddit: 1.0,
     rss: 0.95

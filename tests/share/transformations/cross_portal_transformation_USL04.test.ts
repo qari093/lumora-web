@@ -21,7 +21,6 @@ function demoShare() {
       metadata: {
         mood: "wonder",
         atmosphere: "cyan-stardust",
-        preferredMode: "silent",
       },
     },
     "lumaspace",

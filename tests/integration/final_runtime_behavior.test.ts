@@ -5,7 +5,15 @@ import { deriveDashboardState } from "@/src/runtime/runtimeBridge";
 import { getRealtimeDashboardPayload } from "@/src/runtime/realtimeState";
 import { resetRuntimeVersion } from "@/src/runtime/realtimeVersion";
 
-describe("Final runtime behavior", () => {
+const TEST_DATABASE_URL = process.env.TEST_DATABASE_URL?.trim() || "";
+const HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(TEST_DATABASE_URL);
+
+if (HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = TEST_DATABASE_URL;
+}
+
+describe.skipIf(!HAS_SAFE_TEST_DATABASE)("Final runtime behavior", () => {
   it("persists signal and exposes realtime dashboard state", async () => {
     await clearRuntimeSignals();
     resetRuntimeVersion();

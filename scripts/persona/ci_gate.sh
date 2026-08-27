@@ -1,5 +1,5 @@
-. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
+. "$(cd "$(dirname "$0")/../.." && pwd)/.lumora_safe_bootstrap.sh"
 set -euo pipefail
 
 PORT="${PORT:-3000}"
@@ -23,10 +23,10 @@ const fs = require("fs");
 const p = "/tmp/persona_manifest_ci_gate.json";
 const j = JSON.parse(fs.readFileSync(p,"utf8"));
 if (!j || j.ok !== true) throw new Error("manifest ok!=true");
-const e = j.emojis?.count;
-const a = j.avatars?.count;
-if (e !== 480) throw new Error("manifest emojis.count != 480");
-if (a !== 840) throw new Error("manifest avatars.count != 840");
+const e = j.counts?.emojis;
+const a = j.counts?.avatars;
+if (e !== 480) throw new Error("manifest counts.emojis != 480");
+if (a !== 840) throw new Error("manifest counts.avatars != 840");
 console.log("✓ manifest counts OK");
 NODE
 else

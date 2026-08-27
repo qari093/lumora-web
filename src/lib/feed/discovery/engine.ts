@@ -5,3 +5,4 @@ export function injectDiscoveryLayer(): FeedItem[] {
   feed.push({ id: "discovery_001", type: "signal", score: 0.51 });
   return feed.sort((a, b) => b.score - a.score);
 }
+export type { FeedItem } from "@/lib/feed/personalize/engine";

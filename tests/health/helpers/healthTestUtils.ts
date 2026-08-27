@@ -6,6 +6,6 @@ export const BASE =
 
 export function withHealthServer() {
   beforeAll(async () => {
-    await ensureServerReady(BASE);
+    await ensureServerReady({ baseUrl: BASE });
   });
 }

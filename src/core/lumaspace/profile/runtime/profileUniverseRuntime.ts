@@ -1,15 +1,13 @@
-import {
-  createHeroSpark
-} from "../render/heroRenderer";
+import { createHeroRenderer } from "../render/heroRenderer";
 
 import {
-  createTimelineWaves
+  createTimelineWave
 } from "../render/timelineWave";
 
 export function runProfileUniverseRuntime() {
   return {
     active: true,
-    hero: createHeroSpark(),
-    waves: createTimelineWaves()
+    hero: createHeroRenderer(),
+    waves: createTimelineWave()
   };
 }

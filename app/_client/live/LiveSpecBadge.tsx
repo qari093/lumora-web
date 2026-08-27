@@ -12,8 +12,14 @@ type SpecV2 = {
 
 type Manifest = {
   ok?: boolean;
-  emojis?: { count?: number };
-  avatars?: { count?: number };
+  counts?: {
+    emojis?: number;
+    avatars?: number;
+  };
+  emojis?: Array<{
+    id?: string;
+    url?: string;
+  }>;
   ts?: string;
 };
 
@@ -46,8 +52,8 @@ export default function LiveSpecBadge(props: { mode?: BadgeMode }) {
       setSpec(s?.spec ?? null);
       setManifest(m ?? null);
 
-      const e = m?.emojis?.count;
-      const a = m?.avatars?.count;
+      const e = m?.counts?.emojis;
+      const a = m?.counts?.avatars;
       const okPersona = e === 480 && a === 840;
 
       if (!s?.spec) setWarn("API warn: portal-spec");
@@ -66,8 +72,8 @@ export default function LiveSpecBadge(props: { mode?: BadgeMode }) {
     return `${app} · ${feature}`;
   }, [spec]);
 
-  const e = manifest?.emojis?.count;
-  const a = manifest?.avatars?.count;
+  const e = manifest?.counts?.emojis;
+  const a = manifest?.counts?.avatars;
   const personaOk = e === 480 && a === 840;
 
   if (mode === "compact") {

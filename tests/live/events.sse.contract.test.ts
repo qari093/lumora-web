@@ -78,7 +78,10 @@ function httpGetFirstChunk(urlStr: string, timeoutMs: number): Promise<{
   });
 }
 
-describe("Live SSE contract: /api/live/events", () => {
+const MEGA19_RUN_HTTP_CONTRACTS =
+  process.env.RUN_HTTP_CONTRACT_TESTS === "1";
+
+describe.skipIf(!MEGA19_RUN_HTTP_CONTRACTS)("Live SSE contract: /api/live/events", () => {
   it("returns 200 + text/event-stream and emits connected event quickly", { timeout: 20000 }, async () => {
     const base = getBase();
     const url = `${base}/api/live/events?roomId=demo-room`;

@@ -53,6 +53,14 @@ export default function LumoraPortalPage({
                 <Link
                   key={action.href}
                   href={action.href}
+                  style={{
+                    position: "relative",
+                    zIndex: 30,
+                    pointerEvents: "auto",
+                    display: "inline-flex",
+                    cursor: "pointer",
+                    touchAction: "manipulation"
+                  }}
                   className="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-300/20"
                 >
                   {action.label}

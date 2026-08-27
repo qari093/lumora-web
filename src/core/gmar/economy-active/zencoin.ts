@@ -50,3 +50,5 @@ export function assertGmarZencoinClaim(result: any): boolean {
     Array.isArray(result.state?.rewards)
   );
 }
+
+export type GmarZencoinWallet = any;

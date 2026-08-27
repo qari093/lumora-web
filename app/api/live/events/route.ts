@@ -38,7 +38,6 @@ export async function GET(req: NextRequest) {
         }
       }, 7000);
 
-      // @ts-expect-error: underlying runtime supports cancel
       (controller as any).closeWith = () => {
         clearInterval(timer);
         unsubscribeSSE(subId);

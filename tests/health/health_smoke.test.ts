@@ -35,7 +35,7 @@ afterAll(async () => {
   }
 });
 
-const BASE = process.env.LUMORA_BASE_URL || `${BASE}`;
+const BASE: string = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
 
 function baseUrl(): string {
   const u = process.env.LUMORA_TEST_BASE_URL;

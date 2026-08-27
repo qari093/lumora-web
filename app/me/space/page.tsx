@@ -1,12 +1,7 @@
-import VibeWall from "@/components/lumaspace/VibeWall";
-import VibeWallMount from "@/components/lumaspace/VibeWallMount";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
 export default function MeSpacePage() {
-  return (
-    <>
-      <VibeWallMount />
-      <div style={{ padding: 24 }}>My space placeholder.</div>
-    </>
-  );
+  redirect("/lumaspace");
 }
-
-

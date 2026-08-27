@@ -1,4 +1,4 @@
-import { createCampaign, type CampaignInput } from "@/lib/ads/campaign";
+import { createCampaign, type CampaignInput, type CampaignRecord } from "@/lib/ads/campaign";
 
 export type CampaignCreationInput = CampaignInput & {
   creativeId?: string | null;
@@ -8,7 +8,7 @@ export type CampaignCreationInput = CampaignInput & {
 export type CampaignCreationResult =
   | {
       ok: true;
-      campaign: ReturnType<typeof createCampaign> extends { ok: true; campaign: infer T } ? T : never;
+      campaign: CampaignRecord;
       creativeId: string;
       targetPortals: string[];
     }

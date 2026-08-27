@@ -136,7 +136,6 @@ export function runExternalConnectivityJourney(origin = "https://lumora.app"): S
       metadata: {
         mood: "wonder",
         atmosphere: "cyan-stardust",
-        creatorId: "visual-audit",
       },
     },
     "external_qr",

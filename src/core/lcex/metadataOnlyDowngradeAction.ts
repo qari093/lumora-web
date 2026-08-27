@@ -8,7 +8,7 @@ export type MetadataOnlyDowngradeInput = {
     | "missing_media"
     | "removed_media"
     | "degraded_source"
-    | "manual_review";
+    ;
   triggeredBy:
     | "rights"
     | "culture"

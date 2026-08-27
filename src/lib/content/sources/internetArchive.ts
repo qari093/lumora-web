@@ -1,7 +1,7 @@
 export async function fetchInternetArchive() {
   try {
     const url = "https://archive.org/advancedsearch.php?q=mediatype:movies+AND+licenseurl:(*creativecommons.org/publicdomain*)&output=json&rows=10";
-    const res = await fetch(url, { timeout: 10000 });
+    const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
     const json: any = await res.json();
 
     return (json.response?.docs || []).map((d: any) => ({

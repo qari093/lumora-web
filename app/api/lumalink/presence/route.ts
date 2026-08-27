@@ -1,49 +1,54 @@
 import { NextResponse } from "next/server";
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import {
-  getPresence,
-  setPresence,
-} from "@/src/core/lumalink/runtime";
+  getPresenceForActor,
+  setPresenceForActor,
+} from "@/src/core/lumalink/persistence";
 
 export async function GET(req: Request) {
-  const userId = new URL(req.url).searchParams.get("userId") ?? "";
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
 
-  if (!userId.trim()) {
+  try {
+    const targetUserId = new URL(req.url).searchParams.get("userId");
+
+    const presence = await getPresenceForActor(
+      auth.identity.userId,
+      targetUserId,
+    );
+
     return NextResponse.json(
-      { ok: false, error: "userId_required" },
-      { status: 400 },
+      { ok: true, presence },
+      { headers: userPrivateNoStoreHeaders() },
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { ok: false, error: error instanceof Error ? error.message : "presence_read_failed" },
+      { status: 403, headers: userPrivateNoStoreHeaders() },
     );
   }
-
-  return NextResponse.json({
-    ok: true,
-    presence: getPresence(userId),
-  });
 }
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
+
   const body = await req.json().catch(() => null);
 
-  if (!["offline", "away", "online"].includes(body?.status)) {
-    return NextResponse.json(
-      { ok: false, error: "invalid_presence_status" },
-      { status: 400 },
-    );
-  }
-
   try {
-    const presence = setPresence({
-      userId: body?.userId,
-      status: body.status,
-    });
+    const presence = await setPresenceForActor(
+      auth.identity.userId,
+      body?.status,
+    );
 
-    return NextResponse.json({ ok: true, presence });
+    return NextResponse.json(
+      { ok: true, presence },
+      { headers: userPrivateNoStoreHeaders() },
+    );
   } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : "presence_update_failed",
-      },
-      { status: 400 },
+      { ok: false, error: error instanceof Error ? error.message : "presence_update_failed" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
 }

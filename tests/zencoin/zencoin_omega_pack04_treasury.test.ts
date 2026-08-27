@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   treasuryRuntime,
   treasuryHealthy
-} from "@/core/zencoin/treasury/treasuryRuntime";
+} from "@/src/core/zencoin/treasury/treasuryRuntime";
 
 describe("Zencoin Ω Pack 04 — Treasury", () => {
   it("supports treasury systems", () => {

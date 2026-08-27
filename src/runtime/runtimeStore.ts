@@ -20,3 +20,8 @@ export async function getSignals() {
     orderBy: { createdAt: "asc" },
   });
 }
+
+export async function clearSignals() {
+  await prisma.runtimeSignal.deleteMany({});
+  bumpRuntimeVersion();
+}

@@ -1,3 +1,5 @@
+import { requireUserSession } from "@/src/lib/auth/requireUserSession";
+import { notFound, redirect } from "next/navigation";
 export const runtime = "nodejs";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +11,16 @@ export default async function WalletDetailPage({
 }: {
   params: { ownerId: string };
 }) {
+  const auth = await requireUserSession();
+  if (!auth.ok) {
+    redirect("/login?callbackUrl=/wallets");
+  }
+
   const ownerId = decodeURIComponent(params.ownerId);
+
+  if (ownerId !== auth.identity.userId) {
+    notFound();
+  }
   const wallet = await prisma.wallet.findFirst({
     where: { ownerId, currency: "EUR" },
   });

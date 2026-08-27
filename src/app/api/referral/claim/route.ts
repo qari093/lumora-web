@@ -7,5 +7,5 @@ export async function POST(req: Request){
   if(!res.ok) return NextResponse.json(res, { status:400 });
   for(let i=0;i<res.addedJoiner;i++) await award("LIKE");
   for(let i=0;i<res.addedOwner;i++) await award("LIKE");
-  return NextResponse.json({ ok:true, ...res });
+  return NextResponse.json({ ...res, ok: true });
 }

@@ -1,5 +1,5 @@
-. "$(cd "$(dirname "$0")/../.."  pwd)/.lumora_safe_bootstrap.sh"
 #!/bin/sh
+. "$(cd "$(dirname "$0")/../.." && pwd)/.lumora_safe_bootstrap.sh"
 set -euo pipefail
 
 echo "Live Restart+Smoke — start"
@@ -39,7 +39,7 @@ node - <<'NODE'
 const http=require("http");
 http.get("http://127.0.0.1:3000/api/persona/manifest",(res)=>{
   let d=""; res.on("data",c=>d+=c); res.on("end",()=>{
-    try{ const j=JSON.parse(d); console.log(`✓ emojis=${j?.emojis?.count} avatars=${j?.avatars?.count}`); }
+    try{ const j=JSON.parse(d); console.log(`✓ emojis=${j?.counts?.emojis} avatars=${j?.counts?.avatars}`); }
     catch{ console.log("⚠ parse failed"); }
   });
 }).on("error",()=>console.log("⚠ request failed"));

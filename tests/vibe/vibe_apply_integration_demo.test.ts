@@ -43,7 +43,17 @@ function assertIdempotentApply(json: any, slug: string) {
   expect(["applied", "duplicate_vibe"]).toContain(normalized);
 }
 
-describe("Vibe apply route integration (in-process)", () => {
+const MEGA19_TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL?.trim() || "";
+
+const MEGA19_HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(MEGA19_TEST_DATABASE_URL);
+
+if (MEGA19_HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = MEGA19_TEST_DATABASE_URL;
+}
+
+describe.skipIf(!MEGA19_HAS_SAFE_TEST_DATABASE)("Vibe apply route integration (in-process)", () => {
   it("accepts apply with watchMs >= 5000 (using DB slug)", async () => {
     const route = await import("../../app/api/vibe/apply/route");
     const slug = await pickExistingVibeSlug();

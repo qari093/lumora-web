@@ -15,7 +15,6 @@ describe("ranking engagement boost caps", () => {
 
   it("handles non-finite base score safely", () => {
     const r = applyEngagementBoost({
-      // @ts-expect-error
       baseScore: NaN,
       engagement: { xpBalance: 100, harmonyLevel: 10, squadScore: 5 },
     });

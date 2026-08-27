@@ -155,3 +155,18 @@ export function getFypFullscreenSummary() {
     safeMode: true
   };
 }
+
+export const fullscreenSourceFeed = fypFullscreenSources;
+
+export function getFullscreenSourceFeedSummary() {
+  const summary = getFypFullscreenSummary();
+
+  return {
+    ...summary,
+    directVideoAssets: new Set(
+      fypFullscreenSources
+        .map((item) => item.videoUrl)
+        .filter((url) => url.toLowerCase().endsWith(".mp4")),
+    ).size,
+  };
+}

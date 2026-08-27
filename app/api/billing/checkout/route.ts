@@ -1,7 +1,10 @@
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import { NextRequest, NextResponse } from 'next/server';
 import { reqId } from '@/src/lib/reqid';
 
 export async function POST(req: NextRequest) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
   const id = reqId();
   const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SK;
   const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
@@ -11,7 +14,7 @@ export async function POST(req: NextRequest) {
     body = await req.json();
   } catch {}
 
-  const ownerId = typeof body?.ownerId === 'string' ? body.ownerId : '';
+  const ownerId = auth.identity.userId;
   const euros = typeof body?.euros === 'number' ? body.euros : NaN;
   const note = typeof body?.note === 'string' ? body.note : '';
 

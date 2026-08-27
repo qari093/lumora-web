@@ -9,6 +9,18 @@ export async function GET(_req: Request, ctx: { params: Promise<Params> | Params
   const id = (params?.id || "").toString();
   if (!id) return NextResponse.json({ ok: false, error: "id_required" }, { status: 400 });
 
-  // Launch-safe stub: return empty reactions list.
-  return NextResponse.json({ ok: true, roomId: id, reactions: [], ts: new Date().toISOString() }, { status: 200 });
+  // Soft-launch feature freeze: an empty list is not represented as
+  // persisted reaction state.
+  return NextResponse.json(
+    {
+      ok: true,
+      roomId: id,
+      reactions: [],
+      persisted: false,
+      featureState: "deferred",
+      reason: "reaction_persistence_not_active",
+      ts: new Date().toISOString(),
+    },
+    { status: 200 },
+  );
 }

@@ -1,3 +1,9 @@
+/*
+ FYP shell isolation is runtime-managed by FypShellCleaner:
+ body.lumora-fyp-active
+ nav[aria-label="Global portal navigation"]
+ button[data-testid="lumora-home-beacon"]
+*/
 .shell {
   min-height: 100svh;
   background: #000;
@@ -150,7 +156,7 @@
   font-size: 28px;
   font-weight: 900;
   box-shadow: 0 10px 34px rgba(0,0,0,0.25);
-  backdrop-filter: blur(12px);
+  backdrop-filter: none;
 }
 
 .rightRail small {
@@ -386,7 +392,7 @@
   border: 1px solid rgba(255,255,255,.12);
   border-radius: 999px;
   background: rgba(2,6,23,.36);
-  backdrop-filter: blur(18px);
+  backdrop-filter: none;
 }
 
 .laneSwitch button {
@@ -419,7 +425,7 @@
   font-weight: 800;
   letter-spacing: .04em;
   text-transform: uppercase;
-  backdrop-filter: blur(14px);
+  backdrop-filter: none;
 }
 
 .retentionRing {
@@ -444,7 +450,7 @@
   color: white;
   background: radial-gradient(circle at 35% 20%, rgba(125,249,255,.28), rgba(2,6,23,.42));
   box-shadow: 0 0 24px rgba(34,211,238,.13);
-  backdrop-filter: blur(16px);
+  backdrop-filter: none;
 }
 
 .retentionRing button {
@@ -494,7 +500,7 @@
   color: white;
   background: rgba(2,6,23,.58);
   box-shadow: 0 0 30px rgba(34,211,238,.16);
-  backdrop-filter: blur(20px);
+  backdrop-filter: none;
 }
 
 .deepDivePanel strong {
@@ -532,7 +538,7 @@
   padding: 10px;
   background: rgba(2,6,23,.42);
   box-shadow: 0 0 28px rgba(34,211,238,.12);
-  backdrop-filter: blur(18px);
+  backdrop-filter: none;
 }
 
 .traceDock div {
@@ -630,7 +636,7 @@
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.02em;
-  backdrop-filter: blur(14px);
+  backdrop-filter: none;
   white-space: nowrap;
 }
 
@@ -675,7 +681,7 @@
   font-size: 22px;
   font-weight: 900;
   box-shadow: 0 10px 34px rgba(0,0,0,0.38);
-  backdrop-filter: blur(16px);
+  backdrop-filter: none;
 }
 
 .retentionRing small {
@@ -730,7 +736,7 @@
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(7,8,13,0.66), rgba(30,20,48,0.46));
-  backdrop-filter: blur(18px);
+  backdrop-filter: none;
   box-shadow: 0 18px 50px rgba(0,0,0,0.38);
 }
 
@@ -772,7 +778,7 @@
   min-height: calc(66px + env(safe-area-inset-bottom)) !important;
   padding: 7px 12px calc(7px + env(safe-area-inset-bottom)) !important;
   background: rgba(0,0,0,0.78) !important;
-  backdrop-filter: blur(18px);
+  backdrop-filter: none;
 }
 
 .tiktokBottom a {
@@ -806,7 +812,7 @@
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: 20px;
   background: rgba(8,9,14,0.72);
-  backdrop-filter: blur(18px);
+  backdrop-filter: none;
   color: #fff;
   box-shadow: 0 20px 70px rgba(0,0,0,0.42);
 }
@@ -877,7 +883,7 @@
   font-size: 12px !important;
   font-weight: 850 !important;
   letter-spacing: 0.01em !important;
-  backdrop-filter: blur(14px) !important;
+  backdrop-filter: none !important;
   box-shadow: 0 8px 26px rgba(0,0,0,0.22), inset 0 0 22px rgba(82,224,255,0.12) !important;
 }
 
@@ -948,7 +954,7 @@
   font-size: 12px !important;
   font-weight: 850 !important;
   letter-spacing: 0.01em !important;
-  backdrop-filter: blur(14px) !important;
+  backdrop-filter: none !important;
   box-shadow: 0 8px 26px rgba(0,0,0,0.24), inset 0 0 22px rgba(82,224,255,0.12) !important;
 }
 
@@ -989,7 +995,7 @@
   font-size: 12px !important;
   font-weight: 800 !important;
   white-space: nowrap !important;
-  backdrop-filter: blur(12px) !important;
+  backdrop-filter: none !important;
 }
 
 .laneSwitch button[data-active="true"] {

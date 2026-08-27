@@ -12,3 +12,5 @@ export interface RitualRuntime {
   active: boolean;
   portalId: string;
 }
+
+export type AuraWeather = any;

@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 type Row = {
-  id: number;
+  id: string;
   createdAt: Date;
   type: string;
   emotion: string | null;

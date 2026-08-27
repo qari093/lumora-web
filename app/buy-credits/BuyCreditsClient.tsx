@@ -1,55 +1,36 @@
-// app/buy-credits/page.tsx
 "use client";
-import React, { useState } from "react";
 
-export default function BuyCreditsPage() {
-  const [loading, setLoading] = useState(false);
-  const [state, setState] = useState<string | null>(null);
+const CREDIT_OPTIONS = [100, 500, 1000, 2500];
 
-  React.useEffect(() => {
-    const url = new URL(window.location.href);
-    const s = url.searchParams.get("state");
-    if (s) setState(s);
-  }, []);
-
-  async function checkout(credits: number) {
-    setLoading(true);
-    try {
-      // TODO: plug in real user id from auth/session
-      const userId = "demo-user-123";
-      const res = await fetch("/api/stripe/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, credits }),
-      });
-      const json = await res.json();
-      if (!res.ok || !json?.url) throw new Error(json?.error || "Failed to create session");
-      window.location.href = json.url;
-    } catch (e: any) {
-      alert(e?.message || "Error");
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export default function BuyCreditsClient() {
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui, -apple-system, Segoe UI, Arial" }}>
-      <h1 style={{ fontWeight: 800, marginBottom: 12 }}>Buy Lumora Credits</h1>
-      <p style={{ opacity: 0.8, marginBottom: 18 }}>Choose a pack — you’ll be redirected to Stripe Checkout.</p>
+    <section
+      data-buy-credits-production-state="temporarily-unavailable"
+      className="mx-auto max-w-3xl px-6 py-10"
+    >
+      <h1 className="text-2xl font-semibold">Buy Credits</h1>
 
-      {state === "success" && <p style={{ color: "green" }}>Payment successful! Credits will appear shortly.</p>}
-      {state === "cancel" && <p style={{ color: "tomato" }}>Payment canceled.</p>}
+      <p className="mt-3 text-sm opacity-80">
+        Credit purchases are temporarily unavailable during private beta while
+        the authenticated credits checkout flow is being finalized.
+      </p>
 
-      <div style={{ display: "flex", gap: 12 }}>
-        {[100, 250, 500].map(n => (
-          <button key={n}
-            onClick={() => checkout(n)}
-            disabled={loading}
-            style={{ padding: "10px 14px", borderRadius: 10, fontWeight: 700 }}>
-            {n} credits
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {CREDIT_OPTIONS.map((credits) => (
+          <button
+            key={credits}
+            type="button"
+            disabled
+            aria-disabled="true"
+            className="rounded-xl border px-4 py-3 text-left opacity-60"
+          >
+            {credits} credits
+            <span className="mt-1 block text-xs">
+              Purchasing temporarily unavailable
+            </span>
           </button>
         ))}
       </div>
-    </main>
+    </section>
   );
 }

@@ -1,3 +1,4 @@
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
@@ -5,9 +6,23 @@ export async function GET(
   req: Request,
   ctx: { params: Promise<{ ownerId: string }> }
 ) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
   try {
     const { ownerId } = await ctx.params;
     const userId = (ownerId || "").trim();
+    if (userId !== auth.identity.userId) {
+      return new Response(
+        JSON.stringify({ ok: false, error: "forbidden_owner_scope" }),
+        {
+          status: 403,
+          headers: {
+            "content-type": "application/json",
+            ...userPrivateNoStoreHeaders(),
+          },
+        },
+      );
+    }
     const { searchParams } = new URL(req.url);
     const limit = Math.min(Math.max(Number(searchParams.get("limit") || "20"), 1), 100);
 

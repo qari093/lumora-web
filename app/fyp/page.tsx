@@ -7,9 +7,12 @@ export default function FypPage() {
   const feed = getProductionFypFeed();
 
   return (
-    <FypOmegaPlayer
-      initialFeed={feed.ok ? feed.feed : []}
-      source={feed.source}
-    />
+    <>
+      {/* LUMORA_PORTAL_ALIVE_FYP */}
+      <FypOmegaPlayer
+        initialFeed={feed.ok ? feed.feed : []}
+        source={feed.source}
+      />
+    </>
   );
 }

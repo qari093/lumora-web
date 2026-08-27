@@ -20,7 +20,7 @@ export default function ZENPreview({ email }: Props) {
       setLoading(true);
       setErr(null);
       const _u = `/api/lumaspace/zen/preview?email=${encodeURIComponent(email)}`;
-      const r = await fetch(u, { cache: "no-store" });
+      const r = await fetch(_u, { cache: "no-store" });
       const j = await r.json();
       if (!j.ok) throw new Error(j.error || "failed");
       setState(j.zen);

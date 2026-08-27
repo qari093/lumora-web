@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runModerationCheck } from "@/lib/moderation/moderationCheck";
+import {
+  evaluateConsequentialAutomationBoundary,
+} from "@/src/core/governance/consequentialAutomationBoundary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,6 +18,22 @@ export async function POST(req: NextRequest) {
       {
         ok: true,
         source: "lumora_moderation_v1",
+        constitutionalBoundary: {
+          decisionClass: result.allowed ? "advisory" : "temporary_safety_gate",
+          finalConsequentialActionAuthorized:
+            evaluateConsequentialAutomationBoundary({
+              decisionClass: result.allowed
+                ? "advisory"
+                : "temporary_safety_gate",
+              producedByAutomation: true,
+              humanReviewed: false,
+            }).finalConsequentialActionAuthorized,
+          humanReviewRequired: !result.allowed,
+          automatedDecisionRemainsNonFinal: true,
+          remedyMustRemainAvailable: true,
+          governanceAuthorityMutationAllowed: false,
+          secretReputationMutationAllowed: false,
+        },
         ...result,
       },
       { status: result.allowed ? 200 : 422 }

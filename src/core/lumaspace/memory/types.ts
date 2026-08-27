@@ -12,3 +12,5 @@ export interface MemoryRuntime {
   active: boolean;
   vaultId: string;
 }
+
+export type ChronicleEntry = any;

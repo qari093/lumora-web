@@ -10,10 +10,10 @@ export default function Sparkline({ data, width=200, height=48, stroke="rgba(255
   const pts = data.map((v,i)=>{
     const _x = pad + (i*(w-2*pad))/(data.length-1||1);
     const _y = h - pad - norm(v)*(h-2*pad);
-    return ;
+    return `${_x},${_y}`;
   }).join(" ");
   return (
-    <svg width={w} height={h} viewBox={} role="img" aria-label="sparkline">
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} role="img" aria-label="sparkline">
       <polyline points={pts} fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );

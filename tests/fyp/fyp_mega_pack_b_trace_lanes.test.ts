@@ -1,14 +1,19 @@
-import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { createTraceSignal, normalizeLane, shouldOfferStoryContinuation, summarizeTrace } from "@/src/core/fyp/lumoraTrace";
+import { describe, expect, it } from "vitest";
+import {
+  normalizeLane,
+  shouldOfferStoryContinuation,
+  summarizeTrace,
+  type LumoraTraceEvent,
+} from "@/src/core/fyp/lumoraTrace";
 
 const component = readFileSync("app/fyp/FypAutoplayFeed.tsx", "utf8");
 const styles = readFileSync("app/fyp/styles.module.css", "utf8");
 
 describe("FYP Mega Pack B Lumora Trace + Emotional Lanes", () => {
-  it("adds Lumora Trace runtime instead of generic fullscreen clone runtime", () => {
-    expect(component).toContain('data-fyp-runtime="lumora-depthfeed-trace"');
-    expect(component).toContain("Lumora Trace · attention becomes direction");
+  it("keeps the canonical fullscreen runtime with Lumora DepthFeed trace attached", () => {
+    expect(component).toContain('data-fyp-runtime="fullscreen-native-autoplay"');
+    expect(component).toContain('data-depthfeed-runtime="lumora-depthfeed-trace"');
     expect(component).toContain("Continue this journey?");
   });
 
@@ -29,16 +34,42 @@ describe("FYP Mega Pack B Lumora Trace + Emotional Lanes", () => {
     expect(component).toContain("playsInline");
   });
 
-  it("summarizes curiosity trace deterministically", () => {
-    const signals = [
-      createTraceSignal({ videoId: "a", lane: "science", completed: true, watchedMs: 8000 }),
-      createTraceSignal({ videoId: "b", lane: "science", deepDive: true, watchedMs: 6000 }),
-      createTraceSignal({ videoId: "c", lane: "archive", saved: true, watchedMs: 4000 })
+  it("summarizes canonical Lumora Trace events deterministically", () => {
+    const timestamp = new Date(0).toISOString();
+    const signals: LumoraTraceEvent[] = [
+      {
+        sourceId: "a",
+        lane: normalizeLane("learn"),
+        watchRatio: 0.8,
+        saved: false,
+        replayed: false,
+        deepDiveOpened: false,
+        timestamp,
+      },
+      {
+        sourceId: "b",
+        lane: normalizeLane("learn"),
+        watchRatio: 0.6,
+        saved: false,
+        replayed: false,
+        deepDiveOpened: true,
+        timestamp,
+      },
+      {
+        sourceId: "c",
+        lane: normalizeLane("explore"),
+        watchRatio: 0.4,
+        saved: true,
+        replayed: false,
+        deepDiveOpened: false,
+        timestamp,
+      },
     ];
+
     const summary = summarizeTrace(signals);
-    expect(normalizeLane("science")).toBe("learn");
+    expect(normalizeLane("learn")).toBe("learn");
     expect(summary.dominantLane).toBe("learn");
     expect(summary.curiosityScore).toBeGreaterThan(20);
-    expect(shouldOfferStoryContinuation(signals, "learn")).toBe(true);
+    expect(shouldOfferStoryContinuation(signals)).toBe(true);
   });
 });

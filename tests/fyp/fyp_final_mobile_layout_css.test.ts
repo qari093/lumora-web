@@ -10,7 +10,8 @@ describe("FYP final mobile layout CSS", () => {
     expect(css).toContain(".laneSwitch button[data-active=\"true\"]");
     expect(css).toContain(".retentionRing");
     expect(css).toContain(".traceDock");
-    expect(css).toContain("backdrop-filter: blur(18px)");
+    expect(css).toContain("backdrop-filter: none");
+    expect(css).not.toContain("blur(");
     expect(css).toContain("env(safe-area-inset-bottom)");
   });
 });

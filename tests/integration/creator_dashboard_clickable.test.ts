@@ -11,6 +11,6 @@ describe("Creator dashboard clickable UI", () => {
     expect(client).toContain("onClick");
     expect(client).toContain("setTab");
     expect(client).toContain("Silent Ovation");
-    expect(client).toContain("Experience a Circle");
+    expect(client).toContain("Next Circle: queued for the daily Anchor Circle");
   });
 });

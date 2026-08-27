@@ -22,8 +22,13 @@ describe("Zendoro Pack 1B/10 — Export Warning Cleanup", () => {
   });
 
   it("restores trust/geo/eco/safety exports", () => {
-    expect(calculateTrustScore({ reports: 1 })).toBeLessThan(100);
-    expect(canAccessSurgeFeatures({ trustScore: 90 })).toBe(true);
+    expect(calculateTrustScore({ reports: 1 }).score).toBeLessThan(100);
+    expect(
+        canAccessSurgeFeatures({
+          score: 90,
+          level: "high",
+        })
+      ).toBe(true);
     expect(getClientIp()).toBe("127.0.0.1");
     expect(geoByIp("1.1.1.1").currency).toBe("EUR");
     expect(currencyFor("DE")).toBe("EUR");

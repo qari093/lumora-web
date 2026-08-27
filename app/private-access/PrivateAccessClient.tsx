@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-export default function PrivateAccessPage(): JSX.Element {
+export default function PrivateAccessPage(): React.ReactElement {
   const [email, setEmail] = React.useState("");
   const [token, setToken] = React.useState("");
   const [status, setStatus] = React.useState<string | null>(null);

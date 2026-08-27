@@ -9,7 +9,7 @@ describe("GMAR nested player compatibility", () => {
     const state = createInitialGmarGameState("user-1");
 
     expect(state.playerId).toBe("user-1");
-    expect(state.player.playerId).toBe("user-1");
+    expect(state.player.playerId).toBe("gmar_user-1");
     expect(state.player.userId).toBe("user-1");
     expect(() => assertGmarGameState(state)).not.toThrow();
   });

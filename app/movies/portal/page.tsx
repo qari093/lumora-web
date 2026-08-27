@@ -16,7 +16,13 @@ export default function Page() {
       (<div style={{ display: "grid", gap: 10 }}>
       <div style={{ fontSize: 13, opacity: 0.85 }}>Demo movies: <b>{demo.movies.length}</b></div>
       <div style={{ display: "grid", gap: 10 }}>
-        {demo.movies.map((m) => (
+        {demo.movies.map((movie) => {
+          const m = movie as (typeof demo.movies)[number] & {
+            year?: number | string;
+            genre?: string;
+          };
+
+          return (
           <a key={m.id} href={`/movies/watch/${m.id}`} style={{ textDecoration: "none", color: "inherit" }}>
             <div style={{ padding: 12, borderRadius: 14, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
               <div style={{ display: "grid", gap: 4 }}>
@@ -26,7 +32,8 @@ export default function Page() {
               <div aria-hidden style={{ fontSize: 22 }}>🎞️</div>
             </div>
           </a>
-        ))}
+          );
+        })}
       </div>
     </div>)
     </PortalShell>

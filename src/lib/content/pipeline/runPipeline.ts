@@ -12,6 +12,15 @@ export function runLumoraPipeline(items: RawSourceClip[]): PipelineResult {
       hasAudio: Boolean(item.hasAudio),
       playableUrl: item.playableUrl || item.localUrl || item.embedUrl,
       commercialUse: true,
+        sourceId: item.id,
+        sourceName: item.source,
+          sourceUrl:
+            item.sourceUrl ||
+            item.playableUrl ||
+            item.localUrl ||
+            item.embedUrl ||
+            "",
+          title: item.title ?? item.id,
     });
 
     const quality = validateSourceClipQuality({

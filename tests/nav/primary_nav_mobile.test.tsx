@@ -8,7 +8,9 @@ describe("PrimaryNav (mobile behavior)", () => {
     render(<PrimaryNav />);
     const labels = ["FYP", "GMAR", "NEXA", "Videos", "Movies", "Celebrations", "Share", "Live"];
     labels.forEach(label => {
-      expect(screen.getByText(label)).toBeTruthy();
+      expect(
+        screen.getByRole("link", { name: label })
+      ).toBeTruthy();
     });
   });
 });

@@ -20,6 +20,18 @@ export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const userId = url.searchParams.get("userId");
+  const requestedLimit = Number(
+    url.searchParams.get("limit") || "20"
+  );
+  const limit = Math.max(
+    1,
+    Math.min(
+      100,
+      Number.isFinite(requestedLimit)
+        ? Math.trunc(requestedLimit)
+        : 20
+    )
+  );
 
   if (!userId) {
     return NextResponse.json({
@@ -32,6 +44,7 @@ export async function GET(req: Request) {
     ok: true,
     enabled: true,
     items: [],
+    limit,
     ts: Date.now()
   });
 }

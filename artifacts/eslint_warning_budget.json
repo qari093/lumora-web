@@ -1,14 +1,42 @@
 {
   "ok": false,
   "cap": 25,
-  "warnings": 30,
+  "warnings": 96,
   "hits": [
     {
-      "file": "app/(diag)/offline-diagnostics/page.tsx",
-      "line": 102,
+      "file": "app/(diag)/offline-diagnostics/OfflineDiagnosticsClient.tsx",
+      "line": 98,
       "col": 3,
-      "message": "The 'refresh' function makes the dependencies of useEffect Hook (at line 168) change on every render. To fix this, wrap the definition of 'refresh' in its own useCallback() Hook.",
+      "message": "The 'refresh' function makes the dependencies of useEffect Hook (at line 164) change on every render. To fix this, wrap the definition of 'refresh' in its own useCallback() Hook.",
       "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/_client/offline-player.tsx",
+      "line": 18,
+      "col": 9,
+      "message": "'canceled' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/_modules/avatars/holo-avatar.tsx",
+      "line": 5,
+      "col": 10,
+      "message": "'selectAvatar' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/_modules/avatars/holo-avatar.tsx",
+      "line": 5,
+      "col": 24,
+      "message": "'setMood' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/admin/AdminClient.tsx",
+      "line": 23,
+      "col": 6,
+      "message": "'ApiError' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "app/admin/celebrations/moderation/ParticipantsPanel.tsx",
@@ -18,32 +46,172 @@
       "rule": "react-hooks/exhaustive-deps"
     },
     {
-      "file": "app/api/health/route.ts",
+      "file": "app/admin/testers/TestersTable.tsx",
+      "line": 140,
+      "col": 9,
+      "message": "The 'rows' logical expression could make the dependencies of useMemo Hook (at line 162) change on every render. To fix this, wrap the initialization of 'rows' in its own useMemo() Hook.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/api/billing/checkout/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/billing/checkout/route.ts",
+      "line": 46,
+      "col": 12,
+      "message": "'e' is defined but never used. Allowed unused caught errors must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/coin/transfer/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/fyp/native-feed/route.ts",
+      "line": 26,
+      "col": 12,
+      "message": "'e' is defined but never used. Allowed unused caught errors must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/interaction/not-interested/route.ts",
+      "line": 15,
+      "col": 12,
+      "message": "'e' is defined but never used. Allowed unused caught errors must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/kyc/request/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/kyc/status/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/kyc/status/route.ts",
+      "line": 9,
+      "col": 11,
+      "message": "'url' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/live/bookmark/route.ts",
+      "line": 24,
+      "col": 12,
+      "message": "'e' is defined but never used. Allowed unused caught errors must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/nexa/diag/route.ts",
       "line": 1,
       "col": 10,
-      "message": "'withTelemetry' is defined but never used. Allowed unused vars must match /^_/u.",
+      "message": "'productionDebugGate' is defined but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
-      "file": "app/api/portals/alive/route.ts",
-      "line": 56,
+      "file": "app/api/privacy/consent/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/privacy/consent/route.ts",
+      "line": 8,
+      "col": 9,
+      "message": "'url' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/privacy/export/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/api/privacy/export/route.ts",
+      "line": 10,
       "col": 11,
-      "message": "'ok' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "message": "'body' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
-      "file": "app/celebrations/[slug]/page.tsx",
+      "file": "app/celebrations/[slug]/SlugClient.tsx",
       "line": 25,
       "col": 3,
       "message": "The 'load' function makes the dependencies of useEffect Hook (at line 38) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
       "rule": "react-hooks/exhaustive-deps"
     },
     {
-      "file": "app/creator/review/page.tsx",
-      "line": 23,
+      "file": "app/creator/review/CreatorReviewClient.tsx",
+      "line": 19,
       "col": 3,
-      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 34) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
+      "message": "The 'load' function makes the dependencies of useEffect Hook (at line 30) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
       "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/dash/coin/page.tsx",
+      "line": 8,
+      "col": 9,
+      "message": "'demoUser' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/fyp/FypAutoplayFeed.tsx",
+      "line": 145,
+      "col": 5,
+      "message": "React Hook useMemo has unnecessary dependencies: 'activeItem' and 'selectedLane'. Either exclude them or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/fyp/FypAutoplayFeed.tsx",
+      "line": 434,
+      "col": 36,
+      "message": "The ref value 'startedAtRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'startedAtRef.current' to a variable inside the effect, and use that variable in the cleanup function.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "app/fyp/FypOmegaPlayer.tsx",
+      "line": 280,
+      "col": 30,
+      "message": "'active' is defined but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/fyp94/page.tsx",
+      "line": 15,
+      "col": 7,
+      "message": "'FYP94_LEGACY_FALLBACK_CONTRACT' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/fyp94/page.tsx",
+      "line": 17,
+      "col": 7,
+      "message": "'FYP94_FEED_INTELLIGENCE_CONTRACT' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "app/fyp94/page.tsx",
+      "line": 34,
+      "col": 10,
+      "message": "'writeFyp94SeenId' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "app/me/space/ZENPreview.tsx",
@@ -51,13 +219,6 @@
       "col": 3,
       "message": "The 'load' function makes the dependencies of useEffect Hook (at line 36) change on every render. To fix this, wrap the definition of 'load' in its own useCallback() Hook.",
       "rule": "react-hooks/exhaustive-deps"
-    },
-    {
-      "file": "app/me/space/page.tsx",
-      "line": 1,
-      "col": 8,
-      "message": "'VibeWall' is defined but never used. Allowed unused vars must match /^_/u.",
-      "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
@@ -82,84 +243,105 @@
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 47,
+      "line": 46,
       "col": 7,
       "message": "'vibeLiteOn' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 50,
+      "line": 49,
       "col": 10,
       "message": "'vibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 50,
+      "line": 49,
       "col": 20,
       "message": "'setVibeOpen' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 51,
+      "line": 50,
       "col": 10,
       "message": "'vibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 51,
+      "line": 50,
       "col": 20,
       "message": "'setVibeBusy' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 52,
+      "line": 51,
       "col": 9,
       "message": "'lastVibeAtRef' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 53,
+      "line": 52,
       "col": 9,
       "message": "'cooldownMs' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/LumoraVideoInterface.tsx",
-      "line": 75,
+      "line": 100,
+      "col": 52,
+      "message": "React Hook React.useEffect has a missing dependency: 'refreshLedger'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "components/fyp/FypContentEngineFeed.tsx",
+      "line": 16,
+      "col": 10,
+      "message": "'feedStatus' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/home-beacon/HomeBeacon.tsx",
+      "line": 28,
+      "col": 29,
+      "message": "React Hook \"useState\" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?",
+      "rule": "react-hooks/rules-of-hooks"
+    },
+    {
+      "file": "components/home-beacon/HomeBeacon.tsx",
+      "line": 29,
+      "col": 27,
+      "message": "React Hook \"useState\" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?",
+      "rule": "react-hooks/rules-of-hooks"
+    },
+    {
+      "file": "components/home-beacon/HomeBeacon.tsx",
+      "line": 31,
       "col": 3,
-      "message": "The 'refreshLedger' function makes the dependencies of useEffect Hook (at line 101) change on every render. To fix this, wrap the definition of 'refreshLedger' in its own useCallback() Hook.",
-      "rule": "react-hooks/exhaustive-deps"
+      "message": "React Hook \"useEffect\" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?",
+      "rule": "react-hooks/rules-of-hooks"
+    },
+    {
+      "file": "components/lumaspace/AirdropEngine.tsx",
+      "line": 104,
+      "col": 9,
+      "message": "'parseClaimResponse' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "components/lumaspace/RecorderEngine.tsx",
-      "line": 150,
-      "col": 6,
-      "message": "React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.",
-      "rule": "react-hooks/exhaustive-deps"
-    },
-    {
-      "file": "components/lumaspace/RecorderEngine.tsx",
-      "line": 155,
-      "col": 6,
-      "message": "React Hook useCallback has unnecessary dependencies: 'handleError' and 'stopInternal'. Either exclude them or remove the dependency array.",
-      "rule": "react-hooks/exhaustive-deps"
-    },
-    {
-      "file": "components/lumaspace/RecorderEngine.tsx",
-      "line": 235,
+      "line": 227,
       "col": 6,
       "message": "React Hook useCallback has missing dependencies: 'handleError' and 'stopInternal'. Either include them or remove the dependency array.",
       "rule": "react-hooks/exhaustive-deps"
     },
     {
       "file": "components/lumaspace/RecorderEngine.tsx",
-      "line": 421,
+      "line": 413,
       "col": 6,
       "message": "React Hook useEffect has a missing dependency: 'start'. Either include it or remove the dependency array.",
       "rule": "react-hooks/exhaustive-deps"
@@ -169,6 +351,69 @@
       "line": 18,
       "col": 10,
       "message": "'tick' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/vibe/VibeOverlay.tsx",
+      "line": 14,
+      "col": 10,
+      "message": "'busy' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "components/vibe/VibeTray.tsx",
+      "line": 100,
+      "col": 5,
+      "message": "React Hook React.useCallback has a missing dependency: 'props'. Either include it or remove the dependency array. However, 'props' will change when *any* prop changes, so the preferred fix is to destructure the 'props' object outside of the useCallback call and refer to those specific props inside React.useCallback.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "lib/ads/adFatigue.ts",
+      "line": 23,
+      "col": 9,
+      "message": "'safeUnique' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "lib/ads/campaign.ts",
+      "line": 33,
+      "col": 3,
+      "message": "'now' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/app/api/privacy/consent/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/app/api/privacy/consent/route.ts",
+      "line": 8,
+      "col": 9,
+      "message": "'url' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/app/api/privacy/export/route.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'userPrivateNoStoreHeaders' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/app/api/privacy/export/route.ts",
+      "line": 10,
+      "col": 11,
+      "message": "'body' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/app/api/treasury/close-day/route.ts",
+      "line": 6,
+      "col": 9,
+      "message": "'adPulses' is assigned a value but never used. Allowed unused vars must match /^_/u.",
       "rule": "@typescript-eslint/no-unused-vars"
     },
     {
@@ -186,11 +431,228 @@
       "rule": "react-hooks/exhaustive-deps"
     },
     {
+      "file": "src/components/fyp94/Fyp94VisiblePlayer.tsx",
+      "line": 30,
+      "col": 6,
+      "message": "React Hook useEffect has a missing dependency: 'nextItem'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/components/native-fyp/FypSwiper.tsx",
+      "line": 53,
+      "col": 29,
+      "message": "React Hook \"usePreload\" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.",
+      "rule": "react-hooks/rules-of-hooks"
+    },
+    {
+      "file": "src/components/native-fyp/FypSwiper.tsx",
+      "line": 54,
+      "col": 31,
+      "message": "React Hook \"usePreload\" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.",
+      "rule": "react-hooks/rules-of-hooks"
+    },
+    {
+      "file": "src/components/native-fyp/FypSwiper.tsx",
+      "line": 69,
+      "col": 6,
+      "message": "React Hook useEffect has a missing dependency: 'goNext'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/components/native-fyp/useGlobalMute.ts",
+      "line": 3,
+      "col": 10,
+      "message": "'useEffect' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/components/native-fyp/useVideoReady.ts",
+      "line": 3,
+      "col": 10,
+      "message": "'useEffect' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/components/share/UniversalShareSheet.tsx",
+      "line": 116,
+      "col": 6,
+      "message": "React Hook useEffect has a missing dependency: 'submitShare'. Either include it or remove the dependency array.",
+      "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/core/fyp/gutcheck/types.ts",
+      "line": 1,
+      "col": 15,
+      "message": "'FeedItem' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/gmar/final-completion/database/databasePersistence.ts",
+      "line": 1,
+      "col": 15,
+      "message": "'GmarGameState' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/accessibility/accessibilityRuntime.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/contracts/foundationContract.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/contracts/immutableLaws.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/onboarding/quietBeginning.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/rendering/atmosphereTokens.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/foundation/types.ts",
+      "line": 23,
+      "col": 39,
+      "message": "'v' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/lumaspace/omega/memory/omegaPack06Runtime.ts",
+      "line": 3,
+      "col": 101,
+      "message": "'selectEchoOfYesterday' is defined but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/share/memories/registry.ts",
+      "line": 65,
+      "col": 43,
+      "message": "'record' is defined but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/core/video-ingestion/processing/storage.ts",
+      "line": 19,
+      "col": 3,
+      "message": "'plan' is defined but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
       "file": "src/hooks/useEnergy.ts",
       "line": 73,
       "col": 6,
       "message": "React Hook React.useEffect has a missing dependency: 'crew'. Either include it or remove the dependency array.",
       "rule": "react-hooks/exhaustive-deps"
+    },
+    {
+      "file": "src/lib/content/query.ts",
+      "line": 1,
+      "col": 30,
+      "message": "'id' is defined but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/fyp_movie_clips/live/fyp_movie_bridge.ts",
+      "line": 17,
+      "col": 3,
+      "message": "'ratio' is assigned a value but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/infra/worker.ts",
+      "line": 4,
+      "col": 10,
+      "message": "'e' is defined but never used. Allowed unused caught errors must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/echo-layer/removeCountsComments.ts",
+      "line": 2,
+      "col": 11,
+      "message": "'counts' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/echo-layer/removeCountsComments.ts",
+      "line": 2,
+      "col": 19,
+      "message": "'comments' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/echo-layer/removeCountsComments.ts",
+      "line": 2,
+      "col": 29,
+      "message": "'likes' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/echo-layer/removeCountsComments.ts",
+      "line": 2,
+      "col": 36,
+      "message": "'views' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/feed-rendering/vanityMetricGuard.ts",
+      "line": 2,
+      "col": 11,
+      "message": "'views' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/feed-rendering/vanityMetricGuard.ts",
+      "line": 2,
+      "col": 18,
+      "message": "'likes' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/feed-rendering/vanityMetricGuard.ts",
+      "line": 2,
+      "col": 25,
+      "message": "'comments' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/integration/feed-rendering/vanityMetricGuard.ts",
+      "line": 2,
+      "col": 35,
+      "message": "'followers' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/motion/fps/stability.ts",
+      "line": 4,
+      "col": 9,
+      "message": "'targetFrameMs' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
+    },
+    {
+      "file": "src/lib/native-fyp/runtime/eventsPipeline.ts",
+      "line": 7,
+      "col": 29,
+      "message": "'events' is defined but never used. Allowed unused args must match /^_/u.",
+      "rule": "@typescript-eslint/no-unused-vars"
     },
     {
       "file": "src/lib/uid.ts",
@@ -215,5 +677,5 @@
     }
   ],
   "command": "pnpm -s build",
-  "ts": 1772013669145
+  "ts": 1787681463418
 }

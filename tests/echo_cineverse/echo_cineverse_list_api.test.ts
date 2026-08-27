@@ -10,7 +10,17 @@ async function getJson(url: string) {
 
 const BASE = process.env.LUMORA_BASE_URL || "http://127.0.0.1:3000";
 
-describe("CineVerse/Echo list APIs (seed)", () => {
+const MEGA19_TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL?.trim() || "";
+
+const MEGA19_HAS_SAFE_TEST_DATABASE =
+  /^postgres(?:ql)?:\/\//.test(MEGA19_TEST_DATABASE_URL);
+
+if (MEGA19_HAS_SAFE_TEST_DATABASE) {
+  process.env.DATABASE_URL = MEGA19_TEST_DATABASE_URL;
+}
+
+describe.skipIf(!MEGA19_HAS_SAFE_TEST_DATABASE)("CineVerse/Echo list APIs (seed)", () => {
   it("GET /api/cineverse/list returns ok + non-empty", async () => {
     const { res, j, text } = await getJson(`${BASE}/api/cineverse/list`);
     expect(res.status, text).toBe(200);

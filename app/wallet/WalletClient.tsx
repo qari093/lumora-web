@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function WalletClient() {
   const sp = useSearchParams();
-  const stripe = sp.get("stripe"); // expected: success | cancel | null
+  const stripe = sp?.get("stripe"); // expected: success | cancel | null
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-6">

@@ -39,7 +39,7 @@ interface ClaimResult {
  *
  * Lightweight client-only controller that:
  * - checks current user's airdrop eligibility via /api/lumaspace/aura
- * - triggers a credit/ensure flow via /api/wallets/ensure or /api/wallet/credit
+ * - claim mutation is disabled until an authenticated transactional claim endpoint is available
  * - never throws; all errors are surfaced as non-fatal UX messages
  *
  * NOTE: This is intentionally conservative about assumptions:
@@ -173,75 +173,12 @@ export default function AirdropEngine(props: AirdropEngineProps) {
   }, [resetMessages]);
 
   const claimAirdrop = useCallback(async () => {
-    if (status !== "eligible") return;
-    resetMessages();
-    setStatus("claiming");
-
-    try {
-      // Prefer wallet ensure endpoint when available; fall back to generic wallet credit
-      const endpoints = [
-        "/api/wallets/ensure",
-        "/api/wallet/credit",
-      ];
-
-      let lastError: unknown = null;
-      let result: ClaimResult | null = null;
-
-      for (const endpoint of endpoints) {
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              accept: "application/json",
-            },
-            // Keep payload generic; backend is expected to infer current user.
-            body: JSON.stringify({
-              reason: "lumaspace-airdrop",
-              amount: 0, // engine does not assume any specific amount
-            }),
-          });
-
-          const data = await res
-            .json()
-            .catch(() => ({}));
-
-          const parsed = parseClaimResponse(data);
-          result = parsed;
-
-          if (parsed.ok) break;
-          lastError = parsed;
-        } catch (err) {
-          lastError = err;
-          continue;
-        }
-      }
-
-      if (!result || !result.ok) {
-        console.error("AirdropEngine: claim failed", lastError);
-        setStatus("error");
-        setClaim(result ?? { ok: false, raw: lastError ?? undefined });
-        setMessage(
-          result?.message ??
-            "Airdrop claim failed. Your wallet has not been modified.",
-        );
-        return;
-      }
-
-      setClaim(result);
-      setStatus("claimed");
-      setMessage(
-        result.message ??
-          (result.txId
-            ? `Airdrop claimed successfully. Tx: ${result.txId}`
-            : "Airdrop claimed successfully."),
-      );
-    } catch (err) {
-      console.error("AirdropEngine: unexpected claim error", err);
-      setStatus("error");
-      setMessage("Unexpected error while claiming airdrop.");
-    }
-  }, [resetMessages, status]);
+    setClaim(null);
+    setStatus("error");
+    setMessage(
+      "Airdrop claiming is temporarily unavailable during private beta. Eligibility checks remain available."
+    );
+  }, [])
 
   useEffect(() => {
     if (!autoCheck) return;
@@ -270,7 +207,7 @@ export default function AirdropEngine(props: AirdropEngineProps) {
   }, [status]);
 
   const canCheck = status === "idle" || status === "ineligible" || status === "error";
-  const canClaim = status === "eligible";
+  const canClaim = false;
 
   return (
     <section
@@ -294,7 +231,7 @@ export default function AirdropEngine(props: AirdropEngineProps) {
             </h2>
           </div>
           <p className="text-xs text-muted-foreground">
-            Check if you&apos;re eligible for a LumaSpace credit airdrop and claim directly
+            Check whether you&apos;re eligible for a LumaSpace credit airdrop. Claiming is temporarily unavailable during private beta
             into your wallet.
           </p>
         </div>
@@ -341,24 +278,24 @@ export default function AirdropEngine(props: AirdropEngineProps) {
         )}
       </div>
 
-      {aura?.raw && (
+      {Boolean(aura?.raw) && (
         <details className="mt-1">
           <summary className="cursor-pointer text-[0.7rem] text-muted-foreground underline underline-offset-2">
             Debug: aura snapshot
           </summary>
           <pre className="mt-1 max-h-40 overflow-auto rounded-md bg-muted/60 p-2 text-[0.7rem] leading-snug">
-            {JSON.stringify(aura.raw, null, 2)}
+            {JSON.stringify(aura?.raw, null, 2)}
           </pre>
         </details>
       )}
 
-      {claim?.raw && (
+      {Boolean(claim?.raw) && (
         <details className="mt-1">
           <summary className="cursor-pointer text-[0.7rem] text-muted-foreground underline underline-offset-2">
             Debug: claim response
           </summary>
           <pre className="mt-1 max-h-40 overflow-auto rounded-md bg-muted/60 p-2 text-[0.7rem] leading-snug">
-            {JSON.stringify(claim.raw, null, 2)}
+            {JSON.stringify(claim?.raw, null, 2)}
           </pre>
         </details>
       )}

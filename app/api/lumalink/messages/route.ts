@@ -1,45 +1,56 @@
 import { NextResponse } from "next/server";
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
 import {
-  listMessages,
-  sendMessage,
-} from "@/src/core/lumalink/runtime";
+  listMessagesForActor,
+  sendMessageForActor,
+} from "@/src/core/lumalink/persistence";
 
 export async function GET(req: Request) {
-  const conversationId =
-    new URL(req.url).searchParams.get("conversationId") ?? "";
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
 
-  if (!conversationId.trim()) {
+  try {
+    const conversationId =
+      new URL(req.url).searchParams.get("conversationId") ?? "";
+
+    const messages = await listMessagesForActor(
+      auth.identity.userId,
+      conversationId,
+    );
+
     return NextResponse.json(
-      { ok: false, error: "conversationId_required" },
-      { status: 400 },
+      { ok: true, messages },
+      { headers: userPrivateNoStoreHeaders() },
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { ok: false, error: error instanceof Error ? error.message : "message_read_failed" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
-
-  return NextResponse.json({
-    ok: true,
-    messages: listMessages(conversationId),
-  });
 }
 
 export async function POST(req: Request) {
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
+
   const body = await req.json().catch(() => null);
 
   try {
-    const message = sendMessage({
-      senderId: body?.senderId,
+    const message = await sendMessageForActor(auth.identity.userId, {
       recipientId: body?.recipientId,
       groupId: body?.groupId,
       body: body?.body,
     });
 
-    return NextResponse.json({ ok: true, message }, { status: 201 });
+    return NextResponse.json(
+      { ok: true, message },
+      { status: 201, headers: userPrivateNoStoreHeaders() },
+    );
   } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : "message_send_failed",
-      },
-      { status: 400 },
+      { ok: false, error: error instanceof Error ? error.message : "message_send_failed" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
 }

@@ -11,13 +11,14 @@ describe("FYP repeat-session variation (deterministic)", () => {
     expect(v1).toBe(v2);
 
     const v3 = computeVariantForToday(seed, "2026-02-14");
-    // may coincidentally match, but across many seeds it shouldn't be pathological.
     expect(["A", "B", "C"]).toContain(v3);
   });
 
-  it("app/fyp/page.tsx renders <FypFlow />", () => {
+  it("app/fyp/page.tsx renders the consolidated production FYP runtime", () => {
     const s = fs.readFileSync("app/fyp/page.tsx", "utf8");
-    expect(s.includes('components/fyp/FypFlow')).toBe(true);
-    expect(s.includes("<FypFlow />")).toBe(true);
+
+    expect(s.includes("FypOmegaPlayer")).toBe(true);
+    expect(s.includes("productionFeedAdapter")).toBe(true);
+    expect(s.includes("LUMORA_PORTAL_ALIVE_FYP")).toBe(true);
   });
 });

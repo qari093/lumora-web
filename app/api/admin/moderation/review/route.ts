@@ -3,7 +3,10 @@ import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
 
 import { prisma } from '@/lib/prisma';
-import { adminNoStoreHeaders, requireAdminSession } from '@/src/lib/auth/requireAdminSession';
+import {
+  adminNoStoreHeaders,
+  requireAdminSession,
+} from '@/src/lib/auth/requireAdminSession';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -11,6 +14,7 @@ export const dynamic = 'force-dynamic';
 type ReviewBody = {
   uid?: unknown;
   action?: unknown;
+  reason?: unknown;
 };
 
 function json(status: number, body: Record<string, unknown>): NextResponse {
@@ -39,11 +43,26 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
-  const uid = typeof body.uid === 'string' ? body.uid.trim() : '';
+  const uid =
+    typeof body.uid === 'string'
+      ? body.uid.trim()
+      : '';
 
-  const action = typeof body.action === 'string' ? body.action.trim().toUpperCase() : '';
+  const action =
+    typeof body.action === 'string'
+      ? body.action.trim().toUpperCase()
+      : '';
 
-  if (!uid || (action !== 'APPROVE' && action !== 'REJECT')) {
+  const reason =
+    typeof body.reason === 'string'
+      ? body.reason.trim()
+      : '';
+
+  if (
+    !uid ||
+    !reason ||
+    (action !== 'APPROVE' && action !== 'REJECT')
+  ) {
     return json(400, {
       ok: false,
       route: '/api/admin/moderation/review',
@@ -51,55 +70,103 @@ export async function POST(request: Request): Promise<NextResponse> {
       required: {
         uid: 'non-empty string',
         action: ['APPROVE', 'REJECT'],
+        reason: 'non-empty consequential decision explanation',
       },
     });
   }
 
   try {
-    const video = await prisma.streamVideo.findUnique({
-      where: {
-        uid,
-      },
-      select: {
-        id: true,
-        uid: true,
-        ownerId: true,
-        status: true,
-        readyToStream: true,
-      },
+    const result = await prisma.$transaction(async (tx) => {
+      const video = await tx.streamVideo.findUnique({
+        where: {
+          uid,
+        },
+        select: {
+          id: true,
+          uid: true,
+          ownerId: true,
+          status: true,
+          readyToStream: true,
+        },
+      });
+
+      if (!video) {
+        return {
+          ok: false as const,
+          error: 'video_not_found' as const,
+        };
+      }
+
+      const nextStatus =
+        action === 'APPROVE'
+          ? 'ready'
+          : 'rejected';
+
+      const updated = await tx.streamVideo.update({
+        where: {
+          uid,
+        },
+        data:
+          action === 'APPROVE'
+            ? {
+                status: 'ready',
+                readyToStream: true,
+              }
+            : {
+                status: 'rejected',
+                readyToStream: false,
+              },
+        select: {
+          id: true,
+          uid: true,
+          ownerId: true,
+          status: true,
+          readyToStream: true,
+        },
+      });
+
+      const audit = await tx.moderationDecisionAudit.create({
+        data: {
+          targetType: 'stream_video',
+          targetId: video.uid,
+          affectedOwnerId: video.ownerId ?? null,
+          action: 'moderation_review',
+          outcome: nextStatus,
+          reason,
+          actorUserId: auth.identity.userId,
+          actorEmail: auth.identity.email,
+          source: 'admin_moderation_review',
+          metadata: {
+            previousStatus: video.status,
+            previousReadyToStream: video.readyToStream,
+          },
+        },
+        select: {
+          id: true,
+          targetType: true,
+          targetId: true,
+          action: true,
+          outcome: true,
+          reason: true,
+          createdAt: true,
+        },
+      });
+
+      return {
+        ok: true as const,
+        updated,
+        audit,
+      };
     });
 
-    if (!video) {
+    if (!result.ok) {
       return json(404, {
         ok: false,
         route: '/api/admin/moderation/review',
-        error: 'video_not_found',
+        error: result.error,
         uid,
       });
     }
-
-    const updated = await prisma.streamVideo.update({
-      where: {
-        uid,
-      },
-      data:
-        action === 'APPROVE'
-          ? {
-              status: 'ready',
-              readyToStream: true,
-            }
-          : {
-              status: 'rejected',
-              readyToStream: false,
-            },
-      select: {
-        id: true,
-        uid: true,
-        ownerId: true,
-        status: true,
-        readyToStream: true,
-      },
-    });
 
     return json(200, {
       ok: true,
@@ -107,7 +174,9 @@ export async function POST(request: Request): Promise<NextResponse> {
       source: 'database',
       requestId: randomUUID(),
       action,
-      item: updated,
+      reason,
+      item: result.updated,
+      audit: result.audit,
       reviewedBy: {
         userId: auth.identity.userId,
         email: auth.identity.email,

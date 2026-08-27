@@ -36,7 +36,6 @@ async function getOrCreateTree(worldId: string) {
     world = await prisma.userWorld.update({
       where: { id: worldId },
       data: { treeId: tree.id },
-      select: { id: true, treeId: true },
     });
   }
   const tree = await prisma.treeState.findUnique({

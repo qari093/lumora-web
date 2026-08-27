@@ -1,20 +1,32 @@
 import { NextResponse } from "next/server";
-import { relationshipBetween } from "@/src/core/lumalink/runtime";
+import { requireUserSession, userPrivateNoStoreHeaders } from "@/src/lib/auth/requireUserSession";
+import { findRelationship } from "@/src/core/lumalink/persistence";
 
 export async function GET(req: Request) {
-  const params = new URL(req.url).searchParams;
-  const firstUserId = params.get("firstUserId") ?? "";
-  const secondUserId = params.get("secondUserId") ?? "";
+  const auth = await requireUserSession();
+  if (!auth.ok) return auth.response;
 
-  if (!firstUserId.trim() || !secondUserId.trim()) {
+  const params = new URL(req.url).searchParams;
+  const otherUserId =
+    params.get("otherUserId") ??
+    params.get("secondUserId") ??
+    "";
+
+  if (!otherUserId.trim()) {
     return NextResponse.json(
-      { ok: false, error: "relationship_participants_required" },
-      { status: 400 },
+      { ok: false, error: "otherUserId_required" },
+      { status: 400, headers: userPrivateNoStoreHeaders() },
     );
   }
 
-  return NextResponse.json({
-    ok: true,
-    relationship: relationshipBetween(firstUserId, secondUserId),
-  });
+  return NextResponse.json(
+    {
+      ok: true,
+      relationship: await findRelationship(
+        auth.identity.userId,
+        otherUserId.trim(),
+      ),
+    },
+    { headers: userPrivateNoStoreHeaders() },
+  );
 }

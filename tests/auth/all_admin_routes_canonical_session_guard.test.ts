@@ -21,7 +21,7 @@ describe('all admin routes use canonical sessions', () => {
   const routes = collectRoutes('app/api/admin');
 
   it('covers the complete active administrator API surface', () => {
-    expect(routes).toHaveLength(9);
+    expect(routes).toHaveLength(11);
   });
 
   it.each(routes)('%s uses the canonical administrator guard', (route) => {

@@ -1,35 +1,60 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { getVideosHealth } from "@/lib/videos/runtime";
 
 export const metadata: Metadata = {
-  title: "Videos • Lumora",
-  robots: { index: false, follow: false },
+  title: "Videos | Lumora",
 };
 
-export default function Page() {
-  const items = [
-    { id: "seed-1", title: "Videos Seed 1", subtitle: "Baseline content", href: "#" },
-    { id: "seed-2", title: "Videos Seed 2", subtitle: "Non-empty guard", href: "#" },
-    { id: "seed-3", title: "Videos Seed 3", subtitle: "Render map", href: "#" },
-  ] as const;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-    return (
-    <>{/* LUMORA_PORTAL_ALIVE_VIDEOS */}<span style={{display:"none"}}>LUMORA_PORTAL_ALIVE_VIDEOS</span><main style={{ padding: 24 }}>
-        <section style={{ marginTop: 16 }}>
-          <div style={{ fontSize: 12, opacity: 0.7 }}>Seeded items (non-empty guard)</div>
-          <ul style={{ marginTop: 10, display: "grid", gap: 10, listStyle: "none", padding: 0 }}>
-            {items.map((it) => (
-              <li key={it.id} style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: 12 }}>
-                <div style={{ fontWeight: 700 }}>{it.title}</div>
-                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>{it.subtitle}</div>
-              </li>
-            ))}
-          </ul>
-        </section>
+export default function VideosPage() {
+  const health = getVideosHealth();
 
-      <h1 title="videos" style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Videos</h1>
-      <p style={{ opacity: 0.8 }}>
-        Portal placeholder. Kept minimal to ensure `tsc --noEmit` stays green while Step 37–60 lands.
+  return (
+    <main
+      data-videos-production-state="runtime-connected"
+      style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}
+    >
+      <h1 style={{ fontSize: 28, fontWeight: 800 }}>Videos</h1>
+
+      <p style={{ marginTop: 8, opacity: 0.75 }}>
+        Lumora&apos;s video runtime is active and connected to the wider media
+        ecosystem.
       </p>
-    </main></>
+
+      <section
+        style={{
+          marginTop: 20,
+          padding: 16,
+          border: "1px solid rgba(255,255,255,.12)",
+          borderRadius: 14,
+        }}
+      >
+        <div style={{ fontWeight: 700 }}>Runtime status</div>
+        <div style={{ marginTop: 8, opacity: 0.75 }}>
+          Mode: {health.mode} · Available items: {health.items}
+        </div>
+      </section>
+
+      <section
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+          gap: 12,
+          marginTop: 20,
+        }}
+      >
+        <Link href="/fyp">Open video FYP</Link>
+        <Link href="/watch">Open Watch</Link>
+        <Link href="/video-gen">Create video</Link>
+        <Link href="/api/videos/health">Video runtime health</Link>
+      </section>
+
+      <div id="LUMORA_VIDEOS_PRODUCTION_REALITY" style={{ display: "none" }}>
+        runtime-connected
+      </div>
+    </main>
   );
 }

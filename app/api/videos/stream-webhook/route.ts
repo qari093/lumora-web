@@ -11,7 +11,12 @@ function num(v:any){ const n=Number(v); return Number.isFinite(n)?n:undefined; }
 
 function extract(body: AnyJson){
   const uid = body.uid || body?.data?.uid || body?.video?.uid || body?.result?.uid || body?.id || body?.asset?.id || "";
-  const ready = body.readyToStream ?? body?.data?.readyToStream ?? (body?.status?.state==="ready") ?? (body?.event?.type==="video.ready") ?? false;
+  const readyValue = body.readyToStream ?? body?.data?.readyToStream;
+  const ready =
+    typeof readyValue === "boolean"
+      ? readyValue
+      : body?.status?.state === "ready" ||
+        body?.event?.type === "video.ready";
   const duration = num(body.duration) ?? num(body?.data?.duration) ?? num(body?.input?.duration) ?? num(body?.asset?.duration);
   const size = num(body?.size) ?? num(body?.data?.size) ?? num(body?.input?.size) ?? num(body?.asset?.size);
   const playbackId = body?.playback?.hls || body?.data?.playback?.hls || body?.playbackId || body?.result?.playback?.hls || null;

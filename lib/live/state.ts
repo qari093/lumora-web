@@ -16,7 +16,24 @@ type Subscriber = {
 };
 
 const rooms = new Map<string, LiveRoom>();
-const subs = new Map<string, Subscriber>();
+/* LUMORA_LIVE_GLOBAL_SSE_REGISTRY_V1
+ *
+ * Next.js may compile route handlers into separate module instances.
+ * A module-local subscriber Map can therefore make /events and
+ * /publish observe different registries even inside one server process.
+ *
+ * Keep the SSE listener registry on globalThis so every route bundle
+ * in the same runtime process resolves the same subscribers.
+ */
+type LumoraLiveGlobal = typeof globalThis & {
+  __LUMORA_LIVE_SSE_LISTENERS?: Map<string, Subscriber>;
+};
+
+const liveGlobal = globalThis as LumoraLiveGlobal;
+
+const subs =
+  liveGlobal.__LUMORA_LIVE_SSE_LISTENERS ??
+  (liveGlobal.__LUMORA_LIVE_SSE_LISTENERS = new Map<string, Subscriber>());
 
 function now(): number {
   return Date.now();

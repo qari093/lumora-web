@@ -1,5 +1,5 @@
 {
-  "status": "READY_FOR_INVITES",
+  "status": "FIRST_COHORT_AUTHORIZED_FOR_MANUAL_SEND",
   "wave": 1,
   "maxInvites": 25,
   "invitesIssued": 0,
@@ -7,5 +7,49 @@
   "activeTesters": 0,
   "criticalIssues": 0,
   "expansionAllowed": false,
-  "testers": []
+  "testers": [
+    {
+      "email": "tester1@lumora.app",
+      "wave": 1,
+      "status": "INVITE_AUTHORIZED_NOT_YET_CONFIRMED_SENT",
+      "authorizedAt": "2026-08-26T20:00:23+00:00",
+      "accepted": false,
+      "active": false
+    },
+    {
+      "email": "tester2@lumora.app",
+      "wave": 1,
+      "status": "INVITE_AUTHORIZED_NOT_YET_CONFIRMED_SENT",
+      "authorizedAt": "2026-08-26T20:00:23+00:00",
+      "accepted": false,
+      "active": false
+    },
+    {
+      "email": "tester3@lumora.app",
+      "wave": 1,
+      "status": "INVITE_AUTHORIZED_NOT_YET_CONFIRMED_SENT",
+      "authorizedAt": "2026-08-26T20:00:23+00:00",
+      "accepted": false,
+      "active": false
+    },
+    {
+      "email": "tester4@lumora.app",
+      "wave": 1,
+      "status": "INVITE_AUTHORIZED_NOT_YET_CONFIRMED_SENT",
+      "authorizedAt": "2026-08-26T20:00:23+00:00",
+      "accepted": false,
+      "active": false
+    },
+    {
+      "email": "tester5@lumora.app",
+      "wave": 1,
+      "status": "INVITE_AUTHORIZED_NOT_YET_CONFIRMED_SENT",
+      "authorizedAt": "2026-08-26T20:00:23+00:00",
+      "accepted": false,
+      "active": false
+    }
+  ],
+  "authorizedForManualDispatch": 5,
+  "dispatchMode": "manual_invite_only",
+  "lastUpdatedAt": "2026-08-26T20:00:23+00:00"
 }

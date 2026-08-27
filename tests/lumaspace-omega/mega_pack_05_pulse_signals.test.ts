@@ -51,7 +51,7 @@ describe("LumaSpace Ω∞ Mega Pack 05 — Signals + Pulse Civilization Feed", (
   });
 
   it("applies diversity caps", () => {
-    const signals = ["a", "b", "c"].map((id) =>
+    let signals = ["a", "b", "c"].map((id) =>
       createPulseSignal({
         id,
         kind: "celebration",
@@ -91,7 +91,7 @@ describe("LumaSpace Ω∞ Mega Pack 05 — Signals + Pulse Civilization Feed", (
   });
 
   it("injects wisdom, mission, and bridge signals", () => {
-    let signals = [];
+    let signals: any[] = [];
     signals = injectWisdomSignal(signals, "c1");
     signals = injectMissionSignal(signals, "community1");
     signals = injectBridgeSignal(signals, "c1");

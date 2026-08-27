@@ -14,8 +14,7 @@ vi.mock("../../lib/flags/vibeTags", async () => {
 describe("Vibe Tags Lite: tags route (in-process)", () => {
   it("returns ok with items array", async () => {
     const route = await import("../../app/api/vibe/tags/route");
-    const req = new Request("http://localhost/api/vibe/tags?limit=25", { method: "GET" });
-    const res = await route.GET(req as any);
+    const res = await route.GET();
     expect(res.status).toBeGreaterThanOrEqual(200);
     const json = await res.json();
     expect(json.ok).toBe(true);
@@ -24,8 +23,7 @@ describe("Vibe Tags Lite: tags route (in-process)", () => {
 
   it("clamps limit", async () => {
     const route = await import("../../app/api/vibe/tags/route");
-    const req = new Request("http://localhost/api/vibe/tags?limit=9999", { method: "GET" });
-    const res = await route.GET(req as any);
+    const res = await route.GET();
     const json = await res.json();
     expect(json.ok).toBe(true);
     expect(json.items.length).toBeLessThanOrEqual(200);

@@ -11,6 +11,19 @@ export async function POST(_req: Request, ctx: { params: Promise<Params> | Param
 
   if (!id) return NextResponse.json({ ok: false, error: "id_required" }, { status: 400 });
 
-  // Launch-safe stub: marks room end request accepted; real implementation stays behind feature-freeze.
-  return NextResponse.json({ ok: true, id, ended: true, ts: new Date().toISOString() }, { status: 200 });
+  // Soft-launch feature freeze: never report an ended state unless
+  // canonical room-state persistence has actually performed the mutation.
+  return NextResponse.json(
+    {
+      ok: true,
+      id,
+      accepted: false,
+      ended: false,
+      persisted: false,
+      featureState: "deferred",
+      reason: "room_end_persistence_not_active",
+      ts: new Date().toISOString(),
+    },
+    { status: 202 },
+  );
 }

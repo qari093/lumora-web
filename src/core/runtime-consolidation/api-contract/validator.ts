@@ -7,7 +7,7 @@ export function isLumoraApiResponse(value: unknown): value is LumoraApiResponse<
   if (typeof response.ok !== "boolean") return false;
   if (!response.meta || typeof response.meta !== "object") return false;
 
-  const meta = response.meta as Record<string, unknown>;
+  const meta = response.meta as unknown as Record<string, unknown>;
   if (typeof meta.domain !== "string") return false;
   if (typeof meta.version !== "string") return false;
   if (typeof meta.runtime !== "string") return false;

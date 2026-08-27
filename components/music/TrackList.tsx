@@ -1,3 +1,4 @@
+// LUMORA_MUSIC_SEED_ALIVE
 export type MusicTrack = {
   id: string;
   title: string;
@@ -17,6 +18,7 @@ export default function TrackList({ tracks = fallbackTracks }: { tracks?: MusicT
       <div style={{ display: "grid", gap: 12 }}>
         {tracks.map((track) => (
           <article
+            data-testid="track-row"
             key={track.id}
             style={{
               border: "1px solid rgba(255,255,255,0.14)",

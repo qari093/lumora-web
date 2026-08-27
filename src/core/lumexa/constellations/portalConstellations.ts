@@ -1,1 +1,1 @@
-export * from "../constellation/portalConstellation";
+export * from "../constellation/portalConstellations";

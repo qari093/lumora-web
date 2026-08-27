@@ -13,7 +13,7 @@ export type ContentEngineFeedItem = {
 };
 export default function FypContentEngineFeed() {
   const [items, setItems] = useState<ContentEngineFeedItem[]>([]);
-  const [status, setStatus] = useState<"loading" | "ready" | "fallback">("loading");
+  const [feedStatus, setFeedStatus] = useState<"loading" | "ready" | "fallback">("loading");
   useEffect(() => {
     let mounted = true;
     async function load() {
@@ -23,12 +23,12 @@ export default function FypContentEngineFeed() {
         if (!mounted) return;
         if (json?.ok && Array.isArray(json.items) && json.items.length > 0) {
           setItems(json.items);
-          setStatus("ready");
+          setFeedStatus("ready");
         } else {
-          setStatus("fallback");
+          setFeedStatus("fallback");
         }
       } catch {
-        if (mounted) setStatus("fallback");
+        if (mounted) setFeedStatus("fallback");
       }
     }
     load();
@@ -36,5 +36,11 @@ export default function FypContentEngineFeed() {
       mounted = false;
     };
   }, []);
-  return <FypFullPlayer externalItems={items} feedStatus={status} />;
+  const playerItems = items.map((item) => ({
+    id: item.videoId,
+    playbackUrl: item.src,
+    thumbnailUrl: item.thumbnailUrl,
+  }));
+
+  return <FypFullPlayer externalItems={playerItems} />;
 }

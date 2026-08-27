@@ -9,7 +9,7 @@ const requiredReports = [
 ];
 
 const requiredFiles = [
-  "app/api/auth/session/route.ts",
+  "app/api/auth/[...nextauth]/route.ts",
   "app/api/auth/forgot-password/route.ts",
   "app/api/auth/reset-password/route.ts",
   "app/api/auth/verify-email/route.ts",
@@ -33,6 +33,13 @@ describe("Lumora Identity Final Seal", () => {
   it.each(requiredFiles)("has required identity file %s", (file) => {
     expect(fs.existsSync(file)).toBe(true);
     expect(fs.statSync(file).size).toBeGreaterThan(0);
+  });
+
+  it("serves session through the canonical NextAuth catch-all route", () => {
+    const route = read("app/api/auth/[...nextauth]/route.ts");
+    expect(route).toContain("NextAuth(authOptions)");
+    expect(route).toMatch(/handler\s+as\s+GET/);
+    expect(route).toMatch(/handler\s+as\s+POST/);
   });
 
   it("auth foundation report passed", () => {
