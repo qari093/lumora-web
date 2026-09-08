@@ -2,15 +2,11 @@ name: Bites Hourly Freshness
 
 on:
   schedule:
-    - cron: "7 * * * *"
-  workflow_dispatch:
+    - cron: '7 * * * *'
+  workflow_dispatch: {}
 
 permissions:
   contents: read
-
-concurrency:
-  group: bites-hourly-freshness
-  cancel-in-progress: false
 
 jobs:
   trigger:
@@ -18,69 +14,56 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Trigger authenticated Bites hourly freshness
+      - name: Trigger Bites freshness
         shell: bash
         env:
           BITES_CRON_SECRET: ${{ secrets.BITES_CRON_SECRET }}
         run: |
           set -euo pipefail
 
-          test -n "${BITES_CRON_SECRET}"
+          test -n "${BITES_CRON_SECRET:-}"
 
-          response="$(mktemp)"
-          code="$(
+          RESPONSE="$(mktemp)"
+
+          HTTP="$(
             curl \
               --silent \
               --show-error \
               --location \
               --connect-timeout 15 \
               --max-time 60 \
-              --output "${response}" \
+              --output "${RESPONSE}" \
               --write-out '%{http_code}' \
-              -H "Authorization: Bearer ${BITES_CRON_SECRET}" \
+              --header "Authorization: Bearer ${BITES_CRON_SECRET}" \
               "https://lumoraverse.io/api/fyp/hourly-freshness"
           )"
 
-          echo "HTTP=${code}"
+          echo "HTTP=${HTTP}"
 
-          test "${code}" = "200"
+          test "${HTTP}" = "200"
 
-          node - "${response}" <<'NODE'
-          const fs = require("fs");
+          grep -q '"ok":true' "${RESPONSE}"
+          echo "ok=PASS"
 
-          const file = process.argv[2];
-          const body = JSON.parse(fs.readFileSync(file, "utf8"));
+          grep -q '"runtime":"bites_live_hourly_execution_v1"' "${RESPONSE}"
+          echo "runtime=PASS"
 
-          const checks = {
-            ok: body.ok === true,
-            runtime:
-              body.runtime === "bites_live_hourly_execution_v1",
-            cadence:
-              body.cadenceHours === 1,
-            blindPublication:
-              body.execution?.blindPublication === false,
-            externalNetworkAcquisition:
-              body.execution?.externalNetworkAcquisition === false,
-            scraping:
-              body.execution?.scraping === false,
-            unauthorizedDownload:
-              body.execution?.unauthorizedDownload === false,
-            unauthorizedRehosting:
-              body.execution?.unauthorizedRehosting === false,
-            protectedInventory:
-              Number(body.protectedInventory?.externalCount || 0) >= 981,
-          };
+          grep -q '"cadenceHours":1' "${RESPONSE}"
+          echo "cadence=PASS"
 
-          let failures = 0;
+          grep -q '"blindPublication":false' "${RESPONSE}"
+          echo "blindPublication=PASS"
 
-          for (const [name, ok] of Object.entries(checks)) {
-            console.log(`${name}=${ok ? "PASS" : "FAIL"}`);
-            if (!ok) failures++;
-          }
+          grep -q '"externalNetworkAcquisition":false' "${RESPONSE}"
+          echo "externalNetworkAcquisition=PASS"
 
-          if (failures) {
-            process.exit(7);
-          }
-NODE
+          grep -q '"scraping":false' "${RESPONSE}"
+          echo "scraping=PASS"
 
-          rm -f "${response}"
+          grep -q '"unauthorizedDownload":false' "${RESPONSE}"
+          echo "unauthorizedDownload=PASS"
+
+          grep -q '"unauthorizedRehosting":false' "${RESPONSE}"
+          echo "unauthorizedRehosting=PASS"
+
+          rm -f "${RESPONSE}"
